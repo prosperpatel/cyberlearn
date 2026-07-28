@@ -1,0 +1,43 @@
+{
+  "id": "module-linux-terminal-basics",
+  "slug": "module-01-terminal-basics",
+  "courseSlug": "linux-for-hackers",
+  "title": "Terminal Basics",
+  "description": "Your first steps in the Linux terminal. Learn the commands you'll use every single day as a security professional — navigation, file operations, and your first Bash session.",
+  "order": 1,
+  "estimatedHours": 2,
+  "tags": ["linux", "terminal", "bash", "cli", "commands"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2024-03-01T00:00:00Z",
+  "updatedAt": "2024-09-10T00:00:00Z",
+  "lessons": [
+    {
+      "slug": "lesson-01-what-is-linux",
+      "title": "What is Linux and Why Hackers Love It",
+      "difficulty": "beginner",
+      "estimatedMinutes": 20,
+      "tags": ["linux", "history", "kernel", "distributions"],
+      "xpReward": 200,
+      "order": 1
+    },
+    {
+      "slug": "lesson-02-first-commands",
+      "title": "Your First 20 Linux Commands",
+      "difficulty": "beginner",
+      "estimatedMinutes": 35,
+      "tags": ["commands", "ls", "cd", "pwd", "cat", "grep", "terminal"],
+      "xpReward": 300,
+      "order": 2
+    },
+    {
+      "slug": "lesson-03-filesystem-navigation",
+      "title": "Navigating the Linux Filesystem",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["filesystem", "fhs", "paths", "navigation", "directories"],
+      "xpReward": 250,
+      "order": 3
+    }
+  ]
+}

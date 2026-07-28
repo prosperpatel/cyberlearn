@@ -1,0 +1,65 @@
+{
+  "id": "linux-for-hackers",
+  "slug": "linux-for-hackers",
+  "title": "Linux for Hackers",
+  "tagline": "Master the operating system that powers 90% of the internet and every hacking tool",
+  "description": "Every serious security professional lives in the Linux terminal. This course takes you from zero — what even is a file system — to confidently navigating, scripting, and manipulating Linux systems the way penetration testers do. Hands-on from day one.",
+  "difficulty": "beginner",
+  "estimatedHours": 10,
+  "xpReward": 2000,
+  "category": "linux",
+  "tags": ["linux", "terminal", "bash", "file-system", "permissions", "scripting", "networking"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Navigate the Linux file system with confidence",
+    "Manage files, directories, and permissions from the command line",
+    "Write practical Bash scripts to automate security tasks",
+    "Use core networking tools: netstat, ss, nmap, curl",
+    "Understand process management and privilege escalation concepts",
+    "Set up a personal hacking lab on Linux"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "coverEmoji": "🐧",
+  "isNew": true,
+  "isPro": false,
+  "createdAt": "2024-03-01T00:00:00Z",
+  "updatedAt": "2024-09-10T00:00:00Z",
+  "modules": [
+    {
+      "slug": "module-01-terminal-basics",
+      "title": "Terminal Basics",
+      "order": 1,
+      "lessonCount": 3,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-02-files-permissions",
+      "title": "Files, Directories & Permissions",
+      "order": 2,
+      "lessonCount": 3,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-03-bash-scripting",
+      "title": "Bash Scripting for Security",
+      "order": 3,
+      "lessonCount": 3,
+      "estimatedHours": 3
+    },
+    {
+      "slug": "module-04-networking-tools",
+      "title": "Linux Networking Tools",
+      "order": 4,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-05-hacking-lab",
+      "title": "Build Your Hacking Lab",
+      "order": 5,
+      "lessonCount": 1,
+      "estimatedHours": 1
+    }
+  ]
+}

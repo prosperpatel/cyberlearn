@@ -1,0 +1,58 @@
+{
+  "id": "networking-fundamentals",
+  "slug": "networking-fundamentals",
+  "title": "Networking Fundamentals",
+  "tagline": "Understand the protocols that every attacker exploits and every defender must master",
+  "description": "Every attack travels over a network. This course builds your deep understanding of TCP/IP, DNS, HTTP, TLS, and network analysis with Wireshark. You'll understand what happens at the packet level when you visit a website, conduct a port scan, or intercept traffic.",
+  "difficulty": "beginner",
+  "estimatedHours": 8,
+  "xpReward": 1800,
+  "category": "networking",
+  "tags": ["networking", "tcp-ip", "dns", "http", "tls", "wireshark", "packets", "protocols"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Explain the OSI model and which attacks occur at each layer",
+    "Analyze TCP/IP packets with Wireshark",
+    "Trace a DNS resolution from start to finish",
+    "Understand TLS handshakes and what can go wrong",
+    "Identify network anomalies in packet captures",
+    "Configure basic firewall rules"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "coverEmoji": "🔌",
+  "isNew": false,
+  "isPro": false,
+  "createdAt": "2024-02-01T00:00:00Z",
+  "updatedAt": "2024-08-15T00:00:00Z",
+  "modules": [
+    {
+      "slug": "module-01-tcp-ip",
+      "title": "TCP/IP & the OSI Model",
+      "order": 1,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-02-dns",
+      "title": "DNS — The Internet's Phone Book",
+      "order": 2,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-03-http-tls",
+      "title": "HTTP & TLS Deep Dive",
+      "order": 3,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-04-wireshark",
+      "title": "Packet Analysis with Wireshark",
+      "order": 4,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    }
+  ]
+}

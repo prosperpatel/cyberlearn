@@ -1,0 +1,34 @@
+{
+  "id": "module-tcp-ip",
+  "slug": "module-01-tcp-ip",
+  "courseSlug": "networking-fundamentals",
+  "title": "TCP/IP & the OSI Model",
+  "description": "The foundation of all network communication. Understanding the OSI model and TCP/IP is not optional for security professionals — every network attack and defense maps to a specific layer.",
+  "order": 1,
+  "estimatedHours": 2,
+  "tags": ["networking", "tcp", "ip", "osi", "packets", "protocols"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2024-02-01T00:00:00Z",
+  "updatedAt": "2024-08-15T00:00:00Z",
+  "lessons": [
+    {
+      "slug": "lesson-01-osi-model",
+      "title": "The OSI Model — From Bits to Applications",
+      "difficulty": "beginner",
+      "estimatedMinutes": 25,
+      "tags": ["osi", "layers", "networking", "model", "protocols"],
+      "xpReward": 250,
+      "order": 1
+    },
+    {
+      "slug": "lesson-02-tcp-handshake",
+      "title": "TCP Three-Way Handshake",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["tcp", "handshake", "syn", "ack", "connections", "packets"],
+      "xpReward": 300,
+      "order": 2
+    }
+  ]
+}

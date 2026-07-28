@@ -1,0 +1,65 @@
+{
+  "id": "web-security-fundamentals",
+  "slug": "web-security-fundamentals",
+  "title": "Web Security Fundamentals",
+  "tagline": "Master the OWASP Top 10 and defend the modern web",
+  "description": "Learn to think like an attacker and defend like a professional. This course covers the most critical web vulnerabilities — SQL injection, XSS, CSRF, broken authentication, and more — through hands-on labs, real breach case studies, and guided challenges. By the end, you'll be able to identify, exploit, and remediate the vulnerabilities that cause 90% of all web application breaches.",
+  "difficulty": "beginner",
+  "estimatedHours": 12,
+  "xpReward": 2400,
+  "category": "web-security",
+  "tags": ["sql-injection", "xss", "csrf", "authentication", "owasp", "web", "injection"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Understand how SQL injection, XSS, and CSRF attacks work at a technical level",
+    "Execute attacks safely in isolated lab environments",
+    "Identify vulnerabilities in code before attackers do",
+    "Implement parameterized queries, output encoding, and CSRF tokens",
+    "Read and interpret the OWASP Top 10 report",
+    "Write a basic penetration test report for a web application"
+  ],
+  "version": "1.2.0",
+  "author": "Cyber Learn Team",
+  "coverEmoji": "🌐",
+  "isNew": false,
+  "isPro": false,
+  "createdAt": "2024-01-15T00:00:00Z",
+  "updatedAt": "2024-09-10T00:00:00Z",
+  "modules": [
+    {
+      "slug": "module-01-web-attacks",
+      "title": "Injection & Client-Side Attacks",
+      "order": 1,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-02-authentication",
+      "title": "Authentication & Session Management",
+      "order": 2,
+      "lessonCount": 3,
+      "estimatedHours": 3
+    },
+    {
+      "slug": "module-03-access-control",
+      "title": "Broken Access Control",
+      "order": 3,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-04-api-security",
+      "title": "API Security",
+      "order": 4,
+      "lessonCount": 2,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-05-secure-sdlc",
+      "title": "Secure Development Lifecycle",
+      "order": 5,
+      "lessonCount": 2,
+      "estimatedHours": 3
+    }
+  ]
+}

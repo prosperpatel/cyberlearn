@@ -1,0 +1,582 @@
+import type { FullLesson } from '@/types/lesson-engine'
+
+/**
+ * Sample lesson: Introduction to SQL Injection
+ *
+ * This lesson demonstrates every section type in the engine.
+ * Real lessons will be loaded from an API; this serves as the template
+ * and the demo route at /courses/web-security-fundamentals/lessons/sql-injection-intro
+ */
+export const SQL_INJECTION_LESSON: FullLesson = {
+  id:               'lesson-sql-injection-intro',
+  slug:             'sql-injection-intro',
+  courseSlug:       'web-security-fundamentals',
+  moduleId:         'module-web-attacks',
+  title:            'Introduction to SQL Injection',
+  tagline:          'How a single quote can expose a million records',
+  order:            1,
+  estimatedMinutes: 45,
+  difficulty:       'beginner',
+  xpReward:         400,
+  tags:             ['sql', 'injection', 'web', 'owasp', 'database'],
+  nextLessonSlug:   'xss-cross-site-scripting',
+
+  sections: [
+    // ── 1. HOOK ───────────────────────────────────────────────────────────
+    {
+      id:                'hook-1',
+      type:              'hook',
+      sidebarLabel:      'The Hook',
+      estimatedMinutes:  1,
+      variant:           'statistic',
+      headline:          'A single quote character breached 130 million credit cards.',
+      subheadline:       "In 2007, Albert Gonzalez's team used SQL injection to steal the largest cache of payment card data in history — from Heartland Payment Systems.",
+      stat: {
+        value:   '130M',
+        label:   'Credit cards stolen via SQL injection',
+        source:  'Heartland Payment Systems Breach, 2007',
+      },
+      backgroundAccent: 'red',
+    },
+
+    // ── 2. STORY ──────────────────────────────────────────────────────────
+    {
+      id:               'story-1',
+      type:             'story',
+      sidebarLabel:     'The Story',
+      estimatedMinutes: 3,
+      mood:             'tense',
+      narrative: [
+        "It's 11:47 PM on a Tuesday. In a dimly lit apartment in Miami, Albert Gonzalez types a single apostrophe into a payment terminal's web interface. He presses Enter.",
+        "The server crashes. But instead of closing his laptop, Albert smiles. A crash means the application didn't expect that character. A crash means the code is vulnerable. A crash means the database is exposed.",
+        "Over the next 18 months, Gonzalez and his team silently siphoned credit card numbers from Heartland Payment Systems — a company processing 100 million card transactions per month. Nobody noticed. The data flowed out quietly, invisibly, one SQL query at a time.",
+        "When it was finally discovered, 130 million payment cards had been compromised. It remains one of the largest data breaches in history. The weapon? A technique so simple it can be explained in five minutes — SQL Injection.",
+      ],
+      characters: [
+        {
+          name:        'Albert Gonzalez',
+          role:        'Attacker',
+          description: 'Led the hacking group responsible for the breach. Previously worked as a government informant before returning to cybercrime.',
+          emoji:       '🕵️',
+        },
+        {
+          name:        'Heartland Payment Systems',
+          role:        'Victim',
+          description: 'A major payment processor handling 100M+ transactions/month. Their systems were penetrated for over 18 months without detection.',
+          emoji:       '🏦',
+        },
+      ],
+      timeline: [
+        { timestamp: '2006',      event: 'Reconnaissance begins',   detail: 'Gonzalez identifies Heartland as a high-value target', type: 'normal' },
+        { timestamp: 'Late 2007', event: 'Initial intrusion',       detail: 'SQL injection used to gain first foothold', type: 'critical' },
+        { timestamp: '2008',      event: 'Silent exfiltration',     detail: '130M card numbers stolen over 18 months', type: 'critical' },
+        { timestamp: 'Jan 2009',  event: 'Breach discovered',       detail: 'Visa and Mastercard flag suspicious activity', type: 'normal' },
+        { timestamp: 'Aug 2009',  event: 'Gonzalez arrested',       detail: 'Sentenced to 20 years in federal prison', type: 'resolution' },
+      ],
+      quote: {
+        text:         "The tools were simple. The damage was catastrophic. SQL injection is the hacker's oldest trick — and it still works today.",
+        attribution:  'Security Researcher, Verizon DBIR',
+      },
+    },
+
+    // ── 3. OBJECTIVES ─────────────────────────────────────────────────────
+    {
+      id:               'objectives-1',
+      type:             'objectives',
+      sidebarLabel:     'What You\'ll Learn',
+      estimatedMinutes: 1,
+      objectives: [
+        'Understand what SQL injection is and why it works',
+        'Identify vulnerable login forms and database queries',
+        'Execute a basic SQL injection attack in a safe lab environment',
+        'Explain 3 real-world breaches caused by SQL injection',
+        'Implement parameterized queries to prevent SQL injection',
+      ],
+      xpPreview: {
+        base:    200,
+        bonuses: [
+          { label: 'Complete hands-on lab',   amount: 80 },
+          { label: 'Pass the quiz (70%+)',     amount: 60 },
+          { label: 'Solve the challenge',      amount: 60 },
+        ],
+      },
+    },
+
+    // ── 4. EXPLANATION ────────────────────────────────────────────────────
+    {
+      id:               'explanation-1',
+      type:             'explanation',
+      sidebarLabel:     'How It Works',
+      estimatedMinutes: 6,
+      content: `## What is SQL Injection?
+
+SQL Injection (SQLi) is an attack where an attacker **inserts malicious SQL code** into an input field — and the server executes it as part of a database query.
+
+The vulnerability exists because the application **treats user input as code instead of data**.
+
+## The Vulnerable Pattern
+
+Imagine a login form. When you submit your username and password, the server might build this query:
+
+\`\`\`sql
+SELECT * FROM users WHERE username = 'alice' AND password = 'secret';
+\`\`\`
+
+This is what *should* happen. But if the developer built the query by string concatenation — rather than parameterized queries — an attacker can inject:
+
+\`\`\`
+Username: admin'--
+Password: anything
+\`\`\`
+
+The resulting query becomes:
+
+\`\`\`sql
+SELECT * FROM users WHERE username = 'admin'--' AND password = 'anything';
+\`\`\`
+
+The \`--\` is an SQL comment. Everything after it is ignored. The password check is completely bypassed. The attacker is now logged in as admin.
+
+## Why This Still Happens
+
+Despite being discovered in 1998, SQL injection remains the **#1 web vulnerability** according to OWASP. The reasons:
+- Developers under deadline pressure skip input validation
+- Legacy codebases use string concatenation for queries
+- ORMs are misused (raw query fallbacks)
+- Junior developers don't know it exists`,
+
+      callouts: [
+        {
+          type:  'danger',
+          title: 'OWASP Top 10',
+          text:  'Injection attacks (including SQL injection) have been in the OWASP Top 10 list of critical web vulnerabilities every year since 2003.',
+        },
+        {
+          type:  'info',
+          title: 'Scope of the problem',
+          text:  'According to Verizon\'s Data Breach Investigations Report, injection attacks account for 32% of all web application breaches.',
+        },
+        {
+          type:  'tip',
+          title: 'The fix is simple',
+          text:  'Parameterized queries (prepared statements) completely prevent SQL injection with almost zero performance cost.',
+        },
+      ],
+      codeBlocks: [
+        {
+          language: 'python',
+          caption:  'Vulnerable — NEVER do this',
+          code:     `# ⛔ Vulnerable: string concatenation
+username = request.form['username']
+query = "SELECT * FROM users WHERE username = '" + username + "'"
+cursor.execute(query)`,
+        },
+        {
+          language: 'python',
+          caption:  'Safe — use parameterized queries',
+          code:     `# ✅ Safe: parameterized query
+username = request.form['username']
+query = "SELECT * FROM users WHERE username = ?"
+cursor.execute(query, (username,))  # username is treated as DATA, never as code`,
+        },
+      ],
+      analogy: {
+        scenario: "Imagine you're sending a letter to a bank asking them to 'Transfer $100 to Account #12345'. Now imagine the bank's clerk reads the letter out loud and executes whatever they read verbatim.",
+        mapping:  "SQL injection works the same way — the database 'reads' user input verbatim and executes it as a command. Parameterized queries put the user input in a sealed envelope that the database opens, but never interprets as commands.",
+      },
+      keyTerms: [
+        { term: 'SQL Injection',       definition: 'An attack technique where malicious SQL code is inserted into an input field and executed by the database.' },
+        { term: 'Parameterized Query', definition: 'A query where placeholders (?) replace user input, which is passed separately and treated as data, never as code.' },
+        { term: 'Comment Sequence',    definition: "-- (double dash) in SQL marks the start of a comment. Everything after it is ignored by the database." },
+        { term: 'UNION Attack',        definition: 'An advanced SQLi technique that appends a second SELECT query to retrieve data from different database tables.' },
+      ],
+    },
+
+    // ── 5. DIAGRAM ────────────────────────────────────────────────────────
+    {
+      id:               'diagram-1',
+      type:             'diagram',
+      sidebarLabel:     'Attack Diagram',
+      estimatedMinutes: 3,
+      title:            'How SQL Injection Flows',
+      description:      'Follow the path of a SQL injection attack — from the attacker\'s browser all the way to the database, and back.',
+      nodes: [
+        { id: 'attacker', label: 'Attacker',      type: 'attacker',  detail: "Types: admin'--" },
+        { id: 'browser',  label: 'Browser',        type: 'client',   detail: 'Sends HTTP POST to /login' },
+        { id: 'server',   label: 'Web Server',     type: 'server',   detail: 'Receives form data, builds SQL query via concatenation' },
+        { id: 'query',    label: 'Malicious Query',type: 'default',  detail: "SELECT * FROM users WHERE username='admin'--'" },
+        { id: 'db',       label: 'Database',       type: 'database', detail: 'Executes the query. Returns admin user.' },
+        { id: 'response', label: 'Admin Access',   type: 'default',  detail: 'Attacker is now logged in as admin' },
+      ],
+      edges: [
+        { from: 'attacker', to: 'browser',  label: 'Injects payload',    type: 'attack' },
+        { from: 'browser',  to: 'server',   label: 'POST /login',        type: 'attack' },
+        { from: 'server',   to: 'query',    label: 'Builds bad query',   type: 'attack', animated: true },
+        { from: 'query',    to: 'db',       label: 'Executes',           type: 'attack', animated: true },
+        { from: 'db',       to: 'response', label: 'Returns admin row',  type: 'data' },
+        { from: 'response', to: 'attacker', label: 'Login success!',     type: 'data' },
+      ],
+      caption: 'The attack path: input → concatenation → malicious query → database compromise',
+    },
+
+    // ── 6. ANIMATION ─────────────────────────────────────────────────────
+    {
+      id:               'animation-1',
+      type:             'animation',
+      sidebarLabel:     'Step-by-Step Attack',
+      estimatedMinutes: 3,
+      title:            'Watch a SQL Injection Attack Happen',
+      intro:            'Walk through each step of an SQL injection attack as if you were inside the server.',
+      steps: [
+        {
+          title:       'Step 1 — The normal login',
+          description: "A normal user types their username and password. The server builds: SELECT * FROM users WHERE username = 'alice' AND password = 'correctpassword'",
+          visualNote:  'Query is built. Both conditions must be TRUE. Database returns Alice\'s row. Login succeeds.',
+          code:        "SELECT * FROM users\nWHERE username = 'alice'\nAND password = 'correctpassword'",
+          highlight:   'server',
+        },
+        {
+          title:       'Step 2 — The attacker types a payload',
+          description: "Instead of a real username, the attacker types: admin'-- in the username field and anything in the password field.",
+          visualNote:  'The application receives this input. It naively concatenates it into the query string.',
+          code:        "username = \"admin'--\"\npassword = \"anything\"",
+          highlight:   'attacker',
+        },
+        {
+          title:       "Step 3 — The query mutates",
+          description: "The server builds the query by concatenation. The apostrophe closes the username string early. The -- comments out the rest of the query.",
+          visualNote:  'The WHERE password clause is now commented out. It will never be evaluated.',
+          code:        "SELECT * FROM users\nWHERE username = 'admin'--' AND password = 'anything'",
+          highlight:   'server',
+        },
+        {
+          title:       'Step 4 — The database executes',
+          description: "The database sees a valid SQL query. It has no way to know the input was malicious. It finds the admin row and returns it.",
+          visualNote:  "The database returns the admin user's row. No password was checked.",
+          highlight:   'database',
+        },
+        {
+          title:       'Step 5 — Admin access granted',
+          description: "The application receives the admin row and considers the login successful. The attacker is now logged in as admin with full privileges.",
+          visualNote:  '🎯 The attacker wins. All it took was a single quote and two dashes.',
+          highlight:   'attacker',
+        },
+      ],
+    },
+
+    // ── 7. REAL WORLD EXAMPLE ─────────────────────────────────────────────
+    {
+      id:               'real-world-1',
+      type:             'real-world-example',
+      sidebarLabel:     'Real Breach',
+      estimatedMinutes: 3,
+      company:          'Yahoo! (Acquired by Verizon)',
+      industry:         'Technology / Internet Services',
+      year:             '2012 (disclosed 2016)',
+      incident:         'Stolen credentials from 500 million user accounts via SQL injection',
+      whatHappened: [
+        'Russian state-sponsored hackers targeted Yahoo!\'s user database using a combination of SQL injection and stolen authentication cookies.',
+        'The attackers extracted usernames, email addresses, telephone numbers, dates of birth, hashed passwords, and security questions/answers.',
+        '500 million accounts were compromised — at the time, the largest known data breach in history.',
+        'Yahoo! failed to detect the breach for 4 years. Users were never notified promptly.',
+      ],
+      whyItHappened: [
+        'SQL injection vulnerabilities in Yahoo!\'s web applications allowed the attackers to extract database contents.',
+        'Weak password hashing (MD5) meant the stolen hashes could be cracked easily.',
+        'Poor monitoring and logging meant the breach went undetected for years.',
+        'Security was treated as a cost center, not a priority, under financial pressure.',
+      ],
+      impact: [
+        { value: '500M',   label: 'Accounts compromised'   },
+        { value: '$350M',  label: 'Reduced acquisition price (Verizon deal)' },
+        { value: '4 yrs',  label: 'Time before discovery'  },
+        { value: '$85M',   label: 'Settlement paid to users' },
+      ],
+      lessonsLearned: [
+        'Never store passwords in plain MD5 — use bcrypt, Argon2, or scrypt with proper salting.',
+        'SQL injection vulnerabilities must be caught in code review, not discovered by attackers.',
+        'Security monitoring and anomaly detection can dramatically reduce breach discovery time.',
+        'Disclose breaches promptly — delayed disclosure compounds the legal and reputational damage.',
+      ],
+      sourceLabel: 'SEC Filing & Yahoo Transparency Report',
+    },
+
+    // ── 8. PRACTICAL ──────────────────────────────────────────────────────
+    {
+      id:               'practical-1',
+      type:             'practical',
+      sidebarLabel:     'Hands-On Lab',
+      estimatedMinutes: 10,
+      objective:        'Exploit a vulnerable login form using SQL injection, then fix the vulnerability.',
+      practicalType:    'browser',
+      difficulty:       'beginner',
+      safetyNotice:     'This lab runs in an isolated sandbox environment. Never attempt SQL injection on real websites. Unauthorized access is illegal under the Computer Fraud and Abuse Act (CFAA) and similar laws worldwide.',
+      prerequisites:    ['Read the Explanation section', 'Understand basic SQL SELECT syntax'],
+      steps: [
+        {
+          id:          'step-1',
+          title:       'Open the vulnerable login form',
+          description: 'Navigate to the sandbox lab environment. You\'ll see a basic login form with username and password fields.',
+          expectedOutput: 'You see a login page at http://lab.cyberlearn.local/login',
+        },
+        {
+          id:          'step-2',
+          title:       'Try a normal login (observe behavior)',
+          description: "Enter username 'alice' and password 'wrongpassword'. Note the error message returned.",
+          expectedOutput: "Error: Invalid username or password.",
+        },
+        {
+          id:          'step-3',
+          title:       'Inject the payload',
+          description: "Now enter the following in the username field and click Login.",
+          command:     "admin'--",
+          note:        "Leave the password field as anything — it will be ignored.",
+          expectedOutput: "Welcome, admin! You are now logged in as Administrator.",
+        },
+        {
+          id:          'step-4',
+          title:       'Examine the vulnerable source code',
+          description: "Click 'View Source' in the lab to see the vulnerable code. Identify the exact line where the SQL query is built via string concatenation.",
+          expectedOutput: 'You find: query = "SELECT * FROM users WHERE user = \'" + username + "\'"',
+        },
+        {
+          id:          'step-5',
+          title:       'Fix the vulnerability',
+          description: "Replace the vulnerable code with a parameterized query. Click 'Apply Fix' and verify the injection no longer works.",
+          command:     "cursor.execute('SELECT * FROM users WHERE user = ?', (username,))",
+          expectedOutput: "Injection attempt now returns: Error: Invalid username or password.",
+        },
+      ],
+      hints: [
+        "The -- sequence comments out everything that follows it in SQL. Use it to neutralize the password check.",
+        "Try typing just an apostrophe ' first. If the server crashes or returns an error, it's likely vulnerable.",
+        "After fixing, test with admin'-- again. It should now fail because the input is treated as data, not code.",
+      ],
+      expectedResult: 'You should be able to log in as admin without knowing the password, then fix the code to prevent the same attack.',
+      solution:       "The fix: use cursor.execute('SELECT * FROM users WHERE username = ?', (username,)) — this tells the database driver to treat the username as data, never as SQL code.",
+    },
+
+    // ── 9. AI MENTOR ──────────────────────────────────────────────────────
+    {
+      id:               'ai-mentor-1',
+      type:             'ai-mentor',
+      sidebarLabel:     'Ask AI Mentor',
+      estimatedMinutes: 5,
+      topic:            'SQL Injection',
+      context:          'You are an expert cybersecurity mentor teaching a beginner about SQL injection. This student has just completed a hands-on lab. Explain concepts using analogies, simple language, and real examples. If asked for solutions to real systems, decline and redirect to the lab environment.',
+      suggestedPrompts: [
+        "Explain SQL injection like I'm 10 years old",
+        "What's the difference between SQLi and XSS?",
+        "Show me a UNION-based SQL injection example",
+        "Why do companies still get hit by SQLi in 2024?",
+        "What tools do pentesters use to find SQLi?",
+        "Explain blind SQL injection",
+      ],
+    },
+
+    // ── 10. CHALLENGE ─────────────────────────────────────────────────────
+    {
+      id:               'challenge-1',
+      type:             'challenge',
+      sidebarLabel:     'Challenge',
+      estimatedMinutes: 5,
+      title:            'Find the Hidden Flag',
+      description:      "A company's login page is vulnerable to SQL injection. The database contains a secret flag hidden in the `admin_secrets` table. Use SQL injection to extract it. The flag format is FLAG{...}.",
+      challengeType:    'flag-capture',
+      difficulty:       'beginner',
+      xpReward:         60,
+      flagFormat:       'FLAG{...}',
+      flag:             'FLAG{sqli_1s_n0t_dead}',
+      maxAttempts:      5,
+      hints: [
+        "Try logging in as admin first using the technique from the lab.",
+        "Once logged in, look for a way to read from different tables using UNION SELECT.",
+        "The flag is in the `admin_secrets` table, in the `secret_value` column.",
+      ],
+      solution:         "Payload: admin' UNION SELECT secret_value,NULL FROM admin_secrets--",
+    },
+
+    // ── 11. COMMON MISTAKES ───────────────────────────────────────────────
+    {
+      id:               'common-mistakes-1',
+      type:             'common-mistakes',
+      sidebarLabel:     'Common Mistakes',
+      estimatedMinutes: 3,
+      intro:            "Even experienced developers make these mistakes. Knowing them helps you spot vulnerabilities and avoid them.",
+      mistakes: [
+        {
+          title:       'Testing on production systems',
+          wrong:       "I'll just test this on the live site to see if it's vulnerable.",
+          right:       "Test in isolated lab environments. Even read-only injection can cause crashes, timeouts, or audit trail anomalies.",
+          explanation: 'Testing SQL injection on live systems without authorization is illegal under CFAA, Computer Misuse Act, and equivalent laws worldwide — even if you own the company. Set up a staging environment.',
+          severity:    'critical',
+        },
+        {
+          title:       'Sanitizing only on the client-side',
+          wrong:       'I\'ll use JavaScript to block the apostrophe character before it reaches the server.',
+          right:       'Parameterized queries must be used server-side. Client-side validation can be bypassed with Burp Suite or even browser DevTools in seconds.',
+          explanation: 'Client-side validation is a UX convenience, not a security control. Any request can be intercepted and modified before it reaches the server.',
+          severity:    'critical',
+          example:     'An attacker disables JS or uses curl to send the payload directly: curl -X POST https://site.com/login --data "user=admin\'--"',
+        },
+        {
+          title:       'Blacklisting keywords instead of parameterizing',
+          wrong:       "I'll block the words SELECT, DROP, and -- to prevent injection.",
+          right:       "Use parameterized queries or prepared statements. Blacklists can be bypassed with encoding, case variation, or comment injection.",
+          explanation: "Attackers can bypass keyword blacklists with: SeLeCt, SEL/**/ECT, SELECT%0A, or hexadecimal encoding. Parameterized queries don't care what the input contains.",
+          severity:    'warning',
+        },
+        {
+          title:       'Assuming ORMs are always safe',
+          wrong:       "I'm using an ORM so I'm definitely safe from SQL injection.",
+          right:       'ORMs are safe when used correctly, but raw query fallbacks, improper use of `.raw()`, or format strings can still create vulnerabilities.',
+          explanation: 'Example Django vulnerability: User.objects.raw("SELECT * FROM users WHERE name = \'%s\'" % name) — this is still vulnerable. Use: User.objects.raw("SELECT * FROM users WHERE name = %s", [name])',
+          severity:    'warning',
+        },
+      ],
+    },
+
+    // ── 12. QUIZ ──────────────────────────────────────────────────────────
+    {
+      id:               'quiz-1',
+      type:             'quiz',
+      sidebarLabel:     'Quiz',
+      estimatedMinutes: 5,
+      passingScore:     70,
+      questions: [
+        {
+          id:      'q1',
+          type:    'scenario',
+          context: "A developer shows you this code: query = \"SELECT * FROM products WHERE id = \" + request.params.id",
+          question: "What is the security issue with this code, and what would a safe version look like?",
+          options: [
+            { id: 'a', text: "There is no issue. Integer IDs can't be injected.",                                          isCorrect: false },
+            { id: 'b', text: "The parameter is not sanitized. A safe version uses: cursor.execute('SELECT * FROM products WHERE id = ?', [request.params.id])", isCorrect: true },
+            { id: 'c', text: "The issue is using SELECT instead of FETCH. Replace with a stored procedure.",               isCorrect: false },
+            { id: 'd', text: "The code should use HTTPS to encrypt the query.",                                            isCorrect: false },
+          ],
+          explanation: "Even integer parameters can be manipulated. For example: id=1 OR 1=1 would return all rows. The fix is always a parameterized query — pass the value as a separate parameter to the database driver.",
+          xpReward: 20,
+        },
+        {
+          id:      'q2',
+          type:    'multiple',
+          question: "Which of the following techniques can an attacker use to bypass SQL injection keyword blacklists? (Select all that apply)",
+          options: [
+            { id: 'a', text: "Case variation: SeLeCt instead of SELECT",  isCorrect: true  },
+            { id: 'b', text: "Comment insertion: SEL/**/ECT",              isCorrect: true  },
+            { id: 'c', text: "Using HTTPS instead of HTTP",                isCorrect: false },
+            { id: 'd', text: "URL encoding: %53%45%4C%45%43%54",          isCorrect: true  },
+            { id: 'e', text: "Changing the database from MySQL to Postgres",isCorrect: false },
+          ],
+          explanation: "Blacklists are fundamentally broken for security. Attackers use case variation, comment injection, URL encoding, and dozens of other techniques to bypass them. The only real defense is parameterized queries.",
+          xpReward: 20,
+        },
+        {
+          id:      'q3',
+          type:    'true-false',
+          question: "A web application that uses an ORM (like Django ORM or Hibernate) is completely immune to SQL injection.",
+          options: [
+            { id: 'true',  text: 'True',  isCorrect: false },
+            { id: 'false', text: 'False', isCorrect: true  },
+          ],
+          explanation: "ORMs are safe when used correctly, but they often provide raw query escape hatches (.raw(), executeQuery(), nativeQuery()) that are vulnerable if user input is concatenated into them. Always check how raw queries are constructed.",
+          xpReward: 20,
+        },
+      ],
+    },
+
+    // ── 13. REFLECTION ────────────────────────────────────────────────────
+    {
+      id:               'reflection-1',
+      type:             'reflection',
+      sidebarLabel:     'Reflection',
+      estimatedMinutes: 3,
+      prompts: [
+        'What surprised you most about how SQL injection works?',
+        'Can you think of a website you use that might be vulnerable? (Don\'t test it — just think about it.)',
+        'In your own words, why does using parameterized queries prevent SQL injection?',
+        'What would you do first if you discovered a SQL injection vulnerability in your company\'s application?',
+      ],
+      placeholder: "Type your thoughts here. Your notes are saved locally and help reinforce what you've learned...",
+      minWords:    20,
+    },
+
+    // ── 14. SUMMARY ───────────────────────────────────────────────────────
+    {
+      id:               'summary-1',
+      type:             'summary',
+      sidebarLabel:     'Summary',
+      estimatedMinutes: 2,
+      keyTakeaways: [
+        'SQL injection occurs when user input is treated as SQL code instead of data',
+        "The attack exploits string concatenation in SQL queries — a ' can break the query structure",
+        'Parameterized queries (prepared statements) completely prevent SQL injection',
+        'SQL injection has caused billion-dollar breaches — Heartland, Yahoo, Sony, and hundreds more',
+        'Client-side validation and keyword blacklists are NOT defenses — parameterize everything',
+      ],
+      xpBreakdown: {
+        base:             200,
+        activityBonus:    80,
+        challengeBonus:   60,
+        quizBonus:        60,
+        streakMultiplier: 1.0,
+        total:            400,
+      },
+      nextLesson: {
+        title:            'Cross-Site Scripting (XSS)',
+        slug:             'xss-cross-site-scripting',
+        courseSlug:       'web-security-fundamentals',
+        estimatedMinutes: 40,
+      },
+      relatedTopics: [
+        'UNION-based SQL Injection',
+        'Blind SQL Injection',
+        'NoSQL Injection (MongoDB)',
+        'OWASP Testing Guide — A03',
+        'sqlmap — Automated SQLi Scanner',
+      ],
+    },
+
+    // ── 15. CAREER CONNECTION ─────────────────────────────────────────────
+    {
+      id:               'career-1',
+      type:             'career-connection',
+      sidebarLabel:     'Career Paths',
+      estimatedMinutes: 2,
+      realWorldUsage:   'SQL injection testing is a core skill for web application penetration testers, bug bounty hunters, and application security engineers. It appears in every major web app pentest and is one of the first things tested in a bug bounty program.',
+      roles: [
+        {
+          title:        'Web Application Penetration Tester',
+          description:  'Test web applications for vulnerabilities including SQL injection, XSS, CSRF, and authentication flaws.',
+          salaryRange:  '$90K – $160K',
+        },
+        {
+          title:        'Bug Bounty Hunter',
+          description:  'Independently find vulnerabilities in company systems and earn rewards. SQLi findings often pay $500–$50,000+.',
+          salaryRange:  '$30K – $300K+ (variable)',
+        },
+        {
+          title:        'Application Security Engineer',
+          description:  'Work inside companies to build secure development practices and review code for vulnerabilities.',
+          salaryRange:  '$120K – $200K',
+        },
+        {
+          title:        'Security Analyst (SOC)',
+          description:  'Monitor and respond to SQL injection attempts in production systems.',
+          salaryRange:  '$65K – $120K',
+        },
+      ],
+      companies:       ['HackerOne', 'Bugcrowd', 'Synack', 'NCC Group', 'Rapid7', 'CrowdStrike'],
+      certifications:  ['OSCP', 'CEH', 'BSCP (Burp Suite Certified Practitioner)', 'eWPT'],
+      careerPath:      [
+        'Learn web fundamentals (HTML, HTTP, databases)',
+        'Complete this course (Web Security Fundamentals)',
+        'Practice on DVWA, HackTheBox, TryHackMe',
+        'Get OSCP or eWPT certification',
+        'Start a bug bounty program',
+        'Land your first penetration testing role',
+      ],
+    },
+  ],
+}

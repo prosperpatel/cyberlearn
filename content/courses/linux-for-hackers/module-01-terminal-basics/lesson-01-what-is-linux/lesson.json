@@ -1,0 +1,239 @@
+{
+  "id": "lesson-linux-what-is-linux",
+  "slug": "lesson-01-what-is-linux",
+  "courseSlug": "linux-for-hackers",
+  "moduleId": "module-linux-terminal-basics",
+  "title": "What is Linux and Why Hackers Love It",
+  "tagline": "The operating system behind 90% of the internet, every Android phone, and every serious hacking tool",
+  "description": "Linux isn't just an operating system — it's a philosophy. Open source, transparent, composable, and endlessly customizable. This lesson explains what Linux is, why security professionals live in it, and sets up your mental model for everything that follows.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 20,
+  "tags": ["linux", "history", "kernel", "distributions", "open-source"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Explain what Linux is and how it differs from Windows and macOS",
+    "Name 5 popular Linux distributions and their use cases in security",
+    "Understand the kernel, shell, and userland distinction",
+    "Explain why Linux dominates servers, cloud, and hacking tools"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2024-03-01T00:00:00Z",
+  "updatedAt": "2024-09-10T00:00:00Z",
+  "order": 1,
+  "xpReward": 200,
+  "nextLessonSlug": "lesson-02-first-commands",
+  "sections": [
+    {
+      "id": "hook-linux",
+      "type": "hook",
+      "sidebarLabel": "Why Linux?",
+      "estimatedMinutes": 1,
+      "variant": "fact",
+      "headline": "96.3% of the world's top 1 million web servers run Linux.",
+      "subheadline": "Every major cloud provider (AWS, GCP, Azure), every Android device, and every professional hacking tool runs on Linux. Learning it isn't optional — it's foundational.",
+      "stat": {
+        "value": "96.3%",
+        "label": "Of top web servers run Linux",
+        "source": "W3Techs Web Technology Survey, 2024"
+      },
+      "backgroundAccent": "green"
+    },
+
+    {
+      "id": "objectives-linux",
+      "type": "objectives",
+      "sidebarLabel": "What You'll Learn",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Explain what Linux is and how it differs from Windows and macOS",
+        "Name 5 popular Linux distributions and their use cases in security",
+        "Understand the kernel, shell, and userland distinction",
+        "Explain why Linux dominates servers, cloud, and hacking tools"
+      ]
+    },
+
+    {
+      "id": "explanation-linux-what",
+      "type": "explanation",
+      "sidebarLabel": "What is Linux?",
+      "estimatedMinutes": 5,
+      "content": [
+        "## What is Linux?",
+        "",
+        "Linux is an **open-source operating system kernel** created by Linus Torvalds in 1991. Unlike Windows or macOS, Linux source code is publicly available — anyone can read it, modify it, and contribute to it.",
+        "",
+        "When people say 'Linux', they usually mean a **distribution** (distro): the kernel bundled with software tools, package managers, and desktop environments. Popular distros include Ubuntu, Debian, Fedora, Arch, and for security: Kali Linux.",
+        "",
+        "## The Three Layers",
+        "",
+        "### 1. The Kernel",
+        "The core of Linux. It manages hardware (CPU, memory, disk, network), schedules processes, and enforces security. You rarely interact with it directly — but everything runs through it.",
+        "",
+        "### 2. The Shell",
+        "The command-line interface between you and the kernel. When you type `ls`, the shell translates that into a kernel syscall. **Bash** is the most common shell in security work.",
+        "",
+        "### 3. Userland",
+        "All the programs that run on top of the kernel: web servers, text editors, hacking tools, your Python scripts. These are just programs that make syscalls to the kernel.",
+        "",
+        "## Why Linux for Security?",
+        "",
+        "- **Open source** — you can read how every tool works. No black boxes.",
+        "- **Composable** — small tools that do one thing well, piped together. `cat file.txt | grep password | sort | uniq`",
+        "- **Transparent** — full visibility into network activity, processes, file access.",
+        "- **Tool ecosystem** — Nmap, Wireshark, Metasploit, Burp Suite, sqlmap — built for Linux.",
+        "- **Identical to targets** — 96% of the servers you'll test run Linux."
+      ],
+      "analogy": {
+        "scenario": "Think of Windows like a pre-furnished apartment you rent. Everything looks nice but you can't knock down walls, see what's inside them, or change the plumbing.",
+        "mapping": "Linux is like owning the building and having the blueprints. You can see everything, change anything, and build exactly what you need. Security work requires this level of transparency and control."
+      },
+      "keyTerms": [
+        { "term": "Kernel",       "definition": "The core of Linux. Manages hardware resources and provides the interface between software and hardware." },
+        { "term": "Shell",        "definition": "A command-line interpreter. Bash is the most common. It translates commands into kernel system calls." },
+        { "term": "Distribution", "definition": "A packaged version of Linux: kernel + tools + package manager + optional desktop. Ubuntu, Kali, Debian are distros." },
+        { "term": "Userland",     "definition": "All software that runs on top of the kernel. Your programs, servers, tools — everything except the kernel itself." }
+      ]
+    },
+
+    {
+      "id": "diagram-linux-layers",
+      "type": "diagram",
+      "sidebarLabel": "Linux Architecture",
+      "estimatedMinutes": 2,
+      "title": "Linux Architecture",
+      "description": "The relationship between hardware, kernel, shell, and the programs you run.",
+      "nodes": [
+        { "id": "hw",       "label": "Hardware",    "type": "server",   "detail": "CPU, RAM, Disk, Network cards" },
+        { "id": "kernel",   "label": "Kernel",      "type": "database", "detail": "Core OS: syscalls, scheduling, memory management" },
+        { "id": "shell",    "label": "Shell (Bash)", "type": "default",  "detail": "Command interpreter. Runs your commands." },
+        { "id": "tools",    "label": "Security Tools","type": "client",  "detail": "nmap, wireshark, metasploit, burpsuite" },
+        { "id": "you",      "label": "You",          "type": "attacker", "detail": "The security professional at the keyboard" }
+      ],
+      "edges": [
+        { "from": "you",    "to": "shell",  "label": "Type commands",     "type": "normal" },
+        { "from": "shell",  "to": "kernel", "label": "System calls",      "type": "data",   "animated": true },
+        { "from": "tools",  "to": "kernel", "label": "System calls",      "type": "data" },
+        { "from": "kernel", "to": "hw",     "label": "Hardware control",  "type": "data",   "animated": true }
+      ],
+      "caption": "Every command you type travels through this stack"
+    },
+
+    {
+      "id": "explanation-distros",
+      "type": "explanation",
+      "sidebarLabel": "Security Distros",
+      "estimatedMinutes": 3,
+      "content": [
+        "## Linux Distributions for Security",
+        "",
+        "Not all distros are created equal. Here are the ones you'll encounter in security work:",
+        "",
+        "### Kali Linux",
+        "The **industry standard for penetration testing**. Comes pre-installed with 600+ security tools: Nmap, Metasploit, Burp Suite, Wireshark, sqlmap, and more. Maintained by Offensive Security (the OSCP creators). Use this for active pentesting.",
+        "",
+        "### Parrot OS",
+        "A lighter alternative to Kali. Good for older hardware. Also includes privacy tools and development environments alongside security tools.",
+        "",
+        "### Ubuntu / Debian",
+        "**Best for learning Linux fundamentals** without the noise of pre-installed hacking tools. Also what most production servers run — knowing it helps you understand your targets.",
+        "",
+        "### Arch Linux",
+        "For advanced users. You build the system from scratch, which gives you deep understanding. High learning curve, maximum control.",
+        "",
+        "### What to Use in This Course",
+        "For this course, **Kali Linux** is recommended. Most examples will run on Ubuntu too. The skills are identical — Linux is Linux."
+      ],
+      "callouts": [
+        {
+          "type": "tip",
+          "title": "Start with a VM",
+          "text": "Don't install Kali as your primary OS yet. Use VirtualBox or VMware to run it inside your current OS. Free, safe, and reversible."
+        },
+        {
+          "type": "info",
+          "title": "WSL on Windows",
+          "text": "Windows Subsystem for Linux (WSL2) lets you run a Linux terminal inside Windows. It works for most lessons in this course."
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-linux",
+      "type": "quiz",
+      "sidebarLabel": "Quiz",
+      "estimatedMinutes": 3,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "lq1",
+          "type": "single",
+          "question": "Which component of Linux is responsible for managing hardware, memory, and system calls?",
+          "options": [
+            { "id": "a", "text": "The Shell",       "isCorrect": false },
+            { "id": "b", "text": "The Kernel",      "isCorrect": true  },
+            { "id": "c", "text": "The Distribution","isCorrect": false },
+            { "id": "d", "text": "Userland",        "isCorrect": false }
+          ],
+          "explanation": "The kernel is the core of Linux. It's the only software that has direct access to hardware. Everything else (shells, tools, programs) makes requests to the kernel through system calls."
+        },
+        {
+          "id": "lq2",
+          "type": "single",
+          "question": "Which Linux distribution is the industry standard for penetration testing and comes with 600+ pre-installed security tools?",
+          "options": [
+            { "id": "a", "text": "Ubuntu",    "isCorrect": false },
+            { "id": "b", "text": "Arch Linux","isCorrect": false },
+            { "id": "c", "text": "Kali Linux","isCorrect": true  },
+            { "id": "d", "text": "Fedora",    "isCorrect": false }
+          ],
+          "explanation": "Kali Linux is maintained by Offensive Security (creators of the OSCP certification) and is the industry standard for penetration testing. It ships with Nmap, Metasploit, Burp Suite, Wireshark, and hundreds of other tools pre-installed."
+        },
+        {
+          "id": "lq3",
+          "type": "true-false",
+          "question": "The Linux kernel source code is publicly available and can be modified by anyone.",
+          "options": [
+            { "id": "true",  "text": "True",  "isCorrect": true  },
+            { "id": "false", "text": "False", "isCorrect": false }
+          ],
+          "explanation": "Linux is open-source software released under the GPL license. The kernel source code is publicly available on kernel.org. This transparency is one of the core reasons Linux is trusted for security work."
+        }
+      ]
+    },
+
+    {
+      "id": "summary-linux",
+      "type": "summary",
+      "sidebarLabel": "Summary",
+      "estimatedMinutes": 1,
+      "keyTakeaways": [
+        "Linux is an open-source OS kernel created in 1991 — the same kernel that powers Android, cloud servers, and hacking tools",
+        "The three layers: Kernel (hardware control), Shell (command interpreter), Userland (your programs)",
+        "96% of web servers run Linux — learning it means learning your target environment",
+        "Kali Linux is the penetration testing standard with 600+ pre-installed security tools",
+        "Start with a VM — don't install Kali as your primary OS until you're comfortable"
+      ],
+      "xpBreakdown": {
+        "base": 150,
+        "activityBonus": 0,
+        "challengeBonus": 0,
+        "quizBonus": 50,
+        "streakMultiplier": 1.0,
+        "total": 200
+      },
+      "nextLesson": {
+        "title": "Your First 20 Linux Commands",
+        "slug": "lesson-02-first-commands",
+        "courseSlug": "linux-for-hackers",
+        "estimatedMinutes": 35
+      },
+      "relatedTopics": [
+        "Linux Filesystem Hierarchy Standard (FHS)",
+        "Bash vs Zsh vs Fish",
+        "VirtualBox Setup for Kali",
+        "WSL2 on Windows"
+      ]
+    }
+  ]
+}
