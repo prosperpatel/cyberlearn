@@ -84,3 +84,11 @@ Use `bg-base-900`, `bg-base-800` for surfaces. Use `shadow-cyber-sm/md/lg` for g
 - **`docs/curriculum/KNOWLEDGE_GRAPH.md`** — curriculum dependency engine; governs lesson sequencing and prerequisite logic
 - **`docs/curriculum/CURRICULUM_ARCHITECTURE.md`** — Academy 1 lesson metadata (380 planned lessons across 5 academies)
 - **`docs/curriculum/academy-02-networking.md`** — Academy 2 full lesson metadata (60 lessons, D3 Networking domain)
+
+## Development Rules
+
+- Never modify `CONSTITUTION.md` or `docs/curriculum/KNOWLEDGE_GRAPH.md` unless explicitly instructed.
+- Never regenerate a completed academy document. If generation was interrupted, resume from the exact stopping point — do not restart.
+- Validate Constitution and Knowledge Graph compliance before marking any curriculum work complete.
+- Keep commits focused on a single feature or academy.
+- Maintain backward compatibility unless a breaking change is explicitly approved.
