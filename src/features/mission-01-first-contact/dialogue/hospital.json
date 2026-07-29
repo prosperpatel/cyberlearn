@@ -1,0 +1,71 @@
+{
+  "intro": {
+    "id": "m01-hospital-intro",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mhi-01",
+        "speakerId": "aria",
+        "text": "Analyst. Alert incoming. St. Elowen Medical Center, southeast region.",
+        "emotion": "urgent"
+      },
+      {
+        "id": "mhi-02",
+        "speakerId": "aria",
+        "text": "Their internal network is flagging anomalies across multiple systems.",
+        "emotion": "analytical",
+        "autoAdvanceMs": 2500
+      },
+      {
+        "id": "mhi-03",
+        "speakerId": "aria",
+        "text": "I've pulled their system status dashboard. Seven core departments.",
+        "emotion": "informative"
+      },
+      {
+        "id": "mhi-04",
+        "speakerId": "aria",
+        "text": "Examine each one. Observe what you see. Don't rush through this.",
+        "emotion": "measured"
+      },
+      {
+        "id": "mhi-05",
+        "speakerId": "aria",
+        "text": "Something is moving through this network. Your job right now is to watch.",
+        "emotion": "concerned",
+        "autoAdvanceMs": 3000
+      }
+    ]
+  },
+  "conclude": {
+    "id": "m01-hospital-conclude",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mhc-01",
+        "speakerId": "aria",
+        "text": "Observation complete.",
+        "emotion": "resolute",
+        "autoAdvanceMs": 2200
+      },
+      {
+        "id": "mhc-02",
+        "speakerId": "aria",
+        "text": "Your investigation begins now.",
+        "emotion": "definitive"
+      }
+    ]
+  }
+}
