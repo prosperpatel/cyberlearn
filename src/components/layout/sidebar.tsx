@@ -2,6 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, BookOpen, Terminal, Target, Trophy,
   User, Settings, ChevronLeft, ChevronRight, Shield,
+  GraduationCap, Briefcase, Award, BookMarked, Users, Map,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
@@ -17,6 +18,7 @@ import { Separator } from '@/components/ui/separator'
 // Map icon name strings to Lucide components
 const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   LayoutDashboard, BookOpen, Terminal, Target, Trophy, User, Settings,
+  GraduationCap, Briefcase, Award, BookMarked, Users, Map,
 }
 
 function NavIcon({ name, className }: { name: string; className?: string }) {

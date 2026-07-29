@@ -33,7 +33,7 @@ export function ChallengeSectionRenderer({ section, onComplete, onChallenge, pri
   const outOfAttempts = attempts >= maxAttempts && !submitted?.correct
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12 space-y-6">
+    <div className="max-w-[820px] mx-auto px-6 sm:px-8 py-14 sm:py-20 space-y-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}

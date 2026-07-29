@@ -31,7 +31,7 @@ const EDGE_STYLES: Record<NonNullable<DiagramEdge['type']>, { color: string; lab
 
 export function DiagramSectionRenderer({ section }: Props) {
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12 space-y-6">
+    <div className="max-w-[1040px] mx-auto px-6 sm:px-8 py-14 sm:py-20 space-y-8">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

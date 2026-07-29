@@ -5,17 +5,24 @@ import type { NavItem, SkillCategory } from '@/types'
 // ============================================================
 
 export const ROUTES = {
-  HOME:         '/',
-  DASHBOARD:    '/dashboard',
-  COURSES:      '/courses',
-  COURSE:       (slug: string) => `/courses/${slug}`,
-  LESSON:       (courseSlug: string, lessonSlug: string) =>
-                  `/courses/${courseSlug}/lessons/${lessonSlug}`,
-  LABS:         '/labs',
-  CHALLENGES:   '/challenges',
-  LEADERBOARD:  '/leaderboard',
-  PROFILE:      '/profile',
-  SETTINGS:     '/settings',
+  HOME:           '/',
+  DASHBOARD:      '/dashboard',
+  ACADEMY_PATHS:  '/academy-paths',
+  COURSES:        '/courses',
+  COURSE:         (slug: string) => `/courses/${slug}`,
+  LESSON:         (courseSlug: string, lessonSlug: string) =>
+                    `/courses/${courseSlug}/lessons/${lessonSlug}`,
+  LABS:           '/labs',
+  CHALLENGES:     '/challenges',
+  LEADERBOARD:    '/leaderboard',
+  CAREER_HUB:     '/career-hub',
+  CERTIFICATES:   '/certificates',
+  RESOURCES:      '/resources',
+  COMMUNITY:      '/community',
+  PROFILE:        '/profile',
+  SETTINGS:       '/settings',
+  MISSIONS: '/missions',
+  MISSION:  (id: string) => `/missions/${id}`,
   AUTH: {
     LOGIN:    '/login',
     REGISTER: '/register',
@@ -28,11 +35,26 @@ export const ROUTES = {
 // ============================================================
 
 export const MAIN_NAV: NavItem[] = [
-  { label: 'Dashboard',    href: ROUTES.DASHBOARD,   icon: 'LayoutDashboard' },
-  { label: 'Courses',      href: ROUTES.COURSES,     icon: 'BookOpen'        },
-  { label: 'Labs',         href: ROUTES.LABS,        icon: 'Terminal'        },
-  { label: 'Challenges',   href: ROUTES.CHALLENGES,  icon: 'Target'          },
-  { label: 'Leaderboard',  href: ROUTES.LEADERBOARD, icon: 'Trophy'          },
+  { label: 'Dashboard',      href: ROUTES.DASHBOARD,     icon: 'LayoutDashboard' },
+  { label: 'Academy Paths',  href: ROUTES.ACADEMY_PATHS, icon: 'GraduationCap'   },
+  { label: 'Courses',        href: ROUTES.COURSES,       icon: 'BookOpen'        },
+  { label: 'Missions',       href: ROUTES.MISSIONS,      icon: 'Map'             },
+  { label: 'Labs',           href: ROUTES.LABS,          icon: 'Terminal'        },
+  { label: 'Challenges',     href: ROUTES.CHALLENGES,    icon: 'Target'          },
+  { label: 'Leaderboard',    href: ROUTES.LEADERBOARD,   icon: 'Trophy'          },
+  { label: 'Career Hub',     href: ROUTES.CAREER_HUB,    icon: 'Briefcase'       },
+  { label: 'Certificates',   href: ROUTES.CERTIFICATES,  icon: 'Award'           },
+  { label: 'Resources',      href: ROUTES.RESOURCES,     icon: 'BookMarked'      },
+  { label: 'Community',      href: ROUTES.COMMUNITY,     icon: 'Users'           },
+]
+
+/** Mobile bottom tab bar — max 5 items. */
+export const MOBILE_NAV: NavItem[] = [
+  { label: 'Dashboard',  href: ROUTES.DASHBOARD,     icon: 'LayoutDashboard' },
+  { label: 'Academy',    href: ROUTES.ACADEMY_PATHS, icon: 'GraduationCap'   },
+  { label: 'Courses',    href: ROUTES.COURSES,       icon: 'BookOpen'        },
+  { label: 'Labs',       href: ROUTES.LABS,          icon: 'Terminal'        },
+  { label: 'Challenges', href: ROUTES.CHALLENGES,    icon: 'Target'          },
 ]
 
 export const SECONDARY_NAV: NavItem[] = [
@@ -45,6 +67,7 @@ export const SECONDARY_NAV: NavItem[] = [
 // ============================================================
 
 export const SKILL_CATEGORIES: Record<SkillCategory, { label: string; icon: string; color: string }> = {
+  'foundations':         { label: 'Foundations',         icon: 'Shield',          color: '#00FF87' },
   'networking':          { label: 'Networking',          icon: 'Network',         color: '#00D9FF' },
   'web-security':        { label: 'Web Security',        icon: 'Globe',           color: '#7B5EA7' },
   'cryptography':        { label: 'Cryptography',        icon: 'Lock',            color: '#00FF87' },

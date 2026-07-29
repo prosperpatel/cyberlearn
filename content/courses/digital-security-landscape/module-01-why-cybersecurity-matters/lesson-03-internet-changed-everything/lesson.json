@@ -1,0 +1,498 @@
+{
+  "id": "lesson-internet-changed-everything",
+  "slug": "lesson-03-internet-changed-everything",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-why-cybersecurity-matters",
+  "title": "How the Internet Changed Everything",
+  "tagline": "From four computers in 1969 to 25 billion connected devices — and why every one of them is an opportunity for an attacker.",
+  "description": "The internet was designed for resilience and openness, not security. This lesson traces how cloud computing, mobile devices, and IoT ballooned the global attack surface — and how the Mirai botnet used 600,000 unprotected cameras and DVRs to shut down the internet for 1.2 billion people in one afternoon.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 35,
+  "tags": ["attack-surface", "iot", "cloud", "mobile", "mirai", "botnet", "internet-history", "threat-landscape"],
+  "prerequisites": ["lesson-01-cost-of-insecurity"],
+  "learningObjectives": [
+    "Describe how the internet's original design prioritized availability and openness over security — and why this created lasting vulnerabilities",
+    "Explain how cloud computing, mobile devices, and IoT each expanded the attack surface in distinct ways",
+    "Describe the Mirai botnet attack and what it revealed about the hidden risk of billions of unsecured connected devices"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-28T00:00:00Z",
+  "updatedAt": "2026-07-28T00:00:00Z",
+  "order": 3,
+  "xpReward": 300,
+  "prevLessonSlug": "lesson-02-day-in-life-security-professional",
+  "nextLessonSlug": "lesson-04-security-mindset",
+  "sections": [
+    {
+      "id": "hook-1",
+      "type": "hook",
+      "sidebarLabel": "The Hook",
+      "estimatedMinutes": 1,
+      "variant": "statistic",
+      "headline": "In 1969, the internet was four computers. Today, it's 25 billion devices. Security was an afterthought at four. It's a crisis at 25 billion.",
+      "subheadline": "Every new device added to the internet is an entry point. Most of those 25 billion entry points are poorly — or never — secured.",
+      "stat": {
+        "value": "25B",
+        "label": "Connected IoT devices expected by 2030",
+        "source": "Statista, 2023"
+      },
+      "backgroundAccent": "blue"
+    },
+
+    {
+      "id": "story-1",
+      "type": "story",
+      "sidebarLabel": "The Story",
+      "estimatedMinutes": 4,
+      "mood": "tense",
+      "narrative": [
+        "On October 21, 2016, a Friday afternoon, the internet went down for large parts of the Eastern United States and significant portions of Europe.",
+        "Not all of it. But Twitter. Reddit. Netflix. Spotify. PayPal. The New York Times. GitHub. For millions of users, these services returned error messages or loaded so slowly they were effectively unusable. It lasted most of the day.",
+        "The attacker wasn't a nation-state. There was no espionage, no data theft, no ransom demand. The attack was launched to prove a point — and the weapon was 600,000 security cameras, DVRs, and routers.",
+        "Mirai was a piece of malware that spread automatically across the internet, looking for IoT devices still using their default factory usernames and passwords — things like 'admin/admin' or 'root/password.' It found them by the hundreds of thousands. Once infected, each device became a soldier in a massive botnet, waiting for orders.",
+        "On October 21, Mirai received its orders: flood Dyn, a DNS provider that handled name resolution for hundreds of major websites. Dyn's systems crumpled under approximately 1.2 terabits per second of garbage traffic — the largest DDoS attack in recorded history at the time.",
+        "The devices used in the attack were not laptops or servers. They were baby monitors. Security cameras — ironic in retrospect. DVR boxes in people's living rooms. Devices that their owners had never configured, never patched, and never once thought about as security risks.",
+        "Mirai changed how the security industry thought about the attack surface forever."
+      ],
+      "characters": [
+        {
+          "name": "Mirai Botnet",
+          "role": "Attacker Tool",
+          "description": "Malware that scanned the internet for IoT devices using default credentials. Assembled 600,000 infected devices into a DDoS weapon.",
+          "emoji": "🤖"
+        },
+        {
+          "name": "Dyn",
+          "role": "Target",
+          "description": "A major DNS provider. When Dyn went down, every website that used Dyn for DNS became unreachable — even though those websites themselves were unaffected.",
+          "emoji": "🌐"
+        }
+      ],
+      "timeline": [
+        { "timestamp": "September 2016", "event": "Mirai source code published", "detail": "The author published the botnet's code publicly, enabling anyone to build their own version", "type": "normal" },
+        { "timestamp": "October 2016", "event": "Botnet grows to 600,000 devices", "detail": "Infected security cameras, DVRs, and routers across 164 countries", "type": "normal" },
+        { "timestamp": "Oct 21, 7:00 AM ET", "event": "First DDoS wave", "detail": "1.2 Tbps of traffic sent to Dyn's infrastructure in Nashua, NH", "type": "critical" },
+        { "timestamp": "Oct 21, ~12:00 PM", "event": "Second wave", "detail": "Broader geographic disruption across U.S. and Europe", "type": "critical" },
+        { "timestamp": "Oct 21, Evening", "event": "Services restored", "detail": "Dyn mitigated attack; major services return to normal", "type": "resolution" },
+        { "timestamp": "After", "event": "Industry reckoning", "detail": "IoT security becomes an urgent policy and engineering priority worldwide", "type": "normal" }
+      ],
+      "quote": {
+        "text": "The attack showed that the entire internet's availability can be threatened by compromising devices most people have never thought about as computers.",
+        "attribution": "Bruce Schneier, security technologist, 2016"
+      }
+    },
+
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "What You'll Learn",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Describe how the internet's original design created lasting security vulnerabilities",
+        "Explain how cloud, mobile, and IoT each expanded the attack surface differently",
+        "Describe the Mirai attack and what it reveals about IoT risk"
+      ],
+      "xpPreview": {
+        "base": 150,
+        "bonuses": [
+          { "label": "Complete attack surface mapping activity", "amount": 80 },
+          { "label": "Pass the quiz (70%+)", "amount": 70 }
+        ]
+      }
+    },
+
+    {
+      "id": "explanation-attack-surface",
+      "type": "explanation",
+      "sidebarLabel": "The Attack Surface",
+      "estimatedMinutes": 7,
+      "content": [
+        "## The Internet Was Not Designed for Security",
+        "",
+        "ARPANET — the internet's predecessor — was designed in 1969 by U.S. Department of Defense researchers with one primary goal: survive a nuclear attack by routing packets around damaged nodes. The design was brilliant for resilience and openness.",
+        "",
+        "It was not designed to prevent malicious actors from injecting false data into routing tables. Or to verify that a sender is who they claim to be. Or to protect private communications from interception.",
+        "",
+        "The protocols we still use — TCP/IP, DNS, email's SMTP — were built on this open foundation, with security often bolted on later as an uncomfortable retrofit. The internet's core architecture assumes cooperation, not adversaries.",
+        "",
+        "## Attack Surface: Every Entry Point Is a Risk",
+        "",
+        "An **attack surface** is the sum of all the different points where an attacker could try to enter or extract data from an environment. The larger the attack surface, the more opportunities for attackers.",
+        "",
+        "Thirty years ago, a company's attack surface was its offices, servers, and employees' workstations. All on-premises. All within a physical perimeter.",
+        "",
+        "Three technology shifts have expanded that attack surface to a scale that was unimaginable in the 1990s:",
+        "",
+        "### Cloud Computing",
+        "",
+        "Cloud moved sensitive data and critical applications from locked server rooms to shared infrastructure operated by AWS, Azure, and Google Cloud. This created enormous operational benefits — and an attack surface distributed across multiple cloud providers, regions, and interconnected services.",
+        "",
+        "**New risks cloud introduced:**",
+        "- Misconfigured storage buckets (publicly accessible S3 buckets have exposed hundreds of millions of records)",
+        "- Identity and Access Management (IAM) misconfigurations giving attackers excessive permissions",
+        "- API keys committed to public code repositories by developers",
+        "- Multi-tenancy risks — sharing infrastructure with unknown third parties",
+        "",
+        "### Mobile Devices",
+        "",
+        "Smartphones put a computer in everyone's pocket — and connected it to corporate email, Slack, VPNs, and cloud data. Each employee's phone is a potential entry point to the organization.",
+        "",
+        "**New risks mobile introduced:**",
+        "- Lost or stolen devices accessing corporate email and files",
+        "- Malicious apps on app stores that harvest credentials",
+        "- Public Wi-Fi interception (the 'evil twin' access point attack)",
+        "- BYOD (Bring Your Own Device) policies mixing personal and corporate data",
+        "",
+        "### Internet of Things (IoT)",
+        "",
+        "IoT connected everything — industrial sensors, medical equipment, home assistants, building systems, vehicles — to the internet. These devices are almost always:",
+        "- Running outdated or custom operating systems that are difficult to patch",
+        "- Shipped with default credentials that users never change",
+        "- Designed for function over security, with no mechanism for automatic updates",
+        "- Too numerous and too distributed for traditional IT security controls to cover",
+        "",
+        "The Mirai botnet didn't need sophisticated exploits. It just tried 'admin/admin' and 'root/password' on millions of devices, and found hundreds of thousands of willing participants.",
+        "",
+        "## The Convenience-Security Tradeoff",
+        "",
+        "Every one of these shifts — cloud, mobile, IoT — delivered enormous benefits. Cloud reduces IT costs and increases agility. Mobile enables flexible work. IoT enables smart homes and smart cities.",
+        "",
+        "The tradeoff is real: convenience and connectivity always expand the attack surface. More connected systems = more potential entry points. Security is the discipline of managing that tradeoff — keeping the benefits while reducing the risks."
+      ],
+      "callouts": [
+        {
+          "type": "insight",
+          "title": "DNS: The internet's phone book — and a single point of failure",
+          "text": "When Mirai attacked Dyn, it targeted a DNS provider. DNS translates domain names (twitter.com) into IP addresses. When DNS is down, websites become unreachable — even if the websites themselves are perfectly fine. DNS is a critical dependency the average user never sees."
+        },
+        {
+          "type": "warning",
+          "title": "The fastest growing attack surface right now",
+          "text": "AI systems. Language models, code generation tools, and AI APIs are being integrated into critical infrastructure at speed, often without the security review that traditional software development receives. AI security is the next frontier."
+        },
+        {
+          "type": "info",
+          "title": "Default credentials: Still a crisis in 2026",
+          "text": "Mirai ran in 2016. In 2025, researchers still routinely find network equipment and IoT devices with default credentials in production environments. The problem was not solved — it was documented."
+        }
+      ],
+      "keyTerms": [
+        { "term": "Attack Surface", "definition": "The total set of points where an attacker can try to enter or extract data from a system or organization. Includes all devices, services, APIs, user accounts, and physical entry points." },
+        { "term": "Botnet", "definition": "A network of infected devices (bots) controlled remotely by an attacker (botmaster) without their owners' knowledge. Used for DDoS attacks, spam campaigns, and cryptocurrency mining." },
+        { "term": "DDoS (Distributed Denial of Service)", "definition": "An attack that floods a target with traffic from thousands of distributed sources simultaneously, overwhelming its capacity to respond to legitimate requests." },
+        { "term": "DNS (Domain Name System)", "definition": "The internet's 'phone book' — a distributed system that translates human-readable domain names (google.com) into the IP addresses computers use to route traffic." },
+        { "term": "IoT (Internet of Things)", "definition": "The network of physical devices — sensors, cameras, appliances, industrial equipment, vehicles — embedded with computing and network connectivity. Often designed with minimal security." },
+        { "term": "Default Credentials", "definition": "Factory-set username/password combinations (e.g., admin/admin) that ship with hardware devices. A major security risk when users never change them after deployment." }
+      ],
+      "analogy": {
+        "scenario": "Imagine a city in 1969 — a few buildings, all connected by a small number of roads. Every road is visible and manageable. Now imagine that city grew to 25 billion buildings, each connected to every other by an invisible network of corridors.",
+        "mapping": "The internet grew from four nodes to 25 billion devices — but the security architecture never kept pace with the growth. Every new device adds new corridors that must be monitored and protected."
+      }
+    },
+
+    {
+      "id": "real-world-1",
+      "type": "real-world-example",
+      "sidebarLabel": "Real Attack",
+      "estimatedMinutes": 3,
+      "company": "Dyn (via Mirai Botnet)",
+      "industry": "DNS Infrastructure / Internet",
+      "year": "2016",
+      "incident": "600,000 home security cameras, DVRs, and routers were conscripted into a botnet that knocked out major internet services for 1.2 billion users using default credentials the owners had never changed.",
+      "whatHappened": [
+        "Mirai malware spread automatically across the internet by scanning for IoT devices using default username/password combinations. It tried roughly 60 default credential pairs — including 'admin/admin', 'root/password', and 'admin/1234'.",
+        "Over weeks, Mirai assembled a botnet of 600,000 infected devices across 164 countries. The devices' owners had no idea their baby monitors and security cameras had been weaponized.",
+        "On October 21, 2016, Mirai directed all 600,000 devices to simultaneously flood Dyn with DNS query traffic. At its peak, the attack generated approximately 1.2 terabits per second.",
+        "Dyn's infrastructure collapsed under the load. Every website that relied on Dyn for DNS resolution became unreachable — Twitter, Netflix, Reddit, Spotify, PayPal, and hundreds more."
+      ],
+      "whyItHappened": [
+        "IoT manufacturers shipped devices with default credentials and no mechanism to force or prompt users to change them.",
+        "Consumers had no awareness that their cameras and DVRs were internet-connected computers that could be compromised.",
+        "The security industry had focused on PCs and servers. IoT devices existed in a blind spot.",
+        "There was no regulatory requirement for IoT security at the time. Manufacturers competed on features and price, not security."
+      ],
+      "impact": [
+        { "value": "1.2 Tbps", "label": "Peak attack traffic — largest DDoS in history at the time" },
+        { "value": "600,000", "label": "Compromised devices across 164 countries" },
+        { "value": "1.2B+", "label": "Internet users affected" },
+        { "value": "Hours", "label": "Twitter, Netflix, Reddit, Spotify, PayPal unreachable" }
+      ],
+      "lessonsLearned": [
+        "The attack surface now includes billions of devices that are difficult to patch, never updated, and operated by non-technical users who have no idea they represent a security risk.",
+        "Default credentials are an industry design failure — not a user error. Devices should ship requiring unique password setup before they function.",
+        "DNS is a single-point-of-failure dependency for a large fraction of the internet. Redundancy is essential.",
+        "IoT security is a collective action problem — the individual cost of securing one device is low, but the collective cost of 600,000 unsecured devices can bring down the internet."
+      ],
+      "sourceLabel": "US-CERT Alert TA16-288A, Dyn post-incident analysis, 2016"
+    },
+
+    {
+      "id": "practical-1",
+      "type": "practical",
+      "sidebarLabel": "Surface Mapper",
+      "estimatedMinutes": 6,
+      "objective": "Map the attack surface of a typical university, identifying which technology category (cloud, mobile, IoT, on-premises, or human) each entry point belongs to.",
+      "practicalType": "analysis",
+      "difficulty": "beginner",
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Start with what you know",
+          "description": "Think about a university you've attended or can imagine. List every system that stores or processes data — student records, financial aid, class registration, research data, email, physical access control."
+        },
+        {
+          "id": "step-2",
+          "title": "Classify by technology category",
+          "description": "For each system you listed, classify it: (A) Cloud-hosted, (B) On-premises servers, (C) Mobile-accessible, (D) IoT device, (E) Human entry point (people with access).",
+          "note": "Most modern university systems will be A, C, or E. Physical building systems (HVAC, badge readers) are typically D."
+        },
+        {
+          "id": "step-3",
+          "title": "Identify the highest-risk entry points",
+          "description": "Now consider: which entry points are most likely to be targeted? Which have the most valuable data behind them? Which are hardest to protect?",
+          "expectedOutput": "Student financial aid data (SSNs + financial info) in cloud storage with thousands of legitimate user accounts is extremely high value. Research data can contain government secrets. Badge readers and HVAC systems (IoT) are often ignored by IT teams."
+        },
+        {
+          "id": "step-4",
+          "title": "The Mirai thought experiment",
+          "description": "A university has 200 smart TVs across its dormitories, all set up with default credentials. Assume an attacker compromises them for a DDoS botnet. What risk does this pose to the university specifically — beyond the DDoS target?",
+          "expectedOutput": "The university's IP range becomes associated with malicious traffic, potentially getting blocked by security tools. The network used by the TVs is often the same network used by student devices — an attacker who compromised the TVs has a foothold on the student network.",
+          "note": "Network segmentation — keeping IoT devices on a separate network from user devices — is the direct mitigation."
+        },
+        {
+          "id": "step-5",
+          "title": "Reflect on scale",
+          "description": "If a single university has hundreds of exposed entry points, what does the global attack surface look like? How has this changed from 1969 to today?",
+          "expectedOutput": "The attack surface grows with every new connected device and every new user. Security cannot eliminate the attack surface — it can only manage, monitor, and reduce it."
+        }
+      ],
+      "hints": [
+        "Don't forget humans — phishing emails targeting university employees are the most common initial access vector.",
+        "Cloud means risk travels with the data. If student records are in a cloud database, the entry points include the cloud provider's control plane, not just the university's own network.",
+        "IoT devices that IT teams don't know about (shadow IT) are often the most dangerous — they're unmanaged and unmonitored.",
+        "Attack surface management is an ongoing practice, not a one-time audit — the surface changes every time a new system is deployed or a new user account is created."
+      ],
+      "expectedResult": "You should be able to identify 8–12 distinct entry points for a typical university, classify them by technology type, and rank the top 3 by risk — with a one-sentence justification for each ranking."
+    },
+
+    {
+      "id": "ai-mentor-1",
+      "type": "ai-mentor",
+      "sidebarLabel": "Ask AI Mentor",
+      "estimatedMinutes": 3,
+      "topic": "Attack Surface and Internet Security",
+      "context": "You are a cybersecurity mentor helping a beginner understand how the internet's scale and design create security challenges. Use concrete examples and avoid jargon unless defining it. Help the learner understand tradeoffs — why we still use insecure protocols, why IoT manufacturers don't build in more security, and what the learner can do in their own environment.",
+      "suggestedPrompts": [
+        "Why don't we just replace all the insecure internet protocols with secure ones?",
+        "What can I personally do to reduce my own attack surface?",
+        "Is cloud actually less secure than on-premises infrastructure?",
+        "What makes IoT devices so hard to secure?",
+        "How big is the attack surface of a typical large company?"
+      ]
+    },
+
+    {
+      "id": "mistakes-1",
+      "type": "common-mistakes",
+      "sidebarLabel": "Common Mistakes",
+      "estimatedMinutes": 2,
+      "mistakes": [
+        {
+          "title": "My smart device can't be used for attacks — it's just a camera",
+          "wrong": "Attackers only care about devices that store valuable data.",
+          "right": "Attackers care about compute, bandwidth, and network access — not data. A camera with no interesting data is still a powerful DDoS weapon and a foothold on your network.",
+          "explanation": "Mirai's 600,000 devices stored no attacker-useful data. They were used for their network bandwidth and the network access they provided — not their contents.",
+          "severity": "warning"
+        },
+        {
+          "title": "Cloud is someone else's problem to secure",
+          "wrong": "If we use AWS, security is Amazon's responsibility.",
+          "right": "Cloud follows a shared responsibility model: the provider secures the infrastructure; you secure your data, access controls, and configurations.",
+          "explanation": "The majority of cloud data breaches are due to customer misconfigurations — public S3 buckets, IAM policy errors, exposed API keys — not infrastructure failures by the cloud provider.",
+          "severity": "critical"
+        },
+        {
+          "title": "The internet was designed to be secure and we just haven't used it correctly",
+          "wrong": "We have all the tools to make the internet secure; the problem is user behavior.",
+          "right": "The internet's core protocols were designed before security was understood as a requirement. Security is being retrofitted onto an architecture that did not anticipate adversaries.",
+          "explanation": "TCP/IP, DNS, and SMTP were designed for a trusted academic community. Designing security into core internet infrastructure would require replacing protocols that billions of devices depend on. This is technically and politically extraordinarily difficult.",
+          "severity": "warning"
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Quiz",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "What was the primary attack vector that the Mirai botnet used to compromise 600,000 IoT devices?",
+          "options": [
+            { "id": "a", "text": "A zero-day vulnerability in a popular IoT operating system", "isCorrect": false },
+            { "id": "b", "text": "Default usernames and passwords that device owners had never changed", "isCorrect": true },
+            { "id": "c", "text": "Malicious firmware updates delivered through compromised manufacturer servers", "isCorrect": false },
+            { "id": "d", "text": "A flaw in the DNS protocol that allowed remote code execution", "isCorrect": false }
+          ],
+          "explanation": "Mirai tried approximately 60 default credential combinations — things like 'admin/admin' and 'root/password' — against every IoT device it could find. No sophisticated exploit was needed. The vulnerability was factory settings that users never changed.",
+          "xpReward": 20
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "When Mirai attacked Dyn, most of the websites that became unreachable (Twitter, Netflix, Reddit) were not directly attacked. Why did they go down?",
+          "options": [
+            { "id": "a", "text": "The attack overwhelmed the internet's physical fiber infrastructure", "isCorrect": false },
+            { "id": "b", "text": "Dyn provided DNS services for those websites, and without working DNS their domains became unresolvable", "isCorrect": true },
+            { "id": "c", "text": "Those websites used Dyn as their CDN and traffic had to be rerouted", "isCorrect": false },
+            { "id": "d", "text": "The botnet blocked network routes to those specific IP addresses", "isCorrect": false }
+          ],
+          "explanation": "DNS translates domain names (twitter.com) into IP addresses. When Dyn's DNS servers were overloaded, user devices couldn't resolve twitter.com to an IP address — so the connection never started. The websites themselves were running fine; they were simply unreachable.",
+          "xpReward": 20
+        },
+        {
+          "id": "q3",
+          "type": "single",
+          "question": "Which of the following best describes why cloud computing expanded the attack surface compared to traditional on-premises infrastructure?",
+          "options": [
+            { "id": "a", "text": "Cloud providers have weaker security than on-premises data centres", "isCorrect": false },
+            { "id": "b", "text": "Cloud requires new access controls (IAM, APIs, configuration management) that didn't exist on-premises — and these are frequently misconfigured", "isCorrect": true },
+            { "id": "c", "text": "Cloud data is physically unprotected since servers are not in the customer's building", "isCorrect": false },
+            { "id": "d", "text": "Cloud forces all traffic through public internet routing, bypassing firewalls", "isCorrect": false }
+          ],
+          "explanation": "Cloud providers invest heavily in physical and infrastructure security. The attack surface expansion comes from the customer side: IAM misconfigurations, public storage buckets, exposed API keys, and multi-cloud complexity that security teams struggle to fully monitor.",
+          "xpReward": 20
+        },
+        {
+          "id": "q4",
+          "type": "scenario",
+          "context": "A hospital deploys 500 smart infusion pumps — medical devices that deliver IV medication to patients. These pumps are connected to the hospital network so nurses can update dosage remotely from their workstations. The manufacturer has not released a security update in three years, and the pumps run embedded software that cannot be patched through the hospital's standard process.",
+          "question": "Which combination of attack surface risks does this scenario illustrate?",
+          "options": [
+            { "id": "a", "text": "Cloud computing and mobile device risks only", "isCorrect": false },
+            { "id": "b", "text": "IoT risks (unpatchable embedded devices) and network risks (connected to hospital network with patient workstations)", "isCorrect": true },
+            { "id": "c", "text": "Physical security risks only — the pumps should be locked away", "isCorrect": false },
+            { "id": "d", "text": "Human factors only — nurses clicking phishing emails is the real risk", "isCorrect": false }
+          ],
+          "explanation": "This is a textbook IoT risk scenario: medical devices running unupdatable embedded software connected to the same network as sensitive clinical systems. An attacker who compromises an infusion pump has a foothold on the hospital network — and could potentially manipulate dosages if the device lacks authentication for software commands.",
+          "xpReward": 25
+        },
+        {
+          "id": "q5",
+          "type": "true-false",
+          "question": "The internet was designed from the beginning with strong security controls to protect data in transit and verify the identity of connected systems.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "The internet's predecessor (ARPANET) was designed for resilience and academic openness — not security. Core protocols like TCP/IP, DNS, and SMTP were built without authentication or encryption. HTTPS, DNSSEC, and other security layers were retrofitted decades later. The security challenges we face today are in large part a consequence of this original architectural decision.",
+          "xpReward": 15
+        },
+        {
+          "id": "q6",
+          "type": "true-false",
+          "question": "If a smart device (like a camera or thermostat) doesn't store any valuable personal data, it poses no meaningful security risk to the organization that deploys it.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "A compromised device with no valuable data still offers attackers: (1) network bandwidth for DDoS attacks, (2) a foothold on the internal network to pivot to higher-value systems, and (3) a persistent presence that may go undetected for months. Mirai's 600,000 devices stored no attacker-useful data — they were still used to shut down the internet.",
+          "xpReward": 15
+        }
+      ]
+    },
+
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Reflection",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "List every internet-connected device in your home. How many of them have you ever changed the default password on? What would an attacker find if they scanned your home network?",
+        "The internet was designed for openness and resilience, not security. Do you think that was the right tradeoff in 1969? How has your assessment changed now that you live in 2026?",
+        "Mirai compromised devices belonging to ordinary people who had no idea they were running an attack. Who is responsible — the device owner, the manufacturer, or the platform? What should change?"
+      ],
+      "placeholder": "Type your reflections here...",
+      "minWords": 20
+    },
+
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Summary",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "The internet was designed for openness and resilience, not security — and we live with the consequences of that original architecture",
+        "Every connected device is an entry point; the attack surface grows with every new device, service, and user account",
+        "Cloud, mobile, and IoT each expanded the attack surface in distinct ways — and each requires distinct security approaches",
+        "Mirai used 600,000 ordinary home devices to launch the largest DDoS in history — without sophisticated exploits, just default passwords",
+        "Security and convenience are in constant tension; the goal is to manage the tradeoff, not eliminate one side of it",
+        "IoT security is a collective action problem — an individual's unsecured camera doesn't just harm them; it can be weaponized against everyone"
+      ],
+      "xpBreakdown": {
+        "base": 150,
+        "activityBonus": 80,
+        "challengeBonus": 0,
+        "quizBonus": 70,
+        "streakMultiplier": 1.0,
+        "total": 300
+      },
+      "nextLesson": {
+        "title": "The Security Mindset",
+        "slug": "lesson-04-security-mindset",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 30
+      },
+      "relatedTopics": [
+        "Attack surface management",
+        "IoT security best practices",
+        "Cloud Security Alliance (CSA) Guidance",
+        "OWASP IoT Top 10",
+        "DDoS mitigation and CDN architecture"
+      ]
+    },
+
+    {
+      "id": "career-1",
+      "type": "career-connection",
+      "sidebarLabel": "Career Paths",
+      "estimatedMinutes": 2,
+      "realWorldUsage": "Understanding the attack surface — and how cloud, mobile, and IoT expand it — is foundational to network security, cloud security, and IoT security roles. Attack surface management is now a dedicated function in many large organizations.",
+      "roles": [
+        {
+          "title": "Cloud Security Engineer",
+          "description": "Secures cloud infrastructure (AWS, Azure, GCP). Works on IAM policy, cloud configuration compliance, and securing cloud-native services.",
+          "salaryRange": "$110K – $200K"
+        },
+        {
+          "title": "Network Security Analyst",
+          "description": "Monitors network traffic for anomalies, configures firewalls and IDS/IPS, and investigates network-based attacks.",
+          "salaryRange": "$65K – $130K"
+        },
+        {
+          "title": "IoT Security Researcher",
+          "description": "Tests and researches security vulnerabilities in IoT devices. Often involves embedded firmware analysis and hardware hacking.",
+          "salaryRange": "$90K – $160K"
+        },
+        {
+          "title": "Attack Surface Manager",
+          "description": "Continuously inventories an organization's external-facing assets and monitors them for new vulnerabilities — a relatively new and fast-growing role.",
+          "salaryRange": "$85K – $150K"
+        }
+      ],
+      "certifications": ["CompTIA Security+", "AWS Certified Security – Specialty", "GIAC GICSP (ICS/SCADA)"],
+      "careerPath": [
+        "Understand attack surface concepts (this lesson)",
+        "Learn networking fundamentals: TCP/IP, DNS, routing",
+        "Get CompTIA Network+ for networking depth",
+        "Get CompTIA Security+ for core security certification",
+        "Specialize: cloud security (AWS/Azure certs), IoT security (GICSP), or network security (GCIA)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "digital-security-landscape",
+  "slug": "digital-security-landscape",
+  "title": "The Digital Security Landscape",
+  "tagline": "Why cybersecurity exists, how attacks work, and where you fit in",
+  "description": "Academy 1 starts here. No prior security knowledge required. This course answers the questions every security career begins with: what are we protecting, why does it matter, who are the attackers, and how do you start thinking like a defender? You will meet real breaches, real professionals, and the mental models that every security role depends on.",
+  "difficulty": "beginner",
+  "estimatedHours": 14,
+  "xpReward": 4300,
+  "category": "foundations",
+  "tags": ["foundations", "cia-triad", "cybersecurity", "career", "mindset", "threat-landscape", "networking", "cloud", "iot", "beginner"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Explain the real-world consequences of cybersecurity failures using the CIA triad",
+    "Describe what a Security Operations Centre analyst does on a typical day",
+    "Explain how cloud computing, mobile devices, and IoT expanded the global attack surface",
+    "Apply the security mindset — assume breach, find the weakest link, think about incentives — to everyday scenarios",
+    "Identify the major attack categories, threat actors, and the kill chain model",
+    "Name at least eight cybersecurity career roles and the path that leads to each",
+    "Trace the path a data packet takes across the internet and identify interception points",
+    "Explain the shared responsibility model and how cloud misconfiguration causes breaches",
+    "Analyze a cascade failure and identify the root cause attack vector"
+  ],
+  "version": "1.1.0",
+  "author": "Cyber Learn Team",
+  "coverEmoji": "🛡️",
+  "isNew": true,
+  "isPro": false,
+  "createdAt": "2026-07-28T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "modules": [
+    {
+      "slug": "module-01-why-cybersecurity-matters",
+      "title": "Why Cybersecurity Matters",
+      "order": 1,
+      "lessonCount": 5,
+      "estimatedHours": 3
+    },
+    {
+      "slug": "module-02-connected-world",
+      "title": "The Connected World",
+      "order": 2,
+      "lessonCount": 6,
+      "estimatedHours": 3
+    },
+    {
+      "slug": "module-02-anatomy-of-an-attack",
+      "title": "Anatomy of an Attack",
+      "order": 3,
+      "lessonCount": 4,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-03-security-career-landscape",
+      "title": "Security Career Landscape",
+      "order": 4,
+      "lessonCount": 4,
+      "estimatedHours": 2
+    },
+    {
+      "slug": "module-04-your-first-steps",
+      "title": "Your First Steps in Security",
+      "order": 5,
+      "lessonCount": 4,
+      "estimatedHours": 2
+    }
+  ]
+}

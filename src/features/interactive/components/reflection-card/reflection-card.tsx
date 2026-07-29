@@ -37,7 +37,7 @@ export const ReflectionCard = memo(function ReflectionCard({
   const persist = useCallback(
     (latest: Record<string, string>) => {
       if (storageKey) {
-        try { localStorage.setItem(storageKey, JSON.stringify(latest)) } catch {}
+        try { localStorage.setItem(storageKey, JSON.stringify(latest)) } catch { /* storage unavailable */ }
       }
     },
     [storageKey],

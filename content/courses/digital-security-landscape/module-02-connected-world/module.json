@@ -1,0 +1,70 @@
+{
+  "id": "module-connected-world",
+  "slug": "module-02-connected-world",
+  "courseSlug": "digital-security-landscape",
+  "title": "The Connected World",
+  "description": "Everything is connected. Cars talk to traffic lights, hospitals exchange data with pharmacies, factories run automatically, and satellites orbit above it all. This module explores the modern digital ecosystem that cybersecurity exists to protect — and reveals why an attack on one system can cascade through everything.",
+  "order": 2,
+  "estimatedHours": 3,
+  "tags": ["iot", "networking", "digital-identity", "cloud", "attack-surface", "critical-infrastructure", "interconnected-systems"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-28T00:00:00Z",
+  "updatedAt": "2026-07-28T00:00:00Z",
+  "lessons": [
+    {
+      "slug": "lesson-01-the-connected-world",
+      "title": "OPERATION 2.1: The Connected World",
+      "difficulty": "beginner",
+      "estimatedMinutes": 35,
+      "tags": ["iot", "attack-surface", "critical-infrastructure", "smart-city", "scada"],
+      "xpReward": 350,
+      "order": 1
+    },
+    {
+      "slug": "lesson-02-journey-of-a-data-packet",
+      "title": "OPERATION 2.2: Journey of a Data Packet",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["networking", "dns", "tcp-ip", "routing", "tls", "firewall", "encryption"],
+      "xpReward": 350,
+      "order": 2
+    },
+    {
+      "slug": "lesson-03-digital-identity",
+      "title": "OPERATION 2.3: Digital Identity",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["authentication", "mfa", "digital-footprint", "privacy", "passwords", "identity"],
+      "xpReward": 350,
+      "order": 3
+    },
+    {
+      "slug": "lesson-04-life-in-the-cloud",
+      "title": "OPERATION 2.4: Life in the Cloud",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["cloud", "iaas", "paas", "saas", "shared-responsibility", "availability"],
+      "xpReward": 350,
+      "order": 4
+    },
+    {
+      "slug": "lesson-05-connected-chaos",
+      "title": "OPERATION 2.5: Connected Chaos",
+      "difficulty": "beginner",
+      "estimatedMinutes": 40,
+      "tags": ["capstone", "critical-infrastructure", "cascade-failure", "incident-response", "scada"],
+      "xpReward": 500,
+      "order": 5
+    },
+    {
+      "slug": "lesson-06-promotion-ceremony",
+      "title": "OPERATION 2.6: Promotion Ceremony",
+      "difficulty": "beginner",
+      "estimatedMinutes": 15,
+      "tags": ["ceremony", "module-complete", "career", "badge", "clearance"],
+      "xpReward": 800,
+      "order": 6
+    }
+  ]
+}

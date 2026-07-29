@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom'
 import {
-  LayoutDashboard, BookOpen, Terminal, Target, Trophy,
+  LayoutDashboard, BookOpen, Terminal, Target, GraduationCap,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { MAIN_NAV } from '@/lib/constants'
+import { MOBILE_NAV } from '@/lib/constants'
 
 const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
-  LayoutDashboard, BookOpen, Terminal, Target, Trophy,
+  LayoutDashboard, BookOpen, Terminal, Target, GraduationCap,
 }
 
-// Mobile bottom navigation bar — shown on small screens
+// Mobile bottom navigation bar — shown on small screens (max 5 items)
 export function MobileNav() {
   return (
     <nav
@@ -21,7 +21,7 @@ export function MobileNav() {
       )}
       aria-label="Mobile navigation"
     >
-      {MAIN_NAV.map((item) => {
+      {MOBILE_NAV.map((item) => {
         const Icon = ICON_MAP[item.icon]
 
         return (

@@ -1,0 +1,83 @@
+{
+  "intro": {
+    "id": "m01-world-intro",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mwi-01",
+        "speakerId": "aria",
+        "text": "Welcome to the SENTINEL Operations Center, Analyst.",
+        "emotion": "warm"
+      },
+      {
+        "id": "mwi-02",
+        "speakerId": "aria",
+        "text": "What you're looking at is a live feed of global network traffic. Every pulse, every node — real.",
+        "emotion": "explanatory"
+      },
+      {
+        "id": "mwi-03",
+        "speakerId": "aria",
+        "text": "Over 2,800 critical infrastructure nodes. Power grids. Communication hubs. Financial systems.",
+        "emotion": "informative",
+        "autoAdvanceMs": 3500
+      },
+      {
+        "id": "mwi-04",
+        "speakerId": "aria",
+        "text": "Everything is connected. Everything is being monitored — right now, by us.",
+        "emotion": "serious"
+      },
+      {
+        "id": "mwi-05",
+        "speakerId": "aria",
+        "text": "Take a moment. Observe the network. When you're ready, run a diagnostic scan.",
+        "emotion": "inviting"
+      }
+    ]
+  },
+  "inspect": {
+    "id": "m01-world-inspect",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mwn-01",
+        "speakerId": "aria",
+        "text": "Good. You went straight to the southeast Asian cluster.",
+        "emotion": "approving",
+        "autoAdvanceMs": 2000
+      },
+      {
+        "id": "mwn-02",
+        "speakerId": "aria",
+        "text": "Packet density is within range, but unusually active for this hour. More handshake requests than baseline.",
+        "emotion": "analytical"
+      },
+      {
+        "id": "mwn-03",
+        "speakerId": "aria",
+        "text": "This is what we do — watch, log, correlate. Most spikes like this resolve on their own.",
+        "emotion": "measured"
+      },
+      {
+        "id": "mwn-04",
+        "speakerId": "aria",
+        "text": "Most of the time.",
+        "emotion": "ominous",
+        "autoAdvanceMs": 2200
+      }
+    ]
+  }
+}

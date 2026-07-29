@@ -1,0 +1,400 @@
+{
+  "id": "lesson-the-connected-world",
+  "slug": "lesson-01-the-connected-world",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.1: The Connected World",
+  "tagline": "Fifty billion entry points. One mission: understand the scale.",
+  "description": "You proved yourself inside the CDA. Director Chen has a new assignment: explore the digital ecosystem we're actually protecting. Walk through a living, breathing smart city and discover why the connected world changes everything about cybersecurity.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 35,
+  "tags": ["iot", "attack-surface", "critical-infrastructure", "smart-city", "scada", "cascade-failure", "interconnected-systems"],
+  "prerequisites": ["lesson-05-operation-first-day"],
+  "learningObjectives": [
+    "Identify the eight major categories of connected systems in a modern smart city",
+    "Explain what attack surface means and how the IoT explosion expanded it globally",
+    "Describe how a cascade failure propagates through interconnected critical systems",
+    "Analyze the 2015 Ukraine power grid attack as a documented IoT risk scenario",
+    "Evaluate the security risk of a system based on its connectivity and dependencies"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 1,
+  "xpReward": 350,
+  "prevLessonSlug": "lesson-05-operation-first-day",
+  "nextLessonSlug": "lesson-02-journey-of-a-data-packet",
+  "sections": [
+    {
+      "id": "hook-city",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.1",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "Director Chen stands before a wall of screens. Traffic flows. Power grids pulse. Hospital systems hum. \"Recruit — yesterday you protected people. Today you're going to learn what we're actually protecting.\"",
+      "subheadline": "07:00 AM. CDA Digital Infrastructure Division. Everything is connected. Everything is at risk.",
+      "backgroundAccent": "green"
+    },
+    {
+      "id": "story-briefing",
+      "type": "story",
+      "sidebarLabel": "Mission Brief",
+      "estimatedMinutes": 3,
+      "mood": "discovery",
+      "narrative": [
+        "In Module 1, you survived your first day at the CDA. Six incidents. Six correct decisions. A ransomware outbreak stopped. Director Chen shook your hand.",
+        "Now she has a new assignment.",
+        "The Digital Infrastructure Division — DID — sits at the heart of the CDA. Not because it handles the most dramatic incidents, but because it understands something most people don't: **the threat surface has grown beyond any single building, network, or country.**",
+        "Marcus Webb, who you met in the SOC, appears beside you. \"I spent my first month here thinking cybersecurity was about computers,\" he says. \"Then DID showed me this.\" He gestures at the wall of monitors.",
+        "On the screens: a city. Not simulated. A real city — anonymized — with every connected system mapped in real time. Traffic pulses green and red. Power load charts spike and dip. Hospital admission boards scroll quietly.",
+        "\"We call it the City Model,\" AURA says into your earpiece. \"Your mission today: walk through it. Understand what we're protecting. And understand why a single connected door lock — the cheapest, most forgettable device in that city — can bring down the power grid.\""
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Director",
+          "description": "Leads the CDA. Assigned you to the Digital Infrastructure Division after Module 1."
+        },
+        {
+          "name": "Marcus Webb",
+          "role": "SOC Analyst",
+          "description": "SOC lead who spent his first month thinking cybersecurity was only about computers, before DID changed his perspective."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Your AI mission partner. Guides you through the City Model and explains why a single door lock can bring down a power grid."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "07:00 AM", "event": "Briefing begins in Digital Infrastructure Division", "type": "normal" },
+        { "timestamp": "07:10 AM", "event": "City Model comes online — real-time visualization of all connected systems", "type": "normal" },
+        { "timestamp": "07:15 AM", "event": "Operation 2.1 commences: mapping the attack surface", "type": "normal" }
+      ]
+    },
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Identify the eight major categories of connected systems in a modern smart city",
+        "Explain what attack surface means and how the IoT explosion expanded it globally",
+        "Describe how a cascade failure propagates through interconnected critical systems",
+        "Analyze the 2015 Ukraine power grid attack as a documented IoT risk scenario",
+        "Evaluate the security risk of a system based on its connectivity and dependencies"
+      ],
+      "xpPreview": {
+        "base": 175,
+        "bonuses": [
+          { "label": "Complete city tour", "amount": 75 },
+          { "label": "Pass the quiz (70%+)", "amount": 100 }
+        ]
+      }
+    },
+    {
+      "id": "animation-city-tour",
+      "type": "animation",
+      "sidebarLabel": "City Tour",
+      "estimatedMinutes": 8,
+      "title": "Walking the City Model",
+      "intro": "AURA guides you through eight sectors of the City Model. For each sector, you see the connected systems — and the security implications. Every sector you visit expands the threat picture.",
+      "steps": [
+        {
+          "title": "Smart Transportation",
+          "description": "Traffic lights, trains, and autonomous vehicles share a single city traffic management network. 140,000 sensors update traffic signals every 90 seconds. When you slow for a red light, a network packet caused it. If that network is compromised, an attacker can create gridlock — or worse, force green lights at intersections where pedestrians are crossing. In 2018, a single misconfigured router in Atlanta's traffic system caused 20-minute delays across the entire city during rush hour.",
+          "visualNote": "City traffic grid with data flows connecting vehicles, signals, and the central control server",
+          "highlight": "server"
+        },
+        {
+          "title": "Healthcare Systems",
+          "description": "Hospitals connect infusion pumps, patient monitors, MRI machines, and electronic health records to the same network. Connected insulin pumps that deliver the wrong dose because of a cyberattack are not theoretical — they have been demonstrated in security labs. Medical devices were not designed with network security in mind. They were designed to keep people alive. Security was an afterthought added decades later.",
+          "visualNote": "Hospital network showing medical devices, patient records, and pharmacy data links",
+          "highlight": "database"
+        },
+        {
+          "title": "Power Grid",
+          "description": "The smart power grid uses automated substations, smart meters in every home, and SCADA systems that allow remote operation. An engineer in a control center can reroute power across an entire region in seconds. An attacker with those same credentials can do the same thing — and can do it faster, and with more lasting damage, than any physical sabotage. When power goes down, everything that depends on it follows.",
+          "visualNote": "Power grid showing control center, substations, and residential smart meters with real-time load",
+          "highlight": "server"
+        },
+        {
+          "title": "Industrial Control Systems",
+          "description": "Factories use ICS (Industrial Control Systems) and SCADA to automate everything from car assembly to chemical processing. Many of these systems were built in the 1970s — before the internet existed — and were connected to corporate networks later for efficiency. A Programmable Logic Controller (PLC) controlling a chemical mixing process might be running firmware from 1994, connected to a Windows XP workstation, connected to the corporate LAN, connected to the internet.",
+          "visualNote": "Factory floor showing PLCs, SCADA terminals, and the chain connecting to corporate network and internet",
+          "highlight": "attacker"
+        },
+        {
+          "title": "Financial Infrastructure",
+          "description": "ATMs, payment terminals, trading systems, and interbank transfer networks form the financial layer of the city. The global financial system processes $5 trillion per day. Every transaction is a network packet. A disruption that delays bank transfers by six hours does not just inconvenience people — it can trigger cascading market events. During the 2012 Knight Capital Group incident, a software bug caused $440 million in losses in 45 minutes.",
+          "visualNote": "Financial network showing ATMs, POS terminals, trading floors, and interbank settlement systems",
+          "highlight": "database"
+        },
+        {
+          "title": "Emergency Services",
+          "description": "Police dispatch, fire response, and emergency services are fully digital. The call you make in an emergency travels through VoIP systems, is routed through computer-aided dispatch (CAD), and is recorded on cloud servers. When emergency communications systems fail — because of a cyberattack — responders go dark at the moment the city needs them most.",
+          "visualNote": "Emergency services network showing dispatch centers, radio towers, and first-responder mobile units",
+          "highlight": "server"
+        },
+        {
+          "title": "Telecommunications",
+          "description": "Cell towers, internet exchanges, and submarine cable landing stations are the nervous system of the connected city. Every other system depends on them. They are also among the most targeted infrastructure in nation-state operations — because disabling telecommunications disables everything else simultaneously. When BGP routing tables are corrupted, vast swaths of the internet can be silently redirected through hostile networks.",
+          "visualNote": "Telecom infrastructure showing cell towers, internet exchange points, and undersea cable connections",
+          "highlight": "server"
+        },
+        {
+          "title": "Consumer IoT",
+          "description": "Smart speakers, thermostats, door locks, security cameras, and baby monitors — billions of devices connect to the internet with minimal security. The Mirai botnet infected 600,000 consumer IoT devices using default credentials and used them to launch a 1.2 Tbps DDoS attack — the largest in history at the time — knocking Twitter, Netflix, Reddit, and Spotify offline simultaneously. The attacker's weapon: home security cameras with default passwords.",
+          "visualNote": "Home network showing smart devices linking to cloud services and the broader internet infrastructure",
+          "highlight": "attacker"
+        }
+      ]
+    },
+    {
+      "id": "explain-attack-surface",
+      "type": "explanation",
+      "sidebarLabel": "Intel Brief",
+      "estimatedMinutes": 7,
+      "content": [
+        "## What Is an Attack Surface?",
+        "An attack surface is the total number of points where an attacker can try to enter a system or extract data. Every connected device is a potential entry point. Every open port, every API endpoint, every input field — each one is part of the attack surface.",
+        "## The Growth Is Exponential",
+        "In 1990, the internet had approximately 3 million connected devices — mostly university computers.\n\nIn 2000: 361 million (PCs, early mobile).\n\nIn 2010: 2 billion (smartphones, tablets, home routers).\n\nIn 2024: **over 15 billion devices** — growing by approximately 3 million new connections per day.\n\nEvery new device is a new attack surface. Every new connection is a new potential vector. Security teams are perpetually outnumbered by the things they need to protect.",
+        "## Why Legacy Systems Are Especially Dangerous",
+        "Many industrial control systems were built in the 1970s and 1980s — before cybersecurity existed as a discipline. They were designed to run for 30–50 years without interruption. When organizations connected them to the internet for remote monitoring, they introduced vulnerabilities the original engineers never imagined.\n\nAn SCADA system controlling a water treatment facility might run Windows XP. A hospital's MRI machine might use software that has not been patched in seven years. These systems cannot be easily replaced — they cost millions, serve critical functions, and in some cases the vendors no longer exist.",
+        "## The Cascade Problem",
+        "The most dangerous property of the connected world is interdependency. When one system fails, others follow.\n\nPower goes down → traffic lights fail → emergency vehicles cannot navigate → hospitals lose backup power → patient monitoring systems go offline → 911 dispatch becomes unreachable.\n\nThis is not hypothetical. It is the documented aftermath of the 2015 Ukraine power grid attack — which you will examine next."
+      ],
+      "callouts": [
+        {
+          "type": "insight",
+          "title": "The Visibility Gap",
+          "text": "The average enterprise has over 135,000 connected devices on its network. Most security teams can only see and monitor roughly 30% of them."
+        },
+        {
+          "type": "warning",
+          "title": "The Legacy Trap",
+          "text": "An estimated 40% of industrial control systems worldwide run operating systems that are no longer receiving security updates. This includes systems in the US, UK, and across the EU."
+        },
+        {
+          "type": "tip",
+          "title": "Security Thinking",
+          "text": "When evaluating a system's risk, always ask: what does this connect to? A device with minimal data but maximum connectivity can be a stepping stone to your most sensitive systems."
+        }
+      ],
+      "analogy": {
+        "scenario": "Imagine a city's water supply — a single contamination point can spread to millions of pipes. The larger the network, the faster and farther the problem travels, and the harder it is to find the source.",
+        "mapping": "The connected world works the same way. One compromised device — a camera, a thermostat, an ICS terminal — can become the entry point that cascades through hospitals, power grids, and emergency services."
+      },
+      "keyTerms": [
+        { "term": "Attack Surface", "definition": "The total set of entry points an attacker can try to exploit in a system, network, or organization." },
+        { "term": "IoT (Internet of Things)", "definition": "Physical devices embedded with sensors and connectivity that allow them to exchange data over a network." },
+        { "term": "SCADA", "definition": "Supervisory Control and Data Acquisition — software systems that monitor and control critical physical infrastructure remotely." },
+        { "term": "ICS", "definition": "Industrial Control Systems — hardware and software that automate physical processes in factories, power plants, and utilities." },
+        { "term": "Cascade Failure", "definition": "When the failure of one system triggers failures in dependent systems, creating a chain reaction of outages." },
+        { "term": "Interdependency", "definition": "When systems rely on each other to function, so a failure in one propagates to all systems that depend on it." },
+        { "term": "Botnet", "definition": "A network of compromised devices controlled by an attacker, typically used for distributed denial-of-service attacks." }
+      ]
+    },
+    {
+      "id": "diagram-city-map",
+      "type": "diagram",
+      "sidebarLabel": "Network Map",
+      "estimatedMinutes": 3,
+      "title": "The Connected City: System Dependencies",
+      "description": "This map shows the dependency relationships between the city's critical systems. Red arrows indicate documented attack paths from real-world incident analysis. Blue arrows show normal operational data flows. Notice how every path leads back through telecommunications.",
+      "nodes": [
+        { "id": "telecom", "label": "Telecommunications", "type": "server" },
+        { "id": "power", "label": "Power Grid / SCADA", "type": "server" },
+        { "id": "transport", "label": "Smart Transport", "type": "default" },
+        { "id": "emergency", "label": "Emergency Services", "type": "default" },
+        { "id": "healthcare", "label": "Healthcare Network", "type": "database" },
+        { "id": "financial", "label": "Financial Systems", "type": "database" },
+        { "id": "ics", "label": "ICS / Factory SCADA", "type": "default" },
+        { "id": "consumer", "label": "Consumer IoT", "type": "default" },
+        { "id": "attacker", "label": "Nation-State Attacker", "type": "attacker" }
+      ],
+      "edges": [
+        { "from": "telecom", "to": "power", "type": "data", "label": "SCADA comms" },
+        { "from": "telecom", "to": "emergency", "type": "data", "label": "dispatch" },
+        { "from": "telecom", "to": "transport", "type": "data", "label": "traffic signals" },
+        { "from": "power", "to": "healthcare", "type": "data", "label": "power" },
+        { "from": "power", "to": "financial", "type": "data", "label": "power" },
+        { "from": "power", "to": "ics", "type": "data", "label": "automation" },
+        { "from": "power", "to": "transport", "type": "data", "label": "signal power" },
+        { "from": "consumer", "to": "telecom", "type": "normal", "label": "internet traffic" },
+        { "from": "attacker", "to": "ics", "type": "attack", "label": "initial access" },
+        { "from": "ics", "to": "power", "type": "attack", "animated": true, "label": "lateral movement" },
+        { "from": "power", "to": "telecom", "type": "attack", "animated": true, "label": "cascade" },
+        { "from": "telecom", "to": "emergency", "type": "attack", "animated": true, "label": "cascade" }
+      ]
+    },
+    {
+      "id": "real-world-ukraine",
+      "type": "real-world-example",
+      "sidebarLabel": "Field Evidence",
+      "estimatedMinutes": 4,
+      "company": "Ukrainian Power Grid (Ukrenergo)",
+      "industry": "Energy / Critical Infrastructure",
+      "year": "2015",
+      "incident": "First confirmed cyberattack to cause a real-world power outage — 230,000 customers lost electricity in winter temperatures.",
+      "whatHappened": [
+        "On December 23, 2015, three Ukrainian power distribution companies simultaneously lost control of their systems. Attackers — the Russian military unit Sandworm — had spent months inside the networks mapping every system.",
+        "BlackEnergy malware was delivered via spear-phishing emails with malicious Excel attachments. Keyloggers captured valid SCADA operator credentials over several months.",
+        "On the day of attack, the attackers simultaneously opened 30 circuit breakers at three companies using legitimate operator credentials, launched a telephone denial-of-service attack against call centers to prevent customers from reporting outages, and wiped firmware from serial-to-Ethernet converters to prevent remote power restoration.",
+        "Power was restored manually — which required engineers to physically visit each of dozens of substations over several days."
+      ],
+      "whyItHappened": [
+        "SCADA systems were reachable through the same corporate network where phishing attacks landed, creating a path from a compromised email to a power grid control system.",
+        "Operator credentials captured via keyloggers gave attackers the same access as authorized engineers — legitimate credentials bypass most security controls.",
+        "No multi-factor authentication was required on SCADA accounts, so stolen credentials were sufficient for complete access.",
+        "The firmware wipe of converters was a deliberate anti-restoration measure — the attackers planned for recovery attempts."
+      ],
+      "impact": [
+        { "value": "230,000", "label": "Customers lost power" },
+        { "value": "6 hours", "label": "Maximum outage duration" },
+        { "value": "3", "label": "Power companies attacked simultaneously" },
+        { "value": "Months", "label": "Attacker dwell time before the attack" }
+      ],
+      "lessonsLearned": [
+        "Critical infrastructure connected to corporate IT networks inherits all of those networks' vulnerabilities",
+        "Legitimate credentials are more dangerous than technical exploits — they bypass most security controls completely",
+        "Physical consequences of digital attacks have no undo — restoration requires human physical intervention",
+        "Nation-states invest months of patience into infrastructure attacks — they are not opportunistic"
+      ],
+      "sourceLabel": "US DHS / SANS ICS-CERT Joint Report, 2016"
+    },
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Assessment",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "In 2015, attackers knocked out power for 230,000 Ukrainians using legitimate SCADA credentials. Which factor made this attack possible?",
+          "options": [
+            { "id": "a", "text": "The Ukrainian power grid used no security software at all", "isCorrect": false },
+            { "id": "b", "text": "SCADA systems were networked with corporate IT, allowing credentials to be stolen via phishing", "isCorrect": true },
+            { "id": "c", "text": "The attackers physically broke into the substations to operate circuit breakers", "isCorrect": false },
+            { "id": "d", "text": "The power grid ran unpatched software with a known remote exploit", "isCorrect": false }
+          ],
+          "explanation": "The SCADA systems were reachable through the same corporate network where phishing attacks landed. Keyloggers installed on operator workstations captured valid SCADA credentials. With those credentials, the attackers could operate the power grid exactly as authorized engineers would — from anywhere on the network. The connectivity between corporate IT and operational technology networks is what made the entire attack chain possible.",
+          "xpReward": 15
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "Which best defines 'attack surface' in cybersecurity?",
+          "options": [
+            { "id": "a", "text": "The physical area around a data center that is accessible to outsiders", "isCorrect": false },
+            { "id": "b", "text": "The total number of threat actors who might want to target an organization", "isCorrect": false },
+            { "id": "c", "text": "The complete set of entry points an attacker can use to access or disrupt a system", "isCorrect": true },
+            { "id": "d", "text": "The area of a network diagram that an attacker has already compromised", "isCorrect": false }
+          ],
+          "explanation": "Attack surface is the sum of all potential entry points — connected devices, open ports, API endpoints, user accounts, physical access points. As IoT devices multiply and more systems go online, the attack surface expands. Organizations that cannot enumerate their own attack surface cannot defend it.",
+          "xpReward": 15
+        },
+        {
+          "id": "q3",
+          "type": "single",
+          "question": "A hospital has 5,000 connected medical devices running 8-year-old firmware with no security updates available. Why is this a threat to the hospital's entire network, not just the devices themselves?",
+          "options": [
+            { "id": "a", "text": "Old firmware makes devices transmit data slowly, degrading network performance", "isCorrect": false },
+            { "id": "b", "text": "Medical device firmware contains patient data that can be exfiltrated directly", "isCorrect": false },
+            { "id": "c", "text": "Compromised medical devices can be used as footholds to move laterally to sensitive systems like patient records", "isCorrect": true },
+            { "id": "d", "text": "Healthcare regulators automatically fine hospitals that use outdated medical firmware", "isCorrect": false }
+          ],
+          "explanation": "This is the stepping-stone attack pattern. Attackers rarely target the most sensitive system directly. They find the least-secured connected device — in this case, a medical device with no patch updates — gain initial access there, and then move laterally through the network to reach the actual target: patient records, billing systems, or administrative access.",
+          "xpReward": 15
+        },
+        {
+          "id": "q4",
+          "type": "true-false",
+          "question": "Connecting an industrial control system (ICS) to the internet for remote monitoring makes it inherently insecure, regardless of any security controls applied.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "False. While internet connectivity dramatically expands an ICS's attack surface, proper security controls — network segmentation, strong authentication, continuous monitoring, regular patching, and defense-in-depth — can manage that risk effectively. Many modern ICS deployments operate securely over the internet. The problem is connectivity deployed without security architecture, not connectivity itself.",
+          "xpReward": 10
+        },
+        {
+          "id": "q5",
+          "type": "single",
+          "question": "The Mirai botnet infected 600,000 consumer IoT devices and launched the largest DDoS attack in history at that time. What was the primary vulnerability Mirai exploited?",
+          "options": [
+            { "id": "a", "text": "A zero-day vulnerability in the Linux kernel running on those devices", "isCorrect": false },
+            { "id": "b", "text": "Default factory credentials that device owners had never changed", "isCorrect": true },
+            { "id": "c", "text": "A flaw in the IoT devices' Wi-Fi encryption implementation", "isCorrect": false },
+            { "id": "d", "text": "Physical access to IoT device hardware via unsecured USB ports", "isCorrect": false }
+          ],
+          "explanation": "Mirai scanned the internet for devices accepting Telnet connections, then tried a list of 61 known factory-default username/password combinations. Devices that were never reconfigured from default credentials accepted the login automatically. This required no technical sophistication, just automation and scale.",
+          "xpReward": 15
+        },
+        {
+          "id": "q6",
+          "type": "scenario",
+          "context": "A water treatment facility's SCADA system is connected to the internet through the city's standard IT network. Security review finds a vendor support account with a simple password that has been active for three years, last used six months ago.",
+          "question": "What is the most appropriate immediate action?",
+          "options": [
+            { "id": "a", "text": "Disconnect all SCADA systems from the internet and switch to fully manual operation", "isCorrect": false },
+            { "id": "b", "text": "Disable or rotate the vendor account credentials immediately and audit all recent access logs for that account", "isCorrect": true },
+            { "id": "c", "text": "Install endpoint antivirus software on all SCADA operator workstations", "isCorrect": false },
+            { "id": "d", "text": "Notify the vendor that their account security policy needs improvement", "isCorrect": false }
+          ],
+          "explanation": "The vendor account is an active, known, weakly-secured credential that an attacker could be using right now. Rotating or disabling it immediately closes that specific threat vector with no operational disruption. Full SCADA disconnection may be the right long-term architecture decision but is not the immediate action for a credential threat. Antivirus doesn't address the exposed credential. Notifying the vendor is appropriate but not the immediate action.",
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "Which connected sector in the City Model surprised you most as a security risk, and why?",
+        "Why do you think SCADA systems were connected to corporate networks without adequate security planning?",
+        "If you had to defend the single most critical connected system in a smart city, which would you choose and why?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers..."
+    },
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "The modern attack surface includes billions of devices: vehicles, hospitals, power grids, factories, and home IoT",
+        "Cascade failures happen when interconnected systems fail in sequence — one compromised device can affect millions of people",
+        "Legacy industrial control systems were never designed for network security — connecting them to the internet creates structural vulnerabilities",
+        "The 2015 Ukraine power grid attack demonstrated that physical-world consequences can be achieved through digital attacks using only legitimate credentials",
+        "Most organizations cannot fully enumerate their own attack surface — which means they cannot fully defend it"
+      ],
+      "xpBreakdown": {
+        "base": 175,
+        "activityBonus": 75,
+        "challengeBonus": 0,
+        "quizBonus": 100,
+        "streakMultiplier": 1.0,
+        "total": 350
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.2: Journey of a Data Packet",
+        "slug": "lesson-02-journey-of-a-data-packet",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 30
+      },
+      "relatedTopics": [
+        "NIST Cybersecurity Framework for Critical Infrastructure",
+        "ICS-CERT Ukraine Power Grid Analysis",
+        "CISA ICS Security Advisories",
+        "NERC CIP Standards"
+      ]
+    }
+  ]
+}

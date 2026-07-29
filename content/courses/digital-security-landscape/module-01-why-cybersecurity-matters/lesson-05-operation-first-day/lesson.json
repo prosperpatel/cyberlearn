@@ -1,0 +1,476 @@
+{
+  "id": "lesson-operation-first-day",
+  "slug": "lesson-05-operation-first-day",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-why-cybersecurity-matters",
+  "title": "OPERATION: First Day at the Cyber Defense Agency",
+  "tagline": "Six incidents. One recruit. Your first operational assignment starts now.",
+  "description": "Module 1 capstone mission. Walk the halls of the Cyber Defense Agency as an active recruit, shadow six security teams, and resolve six escalating real-world incidents — from a phishing email in Finance to an agency-wide ransomware crisis. This is not a lesson. It is your first day in the field.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 35,
+  "tags": ["mission-challenge", "soc", "incident-response", "phishing", "ransomware", "cloud-security", "digital-forensics", "bec", "usb-drop", "capstone"],
+  "prerequisites": [
+    "lesson-01-cost-of-insecurity",
+    "lesson-02-day-in-life-security-professional",
+    "lesson-03-internet-changed-everything",
+    "lesson-04-security-mindset"
+  ],
+  "learningObjectives": [
+    "Apply correct incident response decisions to six common real-world cybersecurity scenarios",
+    "Identify a Business Email Compromise attempt and explain why verifying through the original email is never safe",
+    "Explain why plugging a found USB into any computer — including an isolated one — is dangerous",
+    "Select the correct first action in an active ransomware outbreak and articulate the full response sequence",
+    "Demonstrate that cybersecurity decision-making requires confidence under pressure and time constraints"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 5,
+  "xpReward": 500,
+  "prevLessonSlug": "lesson-04-security-mindset",
+  "nextLessonSlug": "lesson-01-the-connected-world",
+  "sections": [
+    {
+      "id": "hook-cinematic",
+      "type": "hook",
+      "sidebarLabel": "Opening",
+      "estimatedMinutes": 1,
+      "variant": "scenario",
+      "headline": "08:00 AM. Cyber Defense Agency Headquarters. Six active threats. One recruit. This is not a drill.",
+      "subheadline": "AURA: \"Congratulations on completing your classroom training, Recruit. Today, people are depending on you. Welcome to your first operational assignment.\"",
+      "backgroundAccent": "red"
+    },
+
+    {
+      "id": "story-briefing",
+      "type": "story",
+      "sidebarLabel": "Operational Brief",
+      "estimatedMinutes": 3,
+      "mood": "tense",
+      "narrative": [
+        "The elevator opens onto the 23rd floor. The first thing you notice is the sound — the constant, low hum of servers and cooling fans, punctuated by the soft percussion of keyboards that never seem to stop.",
+        "AURA's voice fills the space, warm and precise. 'Welcome to the Cyber Defense Agency Operations Centre. You have completed your training. What you do here today is not theoretical. Somewhere outside this building, someone is already making their move.'",
+        "Director Chen meets you at the security checkpoint. Her handshake is firm. 'We have forty-two analysts on this floor. Today you will shadow each team. You will not observe — you will decide.' She doesn't smile. 'Real decisions. Real consequences.'",
+        "Marcus Webb looks up from a bank of six monitors. He gives you a single nod. 'Eight hundred and forty-seven alerts since midnight. I've reviewed two-fourteen. Most are noise.' He turns back to the screens. 'Follow me. And pay attention.'",
+        "By 09:09 AM, the first real alert will arrive. By the time the day is over, you will have faced six incidents, each one more serious than the last. The agency is watching. AURA is watching. And somewhere out there, so are the attackers."
+      ],
+      "characters": [
+        {
+          "name": "AURA",
+          "role": "AI Mission Director",
+          "description": "Monitors all teams simultaneously and narrates your mission. She sees everything.",
+          "emoji": "🤖"
+        },
+        {
+          "name": "Director Chen",
+          "role": "CDA Operations Director",
+          "description": "Runs the Agency. Expects clarity of decision under pressure. Does not tolerate hesitation.",
+          "emoji": "👩‍💼"
+        },
+        {
+          "name": "Marcus Webb",
+          "role": "Tier-1 SOC Analyst",
+          "description": "Quiet. Methodical. He can spot a real alert in a queue of 800 noise events. Your first point of contact.",
+          "emoji": "🔍"
+        },
+        {
+          "name": "Dr. Sarah Okafor",
+          "role": "Incident Response Lead",
+          "description": "When Marcus escalates, she takes command. Calm under fire. Decisive. She does not hesitate.",
+          "emoji": "🛡️"
+        },
+        {
+          "name": "Priya Nair",
+          "role": "Threat Intelligence Analyst",
+          "description": "She has been tracking today's threat actor for six weeks. She knew they were coming.",
+          "emoji": "🔭"
+        },
+        {
+          "name": "Jordan Reeve",
+          "role": "Red Team Lead",
+          "description": "Professionally breaks things. Grins when he succeeds. Today he found a way in through the printer.",
+          "emoji": "🎯"
+        },
+        {
+          "name": "Alex Torres",
+          "role": "Cloud Security Engineer",
+          "description": "Eleven minutes from alert to containment. Precision and speed are his only metrics.",
+          "emoji": "☁️"
+        },
+        {
+          "name": "Dr. James Kovacs",
+          "role": "Digital Forensics Investigator",
+          "description": "He reconstructs what happened from RAM and disk. Everything he does must hold up in court.",
+          "emoji": "🔬"
+        }
+      ],
+      "timeline": [
+        { "timestamp": "08:00", "event": "Mission Alpha-Two begins", "detail": "Director Chen briefs the Recruit. Six incidents. Six decisions.", "type": "normal" },
+        { "timestamp": "08:30", "event": "Department tour", "detail": "Six teams introduce themselves. The threat board is quiet — for now.", "type": "normal" },
+        { "timestamp": "09:14", "event": "INCIDENT 01 — Phishing", "detail": "Finance department. An attachment has been opened.", "type": "critical" },
+        { "timestamp": "10:33", "event": "INCIDENT 02 — Invoice Fraud", "detail": "CFO's office. $87,000 payment request. Something is wrong.", "type": "critical" },
+        { "timestamp": "11:52", "event": "INCIDENT 03 — USB Drop", "detail": "Car park. A device has been found. Someone wants to plug it in.", "type": "critical" },
+        { "timestamp": "13:22", "event": "INCIDENT 04 — Wi-Fi Attack", "detail": "Remote employee. Session potentially intercepted.", "type": "critical" },
+        { "timestamp": "14:47", "event": "INCIDENT 05 — Cloud Exposure", "detail": "S3 bucket. 97 minutes. Product roadmap exposed.", "type": "critical" },
+        { "timestamp": "14:59", "event": "CRISIS — Ransomware spreading", "detail": "Finance. HR. Operations. It's jumping. This is the real one.", "type": "critical" },
+        { "timestamp": "16:44", "event": "All threats contained", "detail": "Director Chen. Operations floor. Every head turns to you.", "type": "resolution" }
+      ],
+      "quote": {
+        "text": "The defenders have to be right every time. The attackers only have to be right once. That asymmetry is why this floor never goes dark.",
+        "attribution": "Director Chen, 08:00 Briefing"
+      }
+    },
+
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Mission Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Shadow all six CDA departments and understand their real-world function",
+        "Correctly respond to a phishing malware incident in the Finance department",
+        "Identify a Business Email Compromise and apply safe out-of-band verification",
+        "Handle a suspicious USB device using correct forensics protocol",
+        "Respond to a cloud misconfiguration, a Wi-Fi interception, and an active ransomware outbreak"
+      ],
+      "xpPreview": {
+        "base": 200,
+        "bonuses": [
+          { "label": "Resolve each incident correctly (×5, 40 XP each)", "amount": 200 },
+          { "label": "Stop the ransomware — CLIMAX", "amount": 100 }
+        ]
+      }
+    },
+
+    {
+      "id": "animation-tour",
+      "type": "animation",
+      "sidebarLabel": "Department Tour",
+      "estimatedMinutes": 4,
+      "title": "CDA Department Tour — Meet the Teams",
+      "intro": "The elevator opens onto the operations floor. AURA is your escort. Six departments. Six missions. Five minutes to meet every person who will be depending on your decisions today.",
+      "steps": [
+        {
+          "title": "Security Operations Centre",
+          "description": "Marcus doesn't look up from the screens. 'This is the nerve centre. Everything flows through here — firewall logs, endpoint alerts, authentication events, network anomalies. I see 800 alerts a shift. My job is to find the one that matters.' He taps a monitor. 'Most days there's exactly one. Some days there are three. You never know until you look.' He glances over his shoulder. 'Pay attention in here. This is where every incident begins.'",
+          "visualNote": "Six monitors fill the field of view. Red, amber, and green status lights pulse across the alert board. The room is dark except for the screens. It never closes.",
+          "highlight": "server"
+        },
+        {
+          "title": "Incident Response",
+          "description": "Dr. Okafor is already on a call when you arrive. She ends it in four words: 'Contain it. Call me.' She turns. 'When the SOC confirms a real incident, my team takes the field. We don't wait for the full picture. We contain first. Ask questions second. Every second of hesitation is another machine.' She walks to a whiteboard covered in timelines. 'We follow a protocol — Identification, Containment, Eradication, Recovery, Lessons Learned. In a crisis, you don't improvise. You execute the protocol.' She caps her marker. 'Ready when you need me.'",
+          "visualNote": "A war room with whiteboards full of incident timelines. Three monitors per desk. A red phone that nobody wants to hear ring.",
+          "highlight": "none"
+        },
+        {
+          "title": "Threat Intelligence",
+          "description": "Priya is reading a report that looks four hundred pages long. She doesn't look up. 'I've been tracking APT-41C for six weeks. I know their preferred phishing lures, their command-and-control infrastructure, and the two industries they've hit before ours.' She finally looks at you. 'When they made their move this morning, we had detection signatures ready for the SOC. We were waiting.' She turns back to her screen. 'The difference between Threat Intelligence and everyone else is that we don't react to attacks. We predict them. The attacker arrived on schedule.'",
+          "visualNote": "Walls covered in printed threat actor profiles and attack flow diagrams. Multiple screens tracking live threat feeds. A pinboard labelled APT-41C with a six-week timeline.",
+          "highlight": "none"
+        },
+        {
+          "title": "Penetration Testing",
+          "description": "Jordan is smiling. That's either a good sign or a terrible one. 'We broke in through the printer this morning. Floor three. Default credentials, never changed. From the printer we pivoted to the internal dev server in four minutes.' He notices your expression. 'Don't worry — isolated test environment. Full authorization.' He holds up a document. 'This is what makes it legal.' He sets it down. 'My team's job is to find every way a real attacker could get in before they do. And document every step so the defenders can close it. If we can break it, the enemy can break it. Better us than them.'",
+          "visualNote": "A room that looks like a cybercafe — casual, comfortable, and deeply technical. One wall displays a network topology map covered in red arrows showing compromise paths.",
+          "highlight": "attacker"
+        },
+        {
+          "title": "Cloud Security",
+          "description": "Alex is watching six cloud dashboards simultaneously. 'Last month, an S3 bucket was exposed for four hours before anyone noticed. I had it locked in eleven minutes after the alert hit.' He gestures at the dashboards. 'Most people don't notice what I do until I'm not here. Then a public bucket appears on a security researcher's blog and suddenly everyone notices.' He pulls up a real-time configuration scan. 'Cloud security is not glamorous. It's watching permissions, access policies, and network configurations at a scale that would take a human team weeks to audit manually. The automation is the job. The instinct to act fast when something is wrong — that's also the job.'",
+          "visualNote": "Clean, methodical workspace. Six cloud provider dashboards with real-time configuration compliance scores. One amber alert sits in the corner. Alex has already seen it.",
+          "highlight": "server"
+        },
+        {
+          "title": "Digital Forensics",
+          "description": "Dr. Kovacs is wearing nitrile gloves and working at a forensics workstation. He doesn't stop. 'I answer one question: what exactly happened? And I have to prove it — in court, if necessary. Every action I take with a piece of evidence is documented. Every tool I use is validated. The chain of custody starts the moment someone hands me a device and doesn't break until the case is closed.' He points to a laptop inside a clear evidence bag. 'This came from a car park two hours ago. By tonight, I will know every file the attacker opened, every program they ran, and every credential they touched.' He looks up. 'I never guess. I reconstruct.'",
+          "visualNote": "A laboratory environment — pristine, methodical, quiet. Evidence bags on labelled shelves. Write-blockers attached to every drive. Every action logged in a paper ledger as well as digitally.",
+          "highlight": "database"
+        }
+      ]
+    },
+
+    {
+      "id": "story-alert",
+      "type": "story",
+      "sidebarLabel": "The Board Activates",
+      "estimatedMinutes": 1,
+      "mood": "tense",
+      "narrative": [
+        "09:09 AM. You are back in the SOC.",
+        "A red light pulses on the alert board. Then another. Then a third.",
+        "Marcus is already moving. 'First one is real. I can tell from the process tree.'",
+        "AURA's voice drops slightly. 'First incident incoming, Recruit. This one is live. Six incidents will test everything you learned in this module. Some decisions will feel obvious. Some will not. All of them matter.'",
+        "Marcus turns from his monitor. 'Your call. I'll back you up — but this decision is yours.'"
+      ],
+      "mood": "tense"
+    },
+
+    {
+      "id": "quiz-incident-01",
+      "type": "quiz",
+      "sidebarLabel": "Incident 01 — Phishing",
+      "estimatedMinutes": 2,
+      "passingScore": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "scenario",
+          "context": "🚨 ALERT — 09:14 AM\n\nSOC MONITOR: Endpoint detection has flagged unusual process activity on a Finance department workstation.\n\nA member of the finance team opened an email attachment from an unknown sender six minutes ago. The attachment launched a process that is attempting to contact an external IP address.\n\nAURA: 'Recruit — I need you focused. The attachment is running on their machine right now. The employee is still at their desk. They don't know anything is wrong. What do you do?'",
+          "question": "What is your first action?",
+          "options": [
+            { "id": "a", "text": "Tell the employee to close the file and run their antivirus scanner", "isCorrect": false },
+            { "id": "b", "text": "Disconnect the computer from the network immediately and escalate to the SOC", "isCorrect": true },
+            { "id": "c", "text": "Reply to the sender's email to ask what the attachment contains", "isCorrect": false },
+            { "id": "d", "text": "Wait and monitor — it could be a false positive before taking any action", "isCorrect": false }
+          ],
+          "explanation": "AURA: 'Correct, Recruit. Disconnecting the machine immediately stops any malware from communicating with the attacker's server and prevents it from spreading laterally. Running antivirus after the fact risks alerting the malware to delete itself — some malware specifically watches for AV processes. Waiting for certainty gives an active infection more time to move. Replying to the attacker's email could expose your identity and confirm the target is active.'\n\nMarcus has isolated the endpoint and is pulling a memory image. The process tree shows a common malware dropper — it was attempting to download a second-stage payload before the connection was cut. You stopped it in time.\n\n+40 XP EARNED",
+          "xpReward": 40
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-incident-02",
+      "type": "quiz",
+      "sidebarLabel": "Incident 02 — Invoice Fraud",
+      "estimatedMinutes": 2,
+      "passingScore": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "scenario",
+          "context": "🚨 ALERT — 10:33 AM\n\nFINANCE TEAM FLAG: A payment request has been submitted for review.\n\nThe CFO's assistant has received an invoice for $87,000 from what appears to be TechSupply Partners — a known, trusted vendor. The invoice looks legitimate. However, the bank account number is different from the one on record, and the sender's email domain is 'techsupplypartners.co' instead of 'techsupplypartners.com'.\n\nThe payment window closes in two hours. The assistant is asking whether to approve.\n\nAURA: 'One letter difference in the domain. $87,000. Two hours. What do you do?'",
+          "question": "What is the correct response?",
+          "options": [
+            { "id": "a", "text": "Approve it — the invoice looks legitimate and the supplier is well-known", "isCorrect": false },
+            { "id": "b", "text": "Call the supplier using a phone number from your own records — not from the email", "isCorrect": true },
+            { "id": "c", "text": "Reply to the email asking the supplier to confirm their new bank account details", "isCorrect": false },
+            { "id": "d", "text": "Forward to the finance director and let them decide without flagging the domain discrepancy", "isCorrect": false }
+          ],
+          "explanation": "AURA: 'Exactly right. This is Business Email Compromise — one of the most financially damaging attacks in the world. Over $50 billion stolen globally since 2013.'\n\n'The domain techsupplypartners.co was registered by the attacker three days ago — one letter off from the legitimate vendor. Replying to the fraudulent email or asking the attacker to verify their own account is giving them exactly what they want. The only safe verification is out-of-band: call the supplier using a number from your own records — a number you looked up, not one from the suspicious email.'\n\nPriya identified the domain as newly registered and flagged it to the fraud team. The real TechSupply Partners confirmed: they never sent that invoice. $87,000 saved.\n\n+40 XP EARNED",
+          "xpReward": 40
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-incident-03",
+      "type": "quiz",
+      "sidebarLabel": "Incident 03 — USB Drop",
+      "estimatedMinutes": 2,
+      "passingScore": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "scenario",
+          "context": "🚨 ALERT — 11:52 AM\n\nSECURITY DESK REPORT: A USB drive has been found in the CDA car park.\n\nA junior engineer found it near the main entrance and brought it to the office. It has no markings. They want to plug it into a spare PC to see if it contains anything that identifies its owner.\n\nAURA: 'You have fifteen seconds. The engineer is standing at the workstation with the USB in their hand. What do you tell them?'",
+          "question": "What is your instruction to the engineer?",
+          "options": [
+            { "id": "a", "text": "Let them plug it in — it's a spare PC and the risk is low", "isCorrect": false },
+            { "id": "b", "text": "Hand it to Security immediately without plugging it in anywhere", "isCorrect": true },
+            { "id": "c", "text": "Plug it into an isolated, air-gapped PC to safely examine the contents", "isCorrect": false },
+            { "id": "d", "text": "Drop it in a postal box — it probably belongs to a nearby business", "isCorrect": false }
+          ],
+          "explanation": "AURA: 'Correct. USB drops are one of the oldest and most reliably effective attacker techniques — and they work precisely because people want to be helpful.'\n\n'Critically: do NOT plug it into an isolated PC. This is a common mistake. A USB device with embedded attack firmware can exploit the USB controller itself — not just the files on the drive. Even a fully patched, fully isolated machine can be compromised through the USB interface. Air-gap does not mean USB-safe.'\n\nDr. Kovacs from Digital Forensics will examine the drive in a purpose-built forensic environment using write-blockers and hardware isolation that prevents any code from executing. This is the only safe method.\n\n+40 XP EARNED",
+          "xpReward": 40
+        }
+      ]
+    },
+
+    {
+      "id": "story-midpoint",
+      "type": "story",
+      "sidebarLabel": "Midpoint Check",
+      "estimatedMinutes": 2,
+      "mood": "discovery",
+      "narrative": [
+        "Three incidents. Three correct calls.",
+        "The SOC board has quieted to a low amber. Marcus leans back fractionally in his chair — the most relaxed you have seen him. 'Not bad,' he says. For Marcus, that is a standing ovation.",
+        "AURA: 'You are three for three, Recruit. Phishing contained. Invoice fraud blocked. USB drop secured. The afternoon is ahead of us.' A pause. 'It does not get easier from here.'",
+        "You look around the operations floor. Forty-two analysts, each in their own world of scrolling data and quiet urgency. They have been doing this for hours. They will be doing it long after you leave. Every one of them made a decision like yours today — and those decisions, multiplied across a year, are the only thing standing between this agency and the people trying to take it apart.",
+        "Marcus hands you a cold coffee. He forgot to drink his own hours ago. 'Three more. Stay sharp.'"
+      ],
+      "quote": {
+        "text": "Security is not a moment of heroism. It is ten thousand small decisions made correctly over time.",
+        "attribution": "AURA, 13:00 Midpoint Assessment"
+      }
+    },
+
+    {
+      "id": "quiz-incident-04",
+      "type": "quiz",
+      "sidebarLabel": "Incident 04 — Wi-Fi Attack",
+      "estimatedMinutes": 2,
+      "passingScore": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "scenario",
+          "context": "🚨 ALERT — 13:22 PM\n\nREMOTE WORKER REPORT: A CDA analyst working from a hotel business centre reports that their session was likely intercepted on the public Wi-Fi network.\n\nDuring that session, approximately forty minutes ago, they sent an internal email with an attachment: the Q3 Financial Forecast, marked INTERNAL — CONFIDENTIAL. The analyst is now on a secure network and asking what they should do.\n\nAURA: 'An unencrypted public Wi-Fi session. Forty minutes ago. A confidential attachment. What is the correct response?'",
+          "question": "What do you do?",
+          "options": [
+            { "id": "a", "text": "Tell them to change their Wi-Fi password and use a VPN next time", "isCorrect": false },
+            { "id": "b", "text": "Assume the interception was unlikely and take no action this time", "isCorrect": false },
+            { "id": "c", "text": "Revoke the analyst's current session tokens, reset their work credentials, and review the attachment for sensitive content", "isCorrect": true },
+            { "id": "d", "text": "Have the analyst's laptop scanned for malware only", "isCorrect": false }
+          ],
+          "explanation": "AURA: 'Correct. An attacker on the same public Wi-Fi network can read all unencrypted traffic — including email credentials, session cookies, and the attachment itself.'\n\n'Changing the Wi-Fi password is irrelevant — the attack was on the network, not their router. Malware scanning addresses only one attack vector and misses the credential theft entirely. Assuming it was unlikely is not a response — it is the absence of one.'\n\n'The complete response: revoke active sessions immediately so any stolen session token stops working. Reset work credentials. Assess the attachment for what was potentially exposed — legal and compliance teams need to know whether regulatory notifications are required.'\n\nCredentials rotated. Sessions revoked. The Q3 forecast contained no PII, but the finance strategy implications are being assessed.\n\n+40 XP EARNED",
+          "xpReward": 40
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-incident-05",
+      "type": "quiz",
+      "sidebarLabel": "Incident 05 — Cloud Exposure",
+      "estimatedMinutes": 2,
+      "passingScore": 0,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "scenario",
+          "context": "🚨 ALERT — 14:47 PM\n\nCLOUD SECURITY MONITOR: An automated configuration scan has flagged an S3 storage bucket as publicly accessible.\n\nThe bucket 'cda-product-roadmap-2025' contains internal product strategy presentations, pricing schedules, and unreleased feature announcements. It has been publicly accessible for 97 minutes. Alex Torres in Cloud Security is standing by.\n\nAURA: 'Ninety-seven minutes. Public. Product roadmap. What is the first action?'",
+          "question": "What do you do first?",
+          "options": [
+            { "id": "a", "text": "Wait for management to approve the configuration change before touching cloud infrastructure", "isCorrect": false },
+            { "id": "b", "text": "Restrict access immediately and file a full incident report", "isCorrect": true },
+            { "id": "c", "text": "Restrict access quietly without escalating — it was probably not discovered", "isCorrect": false },
+            { "id": "d", "text": "Investigate the access logs to confirm who accessed it before making any changes", "isCorrect": false }
+          ],
+          "explanation": "AURA: 'Correct. Contain first. Every additional second of public exposure is another opportunity for a competitor, a journalist, or an attacker to download the contents.'\n\n'Waiting for management approval in an active data exposure is not caution — it is organizational paralysis that extends the breach window. Restricting access without filing an incident report fails regulatory obligations and organizational governance — silent remediation of a data exposure is not acceptable. Investigating before containing is the most common mistake: it extends the exposure while you gather information you can gather just as well after the bucket is secured.'\n\nAlex restricted the bucket in four minutes. CloudTrail logs show no external access during the 97-minute window — but the incident report is mandatory regardless. Legal and Compliance have been notified.\n\n+40 XP EARNED",
+          "xpReward": 40
+        }
+      ]
+    },
+
+    {
+      "id": "story-crisis",
+      "type": "story",
+      "sidebarLabel": "CRISIS — Ransomware",
+      "estimatedMinutes": 2,
+      "mood": "warning",
+      "narrative": [
+        "14:59 PM. The SOC board explodes red.",
+        "Not one light. Not three. All of them.",
+        "Marcus is standing before the alert even sounds. 'Ransomware. Finance. It's in HR. Now Operations.' His voice is perfectly flat. That means it's serious. 'Spreading through a shared network drive. Thirty endpoints. Forty. Fifty.'",
+        "AURA's tone shifts — still precise, but the cadence is faster. 'This is a large-scale ransomware outbreak, Recruit. Every second, another machine is being encrypted. Files are becoming unreadable in real time.'",
+        "Dr. Okafor appears in the SOC doorway. Her team is assembled behind her. 'Incident Response is ready. We need the command decision. NOW.'",
+        "Every analyst on the floor has stopped moving. Every screen shows red.",
+        "AURA: 'This is your call, Recruit. What is the first action?'"
+      ]
+    },
+
+    {
+      "id": "challenge-ransomware",
+      "type": "challenge",
+      "sidebarLabel": "CRISIS — Your Decision",
+      "estimatedMinutes": 5,
+      "title": "CRISIS: AGENCY-WIDE RANSOMWARE DETECTED",
+      "description": "The ransomware has spread to 67 endpoints across Finance, HR, and Operations. Files are being encrypted in real time. The malware is propagating through a shared network drive that connects all three departments.\n\nDr. Okafor's Incident Response team is standing by. Marcus has the network controls open. Every second of inaction means another machine — another file — is lost.\n\nMarcus: 'We need one word. The first action. What do you call?'\n\nAURA: 'You have trained for this. The protocol exists. Trust it. What is the first critical action in an active ransomware outbreak?'\n\nType your answer. One word. All caps.",
+      "challengeType": "identify",
+      "difficulty": "beginner",
+      "xpReward": 100,
+      "timeLimit": 180,
+      "flagFormat": "The first critical action in an active ransomware outbreak — one word, all caps",
+      "flag": "ISOLATE",
+      "hints": [
+        "AURA: 'The malware is spreading through a shared network drive. What stops it reaching the next machine? Think about physical barriers — what is the digital equivalent of cutting a fire break?'",
+        "AURA: 'Contain before you investigate. Investigate before you recover. What is the first word in that sequence?'",
+        "AURA: 'The malware cannot jump to a machine it cannot reach. Remove the connection. Remove the path. What verb describes removing a machine from a network?'"
+      ],
+      "solution": "ISOLATE.\n\nThe correct first action in any active ransomware outbreak is isolation — immediately disconnecting affected network segments to prevent the malware from reaching additional machines.\n\nDo NOT power off machines immediately. RAM contains decryption keys, running process evidence, and network connection data that Digital Forensics needs. Power down only after memory imaging where possible.\n\nThe complete protocol:\n1. ISOLATE — disconnect affected network segments from the broader network\n2. ESCALATE — activate Incident Response; brief CISO\n3. PRESERVE — capture memory images before shutdown where time permits\n4. IDENTIFY — determine the ransomware variant and check for known decryptors\n5. RECOVER — restore from verified, clean backups only\n\nThe ransomware was stopped at 67 endpoints. The shared drive was isolated. 143 machines in adjacent departments were saved because the network segment was cut before the malware could cross over.",
+      "maxAttempts": 3
+    },
+
+    {
+      "id": "story-resolution",
+      "type": "story",
+      "sidebarLabel": "All Clear",
+      "estimatedMinutes": 3,
+      "mood": "triumph",
+      "narrative": [
+        "16:44 PM. The last red light on the SOC board fades to amber. Then green.",
+        "AURA: 'All incidents contained. Damage assessment complete.'",
+        "The operations floor exhales. Not loudly — these are professionals — but you feel it. Marcus has been on his feet for seven hours. He sits down, picks up his cold coffee, and stares at it for a moment before setting it back down.",
+        "Director Chen walks onto the floor. The room quiets without anyone saying anything.",
+        "'Recruit.' Her voice carries to every desk.",
+        "'Today you responded to a phishing malware deployment, disrupted a business email compromise worth $87,000, secured a USB drop attack, protected intercepted credentials, contained a cloud data exposure, and stopped a ransomware outbreak that was spreading across three departments at once.' She holds eye contact. 'On your first operational day.'",
+        "A pause.",
+        "'I've seen analysts with two years of experience freeze on incident three. You did not freeze.'",
+        "She extends her hand. 'Welcome to the Agency.'",
+        "Marcus finally smiles — just barely. Jordan gives you a nod from the pen test room doorway. Alex raises a coffee mug. Dr. Kovacs doesn't look up from his forensic workstation, but you see him nod.",
+        "AURA speaks last, quietly: 'Today you stopped your first cyber incidents. Tomorrow — you discover how the digital world created entirely new battlefields. Module 2 is waiting, Recruit.'"
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Operations Director",
+          "description": "She extended her hand. That means something in this building.",
+          "emoji": "👩‍💼"
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Director",
+          "description": "Always the last to speak. Always the most important.",
+          "emoji": "🤖"
+        }
+      ],
+      "quote": {
+        "text": "Today you stopped your first cyber incidents. Tomorrow, you discover how the digital world created entirely new battlefields.",
+        "attribution": "AURA, 16:44 — Mission Complete"
+      }
+    },
+
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 2,
+      "prompts": [
+        "Which of today's six incidents would have been hardest for you to handle under real pressure? What made it difficult — the speed, the ambiguity, or the stakes?",
+        "AURA's protocol said: 'Contain before you investigate.' In your own words, why does the sequence matter so much in an active incident?",
+        "After today, which department's work appeals to you most — and which surprised you most? What does that tell you about where you might be headed?"
+      ],
+      "placeholder": "Debrief notes — what did today teach you that the classroom didn't?",
+      "minWords": 20
+    },
+
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "Disconnect first, investigate second — isolating an infected machine before it can communicate or spread is the foundational incident response instinct",
+        "Business Email Compromise relies on urgency and authority — the only safe verification is a call to a number you looked up yourself, never from the suspicious email",
+        "USB drops are effective because helpfulness is a vulnerability — even an 'isolated' PC is not USB-safe; only forensic environments with hardware write-blockers are",
+        "In a public Wi-Fi interception, the stolen items are credentials and session tokens — rotate them immediately, assess the data, and address regulatory obligations",
+        "Cloud misconfiguration response: restrict access first, investigate second, report third — never reverse that sequence",
+        "Active ransomware response: ISOLATE the network segment, ESCALATE to IR, PRESERVE RAM evidence before shutdown, RECOVER from clean backups only"
+      ],
+      "xpBreakdown": {
+        "base": 200,
+        "activityBonus": 0,
+        "challengeBonus": 100,
+        "quizBonus": 200,
+        "streakMultiplier": 1.0,
+        "total": 500
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.1: The Connected World",
+        "slug": "lesson-01-the-connected-world",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 35
+      },
+      "relatedTopics": [
+        "NIST Incident Response Framework (SP 800-61)",
+        "FBI IC3 Business Email Compromise Report 2024",
+        "CISA Ransomware Response Checklist",
+        "AWS S3 Security Best Practices",
+        "USB security standards — NIST SP 800-114"
+      ]
+    }
+  ]
+}

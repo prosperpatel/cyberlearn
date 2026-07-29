@@ -1,0 +1,367 @@
+{
+  "id": "lesson-digital-identity",
+  "slug": "lesson-03-digital-identity",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.3: Digital Identity",
+  "tagline": "Who are you online? Not who you want to be — who you actually are, in the eyes of every company that ever asked for your email address.",
+  "description": "In Operation 2.2, you traveled as a data packet and learned how data moves. Today AURA turns the lens on something more personal: you. Build your digital identity from scratch — email to smart home — and watch the shadow it casts grow larger than you expected.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 30,
+  "tags": ["digital-identity", "mfa", "password-security", "digital-footprint", "data-privacy", "credential-stuffing", "authentication"],
+  "prerequisites": ["lesson-02-journey-of-a-data-packet"],
+  "learningObjectives": [
+    "Explain the three factors of authentication and why combining them matters",
+    "Describe what a 'digital footprint' is and distinguish active from passive footprints",
+    "Identify why password reuse across accounts creates catastrophic cascade risk",
+    "Analyze the 2013 Yahoo! breach as a case study in identity data exposure at scale",
+    "Apply threat modeling to your own digital identity to identify the highest-risk accounts"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 3,
+  "xpReward": 350,
+  "prevLessonSlug": "lesson-02-journey-of-a-data-packet",
+  "nextLessonSlug": "lesson-04-life-in-the-cloud",
+  "sections": [
+    {
+      "id": "hook-identity",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.3",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "\"In Operation 2.2, you understood how data moves,\" AURA says. \"Today we talk about who is sending it — and how much of yourself you leave behind every time you do.\" The silhouette on the screen belongs to you. The shadow behind it contains your email, your location history, your purchase history, your healthcare searches, your daily routine, your home address, your face.",
+      "subheadline": "09:15 AM. CDA Privacy Intelligence Unit. The room shows a single silhouette — and the shadow behind it is enormous.",
+      "backgroundAccent": "purple"
+    },
+    {
+      "id": "story-briefing",
+      "type": "story",
+      "sidebarLabel": "Mission Brief",
+      "estimatedMinutes": 3,
+      "mood": "discovery",
+      "narrative": [
+        "Operation 2.2 showed you how data packets travel across networks. Twelve hops. DNS lookups. TLS encryption. BGP routing.",
+        "But we never talked about what was in the packet.",
+        "Alex Torres, the CDA's Cloud Security specialist, is waiting in the Privacy Intelligence Unit — a small, quiet room that feels very different from the SOC. Quieter. More personal.",
+        "\"Every system you've studied so far,\" Alex says, \"processes data about people. The smart city sensors, the network packets, the cloud databases. But what's in those packets? What do those databases store?\"",
+        "She pulls up a profile on the main screen. The profile is deliberately anonymized — but it describes a real person.",
+        "\"This person created their first email account at age 12. Since then, they have created 47 accounts across platforms and services. Each account required some combination of: name, email, password, phone number, date of birth, physical address, payment card, biometric data, or government ID. Each company that received this information made decisions about what to keep, what to share, and what to secure.\"",
+        "She pauses.",
+        "\"Today, this person's data exists across 200+ databases. They have given personal information to healthcare providers, government agencies, employers, social media companies, data brokers, e-commerce platforms, and app developers.\"",
+        "\"How many of those 200 databases do you think they know about?\"",
+        "The answer, AURA tells you quietly, is twelve.",
+        "\"Your mission today: build a digital identity from scratch. Watch what it becomes. Understand what you're defending — and why it matters that you defend it well.\""
+      ],
+      "characters": [
+        {
+          "name": "Alex Torres",
+          "role": "Cloud Security Specialist",
+          "description": "CDA Cloud Security specialist who reveals that a normal person's data exists across 200+ databases — and they're only aware of twelve of them."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Guides the digital identity construction mission and provides the sobering answer about how few databases people are actually aware of."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "09:15", "event": "Briefing begins in Privacy Intelligence Unit", "type": "normal" },
+        { "timestamp": "09:20", "event": "Digital identity construction begins — email to smart home", "type": "normal" },
+        { "timestamp": "09:40", "event": "Full digital shadow mapped — identity analysis complete", "type": "resolution" }
+      ]
+    },
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Explain the three factors of authentication and why combining them matters",
+        "Describe what a 'digital footprint' is and distinguish active from passive footprints",
+        "Identify why password reuse across accounts creates catastrophic cascade risk",
+        "Analyze the 2013 Yahoo! breach as a case study in identity data exposure at scale",
+        "Apply threat modeling to your own digital identity to identify the highest-risk accounts"
+      ],
+      "xpPreview": {
+        "base": 175,
+        "bonuses": [
+          { "label": "Complete identity build", "amount": 75 },
+          { "label": "Pass the quiz (70%+)", "amount": 100 }
+        ]
+      }
+    },
+    {
+      "id": "animation-identity-build",
+      "type": "animation",
+      "sidebarLabel": "Building Your Identity",
+      "estimatedMinutes": 7,
+      "title": "Nine Steps: Building a Digital Identity",
+      "intro": "You are creating a new person's digital identity from nothing. Each step adds something — and each step expands the shadow behind them. By step nine, the shadow is larger than the person.",
+      "steps": [
+        {
+          "title": "Step 1 — Email Address",
+          "description": "The foundation of the digital identity. An email address is the master key — it is the username for almost every other account and the recovery mechanism when passwords are lost. The email account that receives password reset links controls access to every other account. If an attacker owns your email, they own your digital identity. This is why email account security — strong password, MFA, recovery code stored safely — is the single most important security decision most people make.",
+          "visualNote": "Email account creation form, with a glowing key icon — the first layer of the identity forming",
+          "highlight": "user"
+        },
+        {
+          "title": "Step 2 — Password Creation",
+          "description": "The first factor of authentication: something you know. Most people choose a password they can remember, which means it is likely: based on a word, includes a predictable substitution (p@ssword), or is reused from another account. Password cracking databases contain over 10 billion known passwords. If your password appears in any previous data breach, attackers will try it against your accounts. The correct choice: a long, random passphrase (16+ characters) generated by a password manager.",
+          "visualNote": "Password strength meter showing progression from weak 'password123' to strong randomly generated passphrase",
+          "highlight": "user"
+        },
+        {
+          "title": "Step 3 — Phone Number (MFA)",
+          "description": "Adding a phone number enables SMS-based Multi-Factor Authentication — a second factor: something you possess. With MFA, an attacker needs both your password AND physical access to your phone (or your SIM card, via a SIM swap attack). SMS-based MFA is significantly better than no MFA — but it has known weaknesses. SIM swapping, SS7 protocol attacks, and social engineering of mobile carriers can transfer your number to an attacker's phone. Authenticator apps (TOTP: Google Authenticator, Authy) and hardware keys (YubiKey) are stronger alternatives.",
+          "visualNote": "Phone number being added, second factor shield appearing behind the identity silhouette",
+          "highlight": "user"
+        },
+        {
+          "title": "Step 4 — Social Media Profile",
+          "description": "Creating a social media profile adds: full name, photo, date of birth, current city, employer, school, relationship status, interests, friend connections, and political views — often all voluntarily. This information serves as the raw material for spear-phishing and social engineering attacks. Attackers who know your name, employer, and a mutual contact can craft a convincing phishing email that references all three. The shadow grows significantly here — and much of this data cannot be deleted once it propagates to data brokers.",
+          "visualNote": "Social media profile form filling out, with lines extending from each field to data broker icons multiplying in the background",
+          "highlight": "none"
+        },
+        {
+          "title": "Step 5 — Online Shopping Account",
+          "description": "An e-commerce account adds: home address, payment card number, purchase history, browsing history, saved searches, and delivery patterns. Payment card data is highly regulated — but purchase history and browsing behavior are commodities. What you buy reveals your income level, health status, interests, beliefs, and daily routine. A person who buys insulin monthly and orders food delivery every night has a predictable schedule — which can inform both digital and physical targeting.",
+          "visualNote": "Shopping account with address, card, and purchase history visualized as data flowing into third-party analytics platforms",
+          "highlight": "database"
+        },
+        {
+          "title": "Step 6 — Healthcare Portal",
+          "description": "Healthcare data is the most sensitive category of personal information. A patient portal contains: diagnoses, prescriptions, lab results, insurance information, appointment history, and sometimes mental health records. Healthcare data is 25× more valuable on the dark web than a credit card number — because it cannot be changed, it never expires, and it enables insurance fraud, prescription fraud, and blackmail. Healthcare organizations are among the most frequently breached sectors and typically have the weakest cybersecurity infrastructure.",
+          "visualNote": "Healthcare portal showing medical records as high-value target — glowing red in the growing shadow",
+          "highlight": "database"
+        },
+        {
+          "title": "Step 7 — Government Services",
+          "description": "Registering for government digital services ties your digital identity to your legal identity: national ID number, tax records, voting registration, driving license, passport data. This binding is both necessary (for authentic verification) and dangerous (any breach of this data enables comprehensive identity theft). Government credentials are a prime target for nation-state actors who want to build cover identities or manipulate records of specific individuals.",
+          "visualNote": "Government portal with national ID and official records linking to an official government seal — authoritative but high-stakes",
+          "highlight": "database"
+        },
+        {
+          "title": "Step 8 — Cloud Storage",
+          "description": "Cloud storage accounts (Google Drive, iCloud, OneDrive, Dropbox) hold your complete digital life: documents, photos, notes, financial records, private messages, credentials stored in files, and backups of your devices. A single compromised cloud storage account can expose years of personal data — and because cloud storage is designed for sharing, misconfigured permissions (accidentally public folders) are common. In 2014, compromised iCloud accounts led to the leak of hundreds of private photos from celebrities.",
+          "visualNote": "Cloud storage expanding to fill a large portion of the shadow — files, photos, and device backups all visible",
+          "highlight": "database"
+        },
+        {
+          "title": "Step 9 — Smart Home Devices",
+          "description": "The final layer: smart speakers, security cameras, door locks, thermostats, and baby monitors. These devices know when you are home, when you leave, how many people live with you, what your home looks like, and what you say out loud. A compromised smart home camera network provides physical surveillance of your daily routine. A compromised smart lock gives attackers knowledge of your entry patterns. Combined with the preceding eight layers, an attacker who has this data knows more about this person than most of their close friends do.",
+          "visualNote": "Smart home devices completing the shadow — the silhouette of the person is now almost hidden behind an enormous data shadow",
+          "highlight": "attacker"
+        }
+      ]
+    },
+    {
+      "id": "explain-authentication",
+      "type": "explanation",
+      "sidebarLabel": "Identity Intel",
+      "estimatedMinutes": 7,
+      "content": [
+        "## The Three Factors of Authentication",
+        "Authentication answers one question: is this person who they claim to be? There are three categories of evidence that can answer it:\n\n**Factor 1 — Something you know:** Passwords, PINs, security questions. The weakest factor alone — knowledge can be stolen, guessed, or phished without the attacker ever touching you.\n\n**Factor 2 — Something you possess:** A phone (SMS), an authenticator app (TOTP), a hardware security key (FIDO2). Requires the attacker to have physical access to your device or clone it.\n\n**Factor 3 — Something you are:** Biometrics — fingerprint, face, iris. Cannot be forgotten or stolen without physical contact. But can be technically spoofed — and biometrics cannot be changed if compromised.\n\nMFA (Multi-Factor Authentication) requires two or more of these factors. An attacker who steals your password still cannot log in without your physical device or biometric. This single control stops the vast majority of account takeover attacks.",
+        "## Active vs Passive Digital Footprints",
+        "Your digital footprint is the trail of data you leave across the internet. It has two components:\n\n**Active footprint:** Data you deliberately provide — social media posts, account registrations, form submissions, emails you send. You chose to create this data.\n\n**Passive footprint:** Data collected without your direct knowledge — IP addresses logged by websites you visit, cookies tracking your browsing across sites, location data from mobile apps, purchase behavior analyzed by retailers. You did not explicitly create this data, but it exists.\n\nData brokers aggregate both types and sell comprehensive profiles to marketers, employers, law enforcement, and anyone willing to pay. These profiles can include your name, age, address history, income estimate, political affiliation, medical conditions (inferred from purchase history), and even relationship status.",
+        "## The Password Reuse Catastrophe",
+        "When you use the same password on multiple sites, you are creating a dependency chain. If Site A is breached and your password hash is cracked, every account using that same password is now compromised — even if those sites were never attacked.\n\nCredential stuffing — taking a breach database and automatically trying each username/password pair against other popular sites — is one of the most common and effective attacks today. Billions of credentials from previous breaches are freely available. Automated tools try them against banks, email providers, and e-commerce sites at scale.\n\nA password manager solves this by generating a unique, strong, random password for every account. You remember one master password; the manager handles the rest.",
+        "## Threat Modeling Your Own Identity",
+        "Not all accounts are equally valuable targets. Threat modeling your digital identity means asking: which of my accounts, if compromised, would cause the most damage?\n\nThe answer is almost always: email (because of password reset), then banking/financial, then government ID, then healthcare. These are the accounts that warrant the strongest authentication — hardware security keys, not just SMS MFA — and the most unique, strongest passwords."
+      ],
+      "callouts": [
+        {
+          "type": "warning",
+          "title": "The Security Question Trap",
+          "text": "Security questions (mother's maiden name, first pet, hometown) are pseudo-passwords with terrible randomness. The answers are often publicly available from social media or guessable. Treat security question answers like passwords: use random strings stored in your password manager, not real answers."
+        },
+        {
+          "type": "insight",
+          "title": "The Email Account Rule",
+          "text": "Whoever controls your email controls your digital identity. Every password reset goes to your email. Secure your email account with the strongest available MFA — ideally a hardware key — before securing anything else."
+        },
+        {
+          "type": "tip",
+          "title": "Minimum Viable MFA",
+          "text": "If you can only implement MFA on three accounts, choose: email, primary bank, and any password manager. These three control access to everything else."
+        }
+      ],
+      "analogy": {
+        "scenario": "Imagine a key ring where one key is the master — it opens every lock in your house, plus your car, your office, and your safe. Lose that one key, and everything is exposed. The other keys are useful, but losing any one of them matters much less.",
+        "mapping": "Your email account is that master key. Every password reset, every account recovery flow, every security notification goes there. An attacker who owns your email owns your entire digital identity — not just your email. This is why email security is always the first priority."
+      },
+      "keyTerms": [
+        { "term": "MFA (Multi-Factor Authentication)", "definition": "Authentication that requires proof from at least two different factor categories: something you know, something you possess, or something you are." },
+        { "term": "Digital Footprint", "definition": "The trail of data a person creates while using the internet, including actively shared information and passively collected behavioral data." },
+        { "term": "Credential Stuffing", "definition": "An attack that uses stolen username/password combinations from one breach to try to log in to other services, exploiting password reuse." },
+        { "term": "Data Broker", "definition": "A company that collects personal information from various sources, aggregates it into profiles, and sells it to third parties." },
+        { "term": "TOTP", "definition": "Time-Based One-Time Password — a form of MFA where an authenticator app generates a 6-digit code that changes every 30 seconds." },
+        { "term": "SIM Swap", "definition": "An attack where an attacker convinces a mobile carrier to transfer a victim's phone number to an attacker-controlled SIM card, defeating SMS-based MFA." },
+        { "term": "Threat Model", "definition": "The process of identifying which assets are most valuable, which threats are most likely, and which security controls are most important to apply." }
+      ]
+    },
+    {
+      "id": "real-world-yahoo",
+      "type": "real-world-example",
+      "sidebarLabel": "Field Evidence",
+      "estimatedMinutes": 4,
+      "company": "Yahoo!",
+      "industry": "Internet Services / Consumer Technology",
+      "year": "2013",
+      "incident": "Largest data breach in history — 3 billion accounts compromised, security question answers stolen in bulk, and the breach hidden from the public for three years.",
+      "whatHappened": [
+        "In 2013, attackers compromised Yahoo's user database and stole data on every single account Yahoo had ever created: approximately 3 billion accounts. A second breach in 2014 compromised an additional 500 million accounts, later determined to be part of the same incident.",
+        "The stolen data included: names, email addresses, phone numbers, dates of birth, hashed passwords (using MD5, a weak algorithm crackable at scale), security questions and answers — many stored in plaintext — and encrypted or unencrypted backup email addresses.",
+        "Yahoo knew about the 2014 breach in 2014 but did not disclose it publicly until September 2016 — during the process of being acquired by Verizon. The 2013 breach was not disclosed until December 2016.",
+        "The stolen credentials were immediately valuable for credential stuffing attacks against other platforms. Security question answers from Yahoo were used to reset passwords on banking and government accounts — because users had used the same answers everywhere."
+      ],
+      "whyItHappened": [
+        "Yahoo used MD5 for password hashing. MD5 is cryptographically broken for password storage — modern hardware can crack billions of MD5 hashes per second. Proper storage requires slow algorithms like bcrypt, scrypt, or Argon2.",
+        "Security question answers were stored without adequate protection in some cases, making them directly readable after the breach.",
+        "Password reuse by affected users meant that cracked Yahoo passwords unlocked accounts on other platforms — amplifying the breach's impact well beyond Yahoo itself.",
+        "Delayed disclosure (2–3 years) meant affected users could not change passwords, enable MFA, or take protective action during the period of highest risk."
+      ],
+      "impact": [
+        { "value": "3 billion", "label": "Accounts compromised" },
+        { "value": "$350M", "label": "Reduction in Yahoo's Verizon acquisition price" },
+        { "value": "2–3 years", "label": "Delay before public breach disclosure" }
+      ],
+      "lessonsLearned": [
+        "Password reuse across platforms allows a single breach to cascade into dozens of account takeovers on completely different services",
+        "Security questions are effectively passwords — they should be treated with the same strength requirements and never use real answers",
+        "MD5 password hashing is cryptographically broken for this use case — modern applications must use bcrypt, scrypt, or Argon2",
+        "Delayed breach disclosure is both an ethical failure and, increasingly, a legal one — regulators now mandate rapid notification"
+      ],
+      "sourceLabel": "Yahoo / Verizon disclosure, SEC enforcement action, 2016–2017"
+    },
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Assessment",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "Which of the following is the strongest form of Multi-Factor Authentication for securing a high-value account?",
+          "options": [
+            { "id": "a", "text": "SMS text message verification code sent to your phone number", "isCorrect": false },
+            { "id": "b", "text": "Security questions (mother's maiden name, first pet's name)", "isCorrect": false },
+            { "id": "c", "text": "A hardware security key (FIDO2/WebAuthn, e.g., YubiKey)", "isCorrect": true },
+            { "id": "d", "text": "Biometric fingerprint authentication on your smartphone", "isCorrect": false }
+          ],
+          "explanation": "Hardware security keys (FIDO2/WebAuthn) are the strongest commonly available MFA. They are immune to phishing (they cryptographically verify the domain), immune to SIM swap attacks (no phone number involvement), immune to real-time phishing proxies, and require physical possession of the key. SMS codes can be intercepted via SIM swap or SS7 attacks. Security questions are not true MFA — they're a second password with predictable answers. Smartphone biometrics are strong but can be compelled and are device-dependent.",
+          "xpReward": 15
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "What is the difference between an 'active' and a 'passive' digital footprint?",
+          "options": [
+            { "id": "a", "text": "Active footprints are from desktop computers; passive footprints are from mobile devices", "isCorrect": false },
+            { "id": "b", "text": "Active footprints are data you deliberately create (posts, accounts); passive footprints are data collected without your direct input (logs, cookies, tracking)", "isCorrect": true },
+            { "id": "c", "text": "Active footprints are encrypted; passive footprints are stored in plaintext", "isCorrect": false },
+            { "id": "d", "text": "Active footprints can be deleted; passive footprints are permanently stored by law", "isCorrect": false }
+          ],
+          "explanation": "An active digital footprint is data you consciously create: social media posts, account registrations, emails, forum comments. A passive footprint is data collected about your behavior without direct input: IP address logs, cookies tracking your browsing across sites, location data from apps, purchase behavior analysis. Most people are aware of their active footprint — very few understand the scale of their passive footprint, which is aggregated and sold by data brokers.",
+          "xpReward": 15
+        },
+        {
+          "id": "q3",
+          "type": "true-false",
+          "question": "Using the same strong, complex password (like 'K#7mP!xQ9z$') across multiple accounts is acceptable because the password itself is sufficiently difficult to crack.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "False. Password strength only protects against direct brute-force cracking of that password. Credential stuffing attacks work differently — attackers take breached username/password pairs from Site A (where the password was hashed but cracked) and try them on Sites B, C, and D. If you reuse the same password, a breach of any one site compromises all of them — regardless of the password's complexity. Unique passwords per site, managed by a password manager, is the only correct solution.",
+          "xpReward": 10
+        },
+        {
+          "id": "q4",
+          "type": "single",
+          "question": "In the Yahoo! breach, attackers stole security question answers for billions of accounts. Why are stolen security question answers more dangerous long-term than stolen password hashes?",
+          "options": [
+            { "id": "a", "text": "Security question answers are longer and harder to crack than password hashes", "isCorrect": false },
+            { "id": "b", "text": "Password hashes can be reset easily; security question answers are often static and reused across every site that asks the same question", "isCorrect": true },
+            { "id": "c", "text": "Security question answers are stored in plaintext while passwords are always hashed", "isCorrect": false },
+            { "id": "d", "text": "Security question answers directly grant account access without any additional verification", "isCorrect": false }
+          ],
+          "explanation": "Passwords can be changed after a breach is announced. Security questions are usually static — your mother's maiden name and your first pet's name don't change — and are typically reused wherever the same question appears. An attacker with your security question answers from 2013 can attempt to reset accounts on other platforms today, years after the breach. This is why security question answers should be treated as passwords: use random strings stored in a password manager, not real answers.",
+          "xpReward": 15
+        },
+        {
+          "id": "q5",
+          "type": "single",
+          "question": "Which account, if compromised, would give an attacker the widest access to a person's other accounts?",
+          "options": [
+            { "id": "a", "text": "Their social media account (highest volume of personal information)", "isCorrect": false },
+            { "id": "b", "text": "Their email account (used as recovery mechanism for almost all other accounts)", "isCorrect": true },
+            { "id": "c", "text": "Their cloud storage account (contains copies of most documents)", "isCorrect": false },
+            { "id": "d", "text": "Their shopping account (contains payment card and address data)", "isCorrect": false }
+          ],
+          "explanation": "Email is the master key of the digital identity. Password reset flows for almost every other account — banking, healthcare, government, social media, cloud storage — send reset links to the registered email address. An attacker who controls your email can reset every other password. This is why email accounts should have the highest security priority: the strongest unique password and the strongest available MFA.",
+          "xpReward": 15
+        },
+        {
+          "id": "q6",
+          "type": "scenario",
+          "context": "A user receives a call from someone claiming to be their mobile carrier's support team. The caller correctly states the user's name, address, and the last four digits of their account number. The caller says there is a problem with their SIM and needs to transfer their number to a new card for verification.",
+          "question": "What is happening?",
+          "options": [
+            { "id": "a", "text": "A legitimate mobile carrier support call — the caller having personal data proves they are genuine", "isCorrect": false },
+            { "id": "b", "text": "A SIM swap attack — the caller has gathered personal data to social-engineer the carrier into transferring the phone number", "isCorrect": true },
+            { "id": "c", "text": "A phishing call attempting to collect payment card information under false pretenses", "isCorrect": false },
+            { "id": "d", "text": "A technical scam where the caller intends to install remote access software on the user's phone", "isCorrect": false }
+          ],
+          "explanation": "This is a SIM swap attack setup. The attacker has gathered the user's personal details (likely from public records, data broker databases, or previous breaches) and is using them to impersonate the user with the mobile carrier — not with the user directly. The goal: get the carrier to transfer the victim's phone number to an attacker-controlled SIM, defeating SMS-based MFA. Legitimate mobile carriers do not initiate calls asking to transfer SIMs. The user should hang up, call their carrier's published number directly, and verify their account.",
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "Of the nine steps in your digital identity build, which single piece of data would cause you the most concern if it were stolen? Why?",
+        "Why do you think most people use the same passwords across multiple sites, despite the obvious risk?",
+        "If you were designing an authentication system from scratch today, how would you balance security with usability for ordinary users?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers..."
+    },
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "A digital identity grows through nine major account categories — each adding a layer of sensitive data to an expanding shadow",
+        "Email is the master key: whoever controls your email can reset access to almost every other account",
+        "MFA reduces account takeover risk dramatically — hardware keys are strongest, authenticator apps are strong, SMS is weak but better than nothing",
+        "Password reuse allows a single breach to cascade into multiple account takeovers through credential stuffing",
+        "The 2013 Yahoo! breach (3B accounts) showed that even hashed passwords and security questions become liabilities at scale"
+      ],
+      "xpBreakdown": {
+        "base": 175,
+        "activityBonus": 75,
+        "challengeBonus": 0,
+        "quizBonus": 100,
+        "streakMultiplier": 1.0,
+        "total": 350
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.4: Life in the Cloud",
+        "slug": "lesson-04-life-in-the-cloud",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 30
+      },
+      "completionMessage": "You know what a digital identity is. You know how it grows and where it is vulnerable.\n\n\"In Operation 2.3, you built the identity,\" AURA says. \"In Operation 2.4 — you find out where it lives. Hint: it is not in the sky.\""
+    }
+  ]
+}
