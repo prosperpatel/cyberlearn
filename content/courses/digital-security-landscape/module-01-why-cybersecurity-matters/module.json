@@ -1,0 +1,61 @@
+{
+  "id": "module-why-cybersecurity-matters",
+  "slug": "module-01-why-cybersecurity-matters",
+  "courseSlug": "digital-security-landscape",
+  "title": "Why Cybersecurity Matters",
+  "description": "Before you can defend anything, you need to understand what you are defending against — and why it matters. This module answers the three questions every security career begins with: what happens when security fails, what does a security professional actually do, and what does it mean to think like one?",
+  "order": 1,
+  "estimatedHours": 3,
+  "tags": ["cia-triad", "breach", "soc", "attack-surface", "security-mindset", "foundations"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-28T00:00:00Z",
+  "updatedAt": "2026-07-28T00:00:00Z",
+  "lessons": [
+    {
+      "slug": "lesson-01-cost-of-insecurity",
+      "title": "The Cost of Insecurity",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["cia-triad", "breach", "healthcare", "ransomware", "data-breach"],
+      "xpReward": 300,
+      "order": 1
+    },
+    {
+      "slug": "lesson-02-day-in-life-security-professional",
+      "title": "A Day in the Life of a Security Professional",
+      "difficulty": "beginner",
+      "estimatedMinutes": 55,
+      "tags": ["soc", "incident-response", "threat-intelligence", "penetration-testing", "cloud-security", "digital-forensics", "career-roles"],
+      "xpReward": 400,
+      "order": 2
+    },
+    {
+      "slug": "lesson-03-internet-changed-everything",
+      "title": "How the Internet Changed Everything",
+      "difficulty": "beginner",
+      "estimatedMinutes": 35,
+      "tags": ["attack-surface", "iot", "cloud", "mobile", "mirai"],
+      "xpReward": 300,
+      "order": 3
+    },
+    {
+      "slug": "lesson-04-security-mindset",
+      "title": "The Security Mindset",
+      "difficulty": "beginner",
+      "estimatedMinutes": 30,
+      "tags": ["mindset", "assume-breach", "weakest-link", "fail-safe", "adversarial-thinking"],
+      "xpReward": 350,
+      "order": 4
+    },
+    {
+      "slug": "lesson-05-operation-first-day",
+      "title": "OPERATION: First Day at the Cyber Defense Agency",
+      "difficulty": "beginner",
+      "estimatedMinutes": 35,
+      "tags": ["mission-challenge", "phishing", "ransomware", "bec", "usb-drop", "cloud-security", "capstone"],
+      "xpReward": 500,
+      "order": 5
+    }
+  ]
+}

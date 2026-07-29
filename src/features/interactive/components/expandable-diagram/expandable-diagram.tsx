@@ -158,8 +158,8 @@ export const ExpandableDiagram = memo(function ExpandableDiagram({
                   )}
                   <circle r={NODE_R} fill={c.bg} stroke={isActive ? '#6366f1' : c.stroke} strokeWidth={isActive ? 2 : 1.5} />
                   <foreignObject x={-14} y={-14} width={28} height={28} style={{ pointerEvents: 'none' }}>
-                    <div style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Icon className="size-5" style={{ color: c.icon }} />
+                    <div style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', color: c.icon }}>
+                      <Icon className="size-5" />
                     </div>
                   </foreignObject>
                   <text y={NODE_R + 14} textAnchor="middle" fontSize="11" fontWeight="600" fill="#d4d4d8" className="select-none pointer-events-none">

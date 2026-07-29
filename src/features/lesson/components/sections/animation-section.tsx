@@ -41,7 +41,7 @@ export function AnimationSectionRenderer({ section }: Props) {
   const highlightStyle = HIGHLIGHT_STYLES[highlight] ?? HIGHLIGHT_STYLES.none
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12 space-y-6">
+    <div className="max-w-[820px] mx-auto px-6 sm:px-8 py-14 sm:py-20 space-y-10">
       {/* Header */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">
         <h2 className="text-xl font-bold text-foreground">{section.title}</h2>

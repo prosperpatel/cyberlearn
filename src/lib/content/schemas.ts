@@ -22,6 +22,7 @@ export const linesOrString = z.union([
 export const DifficultySchema = z.enum(['beginner', 'intermediate', 'advanced', 'expert'])
 
 export const SkillCategorySchema = z.enum([
+  'foundations',
   'networking',
   'web-security',
   'cryptography',

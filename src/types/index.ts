@@ -14,6 +14,7 @@ export type BadgeVariant =
   | 'outline'
 
 export type SkillCategory =
+  | 'foundations'
   | 'networking'
   | 'web-security'
   | 'cryptography'

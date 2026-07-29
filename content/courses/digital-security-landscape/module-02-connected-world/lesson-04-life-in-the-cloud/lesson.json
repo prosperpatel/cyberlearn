@@ -1,0 +1,397 @@
+{
+  "id": "lesson-life-in-the-cloud",
+  "slug": "lesson-04-life-in-the-cloud",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.4: Life in the Cloud",
+  "tagline": "The cloud is not in the sky. It is a building in Virginia — and you are about to walk inside.",
+  "description": "In Operation 2.3, you built a digital identity and watched the shadow it casts. Today, Director Chen grants temporary access to the Cloud Operations Visualization: the global infrastructure where that identity actually lives. Discover how the modern cloud works, why organizations moved everything there, and why misconfigured cloud storage is among the most common causes of major data breaches.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 30,
+  "tags": ["cloud-security", "aws", "shared-responsibility", "iam", "s3", "iaas", "paas", "saas", "misconfiguration"],
+  "prerequisites": ["lesson-03-digital-identity"],
+  "learningObjectives": [
+    "Describe the three cloud service models (IaaS, PaaS, SaaS) and who is responsible for security in each",
+    "Explain the shared responsibility model and what it means for cloud customers",
+    "Identify the key components of cloud infrastructure: servers, VMs, containers, storage, CDN, availability zones",
+    "Analyze the 2019 Capital One breach as a case study in cloud misconfiguration",
+    "Compare the security trade-offs of cloud deployment vs traditional on-premises infrastructure"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 4,
+  "xpReward": 350,
+  "prevLessonSlug": "lesson-03-digital-identity",
+  "nextLessonSlug": "lesson-05-connected-chaos",
+  "sections": [
+    {
+      "id": "hook-cloud",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.4",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "\"The cloud isn't in the sky,\" Director Chen says. \"It's a building in Virginia. Or Singapore. Or Frankfurt. Walk inside and you'll understand everything — the power, the cost savings, and exactly why a single misconfiguration can expose a hundred million records.\"",
+      "subheadline": "10:00 AM. CDA Cloud Operations Center. A holographic globe rotates — lit up with thousands of data center nodes.",
+      "backgroundAccent": "orange"
+    },
+    {
+      "id": "story-briefing",
+      "type": "story",
+      "sidebarLabel": "Mission Brief",
+      "estimatedMinutes": 3,
+      "mood": "discovery",
+      "narrative": [
+        "Operation 2.3 showed you what a digital identity becomes. Email addresses, medical records, financial data, location history — a shadow larger than the person who cast it.",
+        "But you never asked: where does that shadow live?",
+        "The answer: the cloud. Specifically, a collection of massive data centers operated by Amazon Web Services, Microsoft Azure, Google Cloud, and a handful of other providers. The entire modern internet — your bank, your healthcare portal, your government services, your email — runs on infrastructure owned by three or four private companies.",
+        "Director Chen has arranged a rare briefing: access to the CDA's Cloud Operations Visualization. It is not a real cloud, but it models the architecture of actual production cloud deployments — accurate enough to train operators on real threats.",
+        "Alex Torres, who briefed you in the Privacy Intelligence Unit, is also here. Cloud security is her specialty.",
+        "\"Most people think the cloud is magical,\" Alex says. \"Infinite storage, always available, perfectly secure. None of those things are true by default. The cloud is someone else's computer. A very big, very reliable, very well-maintained computer — but someone else's. And that distinction matters enormously for security.\"",
+        "The holographic display activates. A data center materializes in front of you — servers in rows, power units humming, cooling systems operating.",
+        "\"Welcome to us-east-1,\" AURA says. \"Let's go inside.\""
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Director",
+          "description": "Arranges access to the CDA's Cloud Operations Visualization to show recruits where digital data actually lives."
+        },
+        {
+          "name": "Alex Torres",
+          "role": "Cloud Security Specialist",
+          "description": "Cloud security specialist who emphasizes that the cloud is someone else's computer — and that distinction matters enormously for security."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Guides you through the cloud infrastructure tour, beginning with us-east-1."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "10:00", "event": "Cloud Operations Visualization activated — us-east-1 data center model loaded", "type": "normal" },
+        { "timestamp": "10:05", "event": "Infrastructure exploration begins: physical layer to global CDN", "type": "normal" },
+        { "timestamp": "10:30", "event": "Shared responsibility model analysis — Capital One breach case study", "type": "normal" }
+      ]
+    },
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Describe the three cloud service models (IaaS, PaaS, SaaS) and who is responsible for security in each",
+        "Explain the shared responsibility model and what it means for cloud customers",
+        "Identify the key components of cloud infrastructure: servers, VMs, containers, storage, CDN, availability zones",
+        "Analyze the 2019 Capital One breach as a case study in cloud misconfiguration",
+        "Compare the security trade-offs of cloud deployment vs traditional on-premises infrastructure"
+      ],
+      "xpPreview": {
+        "base": 175,
+        "bonuses": [
+          { "label": "Complete cloud tour", "amount": 75 },
+          { "label": "Pass the quiz (70%+)", "amount": 100 }
+        ]
+      }
+    },
+    {
+      "id": "animation-cloud-tour",
+      "type": "animation",
+      "sidebarLabel": "Cloud Tour",
+      "estimatedMinutes": 7,
+      "title": "Inside the Cloud: Eight Layers",
+      "intro": "You are walking through the layers of a cloud data center — from the physical building to the global CDN edge. Each layer represents infrastructure that organizations once had to build and maintain themselves. Each layer also has specific security considerations.",
+      "steps": [
+        {
+          "title": "Layer 1 — The Physical Data Center",
+          "description": "A cloud data center is a massive industrial building — often the size of several football fields. Inside: tens of thousands of server racks consuming megawatts of power, industrial cooling systems running 24/7, redundant power sources including diesel generators and UPS (Uninterruptible Power Supplies), and physical security featuring biometric access, security guards, and continuous CCTV coverage. AWS has over 100 data centers globally. Microsoft Azure has more than 200. The physical security of these buildings is exceptional — but the cloud's vulnerabilities are rarely physical.",
+          "visualNote": "Data center exterior and interior: server rows, cooling units, power infrastructure, and security checkpoints",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 2 — Server Virtualization",
+          "description": "A single physical server hosts multiple Virtual Machines (VMs). Each VM is a software-defined computer — its own operating system, memory, storage, and network interface — running isolated from other VMs on the same hardware. This is the fundamental technology that makes cloud computing economically viable: instead of one customer per server, dozens of customers can share one server. When you rent a cloud VM, you get dedicated resources (CPU cores, RAM, storage) without needing to own the physical hardware.",
+          "visualNote": "Physical server split into multiple isolated VM instances, each running a different operating system and workload",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 3 — Containers",
+          "description": "Above VMs, containers (Docker, Kubernetes) provide even lighter-weight application isolation. A container shares the host operating system's kernel but isolates the application and its dependencies. Containers start in seconds, use far less memory than VMs, and can be deployed and destroyed automatically in response to load. Most modern applications run in containers — which introduces new security considerations: container escape vulnerabilities, shared kernel attacks, and the security of container registries where images are stored.",
+          "visualNote": "VM layer subdivided into many containers running individual application services — microservices architecture visible",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 4 — Object Storage",
+          "description": "Cloud object storage (AWS S3, Azure Blob Storage, Google Cloud Storage) is the internet's filing cabinet. It holds websites, backups, log files, images, videos, database exports, and application code. Storage buckets can be configured as private (accessible only with authentication) or public (accessible to anyone with the URL). Misconfigured public buckets are among the most common sources of major data breaches — hundreds of millions of records have been exposed through S3 buckets left open by mistake.",
+          "visualNote": "Storage buckets displayed as filing cabinets, some with green locks (private) and some with red open padlocks (public)",
+          "highlight": "database"
+        },
+        {
+          "title": "Layer 5 — Content Delivery Network",
+          "description": "A CDN distributes copies of static content (web pages, images, videos, software updates) to hundreds of edge locations worldwide. When you request content, it is served from the nearest edge server rather than the origin — reducing latency from seconds to milliseconds. CDNs also absorb DDoS attack traffic before it reaches origin servers. Providers like Cloudflare process over 45 million HTTP requests per second globally. The CDN layer is also where TLS certificates are often managed and where web application firewalls (WAFs) are deployed.",
+          "visualNote": "Global map showing CDN edge nodes lighting up as user requests are served from nearby locations",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 6 — Load Balancer",
+          "description": "A load balancer distributes incoming traffic across multiple server instances. It continuously monitors which servers are healthy and routes traffic only to servers that are responding normally. When a server fails, the load balancer stops sending it traffic within seconds — providing high availability. Load balancers also enable horizontal scaling: adding more server instances during peak traffic and removing them during low traffic periods to control cost. Without a load balancer, a single server failure takes down the entire application.",
+          "visualNote": "Load balancer routing traffic across a server pool, with one server showing as degraded and traffic redistributing automatically",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 7 — Availability Zones",
+          "description": "An Availability Zone (AZ) is a physically separate data center within the same geographic region — connected by low-latency fiber but isolated from power, cooling, and network failures at the other AZ. AWS's us-east-1 region has six AZs, each potentially kilometres apart. An application deployed across multiple AZs can survive the complete failure of one data center and continue operating normally. This is fundamental to cloud high availability architecture: no single point of failure.",
+          "visualNote": "Regional map showing multiple data centers (AZs) in the same area, with cross-AZ replication arrows and failure simulation",
+          "highlight": "server"
+        },
+        {
+          "title": "Layer 8 — Cloud Regions",
+          "description": "A cloud region is a geographic cluster of Availability Zones. AWS has 33 regions globally. Azure has over 60. Data stored in one region does not leave that region by default — relevant for data sovereignty laws that require certain data to remain within specific countries. Organizations with global users deploy across multiple regions for lowest latency worldwide. A multi-region architecture can survive a failure of an entire geographic region — but it is also the most expensive and complex configuration to manage securely.",
+          "visualNote": "World map showing all cloud regions lit up across continents, with inter-region replication paths for global applications",
+          "highlight": "none"
+        }
+      ]
+    },
+    {
+      "id": "explain-shared-responsibility",
+      "type": "explanation",
+      "sidebarLabel": "Security Intel",
+      "estimatedMinutes": 7,
+      "content": [
+        "## The Most Important Concept in Cloud Security",
+        "The cloud provider is responsible for the security OF the cloud. You are responsible for the security IN the cloud.\n\nThis distinction — called the Shared Responsibility Model — is the most important concept in cloud security, and the one most commonly misunderstood by organizations migrating to the cloud.",
+        "## The Three Cloud Models",
+        "**IaaS (Infrastructure as a Service)** — The provider manages physical hardware, networking, and virtualization. You manage: the operating system, middleware, applications, and data. Examples: AWS EC2 (virtual machines), Azure Virtual Machines.\n\n*Your security responsibility:* High. You control the OS, so you patch it. You configure the firewall rules. You manage access to your data.\n\n**PaaS (Platform as a Service)** — The provider manages hardware AND the operating system AND the runtime environment. You manage: your application code and data. Examples: AWS Elastic Beanstalk, Google App Engine, Heroku.\n\n*Your security responsibility:* Moderate. The provider handles OS patching. You still control who accesses your application and how data is stored.\n\n**SaaS (Software as a Service)** — The provider manages everything: hardware, OS, application code, and most configuration. You manage: user accounts, data you put into the system, and access controls. Examples: Microsoft 365, Salesforce, Google Workspace.\n\n*Your security responsibility:* Lower — but not zero. You still control who has accounts, what permissions they have, and whether MFA is enforced.",
+        "## What the Provider Always Secures",
+        "Physical data center security. Network infrastructure. Hypervisor (the software that runs VMs). Availability and resilience of the core platform. Compliance certifications (SOC 2, ISO 27001, FedRAMP).",
+        "## What You Always Secure",
+        "Your data. Who can access it. How it is encrypted at rest and in transit. Identity and Access Management (IAM) — who has what permissions. Network configuration: security groups, firewall rules. Application-level security. Monitoring and logging. Your users' account hygiene.",
+        "## Why This Matters",
+        "The Capital One breach (which you will study next) was not caused by a flaw in AWS. AWS was secure. The breach happened because of how Capital One configured their AWS environment — a security group rule that was too permissive, and an IAM role that had more permissions than needed. The breach was entirely in the 'your responsibility' column of the shared responsibility model."
+      ],
+      "callouts": [
+        {
+          "type": "warning",
+          "title": "The Misconfiguration Epidemic",
+          "text": "Gartner estimated that through 2025, 99% of cloud security failures would be the customer's fault — specifically misconfigurations like public storage buckets, overly permissive IAM roles, and disabled MFA on admin accounts."
+        },
+        {
+          "type": "insight",
+          "title": "Why Organizations Moved to Cloud",
+          "text": "Traditional on-premises: capital expenditure (buy servers), months to provision new capacity, full responsibility for physical security and hardware maintenance. Cloud: operational expenditure (pay per use), minutes to provision, provider handles physical security. The cost and speed benefits are real — but so is the security complexity."
+        },
+        {
+          "type": "tip",
+          "title": "Principle of Least Privilege in the Cloud",
+          "text": "In IAM, every role and user should have only the permissions needed to do their specific job — nothing more. An application that reads from a database should not have write permissions. A developer who deploys code should not have access to production data. This is the Principle of Least Privilege — and violating it was the root cause of the Capital One breach."
+        }
+      ],
+      "analogy": {
+        "scenario": "A landlord maintains a building: locks on the entrance, security cameras in the lobby, fire suppression systems, structural integrity. A tenant decides what to store in their apartment, whether to lock their own door, and who gets a spare key.",
+        "mapping": "The cloud provider is the landlord — responsible for the physical security of the building and the shared infrastructure. You are the tenant — responsible for locking your own door (IAM), choosing what to store (data classification), and deciding who gets access (user management). The landlord cannot be faulted if the tenant leaves the door open."
+      },
+      "keyTerms": [
+        { "term": "Shared Responsibility Model", "definition": "The framework defining which cloud security tasks are the provider's responsibility and which are the customer's responsibility." },
+        { "term": "IaaS", "definition": "Infrastructure as a Service — the provider manages physical infrastructure; the customer manages OS, middleware, applications, and data." },
+        { "term": "PaaS", "definition": "Platform as a Service — the provider manages hardware and OS; the customer manages applications and data." },
+        { "term": "SaaS", "definition": "Software as a Service — the provider manages everything including the application; the customer manages data, users, and access controls." },
+        { "term": "S3 Bucket", "definition": "Amazon Simple Storage Service — object storage that can be configured as public or private. Misconfigured public buckets are a common source of data breaches." },
+        { "term": "IAM", "definition": "Identity and Access Management — the system that controls who can access which cloud resources and what they can do with them." },
+        { "term": "Availability Zone", "definition": "A physically separate data center within a cloud region, isolated from failures at other AZs to provide redundancy." }
+      ]
+    },
+    {
+      "id": "diagram-cloud-vs-onprem",
+      "type": "diagram",
+      "sidebarLabel": "Architecture Map",
+      "estimatedMinutes": 3,
+      "title": "Traditional vs Cloud Architecture",
+      "description": "This diagram shows the same application deployed in two different models. Note the differences in security responsibility boundaries and the new attack surface that cloud introduces.",
+      "nodes": [
+        { "id": "user", "label": "End User", "type": "client" },
+        { "id": "onprem-fw", "label": "Perimeter Firewall", "type": "firewall" },
+        { "id": "onprem-server", "label": "Physical Server (On-Prem)", "type": "server" },
+        { "id": "onprem-db", "label": "Physical Database (On-Prem)", "type": "database" },
+        { "id": "cloud-cdn", "label": "CDN Edge Node", "type": "server" },
+        { "id": "cloud-lb", "label": "Cloud Load Balancer", "type": "server" },
+        { "id": "cloud-vm", "label": "Cloud VM (EC2)", "type": "server" },
+        { "id": "cloud-s3", "label": "Object Storage (S3)", "type": "database" },
+        { "id": "iam", "label": "IAM / Roles", "type": "default" },
+        { "id": "attacker", "label": "Attacker", "type": "attacker" }
+      ],
+      "edges": [
+        { "from": "user", "to": "onprem-fw", "type": "normal", "label": "HTTPS" },
+        { "from": "onprem-fw", "to": "onprem-server", "type": "data", "label": "filtered" },
+        { "from": "onprem-server", "to": "onprem-db", "type": "data", "label": "SQL" },
+        { "from": "user", "to": "cloud-cdn", "type": "normal", "label": "HTTPS" },
+        { "from": "cloud-cdn", "to": "cloud-lb", "type": "data", "label": "routed" },
+        { "from": "cloud-lb", "to": "cloud-vm", "type": "data", "label": "distributed" },
+        { "from": "cloud-vm", "to": "cloud-s3", "type": "data", "label": "read/write" },
+        { "from": "cloud-vm", "to": "iam", "type": "data", "label": "role check" },
+        { "from": "attacker", "to": "cloud-s3", "type": "attack", "animated": true, "label": "misconfigured bucket" },
+        { "from": "attacker", "to": "iam", "type": "attack", "label": "stolen creds" }
+      ]
+    },
+    {
+      "id": "real-world-capital-one",
+      "type": "real-world-example",
+      "sidebarLabel": "Field Evidence",
+      "estimatedMinutes": 4,
+      "company": "Capital One",
+      "industry": "Financial Services / Banking",
+      "year": "2019",
+      "incident": "100 million customer records exposed via SSRF attack against a misconfigured WAF that had an overprivileged IAM role — AWS was not compromised; Capital One's configuration was.",
+      "whatHappened": [
+        "In July 2019, Capital One discovered that an attacker had accessed over 100 million customer records stored in their Amazon Web Services environment. The data included names, addresses, credit scores, credit limits, balances, payment history, and approximately 140,000 Social Security numbers and 80,000 bank account numbers.",
+        "The attacker — Paige Thompson, a former AWS software engineer — exploited a misconfigured web application firewall (WAF). The WAF's configuration allowed Server Side Request Forgery (SSRF) attacks, letting the attacker use the WAF as a proxy to make internal HTTP requests.",
+        "Thompson used SSRF to query the AWS Instance Metadata Service (IMDS) at the internal address 169.254.169.254. The IMDS returned temporary IAM credentials for the role attached to the WAF's EC2 instance.",
+        "The WAF's IAM role had excessive permissions — including the ability to list and read S3 buckets containing customer data. Thompson used the stolen credentials to enumerate over 700 folders across 30 S3 buckets and exfiltrate the data."
+      ],
+      "whyItHappened": [
+        "The WAF was misconfigured to allow SSRF requests — a Capital One configuration error, not an AWS flaw.",
+        "The WAF EC2 instance had an IAM role with far broader S3 permissions than it required, violating the Principle of Least Privilege.",
+        "Capital One had not enabled IMDSv2, which requires a token for metadata access and would have blocked this SSRF-to-IMDS attack chain.",
+        "There was insufficient monitoring for anomalous internal credential use — large-scale S3 enumeration was not flagged in real time."
+      ],
+      "impact": [
+        { "value": "100M+", "label": "Customer records exposed" },
+        { "value": "$80M", "label": "OCC regulatory fine" },
+        { "value": "$190M", "label": "Class action settlement" }
+      ],
+      "lessonsLearned": [
+        "The shared responsibility model means cloud configuration errors are entirely the customer's responsibility — AWS infrastructure was not compromised",
+        "SSRF combined with cloud metadata services is a documented, high-impact attack chain that requires explicit mitigation (IMDSv2, WAF rules)",
+        "IAM roles must follow the Principle of Least Privilege — only the permissions required for the specific function, nothing more",
+        "IMDSv2 (which requires a session token for metadata access) is now the AWS default for new deployments — existing environments must be migrated"
+      ],
+      "sourceLabel": "US Department of Justice / Capital One press release / FRB enforcement action, 2019–2022"
+    },
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Assessment",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "In the Shared Responsibility Model, who is responsible for patching the operating system on an AWS EC2 instance (IaaS)?",
+          "options": [
+            { "id": "a", "text": "AWS — they manage all infrastructure including operating systems on IaaS", "isCorrect": false },
+            { "id": "b", "text": "The customer — in IaaS, the customer manages the OS, middleware, applications, and data", "isCorrect": true },
+            { "id": "c", "text": "It is shared equally — AWS handles security patches, the customer handles software updates", "isCorrect": false },
+            { "id": "d", "text": "A third-party managed service provider contracted by both AWS and the customer", "isCorrect": false }
+          ],
+          "explanation": "In IaaS (Infrastructure as a Service), AWS manages the physical hardware, network infrastructure, and hypervisor. The customer is responsible for everything above that: operating system installation, OS patching, middleware, application deployment, and data security. This is a frequent source of breaches — organizations assume the cloud provider patches their VMs, when in fact that responsibility belongs to the customer.",
+          "xpReward": 15
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "In the Capital One breach, the attacker used SSRF to access AWS instance metadata and steal IAM credentials. Which cloud configuration failure was the ROOT CAUSE that made this chain possible?",
+          "options": [
+            { "id": "a", "text": "AWS's IMDS (Instance Metadata Service) had a critical security vulnerability", "isCorrect": false },
+            { "id": "b", "text": "Capital One stored customer data in AWS instead of on-premises servers", "isCorrect": false },
+            { "id": "c", "text": "A WAF misconfiguration allowed SSRF, combined with an overprivileged IAM role that had unnecessary S3 access", "isCorrect": true },
+            { "id": "d", "text": "Capital One failed to encrypt their S3 buckets before storing customer data", "isCorrect": false }
+          ],
+          "explanation": "The root cause was a combination of two Capital One configuration errors: (1) a WAF that was misconfigured to allow SSRF requests, enabling the attacker to reach internal services, and (2) an IAM role attached to the WAF instance that had excessive S3 permissions it should never have had. Either control alone would have broken the attack chain. This was entirely in the 'customer responsibility' column of the shared responsibility model — AWS infrastructure was not compromised.",
+          "xpReward": 15
+        },
+        {
+          "id": "q3",
+          "type": "true-false",
+          "question": "When a company migrates its applications to the cloud (SaaS model), they are no longer responsible for any security aspects of that system.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "False. Even in SaaS, the customer retains critical security responsibilities: managing user accounts and access controls, enforcing MFA, configuring data sharing and permission settings, and monitoring for anomalous user activity. A SaaS breach caused by an attacker logging in with a stolen employee password and no MFA is entirely the customer's responsibility — the provider's systems were not breached.",
+          "xpReward": 10
+        },
+        {
+          "id": "q4",
+          "type": "single",
+          "question": "What is the Principle of Least Privilege in cloud IAM, and why does it matter?",
+          "options": [
+            { "id": "a", "text": "Every user should have the minimum permissions needed for their specific role — no more", "isCorrect": true },
+            { "id": "b", "text": "Cloud systems should use the cheapest available tier of access controls to minimize cost", "isCorrect": false },
+            { "id": "c", "text": "Administrators should have fewer privileges than regular users to prevent insider threats", "isCorrect": false },
+            { "id": "d", "text": "Cloud permissions should be granted temporarily and automatically expire after 24 hours", "isCorrect": false }
+          ],
+          "explanation": "The Principle of Least Privilege states that every identity (user, service, role) should have only the permissions necessary to perform its specific function — nothing more. In the Capital One breach, the WAF's IAM role had permission to access S3 buckets it had no business reason to access. If it had only the permissions it actually needed, the attacker's stolen credentials would have been useless for accessing customer data.",
+          "xpReward": 15
+        },
+        {
+          "id": "q5",
+          "type": "single",
+          "question": "An AWS S3 bucket contains a company's customer database backup. A developer accidentally sets the bucket's access control to 'public.' What is the immediate security consequence?",
+          "options": [
+            { "id": "a", "text": "Nothing — S3 buckets require authentication even when set to public", "isCorrect": false },
+            { "id": "b", "text": "Only AWS employees can access the data, not external parties", "isCorrect": false },
+            { "id": "c", "text": "Anyone on the internet with the bucket URL can download the customer database without authentication", "isCorrect": true },
+            { "id": "d", "text": "The data is automatically encrypted and cannot be read without the company's encryption key", "isCorrect": false }
+          ],
+          "explanation": "A publicly accessible S3 bucket is exactly that — public. Anyone who knows (or discovers) the URL can download the contents without any authentication. Attackers routinely scan for public S3 buckets using tools that enumerate common bucket naming patterns. Hundreds of millions of records have been exposed this way. S3 Block Public Access settings should be enabled by default at the account level to prevent this class of mistake.",
+          "xpReward": 15
+        },
+        {
+          "id": "q6",
+          "type": "scenario",
+          "context": "A financial services company migrated all operations to AWS and is experiencing a major service outage in the us-east-1 region. The CEO says AWS promised 99.9% uptime SLA. The on-call engineer finds the company deployed all services in a single Availability Zone to save costs.",
+          "question": "What is the correct explanation for why the SLA does not cover this outage?",
+          "options": [
+            { "id": "a", "text": "AWS has violated their SLA and owes the company compensation and service credits", "isCorrect": false },
+            { "id": "b", "text": "The company's single-AZ architecture has no redundancy — AWS's SLA applies to the availability of the platform itself, not to how customers architect their applications within it", "isCorrect": true },
+            { "id": "c", "text": "AWS should have automatically distributed the company's services across multiple AZs without requiring configuration", "isCorrect": false },
+            { "id": "d", "text": "The SLA only applies to AWS's free tier; paid customers should expect more outages", "isCorrect": false }
+          ],
+          "explanation": "AWS's SLA covers the availability of AWS infrastructure (the platform, the APIs, the underlying services). It does NOT guarantee the availability of customer applications that are poorly architected. Deploying in a single Availability Zone means a failure of that AZ takes down the entire application. AWS documentation explicitly recommends multi-AZ deployment for production workloads requiring high availability. This is a shared responsibility issue: the customer is responsible for their own application architecture.",
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "Why do you think organizations frequently misconfigure IAM roles with excessive permissions — even when they know the risks?",
+        "Should AWS have made IMDSv2 the mandatory default from the beginning, rather than allowing IMDSv1? What are the trade-offs?",
+        "If you were advising a startup moving to the cloud for the first time, what single security control would you tell them to implement first?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers..."
+    },
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "The cloud is physically massive, highly resilient infrastructure — but its security depends on how customers configure and use it",
+        "The Shared Responsibility Model defines what the provider secures (physical infrastructure, platform) vs what the customer secures (configuration, data, IAM, applications)",
+        "In IaaS the customer manages OS and everything above it; in SaaS the customer mainly manages users, access, and data",
+        "The Capital One breach (100M records) was caused entirely by cloud misconfiguration — AWS infrastructure was not compromised",
+        "Least privilege IAM and blocking public S3 access are the two highest-impact cloud security controls for most organizations"
+      ],
+      "xpBreakdown": {
+        "base": 175,
+        "activityBonus": 75,
+        "challengeBonus": 0,
+        "quizBonus": 100,
+        "streakMultiplier": 1.0,
+        "total": 350
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.5: Connected Chaos",
+        "slug": "lesson-05-connected-chaos",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 40
+      },
+      "completionMessage": "You have seen the connected world, traveled as a packet, built a digital identity, and walked inside the cloud infrastructure.\n\n\"In Operation 2.4, you saw the infrastructure,\" AURA says quietly. \"In Operation 2.5 — we see what happens when an attacker decides to use it as a weapon.\""
+    }
+  ]
+}

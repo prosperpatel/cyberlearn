@@ -1,0 +1,488 @@
+{
+  "id": "lesson-cost-of-insecurity",
+  "slug": "lesson-01-cost-of-insecurity",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-why-cybersecurity-matters",
+  "title": "The Cost of Insecurity",
+  "tagline": "Real people. Real harm. Why cybersecurity failures are never just about computers.",
+  "description": "Cybersecurity failures don't just cost money — they cancel surgeries, steal identities that can never be replaced, and shut down fuel supplies for entire coastlines. This lesson introduces the CIA triad and traces the true cost of insecurity across three of the most-attacked sectors on earth.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 30,
+  "tags": ["cia-triad", "breach", "healthcare", "ransomware", "data-breach", "equifax", "wannacry"],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Explain why cybersecurity failures have consequences beyond financial loss — including human health, national security, and democratic trust",
+    "Identify at least three sectors severely impacted by cyberattacks: healthcare, financial services, and critical infrastructure",
+    "Describe what a data breach is and explain what types of data are most valuable to attackers and why"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-28T00:00:00Z",
+  "updatedAt": "2026-07-28T00:00:00Z",
+  "order": 1,
+  "xpReward": 300,
+  "nextLessonSlug": "lesson-02-day-in-life-security-professional",
+  "sections": [
+    {
+      "id": "hook-1",
+      "type": "hook",
+      "sidebarLabel": "The Hook",
+      "estimatedMinutes": 1,
+      "variant": "statistic",
+      "headline": "19,000 NHS appointments were cancelled. No patient data was stolen. No ransom was paid. The computers just stopped working.",
+      "subheadline": "WannaCry, May 2017. The attack that proved cybersecurity failures aren't about data — they're about people.",
+      "stat": {
+        "value": "$8B",
+        "label": "Global economic damage from WannaCry in 72 hours",
+        "source": "Estimated economic loss, 150 countries, May 2017"
+      },
+      "backgroundAccent": "red"
+    },
+
+    {
+      "id": "story-1",
+      "type": "story",
+      "sidebarLabel": "The Story",
+      "estimatedMinutes": 3,
+      "mood": "tense",
+      "narrative": [
+        "It is 11:34 PM on May 12, 2017. In a hospital corridor in East London, a nurse named Emma is trying to check whether a patient has a known allergy to a blood thinner she is about to administer.",
+        "The screen is black. She moves to the next terminal. Black. The one after that: black. All across the Royal London Hospital — and 33 other National Health Service trusts across England and Scotland — every computer has gone dark at once.",
+        "Emma finds the patient's paper chart from three years ago. She calls the GP on record. She makes do. But not everyone can make do. In the chaos, an elderly man with chest pains waits three hours in a car park because no one can confirm where to route his ambulance. A woman whose breast cancer surgery has been postponed asks, quietly, whether the delay will matter.",
+        "The culprit wasn't a master hacker targeting hospitals. It was a piece of software called WannaCry — and it spread to the NHS almost entirely by accident. The attackers were targeting the world. The NHS was simply running an outdated version of Windows that hadn't been patched.",
+        "This is what cybersecurity failures look like. Not dramatic movie sequences. Real hospitals. Real patients. Real consequences."
+      ],
+      "characters": [
+        {
+          "name": "NHS Hospitals",
+          "role": "Victim",
+          "description": "34 NHS trusts across England and Scotland lost access to all computer systems simultaneously. 19,000 appointments cancelled.",
+          "emoji": "🏥"
+        },
+        {
+          "name": "WannaCry",
+          "role": "Threat",
+          "description": "Ransomware that exploited an unpatched Windows vulnerability (EternalBlue). Spread automatically across networks without any user interaction.",
+          "emoji": "🦠"
+        }
+      ],
+      "timeline": [
+        { "timestamp": "May 12, 2017 09:00", "event": "WannaCry spreads globally", "detail": "Exploits EternalBlue — unpatched SMB vulnerability in Windows", "type": "critical" },
+        { "timestamp": "May 12, 2017 11:00", "event": "NHS systems go dark", "detail": "34 trusts affected across England and Scotland", "type": "critical" },
+        { "timestamp": "May 12, 2017 15:00", "event": "Ambulances diverted", "detail": "Emergency patients rerouted; surgeries cancelled", "type": "critical" },
+        { "timestamp": "May 12, 2017 22:00", "event": "Kill switch activated", "detail": "Security researcher Marcus Hutchins registers a domain that halts spread", "type": "resolution" },
+        { "timestamp": "After the attack", "event": "£92M damage to NHS", "detail": "19,000 cancelled appointments; 4-day recovery", "type": "normal" }
+      ],
+      "quote": {
+        "text": "This was not a targeted attack against the NHS. It was an indiscriminate attack that affected organisations, including the NHS, across the world.",
+        "attribution": "UK National Cyber Security Centre, 2017"
+      }
+    },
+
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "What You'll Learn",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Explain why cybersecurity failures have consequences beyond financial loss",
+        "Identify three sectors severely impacted by cyberattacks and why each is targeted",
+        "Describe what a data breach is and what types of data attackers value most"
+      ],
+      "xpPreview": {
+        "base": 150,
+        "bonuses": [
+          { "label": "Complete breach classification activity", "amount": 80 },
+          { "label": "Pass the quiz (70%+)", "amount": 70 }
+        ]
+      }
+    },
+
+    {
+      "id": "explanation-cia",
+      "type": "explanation",
+      "sidebarLabel": "The CIA Triad",
+      "estimatedMinutes": 6,
+      "content": [
+        "## The Three Things We Lose",
+        "",
+        "When a cyberattack succeeds, organizations lose one or more of three things. Security professionals call them the **CIA Triad** — and no, it has nothing to do with intelligence agencies.",
+        "",
+        "**CIA** stands for:",
+        "- **Confidentiality** — keeping information secret from those who shouldn't have it",
+        "- **Integrity** — keeping information accurate and unmodified",
+        "- **Availability** — keeping systems and data accessible to those who need them",
+        "",
+        "Every cyberattack damages at least one of these three properties.",
+        "",
+        "**WannaCry and the NHS: which property failed?**",
+        "",
+        "| Property | WannaCry's Impact |",
+        "|---|---|",
+        "| Confidentiality | Low — no patient records were published |",
+        "| Integrity | Files were encrypted and made unreadable |",
+        "| **Availability** | **Critical — all systems inaccessible at the worst possible moment** |",
+        "",
+        "WannaCry was an **availability** attack. And availability failures are often the most immediately dangerous — because they stop hospitals, power grids, and emergency services in their tracks.",
+        "",
+        "## What Gets Stolen — and Why It Matters",
+        "",
+        "Not every attack is about availability. Some attacks target confidentiality — stealing information. Here is what is actually valuable:",
+        "",
+        "| Data Type | Why It's Valuable | Cannot Be Replaced? |",
+        "|---|---|---|",
+        "| Payment card numbers | Immediate fraud | No — cards can be reissued |",
+        "| Social Security / National ID | Identity theft lasting years | **Yes — permanent** |",
+        "| Healthcare records | SSN + medical + insurance in one file | **Yes — permanent** |",
+        "| Login credentials | Password reuse across services | No — passwords can change |",
+        "| Corporate trade secrets | Competitive advantage, espionage | Partially |",
+        "",
+        "Healthcare records are the most valuable item on this list — and the hardest to replace. You can get a new credit card in three days. You cannot get a new medical history.",
+        "",
+        "## Three Sectors That Get Hit Hardest",
+        "",
+        "**Healthcare** — runs on outdated systems, holds extraordinarily valuable data, and cannot afford downtime. Ransomware is devastatingly effective because the stakes are literally life or death.",
+        "",
+        "**Financial Services** — attacked constantly because that is where the money is. Large banks are well-defended; the real danger is trust destruction. The 2012 Operation Ababil attacks didn't steal a dollar — they disrupted online banking for millions of customers to demonstrate that the financial system could be brought to its knees.",
+        "",
+        "**Critical Infrastructure** — In 2021, ransomware hit Colonial Pipeline, which supplies nearly half of all fuel to the U.S. East Coast. Colonial shut down preemptively. Panic buying emptied gas stations across multiple states within days. The federal government declared a state of emergency. The attackers didn't hack the pipeline — they just made Colonial afraid enough to stop it themselves."
+      ],
+      "callouts": [
+        {
+          "type": "insight",
+          "title": "Security is not just about data theft",
+          "text": "WannaCry stole nothing. It just made computers stop working. Availability attacks can be as devastating as confidentiality breaches — sometimes more so."
+        },
+        {
+          "type": "info",
+          "title": "The hidden costs of breaches",
+          "text": "Financial costs appear in reports. Reputational damage, human harm (delayed care, lost livelihoods), and national security implications are often larger and rarely quantified."
+        }
+      ],
+      "keyTerms": [
+        { "term": "CIA Triad", "definition": "The three properties that security professionals protect: Confidentiality (data seen only by authorized parties), Integrity (data is accurate and unmodified), and Availability (systems are accessible when needed)." },
+        { "term": "Data Breach", "definition": "A security incident in which confidential information is accessed, disclosed, or stolen without the authorization of the organization that owns it." },
+        { "term": "Ransomware", "definition": "Malicious software that encrypts files or locks systems and demands payment (ransom) for the decryption key. Primarily an availability attack." },
+        { "term": "Attack Surface", "definition": "All the points where an attacker could potentially try to enter or interact with a system — every device, port, service, and user account." }
+      ],
+      "analogy": {
+        "scenario": "Imagine a hospital that stores all patient records in filing cabinets. An availability attack is like someone gluing all the drawers shut. No records were stolen — but no one can do their job either.",
+        "mapping": "Ransomware encrypts digital records so they become unreadable — the same effect as gluing every file cabinet shut, but at a scale of thousands of computers simultaneously."
+      }
+    },
+
+    {
+      "id": "real-world-1",
+      "type": "real-world-example",
+      "sidebarLabel": "Real Breach",
+      "estimatedMinutes": 3,
+      "company": "Equifax",
+      "industry": "Credit Reporting",
+      "year": "2017",
+      "incident": "147 million Americans had their Social Security Numbers, birth dates, and financial data stolen — silently, over 76 days.",
+      "whatHappened": [
+        "Attackers exploited a known vulnerability in Equifax's web application software — Apache Struts — that had a patch available for months.",
+        "For 76 days, attackers operated silently inside Equifax's network, extracting data without triggering detection.",
+        "When Equifax finally disclosed the breach in September 2017, 147 million Americans — nearly half the adult U.S. population — had their SSNs, birth dates, addresses, and credit history exposed."
+      ],
+      "whyItHappened": [
+        "The vulnerability was known. A patch existed. The patch was not applied for months.",
+        "Internal scanning tools were configured incorrectly, so even when Equifax ran vulnerability scans they missed the exposed system.",
+        "There was no real-time detection of the data leaving the network. The 76-day exfiltration window could have been closed much earlier."
+      ],
+      "impact": [
+        { "value": "147M", "label": "Americans exposed" },
+        { "value": "76 days", "label": "Attackers operated undetected" },
+        { "value": "$575M", "label": "FTC settlement" },
+        { "value": "Permanent", "label": "Impact — SSNs cannot be changed" }
+      ],
+      "lessonsLearned": [
+        "Patch management is a security function, not just an IT convenience. Known vulnerabilities with available patches are not acceptable risks.",
+        "Some categories of data — Social Security Numbers, biometrics, medical history — are permanently compromised once stolen. The harm is irreversible.",
+        "Detection matters as much as prevention. 76 days is not a short dwell time — it is a complete organizational monitoring failure."
+      ],
+      "sourceLabel": "FTC Settlement, Congressional Hearing, 2017"
+    },
+
+    {
+      "id": "practical-1",
+      "type": "practical",
+      "sidebarLabel": "CIA Classifier",
+      "estimatedMinutes": 6,
+      "objective": "Classify ten real security incidents by which CIA property was primarily violated, then explain your reasoning.",
+      "practicalType": "analysis",
+      "difficulty": "beginner",
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Read the incident description",
+          "description": "For each incident below, read the summary carefully before classifying."
+        },
+        {
+          "id": "step-2",
+          "title": "Classify: Target (2013)",
+          "description": "40 million credit card numbers stolen during the holiday shopping season. Cardholders were not locked out of their accounts — but their card details were in the hands of criminals.",
+          "note": "Ask yourself: were records kept secret (C), kept accurate (I), or kept accessible (A)? Which property did the attacker violate?"
+        },
+        {
+          "id": "step-3",
+          "title": "Classify: Ukraine Power Grid (2015)",
+          "description": "Attackers remotely switched off electricity for 230,000 customers across western Ukraine. Power was out for 1–6 hours across the region.",
+          "expectedOutput": "Availability — the power grid was made inaccessible to the people who needed it."
+        },
+        {
+          "id": "step-4",
+          "title": "Classify: Bangladesh Bank (2016)",
+          "description": "Hackers sent fraudulent SWIFT transfer instructions from Bangladesh Bank's systems. $81 million was redirected to criminal accounts. The instructions looked legitimate — they were simply wrong.",
+          "note": "The data in transit was not stolen — it was changed."
+        },
+        {
+          "id": "step-5",
+          "title": "Classify: Colonial Pipeline (2021)",
+          "description": "A ransomware attack caused Colonial Pipeline to shut down its pipeline operations preemptively, creating fuel shortages across the U.S. East Coast.",
+          "expectedOutput": "Availability — the pipeline system became inaccessible, causing cascading operational shutdowns."
+        }
+      ],
+      "hints": [
+        "Confidentiality fails when unauthorized people can READ data they shouldn't see.",
+        "Integrity fails when data is MODIFIED or CORRUPTED without authorization.",
+        "Availability fails when authorized people CANNOT ACCESS systems or data they need.",
+        "Many breaches violate multiple properties — identify the primary one based on the attacker's goal and main impact."
+      ],
+      "expectedResult": "You should be able to correctly classify each incident and articulate which CIA property was violated with a one-sentence justification."
+    },
+
+    {
+      "id": "ai-mentor-1",
+      "type": "ai-mentor",
+      "sidebarLabel": "Ask AI Mentor",
+      "estimatedMinutes": 3,
+      "topic": "CIA Triad and Breach Impact",
+      "context": "You are a cybersecurity mentor teaching a beginner about the CIA triad and the real-world cost of security failures. Use concrete examples and analogies. If the learner minimises personal risk ('it won't happen to me'), gently surface the statistics. Never use jargon before defining it.",
+      "suggestedPrompts": [
+        "Why do I care about cybersecurity if I don't work in tech?",
+        "Can you explain the CIA triad with a real example?",
+        "Which is worse — a confidentiality breach or an availability breach?",
+        "How is healthcare data different from credit card data when stolen?",
+        "What should Colonial Pipeline have done differently?"
+      ]
+    },
+
+    {
+      "id": "mistakes-1",
+      "type": "common-mistakes",
+      "sidebarLabel": "Common Mistakes",
+      "estimatedMinutes": 3,
+      "intro": "These misconceptions are extremely common — and extremely costly when they shape real security decisions.",
+      "mistakes": [
+        {
+          "title": "Cybersecurity is just about preventing data theft",
+          "wrong": "If we encrypt our data, we're secure.",
+          "right": "Security protects confidentiality, integrity, AND availability. WannaCry stole nothing — it just stopped hospitals from working.",
+          "explanation": "Availability attacks (ransomware, DDoS, system disruption) can cause as much or more damage than data theft. The CIA triad exists to remind us that all three properties must be protected.",
+          "severity": "warning"
+        },
+        {
+          "title": "Only big companies get attacked",
+          "wrong": "We're too small to be a target.",
+          "right": "43% of cyberattacks target small businesses. Automated tools scan the entire internet for unpatched systems — attackers don't choose targets by size.",
+          "explanation": "Small businesses are often more vulnerable because they have fewer security resources. Automated attack tools don't know or care whether the target is a multinational or a three-person bakery.",
+          "severity": "critical"
+        },
+        {
+          "title": "The financial cost is the total cost",
+          "wrong": "Equifax paid a $575M settlement. That was the cost of the breach.",
+          "right": "The 147 million people whose SSNs were permanently exposed will face consequences for decades. No settlement compensates for an irreplaceable identifier.",
+          "explanation": "Financial costs are visible and measurable. Human harm, reputational damage, and long-tail identity theft consequences are often larger and rarely appear in breach statistics.",
+          "severity": "warning"
+        }
+      ]
+    },
+
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Quiz",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "The WannaCry attack on NHS hospitals in 2017 primarily caused which type of security failure?",
+          "options": [
+            { "id": "a", "text": "Confidentiality — patient records were stolen and published online", "isCorrect": false },
+            { "id": "b", "text": "Integrity — hospital databases were modified with false patient information", "isCorrect": false },
+            { "id": "c", "text": "Availability — systems became inaccessible to authorized staff when they were critically needed", "isCorrect": true },
+            { "id": "d", "text": "All three CIA properties were violated equally", "isCorrect": false }
+          ],
+          "explanation": "WannaCry encrypted files and locked users out of systems — no patient records were publicly disclosed. The primary damage was the inability to access systems when critically needed. This is a textbook availability failure.",
+          "xpReward": 20
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "Which type of stolen data is typically the most valuable to criminals, and why?",
+          "options": [
+            { "id": "a", "text": "Payment card numbers — they can be used immediately for fraudulent purchases", "isCorrect": false },
+            { "id": "b", "text": "Healthcare records — they contain multiple permanent, irreplaceable identifiers in one file", "isCorrect": true },
+            { "id": "c", "text": "Corporate email addresses — they enable phishing at scale", "isCorrect": false },
+            { "id": "d", "text": "Social media passwords — most people reuse passwords across sites", "isCorrect": false }
+          ],
+          "explanation": "Healthcare records contain SSNs, medical history, insurance information, and payment data simultaneously. Unlike a credit card number (cancelled in days), a Social Security Number is permanent. This permanence makes healthcare data worth 10× a payment card on criminal markets.",
+          "xpReward": 20
+        },
+        {
+          "id": "q3",
+          "type": "scenario",
+          "context": "A company discovers that attackers accessed their HR database for 30 days. Employee names, salaries, and Social Security Numbers were copied, but nothing was changed or deleted. All HR systems remained fully operational throughout.",
+          "question": "Which CIA property was primarily violated in this incident?",
+          "options": [
+            { "id": "a", "text": "Confidentiality — private employee data was accessed by unauthorized parties", "isCorrect": true },
+            { "id": "b", "text": "Integrity — data was copied and therefore modified", "isCorrect": false },
+            { "id": "c", "text": "Availability — the attackers were inside the system for 30 days", "isCorrect": false },
+            { "id": "d", "text": "All three — any breach violates all CIA properties simultaneously", "isCorrect": false }
+          ],
+          "explanation": "The attackers read data they were not authorized to see (confidentiality violation). They did not modify the data (no integrity violation) and the systems remained operational (no availability violation). Reading unauthorized data is the definition of a confidentiality breach.",
+          "xpReward": 25
+        },
+        {
+          "id": "q4",
+          "type": "single",
+          "question": "The Colonial Pipeline ransomware attack in 2021 caused significant disruption even though the attackers did not directly compromise the pipeline's operational control systems. What does this reveal?",
+          "options": [
+            { "id": "a", "text": "Ransomware can only affect IT systems, not industrial control systems", "isCorrect": false },
+            { "id": "b", "text": "The fear of a cyberattack can cause as much real-world disruption as the attack itself", "isCorrect": true },
+            { "id": "c", "text": "Colonial Pipeline's operational systems were actually compromised but the company denied it", "isCorrect": false },
+            { "id": "d", "text": "Industrial infrastructure is immune to ransomware and does not need cybersecurity controls", "isCorrect": false }
+          ],
+          "explanation": "Colonial Pipeline shut down its pipeline operations preemptively out of caution — not because operational systems were directly hit. The company's conservative response to compromised business IT systems created real fuel shortages across the East Coast.",
+          "xpReward": 20
+        },
+        {
+          "id": "q5",
+          "type": "single",
+          "question": "What was the root cause of the Equifax breach that exposed 147 million Americans' data?",
+          "options": [
+            { "id": "a", "text": "A sophisticated zero-day exploit that had no available patch", "isCorrect": false },
+            { "id": "b", "text": "A nation-state attack with resources no company could defend against", "isCorrect": false },
+            { "id": "c", "text": "A known vulnerability with an available patch that was not applied for months", "isCorrect": true },
+            { "id": "d", "text": "An insider threat — a disgruntled Equifax employee who sold the data", "isCorrect": false }
+          ],
+          "explanation": "The Apache Struts vulnerability exploited in the Equifax breach had a patch available months before the attack. Equifax's failure to apply the patch in time — combined with misconfigured scanning tools that missed the vulnerable system — turned a preventable vulnerability into the largest identity theft in U.S. history.",
+          "xpReward": 20
+        },
+        {
+          "id": "q6",
+          "type": "true-false",
+          "question": "If a company suffers a data breach exposing customer Social Security Numbers, offering one year of free credit monitoring fully resolves the harm to affected individuals.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "Credit monitoring detects fraud after it occurs — it cannot prevent it, and it does not restore a compromised SSN. Social Security Numbers are permanent identifiers that cannot be changed. Victims may face fraudulent tax filings, medical billing fraud, and credit fraud for years or decades. A year of monitoring does not compensate for permanent, irreversible exposure.",
+          "xpReward": 15
+        },
+        {
+          "id": "q7",
+          "type": "true-false",
+          "question": "Cyberattacks primarily target large enterprises. Small businesses face minimal risk because attackers prefer high-value targets.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "According to Verizon's Data Breach Investigations Report, 43% of cyberattacks target small businesses. Automated attack tools scan the entire internet for vulnerable systems regardless of organization size. Small businesses are frequently more vulnerable because they have fewer security resources — making them easier targets, not safer ones.",
+          "xpReward": 15
+        }
+      ]
+    },
+
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Reflection",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "Think of an organization you interact with daily — your bank, your doctor's office, your university. Which CIA property do you think is most at risk for them, and why?",
+        "The nurse Emma made do with a paper chart from three years ago. What situations in daily life have no paper backup — where an availability failure would have no workaround?",
+        "Before this lesson, did you think of cybersecurity as a technology problem or a people problem? Has your thinking changed?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers — this is about building your mental model...",
+      "minWords": 20
+    },
+
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Summary",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "Cybersecurity failures harm real people — cancelled surgeries, stolen identities, disrupted fuel supplies — not just company balance sheets",
+        "The CIA Triad (Confidentiality, Integrity, Availability) is the lens through which every security incident is analyzed",
+        "Not all attacks steal data — WannaCry stole nothing; it just made computers stop working",
+        "Healthcare records are the most valuable stolen data because they contain permanent, irreplaceable identifiers",
+        "Small businesses are frequent targets — 43% of attacks hit small organizations",
+        "The full cost of a breach includes reputation, human welfare, and national security — not just the financial settlement"
+      ],
+      "xpBreakdown": {
+        "base": 150,
+        "activityBonus": 80,
+        "challengeBonus": 0,
+        "quizBonus": 70,
+        "streakMultiplier": 1.0,
+        "total": 300
+      },
+      "nextLesson": {
+        "title": "A Day in the Life of a Security Professional",
+        "slug": "lesson-02-day-in-life-security-professional",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 25
+      },
+      "relatedTopics": [
+        "CIA Triad deep dive",
+        "NIST Cybersecurity Framework",
+        "Verizon Data Breach Investigations Report",
+        "Ransomware Defense Playbook"
+      ]
+    },
+
+    {
+      "id": "career-1",
+      "type": "career-connection",
+      "sidebarLabel": "Career Paths",
+      "estimatedMinutes": 2,
+      "realWorldUsage": "Understanding the CIA triad and breach impact is foundational to every cybersecurity role. It is the first question in every security interview and the framework behind every risk assessment, incident report, and security policy.",
+      "roles": [
+        {
+          "title": "SOC Analyst",
+          "description": "Monitors for breaches in real-time. Uses the CIA triad to classify and prioritize incidents as they occur.",
+          "salaryRange": "$55K – $110K"
+        },
+        {
+          "title": "Risk Analyst",
+          "description": "Quantifies the likelihood and impact of breaches across all three CIA properties to guide organizational investment in security.",
+          "salaryRange": "$70K – $130K"
+        },
+        {
+          "title": "Incident Responder",
+          "description": "Investigates confirmed breaches. Determines which CIA properties were violated and coordinates the response accordingly.",
+          "salaryRange": "$80K – $150K"
+        },
+        {
+          "title": "Security Awareness Trainer",
+          "description": "Educates employees about breach risks. Teaches the CIA triad to non-technical audiences across the organization.",
+          "salaryRange": "$60K – $100K"
+        }
+      ],
+      "certifications": ["CompTIA ITF+", "(ISC)² CC (Certified in Cybersecurity)", "CompTIA Security+"],
+      "careerPath": [
+        "Understand CIA triad and breach taxonomy (this lesson)",
+        "Learn attack types and the kill chain (Module 2)",
+        "Explore cybersecurity career roles (Module 3)",
+        "Get CompTIA ITF+ or (ISC)² CC as your first certification",
+        "Build hands-on skills in TryHackMe or Hack The Box",
+        "Land your first role: IT Support, Help Desk, or Junior SOC Analyst"
+      ]
+    }
+  ]
+}

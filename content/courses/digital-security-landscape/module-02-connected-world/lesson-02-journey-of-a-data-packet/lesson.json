@@ -1,0 +1,379 @@
+{
+  "id": "lesson-journey-of-a-data-packet",
+  "slug": "lesson-02-journey-of-a-data-packet",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.2: Journey of a Data Packet",
+  "tagline": "For the next thirty minutes, you are not a person looking at a network. You are the packet.",
+  "description": "In Operation 2.1, you saw the connected world from above — the scale, the dependencies, the vulnerabilities. Now AURA miniaturizes you. You are a data packet. A few hundred bytes of information about to make a journey from a phone in London to a server in Virginia. Twelve hops. Countless threats. Let's see what happens.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 30,
+  "tags": ["networking", "dns", "tcp", "tls", "bgp", "https", "man-in-the-middle", "packet-routing", "protocols"],
+  "prerequisites": ["lesson-01-the-connected-world"],
+  "learningObjectives": [
+    "Trace the complete path a data packet takes from a user's device to a destination server",
+    "Explain the role of DNS, TCP, TLS, and IP routing in a network connection",
+    "Identify the points in a packet's journey where an attacker can intercept or modify it",
+    "Describe what a man-in-the-middle attack is and why HTTPS protects against it",
+    "Analyze the 2008 Pakistan Telecom BGP hijack as a routing infrastructure attack"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 2,
+  "xpReward": 350,
+  "prevLessonSlug": "lesson-01-the-connected-world",
+  "nextLessonSlug": "lesson-03-digital-identity",
+  "sections": [
+    {
+      "id": "hook-packet",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.2",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "\"In Operation 2.1, you saw the network from above. Today — you go inside it. For the duration of this operation, you are not a person looking at a network. You are a data packet. A few hundred bytes. The message you carry: a password. The destination: a banking server in Virginia. The clock is running.\"",
+      "subheadline": "08:30 AM. CDA Training Simulation Room. The room goes dark. AURA speaks.",
+      "backgroundAccent": "blue"
+    },
+    {
+      "id": "story-briefing",
+      "type": "story",
+      "sidebarLabel": "Mission Brief",
+      "estimatedMinutes": 3,
+      "mood": "tense",
+      "narrative": [
+        "Operation 2.1 showed you the scale of the connected world. Fifty billion devices. Eight critical sectors. A city that lives or dies by its network connections.",
+        "But that briefing was from the outside — a bird's-eye view of systems and their dependencies.",
+        "Today, Priya Nair from Threat Intelligence has a different kind of briefing.",
+        "\"We track attackers who intercept packets,\" Priya says, pulling up a global traffic map. \"Man-in-the-middle attacks, BGP hijacking, SSL stripping. If you don't understand how data actually travels, you can't understand how it gets stolen.\"",
+        "The training room goes dark. A single blue light pulses in front of you.",
+        "\"Your mission,\" AURA says, \"is to travel as a packet. Not metaphorically. Your interface will show you every hop, every protocol decision, every security check — from the moment a user types a password on their phone to the moment it reaches the server.\"",
+        "\"One password. Twelve hops. Pay attention to every point where something can go wrong.\"",
+        "The simulation begins."
+      ],
+      "characters": [
+        {
+          "name": "Priya Nair",
+          "role": "Threat Intelligence Analyst",
+          "description": "Tracks attackers who intercept packets — man-in-the-middle, BGP hijacking, SSL stripping. Her insight: you cannot understand how data gets stolen if you don't know how it travels."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Guides you through the packet journey simulation. Shows every hop, every protocol decision, every security check across twelve infrastructure points."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "08:30", "event": "Packet journey simulation begins — London phone to Virginia server", "type": "normal" },
+        { "timestamp": "08:31", "event": "Hop 1: Application layer — HTTP request created", "type": "normal" },
+        { "timestamp": "08:45", "event": "All 12 hops completed — full journey analyzed", "type": "resolution" }
+      ]
+    },
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Trace the complete path a data packet takes from a user's device to a destination server",
+        "Explain the role of DNS, TCP, TLS, and IP routing in a network connection",
+        "Identify the points in a packet's journey where an attacker can intercept or modify it",
+        "Describe what a man-in-the-middle attack is and why HTTPS protects against it",
+        "Analyze the 2008 Pakistan Telecom BGP hijack as a routing infrastructure attack"
+      ],
+      "xpPreview": {
+        "base": 175,
+        "bonuses": [
+          { "label": "Complete packet journey", "amount": 75 },
+          { "label": "Pass the quiz (70%+)", "amount": 100 }
+        ]
+      }
+    },
+    {
+      "id": "animation-packet-journey",
+      "type": "animation",
+      "sidebarLabel": "The Journey",
+      "estimatedMinutes": 8,
+      "title": "Twelve Hops: London to Virginia",
+      "intro": "You are a data packet. Your payload: an encrypted password string. Your destination: a bank's authentication server. Each hop is a different network infrastructure point — and a different potential threat. Follow your journey.",
+      "steps": [
+        {
+          "title": "Hop 1 — Application Creates the Request",
+          "description": "A user opens a banking app on their phone and types their password. The application layer (Layer 7) packages this into an HTTP request. The password is passed to a form field. The request is: 'POST /login HTTP/1.1 — Host: bank.example.com'. At this point, you exist as plaintext data in the application's memory. If the app is malicious, or if malware is watching app memory, the password can be stolen here — before it ever touches the network.",
+          "visualNote": "Phone screen showing login form with POST request being assembled in the browser layer",
+          "highlight": "user"
+        },
+        {
+          "title": "Hop 2 — TLS Handshake (The Security Tunnel)",
+          "description": "Before the password goes anywhere, the app initiates a TLS handshake with the server. The phone says: 'Hello, I want to connect securely.' The server responds with its TLS certificate — a digital document proving it is actually bank.example.com and not an impostor. The phone's browser validates this certificate against trusted Certificate Authorities. If the certificate is valid, a symmetric encryption key is generated and shared. Everything from this point is encrypted. This is HTTPS.",
+          "visualNote": "TLS handshake diagram showing certificate exchange and key establishment between phone and server",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 3 — DNS Resolution",
+          "description": "Your device knows the destination hostname (bank.example.com) but not the IP address it needs to route to. It queries a DNS resolver — either your ISP's DNS server or a public resolver like 1.1.1.1. The resolver looks up 'bank.example.com' in its records and returns the IP address: 203.0.113.45. DNS is unencrypted by default. An attacker who controls your DNS resolver — or who intercepts your DNS queries — can send you to a completely different server. This is called DNS spoofing or DNS hijacking.",
+          "visualNote": "DNS query flow showing phone querying resolver, resolver checking root/TLD servers, returning IP address",
+          "highlight": "database"
+        },
+        {
+          "title": "Hop 4 — TCP Encapsulation",
+          "description": "Your encrypted HTTP request is wrapped in TCP (Transmission Control Protocol) headers. TCP adds sequence numbers, port numbers, and error-correction data. The destination port is 443 (HTTPS). Your packet now looks like: [IP Header][TCP Header][Encrypted HTTP Payload]. TCP ensures that if this packet is lost or corrupted in transit, the receiving end will request it again. The packet is now ready to travel the physical network.",
+          "visualNote": "Packet structure diagram showing nested headers: Ethernet frame > IP header > TCP header > TLS data",
+          "highlight": "none"
+        },
+        {
+          "title": "Hop 5 — Wi-Fi Transmission to Router",
+          "description": "The packet travels over radio waves from the phone to the Wi-Fi router. If the Wi-Fi network uses WPA2 or WPA3 encryption, this link is encrypted at the wireless layer. If it uses WEP (an older, broken protocol) or no encryption (open network), an attacker with a Wi-Fi adapter in promiscuous mode can capture every packet passing over the air. In a coffee shop, this is trivially easy. This is why HTTPS matters even on trusted Wi-Fi: the TLS layer protects your data even if the Wi-Fi layer is compromised.",
+          "visualNote": "Wi-Fi transmission showing packet as radio waves from phone to router, with potential attacker capturing wireless packets",
+          "highlight": "attacker"
+        },
+        {
+          "title": "Hop 6 — NAT at the Router",
+          "description": "The home or office router performs Network Address Translation (NAT). Your phone has a private IP address (192.168.1.15) that is not routable on the public internet. The router replaces your private IP with its own public IP (provided by your ISP) and tracks the mapping so it can forward responses back to the right device. This is why millions of devices can share a single public IP address — which was necessary as the world ran out of IPv4 addresses.",
+          "visualNote": "NAT diagram showing private IP (192.168.1.x) being translated to public IP at the router boundary",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 7 — ISP Network",
+          "description": "The packet enters your Internet Service Provider's network. The ISP routes it through its backbone — a series of high-capacity links between major cities. Your ISP can see the metadata of your traffic: which IP addresses you connect to, when, and how often. With encrypted HTTPS, they cannot see the content of your password — but they can see that you connected to bank.example.com at 10:32 AM from your home IP. This metadata has significant privacy implications.",
+          "visualNote": "ISP backbone network showing packet traversing major city nodes toward the internet exchange",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 8 — Internet Backbone (BGP Routing)",
+          "description": "At the Internet Exchange Point (IXP), your packet enters the global internet backbone — a network of networks operated by Tier 1 providers. Routing is controlled by BGP (Border Gateway Protocol), which determines the best path between autonomous systems. BGP was designed for trust, not security — it assumes all participating networks are honest. In 2008, Pakistan Telecom accidentally (or deliberately) used BGP to hijack YouTube's IP space, redirecting YouTube traffic globally through Pakistani servers and taking down YouTube for 2 hours.",
+          "visualNote": "Global internet map showing packet routing across autonomous systems, with BGP advertisement paths shown",
+          "highlight": "none"
+        },
+        {
+          "title": "Hop 9 — CDN Edge Node",
+          "description": "For many large websites, your packet does not go all the way to the origin server. A Content Delivery Network (CDN) like Cloudflare or Akamai has placed edge servers in hundreds of cities worldwide. The CDN routes your request to the nearest edge server — which may be only 5 milliseconds away — where cached content is served. CDNs also provide DDoS protection and TLS termination, absorbing attack traffic before it reaches the origin. Your bank may have its login page served by a CDN while the authentication backend sits elsewhere.",
+          "visualNote": "Global CDN edge network map showing packet diverted to nearest edge node rather than origin server",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 10 — Firewall Inspection",
+          "description": "The packet arrives at the destination network's perimeter firewall. The firewall performs stateful inspection: it checks the packet's source IP, destination port (443), and TCP connection state against its ruleset. If the connection is not expected and permitted, the packet is dropped. Modern next-generation firewalls (NGFWs) can also decrypt TLS traffic, inspect the content for malware signatures, and re-encrypt it — a process called TLS inspection or SSL interception.",
+          "visualNote": "Firewall ruleset evaluation showing packet being checked against ACL and stateful connection table",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 11 — Load Balancer",
+          "description": "Behind the firewall, a load balancer distributes incoming requests across a pool of application servers. This ensures no single server becomes overloaded and provides high availability — if one server fails, the load balancer routes traffic to the remaining healthy servers. This is how large websites handle millions of concurrent users. For a DDoS attack to succeed, it must overwhelm not just one server but the entire load-balanced pool.",
+          "visualNote": "Load balancer distributing requests across a pool of application servers with health checks shown",
+          "highlight": "server"
+        },
+        {
+          "title": "Hop 12 — Application Server + Response",
+          "description": "The packet reaches the application server. The server decrypts the TLS payload, reads the HTTP POST request, and extracts the credentials. It checks them against a database of hashed passwords. If valid, it returns an authentication token encrypted in the TLS response. The token travels all the way back through the same path — in reverse — to your phone. The entire journey: 12 hops, across 2 continents, in approximately 120 milliseconds.",
+          "visualNote": "Application server processing login request, checking hashed credentials in database, returning auth token",
+          "highlight": "database"
+        }
+      ]
+    },
+    {
+      "id": "explain-protocols",
+      "type": "explanation",
+      "sidebarLabel": "Protocol Intel",
+      "estimatedMinutes": 7,
+      "content": [
+        "## Why Protocols Matter for Security",
+        "A protocol is a set of rules that defines how data is formatted and transmitted between systems. Every security vulnerability in network communication is a vulnerability in a protocol — either in its design, its implementation, or in how it's configured.\n\nUnderstanding protocols means understanding exactly where in the packet's journey an attacker can interfere.",
+        "## The Key Protocols",
+        "**DNS (Domain Name System)** — Translates domain names (bank.example.com) to IP addresses (203.0.113.45). Designed without authentication — DNS responses can be spoofed. Modern mitigations include DNSSEC (cryptographic validation) and DNS over HTTPS (DoH, which encrypts DNS queries).\n\n**TCP (Transmission Control Protocol)** — Provides reliable, ordered delivery of packets. Establishes connections via a three-way handshake (SYN → SYN-ACK → ACK). TCP SYN flood attacks exploit this handshake to exhaust server connection tables.\n\n**TLS (Transport Layer Security)** — Encrypts the data payload so only the intended recipient can read it. Also authenticates the server using digital certificates. TLS 1.3 (current) is significantly more secure than older versions. Expired or mismatched certificates cause browser security warnings.\n\n**HTTPS** — HTTP running over TLS. The padlock icon in your browser. Without TLS, every packet in your journey is readable by anyone on the same network path. With TLS, the content is encrypted — but the destination IP address and metadata remain visible.\n\n**BGP (Border Gateway Protocol)** — Routes packets between autonomous systems (ISPs, networks). Designed on the assumption that all networks are trusted. No built-in authentication. BGP hijacking — when a network falsely advertises ownership of an IP range — remains a significant threat to internet routing.",
+        "## The Two Layers of Security",
+        "When you see HTTPS in your browser, two security properties are in effect:\n\n1. **Encryption** — The content of your communication is scrambled and can only be read by you and the server.\n2. **Authentication** — You have verified, via the TLS certificate, that you are talking to the actual server and not an impostor.\n\nBoth matter. Encryption without authentication lets you have a perfectly private conversation with the wrong person. Authentication without encryption lets you verify the right person is listening — while everyone else listens too."
+      ],
+      "callouts": [
+        {
+          "type": "warning",
+          "title": "HTTPS Does Not Mean 'Safe'",
+          "text": "HTTPS encrypts your data in transit and authenticates the server. It does NOT mean the website is trustworthy, legitimate, or free of malware. Phishing sites routinely use HTTPS. Always verify the domain, not just the padlock."
+        },
+        {
+          "type": "insight",
+          "title": "The Metadata Problem",
+          "text": "Even with HTTPS, your ISP can see which IP addresses you connect to, when, and for how long. This metadata — who you talk to, not what you say — can reveal sensitive information: healthcare providers, legal services, political affiliations, financial institutions."
+        },
+        {
+          "type": "tip",
+          "title": "For Defenders",
+          "text": "TLS inspection (decrypting traffic at the perimeter firewall to scan for threats, then re-encrypting it) is a powerful security tool — but it breaks end-to-end encryption and requires careful management of the inspection certificate chain."
+        }
+      ],
+      "analogy": {
+        "scenario": "Imagine sending a certified letter through a long chain of postal handlers, each able to see the envelope address but not the contents, until one handler secretly opens it, reads it, and reseals it — then passes it on as if nothing happened.",
+        "mapping": "That is a man-in-the-middle attack. TLS is the tamper-evident seal that would reveal the letter was opened. Without TLS, every router and ISP in the path can read your data. With TLS, only the intended recipient can decrypt it."
+      },
+      "keyTerms": [
+        { "term": "DNS", "definition": "Domain Name System — translates human-readable domain names into IP addresses that routers can use." },
+        { "term": "TCP/IP", "definition": "Transmission Control Protocol / Internet Protocol — the foundational suite of protocols that governs how data is packaged, addressed, transmitted, and received on the internet." },
+        { "term": "TLS", "definition": "Transport Layer Security — the cryptographic protocol that encrypts data in transit and authenticates servers using digital certificates." },
+        { "term": "BGP", "definition": "Border Gateway Protocol — the routing protocol that exchanges routing information between autonomous systems on the internet." },
+        { "term": "CDN", "definition": "Content Delivery Network — a globally distributed network of servers that delivers content from locations close to the user." },
+        { "term": "Man-in-the-Middle (MitM)", "definition": "An attack where an attacker secretly intercepts and can read or modify communication between two parties who believe they are communicating directly." },
+        { "term": "DNS Spoofing", "definition": "An attack where a malicious actor provides false DNS responses to redirect users to an attacker-controlled server." }
+      ]
+    },
+    {
+      "id": "real-world-bgp",
+      "type": "real-world-example",
+      "sidebarLabel": "Field Evidence",
+      "estimatedMinutes": 4,
+      "company": "Pakistan Telecom (PTCL)",
+      "industry": "Telecommunications / Internet Routing",
+      "year": "2008",
+      "incident": "A BGP route misconfiguration took YouTube offline globally for two hours — every packet destined for YouTube was silently routed through Pakistan and dropped.",
+      "whatHappened": [
+        "On February 24, 2008, Pakistan Telecom was tasked by the Pakistani government to block YouTube within Pakistan. To do this, PTCL advertised a more specific BGP route for YouTube's IP address space — telling the global internet routing infrastructure that the shortest path to YouTube's servers was through PTCL's network.",
+        "Due to a configuration error, this BGP announcement propagated beyond Pakistan's borders to PTCL's upstream providers, and from there to the global internet's routing tables.",
+        "Routers worldwide updated their routing tables to send YouTube traffic through PTCL. PTCL dropped the traffic — as intended for Pakistani users — but now it was dropping all global YouTube traffic.",
+        "YouTube was inaccessible from most of the world for approximately two hours until engineers identified the BGP route advertisement as the cause and worked with providers to withdraw it."
+      ],
+      "whyItHappened": [
+        "BGP was designed in 1989 for a small internet of trusted academic networks. It has no built-in authentication — any autonomous system can advertise any IP space, and neighboring routers will believe it.",
+        "PTCL's upstream providers accepted the more-specific route announcement without verification, propagating it globally. BGP prefers more-specific routes, so PTCL's announcement 'won' routing decisions worldwide.",
+        "No cryptographic verification of route ownership existed in the widely deployed BGP implementation at the time. RPKI (Resource Public Key Infrastructure) is the modern solution, but its adoption was incomplete in 2008 — and remains so today."
+      ],
+      "impact": [
+        { "value": "~2 hours", "label": "YouTube offline globally" },
+        { "value": "1 billion", "label": "Daily video views disrupted (2008 scale)" },
+        { "value": "Weeks", "label": "Time before RPKI adoption discussions reached global ISPs" }
+      ],
+      "lessonsLearned": [
+        "BGP has no built-in security — it relies on trust between networks, making it vulnerable to both accidental and deliberate hijacking",
+        "A routing attack can affect billions of users globally without any access to their devices or systems",
+        "RPKI (Resource Public Key Infrastructure) can cryptographically validate BGP announcements — but global adoption is still incomplete",
+        "Internet infrastructure attacks do not require sophisticated malware — misusing legitimate protocols can achieve the same effect"
+      ],
+      "sourceLabel": "RIPE NCC / ARIN BGP Routing Incident Analysis, 2008"
+    },
+    {
+      "id": "quiz-1",
+      "type": "quiz",
+      "sidebarLabel": "Assessment",
+      "estimatedMinutes": 5,
+      "passingScore": 70,
+      "questions": [
+        {
+          "id": "q1",
+          "type": "single",
+          "question": "When you type a URL into your browser and press Enter, what is the FIRST network action your device takes?",
+          "options": [
+            { "id": "a", "text": "Sending an HTTP request to the web server", "isCorrect": false },
+            { "id": "b", "text": "Performing a DNS lookup to resolve the domain name to an IP address", "isCorrect": true },
+            { "id": "c", "text": "Initiating a TCP three-way handshake with the destination server", "isCorrect": false },
+            { "id": "d", "text": "Downloading the server's TLS certificate for validation", "isCorrect": false }
+          ],
+          "explanation": "Before your browser can connect to any server, it needs an IP address. DNS resolution converts the human-readable domain name (bank.example.com) to the routable IP address (203.0.113.45). Only after the IP address is known can TCP connection and TLS handshake begin. DNS is the very first network step of any web connection.",
+          "xpReward": 15
+        },
+        {
+          "id": "q2",
+          "type": "single",
+          "question": "What does TLS (the 'S' in HTTPS) specifically protect against when you submit a password on a login form?",
+          "options": [
+            { "id": "a", "text": "Attackers brute-forcing your password from the server side", "isCorrect": false },
+            { "id": "b", "text": "Attackers on the same network reading your password as it travels from your device to the server", "isCorrect": true },
+            { "id": "c", "text": "The website using your password to access other accounts you have", "isCorrect": false },
+            { "id": "d", "text": "Malware on your device capturing your password before it is typed", "isCorrect": false }
+          ],
+          "explanation": "TLS encrypts the data in transit — specifically protecting it from being read by anyone on the network path between your device and the server. An attacker on your coffee shop Wi-Fi, your ISP, or any router in between cannot read the encrypted payload. TLS does NOT protect against server-side attacks, credential stuffing from the server, or malware on your device (which captures the password before it reaches the network layer).",
+          "xpReward": 15
+        },
+        {
+          "id": "q3",
+          "type": "true-false",
+          "question": "If a website uses HTTPS, it means the website itself is legitimate and trustworthy.",
+          "options": [
+            { "id": "true", "text": "True", "isCorrect": false },
+            { "id": "false", "text": "False", "isCorrect": true }
+          ],
+          "explanation": "False. HTTPS only proves that your connection to the server is encrypted and that the server owns the domain in the certificate. It says nothing about the website's intent. Phishing websites routinely obtain valid HTTPS certificates for convincing-looking domains (like 'bank-secure-login.com'). HTTPS protects the channel, not the destination.",
+          "xpReward": 10
+        },
+        {
+          "id": "q4",
+          "type": "single",
+          "question": "In 2008, Pakistan Telecom's BGP misconfiguration took YouTube offline globally. What does this demonstrate about the internet's routing infrastructure?",
+          "options": [
+            { "id": "a", "text": "Pakistan had more powerful routers than YouTube's data centers", "isCorrect": false },
+            { "id": "b", "text": "BGP trusts routing announcements without cryptographic verification, making it vulnerable to any AS advertising false routes", "isCorrect": true },
+            { "id": "c", "text": "YouTube failed to renew its domain name registration, allowing Pakistan to claim it", "isCorrect": false },
+            { "id": "d", "text": "A DDoS attack from Pakistani users overwhelmed YouTube's capacity", "isCorrect": false }
+          ],
+          "explanation": "BGP (Border Gateway Protocol) was designed for a small, trusted internet of academic networks. It has no built-in authentication — any autonomous system can advertise any IP address space, and neighboring routers will update their routing tables accordingly. When PTCL advertised YouTube's IP range, global routers treated it as a legitimate, more-specific route and redirected YouTube's traffic through PTCL. This is why RPKI (cryptographic validation of BGP announcements) exists, though adoption is still incomplete.",
+          "xpReward": 15
+        },
+        {
+          "id": "q5",
+          "type": "single",
+          "question": "A user connects to a bank website over HTTPS on an open (unencrypted) coffee shop Wi-Fi network. An attacker on the same Wi-Fi captures all traffic. What can the attacker see?",
+          "options": [
+            { "id": "a", "text": "The user's password and account balance in plaintext", "isCorrect": false },
+            { "id": "b", "text": "The fact that the user connected to the bank's IP address and the size of each request, but not the content", "isCorrect": true },
+            { "id": "c", "text": "The complete HTTP request including all form data", "isCorrect": false },
+            { "id": "d", "text": "Nothing — HTTPS prevents all traffic capture on Wi-Fi", "isCorrect": false }
+          ],
+          "explanation": "HTTPS (TLS) encrypts the content of the HTTP request — including form fields like passwords. An attacker capturing Wi-Fi packets will see encrypted ciphertext for the payload. However, the IP address of the destination, the timing, and the approximate size of requests are still visible as metadata. The attacker knows the user connected to the bank, and approximately when and how long. The password itself is protected by TLS.",
+          "xpReward": 15
+        },
+        {
+          "id": "q6",
+          "type": "scenario",
+          "context": "A user reports that their browser shows a security warning when visiting the company's internal web portal: 'NET::ERR_CERT_AUTHORITY_INVALID'. The company's IT team recently deployed a new perimeter firewall with TLS inspection enabled.",
+          "question": "What most likely caused this warning?",
+          "options": [
+            { "id": "a", "text": "A man-in-the-middle attacker has intercepted the user's connection", "isCorrect": false },
+            { "id": "b", "text": "The TLS inspection firewall is re-signing decrypted traffic with its own certificate, which is not trusted by the user's browser", "isCorrect": true },
+            { "id": "c", "text": "The internal web portal's HTTPS certificate has expired", "isCorrect": false },
+            { "id": "d", "text": "The user's DNS settings have been changed to redirect traffic to a malicious server", "isCorrect": false }
+          ],
+          "explanation": "When a firewall performs TLS inspection, it decrypts traffic, inspects it, and re-encrypts it using its own certificate authority (CA). If the firewall's CA certificate has not been pushed to users' browsers as a trusted root, browsers will show a certificate error — because the certificate they receive is signed by an unknown authority (the firewall), not the original web server. This is a common deployment gotcha: TLS inspection requires distributing the firewall's CA to all endpoints.",
+          "xpReward": 20
+        }
+      ]
+    },
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "At which hop in the packet's journey did you feel the user's data was most at risk, and why?",
+        "If you could add one additional security control at any single hop, where would you add it and what would it be?",
+        "Why do you think BGP — a protocol with such a critical vulnerability — was never redesigned from scratch?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers..."
+    },
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "A single network connection involves at least 12 distinct infrastructure hops — each a potential point of interception or manipulation",
+        "DNS resolution is unauthenticated by default — DNS hijacking and spoofing remain active attack techniques",
+        "TLS encrypts content in transit and authenticates the server — but it does not protect metadata, and HTTPS alone does not mean a site is safe",
+        "BGP has no built-in authentication, making routing infrastructure vulnerable to both accidental misconfiguration and deliberate hijacking",
+        "Network-layer attacks often aim for invisibility — the best attacks leave no trace and the victim never knows"
+      ],
+      "xpBreakdown": {
+        "base": 175,
+        "activityBonus": 75,
+        "challengeBonus": 0,
+        "quizBonus": 100,
+        "streakMultiplier": 1.0,
+        "total": 350
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.3: Digital Identity",
+        "slug": "lesson-03-digital-identity",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 30
+      },
+      "completionMessage": "You have traveled the internet as a packet and returned with knowledge most users never have.\n\n\"In Operation 2.2, you understood how data travels,\" AURA says. \"In Operation 2.3 — we talk about who is sending it. And who is watching.\""
+    }
+  ]
+}

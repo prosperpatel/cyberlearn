@@ -6,7 +6,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type {
-  AttackPhase, AttackPhaseData, AttackTimelineProps, EventSeverity, TimelineEvent,
+  AttackPhase, AttackTimelineProps, EventSeverity, TimelineEvent,
 } from '../../types'
 
 // ── Phase config ──────────────────────────────────────────────────────────────

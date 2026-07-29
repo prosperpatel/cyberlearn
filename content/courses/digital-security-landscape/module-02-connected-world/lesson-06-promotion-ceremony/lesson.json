@@ -1,0 +1,202 @@
+{
+  "id": "lesson-promotion-ceremony",
+  "slug": "lesson-06-promotion-ceremony",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.6: Promotion Ceremony",
+  "tagline": "Five Operations. One module. The connected world, mapped and defended. You have earned this.",
+  "description": "Five Operations. The Connected World. A Packet's Journey. A Digital Identity. Life in the Cloud. Connected Chaos. You have studied all of it. Director Chen is waiting in the main briefing room. The entire team is assembled. This is not a lesson. This is a ceremony.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 15,
+  "tags": ["ceremony", "career-paths", "cloud-security", "network-security", "iam", "ics-security", "iot-security", "clearance-level-2"],
+  "prerequisites": ["lesson-05-connected-chaos"],
+  "learningObjectives": [
+    "Identify six cybersecurity career paths that require knowledge of connected systems and cloud infrastructure",
+    "Recognize the Module 2 skills that map directly to high-demand security specializations",
+    "Connect the narrative of the connected world to career opportunities in cloud, network, IAM, ICS, IoT, and incident response security"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 6,
+  "xpReward": 800,
+  "prevLessonSlug": "lesson-05-connected-chaos",
+  "sections": [
+    {
+      "id": "hook-ceremony",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.6",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "The cascade investigation report has been filed. The city is restored. The vendor credential audit has begun. And AURA has sent one final message to your terminal:\n\n\"Recruit. Report to the main briefing room. Clearance Level 2 ceremony commences in five minutes.\"\n\nThe hallway outside the briefing room is quiet. Inside, the entire team is assembled — everyone you met across five Operations. Director Chen stands at the front.",
+      "subheadline": "10:30 AM. CDA Main Briefing Room. The room is full. Everyone is standing.",
+      "backgroundAccent": "green"
+    },
+    {
+      "id": "story-speech",
+      "type": "story",
+      "sidebarLabel": "Director's Address",
+      "estimatedMinutes": 3,
+      "mood": "triumph",
+      "narrative": [
+        "Director Chen waits until the room is completely silent.",
+        "\"When a recruit enters the CDA, they know cybersecurity is important. They've read about breaches. They've seen the headlines. But they don't yet understand *why* any of it matters — not at the level where it becomes instinct.\"",
+        "She gestures to the mission display behind her. Five operation tiles. Each one lit green.",
+        "\"Module 2 was designed to answer that question. Not with abstract concepts. With evidence.\"",
+        "\"You walked through a smart city and saw fifty billion devices — every one of them a potential entry point. You traveled as a data packet and discovered that between your phone and the server, twelve different infrastructure systems handle your data — and any one of them can be compromised. You built a digital identity from scratch and watched it grow into a shadow spanning two hundred databases. You went inside a cloud data center and understood that the security of what lives there is your responsibility, not the provider's. And this morning — you investigated a cascade failure that took seven critical systems offline in twenty-seven minutes, all traceable to a single default credential that was four years old.\"",
+        "She pauses.",
+        "\"You now understand what we protect. Not computers. Not networks. The infrastructure that keeps hospitals running, keeps water safe, keeps power on, keeps emergency services communicating, keeps financial systems stable. The invisible layer underneath everything that people take for granted — until it isn't there.\"",
+        "\"That understanding is Clearance Level 2. You have earned it.\""
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Director",
+          "description": "Addresses the full team assembled for the Clearance Level 2 ceremony. Articulates what Module 2 was designed to do: not teach abstract concepts, but build the instinct to understand what we protect."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "10:30 AM", "event": "Clearance Level 2 ceremony begins", "type": "normal" },
+        { "timestamp": "10:35 AM", "event": "Director Chen's address", "type": "normal" },
+        { "timestamp": "10:45 AM", "event": "Digital Infrastructure Badge awarded — Module 2 complete", "type": "resolution" }
+      ]
+    },
+    {
+      "id": "story-team",
+      "type": "story",
+      "sidebarLabel": "The Team",
+      "estimatedMinutes": 3,
+      "mood": "discovery",
+      "narrative": [
+        "One by one, the team members speak.",
+        "**Marcus Webb** steps forward from the SOC section. He is not known for sentiment. \"Operation 2.1 — you understood attack surface faster than most people who've been here two years. Good instincts.\"",
+        "**Priya Nair** from Threat Intelligence gives a brief nod. \"The packet journey — you asked the right question. Not 'what protocol is this' but 'where in this journey can an attacker intercept me.' That's the analyst's question.\"",
+        "**Alex Torres** from Cloud Security holds up the incident report from this morning — forty pages. \"Capital One, Equifax, Yahoo, Maersk. Thousands of organizations before us. We know the playbook. We know the vulnerabilities. What changes everything is people who internalize the stakes.\" She looks at you directly. \"You internalized them.\"",
+        "AURA speaks — not through the earpiece, but through the room's main speakers. A small gesture the AI makes only at ceremonies.",
+        "\"Five Operations. Forty-four quiz questions answered. One cascade investigation completed. One root cause correctly identified. Twenty-seven educational minutes inside a data packet. Nine layers of a digital identity constructed. Eight layers of cloud infrastructure explored. Eight sectors of a connected city mapped.\"",
+        "A pause.",
+        "\"What you understand now, most people never do. That the digital world and the physical world are the same world. That a default password on a vendor VPN account is not an IT problem. It is a public safety problem. That the work done by the people in this room — done correctly — keeps the lights on and the water safe and the hospitals running.\"",
+        "\"You are ready for what comes next.\""
+      ],
+      "characters": [
+        {
+          "name": "Marcus Webb",
+          "role": "SOC Analyst",
+          "description": "Notes that the recruit understood attack surface faster than most people who've been at the CDA for two years."
+        },
+        {
+          "name": "Priya Nair",
+          "role": "Threat Intelligence Analyst",
+          "description": "Recognized that the recruit asked the analyst's question during the packet journey: not 'what protocol is this' but 'where can an attacker intercept me.'"
+        },
+        {
+          "name": "Alex Torres",
+          "role": "Cloud Security Specialist",
+          "description": "Holds up the 40-page cascade investigation report. Notes that what changes everything is people who internalize the stakes — and the recruit internalized them."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Speaks through the room's main speakers — a gesture reserved for ceremonies. Tallies every operation completed and closes with the core lesson: the digital world and the physical world are the same world."
+        }
+      ]
+    },
+    {
+      "id": "career-1",
+      "type": "career-connection",
+      "sidebarLabel": "Career Paths",
+      "estimatedMinutes": 5,
+      "realWorldUsage": "Module 2 knowledge — connected systems, networking, digital identity, cloud architecture, critical infrastructure — maps directly to specializations that are among the fastest-growing and highest-compensated in cybersecurity. Every role below requires understanding the connected world you just studied.",
+      "roles": [
+        {
+          "title": "Cloud Security Engineer",
+          "salaryRange": "$110,000 – $180,000",
+          "description": "Designs, implements, and maintains security controls for cloud environments. Deep expertise in IAM, network security groups, logging and monitoring, and the shared responsibility model across major cloud providers."
+        },
+        {
+          "title": "Network Security Engineer",
+          "salaryRange": "$90,000 – $155,000",
+          "description": "Protects network infrastructure — firewalls, routers, switches, VPNs, and intrusion detection systems. Analyzes traffic, designs segmentation, and responds to network-layer attacks including BGP anomalies and DDoS."
+        },
+        {
+          "title": "Identity & Access Management (IAM) Specialist",
+          "salaryRange": "$95,000 – $160,000",
+          "description": "Manages authentication systems, SSO, MFA, privileged access management (PAM), and directory services. Ensures the right people have the right access — and that attackers with stolen credentials cannot abuse them."
+        },
+        {
+          "title": "Critical Infrastructure Protection Specialist",
+          "salaryRange": "$100,000 – $170,000",
+          "description": "Secures operational technology (OT) environments — power grids, water treatment, manufacturing, transportation. Bridges the gap between IT security and industrial control system (ICS/SCADA) operations."
+        },
+        {
+          "title": "IoT Security Researcher / Analyst",
+          "salaryRange": "$85,000 – $145,000",
+          "description": "Tests IoT devices for security vulnerabilities, develops security frameworks for connected device manufacturers, and supports regulatory compliance for connected products."
+        },
+        {
+          "title": "Incident Response Analyst (Infrastructure Specialist)",
+          "salaryRange": "$90,000 – $155,000",
+          "description": "Leads investigation and containment of security incidents affecting network infrastructure and cloud environments. Specializes in cascade analysis — tracing multi-system failures back to root cause."
+        }
+      ],
+      "companies": [
+        "Amazon Web Services (AWS) Security",
+        "Claroty (OT/ICS/IoT security)",
+        "CrowdStrike",
+        "Dragos (ICS threat intelligence)",
+        "Palo Alto Networks",
+        "Cloudflare",
+        "Microsoft Security",
+        "CISA (US Government)"
+      ],
+      "certifications": [
+        "AWS Certified Security – Specialty",
+        "GICSP (Global Industrial Cyber Security Professional) — GIAC/SANS",
+        "CCNA / CCNP Security — Cisco",
+        "SC-300 (Microsoft Identity and Access Administrator)",
+        "CompTIA Cloud+",
+        "GCIH (GIAC Certified Incident Handler)"
+      ],
+      "careerPath": [
+        "Help Desk / IT Support → Security+ → Network+ or AWS Cloud Practitioner",
+        "Network Security Engineer or Cloud Security Engineer → infrastructure specialization",
+        "Senior Cloud Security Architect or Critical Infrastructure Protection Lead → CISO track"
+      ]
+    },
+    {
+      "id": "reflection-ceremony",
+      "type": "reflection",
+      "sidebarLabel": "Reflection",
+      "estimatedMinutes": 2,
+      "prompts": [
+        "Which Operation in Module 2 changed your thinking the most, and why?",
+        "You now understand the connected world — as both something to protect and as a potential attack surface. What feels most urgent to secure?",
+        "What aspect of cybersecurity are you most interested in exploring in Module 3?"
+      ],
+      "placeholder": "Take a moment before the next module begins. There are no wrong answers here..."
+    },
+    {
+      "id": "summary-module-complete",
+      "type": "summary",
+      "sidebarLabel": "Module 2 Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "The modern attack surface is not limited to computers — it encompasses vehicles, hospitals, power grids, factories, smart homes, and every networked device between them",
+        "Every data packet travels twelve or more infrastructure hops, each of which can be intercepted, redirected, or inspected by a sufficiently positioned attacker",
+        "Digital identity is a layered construct across hundreds of databases — email is the master key, and credential reuse is the single greatest amplifier of breach impact",
+        "Cloud security operates on a shared responsibility model — providers secure the infrastructure, customers secure the configuration, data, and access controls",
+        "Cascade failures in interconnected systems can bring down critical services across an entire city in under thirty minutes, triggered by a single default credential that was never changed"
+      ],
+      "xpBreakdown": {
+        "base": 800,
+        "activityBonus": 0,
+        "challengeBonus": 0,
+        "quizBonus": 0,
+        "streakMultiplier": 1.0,
+        "total": 800
+      },
+      "completionMessage": "Module 2: The Connected World — Complete.\n\nDigital Infrastructure Badge — Awarded\nClearance Level 2 — Granted\nModule 2 Certificate — Issued\n800 XP Module Completion Bonus — Earned\n\n\"Director Chen closes the ceremony with four words,\" AURA says.\n\n\"'Tomorrow — we hunt.'\"\n\nModule 3: Anatomy of an Attack — Beginning soon."
+    }
+  ]
+}

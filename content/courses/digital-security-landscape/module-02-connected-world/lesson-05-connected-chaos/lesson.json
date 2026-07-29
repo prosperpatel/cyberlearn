@@ -1,0 +1,354 @@
+{
+  "id": "lesson-connected-chaos",
+  "slug": "lesson-05-connected-chaos",
+  "courseSlug": "digital-security-landscape",
+  "moduleId": "module-connected-world",
+  "title": "OPERATION 2.5: Connected Chaos",
+  "tagline": "The cascade has begun. Everything is connected. Everything is failing.",
+  "description": "In Operations 2.1 through 2.4, you mapped the connected world, traveled as a packet, built a digital identity, and walked inside cloud infrastructure. Today — in this capstone investigation — you discover what happens when an attacker weaponizes all of it simultaneously. A smart city is in cascade failure. You are the investigator. Find the root cause before the damage becomes permanent.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 40,
+  "tags": ["cascade-failure", "critical-infrastructure", "scada", "incident-response", "default-credentials", "lateral-movement", "root-cause-analysis", "notpetya"],
+  "prerequisites": ["lesson-01-the-connected-world", "lesson-02-journey-of-a-data-packet", "lesson-03-digital-identity", "lesson-04-life-in-the-cloud"],
+  "learningObjectives": [
+    "Analyze a cascade failure timeline to determine the sequence and dependencies of system failures",
+    "Identify which security control failures allowed each stage of the cascade to proceed",
+    "Trace an attack back to its original access vector using network logs and authentication records",
+    "Determine the single root cause vulnerability that enabled an entire cascade failure chain",
+    "Recommend the immediate containment action that stops an attack from progressing further"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-07-29T00:00:00Z",
+  "updatedAt": "2026-07-29T00:00:00Z",
+  "order": 5,
+  "xpReward": 500,
+  "prevLessonSlug": "lesson-04-life-in-the-cloud",
+  "nextLessonSlug": "lesson-06-promotion-ceremony",
+  "sections": [
+    {
+      "id": "hook-chaos",
+      "type": "hook",
+      "sidebarLabel": "Operation 2.5",
+      "estimatedMinutes": 2,
+      "variant": "scenario",
+      "headline": "The alarm comes before anyone has coffee. AURA's voice is calm — which is worse than if it were not. \"Cascade failure detected across Sector 7 infrastructure. Water treatment. Power grid. Traffic systems. Hospital comms. All failing in sequence. Cause unknown. Time since first anomaly: seven minutes.\"\n\nDirector Chen is already at the operations board.\n\n\"Recruit. You've studied the connected world. All of it. Now it's failing. Find out why.\"",
+      "subheadline": "06:52 AM. CDA Emergency Operations Centre. Every alert board in the building is red.",
+      "backgroundAccent": "red"
+    },
+    {
+      "id": "story-cascade-begins",
+      "type": "story",
+      "sidebarLabel": "Alert: Cascade Active",
+      "estimatedMinutes": 4,
+      "mood": "tense",
+      "narrative": [
+        "Four Operations. The connected world. A packet's journey. A digital identity. Life in the cloud.",
+        "You studied all of it because Director Chen needed you to understand what we protect.",
+        "Now you need to understand what happens when it fails.",
+        "**06:45 AM** — AURA detects anomalous commands being issued to the water treatment facility's SCADA system. The commands are being issued through a legitimate vendor VPN account. A technician is logged in from an IP address in a country the vendor does not operate in. The alert is flagged — priority 3, low urgency. It sits in a queue.",
+        "**06:52 AM** — Three power grid substations in the eastern sector execute unauthorized shutdown commands. The commands are authenticated. They come from a valid SCADA operator account. 200,000 homes lose power.",
+        "**07:03 AM** — Traffic signals fail across 40% of the city. The intersection control system runs on power from the affected substations. Backup batteries last eleven minutes.",
+        "**07:05 AM** — City General Hospital switches to backup diesel generators. Their communications system — cloud-hosted on a data center in the affected sector — goes down. Internal phones are dead. Patient monitoring systems are on local battery backup.",
+        "**07:09 AM** — ATMs across the sector go offline. The banking network's regional hub is in the same affected power zone. Card terminals go dark in supermarkets and pharmacies.",
+        "**07:14 AM** — Emergency services dispatch — the city's computer-aided dispatch (CAD) system — experiences a critical failure. The CAD system is SaaS, hosted in the cloud data center that lost power. Call-takers cannot see which units are available or where incidents are located.",
+        "**07:19 AM** — Cell tower battery backups in the sector begin depleting. The first tower goes dark at 07:22 AM.",
+        "You are looking at seven systems failing in twenty-seven minutes.",
+        "The cause is still unknown.",
+        "AURA's voice is quiet: \"You know everything that just failed. You know why each system was vulnerable. Now find the thread that started it.\"",
+        "The investigation begins."
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Director",
+          "description": "Already at the operations board when the alarm triggers. Directs the recruit to find the root cause of the cascade failure."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Detected the original SCADA anomaly at 06:44. Guides the investigation and provides the final challenge: find the thread that started it."
+        },
+        {
+          "name": "Marcus Webb",
+          "role": "SOC Analyst",
+          "description": "Notices immediately that the malicious commands used authenticated, legitimate credentials — not a technical exploit. That's what worries him."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "06:45 AM", "event": "SCADA anomaly detected — water treatment facility, vendor VPN, foreign IP", "type": "critical" },
+        { "timestamp": "06:52 AM", "event": "Power grid: three substations execute unauthorized shutdown — 200,000 homes dark", "type": "critical" },
+        { "timestamp": "07:03 AM", "event": "Traffic signals fail across 40% of the city — backup batteries: 11 minutes", "type": "critical" },
+        { "timestamp": "07:05 AM", "event": "City General Hospital: comms down, backup generators active", "type": "critical" },
+        { "timestamp": "07:09 AM", "event": "ATMs and bank terminals go offline across eastern sector", "type": "normal" },
+        { "timestamp": "07:14 AM", "event": "Emergency services CAD system fails — dispatch goes dark", "type": "critical" },
+        { "timestamp": "07:19 AM", "event": "Cell tower battery depletion begins — first tower down at 07:22", "type": "critical" }
+      ]
+    },
+    {
+      "id": "objectives-1",
+      "type": "objectives",
+      "sidebarLabel": "Investigation Objectives",
+      "estimatedMinutes": 1,
+      "objectives": [
+        "Analyze the cascade failure timeline to determine the sequence and dependencies of system failures",
+        "Identify which security control failures allowed each stage of the cascade to proceed",
+        "Trace the attack back to the original access vector using network logs and authentication records",
+        "Determine the single root cause vulnerability that enabled the entire cascade",
+        "Recommend the immediate containment action that would stop the attack from progressing further"
+      ],
+      "xpPreview": {
+        "base": 200,
+        "bonuses": [
+          { "label": "Complete investigation", "amount": 50 },
+          { "label": "Identify root cause (challenge)", "amount": 100 },
+          { "label": "Review common failures", "amount": 150 }
+        ]
+      }
+    },
+    {
+      "id": "practical-investigation",
+      "type": "practical",
+      "sidebarLabel": "Investigation",
+      "estimatedMinutes": 10,
+      "objective": "Analyze the seven evidence files from the cascade failure and trace the attack back to its root cause authentication vulnerability.",
+      "practicalType": "analysis",
+      "difficulty": "beginner",
+      "steps": [
+        {
+          "id": "step-1",
+          "title": "Evidence File 1 — SCADA Audit Log: Water Treatment Facility",
+          "description": "06:44:17 — VPN login from IP 185.220.101.x (Tor exit node, Romania)\nAccount: vendor_maintenance_acct\nAuthentication: SUCCESS (username + password, no MFA)\nCommands issued: VIEW system_status, VIEW sensor_readings\n\n06:45:03 — Commands: WRITE chemical_dosing_pump_2 SET flow_rate=0, WRITE pH_monitor SET alarm_threshold=disable\n\n06:45:49 — Commands: READ power_grid_credentials (stored in SCADA shared credential database)\n\nNote: Last password change for vendor_maintenance_acct: NEVER\nNote: Account created: 4 years, 7 months ago",
+          "note": "Pay attention to where the attacker accessed after getting in: 'READ power_grid_credentials.' What does this reveal about the SCADA architecture?"
+        },
+        {
+          "id": "step-2",
+          "title": "Evidence File 2 — Power Grid SCADA Authentication Log",
+          "description": "06:50:22 — Login to power grid SCADA control panel\nAccount: grid_operator_3\nCredential source: Pulled from water treatment shared credential store\nAuthentication: SUCCESS (credentials valid)\nMFA: NOT ENABLED on grid_operator_3 account\n\n06:51:11 — Commands: SHUTDOWN substation_east_1, SHUTDOWN substation_east_2, SHUTDOWN substation_east_3\n06:51:47 — Firmware update pushed to all three substations (overwrites standard firmware with modified version)\n\nNote: grid_operator_3 is a service account. Last activity before today: 8 months ago.",
+          "note": "The power grid commands used legitimate credentials. Where did those credentials come from, and why was MFA not protecting this account?"
+        },
+        {
+          "id": "step-3",
+          "title": "Evidence File 3 — Traffic Management System Log",
+          "description": "07:02:48 — Power supply monitoring: UPS_EAST_SECTOR status = CRITICAL (3 substations offline)\n07:03:11 — Intersection controller IDs 4401-4788: POWER LOSS\n07:03:11 — UPS failover: BATTERY_ONLY mode — estimated runtime: 11 minutes\n07:03:22 — Network connectivity lost (controllers depend on same power zone)\n07:14:00 — Battery depletion across all 387 affected intersection controllers\n\nNote: Traffic management cloud dashboard unavailable — data center in affected power zone",
+          "note": "The traffic system had no direct cyberattack against it. Why did it fail? Both the traffic system controllers AND the cloud dashboard managing them were in the same geographic power zone — what is the term for this kind of dependency?"
+        },
+        {
+          "id": "step-4",
+          "title": "Evidence File 4 — Hospital Communications Incident Report",
+          "description": "07:05:02 — Backup diesel generators activated: ONLINE\n07:05:04 — Internal communications system: OFFLINE (VoIP system depends on data center in eastern sector)\n07:05:04 — Patient monitoring: LOCAL BATTERY BACKUP (estimated 4 hours)\n07:05:10 — Nurse call system: OFFLINE\n07:06:30 — ICU manual monitoring protocols initiated\n07:08:00 — Hospital security radioed: 'We have no comms. We're going manual.'\n\nNote: Hospital IT team attempted to failover to backup cloud region — secondary region not configured. Single-region deployment.",
+          "note": "The hospital had backup power but still lost communications. Think back to Operation 2.4 — what cloud architectural failure contributed to this?"
+        },
+        {
+          "id": "step-5",
+          "title": "Evidence File 5 — Network Vendor Access Audit",
+          "description": "Query: All active VPN accounts for vendor_maintenance_acct\n\nResults:\n- Water Treatment Facility Sector 7 — ACTIVE\n- Water Treatment Facility Sector 3 — ACTIVE\n- Power Grid Eastern Control — ACTIVE\n- Municipal Water Reservoir Control — ACTIVE\n- Sector 7 Industrial Cooling Systems — ACTIVE\n\nQuery: When was vendor_maintenance_acct created and who manages it?\n\nResult: Account created by UtilityConnect Ltd (third-party SCADA vendor). Account is shared across all UtilityConnect client deployments. One credential. All clients.\n\nPassword policy: None enforced. MFA: Not available on UtilityConnect vendor portal.",
+          "note": "This is the critical evidence file. One account. Five different clients. All critical infrastructure. Zero MFA. What happens when that one account is compromised?"
+        },
+        {
+          "id": "step-6",
+          "title": "Evidence File 6 — Threat Intelligence: Account History",
+          "description": "Cross-reference: vendor_maintenance_acct credential exposure history\n\n2022-03-15: UtilityConnect internal email database breached — 47,000 credentials leaked\n2022-03-15: vendor_maintenance_acct password included in breach data\n2022-03-16: Password: NOT changed by UtilityConnect or any client\n2023-08-20: Credentials appear in dark web credential marketplace (price: $500)\n2026-07-29: FIRST USE of stolen credentials in active attack\n\nTime between credential exposure and today's attack: 4 years, 4 months\n\nIP used in today's attack: 185.220.101.x (Tor exit node — attacker's origin concealed)",
+          "note": "The stolen credentials sat in a dark web marketplace for over four years before use. Nation-state actors and sophisticated criminal groups often purchase credentials and wait for the optimal moment."
+        },
+        {
+          "id": "step-7",
+          "title": "Evidence File 7 — Root Cause Mapping",
+          "description": "Based on the evidence:\n\nEntry point: vendor_maintenance_acct (shared, never-rotated, no MFA)\nInitial compromise: Water treatment SCADA\nLateral movement: Credentials for power grid pulled from shared SCADA credential store\nCascade trigger: Three power substations taken offline\nDownstream failures: Traffic (power dependency), Hospital comms (cloud single-region), Bank terminals (power dependency), Emergency dispatch (cloud single-region), Cell towers (power dependency)\n\nSingle point of failure that enabled the entire chain:\n________________",
+          "note": "The attacker used a credential that: (a) had never been changed since creation, (b) was shared across five clients, (c) had no second factor, and (d) appeared in a publicly available breach database four years ago."
+        }
+      ],
+      "hints": [
+        "Each evidence file builds on the previous one — the full picture only emerges when you have read all seven.",
+        "Focus on what the attacker needed at each step: credentials for the first system, then credentials for the next system. Where were those credentials stored?",
+        "The cascade affected seven systems — but only the first failure was caused by a direct cyberattack. Everything else was dependent failure."
+      ],
+      "expectedResult": "Identify that the root cause was DEFAULT credentials — a shared, never-rotated vendor VPN account whose password was set at creation and never changed — that enabled the attacker to move laterally from water treatment to the power grid, triggering the entire 27-minute cascade across seven critical systems."
+    },
+    {
+      "id": "real-world-notpetya",
+      "type": "real-world-example",
+      "sidebarLabel": "Field Intelligence",
+      "estimatedMinutes": 4,
+      "company": "Multiple Organizations (Maersk, Merck, FedEx/TNT, Mondelez)",
+      "industry": "Global — Shipping, Pharmaceutical, Logistics, Food Manufacturing",
+      "year": "2017",
+      "incident": "NotPetya wiper malware — delivered via a compromised software update — became the most financially destructive cyberattack in history, causing $10 billion in damage across 64 countries in hours.",
+      "whatHappened": [
+        "On June 27, 2017, a software update for a Ukrainian accounting application called M.E.Doc was hijacked to deliver malware. Within hours, the malware — named NotPetya — had spread to organizations in 64 countries.",
+        "NotPetya was disguised as ransomware but was actually a wiper: it permanently destroyed data and rendered systems unbootable. The ransom mechanism was non-functional by design. The goal was destruction, not money.",
+        "NotPetya used a combination of EternalBlue (an NSA exploit leaked by Shadow Brokers), credential harvesting (Mimikatz), and Windows networking protocols to spread across corporate networks at unprecedented speed — no user interaction required after initial infection.",
+        "Maersk, which handled 20% of global shipping container traffic, had 45,000 PCs and 4,000 servers destroyed in 45 minutes. Port terminals worldwide halted. Merck lost HPV vaccine production capability for months. FedEx/TNT's logistics operations were disrupted for over a year."
+      ],
+      "whyItHappened": [
+        "Supply chain attack via M.E.Doc software update: any organization using the software — required by Ukrainian tax law — became a potential patient zero.",
+        "Flat corporate network architecture meant no segmentation to contain lateral movement. Once inside one machine, NotPetya spread to every reachable Windows host using EternalBlue and harvested credentials.",
+        "EternalBlue exploited an unpatched Windows SMB vulnerability (MS17-010). Despite a patch being available for months, many organizations had not applied it.",
+        "Organizations lacked isolated, offline backups. Cloud-connected and network-attached backups were also wiped."
+      ],
+      "impact": [
+        { "value": "$10 billion", "label": "Total global damages" },
+        { "value": "64 countries", "label": "Affected in hours" },
+        { "value": "$300M", "label": "Maersk losses alone" },
+        { "value": "10 days", "label": "Time Maersk took to reinstall 45,000 PCs" }
+      ],
+      "lessonsLearned": [
+        "Supply chain attacks compromise many organizations through a single trusted vendor — software updates are a high-value attack vector requiring cryptographic signing and verification",
+        "Network segmentation would have limited lateral movement dramatically — flat corporate networks allowed instant spread across the entire organization",
+        "Offline, isolated backups are the only reliable recovery mechanism for wiper malware — cloud-connected backups were also destroyed",
+        "Critical infrastructure dependencies on civilian commercial software create cascading vulnerabilities that cross sectors and borders"
+      ],
+      "sourceLabel": "Wired Magazine 'The Untold Story of NotPetya' (2018) / US DOJ Sandworm indictment (2020)"
+    },
+    {
+      "id": "mistakes-critical-infra",
+      "type": "common-mistakes",
+      "sidebarLabel": "Common Failures",
+      "estimatedMinutes": 5,
+      "intro": "The Connected Chaos investigation revealed patterns that appear in real critical infrastructure incidents worldwide. These are not exotic vulnerabilities. They are recurring failures that defenders know about — and that organizations repeatedly fail to fix.",
+      "mistakes": [
+        {
+          "title": "Shared Vendor Credentials Across Multiple Clients",
+          "wrong": "Using one support account across all client deployments for operational convenience — one credential, five critical infrastructure systems, zero isolation",
+          "right": "Require unique, MFA-protected credentials for every client deployment. Implement vendor access management with time-limited, session-specific access tokens. Audit all active vendor accounts quarterly.",
+          "explanation": "Third-party vendors often create a single support account and use it across all their clients' systems. A single credential compromise cascades immediately to every client simultaneously — as happened in this investigation, where one stolen account gave access to water treatment, power grid, and three other critical systems.",
+          "severity": "critical"
+        },
+        {
+          "title": "Credentials Stored in Shared SCADA Databases",
+          "wrong": "Storing credentials for connected systems in shared SCADA databases so any operator can access any system in an emergency",
+          "right": "Implement a privileged access management (PAM) solution. Store credentials in a vault with per-user, per-session access that is logged and audited. Never store production credentials in shared SCADA system databases.",
+          "explanation": "SCADA operators store credentials for connected systems in shared databases for operational convenience. When those databases are compromised, attackers get credentials for all connected systems simultaneously. In this investigation, power grid credentials were stored in the water treatment SCADA — which is why compromising the water treatment system gave immediate access to the power grid.",
+          "severity": "critical"
+        },
+        {
+          "title": "Skipping MFA on Critical Infrastructure Remote Access",
+          "wrong": "Disabling or never implementing MFA on remote SCADA and ICS accounts because operators in the field need fast access — trading security for operational convenience",
+          "right": "MFA is non-negotiable for any remote access to critical infrastructure. Hardware keys (FIDO2) work in field environments. Time-based OTP (TOTP) authenticator apps work without a network connection. There is no legitimate operational reason to skip MFA on critical system access.",
+          "explanation": "With MFA enabled on vendor_maintenance_acct, stolen credentials from a 2022 breach would have been completely useless. The attacker had the correct password — but without the second factor (something they possess), the authentication would have failed. MFA would have broken the entire attack chain at step 1.",
+          "severity": "critical"
+        },
+        {
+          "title": "Cloud Services Deployed Without Geographic Redundancy",
+          "wrong": "Deploying mission-critical services — hospital communications, emergency dispatch — in a single cloud region or single availability zone to save cost and complexity",
+          "right": "Critical services require multi-AZ deployment as a minimum. Mission-critical communications (hospital systems, emergency dispatch) require multi-region deployment with active failover. Test the failover — the worst time to discover it does not work is during an incident.",
+          "explanation": "The hospital and emergency dispatch systems both failed not because of a direct cyberattack, but because they were hosted in a cloud data center in the affected power zone. Multi-region deployment would have allowed automatic failover, keeping communications running even as the eastern sector lost power. The cloud architecture failure amplified the blast radius of the power grid attack.",
+          "severity": "warning"
+        },
+        {
+          "title": "Treating Critical Infrastructure Alerts as Low Priority",
+          "wrong": "Logging anomalous SCADA access from a foreign IP as priority 3 — leaving it unreviewed for eight minutes while the attacker moved laterally from water treatment to the power grid",
+          "right": "Tune alert thresholds based on asset criticality. Vendor VPN logins from foreign IPs or Tor exit nodes on any critical infrastructure system are automatic priority 1. A single login anomaly on a water treatment SCADA is not a low-priority event.",
+          "explanation": "The 06:44 AM SCADA anomaly alert sat in a queue for eight minutes before anyone noticed it. In those eight minutes, the attacker compromised the power grid and issued the substation shutdown commands. Eight minutes of alert lag cost the city 27 minutes of cascade failure and affected 200,000 homes. Alert triage must be calibrated to asset criticality, not just alert volume.",
+          "severity": "critical"
+        }
+      ]
+    },
+    {
+      "id": "challenge-root-cause",
+      "type": "challenge",
+      "sidebarLabel": "Root Cause",
+      "estimatedMinutes": 3,
+      "title": "CRITICAL: Identify the Root Cause Vulnerability",
+      "description": "You have reviewed all seven evidence files. The cascade is mapped. Seven systems failed in twenty-seven minutes — all traceable to a single authentication vulnerability that existed for four years, seven months, and zero days before it was exploited.\n\nAURA asks: 'What single-word category describes the root cause vulnerability that enabled this entire cascade?'\n\nEnter the classification below.",
+      "challengeType": "identify",
+      "difficulty": "beginner",
+      "flag": "DEFAULT",
+      "flagFormat": "one word, all caps — the authentication vulnerability category",
+      "timeLimit": 180,
+      "maxAttempts": 3,
+      "xpReward": 100,
+      "hints": [
+        "The vendor account was created four years ago. Its password was set at creation. At the time of the attack, the password had never been changed — and the vendor's own breach in 2022 exposed this exact password in a credential dump.",
+        "The account had no MFA. The password had never rotated. It was the same credential set it had been on day one. What security policy was violated?",
+        "When credentials are never changed from their initial state — especially when that initial state was set by a vendor and shared across multiple clients — they are called this type of credential."
+      ],
+      "solution": "The root cause was DEFAULT credentials — a shared vendor VPN account whose credentials were set at creation and never changed. Default credentials are the single most commonly exploited vulnerability in critical infrastructure attacks worldwide. The fix requires: (1) eliminate shared vendor accounts — every client needs unique credentials; (2) mandate credential rotation on a defined schedule; (3) require MFA on all remote access to critical systems; (4) monitor for credentials appearing in breach databases; (5) implement privileged access management (PAM) to control, monitor, and audit all privileged account usage."
+    },
+    {
+      "id": "story-resolution",
+      "type": "story",
+      "sidebarLabel": "Resolution",
+      "estimatedMinutes": 3,
+      "mood": "triumph",
+      "narrative": [
+        "09:47 AM.",
+        "Two hours and fifty-five minutes after the first anomaly.",
+        "The power substations have been restored manually. Engineers visited each one and reset the corrupted firmware. The water treatment facility is back under operator control — with the vendor VPN account disabled and a new, MFA-protected access method in place.",
+        "The traffic lights came back sector by sector. Hospital communications went back online when the cloud data center restored power from a separate grid connection. ATMs rebooted. Emergency dispatch regained their systems.",
+        "The city breathes.",
+        "Director Chen is standing at the operations board, looking at the cascade map — seven failure points, traced back to one default-credential vendor account that was four years old and had never been changed.",
+        "\"You found it,\" she says.",
+        "Marcus Webb shakes his head. \"Default credentials on a shared vendor account. We've been warning about this for years.\"",
+        "\"And now we have evidence,\" Director Chen says. She looks at you. \"What you documented today — the dependency chain, the failure sequence, the root cause — this goes into a formal incident report. Other cities need to see this.\"",
+        "AURA speaks: \"Fifty-three vendors currently have active support accounts on critical infrastructure systems in this city. None of them have been audited in two years. Director Chen has just authorized an emergency credential audit — starting tonight.\"",
+        "The cascade is over. The work begins.",
+        "\"You understood the connected world,\" AURA says. \"You traveled the packet. You built the identity. You walked the cloud. Today you saw what happens when all of that knowledge is weaponized.\"",
+        "\"One default password. Twenty-seven minutes. Seven systems failing across a city of two million people.\"",
+        "\"Remember this. Because this is what you're defending against.\""
+      ],
+      "characters": [
+        {
+          "name": "Director Chen",
+          "role": "CDA Director",
+          "description": "Reviews the cascade map and confirms the recruit found the root cause. Authorizes the formal incident report and an emergency credential audit of all 53 vendor accounts."
+        },
+        {
+          "name": "Marcus Webb",
+          "role": "SOC Analyst",
+          "description": "Has been warning about shared vendor credentials for years. This incident is the evidence he needed to back those warnings."
+        },
+        {
+          "name": "AURA",
+          "role": "AI Mission Intelligence",
+          "description": "Reveals that 53 vendors have active support accounts on critical city infrastructure, none audited in two years. Closes the operation with the lesson: one default password took down seven systems."
+        }
+      ],
+      "timeline": [
+        { "timestamp": "09:47 AM", "event": "All affected systems restored — cascade contained", "type": "resolution" },
+        { "timestamp": "09:50 AM", "event": "Vendor VPN account disabled — emergency credential audit authorized", "type": "normal" },
+        { "timestamp": "09:55 AM", "event": "Incident report filed — root cause: default credentials on shared vendor account", "type": "normal" }
+      ]
+    },
+    {
+      "id": "reflection-1",
+      "type": "reflection",
+      "sidebarLabel": "Debrief",
+      "estimatedMinutes": 3,
+      "prompts": [
+        "The 06:44 SCADA anomaly alert was priority 3 and sat unreviewed for eight minutes. If you were designing the alert system, what would you have done differently?",
+        "Why do you think so many critical infrastructure organizations continue to use shared vendor accounts and default credentials, despite published guidance recommending against them?",
+        "If you had to choose one control from today's investigation to implement immediately in a city's infrastructure, which would have the highest impact?"
+      ],
+      "placeholder": "Type your reflections here. There are no wrong answers..."
+    },
+    {
+      "id": "summary-1",
+      "type": "summary",
+      "sidebarLabel": "Mission Complete",
+      "estimatedMinutes": 2,
+      "keyTakeaways": [
+        "Cascade failures in interconnected systems can propagate from one compromised device to seven failing services in under thirty minutes",
+        "Shared vendor credentials with default passwords are among the most consistently exploited vulnerabilities in critical infrastructure",
+        "Lateral movement using legitimate credentials is harder to detect than malware — the attacker appears to be an authorized operator",
+        "Cloud single-region deployment creates a geographic single point of failure — multi-AZ and multi-region architecture is required for critical services",
+        "Alert triage matters: a low-priority alert on critical infrastructure is a high-priority alert — tune thresholds based on asset criticality"
+      ],
+      "xpBreakdown": {
+        "base": 200,
+        "activityBonus": 50,
+        "challengeBonus": 100,
+        "quizBonus": 150,
+        "streakMultiplier": 1.0,
+        "total": 500
+      },
+      "nextLesson": {
+        "title": "OPERATION 2.6: Promotion Ceremony",
+        "slug": "lesson-06-promotion-ceremony",
+        "courseSlug": "digital-security-landscape",
+        "estimatedMinutes": 15
+      },
+      "completionMessage": "The investigation is complete. The cascade is documented. The root cause is identified.\n\n\"Five Operations,\" AURA says. \"The connected world. A packet's journey. A digital identity. Cloud infrastructure. A cascade attack. You have studied all of it.\"\n\n\"One more. Director Chen is waiting.\""
+    }
+  ]
+}

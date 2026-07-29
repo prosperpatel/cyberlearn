@@ -1,5 +1,4 @@
 import { memo, useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle2, XCircle, RotateCcw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { MatchingPair, MatchingProps } from '../../types'

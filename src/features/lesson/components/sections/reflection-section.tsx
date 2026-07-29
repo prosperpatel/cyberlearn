@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { PenLine, Check } from 'lucide-react'
+import { PenLine, Check, Lightbulb } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { ReflectionSection } from '@/types/lesson-engine'
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: Props) {
-  const [note, setNote] = useState(savedNote)
+  const [note, setNote]   = useState(savedNote)
   const [saved, setSaved] = useState(false)
 
   const wordCount = note.trim().split(/\s+/).filter(Boolean).length
@@ -22,33 +22,35 @@ export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: P
     setNote(e.target.value)
     setSaved(false)
     onSave?.(e.target.value)
-    // Debounced "saved" indicator
-    setSaved(false)
   }, [onSave])
 
   function handleSave() {
     onSave?.(note)
     setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
+    setTimeout(() => setSaved(false), 2500)
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12 space-y-6">
+    <div className="max-w-[820px] mx-auto px-6 sm:px-8 py-14 sm:py-20 space-y-10">
+
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="space-y-2"
+        className="space-y-3"
       >
-        <div className="flex items-center gap-2 text-foreground">
-          <PenLine className="size-5 text-primary" />
-          <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono">
+        <div className="flex items-center gap-2.5">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-primary/12">
+            <PenLine className="size-4 text-primary" />
+          </div>
+          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-muted-foreground font-mono">
             Reflection
           </span>
         </div>
-        <h2 className="text-xl font-bold text-foreground">
-          Take a moment. Think about what you just learned.
+        <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-tight">
+          Take a moment.<br className="hidden sm:block" /> Think about what you just learned.
         </h2>
-        <p className="text-muted-foreground text-sm leading-relaxed">
+        <p className="text-[1.0625rem] text-muted-foreground leading-[1.8]">
           Reflection deepens understanding. Your notes are saved locally and private.
         </p>
       </motion.div>
@@ -58,12 +60,16 @@ export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: P
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="space-y-2"
+        className="rounded-xl border border-border bg-base-800/50 p-5 sm:p-6 space-y-3"
       >
+        <div className="flex items-center gap-2 text-muted-foreground mb-1">
+          <Lightbulb className="size-3.5" />
+          <span className="text-[11px] font-bold uppercase tracking-widest">Reflection prompts</span>
+        </div>
         {section.prompts.map((prompt, i) => (
-          <div key={i} className="flex items-start gap-3 text-sm text-foreground">
-            <span className="text-primary font-bold shrink-0 font-mono">{i + 1}.</span>
-            <span className="leading-relaxed">{prompt}</span>
+          <div key={i} className="flex items-start gap-3 text-[1.0625rem] text-foreground">
+            <span className="text-primary font-bold shrink-0 font-mono text-sm mt-0.5">{i + 1}.</span>
+            <span className="leading-[1.75]">{prompt}</span>
           </div>
         ))}
       </motion.div>
@@ -73,27 +79,30 @@ export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: P
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
-        className="space-y-2"
+        className="space-y-3"
       >
         <textarea
           value={note}
           onChange={handleChange}
-          placeholder={section.placeholder ?? 'Write your thoughts here...'}
-          rows={8}
+          placeholder={section.placeholder ?? 'Write your thoughts here…'}
+          rows={9}
           className={cn(
-            'w-full rounded-xl border bg-base-900 px-4 py-3',
-            'text-sm text-foreground leading-relaxed placeholder:text-muted-foreground',
+            'w-full rounded-xl border bg-base-900 px-5 py-4',
+            'text-[1.0625rem] text-foreground leading-[1.85] placeholder:text-muted-foreground/50',
             'resize-none',
-            'focus:outline-none focus:border-primary/50 transition-colors',
+            'focus:outline-none focus:border-primary/40 focus:ring-1 focus:ring-primary/20 transition-all',
             'border-border',
           )}
         />
 
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-muted-foreground font-mono">
-            <span>{wordCount} words</span>
+          <div className="flex items-center gap-3 text-xs text-muted-foreground font-mono">
+            <span>{wordCount} {wordCount === 1 ? 'word' : 'words'}</span>
             {minWords > 0 && (
-              <span className={cn(hasEnough ? 'text-cyber-green' : 'text-muted-foreground')}>
+              <span className={cn(
+                'font-bold transition-colors',
+                hasEnough ? 'text-cyber-green' : 'text-muted-foreground/50',
+              )}>
                 / {minWords} minimum
               </span>
             )}
@@ -103,10 +112,10 @@ export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: P
             onClick={handleSave}
             disabled={!note.trim()}
             className={cn(
-              'flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150',
+              'flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-lg transition-all duration-200',
               saved
-                ? 'bg-cyber-green/10 text-cyber-green border border-cyber-green/20'
-                : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20',
+                ? 'bg-cyber-green/12 text-cyber-green border border-cyber-green/25'
+                : 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/18',
               !note.trim() && 'opacity-40 cursor-not-allowed',
             )}
           >
@@ -129,7 +138,7 @@ export function ReflectionSectionRenderer({ section, savedNote = '', onSave }: P
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="text-xs text-muted-foreground/50 text-center"
+        className="text-xs text-muted-foreground/40 text-center"
       >
         Notes are stored locally in your browser. Only you can see them.
       </motion.p>
