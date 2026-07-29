@@ -14,14 +14,12 @@ export const Hotspot = memo(function Hotspot({
   className,
 }: HotspotProps) {
   const [answered,   setAnswered]   = useState<string | null>(null)   // clicked region id
-  const [showExp,    setShowExp]    = useState<string | null>(null)
   const answeredRegion = answered ? regions.find((r) => r.id === answered) : null
 
   const handleClick = (region: HotspotRegion) => {
     if (answered) return
     setAnswered(region.id)
     onAnswer?.(region.id, region.isCorrect)
-    if (region.explanation) setShowExp(region.id)
   }
 
   return (

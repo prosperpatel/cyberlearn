@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Terminal, HelpCircle, CheckCircle2, XCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -56,7 +56,7 @@ interface LineViewProps {
 
 function LineView({ line, prompt = '$', animate = false }: LineViewProps) {
   const reduced = useReducedMotion()
-  const shouldAnimate = animate && line.animated && !reduced
+  const shouldAnimate = Boolean(animate && line.animated && !reduced)
   const { displayed } = useTypingAnimation(line.text, shouldAnimate, line.delay ?? 0)
   const text = shouldAnimate ? displayed : line.text
 
@@ -103,7 +103,7 @@ function GuidedTerminal({
 }) {
   const [stepIdx,   setStepIdx]   = useState(0)
   const [input,     setInput]     = useState('')
-  const [history,   setHistory]   = useState<Array<{ prompt: string; text: string; type: TerminalLineType }>>([])
+  const [history,   setHistory]   = useState<Array<{ prompt?: string; text: string; type: TerminalLineType }>>([])
   const [showHint,  setShowHint]  = useState(false)
   const [status,    setStatus]    = useState<'idle' | 'correct' | 'wrong'>('idle')
   const inputRef                  = useRef<HTMLInputElement>(null)

@@ -185,8 +185,8 @@ function DiagramNodeEl({
       />
       {/* Icon via foreignObject */}
       <foreignObject x={-14} y={-14} width={28} height={28} style={{ pointerEvents: 'none' }}>
-        <div style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Icon className="size-5" style={{ color: c.icon }} />
+        <div style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', color: c.icon }}>
+          <Icon className="size-5" />
         </div>
       </foreignObject>
       {/* Label below */}

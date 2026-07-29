@@ -1,8 +1,8 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import {
-  Monitor, Network, Router, Shield, Server, AlertTriangle, Cloud, Smartphone,
-  Pause, Play, Rewind, Zap, X, ChevronDown, ChevronUp,
+  Monitor, Network, Router, Shield, Server, AlertTriangle, Cloud,
+  Pause, Play, Rewind, Zap, X,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { NetworkNodeType, NetworkPacket, PacketFlowVisualizerProps } from '../../types'
@@ -222,7 +222,6 @@ export const PacketFlowVisualizer = memo(function PacketFlowVisualizer({
                   {/* Travelling packets on the connector */}
                   {activePackets
                     .filter((ap) => {
-                      const seg  = 1 / (nodes.length - 1)
                       const from = i / (nodes.length - 1)
                       const to   = (i + 1) / (nodes.length - 1)
                       return ap.progress > from && ap.progress < to

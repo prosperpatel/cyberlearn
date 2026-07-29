@@ -145,7 +145,7 @@ export async function searchContent(
   const q     = query.trim().toLowerCase()
   const terms = q ? q.split(/\s+/).filter(Boolean) : []
 
-  let results = index.filter((entry) => {
+  const filtered = index.filter((entry) => {
     if (filters?.type && entry.type !== filters.type)               return false
     if (filters?.difficulty && entry.difficulty !== filters.difficulty) return false
     if (filters?.maxMinutes && entry.estimatedMinutes > filters.maxMinutes) return false
@@ -159,15 +159,14 @@ export async function searchContent(
   })
 
   if (q) {
-    results = results
+    const scored = filtered
       .map((entry) => ({ entry, score: scoreEntry(entry, q, terms) }))
       .filter((r) => r.score > 0)
       .sort((a, b) => b.score - a.score)
-  } else {
-    return results.map((entry) => ({ entry, score: 0 }))
+    return scored
   }
 
-  return results
+  return filtered.map((entry) => ({ entry, score: 0 }))
 }
 
 /** Forces a rebuild of the search index on the next call. */
