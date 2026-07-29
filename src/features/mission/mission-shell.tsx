@@ -37,14 +37,14 @@ export function MissionShell({ config }: MissionShellProps) {
 
   const [loadState, setLoadState]   = useState<LoadState>('loading')
   const [loadProgress, setProgress] = useState<AssetLoadProgress>({
-    loaded: 0, total: 0, pending: 0, error: 0,
+    loaded: 0, total: 0, ratio: 0,
   })
   const [missionComplete, setMissionComplete] = useState(false)
 
   // ── 1. Register tracks & assets ───────────────────────────────────
 
   useEffect(() => {
-    audio.registerAll(tracks)
+    audio.register(tracks)
     assetCtx.register(assets)
 
     let cancelled = false
@@ -91,14 +91,12 @@ export function MissionShell({ config }: MissionShellProps) {
   // ── Render ─────────────────────────────────────────────────────────
 
   if (loadState === 'loading') {
-    const pct = loadProgress.total > 0
-      ? loadProgress.loaded / loadProgress.total
-      : undefined
-
     return (
       <LoadingScreen
-        progress={pct}
-        status={pct !== undefined ? `Loading assets ${loadProgress.loaded}/${loadProgress.total}` : 'Initialising'}
+        progress={loadProgress.ratio > 0 ? loadProgress.ratio : undefined}
+        status={loadProgress.total > 0
+          ? `Loading ${loadProgress.loaded} / ${loadProgress.total}`
+          : 'Initialising'}
       />
     )
   }

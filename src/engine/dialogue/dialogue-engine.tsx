@@ -12,7 +12,6 @@ import { engineBus } from '../event-bus/event-bus'
 import { useAudio } from '../audio/audio-context'
 import {
   INITIAL_DIALOGUE_STATE,
-  type DialogueDisplayState,
   type DialogueLine,
   type DialogueScript,
   type DialogueState,
@@ -56,6 +55,13 @@ interface DialogueContextValue {
 
   /** Whether the typewriter animation should be skipped (show full text immediately). */
   skipTypewriter: boolean
+
+  /**
+   * Must be passed to the <Typewriter onComplete> prop.
+   * Signals the engine that the typewriter animation has finished for the
+   * current line, transitioning state from 'typing' → 'waiting'.
+   */
+  onTypewriterComplete: () => void
 }
 
 const DialogueContext = createContext<DialogueContextValue | null>(null)
@@ -250,29 +256,17 @@ export function DialogueProvider({ children }: { children: ReactNode }) {
     return dialogueState.activeScript.speakers[currentLine.speakerId] ?? null
   }, [currentLine, dialogueState.activeScript])
 
-  // Expose onTypewriterComplete so the Typewriter knows when to stop
-  const stateWithCallback: DialogueState & {
-    _onTypewriterComplete: () => void
-    _displayState: DialogueDisplayState
-  } = useMemo(
-    () => ({
-      ...dialogueState,
-      _onTypewriterComplete: onTypewriterComplete,
-      _displayState: dialogueState.displayState,
-    }),
-    [dialogueState, onTypewriterComplete],
-  )
-
   const value = useMemo<DialogueContextValue>(
     () => ({
-      state:           stateWithCallback,
+      state:                dialogueState,
       play, advance, skipAll, pause, resume, stop,
       currentLine,
       currentSpeaker,
       skipTypewriter,
+      onTypewriterComplete,
     }),
-    [stateWithCallback, play, advance, skipAll, pause, resume, stop,
-     currentLine, currentSpeaker, skipTypewriter],
+    [dialogueState, play, advance, skipAll, pause, resume, stop,
+     currentLine, currentSpeaker, skipTypewriter, onTypewriterComplete],
   )
 
   return (
@@ -291,5 +285,4 @@ export function useDialogue(): DialogueContextValue {
   return ctx
 }
 
-// Export the internal callback type so the Typewriter integration works
 export type { DialogueContextValue }

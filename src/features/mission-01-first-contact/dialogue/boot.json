@@ -1,0 +1,43 @@
+{
+  "id": "m01-boot",
+  "speakers": {
+    "aria": {
+      "id": "aria",
+      "displayName": "ARIA",
+      "colorClass": "text-cyan-400"
+    }
+  },
+  "lines": [
+    {
+      "id": "m01-boot-01",
+      "speakerId": "aria",
+      "text": "Analyst. You're on time. I appreciate that.",
+      "emotion": "attentive"
+    },
+    {
+      "id": "m01-boot-02",
+      "speakerId": "aria",
+      "text": "I'm ARIA — Adaptive Response Intelligence Assistant. I'll be your partner here at SENTINEL.",
+      "emotion": "neutral"
+    },
+    {
+      "id": "m01-boot-03",
+      "speakerId": "aria",
+      "text": "Not your teacher. Not your supervisor.",
+      "emotion": "emphatic"
+    },
+    {
+      "id": "m01-boot-04",
+      "speakerId": "aria",
+      "text": "Your partner.",
+      "emotion": "definitive"
+    },
+    {
+      "id": "m01-boot-05",
+      "speakerId": "aria",
+      "text": "The people who built me thought that word mattered. I've come to agree.",
+      "emotion": "contemplative",
+      "autoAdvanceMs": 3000
+    }
+  ]
+}
