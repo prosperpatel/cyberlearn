@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { AppLayout } from '@/components/layout/app-layout'
 import { AuthLayout } from '@/components/layout/auth-layout'
 import { Dashboard } from '@/features/dashboard/pages/dashboard'
+import { Missions } from '@/features/missions/pages/missions'
 import { AcademyPaths } from '@/features/academy/pages/academy-paths'
 import { Courses } from '@/features/courses/pages/courses'
 import { Labs } from '@/features/labs/pages/labs'
@@ -51,6 +52,7 @@ export const router = createBrowserRouter([
       { path: 'academy-paths',          element: <AcademyPaths /> },
       { path: 'courses',                element: <Courses /> },
       { path: 'courses/:courseSlug',    element: <CourseDetail /> },
+      { path: 'missions',               element: <Missions /> },
       { path: 'labs',                   element: <Labs /> },
       { path: 'challenges',             element: <Challenges /> },
       { path: 'leaderboard',            element: <Leaderboard /> },

@@ -21,6 +21,7 @@ export const ROUTES = {
   COMMUNITY:      '/community',
   PROFILE:        '/profile',
   SETTINGS:       '/settings',
+  MISSIONS: '/missions',
   MISSION:  (id: string) => `/missions/${id}`,
   AUTH: {
     LOGIN:    '/login',
@@ -37,6 +38,7 @@ export const MAIN_NAV: NavItem[] = [
   { label: 'Dashboard',      href: ROUTES.DASHBOARD,     icon: 'LayoutDashboard' },
   { label: 'Academy Paths',  href: ROUTES.ACADEMY_PATHS, icon: 'GraduationCap'   },
   { label: 'Courses',        href: ROUTES.COURSES,       icon: 'BookOpen'        },
+  { label: 'Missions',       href: ROUTES.MISSIONS,      icon: 'Map'             },
   { label: 'Labs',           href: ROUTES.LABS,          icon: 'Terminal'        },
   { label: 'Challenges',     href: ROUTES.CHALLENGES,    icon: 'Target'          },
   { label: 'Leaderboard',    href: ROUTES.LEADERBOARD,   icon: 'Trophy'          },
