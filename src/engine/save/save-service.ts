@@ -1,9 +1,9 @@
 import { engineBus } from '../event-bus/event-bus'
 import { DEFAULT_CHANNEL_VOLUMES, DEFAULT_MASTER_VOLUME } from '../audio/types'
 import { DEFAULT_ACCESSIBILITY } from '../accessibility/types'
+import type { MissionId } from '../types'
 import {
   SAVE_VERSION,
-  type MissionId,
   type MissionSaveData,
   type SaveData,
   type UserSettings,

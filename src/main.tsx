@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import '@/styles/globals.css'
 import { App } from './App'
 
-// DEV-only: register test missions so they're available at /missions/<id>
+// DEV-only: register test harness at /missions/engine-test
 if (import.meta.env.DEV) {
   await import('@/features/mission-engine-test')
 }

@@ -61,7 +61,7 @@ export function CompletionScene(_: SceneProps) {
         {/* Save data */}
         <div style={S.section}>SAVE STATE</div>
         <Row label="Mission"    value={MISSION_ID} pass />
-        <Row label="Completed"  value={missionData?.completed ? 'yes' : 'no'} pass={!!missionData?.completed} />
+        <Row label="Completed"  value={missionData?.completedAt ? 'yes' : 'no'} pass={!!missionData?.completedAt} />
         <Row label="Achievement" value={ACHIEVEMENT} pass={achievements.includes(ACHIEVEMENT)} />
         <Row label="Scenes visited" value={String(missionData?.visitedScenes?.length ?? 0)} pass />
 

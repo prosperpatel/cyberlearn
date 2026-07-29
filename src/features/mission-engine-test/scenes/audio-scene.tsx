@@ -117,8 +117,8 @@ export function AudioScene({ onComplete }: SceneProps) {
           value={String(accessibility.reducedMotion)}
           pass={accessibility.reducedMotion !== null}
         />
-        <Row label="Font Scale" value={`${accessibility.fontScale}×`} pass />
-        <Row label="High Contrast" value={String(accessibility.highContrast)} pass />
+        <Row label="Font Scale" value={`${accessibility.settings.fontScale}×`} pass />
+        <Row label="High Contrast" value={String(accessibility.settings.highContrast)} pass />
 
         <NavButton onClick={handleNext} style={{ marginTop: 16 }}>NEXT → TRANSITION TEST</NavButton>
       </div>
