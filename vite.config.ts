@@ -18,10 +18,17 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          ui: ['lucide-react', 'class-variance-authority', 'clsx', 'tailwind-merge'],
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          const pkg = id.split('node_modules/')[1].split('/')[0]
+          if (pkg === 'react' || pkg === 'react-dom' || pkg === 'scheduler') return 'react'
+          if (pkg === 'react-router' || pkg === 'react-router-dom' || pkg === '@remix-run') return 'router'
+          if (pkg === '@supabase') return 'supabase'
+          if (pkg === 'framer-motion' || pkg === 'motion') return 'motion'
+          if (pkg === '@radix-ui' || pkg === 'lucide-react' ||
+              pkg === 'class-variance-authority' || pkg === 'clsx' || pkg === 'tailwind-merge') return 'ui'
+          if (pkg === 'howler') return 'audio'
+          return 'vendor'
         },
       },
     },

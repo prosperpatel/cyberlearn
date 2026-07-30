@@ -89,59 +89,59 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   //
   // Responsibilities of this effect:
   //   1. Resolve the current session on mount
-  //   2. Watch for auth state changes
+  //   2. Watch for auth state changes (token refresh, sign-out, etc.)
   //   3. After each change, load the profile and update `user`
   //
-  // Navigation is intentionally NOT performed here.  All route decisions
-  // live in the reactive navigation effect below so there is a single,
-  // deterministic code path — no race between getSession() and
-  // onAuthStateChange(), and no silent catch block that routes to /dashboard.
+  // Navigation is intentionally NOT performed here. All route decisions live
+  // in the single reactive navigation effect below, so there is only one code
+  // path regardless of whether the session came from getSession() or an
+  // onAuthStateChange() event.
 
   useEffect(() => {
     let mounted = true
 
-    // Fetch the profile for `supabaseUser` and update state.
-    // Returns the profile (or null) so callers can use it without a second query.
+    // Fetch the profile for `supabaseUser` and update component state.
     async function syncUser(supabaseUser: { id: string; email?: string } | null) {
       if (!supabaseUser) {
         if (mounted) setUser(null)
-        return null
+        return
       }
+      console.log('[Auth] syncUser — fetching profile for', supabaseUser.id)
       const profile = await ProfileService.getProfile(supabaseUser.id).catch((err: unknown) => {
-        console.warn('[Auth] Profile fetch failed:', err)
+        console.warn('[Auth] getProfile error:', err)
         return null
       })
+      console.log('[Auth] syncUser — profile result:', profile)
       if (mounted) {
         setUser(profile ? mapProfile(profile, supabaseUser.email ?? '') : null)
       }
-      return profile
     }
 
     // ── Initial session resolution ─────────────────────────────────────────
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      if (!mounted) return
-      setSession(session)
-      await syncUser(session?.user ?? null)
-      if (mounted) setIsLoading(false)
-    })
+    // .finally() guarantees setIsLoading(false) even if getSession() or
+    // syncUser() throw an unexpected error.
+    supabase.auth.getSession()
+      .then(async ({ data: { session } }) => {
+        if (!mounted) return
+        console.log('[Auth] getSession resolved — session:', session?.user?.id ?? null)
+        setSession(session)
+        await syncUser(session?.user ?? null)
+      })
+      .catch((err: unknown) => {
+        console.error('[Auth] getSession error:', err)
+      })
+      .finally(() => {
+        if (mounted) setIsLoading(false)
+      })
 
     // ── Ongoing auth state changes ─────────────────────────────────────────
+    // Only updates state — navigation is handled by the guard effect below.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (!mounted) return
+        console.log('[Auth] onAuthStateChange — event:', event, 'user:', session?.user?.id ?? null)
         setSession(session)
-
-        const profile = await syncUser(session?.user ?? null)
-        if (!mounted) return
-
-        // For returning users signing in with an existing profile, honour any
-        // saved redirect (e.g. they tried to open /missions/x before logging in).
-        // New users (profile === null) are handled by the navigation effect below.
-        if (event === 'SIGNED_IN' && profile) {
-          const redirectTo = sessionStorage.getItem('auth:redirect') ?? ROUTES.DASHBOARD
-          sessionStorage.removeItem('auth:redirect')
-          navigate(redirectTo, { replace: true })
-        }
+        await syncUser(session?.user ?? null)
       },
     )
 
@@ -151,20 +151,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [navigate])
 
-  // ── Reactive onboarding guard ─────────────────────────────────────────────
+  // ── Single navigation source of truth ────────────────────────────────────
   //
-  // Runs whenever auth state settles (isLoading→false) or changes.
-  // If the user is authenticated but has no profile, send them to /onboarding.
-  // This is the ONLY place that issues this redirect, so there are no races.
+  // Runs whenever auth state settles or changes. This is the ONLY place that
+  // issues route redirects, preventing races between concurrent effects.
+  //
+  //  • session + no profile  → /onboarding
+  //  • session + profile + on an auth/transition page → /dashboard (or saved path)
+  //  • session + profile + on an app page → stay (page refresh scenario)
+  //  • no session → ProtectedRoute handles /login redirect
 
   useEffect(() => {
-    if (isLoading) return          // Still resolving — wait
-    if (!session) return           // Not logged in — ProtectedRoute handles this
-    if (user) return               // Profile exists — nothing to do
+    if (isLoading) return
+    if (!session) return
 
-    const alreadyOnboarding = window.location.pathname.startsWith(ROUTES.ONBOARDING)
-    if (!alreadyOnboarding) {
-      navigate(ROUTES.ONBOARDING, { replace: true })
+    const path = window.location.pathname
+
+    if (!user) {
+      console.log('[Auth] guard — session but no profile, redirecting to onboarding. path:', path)
+      if (!path.startsWith(ROUTES.ONBOARDING)) {
+        navigate(ROUTES.ONBOARDING, { replace: true })
+      }
+      return
+    }
+
+    // Profile exists — only redirect if we're still on an auth/transition page.
+    const isAuthPage = (
+      path === ROUTES.AUTH.LOGIN ||
+      path === ROUTES.AUTH.REGISTER ||
+      path.startsWith('/auth/')
+    )
+    if (isAuthPage) {
+      const saved = sessionStorage.getItem('auth:redirect') ?? ROUTES.DASHBOARD
+      sessionStorage.removeItem('auth:redirect')
+      console.log('[Auth] guard — profile found, redirecting to:', saved)
+      navigate(saved, { replace: true })
     }
   }, [isLoading, session, user, navigate])
 
@@ -174,6 +195,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setError(null)
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      // Use the origin only — Supabase validates redirectTo against its
+      // allowlist; the Site URL (origin) is always allowed. A custom path
+      // like /auth/callback is rejected unless explicitly added to the
+      // dashboard's Redirect URLs, causing a fallback to root anyway.
       options: { redirectTo: window.location.origin },
     })
     if (error) setError(mapAuthError(error))

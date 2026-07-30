@@ -100,16 +100,19 @@ function GoogleIcon({ className }: { className?: string }) {
 // ── Page ─────────────────────────────────────────────────────────────────────
 
 export function Login() {
-  const { session, isLoading, error, signInWithGoogle, clearError } = useAuth()
+  const { session, user, isLoading, error, signInWithGoogle, clearError } = useAuth()
   const navigate = useNavigate()
   const [signingIn, setSigningIn] = useState(false)
 
-  // Already authenticated → go straight to dashboard
+  // Safety net: if a fully-authenticated user navigates directly to /login,
+  // send them to the dashboard. Requires BOTH session AND profile (user) so
+  // that a user with a session-but-no-profile is handled by AuthProvider's
+  // onboarding guard instead of landing here.
   useEffect(() => {
-    if (!isLoading && session) {
+    if (!isLoading && session && user) {
       navigate(ROUTES.DASHBOARD, { replace: true })
     }
-  }, [session, isLoading, navigate])
+  }, [session, user, isLoading, navigate])
 
   async function handleGoogleSignIn() {
     clearError()
