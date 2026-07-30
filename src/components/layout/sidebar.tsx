@@ -6,16 +6,15 @@ import {
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { useUIStore } from '@/store/ui-store'
-import { useAuthStore } from '@/store/auth-store'
+import { useUIStore }  from '@/store/ui-store'
+import { useAuth }     from '@/hooks/use-auth'
 import { MAIN_NAV, SECONDARY_NAV, APP_CONFIG } from '@/lib/constants'
-import { XPBar } from '@/components/shared/xp-bar'
-import { Avatar } from '@/components/ui/avatar'
-import { Tooltip } from '@/components/ui/tooltip'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
+import { XPBar }       from '@/components/shared/xp-bar'
+import { Avatar }      from '@/components/ui/avatar'
+import { Tooltip }     from '@/components/ui/tooltip'
+import { ScrollArea }  from '@/components/ui/scroll-area'
+import { Separator }   from '@/components/ui/separator'
 
-// Map icon name strings to Lucide components
 const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   LayoutDashboard, BookOpen, Terminal, Target, Trophy, User, Settings,
   GraduationCap, Briefcase, Award, BookMarked, Users, Map,
@@ -30,15 +29,13 @@ function NavIcon({ name, className }: { name: string; className?: string }) {
 
 export function Sidebar() {
   const { sidebarCollapsed, toggleSidebarCollapsed } = useUIStore()
-  const { user } = useAuthStore()
-  const location = useLocation()
+  const { user }    = useAuth()
+  const location    = useLocation()
 
-  const mockUser = {
-    displayName: user?.displayName ?? 'Hacker',
-    username: user?.username ?? '@h4ck3r',
-    xp: user?.xp ?? 3240,
-    avatar: user?.avatar,
-  }
+  const displayName = user?.name   ?? 'Agent'
+  const emailPrefix = user?.email  ? `@${user.email.split('@')[0]}` : '@agent'
+  const xp          = user?.xp    ?? 0
+  const avatar      = user?.avatar ?? undefined
 
   return (
     <motion.aside
@@ -90,7 +87,6 @@ export function Sidebar() {
 
         <Separator className="my-4 mx-2 w-auto" />
 
-        {/* Secondary nav */}
         <nav className="px-2 space-y-0.5" aria-label="Secondary navigation">
           {SECONDARY_NAV.map((item) => (
             <SidebarNavItem
@@ -108,28 +104,18 @@ export function Sidebar() {
         {!sidebarCollapsed ? (
           <div className="space-y-3">
             <div className="flex items-center gap-2.5">
-              <Avatar
-                src={mockUser.avatar}
-                fallback={mockUser.displayName}
-                size="sm"
-                ring="primary"
-              />
+              <Avatar src={avatar} fallback={displayName} size="sm" ring="primary" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate">{mockUser.displayName}</p>
-                <p className="text-xs text-muted-foreground truncate font-mono">{mockUser.username}</p>
+                <p className="text-sm font-semibold truncate">{displayName}</p>
+                <p className="text-xs text-muted-foreground truncate font-mono">{emailPrefix}</p>
               </div>
             </div>
-            <XPBar xp={mockUser.xp} compact showRankLabel={false} />
+            <XPBar xp={xp} compact showRankLabel={false} />
           </div>
         ) : (
           <div className="flex justify-center">
-            <Tooltip content={`${mockUser.displayName} — ${mockUser.xp.toLocaleString()} XP`} side="right">
-              <Avatar
-                src={mockUser.avatar}
-                fallback={mockUser.displayName}
-                size="sm"
-                ring="primary"
-              />
+            <Tooltip content={`${displayName} — ${xp.toLocaleString()} XP`} side="right">
+              <Avatar src={avatar} fallback={displayName} size="sm" ring="primary" />
             </Tooltip>
           </div>
         )}
@@ -179,7 +165,6 @@ function SidebarNavItem({ item, collapsed, isActive }: SidebarNavItemProps) {
       )}
       aria-current={isActive ? 'page' : undefined}
     >
-      {/* Active indicator bar */}
       {isActive && (
         <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-full bg-primary" />
       )}
