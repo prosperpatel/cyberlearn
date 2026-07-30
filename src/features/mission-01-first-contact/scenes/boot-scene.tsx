@@ -54,7 +54,7 @@ export function BootScene({ onComplete }: SceneProps) {
   const totalLines = BOOT_SCRIPT.lines.length
 
   return (
-    <div onClick={handleAdvance} style={wrapStyle}>
+    <div onPointerDown={handleAdvance} style={wrapStyle}>
       {/* Scanline texture overlay */}
       <div style={scanlineStyle} aria-hidden="true" />
 
@@ -131,6 +131,9 @@ const wrapStyle: CSSProperties = {
   fontFamily:     '"Courier New", monospace',
   cursor:         'default',
   userSelect:     'none',
+  // touch-action:manipulation lets the browser register a tap immediately
+  // without the 300 ms click-delay heuristic on mobile.
+  touchAction:    'manipulation',
 }
 
 const scanlineStyle: CSSProperties = {

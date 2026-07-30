@@ -260,16 +260,17 @@ function DialoguePanel({
 
       <div style={thinRuleStyle} />
 
-      {/* Dialogue text */}
+      {/* Dialogue text — pointer + touch tap both advance the dialogue */}
       <div
-        onClick={showAdvance ? onAdvance : undefined}
+        onPointerDown={showAdvance ? onAdvance : undefined}
         style={{
-          padding:    '14px 16px',
-          minHeight:  52,
-          fontSize:   13,
-          lineHeight: 1.7,
-          color:      '#D0EEF8',
-          cursor:     showAdvance ? 'pointer' : 'default',
+          padding:     '14px 16px',
+          minHeight:   52,
+          fontSize:    13,
+          lineHeight:  1.7,
+          color:       '#D0EEF8',
+          cursor:      showAdvance ? 'pointer' : 'default',
+          touchAction: showAdvance ? 'manipulation' : 'auto',
         }}
         aria-live="polite"
         aria-atomic="true"

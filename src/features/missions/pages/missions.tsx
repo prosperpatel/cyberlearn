@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { useAudio } from '@/engine/audio'
 import { ROUTES } from '@/lib/constants'
 
 // ── Mission catalogue data ────────────────────────────────────────────────────
@@ -128,6 +129,7 @@ function MissionCard({ mission, onStart }: MissionCardProps) {
 
 export function Missions() {
   const navigate = useNavigate()
+  const audio    = useAudio()
 
   return (
     <div className="space-y-6 p-6 max-w-5xl mx-auto">
@@ -148,7 +150,14 @@ export function Missions() {
           <MissionCard
             key={m.id}
             mission={m}
-            onStart={() => navigate(ROUTES.MISSION(m.id))}
+            onStart={() => {
+              // Unlock the Web Audio context while we are still inside the
+              // user-gesture handler.  If we wait until the scene mounts the
+              // gesture token will have expired and audio will be silent on
+              // iOS / Android.
+              audio.unlock()
+              navigate(ROUTES.MISSION(m.id))
+            }}
           />
         ))}
       </div>

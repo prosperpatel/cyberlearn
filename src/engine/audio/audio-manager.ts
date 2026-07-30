@@ -171,6 +171,25 @@ export class AudioManager {
   getMasterVolume(): number { return this.masterVolume }
   getChannelVolumes(): Readonly<ChannelVolumes> { return { ...this.channelVolumes } }
 
+  // ── Mobile audio unlock ───────────────────────────────────────────
+
+  /**
+   * Resume the Web Audio context.  Must be called from a user-gesture handler
+   * (tap, click, key press) on iOS and Android — the AudioContext starts in
+   * 'suspended' state and cannot be started programmatically.
+   *
+   * Call this as early as possible in the gesture that launches a mission so
+   * that audio is ready by the time the first scene tries to play a track.
+   */
+  unlock(): void {
+    const ctx = Howler.ctx
+    if (!ctx || ctx.state !== 'suspended') return
+    ctx.resume().catch(() => {
+      // Silently ignore — the browser may deny the resume if not in a
+      // gesture context; subsequent play() attempts will retry via Howler.
+    })
+  }
+
   // ── Status ────────────────────────────────────────────────────────
 
   getStatus(trackId: TrackId): TrackStatus | undefined {

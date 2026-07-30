@@ -29,6 +29,12 @@ interface AudioContextValue {
   isPlaying:  (trackId: TrackId) => boolean
   masterVolume:   number
   channelVolumes: Readonly<ChannelVolumes>
+  /**
+   * Resume the Web Audio context from a user-gesture handler.
+   * Must be called during the tap/click that starts a mission so the
+   * AudioContext is unlocked before any tracks attempt to play.
+   */
+  unlock: () => void
 }
 
 const AudioContext = createContext<AudioContextValue | null>(null)
@@ -87,6 +93,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   const isPlaying = useCallback(
     (id: TrackId) => audioManager.isPlaying(id), []
   )
+  const unlock = useCallback(() => audioManager.unlock(), [])
 
   const value = useMemo<AudioContextValue>(
     () => ({
@@ -94,11 +101,12 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       play, stop, pause, resume, fadeIn, fadeOut, fade,
       setMasterVolume, setChannelVolume,
       getStatus, isPlaying,
+      unlock,
       masterVolume:   audioManager.getMasterVolume(),
       channelVolumes: audioManager.getChannelVolumes(),
     }),
     [register, play, stop, pause, resume, fadeIn, fadeOut, fade,
-     setMasterVolume, setChannelVolume, getStatus, isPlaying],
+     setMasterVolume, setChannelVolume, getStatus, isPlaying, unlock],
   )
 
   return <AudioContext.Provider value={value}>{children}</AudioContext.Provider>

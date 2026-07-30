@@ -88,13 +88,16 @@ export function DialogueProvider({ children }: { children: ReactNode }) {
   useEffect(() => () => clearAutoAdvance(), [clearAutoAdvance])
 
   // When displayState becomes 'waiting' and the current line has autoAdvanceMs,
-  // start the auto-advance timer
+  // start the auto-advance timer.
+  //
+  // IMPORTANT: do NOT call setDialogueState inside this effect — doing so
+  // triggers a re-render whose cleanup fires clearAutoAdvance and cancels the
+  // timer we just set.  The 'auto-advancing' display state is instead inferred
+  // by consumers from (displayState === 'waiting' && line.autoAdvanceMs != null).
   useEffect(() => {
     if (dialogueState.displayState !== 'waiting') return
     const line = dialogueState.activeScript?.lines[dialogueState.lineIndex]
     if (!line?.autoAdvanceMs) return
-
-    setDialogueState((s) => ({ ...s, displayState: 'auto-advancing' }))
 
     autoAdvanceTimerRef.current = setTimeout(() => {
       advanceInternal()
@@ -174,27 +177,36 @@ export function DialogueProvider({ children }: { children: ReactNode }) {
   }, [clearAutoAdvance, audio])
 
   const advance = useCallback((): void => {
+    // Capture whether we need to advance OUTSIDE the updater so we never call
+    // setState from inside another setState updater (which is a side-effect and
+    // can silently fail under React 18's concurrent scheduler on low-end devices).
+    let shouldAdvance = false
+
     setDialogueState((prev) => {
       if (!prev.activeScript) return prev
 
-      // Typewriter still running → skip to full text
+      // Typewriter still running → skip to full text immediately
       if (prev.displayState === 'typing') {
         setSkipTypewriter(true)
         const fullText = prev.activeScript.lines[prev.lineIndex]?.text ?? ''
         return { ...prev, displayState: 'waiting', visibleText: fullText }
       }
 
-      // Full text shown and skippable → advance to next line
+      // Full text shown and skippable → signal that we should advance
       const line = prev.activeScript.lines[prev.lineIndex]
       if (
         (prev.displayState === 'waiting' || prev.displayState === 'auto-advancing') &&
         line?.skippable !== false
       ) {
-        advanceInternal()
+        shouldAdvance = true
       }
 
       return prev
     })
+
+    // advanceInternal has its own setDialogueState call — call it outside the
+    // updater above so the two state updates are properly sequenced by React.
+    if (shouldAdvance) advanceInternal()
   }, [advanceInternal])
 
   const skipAll = useCallback((): void => {
