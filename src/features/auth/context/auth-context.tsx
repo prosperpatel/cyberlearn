@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom'
 import type { Session, AuthError } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 import { ROUTES } from '@/lib/constants'
+import { ProfileService } from '@/features/onboarding/services/profile-service'
+import type { Profile } from '@/features/onboarding/types/profile'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -37,66 +39,29 @@ interface AuthContextValue {
   signInWithGoogle: () => Promise<void>
   signOut:          () => Promise<void>
   clearError:       () => void
+  refreshUser:      () => Promise<void>
 }
 
 // ── Context ───────────────────────────────────────────────────────────────────
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
-// ── Profile helpers ───────────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────────────────────────
 
-interface ProfileRow {
-  id:                string
-  email:             string
-  name:              string
-  avatar:            string | null
-  xp:                number
-  level:             number
-  streak:            number
-  completed_missions: number
-  academy_progress:  number
-  created_at:        string
-  last_login:        string
-}
-
-function mapRow(row: ProfileRow): AppUser {
+function mapProfile(profile: Profile, email: string): AppUser {
   return {
-    id:               row.id,
-    email:            row.email,
-    name:             row.name,
-    avatar:           row.avatar,
-    xp:               row.xp,
-    level:            row.level,
-    streak:           row.streak,
-    completedMissions: row.completed_missions,
-    academyProgress:  row.academy_progress,
-    createdAt:        row.created_at,
-    lastLogin:        row.last_login,
+    id:               profile.id,
+    email,
+    name:             profile.display_name,
+    avatar:           profile.avatar_url,
+    xp:               profile.xp,
+    level:            profile.level,
+    streak:           profile.streak,
+    completedMissions: 0,
+    academyProgress:  0,
+    createdAt:        profile.created_at,
+    lastLogin:        profile.updated_at,
   }
-}
-
-/** Upsert the user's profile row (idempotent — safe to call on every sign-in). */
-async function upsertProfile(
-  id: string,
-  email: string,
-  name: string,
-  avatar: string | null,
-): Promise<AppUser | null> {
-  const { data, error } = await supabase
-    .from('profiles')
-    .upsert(
-      { id, email, name, avatar, last_login: new Date().toISOString() },
-      { onConflict: 'id' },
-    )
-    .select('*')
-    .single<ProfileRow>()
-
-  if (error) {
-    console.error('[Auth] Failed to upsert profile:', error.message)
-    return null
-  }
-
-  return mapRow(data)
 }
 
 function mapAuthError(err: AuthError): string {
@@ -120,51 +85,59 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true)
   const [error,     setError]     = useState<string | null>(null)
 
-  // ── Initial session + auth state listener ─────────────────────────────────
+  // ── Session + profile loader ──────────────────────────────────────────────
+  //
+  // Responsibilities of this effect:
+  //   1. Resolve the current session on mount
+  //   2. Watch for auth state changes
+  //   3. After each change, load the profile and update `user`
+  //
+  // Navigation is intentionally NOT performed here.  All route decisions
+  // live in the reactive navigation effect below so there is a single,
+  // deterministic code path — no race between getSession() and
+  // onAuthStateChange(), and no silent catch block that routes to /dashboard.
 
   useEffect(() => {
     let mounted = true
 
-    // Resolve the current session from localStorage / URL hash
+    // Fetch the profile for `supabaseUser` and update state.
+    // Returns the profile (or null) so callers can use it without a second query.
+    async function syncUser(supabaseUser: { id: string; email?: string } | null) {
+      if (!supabaseUser) {
+        if (mounted) setUser(null)
+        return null
+      }
+      const profile = await ProfileService.getProfile(supabaseUser.id).catch((err: unknown) => {
+        console.warn('[Auth] Profile fetch failed:', err)
+        return null
+      })
+      if (mounted) {
+        setUser(profile ? mapProfile(profile, supabaseUser.email ?? '') : null)
+      }
+      return profile
+    }
+
+    // ── Initial session resolution ─────────────────────────────────────────
     supabase.auth.getSession().then(async ({ data: { session } }) => {
       if (!mounted) return
       setSession(session)
-
-      if (session?.user) {
-        const meta = session.user.user_metadata
-        const profile = await upsertProfile(
-          session.user.id,
-          session.user.email ?? '',
-          (meta.full_name as string | undefined) ?? (meta.name as string | undefined) ?? 'Agent',
-          (meta.avatar_url as string | undefined) ?? (meta.picture as string | undefined) ?? null,
-        )
-        if (mounted) setUser(profile)
-      }
-
+      await syncUser(session?.user ?? null)
       if (mounted) setIsLoading(false)
     })
 
-    // React to all subsequent auth events
+    // ── Ongoing auth state changes ─────────────────────────────────────────
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (!mounted) return
         setSession(session)
 
-        if (session?.user) {
-          const meta = session.user.user_metadata
-          const profile = await upsertProfile(
-            session.user.id,
-            session.user.email ?? '',
-            (meta.full_name as string | undefined) ?? (meta.name as string | undefined) ?? 'Agent',
-            (meta.avatar_url as string | undefined) ?? (meta.picture as string | undefined) ?? null,
-          )
-          if (mounted) setUser(profile)
-        } else {
-          if (mounted) setUser(null)
-        }
+        const profile = await syncUser(session?.user ?? null)
+        if (!mounted) return
 
-        // After Google OAuth completes, redirect to where the user was headed
-        if (event === 'SIGNED_IN' && mounted) {
+        // For returning users signing in with an existing profile, honour any
+        // saved redirect (e.g. they tried to open /missions/x before logging in).
+        // New users (profile === null) are handled by the navigation effect below.
+        if (event === 'SIGNED_IN' && profile) {
           const redirectTo = sessionStorage.getItem('auth:redirect') ?? ROUTES.DASHBOARD
           sessionStorage.removeItem('auth:redirect')
           navigate(redirectTo, { replace: true })
@@ -178,17 +151,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [navigate])
 
+  // ── Reactive onboarding guard ─────────────────────────────────────────────
+  //
+  // Runs whenever auth state settles (isLoading→false) or changes.
+  // If the user is authenticated but has no profile, send them to /onboarding.
+  // This is the ONLY place that issues this redirect, so there are no races.
+
+  useEffect(() => {
+    if (isLoading) return          // Still resolving — wait
+    if (!session) return           // Not logged in — ProtectedRoute handles this
+    if (user) return               // Profile exists — nothing to do
+
+    const alreadyOnboarding = window.location.pathname.startsWith(ROUTES.ONBOARDING)
+    if (!alreadyOnboarding) {
+      navigate(ROUTES.ONBOARDING, { replace: true })
+    }
+  }, [isLoading, session, user, navigate])
+
   // ── Actions ───────────────────────────────────────────────────────────────
 
   const signInWithGoogle = useCallback(async () => {
     setError(null)
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        // Supabase redirects here after Google auth; must be allow-listed in
-        // the Supabase dashboard under Authentication → URL Configuration.
-        redirectTo: window.location.origin,
-      },
+      options: { redirectTo: window.location.origin },
     })
     if (error) setError(mapAuthError(error))
   }, [])
@@ -202,17 +188,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
     setUser(null)
     setSession(null)
-    // Full navigation clears all in-memory state cleanly
     window.location.replace(ROUTES.AUTH.LOGIN)
   }, [])
 
   const clearError = useCallback(() => setError(null), [])
 
+  const refreshUser = useCallback(async () => {
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session?.user) return
+    const profile = await ProfileService.getProfile(session.user.id).catch(() => null)
+    if (profile) setUser(mapProfile(profile, session.user.email ?? ''))
+  }, [])
+
   // ── Value ──────────────────────────────────────────────────────────────────
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, session, isLoading, error, signInWithGoogle, signOut, clearError }),
-    [user, session, isLoading, error, signInWithGoogle, signOut, clearError],
+    () => ({ user, session, isLoading, error, signInWithGoogle, signOut, clearError, refreshUser }),
+    [user, session, isLoading, error, signInWithGoogle, signOut, clearError, refreshUser],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
