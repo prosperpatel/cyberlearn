@@ -23,6 +23,7 @@ export const ROUTES = {
   SETTINGS:       '/settings',
   MISSIONS: '/missions',
   MISSION:  (id: string) => `/missions/${id}`,
+  ONBOARDING: '/onboarding',
   AUTH: {
     LOGIN:    '/login',
     REGISTER: '/register',

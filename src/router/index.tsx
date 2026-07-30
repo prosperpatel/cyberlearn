@@ -4,6 +4,7 @@ import { ProtectedRoute }     from '@/features/auth/components/protected-route'
 import { AppLayout }          from '@/components/layout/app-layout'
 import { Login }              from '@/features/auth/pages/login'
 import { Register }           from '@/features/auth/pages/register'
+import { OnboardingPage }     from '@/features/onboarding/pages/onboarding-page'
 import { Dashboard }          from '@/features/dashboard/pages/dashboard'
 import { AcademyPaths }       from '@/features/academy/pages/academy-paths'
 import { Courses }            from '@/features/courses/pages/courses'
@@ -45,6 +46,12 @@ export const router = createBrowserRouter([
       {
         element: <ProtectedRoute />,
         children: [
+
+          // Onboarding — full-screen, no AppLayout, accessible before profile exists
+          {
+            path: ROUTES.ONBOARDING.slice(1),
+            element: <OnboardingPage />,
+          },
 
           // Full-screen — no AppLayout chrome
           {
