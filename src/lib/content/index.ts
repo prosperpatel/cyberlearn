@@ -20,7 +20,11 @@ export {
 export {
   getAvailableLessonKeys,
   invalidateRegistry,
+  getMissionBySlug,
+  getBlocksForMission,
 } from './registry'
+
+export type { CourseMissionMeta } from './mission-schemas'
 
 // Search — used by the search page / command palette
 export {

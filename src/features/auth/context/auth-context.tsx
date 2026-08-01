@@ -189,11 +189,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setError(null)
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      // Use the origin only — Supabase validates redirectTo against its
-      // allowlist; the Site URL (origin) is always allowed. A custom path
-      // like /auth/callback is rejected unless explicitly added to the
-      // dashboard's Redirect URLs, causing a fallback to root anyway.
-      options: { redirectTo: window.location.origin },
+      // Full callback URL so Supabase matches it against its Allowed Redirect
+      // URLs list. The origin-only form is NOT in that list, which caused
+      // Supabase to fall back to its Site URL (production) even on localhost.
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     })
     if (error) setError(mapAuthError(error))
   }, [])

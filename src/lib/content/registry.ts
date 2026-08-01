@@ -207,6 +207,31 @@ export function getAvailableLessonKeys(): Array<{ courseSlug: string; lessonSlug
 }
 
 /**
+ * Returns mission metadata by mission slug alone (cross-course lookup).
+ * Searches MISSION_GLOBS for a path whose mission folder matches the slug.
+ * Returns null if no match is found; throws ContentValidationError on bad JSON.
+ */
+export async function getMissionBySlug(missionSlug: string): Promise<CourseMissionMeta | null> {
+  const cacheKey = `slug:${missionSlug}`
+  if (missionCache.has(cacheKey)) return missionCache.get(cacheKey)!
+
+  const entry = Object.entries(MISSION_GLOBS).find(([path]) => {
+    const s = parseMissionSlugs(path)
+    return s.missionSlug === missionSlug
+  })
+
+  if (!entry) return null
+
+  const [, load] = entry
+  const raw = await load()
+  const parsed = CourseMissionMetaSchema.safeParse(raw)
+  if (!parsed.success) throw describeZodError(`mission "${missionSlug}"`, parsed.error)
+
+  missionCache.set(cacheKey, parsed.data)
+  return parsed.data
+}
+
+/**
  * Returns mission metadata for a specific mission by its slugs.
  * Throws ContentNotFoundError if no matching mission.json exists.
  */

@@ -14,6 +14,38 @@ import { NotFound, ErrorState } from '@/components/shared/error-states'
 import { loadCourse, loadModulesForCourse, ContentNotFoundError } from '@/lib/content'
 import { ROUTES, SKILL_CATEGORIES } from '@/lib/constants'
 import type { ContentCourse, ContentModule } from '@/lib/content'
+import type { DifficultySchema } from '@/lib/content/schemas'
+import type { z } from 'zod'
+
+// ── Module item normalisation — lessons and missions share the same card UI ───
+
+type ItemDifficulty = z.infer<typeof DifficultySchema>
+
+type ModuleItem = {
+  slug:             string
+  title:            string
+  estimatedMinutes: number
+  xpReward:         number
+  difficulty:       ItemDifficulty
+  isMission:        boolean
+}
+
+function getModuleItems(module: ContentModule): ModuleItem[] {
+  if (module.lessons.length > 0) {
+    return module.lessons.map((l) => ({ ...l, isMission: false }))
+  }
+  if (module.missions && module.missions.length > 0) {
+    return module.missions.map((m) => ({
+      slug:             String(m['slug'] ?? ''),
+      title:            String(m['title'] ?? ''),
+      estimatedMinutes: Number(m['estimatedMinutes'] ?? 0),
+      xpReward:         Number(m['xpReward'] ?? 0),
+      difficulty:       String(m['difficulty'] ?? 'beginner') as ItemDifficulty,
+      isMission:        true,
+    }))
+  }
+  return []
+}
 
 // ── Load state ────────────────────────────────────────────────────────────────
 
@@ -72,10 +104,15 @@ export function CourseDetail() {
   )
 
   const { course, modules } = state
-  const catStyle     = SKILL_CATEGORIES[course.category]
-  const totalLessons = modules.reduce((acc, m) => acc + m.lessons.length, 0)
-  const firstLesson  = modules[0]?.lessons?.[0]
-  const startHref    = firstLesson ? ROUTES.LESSON(course.slug, firstLesson.slug) : undefined
+  const catStyle    = SKILL_CATEGORIES[course.category]
+  const allItems    = modules.map(getModuleItems)
+  const totalItems  = allItems.reduce((acc, items) => acc + items.length, 0)
+  const firstItem   = allItems[0]?.[0]
+  const startHref   = firstItem
+    ? firstItem.isMission
+      ? ROUTES.MISSION(firstItem.slug)
+      : ROUTES.LESSON(course.slug, firstItem.slug)
+    : undefined
 
   function toggleModule(slug: string) {
     setExpanded((prev) => {
@@ -180,7 +217,7 @@ export function CourseDetail() {
               </div>
               <div className="flex items-center gap-1.5 text-muted-foreground">
                 <BookOpen className="size-4 shrink-0" />
-                <span>{totalLessons} lessons across {modules.length} modules</span>
+                <span>{totalItems} missions across {modules.length} modules</span>
               </div>
             </div>
 
@@ -224,7 +261,7 @@ export function CourseDetail() {
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-base font-bold text-foreground">Course Modules</h2>
             <span className="text-xs text-muted-foreground font-mono shrink-0">
-              {modules.length} modules · {totalLessons} missions
+              {modules.length} modules · {totalItems} missions
             </span>
           </div>
 
@@ -260,7 +297,7 @@ export function CourseDetail() {
                         {module.title}
                       </p>
                       <div className="flex items-center gap-2 mt-0.5 text-xs text-muted-foreground">
-                        <span>{module.lessons.length} missions</span>
+                        <span>{getModuleItems(module).length} missions</span>
                         <span className="text-muted-foreground/40">·</span>
                         <span>{formatDuration(module.estimatedHours * 60)}</span>
                       </div>
@@ -285,13 +322,15 @@ export function CourseDetail() {
                         style={{ overflow: 'hidden' }}
                       >
                         <div className="border-t border-border/60 divide-y divide-border/40">
-                          {module.lessons.map((lesson, li) => {
-                            const href    = ROUTES.LESSON(course.slug, lesson.slug)
+                          {getModuleItems(module).map((item, li) => {
+                            const href    = item.isMission
+                              ? ROUTES.MISSION(item.slug)
+                              : ROUTES.LESSON(course.slug, item.slug)
                             const isFirst = mi === 0 && li === 0
 
                             return (
                               <div
-                                key={lesson.slug}
+                                key={item.slug}
                                 className="flex items-center gap-3 sm:gap-4 px-5 py-3 hover:bg-base-800/25 transition-colors"
                               >
                                 {/* Step number */}
@@ -302,26 +341,26 @@ export function CourseDetail() {
                                 {/* Title + meta */}
                                 <div className="flex-1 min-w-0">
                                   <p className="text-sm font-medium text-foreground truncate">
-                                    {lesson.title}
+                                    {item.title}
                                   </p>
                                   <div className="flex items-center gap-2 mt-0.5">
                                     <span className="text-xs text-muted-foreground flex items-center gap-1">
                                       <Clock className="size-3" />
-                                      {formatDuration(lesson.estimatedMinutes)}
+                                      {formatDuration(item.estimatedMinutes)}
                                     </span>
                                     <span className="text-muted-foreground/30 text-xs">·</span>
                                     <span className="text-xs font-mono font-semibold text-cyber-green">
-                                      +{lesson.xpReward} XP
+                                      +{item.xpReward} XP
                                     </span>
                                   </div>
                                 </div>
 
                                 {/* Difficulty — desktop only */}
                                 <Badge
-                                  variant={difficultyVariant(lesson.difficulty)}
+                                  variant={difficultyVariant(item.difficulty)}
                                   className="hidden sm:inline-flex shrink-0"
                                 >
-                                  {lesson.difficulty}
+                                  {item.difficulty}
                                 </Badge>
 
                                 {/* Start button */}
