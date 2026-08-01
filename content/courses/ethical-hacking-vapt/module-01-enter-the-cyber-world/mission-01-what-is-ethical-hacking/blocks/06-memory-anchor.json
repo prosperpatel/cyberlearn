@@ -4,16 +4,16 @@
   "order": 6,
   "estimatedMinutes": 2,
   "sidebarLabel": "Remember This",
-  "title": "[PLACEHOLDER] The Three Rules of Ethical Hacking",
-  "concept": "[PLACEHOLDER] The three non-negotiable rules every ethical hacker must follow: get permission, stay in scope, protect the data.",
-  "anchor": "[PLACEHOLDER] Think PSP — Permission, Scope, Privacy. Like a PlayStation Portable, a good pen tester needs all three to play.",
-  "explanation": "[PLACEHOLDER] No matter how advanced your techniques, ethical hacking without these three guardrails is illegal hacking. PSP is your licence to operate.",
+  "title": "The Three Rules of Ethical Hacking",
+  "concept": "Every ethical hacking engagement must satisfy three non-negotiable requirements: written Permission before you touch anything, clearly defined Scope setting the exact legal boundary, and strict Privacy over everything you discover.",
+  "anchor": "Remember PSP — Permission, Scope, Privacy. No matter how experienced you become, hacking without all three is not ethical hacking. It is just hacking.",
+  "explanation": "PSP is your professional licence to operate. Permission means a signed legal contract — not a verbal OK, not an email thread, a binding document with signatures. Scope means you know exactly what you can and cannot test, and that boundary is absolute. Privacy means every vulnerability you find, every piece of data you encounter, stays confidential and is destroyed after the engagement closes. Miss any one of these three and you have crossed the line from ethical hacker to criminal hacker — regardless of how good your intentions were.",
   "acronym": {
     "letters": ["P", "S", "P"],
     "meanings": [
-      "[PLACEHOLDER] Permission — written authorisation from the system owner",
-      "[PLACEHOLDER] Scope — clearly defined boundaries for the engagement",
-      "[PLACEHOLDER] Privacy — strict confidentiality over all discovered data"
+      "Permission — explicit written authorisation from the system owner, signed before any testing begins",
+      "Scope — formally agreed boundaries defining exactly which systems and techniques are authorised",
+      "Privacy — strict confidentiality over all discovered vulnerabilities and data; destroyed after reporting"
     ]
   }
 }

@@ -5,22 +5,22 @@
   "estimatedMinutes": 3,
   "sidebarLabel": "The Operative",
   "narrative": [
-    "[PLACEHOLDER] It was 2 AM when the alert fired. A major retail chain's customer database had been exfiltrated — 14 million records, gone in under an hour.",
-    "[PLACEHOLDER] Six months earlier, a security firm had offered to run a penetration test on the same infrastructure. The offer was declined. Too expensive, too disruptive.",
-    "[PLACEHOLDER] The total breach cost? $47 million. The penetration test quote? $35,000.",
-    "[PLACEHOLDER] This is why ethical hackers exist — not to cause harm, but to find the holes before the criminals do."
+    "At 2:14 AM on a Tuesday, the alert fired in a major retail chain's security operations centre. Fourteen million customer records — names, email addresses, and payment card details — were already gone. The attacker had been inside the network for six days, moving quietly through server to server, before a routine log review caught a single anomalous outbound connection. By then, it was far too late.",
+    "Six months earlier, Alex Chen had sat across a boardroom table from the company's Chief Information Security Officer, Maria Santos, and presented a penetration testing proposal. Alex's firm had tested dozens of retail networks. The proposal was thorough: two weeks of authorised testing, a written report with severity ratings for every finding, and a remediation roadmap the engineering team could execute. The price was $35,000.",
+    "Maria had wanted to proceed. The CFO looked at the number and called it unnecessary overhead. There had been no serious incident in three years. The firewalls were updated. The software was 'mostly' patched. That word — mostly — turned out to be the problem. One unpatched web application server had been sitting exposed for eight months, running software with a publicly known critical vulnerability. The attacker found it in forty minutes using freely available tools.",
+    "The breach cost the company $47 million — legal fees, regulatory fines, forensic investigation, customer notification letters, eighteen months of credit monitoring for fourteen million people, and a complete infrastructure rebuild. Alex's phone rang two weeks after the public disclosure. It was Maria. The conversation was short. 'Does the offer still stand?' It did. But the paperwork this time was signed before Alex had left the building."
   ],
   "characters": [
     {
       "name": "Alex Chen",
       "role": "Penetration Tester",
-      "description": "[PLACEHOLDER] A certified ethical hacker with 8 years of experience helping organisations find and fix vulnerabilities before attackers exploit them.",
+      "description": "A certified ethical hacker with eight years of experience helping organisations find vulnerabilities before attackers do. Alex does exactly what a criminal hacker would do — but with a signed contract, a defined scope, and a report at the end instead of stolen data.",
       "emoji": "🔍"
     },
     {
       "name": "Maria Santos",
-      "role": "CISO",
-      "description": "[PLACEHOLDER] Chief Information Security Officer who learned the hard way that prevention is always cheaper than breach response.",
+      "role": "Chief Information Security Officer",
+      "description": "A CISO who spent years advocating for proactive security investment — and learned the hard way that prevention costs a fraction of response. After the breach, Maria became one of the industry's most vocal advocates for mandatory annual penetration testing.",
       "emoji": "🛡️"
     }
   ],

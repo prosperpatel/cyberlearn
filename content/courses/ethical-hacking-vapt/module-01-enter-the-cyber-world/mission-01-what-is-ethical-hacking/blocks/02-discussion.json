@@ -4,12 +4,12 @@
   "order": 2,
   "estimatedMinutes": 2,
   "sidebarLabel": "Reflect",
-  "title": "[PLACEHOLDER] The Line Between Hacker and Criminal",
-  "prompt": "[PLACEHOLDER] Think of a skill that can be used for both good and harmful purposes — cooking, driving, chemistry, or picking a lock. What is the single thing that separates the professional using that skill legally from the person using it criminally?",
-  "context": "[PLACEHOLDER] This reflection sets up the core principle of the entire VAPT course: the distinction between ethical and malicious hacking is not technical — it is legal and ethical. Both use identical skills and tools.",
+  "title": "The Line Between Hacker and Criminal",
+  "prompt": "Think of a skill that can be used for both legitimate and harmful purposes — lockpicking, chemistry, pharmacology, cybersecurity. What is the single thing that separates a professional using that skill legally from someone using it to cause harm?",
+  "context": "This reflection sets up the core principle of the entire VAPT course. The distinction between ethical and malicious hacking is not technical — both use identical tools and techniques. The difference is entirely legal and ethical, and it comes down to a single concept you are about to learn.",
   "guideQuestions": [
-    "[PLACEHOLDER] What role does authorisation play in making a skill or action legitimate?",
-    "[PLACEHOLDER] Can you think of a real-world example where the same technical knowledge led to very different legal outcomes?",
-    "[PLACEHOLDER] What responsibility does a professional have when they discover something dangerous while using their skills legally?"
+    "What role does authorisation play in making a skilled action legitimate rather than criminal?",
+    "Can you name a real-world profession where someone is legally paid to do things that would be criminal without a formal agreement — locksmith, security guard, pharmaceutical researcher?",
+    "If a professional discovers something dangerous while operating legitimately — but outside their agreed scope — what responsibility do they have? Does finding it change anything legally?"
   ]
 }

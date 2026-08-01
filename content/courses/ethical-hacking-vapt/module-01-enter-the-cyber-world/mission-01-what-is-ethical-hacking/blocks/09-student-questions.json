@@ -4,23 +4,23 @@
   "order": 9,
   "estimatedMinutes": 3,
   "sidebarLabel": "Your Questions",
-  "intro": "[PLACEHOLDER] These are the questions most new students ask at this stage.",
+  "intro": "These are the questions every new student asks at this point. Good questions — the answers matter.",
   "faqs": [
     {
-      "question": "[PLACEHOLDER] Do I need to know how to code to become an ethical hacker?",
-      "answer": "[PLACEHOLDER] Not at first. Many entry-level roles use existing tools and frameworks. However, scripting knowledge (especially Python and Bash) dramatically increases your effectiveness and career ceiling. You'll learn both in this course."
+      "question": "Do I need to know how to code to become an ethical hacker?",
+      "answer": "Not at first. Many entry-level penetration testers work effectively using existing tools and frameworks without writing code. However, scripting ability — particularly Python and Bash — dramatically expands your capabilities and is expected at mid-level and above. This course introduces scripting concepts as they become directly relevant to the techniques you are learning."
     },
     {
-      "question": "[PLACEHOLDER] Is ethical hacking legal in my country?",
-      "answer": "[PLACEHOLDER] Ethical hacking with written authorisation is legal in virtually all countries. The key word is 'written authorisation'. Without it, accessing computer systems without permission is a criminal offence in most jurisdictions, including under the UK Computer Misuse Act and the US Computer Fraud and Abuse Act."
+      "question": "Is ethical hacking legal in my country?",
+      "answer": "Ethical hacking with written authorisation is legal in virtually all countries. The critical word is 'written'. Without a signed agreement, accessing computer systems without permission is a criminal offence in most jurisdictions — including under the UK Computer Misuse Act 1990, the US Computer Fraud and Abuse Act (CFAA), EU cybercrime directives, India's Information Technology Act, and equivalent legislation in Australia, Canada, and beyond. 'I was helping them' is not a legal defence."
     },
     {
-      "question": "[PLACEHOLDER] What certifications should I aim for?",
-      "answer": "[PLACEHOLDER] CEH (Certified Ethical Hacker) and CompTIA Security+ are popular entry points. OSCP (Offensive Security Certified Professional) is the gold standard for hands-on penetration testing and is highly regarded by employers."
+      "question": "What certifications should I work towards?",
+      "answer": "CompTIA Security+ is a respected foundation certification valued by enterprise employers. CEH (Certified Ethical Hacker) covers the methodology you are learning here and is widely recognised in industry. OSCP (Offensive Security Certified Professional) is the hands-on gold standard for penetration testing — a 24-hour practical exam that employers take seriously. eJPT (eLearnSecurity Junior Penetration Tester) is an excellent entry-level practical cert to build towards before OSCP."
     },
     {
-      "question": "[PLACEHOLDER] Can I practise ethical hacking legally without a client?",
-      "answer": "[PLACEHOLDER] Yes. Set up your own local lab with deliberately vulnerable VMs (Metasploitable, DVWA, HackTheBox, TryHackMe). These platforms are specifically designed for legal practice."
+      "question": "Can I legally practise ethical hacking without a paying client?",
+      "answer": "Yes — and you should start now. Platforms like HackTheBox and TryHackMe provide legal, online labs built specifically for security practice. For offline practice, deploy deliberately vulnerable virtual machines: Metasploitable, DVWA (Damn Vulnerable Web Application), and machines from VulnHub are all free. One absolute rule: never practise on systems you do not own or have explicit written permission to test. Not on your neighbour's WiFi, not on a company website 'just to check', not on anything you did not build yourself or receive written authorisation for."
     }
   ]
 }

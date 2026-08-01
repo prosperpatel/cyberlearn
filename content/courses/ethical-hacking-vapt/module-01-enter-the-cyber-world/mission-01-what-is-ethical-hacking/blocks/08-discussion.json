@@ -4,13 +4,13 @@
   "order": 8,
   "estimatedMinutes": 3,
   "sidebarLabel": "Discuss",
-  "title": "[PLACEHOLDER] The Ethics of Disclosure",
-  "prompt": "[PLACEHOLDER] A security researcher discovers a critical zero-day vulnerability in a widely used banking application while conducting authorised research on a different system. They were NOT given permission to test the banking app. What should they do?",
-  "context": "[PLACEHOLDER] This scenario represents a common ethical dilemma in security research: the boundary between authorised and unauthorised testing, and the obligations around responsible disclosure.",
+  "title": "The Ethics of Disclosure",
+  "prompt": "A security researcher is conducting an authorised penetration test on a mid-sized e-commerce platform. While reviewing the platform's third-party payment integrations, she notices that a widely-used banking API appears to have a critical authentication bypass vulnerability — a system she was not given permission to test. The banking API is used by millions of merchants worldwide. What should she do?",
+  "context": "This scenario represents one of the most common ethical dilemmas in professional security research: you discover something dangerous while operating legitimately — but outside your authorised scope. The answer matters because how you handle it defines your professional integrity and determines your legal exposure. There is a right answer here, and it is more nuanced than 'report it' or 'ignore it'.",
   "guideQuestions": [
-    "[PLACEHOLDER] Does the researcher have any legal obligation to report the vulnerability?",
-    "[PLACEHOLDER] What are the risks of reporting directly to the company vs. through a coordinated disclosure process?",
-    "[PLACEHOLDER] How does this differ from discovering the vulnerability during an authorised engagement?",
-    "[PLACEHOLDER] What would you do in this situation, and why?"
+    "Does discovering a vulnerability outside your scope create any legal obligation to report it — or does reporting it actually create new legal risk for you?",
+    "What is the difference between responsible disclosure (contacting the vendor directly and privately) and going to the media, a government agency, or posting publicly?",
+    "How does this situation differ from discovering the same vulnerability during an authorised engagement that explicitly included the banking API?",
+    "If you were in her position: what would you document, who would you tell first, and in what order — before touching anything else?"
   ]
 }

@@ -4,32 +4,42 @@
   "order": 14,
   "estimatedMinutes": 4,
   "sidebarLabel": "Flashcards",
-  "title": "[PLACEHOLDER] Key Terms Flashcards",
+  "title": "Key Terms — Mission 1",
   "cards": [
     {
-      "front": "[PLACEHOLDER] What does VAPT stand for?",
-      "back":  "[PLACEHOLDER] Vulnerability Assessment and Penetration Testing — a combined methodology to identify and validate security weaknesses.",
-      "hint":  "[PLACEHOLDER] Think 'find it, then prove it'"
+      "front": "What does VAPT stand for, and what makes it different from just running a scanner?",
+      "back": "Vulnerability Assessment and Penetration Testing. A VA identifies and catalogues potential weaknesses. A PT validates them by attempting real exploitation to prove impact. Together: breadth and depth.",
+      "hint": "Find it, then prove it."
     },
     {
-      "front": "[PLACEHOLDER] What is a CVE?",
-      "back":  "[PLACEHOLDER] Common Vulnerabilities and Exposures — a unique identifier for a known security vulnerability, e.g. CVE-2024-12345.",
-      "hint":  "[PLACEHOLDER] It's the 'name tag' for a vulnerability"
+      "front": "What is a CVE, and why does it have a number?",
+      "back": "Common Vulnerabilities and Exposures — a unique identifier assigned to each publicly known security vulnerability, e.g. CVE-2017-5638 (the Apache Struts flaw that caused the Equifax breach). The number makes it globally referenceable.",
+      "hint": "Think of it as a vulnerability's official name tag."
     },
     {
-      "front": "[PLACEHOLDER] What is CVSS?",
-      "back":  "[PLACEHOLDER] Common Vulnerability Scoring System — a 0–10 scale indicating vulnerability severity. 9.0–10.0 = Critical.",
-      "hint":  "[PLACEHOLDER] Think 'how bad is it on a scale of 1 to 10?'"
+      "front": "What is CVSS, and what score indicates a Critical vulnerability?",
+      "back": "Common Vulnerability Scoring System — a 0.0 to 10.0 severity scale. Critical = 9.0–10.0. High = 7.0–8.9. Medium = 4.0–6.9. Low = 0.1–3.9. A Critical CVSS score demands same-week patching.",
+      "hint": "How bad is it, out of 10?"
     },
     {
-      "front": "[PLACEHOLDER] Name the 5 phases of a VAPT engagement",
-      "back":  "[PLACEHOLDER] 1. Scoping, 2. Reconnaissance, 3. Scanning, 4. Exploitation, 5. Reporting",
-      "hint":  "[PLACEHOLDER] SRSER — Scoping, Recon, Scanning, Exploitation, Reporting"
+      "front": "Name the five phases of a VAPT engagement in order.",
+      "back": "1. Scoping — define scope and get written authorisation\n2. Reconnaissance — passive intelligence gathering\n3. Scanning — active enumeration of vulnerabilities\n4. Exploitation — prove real-world impact\n5. Reporting — deliver findings with CVSS ratings and remediation steps",
+      "hint": "S-R-S-E-R: Scope, Recon, Scan, Exploit, Report"
     },
     {
-      "front": "[PLACEHOLDER] What is the difference between grey-box and white-box testing?",
-      "back":  "[PLACEHOLDER] Grey-box: partial knowledge (simulates insider). White-box: full knowledge including source code and architecture.",
-      "hint":  "[PLACEHOLDER] More boxes = more knowledge"
+      "front": "What is the difference between grey-box and white-box penetration testing?",
+      "back": "Grey-box: partial knowledge — simulates an insider or a user whose credentials have been compromised. Tester has limited access (e.g. one account or a network diagram).\n\nWhite-box: full knowledge — source code, architecture, all credentials. Most thorough. Finds the deepest issues in the least time.",
+      "hint": "More boxes open = more knowledge provided."
+    },
+    {
+      "front": "What are the PSP requirements every ethical hacking engagement must satisfy?",
+      "back": "Permission — explicit written authorisation signed before any testing begins.\n\nScope — formally agreed boundaries defining exactly which systems and techniques are authorised.\n\nPrivacy — strict confidentiality over all discovered vulnerabilities and data.",
+      "hint": "No PSP = not ethical hacking."
+    },
+    {
+      "front": "What is the difference between Responsible Disclosure and going public with a vulnerability?",
+      "back": "Responsible Disclosure: privately notify the affected vendor first, give them reasonable time to patch (typically 90 days), then publish. Coordinated through the vendor or a bug bounty programme.\n\nGoing public: disclosing without notice. Puts users at immediate risk and may create legal exposure for the researcher.",
+      "hint": "Private first, public later — after a patch exists."
     }
   ]
 }

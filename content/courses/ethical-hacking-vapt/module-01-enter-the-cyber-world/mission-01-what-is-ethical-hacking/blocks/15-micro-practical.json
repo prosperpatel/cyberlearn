@@ -12,22 +12,23 @@
     "tags": ["ethical-hacking", "responsible-disclosure", "bug-bounty"]
   },
   "content": {
-    "objective": "[PLACEHOLDER] Locate and read a real responsible disclosure or bug bounty policy from a major technology company, and identify the key rules that define legal and authorised security research.",
+    "objective": "Locate and read a real responsible disclosure or bug bounty policy from a major technology company. Identify the key rules that define what is legally authorised, what is out of scope, and what happens if a researcher reports a valid vulnerability.",
     "requirements": [
       "Web browser",
       "Internet connection"
     ],
     "instructions": [
-      "[PLACEHOLDER] Open your web browser and navigate to a well-known technology company — for example Google, Microsoft, GitHub, or Cloudflare.",
-      "[PLACEHOLDER] Search their website for a 'Responsible Disclosure Policy', 'Security Policy', or 'Bug Bounty Program' page. You can also search: site:company.com responsible disclosure",
-      "[PLACEHOLDER] Read through the policy and note: (1) what is explicitly in scope, (2) what is explicitly out of scope, and (3) what you are NOT allowed to do.",
-      "[PLACEHOLDER] Write down one thing that surprised you about the policy — something you did not expect to be allowed or forbidden."
+      "Open your browser and navigate to a major technology company. Good choices: Google (bughunters.google.com), Microsoft (msrc.microsoft.com/create-report), GitHub (github.com/security), Cloudflare (cloudflare.com/disclosure), or HackerOne (hackerone.com/directory).",
+      "Find the company's 'Responsible Disclosure Policy', 'Vulnerability Disclosure Policy', or 'Bug Bounty Program' page. You can search: [company name] responsible disclosure policy — or look for a 'Security' link in the website footer.",
+      "Read the policy carefully and answer three questions: (1) What systems are explicitly in scope? (2) What activities are explicitly prohibited — even within scope? (3) What is the company's commitment to the researcher if a valid vulnerability is reported?",
+      "Note one thing that surprised you — something you did not expect to be permitted, or something you assumed would be fine that is explicitly prohibited."
     ],
     "successCriteria": [
-      "[PLACEHOLDER] You found a published responsible disclosure or bug bounty policy from a real company.",
-      "[PLACEHOLDER] You can name at least one activity the policy explicitly permits.",
-      "[PLACEHOLDER] You can name at least one activity the policy explicitly forbids."
+      "You found a published responsible disclosure or bug bounty policy from a real company and can name the company and where the policy is published.",
+      "You can describe at least one activity the policy explicitly permits researchers to perform.",
+      "You can describe at least one activity the policy explicitly prohibits — even for researchers acting in good faith.",
+      "You can explain what the company commits to doing if a researcher submits a valid vulnerability report through proper channels."
     ],
-    "reflection": "[PLACEHOLDER] Why do companies publish responsible disclosure policies? What does it tell you about the relationship between security researchers and the organisations they help?"
+    "reflection": "Why do companies publish responsible disclosure policies at all? What does the existence of these policies tell you about the relationship between organisations and the security researchers who find vulnerabilities in their systems — and why is a formal written policy better for both sides than an informal arrangement?"
   }
 }

@@ -4,32 +4,36 @@
   "order": 5,
   "estimatedMinutes": 5,
   "sidebarLabel": "Core Concepts",
-  "title": "[PLACEHOLDER] Ethical Hacking: The Foundations",
-  "content": "[PLACEHOLDER] Ethical hacking is the practice of deliberately probing computer systems, networks, and applications for security vulnerabilities — with explicit written permission from the owner.\n\nThe goal is identical to a malicious attacker's: find weaknesses. The difference is what happens after discovery. An ethical hacker documents and reports findings so they can be fixed. A criminal exploits them for profit or disruption.\n\nEthical hackers operate under three core constraints:\n- **Written authorisation** — always documented in a formal contract\n- **Defined scope** — clear boundaries on what can and cannot be tested\n- **No data retention** — discovered data is handled under strict confidentiality",
+  "title": "Ethical Hacking: The Foundations",
+  "content": "Ethical hacking is the practice of deliberately probing computer systems, networks, and applications for security vulnerabilities — with explicit written permission from the system owner.\n\nThe goal is identical to a malicious attacker's: find weaknesses before someone else does. The difference is entirely in what happens after discovery. An ethical hacker documents and reports findings so they can be fixed. A criminal hacker exploits them for profit, disruption, or data theft.\n\nThree constraints define every ethical hacking engagement without exception:\n- **Written authorisation** — documented in a signed contract before any testing begins, naming the specific systems and techniques permitted\n- **Defined scope** — formally agreed boundaries covering exactly which systems, IP ranges, applications, and attack techniques are in play\n- **Strict confidentiality** — all discovered data and vulnerabilities are handled under professional confidentiality obligations and destroyed after the final report",
   "callouts": [
     {
       "type": "info",
-      "title": "[PLACEHOLDER] Key Distinction",
-      "text": "[PLACEHOLDER] Ethical hacking (also called penetration testing or pen testing) is authorised. Any hacking without explicit permission is illegal, regardless of intent."
+      "title": "Key Distinction",
+      "text": "Ethical hacking — also called penetration testing or pen testing — is authorised security testing. Any access to computer systems without explicit written permission is illegal, regardless of your intent, your skill level, or whether any data is copied or any damage occurs."
     },
     {
       "type": "warning",
-      "title": "[PLACEHOLDER] Legal Reality",
-      "text": "[PLACEHOLDER] In most countries, unauthorised access to computer systems is a criminal offence — even if you discover vulnerabilities and report them. Always obtain written permission first."
+      "title": "The Legal Reality",
+      "text": "In the UK, the Computer Misuse Act 1990 makes unauthorised access a criminal offence. In the US, the Computer Fraud and Abuse Act applies. Equivalent legislation exists in the EU, India, Australia, and most other jurisdictions. The 'I was just testing security to help them' defence does not exist in law. Always obtain written authorisation first."
     }
   ],
   "keyTerms": [
     {
-      "term": "[PLACEHOLDER] Penetration Testing",
-      "definition": "[PLACEHOLDER] A simulated cyberattack against a system to evaluate its security posture. Also called a pen test."
+      "term": "Penetration Testing",
+      "definition": "A simulated cyberattack conducted against a system with formal written authorisation, designed to identify and prove the exploitability of security vulnerabilities. Commonly called a pen test."
     },
     {
-      "term": "[PLACEHOLDER] VAPT",
-      "definition": "[PLACEHOLDER] Vulnerability Assessment and Penetration Testing — a combined methodology that identifies and validates security weaknesses."
+      "term": "VAPT",
+      "definition": "Vulnerability Assessment and Penetration Testing. The VA phase identifies and catalogues potential weaknesses. The PT phase validates them by attempting real exploitation. Together they give both breadth and depth."
     },
     {
-      "term": "[PLACEHOLDER] Scope",
-      "definition": "[PLACEHOLDER] The explicitly defined boundaries of a penetration test — which systems, IP ranges, and attack techniques are permitted."
+      "term": "Scope",
+      "definition": "The formally agreed boundaries of a penetration test — specifying exactly which systems, IP addresses, applications, and attack techniques are authorised. Operating outside scope without a signed amendment is illegal, regardless of intent."
+    },
+    {
+      "term": "Rules of Engagement (RoE)",
+      "definition": "The written agreement between client and tester that defines what is permitted, what is prohibited, testing hours, emergency contacts, and the procedure for handling unexpected discoveries such as live incidents or out-of-scope systems."
     }
   ]
 }

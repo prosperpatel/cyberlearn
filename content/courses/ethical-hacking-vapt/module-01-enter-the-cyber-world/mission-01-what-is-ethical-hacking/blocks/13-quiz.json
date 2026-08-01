@@ -2,48 +2,74 @@
   "id": "block-16-quiz",
   "type": "quiz",
   "order": 13,
-  "estimatedMinutes": 4,
+  "estimatedMinutes": 5,
   "sidebarLabel": "Quiz",
   "passingScore": 80,
   "questions": [
     {
       "id": "q1",
-      "question": "[PLACEHOLDER] Which of the following is the primary legal requirement before conducting a penetration test?",
+      "question": "Which of the following is the primary legal requirement before conducting a penetration test?",
       "type": "single",
       "options": [
-        { "id": "a", "text": "[PLACEHOLDER] A verbal agreement with the IT manager",           "isCorrect": false },
-        { "id": "b", "text": "[PLACEHOLDER] Written authorisation from the system owner",       "isCorrect": true  },
-        { "id": "c", "text": "[PLACEHOLDER] A security certification such as CEH or OSCP",     "isCorrect": false },
-        { "id": "d", "text": "[PLACEHOLDER] An NDA signed by both parties",                    "isCorrect": false }
+        { "id": "a", "text": "A verbal agreement with the organisation's IT manager", "isCorrect": false },
+        { "id": "b", "text": "Written authorisation from the system owner", "isCorrect": true },
+        { "id": "c", "text": "A valid security certification such as CEH or OSCP", "isCorrect": false },
+        { "id": "d", "text": "An NDA signed by both parties", "isCorrect": false }
       ],
-      "explanation": "[PLACEHOLDER] Written authorisation from the system owner is the only legally sufficient requirement. Verbal agreements are unenforceable. Certifications demonstrate skill but don't authorise any specific engagement. An NDA protects confidentiality but doesn't authorise testing.",
-      "xpReward": 50
+      "explanation": "Written authorisation from the system owner is the only legally sufficient requirement. Verbal agreements are unenforceable and provide no legal protection. Certifications demonstrate skill but do not authorise any specific engagement. An NDA protects confidentiality but does not grant permission to test.",
+      "xpReward": 15
     },
     {
       "id": "q2",
-      "question": "[PLACEHOLDER] What is the key difference between a vulnerability assessment and a penetration test?",
+      "question": "What is the key difference between a Vulnerability Assessment (VA) and a Penetration Test (PT)?",
       "type": "single",
       "options": [
-        { "id": "a", "text": "[PLACEHOLDER] A pen test uses automated tools; a VA is manual",                  "isCorrect": false },
-        { "id": "b", "text": "[PLACEHOLDER] A VA identifies potential issues; a pen test proves exploitability", "isCorrect": true  },
-        { "id": "c", "text": "[PLACEHOLDER] A VA is illegal; a pen test requires authorisation",                 "isCorrect": false },
-        { "id": "d", "text": "[PLACEHOLDER] There is no difference — they are the same thing",                  "isCorrect": false }
+        { "id": "a", "text": "A penetration test uses automated tools; a VA is entirely manual", "isCorrect": false },
+        { "id": "b", "text": "A VA identifies potential weaknesses; a PT validates and proves they are exploitable", "isCorrect": true },
+        { "id": "c", "text": "A VA is illegal; a penetration test requires written authorisation", "isCorrect": false },
+        { "id": "d", "text": "There is no meaningful difference — they produce the same output", "isCorrect": false }
       ],
-      "explanation": "[PLACEHOLDER] A vulnerability assessment identifies and catalogues potential security weaknesses. A penetration test goes further — it attempts to actually exploit those weaknesses to prove real-world impact. Both require authorisation.",
-      "xpReward": 50
+      "explanation": "A Vulnerability Assessment identifies and catalogues potential security weaknesses — it builds a list. A Penetration Test goes further: it attempts to actually exploit those weaknesses to prove real-world impact. Both require authorisation. The Equifax breach is a real example of a critical CVE (CVE-2017-5638) that a VA would have identified and a PT would have proved was exploitable — before attackers found it first.",
+      "xpReward": 15
     },
     {
       "id": "q3",
-      "question": "[PLACEHOLDER] In a black-box penetration test, what information does the tester have at the start?",
+      "question": "In a black-box penetration test, what information does the tester have at the start of the engagement?",
       "type": "single",
       "options": [
-        { "id": "a", "text": "[PLACEHOLDER] Full access to source code and architecture diagrams",  "isCorrect": false },
-        { "id": "b", "text": "[PLACEHOLDER] Network diagrams and internal IP ranges",               "isCorrect": false },
-        { "id": "c", "text": "[PLACEHOLDER] Only the target organisation's name and public IP range","isCorrect": true  },
-        { "id": "d", "text": "[PLACEHOLDER] Credentials for one standard user account",              "isCorrect": false }
+        { "id": "a", "text": "Full access to source code, architecture diagrams, and internal credentials", "isCorrect": false },
+        { "id": "b", "text": "Internal network diagrams and a list of IP address ranges", "isCorrect": false },
+        { "id": "c", "text": "Only the organisation's name and the public-facing IP range or domain", "isCorrect": true },
+        { "id": "d", "text": "Credentials for one standard user account on the target system", "isCorrect": false }
       ],
-      "explanation": "[PLACEHOLDER] Black-box testing simulates an external attacker who has no insider knowledge. The tester starts with only publicly available information — typically just the organisation name and perhaps an IP range.",
-      "xpReward": 50
+      "explanation": "Black-box testing simulates an external attacker who has no insider knowledge. The tester starts with only publicly available information — typically the organisation name and a public IP range or domain. This approach tests how far an attacker could realistically get using only what is discoverable without any access to internal systems.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "A security tester is scanning an authorised /24 subnet and notices a server at an IP address just outside the agreed scope responding to probes. The server appears to be running vulnerable software. What is the correct action?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Quickly run a vulnerability scan since the discovery was accidental and well-intentioned", "isCorrect": false },
+        { "id": "b", "text": "Ignore it entirely and continue testing the in-scope systems", "isCorrect": false },
+        { "id": "c", "text": "Stop, document the IP address and what was observed, and immediately notify the client", "isCorrect": true },
+        { "id": "d", "text": "Add a note in the final report and let the client decide after the engagement closes", "isCorrect": false }
+      ],
+      "explanation": "Scope is a legal boundary. Testing anything outside it — even accidentally, even with good intentions — constitutes unauthorised access. The correct procedure is to stop immediately, document what was observed (IP, timestamp, what was visible), and notify the client. They can then formally expand the scope via a signed amendment if they want the system included.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "What does the PSP framework stand for in the context of ethical hacking?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Probe, Scan, Penetrate — the three phases of active testing", "isCorrect": false },
+        { "id": "b", "text": "Permission, Scope, Privacy — the three non-negotiable requirements for every engagement", "isCorrect": true },
+        { "id": "c", "text": "Patch, Scan, Pentest — a vulnerability management cycle", "isCorrect": false },
+        { "id": "d", "text": "Plan, Scope, Pentest — the pre-engagement planning phases", "isCorrect": false }
+      ],
+      "explanation": "PSP stands for Permission (written authorisation from the system owner), Scope (formally agreed boundaries defining what can and cannot be tested), and Privacy (strict confidentiality over all discovered data and vulnerabilities). All three must be present before any testing begins. Missing any one of them makes the engagement unauthorised — and illegal.",
+      "xpReward": 15
     }
   ]
 }

@@ -4,15 +4,18 @@
   "order": 16,
   "estimatedMinutes": 1,
   "sidebarLabel": "Complete",
-  "title": "[PLACEHOLDER] Mission Complete: Operation Lawful Strike",
-  "message": "[PLACEHOLDER] You've completed your first mission. You now understand what separates an ethical hacker from a criminal one — and it's not skill, it's authorisation. Keep that mindset at the core of everything you do in this course.",
+  "headline": "Operation Lawful Strike — Complete",
+  "message": "You now understand the single thing that separates a security professional from a criminal: authorisation. Same skills. Same tools. Same techniques. One signed piece of paper makes all the difference.\n\nThis principle — PSP, Permission, Scope, Privacy — is not just the foundation of ethical hacking. It is the foundation of your entire career in security. Every decision you make from here starts with the question: am I authorised to do this?",
   "xpEarned": 80,
   "badgesUnlocked": [
-    "[PLACEHOLDER] First Mission"
+    {
+      "name": "Foundation Operative",
+      "description": "Completed Mission 1: What Is Ethical Hacking? — understood the professional framework that makes security testing legal."
+    }
   ],
   "nextSteps": [
-    "[PLACEHOLDER] Proceed to Mission 02: The Legal Framework",
-    "[PLACEHOLDER] Optional: Complete the Assignment to earn a Practice badge",
-    "[PLACEHOLDER] Explore the community discussion for this mission"
+    "Mission 02: The Legal Framework — dive into the Computer Misuse Act, CFAA, and the laws that govern every engagement",
+    "Optional: Complete the Mission 1 Assignment to earn a Practice badge and cement today's concepts",
+    "Review the Cheat Sheet and Flashcards — the VAPT phases and CVSS scale appear in every future mission"
   ]
 }

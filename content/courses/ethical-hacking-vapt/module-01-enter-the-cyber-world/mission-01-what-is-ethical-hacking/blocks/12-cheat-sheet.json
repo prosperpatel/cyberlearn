@@ -4,33 +4,33 @@
   "order": 12,
   "estimatedMinutes": 2,
   "sidebarLabel": "Cheat Sheet",
-  "title": "[PLACEHOLDER] Ethical Hacking Quick Reference",
+  "title": "Ethical Hacking Quick Reference",
   "sections": [
     {
-      "heading": "[PLACEHOLDER] Testing Types",
+      "heading": "Testing Types",
       "rows": [
-        { "label": "[PLACEHOLDER] Black-box",  "value": "[PLACEHOLDER] Zero prior knowledge — simulates external attacker" },
-        { "label": "[PLACEHOLDER] Grey-box",   "value": "[PLACEHOLDER] Partial knowledge — simulates insider / compromised account" },
-        { "label": "[PLACEHOLDER] White-box",  "value": "[PLACEHOLDER] Full knowledge — most thorough, finds deepest issues" }
+        { "label": "Black-box",  "value": "Zero prior knowledge. Simulates an external attacker. Tester starts from only publicly available information — domain name, IP range, nothing more." },
+        { "label": "Grey-box",   "value": "Partial knowledge — e.g. one standard user account or a high-level network diagram. Simulates a compromised insider or a credential-phishing attack." },
+        { "label": "White-box",  "value": "Full knowledge: source code, architecture diagrams, credentials, infrastructure documentation. Most thorough — finds the deepest technical issues fastest." }
       ]
     },
     {
-      "heading": "[PLACEHOLDER] VAPT Phases",
+      "heading": "VAPT Phases",
       "rows": [
-        { "label": "[PLACEHOLDER] 1. Scoping",        "value": "[PLACEHOLDER] Define scope, RoE, timeline, get written authorisation" },
-        { "label": "[PLACEHOLDER] 2. Reconnaissance",  "value": "[PLACEHOLDER] OSINT, DNS, WHOIS, LinkedIn — no target packets yet" },
-        { "label": "[PLACEHOLDER] 3. Scanning",        "value": "[PLACEHOLDER] Nmap, Nessus, Nikto — active information gathering" },
-        { "label": "[PLACEHOLDER] 4. Exploitation",    "value": "[PLACEHOLDER] Prove impact of confirmed vulnerabilities" },
-        { "label": "[PLACEHOLDER] 5. Reporting",       "value": "[PLACEHOLDER] CVSS ratings, PoC evidence, remediation roadmap" }
+        { "label": "1. Scoping",         "value": "Define targets, Rules of Engagement, timeline. Written authorisation signed before any testing begins." },
+        { "label": "2. Reconnaissance",  "value": "OSINT, DNS, WHOIS, LinkedIn, GitHub — passive intelligence only. No packets sent to the target yet." },
+        { "label": "3. Scanning",         "value": "Nmap (ports/services), Nessus/OpenVAS (CVEs), Nikto (web) — active enumeration within scope." },
+        { "label": "4. Exploitation",     "value": "Prove real-world impact by exploiting confirmed vulnerabilities. Document every command, timestamp, and output." },
+        { "label": "5. Reporting",        "value": "CVSS severity scores, proof-of-concept evidence, executive summary, technical findings, remediation roadmap." }
       ]
     },
     {
-      "heading": "[PLACEHOLDER] Key Standards",
+      "heading": "Key Standards & References",
       "rows": [
-        { "label": "[PLACEHOLDER] CVE",       "value": "[PLACEHOLDER] Public vulnerability database identifier" },
-        { "label": "[PLACEHOLDER] CVSS",      "value": "[PLACEHOLDER] 0–10 severity score (0=None, 10=Critical)" },
-        { "label": "[PLACEHOLDER] OWASP Top 10","value": "[PLACEHOLDER] Top 10 web application security risks" },
-        { "label": "[PLACEHOLDER] PTES",      "value": "[PLACEHOLDER] Penetration Testing Execution Standard" }
+        { "label": "CVE",          "value": "Common Vulnerabilities and Exposures — a public registry entry with a unique ID (e.g. CVE-2017-5638) for each known vulnerability." },
+        { "label": "CVSS",         "value": "Common Vulnerability Scoring System — 0.0 to 10.0. Critical: 9.0–10.0 | High: 7.0–8.9 | Medium: 4.0–6.9 | Low: 0.1–3.9" },
+        { "label": "OWASP Top 10", "value": "The 10 most critical web application security risks. A standard reference for web application penetration testing, updated regularly." },
+        { "label": "PTES",         "value": "Penetration Testing Execution Standard — defines the minimum phases and deliverables expected in a professional engagement." }
       ]
     }
   ]

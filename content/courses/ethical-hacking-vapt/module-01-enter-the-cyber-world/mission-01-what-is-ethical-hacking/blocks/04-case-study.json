@@ -4,28 +4,29 @@
   "order": 4,
   "estimatedMinutes": 4,
   "sidebarLabel": "Case Study",
-  "company": "[PLACEHOLDER] Example Corp",
-  "year": "2024",
-  "industry": "Financial Services",
-  "incident": "[PLACEHOLDER] A mid-sized financial services firm suffered a data breach after an attacker exploited an unpatched vulnerability in their web application firewall.",
+  "company": "Equifax",
+  "year": "2017",
+  "industry": "Credit Reporting",
+  "incident": "One of the largest consumer data breaches in history — caused by a known, publicly patched vulnerability that sat unaddressed for 76 days. A single penetration test would have found it.",
   "whatHappened": [
-    "[PLACEHOLDER] An attacker discovered a known CVE in the company's WAF that had not been patched for 14 months.",
-    "[PLACEHOLDER] Using a publicly available exploit, the attacker bypassed authentication and gained access to the admin panel.",
-    "[PLACEHOLDER] Over 72 hours, the attacker exfiltrated customer account data without triggering any alerts."
+    "Attackers exploited CVE-2017-5638, a critical remote code execution vulnerability in Apache Struts 2 — a widely-used web application framework. The Apache Software Foundation had released a patch in March 2017 and rated the vulnerability as maximum severity.",
+    "Equifax received a vulnerability alert from the US-CERT and their own scanning tools, but the patch was not applied to all systems. Crucially, an internal scanning tool misconfiguration caused the vulnerable server to be missed during routine checks.",
+    "For 76 days, attackers moved freely through Equifax's internal network, querying 48 separate databases and exfiltrating compressed archives of consumer data. Traffic was encrypted, and an expired SSL certificate meant Equifax's monitoring tools were not inspecting the encrypted outbound connections.",
+    "The breach was only discovered when the expired certificate was finally renewed — and the monitoring system immediately flagged the suspicious encrypted traffic it had been blind to for months."
   ],
   "whyItHappened": [
-    "[PLACEHOLDER] No regular vulnerability scanning was in place.",
-    "[PLACEHOLDER] The patch management process had a backlog exceeding 200 days for medium-severity CVEs.",
-    "[PLACEHOLDER] No penetration test had been conducted in over three years."
+    "No effective patch management process: a publicly disclosed, maximum-severity CVE remained unpatched for 76 days on an internet-facing server, despite the vendor and US government issuing immediate alerts.",
+    "Monitoring failure: an expired SSL certificate had been preventing inspection of encrypted network traffic for 19 months. The certificate renewal inadvertently revealed the ongoing breach.",
+    "No independent verification: a penetration test would have confirmed whether the known-vulnerable Apache Struts version was present and exploitable — standard procedure in any VAPT engagement."
   ],
   "lessonsLearned": [
-    "[PLACEHOLDER] Regular VAPT engagements would have identified the unpatched CVE before attackers did.",
-    "[PLACEHOLDER] A patch management SLA aligned to CVSS severity scores prevents critical delays.",
-    "[PLACEHOLDER] Continuous monitoring and alerting on admin panel access would have detected the intrusion within hours."
+    "A single web application penetration test covering third-party frameworks would have identified the unpatched Apache Struts instance within hours — weeks before attackers found it.",
+    "Patch management must be tied to CVSS severity. A CVSS 10.0 vulnerability demands same-week remediation. A 76-day queue for critical patches is a systemic governance failure, not a technical one.",
+    "Security monitoring is only effective if it is actively maintained. Certificate expiry, tool misconfiguration, and unchecked alert queues create blind spots that attackers routinely exploit."
   ],
   "impactStats": [
-    { "value": "$2.3M", "label": "[PLACEHOLDER] Total breach cost" },
-    { "value": "47K",   "label": "[PLACEHOLDER] Customer records exposed" },
-    { "value": "72h",   "label": "[PLACEHOLDER] Dwell time before detection" }
+    { "value": "147.9M", "label": "Consumer records exposed" },
+    { "value": "$700M+", "label": "Total settlement cost" },
+    { "value": "76 days", "label": "Critical CVE left unpatched" }
   ]
 }

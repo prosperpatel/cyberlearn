@@ -4,29 +4,30 @@
   "order": 10,
   "estimatedMinutes": 3,
   "sidebarLabel": "Common Mistakes",
-  "intro": "[PLACEHOLDER] New ethical hackers make these mistakes — avoid them from day one.",
+  "intro": "These three mistakes end careers and create criminal liability. Recognise them now so you never make them.",
   "mistakes": [
     {
-      "title": "[PLACEHOLDER] Testing without written permission",
-      "wrong":  "[PLACEHOLDER] 'I mentioned it verbally and they seemed fine with it.'",
-      "right":  "[PLACEHOLDER] Always obtain a signed Statement of Work or Penetration Testing Agreement before touching anything.",
-      "explanation": "[PLACEHOLDER] Verbal agreements are unenforceable and will not protect you if something goes wrong or the client later claims they never authorised testing.",
+      "title": "Testing with verbal permission instead of written authorisation",
+      "wrong": "'I mentioned the testing to the IT manager over the phone and they said it was fine.'",
+      "right": "Obtain a signed Statement of Work or Penetration Testing Agreement before running a single scan, sending a single packet, or opening a single tool.",
+      "explanation": "A verbal agreement is legally worthless if something goes wrong. Clients misremember conversations, change their minds, or get replaced. Without a signed document naming the specific systems and techniques authorised, you have no legal protection — and under computer misuse law, you have committed an offence regardless of what was said verbally.",
       "severity": "critical"
     },
     {
-      "title": "[PLACEHOLDER] Exceeding the defined scope",
-      "wrong":  "[PLACEHOLDER] 'I found an interesting system that wasn't in scope, so I tested it too.'",
-      "right":  "[PLACEHOLDER] Immediately stop, document, and notify the client if you discover in-scope systems connecting to out-of-scope systems.",
-      "explanation": "[PLACEHOLDER] Even if the out-of-scope system has critical vulnerabilities, testing it without authorisation is illegal. The scope is a legal boundary.",
-      "severity": "critical"
+      "title": "Testing systems outside the agreed scope",
+      "wrong": "'I found an interesting server that wasn't in scope — but it looked vulnerable, so I took a quick look.'",
+      "right": "Stop immediately when you encounter something outside scope. Document what you found — IP address, time, what was visible — and report it to the client. Do not interact with it.",
+      "explanation": "Scope is a legal boundary, not a suggestion. Testing a system you were not explicitly authorised to test is unauthorised computer access — the same crime as if you had no agreement at all. The correct procedure is to document, stop, and notify. The client can then formally expand the scope via a signed amendment if they want the system included.",
+      "severity": "critical",
+      "example": "You are scanning a /24 subnet and notice a server responding from an IP just outside the agreed range. Even if it is clearly running vulnerable software, you must not interact with it. Log the IP and timestamp, notify the client, and wait for written scope expansion."
     },
     {
-      "title": "[PLACEHOLDER] Confusing a vulnerability scan with a penetration test",
-      "wrong":  "[PLACEHOLDER] 'We ran Nessus and got a report — that's our pen test done.'",
-      "right":  "[PLACEHOLDER] A vulnerability scan identifies potential issues. A penetration test validates and exploits them to prove real-world impact.",
-      "explanation": "[PLACEHOLDER] A scanner generates many false positives and tells you nothing about actual exploitability. Manual testing and exploitation proof are what deliver real value.",
+      "title": "Treating a vulnerability scan as a completed penetration test",
+      "wrong": "'We ran Nessus against the environment and generated a 60-page report — VAPT complete.'",
+      "right": "A vulnerability scan identifies potential issues. A penetration test validates them by attempting exploitation to prove real-world impact. Both are required. They are not the same thing.",
+      "explanation": "Automated scanners generate false positives, miss business logic vulnerabilities, and reveal nothing about actual exploitability. A CVSS 9.8 vulnerability flagged by a scanner might be completely unexploitable in a specific server configuration. Manual validation and proof-of-exploitation are what transform a list of potential findings into actionable security intelligence that organisations can prioritise.",
       "severity": "warning",
-      "example": "[PLACEHOLDER] A scanner might report a web server version as vulnerable to a 2019 CVE. A pen tester would confirm whether the specific configuration is actually exploitable."
+      "example": "Nessus flags a web server as vulnerable to a remote code execution CVE. A penetration tester would then manually verify whether that specific server configuration actually allows exploitation — many reported vulnerabilities are not exploitable in practice, while others are far worse than the scanner indicated."
     }
   ]
 }

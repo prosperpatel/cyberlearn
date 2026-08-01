@@ -4,21 +4,46 @@
   "order": 7,
   "estimatedMinutes": 3,
   "sidebarLabel": "Interactive Diagram",
-  "title": "[PLACEHOLDER] The VAPT Engagement Lifecycle",
-  "description": "[PLACEHOLDER] A penetration test follows a structured five-phase methodology from initial scoping through to final reporting.",
+  "title": "The VAPT Engagement Lifecycle",
+  "description": "A penetration test follows a structured five-phase methodology. Each phase feeds the next — and the whole process repeats with every new engagement.",
   "nodes": [
-    { "id": "scope",   "label": "[PLACEHOLDER] Scoping",       "type": "default", "detail": "[PLACEHOLDER] Define targets, rules of engagement, and timeline" },
-    { "id": "recon",   "label": "[PLACEHOLDER] Reconnaissance", "type": "default", "detail": "[PLACEHOLDER] Gather intelligence on the target environment" },
-    { "id": "scan",    "label": "[PLACEHOLDER] Scanning",       "type": "default", "detail": "[PLACEHOLDER] Identify open ports, services, and vulnerabilities" },
-    { "id": "exploit", "label": "[PLACEHOLDER] Exploitation",   "type": "attacker","detail": "[PLACEHOLDER] Attempt to exploit discovered vulnerabilities" },
-    { "id": "report",  "label": "[PLACEHOLDER] Reporting",      "type": "default", "detail": "[PLACEHOLDER] Document findings with severity ratings and remediation guidance" }
+    {
+      "id": "scope",
+      "label": "Scoping",
+      "type": "default",
+      "detail": "Define targets, Rules of Engagement, testing hours, and timeline. Written authorisation must be signed before anything else happens. This phase also establishes emergency contacts and the procedure for handling unexpected findings."
+    },
+    {
+      "id": "recon",
+      "label": "Reconnaissance",
+      "type": "default",
+      "detail": "Gather intelligence on the target using only public sources: DNS records, WHOIS, LinkedIn profiles, job postings, GitHub repositories, and subdomain enumeration. No packets are sent to the target yet — this is entirely passive."
+    },
+    {
+      "id": "scan",
+      "label": "Scanning",
+      "type": "default",
+      "detail": "Actively probe the target within scope: Nmap discovers open ports and services, Nessus or OpenVAS identifies known CVEs, Nikto checks web servers for common misconfigurations. This builds the vulnerability shortlist for exploitation."
+    },
+    {
+      "id": "exploit",
+      "label": "Exploitation",
+      "type": "attacker",
+      "detail": "Attempt to exploit confirmed vulnerabilities to prove real-world impact. Every step is documented: commands run, timestamps, screenshots, and output logs. Only techniques within the agreed Rules of Engagement are permitted."
+    },
+    {
+      "id": "report",
+      "label": "Reporting",
+      "type": "default",
+      "detail": "Deliver a structured report: executive summary for leadership, technical findings with CVSS severity scores, proof-of-concept evidence, and a prioritised remediation roadmap. The report is the entire value of the engagement."
+    }
   ],
   "edges": [
-    { "from": "scope",   "to": "recon",   "label": "[PLACEHOLDER] Authorised",  "type": "normal" },
-    { "from": "recon",   "to": "scan",    "label": "[PLACEHOLDER] Intelligence", "type": "normal" },
-    { "from": "scan",    "to": "exploit", "label": "[PLACEHOLDER] Findings",     "type": "attack"  },
-    { "from": "exploit", "to": "report",  "label": "[PLACEHOLDER] Evidence",     "type": "normal"  }
+    { "from": "scope",   "to": "recon",   "label": "Authorised",   "type": "normal" },
+    { "from": "recon",   "to": "scan",    "label": "Intelligence",  "type": "normal" },
+    { "from": "scan",    "to": "exploit", "label": "Findings",      "type": "attack"  },
+    { "from": "exploit", "to": "report",  "label": "Evidence",      "type": "normal"  }
   ],
-  "caption": "[PLACEHOLDER] Each phase feeds into the next — reporting feeds back into future scoping for continuous improvement.",
+  "caption": "Click each phase to read what actually happens during it. Reporting feeds directly into the next Scoping session — VAPT is a continuous cycle, not a one-time event.",
   "interactive": true
 }

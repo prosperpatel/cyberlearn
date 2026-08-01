@@ -4,22 +4,26 @@
   "order": 11,
   "estimatedMinutes": 2,
   "sidebarLabel": "Mind Map",
-  "title": "[PLACEHOLDER] Building Inspectors and Security Auditors",
-  "realWorldThing": "[PLACEHOLDER] A building safety inspector hired to check if a structure meets fire safety codes",
-  "concept": "[PLACEHOLDER] A penetration tester hired to check if a computer system meets security standards",
-  "comparison": "[PLACEHOLDER] Both are authorised professionals using specialised knowledge to find dangerous weaknesses before they cause harm. Neither causes the harm — they report it so it can be fixed.",
+  "title": "The Authorised Professional",
+  "realWorldThing": "A building safety inspector hired by a property owner to check whether the structure meets fire safety regulations — testing emergency exits, sprinkler systems, load-bearing capacity, and electrical wiring. The inspector deliberately looks for problems, even simulating failure conditions.",
+  "concept": "A penetration tester hired by an organisation to check whether their systems meet security standards — probing for open ports, misconfigured services, unpatched software, and weak authentication. The tester deliberately looks for weaknesses, even attempting exploitation under controlled conditions.",
+  "comparison": "Both are authorised professionals using specialised knowledge to find dangerous weaknesses before those weaknesses cause catastrophic harm. Neither creates the danger — they find it and document it so it can be fixed before a real emergency occurs. Without them, buildings collapse and data gets stolen.",
   "breakdown": [
     {
-      "realWorld": "[PLACEHOLDER] Building inspector checks fire exits",
-      "techEquivalent": "[PLACEHOLDER] Pen tester checks for open network ports and services"
+      "realWorld": "Inspector checks whether fire exits are unlocked, unobstructed, and correctly signed",
+      "techEquivalent": "Pen tester checks for open ports and network services that are unnecessarily exposed to the internet"
     },
     {
-      "realWorld": "[PLACEHOLDER] Inspector tests if sprinklers activate correctly",
-      "techEquivalent": "[PLACEHOLDER] Pen tester tests if intrusion detection systems trigger on attack patterns"
+      "realWorld": "Inspector tests whether sprinkler heads activate correctly when triggered by a heat source",
+      "techEquivalent": "Pen tester tests whether intrusion detection and alerting systems trigger when attack patterns are simulated"
     },
     {
-      "realWorld": "[PLACEHOLDER] Inspector writes a report with required fixes",
-      "techEquivalent": "[PLACEHOLDER] Pen tester writes a remediation report with severity ratings"
+      "realWorld": "Inspector checks structural load capacity — would the floor support a full emergency evacuation?",
+      "techEquivalent": "Pen tester checks for SQL injection — can an attacker manipulate the database by submitting malformed input?"
+    },
+    {
+      "realWorld": "Inspector writes a formal report listing every required fix, severity level, and legal deadline",
+      "techEquivalent": "Pen tester writes a report with CVSS severity scores for every finding, proof-of-concept evidence, and a prioritised remediation roadmap"
     }
   ]
 }
