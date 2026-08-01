@@ -1,0 +1,16 @@
+{
+  "id": "block-11-discussion",
+  "type": "discussion",
+  "order": 8,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Discuss",
+  "title": "[PLACEHOLDER] The Ethics of Disclosure",
+  "prompt": "[PLACEHOLDER] A security researcher discovers a critical zero-day vulnerability in a widely used banking application while conducting authorised research on a different system. They were NOT given permission to test the banking app. What should they do?",
+  "context": "[PLACEHOLDER] This scenario represents a common ethical dilemma in security research: the boundary between authorised and unauthorised testing, and the obligations around responsible disclosure.",
+  "guideQuestions": [
+    "[PLACEHOLDER] Does the researcher have any legal obligation to report the vulnerability?",
+    "[PLACEHOLDER] What are the risks of reporting directly to the company vs. through a coordinated disclosure process?",
+    "[PLACEHOLDER] How does this differ from discovering the vulnerability during an authorised engagement?",
+    "[PLACEHOLDER] What would you do in this situation, and why?"
+  ]
+}

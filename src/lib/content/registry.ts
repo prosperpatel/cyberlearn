@@ -18,6 +18,10 @@ import {
   ContentLessonSchema,
 } from './schemas'
 import type { ContentCourse, ContentModule, ContentLesson } from './schemas'
+import { CourseMissionMetaSchema } from './mission-schemas'
+import type { CourseMissionMeta } from './mission-schemas'
+import { migrateBlock, ContentMigrationError } from './block-migration'
+import type { StandardBlock } from '@/types/mission-engine'
 
 // ── Vite glob maps — populated at build time ──────────────────────────────────
 // Patterns are relative to THIS file (src/lib/content/registry.ts)
@@ -38,6 +42,20 @@ const LESSON_GLOBS = import.meta.glob(
   { import: 'default' },
 )
 
+// Mission globs — Course → Module → Mission → Block architecture
+// mission.json lives at:  content/courses/{course}/{module}/{mission}/mission.json
+// Block files live at:    content/courses/{course}/{module}/{mission}/blocks/*.json
+
+const MISSION_GLOBS = import.meta.glob(
+  '../../../content/courses/*/*/*/mission.json',
+  { import: 'default' },
+)
+
+const BLOCK_GLOBS = import.meta.glob(
+  '../../../content/courses/*/*/*/blocks/*.json',
+  { import: 'default' },
+)
+
 // ── Path parsers ──────────────────────────────────────────────────────────────
 
 function parseCourseSlug(path: string): string {
@@ -54,11 +72,28 @@ function parseLessonSlugs(path: string) {
   return { courseSlug: m?.[1] ?? '', moduleSlug: m?.[2] ?? '', lessonSlug: m?.[3] ?? '' }
 }
 
+function parseMissionSlugs(path: string) {
+  const m = path.match(/courses\/([^/]+)\/([^/]+)\/([^/]+)\/mission\.json$/)
+  return { courseSlug: m?.[1] ?? '', moduleSlug: m?.[2] ?? '', missionSlug: m?.[3] ?? '' }
+}
+
+function parseBlockPath(path: string) {
+  const m = path.match(/courses\/([^/]+)\/([^/]+)\/([^/]+)\/blocks\/([^/]+)\.json$/)
+  return {
+    courseSlug:  m?.[1] ?? '',
+    moduleSlug:  m?.[2] ?? '',
+    missionSlug: m?.[3] ?? '',
+    blockFile:   m?.[4] ?? '',
+  }
+}
+
 // ── Module-level caches — shared across all callers in a session ──────────────
 
 let coursesCache: ContentCourse[] | null = null
-const moduleCache = new Map<string, ContentModule>()
-const lessonCache = new Map<string, ContentLesson>()
+const moduleCache  = new Map<string, ContentModule>()
+const lessonCache  = new Map<string, ContentLesson>()
+const missionCache = new Map<string, CourseMissionMeta>()
+const blockCache   = new Map<string, StandardBlock[]>()
 
 // ── Internal: format Zod errors into a readable message ──────────────────────
 
@@ -171,11 +206,81 @@ export function getAvailableLessonKeys(): Array<{ courseSlug: string; lessonSlug
   })
 }
 
+/**
+ * Returns mission metadata for a specific mission by its slugs.
+ * Throws ContentNotFoundError if no matching mission.json exists.
+ */
+export async function getMission(
+  courseSlug: string,
+  moduleSlug: string,
+  missionSlug: string,
+): Promise<CourseMissionMeta> {
+  const key = `${courseSlug}/${moduleSlug}/${missionSlug}`
+  if (missionCache.has(key)) return missionCache.get(key)!
+
+  const entry = Object.entries(MISSION_GLOBS).find(([path]) => {
+    const s = parseMissionSlugs(path)
+    return s.courseSlug === courseSlug && s.moduleSlug === moduleSlug && s.missionSlug === missionSlug
+  })
+
+  if (!entry) {
+    throw new ContentNotFoundError(`Mission "${key}" not found in content directory`)
+  }
+
+  const [, load] = entry
+  const raw = await load()
+  const parsed = CourseMissionMetaSchema.safeParse(raw)
+  if (!parsed.success) throw describeZodError(`mission "${key}"`, parsed.error)
+
+  missionCache.set(key, parsed.data)
+  return parsed.data
+}
+
+/**
+ * Returns all blocks for a mission as StandardBlock[], sorted by metadata.order.
+ * Accepts both new standard-format and legacy flat-format block files —
+ * the migration layer converts old files transparently on first load.
+ */
+export async function getBlocksForMission(
+  courseSlug: string,
+  moduleSlug: string,
+  missionSlug: string,
+): Promise<StandardBlock[]> {
+  const key = `${courseSlug}/${moduleSlug}/${missionSlug}`
+  if (blockCache.has(key)) return blockCache.get(key)!
+
+  const entries = Object.entries(BLOCK_GLOBS).filter(([path]) => {
+    const s = parseBlockPath(path)
+    return s.courseSlug === courseSlug && s.moduleSlug === moduleSlug && s.missionSlug === missionSlug
+  })
+
+  const blocks = await Promise.all(
+    entries.map(async ([path, load]) => {
+      const raw = await load()
+      try {
+        return migrateBlock(raw)
+      } catch (err) {
+        const { blockFile } = parseBlockPath(path)
+        if (err instanceof ContentMigrationError) {
+          throw new ContentValidationError(`${err.message} (file: ${key}/blocks/${blockFile})`)
+        }
+        throw err
+      }
+    }),
+  )
+
+  const sorted = blocks.sort((a, b) => a.metadata.order - b.metadata.order)
+  blockCache.set(key, sorted)
+  return sorted
+}
+
 /** Clears all in-memory caches. Useful in tests or after hot-reload. */
 export function invalidateRegistry(): void {
   coursesCache = null
   moduleCache.clear()
   lessonCache.clear()
+  missionCache.clear()
+  blockCache.clear()
 }
 
 // ── Error types ───────────────────────────────────────────────────────────────

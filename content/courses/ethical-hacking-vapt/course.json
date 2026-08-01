@@ -1,0 +1,41 @@
+{
+  "id": "ethical-hacking-vapt",
+  "slug": "ethical-hacking-vapt",
+  "title": "Ethical Hacking & VAPT",
+  "tagline": "Think Like an Attacker. Secure Like a Defender.",
+  "description": "Master the fundamentals of Ethical Hacking and Vulnerability Assessment & Penetration Testing (VAPT). Learn how security professionals discover, assess, validate, and report security vulnerabilities through interactive lessons, visual explanations, quizzes, AI tutoring, and practical labs.",
+  "difficulty": "beginner",
+  "estimatedHours": 40,
+  "xpReward": 6000,
+  "category": "penetration-testing",
+  "tags": [
+    "ethical-hacking",
+    "vapt",
+    "penetration-testing",
+    "reconnaissance",
+    "osint",
+    "footprinting",
+    "enumeration",
+    "vulnerability-assessment",
+    "network-scanning",
+    "web-security"
+  ],
+  "prerequisites": [],
+  "learningObjectives": [
+    "Understand ethical hacking methodology and the VAPT lifecycle",
+    "Perform reconnaissance and information gathering using OSINT techniques",
+    "Conduct footprinting and network scanning to map attack surfaces",
+    "Enumerate services and identify potential vulnerabilities",
+    "Assess and categorise vulnerabilities using industry-standard frameworks",
+    "Perform basic penetration testing on networks and web applications",
+    "Document and report security findings in a professional format"
+  ],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "coverEmoji": "🎯",
+  "isNew": true,
+  "isPro": false,
+  "createdAt": "2026-08-01T00:00:00Z",
+  "updatedAt": "2026-08-01T00:00:00Z",
+  "modules": []
+}

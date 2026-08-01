@@ -1,0 +1,15 @@
+{
+  "id": "block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Reflect",
+  "title": "[PLACEHOLDER] The Line Between Hacker and Criminal",
+  "prompt": "[PLACEHOLDER] Think of a skill that can be used for both good and harmful purposes — cooking, driving, chemistry, or picking a lock. What is the single thing that separates the professional using that skill legally from the person using it criminally?",
+  "context": "[PLACEHOLDER] This reflection sets up the core principle of the entire VAPT course: the distinction between ethical and malicious hacking is not technical — it is legal and ethical. Both use identical skills and tools.",
+  "guideQuestions": [
+    "[PLACEHOLDER] What role does authorisation play in making a skill or action legitimate?",
+    "[PLACEHOLDER] Can you think of a real-world example where the same technical knowledge led to very different legal outcomes?",
+    "[PLACEHOLDER] What responsibility does a professional have when they discover something dangerous while using their skills legally?"
+  ]
+}

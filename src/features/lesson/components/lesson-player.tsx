@@ -72,6 +72,8 @@ export function LessonPlayer({ lesson }: Props) {
   // both of which change clientHeight and may make previously tall content fit.
   useEffect(() => {
     const el = contentRef.current
+    // TEMP LOG 1: is el mounted and what are its dimensions?
+    console.log('[scroll-detect] init | el:', el ? 'OK' : 'NULL', '| scrollH:', el?.scrollHeight, '| clientH:', el?.clientHeight)
     if (!el) return
 
     // Guard: markCurrentComplete is idempotent at the store level, but the
@@ -81,20 +83,36 @@ export function LessonPlayer({ lesson }: Props) {
 
     function checkBottom() {
       if (!el || triggered) return
-      if (el.scrollHeight - el.scrollTop - el.clientHeight < 48) {
+      const dist = el.scrollHeight - el.scrollTop - el.clientHeight
+      // TEMP LOG 2: is checkBottom firing and what values does it see?
+      console.log('[scroll-detect] check | dist:', dist, '| scrollTop:', el.scrollTop)
+      if (dist < 48) {
         triggered = true
+        // TEMP LOG 3: does completion trigger?
+        console.log('[scroll-detect] → marking complete')
         markCurrentCompleteRef.current()
       }
     }
 
+    // TEMP LOG 4: detect whether the window is scrolling instead of el
+    function onWindowScroll() {
+      console.log('[scroll-detect] WINDOW-SCROLL | scrollY:', window.scrollY)
+    }
+
     el.addEventListener('scroll', checkBottom, { passive: true })
+    window.addEventListener('scroll', onWindowScroll, { passive: true })
     window.addEventListener('resize', checkBottom, { passive: true })
     // The enter animation is 280 ms; allow 600 ms for it to settle before
     // checking whether the section is short enough to auto-complete.
-    const timer = window.setTimeout(checkBottom, 600)
+    const timer = window.setTimeout(() => {
+      // TEMP LOG 5: does the timer fire?
+      console.log('[scroll-detect] timer fired')
+      checkBottom()
+    }, 600)
 
     return () => {
       el.removeEventListener('scroll', checkBottom)
+      window.removeEventListener('scroll', onWindowScroll)
       window.removeEventListener('resize', checkBottom)
       window.clearTimeout(timer)
     }

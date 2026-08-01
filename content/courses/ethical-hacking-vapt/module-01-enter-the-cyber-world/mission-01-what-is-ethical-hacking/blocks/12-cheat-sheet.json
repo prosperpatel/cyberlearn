@@ -1,0 +1,37 @@
+{
+  "id": "block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 12,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "[PLACEHOLDER] Ethical Hacking Quick Reference",
+  "sections": [
+    {
+      "heading": "[PLACEHOLDER] Testing Types",
+      "rows": [
+        { "label": "[PLACEHOLDER] Black-box",  "value": "[PLACEHOLDER] Zero prior knowledge — simulates external attacker" },
+        { "label": "[PLACEHOLDER] Grey-box",   "value": "[PLACEHOLDER] Partial knowledge — simulates insider / compromised account" },
+        { "label": "[PLACEHOLDER] White-box",  "value": "[PLACEHOLDER] Full knowledge — most thorough, finds deepest issues" }
+      ]
+    },
+    {
+      "heading": "[PLACEHOLDER] VAPT Phases",
+      "rows": [
+        { "label": "[PLACEHOLDER] 1. Scoping",        "value": "[PLACEHOLDER] Define scope, RoE, timeline, get written authorisation" },
+        { "label": "[PLACEHOLDER] 2. Reconnaissance",  "value": "[PLACEHOLDER] OSINT, DNS, WHOIS, LinkedIn — no target packets yet" },
+        { "label": "[PLACEHOLDER] 3. Scanning",        "value": "[PLACEHOLDER] Nmap, Nessus, Nikto — active information gathering" },
+        { "label": "[PLACEHOLDER] 4. Exploitation",    "value": "[PLACEHOLDER] Prove impact of confirmed vulnerabilities" },
+        { "label": "[PLACEHOLDER] 5. Reporting",       "value": "[PLACEHOLDER] CVSS ratings, PoC evidence, remediation roadmap" }
+      ]
+    },
+    {
+      "heading": "[PLACEHOLDER] Key Standards",
+      "rows": [
+        { "label": "[PLACEHOLDER] CVE",       "value": "[PLACEHOLDER] Public vulnerability database identifier" },
+        { "label": "[PLACEHOLDER] CVSS",      "value": "[PLACEHOLDER] 0–10 severity score (0=None, 10=Critical)" },
+        { "label": "[PLACEHOLDER] OWASP Top 10","value": "[PLACEHOLDER] Top 10 web application security risks" },
+        { "label": "[PLACEHOLDER] PTES",      "value": "[PLACEHOLDER] Penetration Testing Execution Standard" }
+      ]
+    }
+  ]
+}

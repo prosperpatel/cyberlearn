@@ -440,6 +440,9 @@ export const ContentModuleSchema = z.object({
   createdAt:      z.string().datetime(),
   updatedAt:      z.string().datetime(),
   lessons:        z.array(LessonSummarySchema),
+  // Mission-based modules use `missions` instead of `lessons`.
+  // Both are optional arrays; a module may have one or the other (or neither during setup).
+  missions:       z.array(z.record(z.unknown())).optional(),
 })
 
 // ============================================================

@@ -132,6 +132,7 @@ export interface Course {
   isNew?: boolean
   isFeatured?: boolean
   isPro?: boolean
+  isComingSoon?: boolean
   stats: CourseStats
 }
 

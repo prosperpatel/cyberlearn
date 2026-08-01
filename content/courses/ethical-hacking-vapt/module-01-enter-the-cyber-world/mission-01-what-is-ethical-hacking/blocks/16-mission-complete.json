@@ -1,0 +1,18 @@
+{
+  "id": "block-21-mission-complete",
+  "type": "mission-complete",
+  "order": 16,
+  "estimatedMinutes": 1,
+  "sidebarLabel": "Complete",
+  "title": "[PLACEHOLDER] Mission Complete: Operation Lawful Strike",
+  "message": "[PLACEHOLDER] You've completed your first mission. You now understand what separates an ethical hacker from a criminal one — and it's not skill, it's authorisation. Keep that mindset at the core of everything you do in this course.",
+  "xpEarned": 80,
+  "badgesUnlocked": [
+    "[PLACEHOLDER] First Mission"
+  ],
+  "nextSteps": [
+    "[PLACEHOLDER] Proceed to Mission 02: The Legal Framework",
+    "[PLACEHOLDER] Optional: Complete the Assignment to earn a Practice badge",
+    "[PLACEHOLDER] Explore the community discussion for this mission"
+  ]
+}

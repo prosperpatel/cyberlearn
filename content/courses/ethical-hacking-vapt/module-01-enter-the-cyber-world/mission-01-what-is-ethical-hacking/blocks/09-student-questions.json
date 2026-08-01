@@ -1,0 +1,26 @@
+{
+  "id": "block-12-student-questions",
+  "type": "student-questions",
+  "order": 9,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Your Questions",
+  "intro": "[PLACEHOLDER] These are the questions most new students ask at this stage.",
+  "faqs": [
+    {
+      "question": "[PLACEHOLDER] Do I need to know how to code to become an ethical hacker?",
+      "answer": "[PLACEHOLDER] Not at first. Many entry-level roles use existing tools and frameworks. However, scripting knowledge (especially Python and Bash) dramatically increases your effectiveness and career ceiling. You'll learn both in this course."
+    },
+    {
+      "question": "[PLACEHOLDER] Is ethical hacking legal in my country?",
+      "answer": "[PLACEHOLDER] Ethical hacking with written authorisation is legal in virtually all countries. The key word is 'written authorisation'. Without it, accessing computer systems without permission is a criminal offence in most jurisdictions, including under the UK Computer Misuse Act and the US Computer Fraud and Abuse Act."
+    },
+    {
+      "question": "[PLACEHOLDER] What certifications should I aim for?",
+      "answer": "[PLACEHOLDER] CEH (Certified Ethical Hacker) and CompTIA Security+ are popular entry points. OSCP (Offensive Security Certified Professional) is the gold standard for hands-on penetration testing and is highly regarded by employers."
+    },
+    {
+      "question": "[PLACEHOLDER] Can I practise ethical hacking legally without a client?",
+      "answer": "[PLACEHOLDER] Yes. Set up your own local lab with deliberately vulnerable VMs (Metasploitable, DVWA, HackTheBox, TryHackMe). These platforms are specifically designed for legal practice."
+    }
+  ]
+}

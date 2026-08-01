@@ -1,0 +1,19 @@
+{
+  "id": "block-05-memory-anchor",
+  "type": "memory-anchor",
+  "order": 6,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "[PLACEHOLDER] The Three Rules of Ethical Hacking",
+  "concept": "[PLACEHOLDER] The three non-negotiable rules every ethical hacker must follow: get permission, stay in scope, protect the data.",
+  "anchor": "[PLACEHOLDER] Think PSP — Permission, Scope, Privacy. Like a PlayStation Portable, a good pen tester needs all three to play.",
+  "explanation": "[PLACEHOLDER] No matter how advanced your techniques, ethical hacking without these three guardrails is illegal hacking. PSP is your licence to operate.",
+  "acronym": {
+    "letters": ["P", "S", "P"],
+    "meanings": [
+      "[PLACEHOLDER] Permission — written authorisation from the system owner",
+      "[PLACEHOLDER] Scope — clearly defined boundaries for the engagement",
+      "[PLACEHOLDER] Privacy — strict confidentiality over all discovered data"
+    ]
+  }
+}

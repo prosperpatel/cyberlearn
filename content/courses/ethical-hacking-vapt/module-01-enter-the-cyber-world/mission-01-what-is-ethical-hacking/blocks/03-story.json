@@ -1,0 +1,28 @@
+{
+  "id": "block-02-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Operative",
+  "narrative": [
+    "[PLACEHOLDER] It was 2 AM when the alert fired. A major retail chain's customer database had been exfiltrated — 14 million records, gone in under an hour.",
+    "[PLACEHOLDER] Six months earlier, a security firm had offered to run a penetration test on the same infrastructure. The offer was declined. Too expensive, too disruptive.",
+    "[PLACEHOLDER] The total breach cost? $47 million. The penetration test quote? $35,000.",
+    "[PLACEHOLDER] This is why ethical hackers exist — not to cause harm, but to find the holes before the criminals do."
+  ],
+  "characters": [
+    {
+      "name": "Alex Chen",
+      "role": "Penetration Tester",
+      "description": "[PLACEHOLDER] A certified ethical hacker with 8 years of experience helping organisations find and fix vulnerabilities before attackers exploit them.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "Maria Santos",
+      "role": "CISO",
+      "description": "[PLACEHOLDER] Chief Information Security Officer who learned the hard way that prevention is always cheaper than breach response.",
+      "emoji": "🛡️"
+    }
+  ],
+  "mood": "tense"
+}

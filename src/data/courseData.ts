@@ -5,6 +5,24 @@ import type { Course } from '@/types'
  * These are the courses displayed on the /courses page.
  */
 export const STANDALONE_COURSES: Course[] = [
+  // ── Ethical Hacking / VAPT ────────────────────────────────────────────────
+  {
+    id:             'ethical-hacking-vapt',
+    slug:           'ethical-hacking-vapt',
+    title:          'Ethical Hacking & VAPT',
+    tagline:        'Think Like an Attacker. Secure Like a Defender.',
+    description:    'Master the fundamentals of Ethical Hacking and Vulnerability Assessment & Penetration Testing (VAPT). Learn how security professionals discover, assess, validate, and report security vulnerabilities through interactive lessons, visual explanations, quizzes, AI tutoring, and practical labs.',
+    coverImage:     '🎯',
+    category:       'penetration-testing',
+    difficulty:     'beginner',
+    estimatedHours: 40,
+    xpReward:       6000,
+    modules:        [],
+    prerequisites:  [],
+    tags:           ['ethical-hacking', 'vapt', 'penetration-testing', 'reconnaissance', 'osint', 'footprinting', 'enumeration', 'vulnerability-assessment', 'network-scanning', 'web-security'],
+    isComingSoon:   true,
+    stats:          { totalLessons: 0, totalStudents: 0, averageRating: 0, completionRate: 0 },
+  },
   // ── Security Tools ────────────────────────────────────────────────────────
   {
     id:             'wireshark-deep-dive',

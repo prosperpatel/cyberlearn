@@ -1,0 +1,24 @@
+{
+  "id": "block-08-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Interactive Diagram",
+  "title": "[PLACEHOLDER] The VAPT Engagement Lifecycle",
+  "description": "[PLACEHOLDER] A penetration test follows a structured five-phase methodology from initial scoping through to final reporting.",
+  "nodes": [
+    { "id": "scope",   "label": "[PLACEHOLDER] Scoping",       "type": "default", "detail": "[PLACEHOLDER] Define targets, rules of engagement, and timeline" },
+    { "id": "recon",   "label": "[PLACEHOLDER] Reconnaissance", "type": "default", "detail": "[PLACEHOLDER] Gather intelligence on the target environment" },
+    { "id": "scan",    "label": "[PLACEHOLDER] Scanning",       "type": "default", "detail": "[PLACEHOLDER] Identify open ports, services, and vulnerabilities" },
+    { "id": "exploit", "label": "[PLACEHOLDER] Exploitation",   "type": "attacker","detail": "[PLACEHOLDER] Attempt to exploit discovered vulnerabilities" },
+    { "id": "report",  "label": "[PLACEHOLDER] Reporting",      "type": "default", "detail": "[PLACEHOLDER] Document findings with severity ratings and remediation guidance" }
+  ],
+  "edges": [
+    { "from": "scope",   "to": "recon",   "label": "[PLACEHOLDER] Authorised",  "type": "normal" },
+    { "from": "recon",   "to": "scan",    "label": "[PLACEHOLDER] Intelligence", "type": "normal" },
+    { "from": "scan",    "to": "exploit", "label": "[PLACEHOLDER] Findings",     "type": "attack"  },
+    { "from": "exploit", "to": "report",  "label": "[PLACEHOLDER] Evidence",     "type": "normal"  }
+  ],
+  "caption": "[PLACEHOLDER] Each phase feeds into the next — reporting feeds back into future scoping for continuous improvement.",
+  "interactive": true
+}

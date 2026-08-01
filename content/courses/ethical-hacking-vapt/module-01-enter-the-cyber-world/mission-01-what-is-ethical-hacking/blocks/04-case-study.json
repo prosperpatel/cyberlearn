@@ -1,0 +1,31 @@
+{
+  "id": "block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Case Study",
+  "company": "[PLACEHOLDER] Example Corp",
+  "year": "2024",
+  "industry": "Financial Services",
+  "incident": "[PLACEHOLDER] A mid-sized financial services firm suffered a data breach after an attacker exploited an unpatched vulnerability in their web application firewall.",
+  "whatHappened": [
+    "[PLACEHOLDER] An attacker discovered a known CVE in the company's WAF that had not been patched for 14 months.",
+    "[PLACEHOLDER] Using a publicly available exploit, the attacker bypassed authentication and gained access to the admin panel.",
+    "[PLACEHOLDER] Over 72 hours, the attacker exfiltrated customer account data without triggering any alerts."
+  ],
+  "whyItHappened": [
+    "[PLACEHOLDER] No regular vulnerability scanning was in place.",
+    "[PLACEHOLDER] The patch management process had a backlog exceeding 200 days for medium-severity CVEs.",
+    "[PLACEHOLDER] No penetration test had been conducted in over three years."
+  ],
+  "lessonsLearned": [
+    "[PLACEHOLDER] Regular VAPT engagements would have identified the unpatched CVE before attackers did.",
+    "[PLACEHOLDER] A patch management SLA aligned to CVSS severity scores prevents critical delays.",
+    "[PLACEHOLDER] Continuous monitoring and alerting on admin panel access would have detected the intrusion within hours."
+  ],
+  "impactStats": [
+    { "value": "$2.3M", "label": "[PLACEHOLDER] Total breach cost" },
+    { "value": "47K",   "label": "[PLACEHOLDER] Customer records exposed" },
+    { "value": "72h",   "label": "[PLACEHOLDER] Dwell time before detection" }
+  ]
+}

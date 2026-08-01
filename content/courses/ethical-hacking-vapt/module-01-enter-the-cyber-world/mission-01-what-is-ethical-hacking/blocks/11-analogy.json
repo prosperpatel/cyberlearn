@@ -1,0 +1,25 @@
+{
+  "id": "block-07-analogy",
+  "type": "analogy",
+  "order": 11,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "[PLACEHOLDER] Building Inspectors and Security Auditors",
+  "realWorldThing": "[PLACEHOLDER] A building safety inspector hired to check if a structure meets fire safety codes",
+  "concept": "[PLACEHOLDER] A penetration tester hired to check if a computer system meets security standards",
+  "comparison": "[PLACEHOLDER] Both are authorised professionals using specialised knowledge to find dangerous weaknesses before they cause harm. Neither causes the harm — they report it so it can be fixed.",
+  "breakdown": [
+    {
+      "realWorld": "[PLACEHOLDER] Building inspector checks fire exits",
+      "techEquivalent": "[PLACEHOLDER] Pen tester checks for open network ports and services"
+    },
+    {
+      "realWorld": "[PLACEHOLDER] Inspector tests if sprinklers activate correctly",
+      "techEquivalent": "[PLACEHOLDER] Pen tester tests if intrusion detection systems trigger on attack patterns"
+    },
+    {
+      "realWorld": "[PLACEHOLDER] Inspector writes a report with required fixes",
+      "techEquivalent": "[PLACEHOLDER] Pen tester writes a remediation report with severity ratings"
+    }
+  ]
+}

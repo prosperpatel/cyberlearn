@@ -1,0 +1,49 @@
+{
+  "id": "block-16-quiz",
+  "type": "quiz",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "[PLACEHOLDER] Which of the following is the primary legal requirement before conducting a penetration test?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "[PLACEHOLDER] A verbal agreement with the IT manager",           "isCorrect": false },
+        { "id": "b", "text": "[PLACEHOLDER] Written authorisation from the system owner",       "isCorrect": true  },
+        { "id": "c", "text": "[PLACEHOLDER] A security certification such as CEH or OSCP",     "isCorrect": false },
+        { "id": "d", "text": "[PLACEHOLDER] An NDA signed by both parties",                    "isCorrect": false }
+      ],
+      "explanation": "[PLACEHOLDER] Written authorisation from the system owner is the only legally sufficient requirement. Verbal agreements are unenforceable. Certifications demonstrate skill but don't authorise any specific engagement. An NDA protects confidentiality but doesn't authorise testing.",
+      "xpReward": 50
+    },
+    {
+      "id": "q2",
+      "question": "[PLACEHOLDER] What is the key difference between a vulnerability assessment and a penetration test?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "[PLACEHOLDER] A pen test uses automated tools; a VA is manual",                  "isCorrect": false },
+        { "id": "b", "text": "[PLACEHOLDER] A VA identifies potential issues; a pen test proves exploitability", "isCorrect": true  },
+        { "id": "c", "text": "[PLACEHOLDER] A VA is illegal; a pen test requires authorisation",                 "isCorrect": false },
+        { "id": "d", "text": "[PLACEHOLDER] There is no difference — they are the same thing",                  "isCorrect": false }
+      ],
+      "explanation": "[PLACEHOLDER] A vulnerability assessment identifies and catalogues potential security weaknesses. A penetration test goes further — it attempts to actually exploit those weaknesses to prove real-world impact. Both require authorisation.",
+      "xpReward": 50
+    },
+    {
+      "id": "q3",
+      "question": "[PLACEHOLDER] In a black-box penetration test, what information does the tester have at the start?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "[PLACEHOLDER] Full access to source code and architecture diagrams",  "isCorrect": false },
+        { "id": "b", "text": "[PLACEHOLDER] Network diagrams and internal IP ranges",               "isCorrect": false },
+        { "id": "c", "text": "[PLACEHOLDER] Only the target organisation's name and public IP range","isCorrect": true  },
+        { "id": "d", "text": "[PLACEHOLDER] Credentials for one standard user account",              "isCorrect": false }
+      ],
+      "explanation": "[PLACEHOLDER] Black-box testing simulates an external attacker who has no insider knowledge. The tester starts with only publicly available information — typically just the organisation name and perhaps an IP range.",
+      "xpReward": 50
+    }
+  ]
+}

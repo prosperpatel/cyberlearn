@@ -1,0 +1,34 @@
+{
+  "id": "mission-01-what-is-ethical-hacking",
+  "slug": "mission-01-what-is-ethical-hacking",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-01-enter-the-cyber-world",
+  "title": "What Is Ethical Hacking?",
+  "tagline": "Your first mission briefing — understand the rules of engagement.",
+  "description": "Explore what ethical hacking means, how it differs from malicious hacking, the legal framework around penetration testing, and the career paths it opens up.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 45,
+  "xpReward": 80,
+  "order": 1,
+  "missionNumber": 1,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-01T00:00:00Z",
+  "updatedAt": "2026-08-01T00:00:00Z",
+  "prerequisites": [],
+  "tags": ["ethical-hacking", "vapt", "foundations", "career", "law"],
+  "learningObjectives": [
+    "Define ethical hacking in your own words, correctly referencing authorisation, scope, and professional context — not merely 'hacking with permission'",
+    "Explain the defining professional difference between a criminal hacker and an ethical hacker, and understand why authorisation is the key distinguishing factor",
+    "Describe what written authorisation means and why verbal permission is insufficient in professional security practice",
+    "Define the concept of scope in a penetration testing engagement and give one example of an in-scope and one out-of-scope activity",
+    "Explain the term VAPT and distinguish a Vulnerability Assessment (identifies weaknesses) from a Penetration Test (validates and proves exploitability)"
+  ],
+  "skills": ["ethical-hacking", "vapt", "legal-framework", "cvss"],
+  "badge": "Foundation Operative",
+  "missionIcon": "shield",
+  "completionRequirements": {
+    "minBlocksCompleted": 14,
+    "minQuizScore": 80
+  }
+}

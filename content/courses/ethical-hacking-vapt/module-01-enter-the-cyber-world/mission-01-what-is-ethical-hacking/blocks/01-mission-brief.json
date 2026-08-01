@@ -1,0 +1,28 @@
+{
+  "id": "block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "What Is Ethical Hacking?",
+  "operativeCodename": "Operation Lawful Strike",
+  "subtitle": "Master this first. Everything else depends on it.",
+  "briefing": "Here's a thought experiment.\n\nTwo people sit down at their laptops and do the exact same thing. They probe a company's web server, find a serious security vulnerability, and document exactly how it works. Same skills. Same technique. Same discovery.\n\nOne of them walks away with a consulting fee and a thank-you letter from the company's security team.\n\nThe other gets a call from a lawyer.\n\nWhat's the difference? It isn't skill. It isn't intent. It isn't whether any damage was done.\n\nIt's one thing. And before this mission is over, you'll know exactly what that thing is — and why every decision you make as a security professional starts there.",
+  "whyItMatters": "Organisations around the world pay serious money to ethical hackers — professionals hired to find the vulnerabilities that attackers would otherwise exploit. The demand for these professionals outpaces the supply, and it has for years.\n\nBut what separates a career from a criminal act isn't skill. It's understanding the professional framework that makes security testing authorised, scoped, and documented.\n\nWithout this foundation, every technical skill you build sits on unstable ground. With it, those same skills become one of the most valuable things you can offer.",
+  "objectives": [
+    "Explain what ethical hacking really means — not the version from movies",
+    "Understand the one professional difference that separates authorised security testing from unauthorised access",
+    "Learn why a signed agreement matters more than a verbal go-ahead",
+    "Define scope and understand why operating outside it is never acceptable — even with good intentions",
+    "Understand what VAPT means and how professionals use both approaches together"
+  ],
+  "skillsUnlocked": [
+    "Defining ethical hacking with real professional precision",
+    "Identifying whether a given action falls inside or outside an authorised engagement",
+    "Reading and interpreting the professional policies that govern real-world security research"
+  ],
+  "closingMessage": "You're about to meet two security researchers who made exactly the same discovery. One decision — a single piece of paperwork — changed everything for both of them.\n\nLet's find out what that decision was.",
+  "difficulty": "beginner",
+  "xpReward": 80,
+  "tags": ["ethical-hacking", "vapt", "foundations", "authorisation", "scope"]
+}

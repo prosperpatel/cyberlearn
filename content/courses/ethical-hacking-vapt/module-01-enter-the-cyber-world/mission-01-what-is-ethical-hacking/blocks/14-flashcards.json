@@ -1,0 +1,35 @@
+{
+  "id": "block-17-flashcards",
+  "type": "flashcards",
+  "order": 14,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Flashcards",
+  "title": "[PLACEHOLDER] Key Terms Flashcards",
+  "cards": [
+    {
+      "front": "[PLACEHOLDER] What does VAPT stand for?",
+      "back":  "[PLACEHOLDER] Vulnerability Assessment and Penetration Testing — a combined methodology to identify and validate security weaknesses.",
+      "hint":  "[PLACEHOLDER] Think 'find it, then prove it'"
+    },
+    {
+      "front": "[PLACEHOLDER] What is a CVE?",
+      "back":  "[PLACEHOLDER] Common Vulnerabilities and Exposures — a unique identifier for a known security vulnerability, e.g. CVE-2024-12345.",
+      "hint":  "[PLACEHOLDER] It's the 'name tag' for a vulnerability"
+    },
+    {
+      "front": "[PLACEHOLDER] What is CVSS?",
+      "back":  "[PLACEHOLDER] Common Vulnerability Scoring System — a 0–10 scale indicating vulnerability severity. 9.0–10.0 = Critical.",
+      "hint":  "[PLACEHOLDER] Think 'how bad is it on a scale of 1 to 10?'"
+    },
+    {
+      "front": "[PLACEHOLDER] Name the 5 phases of a VAPT engagement",
+      "back":  "[PLACEHOLDER] 1. Scoping, 2. Reconnaissance, 3. Scanning, 4. Exploitation, 5. Reporting",
+      "hint":  "[PLACEHOLDER] SRSER — Scoping, Recon, Scanning, Exploitation, Reporting"
+    },
+    {
+      "front": "[PLACEHOLDER] What is the difference between grey-box and white-box testing?",
+      "back":  "[PLACEHOLDER] Grey-box: partial knowledge (simulates insider). White-box: full knowledge including source code and architecture.",
+      "hint":  "[PLACEHOLDER] More boxes = more knowledge"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "module-01-enter-the-cyber-world",
+  "slug": "module-01-enter-the-cyber-world",
+  "courseSlug": "ethical-hacking-vapt",
+  "title": "Enter the Cyber World",
+  "description": "Lay the foundations: what ethical hacking is, the legal and ethical framework, and why VAPT matters to organisations.",
+  "order": 1,
+  "estimatedHours": 4,
+  "tags": ["ethical-hacking", "foundations", "vapt", "law"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-01T00:00:00Z",
+  "updatedAt": "2026-08-01T00:00:00Z",
+  "lessons": [],
+  "missions": [
+    {
+      "slug": "mission-01-what-is-ethical-hacking",
+      "title": "What Is Ethical Hacking?",
+      "order": 1,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 500,
+      "tags": ["ethical-hacking", "vapt", "career"]
+    }
+  ]
+}

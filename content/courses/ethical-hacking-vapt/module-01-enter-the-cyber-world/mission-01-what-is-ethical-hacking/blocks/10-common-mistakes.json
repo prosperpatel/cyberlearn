@@ -1,0 +1,32 @@
+{
+  "id": "block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 10,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "[PLACEHOLDER] New ethical hackers make these mistakes — avoid them from day one.",
+  "mistakes": [
+    {
+      "title": "[PLACEHOLDER] Testing without written permission",
+      "wrong":  "[PLACEHOLDER] 'I mentioned it verbally and they seemed fine with it.'",
+      "right":  "[PLACEHOLDER] Always obtain a signed Statement of Work or Penetration Testing Agreement before touching anything.",
+      "explanation": "[PLACEHOLDER] Verbal agreements are unenforceable and will not protect you if something goes wrong or the client later claims they never authorised testing.",
+      "severity": "critical"
+    },
+    {
+      "title": "[PLACEHOLDER] Exceeding the defined scope",
+      "wrong":  "[PLACEHOLDER] 'I found an interesting system that wasn't in scope, so I tested it too.'",
+      "right":  "[PLACEHOLDER] Immediately stop, document, and notify the client if you discover in-scope systems connecting to out-of-scope systems.",
+      "explanation": "[PLACEHOLDER] Even if the out-of-scope system has critical vulnerabilities, testing it without authorisation is illegal. The scope is a legal boundary.",
+      "severity": "critical"
+    },
+    {
+      "title": "[PLACEHOLDER] Confusing a vulnerability scan with a penetration test",
+      "wrong":  "[PLACEHOLDER] 'We ran Nessus and got a report — that's our pen test done.'",
+      "right":  "[PLACEHOLDER] A vulnerability scan identifies potential issues. A penetration test validates and exploits them to prove real-world impact.",
+      "explanation": "[PLACEHOLDER] A scanner generates many false positives and tells you nothing about actual exploitability. Manual testing and exploitation proof are what deliver real value.",
+      "severity": "warning",
+      "example": "[PLACEHOLDER] A scanner might report a web server version as vulnerable to a 2019 CVE. A pen tester would confirm whether the specific configuration is actually exploitable."
+    }
+  ]
+}

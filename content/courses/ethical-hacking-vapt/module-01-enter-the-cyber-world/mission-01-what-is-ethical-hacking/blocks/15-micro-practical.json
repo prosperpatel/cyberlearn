@@ -1,0 +1,33 @@
+{
+  "id": "block-09-micro-practical",
+  "type": "micro-practical",
+  "title": "Find a Responsible Disclosure Policy",
+  "metadata": {
+    "order": 15,
+    "estimatedMinutes": 5,
+    "optional": false,
+    "xp": 20,
+    "difficulty": "beginner",
+    "icon": "laptop",
+    "tags": ["ethical-hacking", "responsible-disclosure", "bug-bounty"]
+  },
+  "content": {
+    "objective": "[PLACEHOLDER] Locate and read a real responsible disclosure or bug bounty policy from a major technology company, and identify the key rules that define legal and authorised security research.",
+    "requirements": [
+      "Web browser",
+      "Internet connection"
+    ],
+    "instructions": [
+      "[PLACEHOLDER] Open your web browser and navigate to a well-known technology company — for example Google, Microsoft, GitHub, or Cloudflare.",
+      "[PLACEHOLDER] Search their website for a 'Responsible Disclosure Policy', 'Security Policy', or 'Bug Bounty Program' page. You can also search: site:company.com responsible disclosure",
+      "[PLACEHOLDER] Read through the policy and note: (1) what is explicitly in scope, (2) what is explicitly out of scope, and (3) what you are NOT allowed to do.",
+      "[PLACEHOLDER] Write down one thing that surprised you about the policy — something you did not expect to be allowed or forbidden."
+    ],
+    "successCriteria": [
+      "[PLACEHOLDER] You found a published responsible disclosure or bug bounty policy from a real company.",
+      "[PLACEHOLDER] You can name at least one activity the policy explicitly permits.",
+      "[PLACEHOLDER] You can name at least one activity the policy explicitly forbids."
+    ],
+    "reflection": "[PLACEHOLDER] Why do companies publish responsible disclosure policies? What does it tell you about the relationship between security researchers and the organisations they help?"
+  }
+}

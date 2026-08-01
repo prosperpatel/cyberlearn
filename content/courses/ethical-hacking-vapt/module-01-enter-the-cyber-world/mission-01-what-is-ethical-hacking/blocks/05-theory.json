@@ -1,0 +1,35 @@
+{
+  "id": "block-03-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Core Concepts",
+  "title": "[PLACEHOLDER] Ethical Hacking: The Foundations",
+  "content": "[PLACEHOLDER] Ethical hacking is the practice of deliberately probing computer systems, networks, and applications for security vulnerabilities — with explicit written permission from the owner.\n\nThe goal is identical to a malicious attacker's: find weaknesses. The difference is what happens after discovery. An ethical hacker documents and reports findings so they can be fixed. A criminal exploits them for profit or disruption.\n\nEthical hackers operate under three core constraints:\n- **Written authorisation** — always documented in a formal contract\n- **Defined scope** — clear boundaries on what can and cannot be tested\n- **No data retention** — discovered data is handled under strict confidentiality",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "[PLACEHOLDER] Key Distinction",
+      "text": "[PLACEHOLDER] Ethical hacking (also called penetration testing or pen testing) is authorised. Any hacking without explicit permission is illegal, regardless of intent."
+    },
+    {
+      "type": "warning",
+      "title": "[PLACEHOLDER] Legal Reality",
+      "text": "[PLACEHOLDER] In most countries, unauthorised access to computer systems is a criminal offence — even if you discover vulnerabilities and report them. Always obtain written permission first."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "[PLACEHOLDER] Penetration Testing",
+      "definition": "[PLACEHOLDER] A simulated cyberattack against a system to evaluate its security posture. Also called a pen test."
+    },
+    {
+      "term": "[PLACEHOLDER] VAPT",
+      "definition": "[PLACEHOLDER] Vulnerability Assessment and Penetration Testing — a combined methodology that identifies and validates security weaknesses."
+    },
+    {
+      "term": "[PLACEHOLDER] Scope",
+      "definition": "[PLACEHOLDER] The explicitly defined boundaries of a penetration test — which systems, IP ranges, and attack techniques are permitted."
+    }
+  ]
+}

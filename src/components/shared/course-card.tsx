@@ -67,6 +67,7 @@ export function CourseCard({ course, progress, className, variant = 'default' }:
             <div className="relative flex items-end justify-between w-full">
               <div className="text-4xl">{course.coverImage ?? '🔐'}</div>
               <div className="flex gap-1.5">
+                {course.isComingSoon && <Badge variant="outline">SOON</Badge>}
                 {course.isNew && <Badge variant="new">NEW</Badge>}
                 {course.isPro && <Badge variant="pro">PRO</Badge>}
               </div>
@@ -131,8 +132,9 @@ export function CourseCard({ course, progress, className, variant = 'default' }:
               {isLocked ? <Lock className="size-5 text-muted-foreground" /> : (course.coverImage ?? '🔐')}
             </div>
             <div className="flex flex-col items-end gap-1">
-              {course.isNew  && <Badge variant="new">NEW</Badge>}
-              {course.isPro  && <Badge variant="pro">PRO</Badge>}
+                {course.isComingSoon && <Badge variant="outline">SOON</Badge>}
+                {course.isNew  && <Badge variant="new">NEW</Badge>}
+                {course.isPro  && <Badge variant="pro">PRO</Badge>}
             </div>
           </div>
 
