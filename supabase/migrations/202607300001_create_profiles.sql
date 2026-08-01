@@ -45,3 +45,9 @@ $$;
 create trigger profiles_set_updated_at
   before update on public.profiles
   for each row execute function public.set_updated_at();
+
+-- PostgREST requires explicit GRANT even when RLS policies are present.
+-- Without these, every INSERT/SELECT returns 42501 "permission denied for table profiles"
+-- before RLS is evaluated.
+grant select, insert, update on public.profiles to authenticated;
+grant select                  on public.profiles to anon;
