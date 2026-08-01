@@ -134,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // ── Ongoing auth state changes ─────────────────────────────────────────
     // Only updates state — navigation is handled by the guard effect below.
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      async (_event, session) => {
         if (!mounted) return
         setSession(session)
         await syncUser(session?.user ?? null)
