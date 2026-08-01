@@ -106,12 +106,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (mounted) setUser(null)
         return
       }
-      console.log('[Auth] syncUser — fetching profile for', supabaseUser.id)
       const profile = await ProfileService.getProfile(supabaseUser.id).catch((err: unknown) => {
         console.warn('[Auth] getProfile error:', err)
         return null
       })
-      console.log('[Auth] syncUser — profile result:', profile)
       if (mounted) {
         setUser(profile ? mapProfile(profile, supabaseUser.email ?? '') : null)
       }
@@ -123,7 +121,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     supabase.auth.getSession()
       .then(async ({ data: { session } }) => {
         if (!mounted) return
-        console.log('[Auth] getSession resolved — session:', session?.user?.id ?? null)
         setSession(session)
         await syncUser(session?.user ?? null)
       })
@@ -139,7 +136,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (!mounted) return
-        console.log('[Auth] onAuthStateChange — event:', event, 'user:', session?.user?.id ?? null)
         setSession(session)
         await syncUser(session?.user ?? null)
       },
@@ -168,7 +164,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const path = window.location.pathname
 
     if (!user) {
-      console.log('[Auth] guard — session but no profile, redirecting to onboarding. path:', path)
       if (!path.startsWith(ROUTES.ONBOARDING)) {
         navigate(ROUTES.ONBOARDING, { replace: true })
       }
@@ -184,7 +179,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (isAuthPage) {
       const saved = sessionStorage.getItem('auth:redirect') ?? ROUTES.DASHBOARD
       sessionStorage.removeItem('auth:redirect')
-      console.log('[Auth] guard — profile found, redirecting to:', saved)
       navigate(saved, { replace: true })
     }
   }, [isLoading, session, user, navigate])

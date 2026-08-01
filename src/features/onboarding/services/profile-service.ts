@@ -18,17 +18,11 @@ export const ProfileService = {
   },
 
   async createProfile(input: CreateProfileInput): Promise<Profile> {
-    const { data: { session } } = await supabase.auth.getSession()
-    console.log('[ProfileService] createProfile — authenticated uid:', session?.user?.id ?? 'NONE')
-    console.log('[ProfileService] createProfile — payload:', JSON.stringify({ ...input, xp: 100, level: 1, streak: 0 }, null, 2))
-
-    const { data, error, status, statusText } = await supabase
+    const { data, error } = await supabase
       .from('profiles')
       .insert({ ...input, xp: 100, level: 1, streak: 0 })
       .select()
       .single()
-
-    console.log('[ProfileService] createProfile — response:', { status, statusText, data, error })
 
     if (error) throw error
     return data as Profile
@@ -49,14 +43,10 @@ export const ProfileService = {
   },
 
   async checkUsernameAvailability(username: string, currentUserId?: string): Promise<boolean> {
-    console.log('[ProfileService] checkUsernameAvailability — username:', username, 'userId:', currentUserId)
-
-    const { data, error, status } = await supabase.rpc('check_username_available', {
+    const { data, error } = await supabase.rpc('check_username_available', {
       p_username:     username,
       p_current_user: currentUserId ?? null,
     })
-
-    console.log('[ProfileService] checkUsernameAvailability — response:', { status, data, error })
 
     if (error) throw error
     return Boolean(data)

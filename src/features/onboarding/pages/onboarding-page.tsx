@@ -86,19 +86,13 @@ export function OnboardingPage() {
       // Supabase query errors are plain objects returned from PostgREST's JSON
       // body — they have { message, code, details, hint } but are NOT Error
       // instances, so `instanceof Error` is always false for them.
-      console.error('[Onboarding] profile activation error (full object):', cause)
-
       const code    = typeof cause === 'object' && cause !== null && 'code'    in cause ? String((cause as { code: unknown }).code) : ''
       const message = cause instanceof Error
         ? cause.message
         : typeof cause === 'object' && cause !== null && 'message' in cause
           ? String((cause as { message: unknown }).message)
           : 'Profile activation failed. Please try again.'
-      const hint    = typeof cause === 'object' && cause !== null && 'hint'    in cause ? String((cause as { hint: unknown }).hint ?? '') : ''
 
-      console.error('[Onboarding] code:', code, '| message:', message, '| hint:', hint)
-
-      // Postgres unique constraint violation (race window between pre-check and insert)
       if (code === '23505') {
         setStep(2)
         setError('That callsign was just claimed. Please choose another.')
