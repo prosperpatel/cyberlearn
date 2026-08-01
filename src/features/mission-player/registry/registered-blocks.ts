@@ -15,13 +15,14 @@
 
 import { registerBlock } from './block-registry'
 import { PlaceholderBlock } from '../components/placeholder-block'
+import { MissionBriefBlock } from '../components/blocks/mission-brief-block'
 
 // ── Built-in block type registrations ────────────────────────────────────────
 // Each line maps a block type string → the React component that renders it.
 // The registry accepts any string type — custom block types from plugins or
 // future academies can be registered here too.
 
-registerBlock('mission-brief',      PlaceholderBlock)
+registerBlock('mission-brief',      MissionBriefBlock)
 registerBlock('story',              PlaceholderBlock)
 registerBlock('theory',             PlaceholderBlock)
 registerBlock('case-study',         PlaceholderBlock)
