@@ -24,6 +24,11 @@ export function LessonPlayer({ lesson }: Props) {
   const sessionStartRef = useRef(Date.now())
   const contentRef      = useRef<HTMLDivElement>(null)
 
+  // Keep a stable ref so the scroll handler always calls the latest version
+  // without needing to be re-registered on every render.
+  const markCurrentCompleteRef = useRef(progress.markCurrentComplete)
+  markCurrentCompleteRef.current = progress.markCurrentComplete
+
   // Initialise progress on first mount
   useEffect(() => {
     progress.init()
@@ -57,6 +62,43 @@ export function LessonPlayer({ lesson }: Props) {
     window.addEventListener('resize', handler)
     return () => window.removeEventListener('resize', handler)
   }, [])
+
+  // Mark the current section complete when the user scrolls to the bottom.
+  // Must listen on contentRef (the overflow-y-auto div), not window — on mobile
+  // a scroll inside a custom overflow container never fires window.scroll.
+  // Also schedules a delayed check so sections that fit entirely on screen
+  // (no scrolling needed) are auto-completed once the enter animation settles.
+  // The resize listener re-evaluates after orientation change or keyboard dismissal,
+  // both of which change clientHeight and may make previously tall content fit.
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+
+    // Guard: markCurrentComplete is idempotent at the store level, but the
+    // Zustand setter is still invoked on every scroll frame once at the bottom.
+    // The flag prevents any calls after the first successful completion.
+    let triggered = false
+
+    function checkBottom() {
+      if (!el || triggered) return
+      if (el.scrollHeight - el.scrollTop - el.clientHeight < 48) {
+        triggered = true
+        markCurrentCompleteRef.current()
+      }
+    }
+
+    el.addEventListener('scroll', checkBottom, { passive: true })
+    window.addEventListener('resize', checkBottom, { passive: true })
+    // The enter animation is 280 ms; allow 600 ms for it to settle before
+    // checking whether the section is short enough to auto-complete.
+    const timer = window.setTimeout(checkBottom, 600)
+
+    return () => {
+      el.removeEventListener('scroll', checkBottom)
+      window.removeEventListener('resize', checkBottom)
+      window.clearTimeout(timer)
+    }
+  }, [progress.currentSectionId])
 
   const currentSection = lesson.sections.find(
     (s) => s.id === progress.currentSectionId

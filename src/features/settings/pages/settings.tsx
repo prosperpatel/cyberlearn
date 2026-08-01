@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 
 export function Settings() {
   return (
-    <div className="space-y-6 p-6 max-w-2xl mx-auto">
+    <div className="space-y-6 p-4 sm:p-6 max-w-2xl mx-auto">
       <div className="flex items-center gap-3">
         <div className="flex size-10 items-center justify-center rounded-xl bg-muted border border-border">
           <SettingsIcon className="size-5 text-muted-foreground" />
@@ -24,7 +24,7 @@ export function Settings() {
           <CardDescription>Update your display information</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="display-name">Display Name</Label>
               <Input id="display-name" defaultValue="Alex Chen" />

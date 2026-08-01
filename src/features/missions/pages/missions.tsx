@@ -132,7 +132,7 @@ export function Missions() {
   const audio    = useAudio()
 
   return (
-    <div className="space-y-6 p-6 max-w-5xl mx-auto">
+    <div className="space-y-6 p-4 sm:p-6 max-w-5xl mx-auto">
       {/* Page header */}
       <div className="flex items-center gap-3">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/15 border border-primary/25">

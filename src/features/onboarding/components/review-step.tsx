@@ -18,7 +18,7 @@ export function ReviewStep({ data }: { data: OnboardingData }) {
       <p className="mt-2 text-slate-400">Review your academy profile before activation.</p>
       <dl className="mt-7 divide-y divide-slate-800 rounded-xl border border-slate-700 bg-base-900 px-4">
         {rows(data).map(([term, desc]) => (
-          <div key={term} className="grid grid-cols-[8rem_1fr] gap-3 py-4 text-sm">
+          <div key={term} className="grid grid-cols-1 gap-0.5 py-3 text-sm sm:grid-cols-[8rem_1fr] sm:gap-3 sm:py-4">
             <dt className="text-slate-500">{term}</dt>
             <dd className="font-medium text-slate-100">{desc}</dd>
           </div>

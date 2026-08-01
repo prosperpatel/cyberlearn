@@ -105,7 +105,7 @@ export function Dashboard() {
   const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening'
 
   return (
-    <div className="space-y-8 p-6 pb-8 max-w-7xl mx-auto">
+    <div className="space-y-6 sm:space-y-8 p-4 sm:p-6 pb-8 max-w-7xl mx-auto">
 
       {/* ── Welcome header ── */}
       <FadeUp>
@@ -200,7 +200,7 @@ export function Dashboard() {
             <Card variant="cyber-border" className="overflow-hidden group">
               {/* Banner */}
               <div
-                className="relative h-36 flex items-end p-5"
+                className="relative h-28 sm:h-36 flex items-end p-4 sm:p-5"
                 style={{
                   background: 'linear-gradient(135deg, rgba(123,94,167,0.3) 0%, rgba(0,217,255,0.15) 100%)',
                 }}
@@ -209,8 +209,8 @@ export function Dashboard() {
                 <div className="relative flex items-end justify-between w-full">
                   <div>
                     <Badge variant="new" className="mb-2">Featured</Badge>
-                    <h2 className="text-xl font-black text-foreground">{MOCK_FEATURED_COURSE.title}</h2>
-                    <p className="text-sm text-muted-foreground mt-0.5">{MOCK_FEATURED_COURSE.tagline}</p>
+                    <h2 className="text-base sm:text-xl font-black text-foreground">{MOCK_FEATURED_COURSE.title}</h2>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 line-clamp-2">{MOCK_FEATURED_COURSE.tagline}</p>
                   </div>
                   <div className="text-5xl hidden sm:block">{MOCK_FEATURED_COURSE.coverImage}</div>
                 </div>

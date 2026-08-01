@@ -30,7 +30,7 @@ export function Profile() {
     : ''
 
   return (
-    <div className="space-y-6 p-6 max-w-4xl mx-auto">
+    <div className="space-y-6 p-4 sm:p-6 max-w-4xl mx-auto">
       {/* Hero card */}
       <Card variant="cyber-border">
         <CardContent className="p-6">
@@ -83,8 +83,8 @@ export function Profile() {
               <ProfileRow label="Primary Goal" value={profile.goal} />
               <ProfileRow label="Country"      value={countryName(profile.country)} />
               <ProfileRow label="Daily Goal"   value={`${profile.daily_goal} min / day`} />
-              <div className="grid grid-cols-[8rem_1fr] gap-3 py-4 text-sm">
-                <dt className="text-muted-foreground pt-0.5">Interests</dt>
+              <div className="py-3 sm:py-4 text-sm grid grid-cols-1 gap-1 sm:grid-cols-[8rem_1fr] sm:gap-3">
+                <dt className="text-muted-foreground">Interests</dt>
                 <dd className="flex flex-wrap gap-2">
                   {profile.interests.map(interest => (
                     <Badge key={interest} variant="outline">{interest}</Badge>
@@ -102,7 +102,7 @@ export function Profile() {
           <CardTitle>Achievements</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-4 sm:grid-cols-6 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
             {MOCK_ACHIEVEMENTS.map((ach) => (
               <AchievementBadge key={ach.id} achievement={ach} size="md" />
             ))}
@@ -115,7 +115,7 @@ export function Profile() {
 
 function ProfileRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="grid grid-cols-[8rem_1fr] gap-3 py-4 text-sm">
+    <div className="grid grid-cols-1 gap-0.5 py-3 text-sm sm:grid-cols-[8rem_1fr] sm:gap-3 sm:py-4">
       <dt className="text-muted-foreground">{label}</dt>
       <dd className="font-medium text-foreground">{value}</dd>
     </div>

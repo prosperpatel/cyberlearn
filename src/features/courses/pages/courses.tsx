@@ -34,7 +34,7 @@ export function Courses() {
   })
 
   return (
-    <div className="space-y-6 p-6 max-w-7xl mx-auto">
+    <div className="space-y-6 p-4 sm:p-6 max-w-7xl mx-auto">
 
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
@@ -79,7 +79,7 @@ export function Courses() {
           startIcon={<Search />}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
         <div className="flex items-center gap-2 flex-wrap">
           {FILTERS.map((f) => (

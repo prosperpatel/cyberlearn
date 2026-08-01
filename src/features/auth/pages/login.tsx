@@ -263,7 +263,7 @@ export function Login() {
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="lg:hidden mb-10 flex flex-col items-center gap-3 relative z-10"
+          className="lg:hidden mb-6 sm:mb-10 flex flex-col items-center gap-3 relative z-10"
         >
           <div className="relative">
             <div className="size-12 rounded-2xl bg-gradient-cyber flex items-center justify-center shadow-cyber-md">
@@ -282,7 +282,7 @@ export function Login() {
           className="relative z-10 w-full max-w-sm"
         >
           <div
-            className="rounded-2xl border border-white/[0.06] p-8"
+            className="rounded-2xl border border-white/[0.06] p-6 sm:p-8"
             style={{
               background: 'rgba(26, 29, 38, 0.6)',
               backdropFilter: 'blur(24px)',
