@@ -1,0 +1,30 @@
+{
+  "id": "m5-block-09-student-questions",
+  "type": "student-questions",
+  "order": 9,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Your Questions",
+  "title": "Questions About Tools, Frameworks, and Getting Started",
+  "questions": [
+    {
+      "question": "Should I use Kali Linux or Parrot OS for penetration testing?",
+      "answer": "Both are purpose-built penetration testing Linux distributions that come pre-installed with most standard tools. The choice between them does not matter significantly for learning purposes — professional penetration testers have preferences, but employers do not care which one you used.\n\nKali Linux (maintained by Offensive Security, the same organisation that maintains OSCP) is more widely documented in tutorials, write-ups, and courses — making it easier to find help when something does not work. Parrot OS is lighter and runs better on older hardware.\n\nThe more important question is: do you understand what you are running and why? You can use any Linux distribution as a pentesting platform if you understand the tools. A professional who can only work in Kali is less capable than one who can adapt to any environment.\n\nFor learning: start with Kali. The documentation and community are the best available for beginners."
+    },
+    {
+      "question": "How do I know which CVE to look up when I find a specific service running?",
+      "answer": "The process:\n\n1. Identify the exact service and version number during scanning (Nmap -sV for version detection)\n2. Search the NVD (nvd.nist.gov) for the service name + version range. Example: 'Apache 2.4.49' returns CVE-2021-41773, a critical path traversal and RCE vulnerability.\n3. Check the CVE entry for: CVSS score, affected version range, whether a patch exists, and whether a public exploit is available (the NVD links to ExploitDB and other exploit databases when relevant)\n4. Check ExploitDB (exploit-db.com) to see if a public proof-of-concept exploit exists\n\nIn a professional engagement, you would not search CVEs for every service manually — a credentialed vulnerability scanner (Nessus, OpenVAS) does this automatically. But understanding how to do it manually is essential: it teaches you why the vulnerability matters, what the exploit actually does, and whether the automated scanner's severity rating makes sense in context.\n\nAlways read the CVE description and CVSS score breakdown before attempting any exploit. Understand what the exploit does before you run it."
+    },
+    {
+      "question": "Is OWASP Top 10 the same as OWASP Testing Guide? Do I need to know both?",
+      "answer": "They are different documents with different purposes:\n\nOWASP Top 10 is a risk awareness document listing the ten most prevalent and impactful categories of web application vulnerabilities. It is intended for developers, architects, and security managers as a prioritisation guide. It does not tell you how to test for anything — it tells you what to prioritise.\n\nOWASP Testing Guide (OTG) and OWASP Web Security Testing Guide (WSTG) are comprehensive technical manuals that describe exactly how to test for each class of vulnerability — which parameters to test, which tools to use, what responses to look for. The current version is WSTG v4.2.\n\nFor your career in offensive security: know the Top 10 as a classification and priority framework. Use the WSTG as a technical reference when you need to understand how to test for a specific vulnerability category. They complement each other — the Top 10 answers 'what matters most', the WSTG answers 'how do I test for it'."
+    },
+    {
+      "question": "I hear people say Metasploit is 'cheating'. Is it?",
+      "answer": "No — Metasploit is a professional tool used by professional penetration testers. Using it is not cheating; using it without understanding what it does is a problem.\n\nWhen OSCP prohibits Metasploit for most of the exam (you can use it on one machine), it is not because Metasploit is unprofessional — it is because the exam is designed to assess whether you understand exploitation well enough to work without automated frameworks when needed. Understanding the underlying vulnerability and exploit mechanism makes you a better practitioner whether you ultimately use Metasploit or not.\n\nIn professional engagements, Metasploit is used routinely. The key is to know: what module am I running, what does it do to the target system, what is its footprint, and does the RoE permit this class of technique? A pentester who blindly runs 'exploit/multi/handler' without understanding the payload, the listener, and the network path it takes is doing unsafe work — not because Metasploit is bad, but because they do not understand the tool."
+    },
+    {
+      "question": "What is Burp Suite and why do I need it if I can already use browser developer tools?",
+      "answer": "Browser developer tools let you inspect requests the browser made. Burp Suite lets you intercept, modify, and replay those requests — including adding inputs the browser's UI does not surface.\n\nBurp Suite is an intercepting proxy that sits between your browser and the web server. Every request your browser makes passes through Burp, where you can:\n- Pause it and modify any parameter before it reaches the server\n- Send it to the Repeater to test it dozens of times with different values\n- Send it to the Intruder for automated parameter fuzzing\n- Use the Scanner (paid version) to automatically test for common vulnerabilities\n\nExample: a web application has a hidden input field in an HTML form that controls whether the user is an 'admin' or 'user'. Browser developer tools let you see it. Burp Suite lets you change its value before the server processes the request — testing for a Broken Access Control vulnerability that the browser's UI would never let you trigger.\n\nFor web application penetration testing, Burp Suite is not optional — it is the central tool. The Community Edition is free and sufficient for learning. The Professional Edition ($449/year) adds automation features used in professional engagements."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "m5-block-16-mission-complete",
+  "type": "mission-complete",
+  "order": 16,
+  "estimatedMinutes": 1,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Toolkit — Complete",
+  "message": "Module 1 is complete.\n\nYou started with a question — what is ethical hacking? — and you now have a full foundational framework for the answer.\n\nYou understand that ethical hacking operates within a legal and professional framework that makes it categorically different from criminal activity. You understand how attackers think, why the asymmetry between offence and defence makes this field uniquely challenging, and what the law actually permits and prohibits. You understand the five-phase VAPT methodology that transforms skill into professional engagement. And you now have the vocabulary — CVE, CVSS, OWASP, NIST CSF, PTES — that lets you read, write, and discuss professional security work.\n\nFatima installed thirty tools before she had the knowledge to use any of them. You now have the knowledge first. The tools are the next step — and they will make sense in a way they could not have before this module.\n\nModule 2 begins the hands-on technical work. You will learn reconnaissance systematically, understand networking at the level that makes scanning meaningful, and begin building the practical pattern recognition that separates someone who runs tools from someone who interprets what the tools find.\n\nThe foundation is built. The next floor begins now.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Equipped Operative",
+      "description": "Completed Mission 5: Your Professional Toolkit — demonstrated understanding of CVE/CVSS/NVD, OWASP Top 10, NIST Cybersecurity Framework, tool categories, and offensive security certification pathways."
+    }
+  ],
+  "nextSteps": [
+    "Module 2: Reconnaissance and Network Fundamentals — begin the systematic technical work; learn how networks actually work, what reconnaissance reveals, and how to interpret what you find",
+    "Start building your lab: create a free account on Hack The Box or TryHackMe and complete your first guided room to connect this module's concepts to hands-on practice",
+    "Research: look up one CVE that interests you on nvd.nist.gov, read the full entry, and identify which OWASP Top 10 category it maps to — this is the vocabulary exercise that cements everything in this mission"
+  ]
+}

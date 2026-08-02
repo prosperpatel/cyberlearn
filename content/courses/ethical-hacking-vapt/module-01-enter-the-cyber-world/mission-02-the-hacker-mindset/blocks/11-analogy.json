@@ -1,0 +1,29 @@
+{
+  "id": "m2-block-11-analogy",
+  "type": "analogy",
+  "order": 11,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "The Medieval Castle",
+  "realWorldThing": "A medieval castle with a moat, thick stone walls, watchtowers, a reinforced gatehouse, and an inner keep. The lord must maintain every section of the defences, every day. Attackers can probe as many times as they want, looking for the one weak point: the bridge left down, a poorly sealed tunnel, a bribed gatekeeper, a servant who can be convinced to open a door.",
+  "concept": "A modern organisation with enterprise firewalls, email filtering, MFA enforcement, patched servers, and intrusion detection. The security team must maintain every control, on every system, every day. Attackers probe until they find the one weak point: a vendor's reused password, a phishing email that bypasses the filter, a misconfigured cloud storage bucket, or a developer who clicks a link.",
+  "comparison": "In both cases, the defender's strength is measured not by their strongest defence but by their weakest point. The most impenetrable castle wall means nothing if one gate is unguarded. The most sophisticated firewall means nothing if a vendor's portal is protected by a password from a three-year-old breach database. The attacker does not have to conquer the whole castle. They just have to find the one door that was left open.",
+  "breakdown": [
+    {
+      "realWorld": "The moat and outer wall defend against frontal assault — the most obvious attack",
+      "techEquivalent": "The perimeter firewall and intrusion detection system defend against direct external attacks on known ports and protocols"
+    },
+    {
+      "realWorld": "Watchtower guards can only see what is within their line of sight — a tunnel dug from outside the visible perimeter goes undetected",
+      "techEquivalent": "Security monitoring can only detect what it is configured to look for — a vendor's remote access portal falls outside your monitoring tools' scope"
+    },
+    {
+      "realWorld": "A bribed gatekeeper or corrupt servant grants access without defeating a single defence",
+      "techEquivalent": "A phishing attack on an employee, or a vendor with compromised credentials, bypasses all perimeter controls entirely"
+    },
+    {
+      "realWorld": "The inner keep is the most protected part — but once you are inside the castle walls, reaching it is much easier",
+      "techEquivalent": "Internal network segmentation is the equivalent of the inner keep — once an attacker is past the perimeter, lateral movement depends on how well the interior is segmented"
+    }
+  ]
+}

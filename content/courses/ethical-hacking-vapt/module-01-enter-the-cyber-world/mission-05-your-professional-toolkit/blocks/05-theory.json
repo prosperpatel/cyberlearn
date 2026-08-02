@@ -1,0 +1,53 @@
+{
+  "id": "m5-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 7,
+  "sidebarLabel": "OWASP Top 10",
+  "title": "OWASP Top 10 (2021): The Standard Reference for Web Application Security",
+  "content": {
+    "introduction": "The OWASP Top 10 is the most widely cited reference in web application security. Published by the Open Web Application Security Project (OWASP), a non-profit foundation, it lists the ten most critical web application security risks identified from analysis of hundreds of organisations' real vulnerability data. It is not a penetration testing checklist — it is a risk awareness document that shapes how developers build, how auditors assess, and how pentesters report web application findings.",
+    "sections": [
+      {
+        "heading": "A01:2021 — Broken Access Control",
+        "body": "The most prevalent web application vulnerability category. Occurs when users can perform actions or access data outside their intended permissions.\n\nExamples: Accessing another user's account by changing a URL parameter (?user_id=1234 → ?user_id=1235), vertical privilege escalation (regular user accessing admin functions), horizontal privilege escalation (accessing another user's data), accessing API endpoints without proper authorisation checks.\n\nWhy it moved to #1: OWASP found broken access control vulnerabilities in 94% of tested applications in their 2021 dataset."
+      },
+      {
+        "heading": "A02:2021 — Cryptographic Failures",
+        "body": "Previously called 'Sensitive Data Exposure'. Renamed to focus on the root cause — failures in cryptography — rather than the symptom. Covers weak or absent encryption of data in transit or at rest.\n\nExamples: Using HTTP instead of HTTPS, weak cipher suites (RC4, DES, MD5 for password hashing), unencrypted storage of sensitive PII or health records, transmitting sensitive data in URL parameters (which appear in server logs).\n\nCapital One relevance: Yahoo's storage of security questions in plaintext (Mission 3) was a Cryptographic Failure."
+      },
+      {
+        "heading": "A03:2021 — Injection",
+        "body": "Occurs when untrusted data is sent to an interpreter as part of a command or query, allowing the attacker to manipulate that command.\n\nTypes: SQL injection (most common), OS command injection, LDAP injection, XPath injection, NoSQL injection, template injection.\n\nThe unifying principle: if user-supplied data can be interpreted as code or commands by an interpreter (database, OS, LDAP server), the application is vulnerable to injection. The defence: parameterised queries, input validation, and output encoding.\n\nSQL injection alone has been responsible for some of the most significant data breaches in history."
+      },
+      {
+        "heading": "A04:2021 — Insecure Design",
+        "body": "New in 2021. Distinguishes design-level flaws from implementation bugs. Addresses the category of vulnerabilities that arise from missing or inadequate security design — flaws that cannot be patched away because they are architectural.\n\nExamples: No rate limiting on authentication attempts (allows password brute force at scale), no threat modelling conducted during design, business logic flaws (e.g., a discount code that can be applied unlimited times), missing security requirements in functional specifications.\n\nKey insight: secure design is a prerequisite for secure implementation. You cannot bolt security onto a fundamentally insecure design."
+      },
+      {
+        "heading": "A05:2021 — Security Misconfiguration",
+        "body": "The second most common finding in web application assessments. Occurs when security controls are improperly configured, left at defaults, or absent where they should be present.\n\nExamples: Default admin credentials left unchanged, unnecessary features and services enabled (unnecessary ports, pages, accounts, privileges), overly verbose error messages exposing stack traces or database structure, S3 buckets misconfigured with public access, missing security headers (Content-Security-Policy, X-Frame-Options).\n\nCapital One relevance: The overpermissive IAM role was a Security Misconfiguration."
+      },
+      {
+        "heading": "A06:2021 — Vulnerable and Outdated Components",
+        "body": "Using software components — libraries, frameworks, CMS plugins, server software — with known vulnerabilities.\n\nExamples: Running an outdated version of Apache with a known CVE, using an unpatched WordPress plugin, including a JavaScript library with a known XSS vulnerability, running an end-of-life operating system on a server.\n\nLog4Shell (CVE-2021-44228) is the defining example: a critical RCE vulnerability in the Apache Log4j logging library, used in millions of applications, that was not patched quickly enough because organisations did not know they were using Log4j (it was a transitive dependency in many cases)."
+      },
+      {
+        "heading": "A07:2021 — Identification and Authentication Failures",
+        "body": "Previously called 'Broken Authentication'. Weaknesses in how applications identify users and manage sessions.\n\nExamples: Allowing weak passwords (no complexity requirements), not implementing multi-factor authentication (MFA) on privileged accounts, session tokens that are not invalidated after logout, predictable session token generation, no protection against credential stuffing attacks (trying breached username/password combinations from other sites).\n\nCapital One relevance: A missing MFA requirement on a VPN account was the initial access vector in the Colonial Pipeline ransomware attack — the same class of failure."
+      },
+      {
+        "heading": "A08:2021 — Software and Data Integrity Failures",
+        "body": "New in 2021. Focuses on failures to verify the integrity of software updates, critical data, and CI/CD pipelines.\n\nExamples: Insecure CI/CD pipelines where malicious code can be injected into the build process, auto-update mechanisms that do not verify digital signatures, deserialisation vulnerabilities (trusting serialised objects from untrusted sources), SolarWinds-style supply chain attacks where the build pipeline itself is compromised.\n\nThe SolarWinds SUNBURST attack introduced in Mission 2 is the defining case for this category."
+      },
+      {
+        "heading": "A09:2021 — Security Logging and Monitoring Failures",
+        "body": "Insufficient logging, alerting, or monitoring that allows attacks to go undetected.\n\nExamples: Failed login attempts not logged, no alerting on credential stuffing attacks, audit logs not protected from tampering, security events not monitored in real time, Mean Time to Detect (MTTD) measured in months rather than hours.\n\nCapital One relevance: The data exfiltration was not detected by Capital One's own monitoring — it was reported by a third party. MTTD in that breach was weeks. This category represents the gap between 'having a vulnerability' and 'knowing you have been exploited'."
+      },
+      {
+        "heading": "A10:2021 — Server-Side Request Forgery (SSRF)",
+        "body": "New in 2021. Occurs when a web application fetches a remote resource based on a user-supplied URL without adequate validation, allowing an attacker to make the server send requests to unintended destinations.\n\nWhy it matters: In cloud environments, SSRF can be used to access the cloud provider's instance metadata service (as in the Capital One breach), retrieve IAM credentials, access internal services behind firewalls that the attacker could not reach directly, or pivot to internal network resources.\n\nCapital One relevance: SSRF was the exact attack class used against the Capital One WAF to retrieve AWS IAM credentials from the metadata service. This is why SSRF was elevated to the Top 10 for the first time in 2021 — it is disproportionately dangerous in cloud environments."
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "m5-block-06-diagram",
+  "type": "diagram",
+  "order": 6,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Tool Categories",
+  "title": "The Professional Toolkit — Tool Categories by VAPT Phase",
+  "description": "Professional security tools are not randomly selected — they map to specific phases of the VAPT methodology. Understanding which category of tool serves which phase prevents the Fatima problem: having thirty tools installed and no idea when to use any of them.",
+  "nodes": [
+    {
+      "id": "recon",
+      "label": "Reconnaissance\nTools",
+      "type": "primary",
+      "detail": "Gather information about targets before any active scanning. Used in Phase 2 (Reconnaissance). Examples: Nmap (host discovery), theHarvester (OSINT email/subdomain collection), Maltego (relationship mapping), Shodan (exposed service search), OSINT Framework (aggregates public sources)."
+    },
+    {
+      "id": "vuln-scan",
+      "label": "Vulnerability\nScanners",
+      "type": "primary",
+      "detail": "Automate identification of known vulnerabilities across network and host surfaces. Used in Phase 3 (Scanning & Enumeration). Examples: Nessus (industry standard, commercial), OpenVAS (open-source), Qualys (cloud-based), Nikto (web server scanner)."
+    },
+    {
+      "id": "web-app",
+      "label": "Web Application\nTesting Tools",
+      "type": "primary",
+      "detail": "Intercept, inspect, and modify web traffic; discover and test web vulnerabilities. Used in Phases 3 and 4. Examples: Burp Suite (industry standard proxy and scanner), OWASP ZAP (open-source alternative), Gobuster/ffuf (directory and file brute-forcing), SQLMap (automated SQL injection testing)."
+    },
+    {
+      "id": "exploit",
+      "label": "Exploitation\nFrameworks",
+      "type": "primary",
+      "detail": "Structured platforms for developing and executing exploits against confirmed vulnerabilities. Used in Phase 4 (Exploitation). Examples: Metasploit (open-source, industry standard), Cobalt Strike (commercial, used in red team engagements), Havoc (open-source C2 framework)."
+    },
+    {
+      "id": "credential",
+      "label": "Credential &\nPassword Tools",
+      "type": "primary",
+      "detail": "Test password strength, crack hashes, perform credential attacks. Used in Phases 3 and 4. Examples: Hashcat (GPU-accelerated hash cracking), John the Ripper (multi-format hash cracker), Hydra (online login brute force), CrackMapExec (credential testing across Windows environments)."
+    },
+    {
+      "id": "traffic",
+      "label": "Traffic\nAnalysis",
+      "type": "primary",
+      "detail": "Capture and inspect network traffic to understand protocols, identify cleartext credentials, and analyse attack patterns. Used across phases. Examples: Wireshark (full packet capture and analysis), tcpdump (command-line packet capture)."
+    },
+    {
+      "id": "post-exploit",
+      "label": "Post-Exploitation\nTools",
+      "type": "primary",
+      "detail": "Enumerate privileges, extract credentials, map Active Directory, and assess lateral movement potential after initial access. Used in PTES Phase 6 (Post-Exploitation). Examples: Mimikatz (Windows credential extraction), BloodHound (Active Directory relationship mapping), PowerView (AD enumeration)."
+    },
+    {
+      "id": "phase-recon",
+      "label": "Phase 2\nReconnaissance",
+      "type": "phase",
+      "detail": "Passive and active information gathering about the target."
+    },
+    {
+      "id": "phase-scan",
+      "label": "Phase 3\nScanning",
+      "type": "phase",
+      "detail": "Port scanning, service detection, vulnerability scanning, enumeration."
+    },
+    {
+      "id": "phase-exploit",
+      "label": "Phase 4\nExploitation",
+      "type": "phase",
+      "detail": "Confirmed exploitation of vulnerabilities within scope."
+    },
+    {
+      "id": "phase-post",
+      "label": "PTES Phase 6\nPost-Exploitation",
+      "type": "phase",
+      "detail": "Privilege escalation, lateral movement, data reachability assessment."
+    }
+  ],
+  "edges": [
+    { "from": "recon", "to": "phase-recon", "label": "supports", "type": "usage" },
+    { "from": "vuln-scan", "to": "phase-scan", "label": "supports", "type": "usage" },
+    { "from": "web-app", "to": "phase-scan", "label": "supports", "type": "usage" },
+    { "from": "web-app", "to": "phase-exploit", "label": "supports", "type": "usage" },
+    { "from": "exploit", "to": "phase-exploit", "label": "supports", "type": "usage" },
+    { "from": "credential", "to": "phase-scan", "label": "supports", "type": "usage" },
+    { "from": "credential", "to": "phase-exploit", "label": "supports", "type": "usage" },
+    { "from": "traffic", "to": "phase-recon", "label": "supports", "type": "usage" },
+    { "from": "traffic", "to": "phase-scan", "label": "supports", "type": "usage" },
+    { "from": "post-exploit", "to": "phase-post", "label": "supports", "type": "usage" }
+  ]
+}

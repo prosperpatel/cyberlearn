@@ -1,0 +1,36 @@
+{
+  "id": "m3-block-15-micro-practical",
+  "type": "micro-practical",
+  "title": "Read a Real Bug Bounty Programme",
+  "metadata": {
+    "order": 15,
+    "estimatedMinutes": 10,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "file-text",
+    "tags": ["bug-bounty", "responsible-disclosure", "safe-harbour", "legal-framework"]
+  },
+  "content": {
+    "objective": "Read a real, published bug bounty programme or vulnerability disclosure policy from a major technology company. Identify the exact provisions that create legal protection for researchers — scope, safe harbour, prohibited actions, and the disclosure process — so you understand what a professional framework looks like in practice.",
+    "requirements": [
+      "Web browser",
+      "Internet connection"
+    ],
+    "instructions": [
+      "Navigate to one of the following bug bounty or disclosure programmes: HackerOne (hackerone.com/directory — search for a large company), Bugcrowd (bugcrowd.com/programs), Google (bughunters.google.com), Microsoft (msrc.microsoft.com), or GitHub (github.com/security). Choose a programme from a company you recognise.",
+      "Find and read the full programme policy document — not just the reward table. Look specifically for: (a) the scope section listing in-scope and out-of-scope targets, (b) the list of prohibited testing techniques, (c) the safe harbour or legal protection clause, and (d) the process for submitting a report.",
+      "Identify whether the programme has a safe harbour clause. If it does, write down what it promises the researcher. If it does not, note that absence.",
+      "Find one specific prohibited action that surprised you — something you might have assumed was acceptable but is explicitly forbidden. Consider why the company may have prohibited it.",
+      "Review the reward structure (if the programme offers financial rewards). What is the maximum reward for a Critical severity vulnerability? What criteria determine severity?"
+    ],
+    "successCriteria": [
+      "You have read the full programme policy for one published bug bounty or vulnerability disclosure programme and can name the company and where the policy is hosted.",
+      "You can describe what is in scope and what is out of scope for the programme — including at least one example of each.",
+      "You can state whether the programme has a safe harbour clause, and if so, what it commits the organisation to.",
+      "You have identified at least one prohibited action and can explain why it is prohibited.",
+      "You can describe the process a researcher must follow to submit a valid vulnerability report under this programme."
+    ],
+    "reflection": "Security researchers who operate within published bug bounty programmes are the 'white hat' version of grey hat curiosity: same skill, same discovery, but with a legal framework that protects both sides. As you read the programme you chose, notice how precisely written the scope and prohibited actions are. Every prohibited item is there because someone — possibly multiple researchers — did it without permission, and the programme owner had to deal with the consequences. The programme document is essentially a history of where the lines were drawn, and why."
+  }
+}

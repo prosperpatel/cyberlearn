@@ -21,6 +21,42 @@
       "estimatedMinutes": 45,
       "xpReward": 500,
       "tags": ["ethical-hacking", "vapt", "career"]
+    },
+    {
+      "slug": "mission-02-the-hacker-mindset",
+      "title": "The Hacker Mindset",
+      "order": 2,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["cia-triad", "attack-surface", "threat-actors", "mindset"]
+    },
+    {
+      "slug": "mission-03-the-legal-landscape",
+      "title": "The Legal Landscape",
+      "order": 3,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["law", "cfaa", "computer-misuse-act", "bug-bounty", "hacker-types"]
+    },
+    {
+      "slug": "mission-04-the-vapt-lifecycle",
+      "title": "The VAPT Lifecycle",
+      "order": 4,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["vapt", "methodology", "scope", "rules-of-engagement", "reporting", "ptes"]
+    },
+    {
+      "slug": "mission-05-your-professional-toolkit",
+      "title": "Your Professional Toolkit",
+      "order": 5,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["cve", "cvss", "owasp", "nist-csf", "tools", "certifications"]
     }
   ]
 }

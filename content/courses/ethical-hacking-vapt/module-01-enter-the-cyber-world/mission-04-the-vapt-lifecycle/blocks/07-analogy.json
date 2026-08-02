@@ -1,0 +1,46 @@
+{
+  "id": "m4-block-07-analogy",
+  "type": "analogy",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Analogy",
+  "title": "The Building Fire Safety Inspection",
+  "realWorldThing": "A certified fire safety inspector hired to inspect a commercial office building",
+  "concept": "A professional VAPT consultant hired to assess an organisation's security posture",
+  "comparison": "Fire safety inspection and VAPT follow the same professional structure: a certified expert, hired by the owner, tests a defined set of systems against known failure modes, documents every finding, and delivers a report that prioritises remediation. Both operate within a legally authorised scope. Both can cause disruption if not managed carefully. Both produce a deliverable the owner uses to pass compliance reviews and reduce risk.",
+  "breakdown": [
+    {
+      "realWorld": "Building owner hires a certified fire inspector",
+      "techEquivalent": "Organisation hires a certified penetration tester"
+    },
+    {
+      "realWorld": "Inspection permit and authorisation from building management",
+      "techEquivalent": "Signed scope document and authorization letter"
+    },
+    {
+      "realWorld": "Inspection scope: floors 1–5 only, not the server room on floor 6",
+      "techEquivalent": "In-scope targets: 10.10.1.0/24 and web-app.example.com; not the payment processor"
+    },
+    {
+      "realWorld": "Prohibited: do not cut power to fire suppression systems during business hours",
+      "techEquivalent": "Prohibited: no DoS testing, no testing during 09:00–17:00 production windows"
+    },
+    {
+      "realWorld": "Inspector finds a fire hazard in the stairwell — rates it as Critical",
+      "techEquivalent": "Pentester finds a SQL injection on the login page — rates it Critical with CVSS 9.8"
+    },
+    {
+      "realWorld": "Inspector notices the building next door also looks unsafe — cannot enter without authorisation",
+      "techEquivalent": "Pentester discovers an interesting host just outside the agreed scope — cannot test it without a scope amendment"
+    },
+    {
+      "realWorld": "Final inspection report: every finding, location, severity, and required remediation timeline",
+      "techEquivalent": "Final pentest report: every finding, affected system, CVSS score, evidence, and remediation guidance"
+    },
+    {
+      "realWorld": "Building owner uses the report to pass fire safety compliance and schedule remediation",
+      "techEquivalent": "Organisation uses the report to prioritise patching, pass security audits, and demonstrate due diligence"
+    }
+  ],
+  "importantDistinction": "A fire inspector who enters the building next door without authorisation because 'it looked risky' has committed trespass — regardless of their professional certification and good intentions. A pentester who tests an out-of-scope system for the same reason has committed unauthorised access. In both cases, the professional framework exists precisely to prevent this: scope is not bureaucracy, it is the legal foundation that makes the work possible."
+}

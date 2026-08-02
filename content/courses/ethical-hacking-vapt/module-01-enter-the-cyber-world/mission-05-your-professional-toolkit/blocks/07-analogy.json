@@ -1,0 +1,42 @@
+{
+  "id": "m5-block-07-analogy",
+  "type": "analogy",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Analogy",
+  "title": "The Carpenter's Toolkit",
+  "realWorldThing": "A skilled carpenter with a professional toolkit",
+  "concept": "A security professional with a professional security toolkit",
+  "comparison": "A carpenter does not become skilled by owning good tools — they become skilled through years of practice that develops the judgment to select the right tool, use it correctly, and interpret what the result tells them about the material. Security professionals face exactly the same reality: the tool shows you output; experience and knowledge tell you what that output means.",
+  "breakdown": [
+    {
+      "realWorld": "Power saw — cuts material quickly and precisely in skilled hands; causes serious damage if misused",
+      "techEquivalent": "Metasploit — executes exploits efficiently in skilled hands; can crash systems, trigger incident responses, or cause unintended damage if run without understanding what the module does"
+    },
+    {
+      "realWorld": "Measuring tape — gives precise dimensions, but cannot tell you what to build",
+      "techEquivalent": "CVSS score — gives precise severity measurement, but cannot tell you which vulnerabilities to prioritise in this specific environment"
+    },
+    {
+      "realWorld": "Spirit level — tells you whether you're aligned correctly; essential but limited",
+      "techEquivalent": "NIST Cybersecurity Framework — tells you whether your security programme is aligned; essential for governance, not a technical testing tool"
+    },
+    {
+      "realWorld": "Vulnerability scanner (Nessus) — identifies what might be structurally weak in the material",
+      "techEquivalent": "Structural survey tool — identifies potential weak points, but a human engineer still interprets the results and decides what to fix first"
+    },
+    {
+      "realWorld": "Apprenticeship certificate — proves you completed a formal training programme",
+      "techEquivalent": "Security+ or CEH — proves you completed formal training; valued by employers, not a substitute for demonstrated skill"
+    },
+    {
+      "realWorld": "Master craftsperson's guild certification after a practical skills test",
+      "techEquivalent": "OSCP — awarded only after completing a 24-hour hands-on exam compromising real machines; proves demonstrated skill, not knowledge recall"
+    },
+    {
+      "realWorld": "Knowing which saw blade to use for hardwood vs. softwood vs. MDF",
+      "techEquivalent": "Knowing which Nmap scan type to use (SYN scan vs. UDP vs. service version detection) and why, and what each result means"
+    }
+  ],
+  "importantDistinction": "A beginner carpenter who buys every tool in the catalogue is not a carpenter — they are someone who owns tools. What Fatima discovered when she installed thirty tools and felt less confident than before is exactly this: tools without the knowledge to interpret their output are not a toolkit, they are a collection. Build the knowledge first. The tools become useful when you know what you're asking them to do and why."
+}

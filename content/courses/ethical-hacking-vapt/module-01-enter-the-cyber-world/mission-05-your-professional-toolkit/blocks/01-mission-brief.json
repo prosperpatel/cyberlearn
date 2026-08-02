@@ -1,0 +1,19 @@
+{
+  "id": "m5-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mission Brief",
+  "operativeCodename": "Operation Toolkit",
+  "classification": "BEGINNER CLEARANCE",
+  "briefingOfficer": "Senior Instructor, CyberLearn Academy",
+  "missionStatement": "You now understand what ethical hacking is, how attackers think, what the law permits, and how a professional VAPT engagement is structured from first document to final report.\n\nThe final piece of Module 1 is the vocabulary and the toolkit. Security professionals communicate in a shared language — CVEs, CVSS scores, OWASP categories, NIST functions — and they execute their methodology with a defined set of tools. Without this vocabulary, you cannot read a professional report, discuss findings with a client, or contribute meaningfully to a team.\n\nYour mission: learn the systems that underpin vulnerability management, understand the tools that execute each VAPT phase, and map out the certification landscape so you know where you are heading and why.",
+  "objectives": [
+    "Understand the CVE, CWE, NVD, and CVSS systems and how they work together",
+    "Learn all ten OWASP Top 10 categories (2021) and what each represents",
+    "Understand the NIST Cybersecurity Framework's five core functions",
+    "Map professional security tools to the VAPT phases they serve",
+    "Plan a certification pathway based on career goals and current level"
+  ],
+  "operativeNote": "Tools without methodology are noise. Methodology without tools is theory. After this mission, you will have both — and you will understand why the two are not interchangeable."
+}

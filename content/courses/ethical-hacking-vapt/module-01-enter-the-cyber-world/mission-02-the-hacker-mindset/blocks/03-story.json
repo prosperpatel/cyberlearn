@@ -1,0 +1,24 @@
+{
+  "id": "m2-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Nadia's Perfect Defence",
+  "narrative": [
+    "Nadia Kumar was twelve weeks into her new role as Head of Information Security at Northgate Health Systems — a regional hospital group with 8,000 employees, four hospitals, and twenty-three outpatient clinics. The previous security posture had been, charitably, informal. Nadia had spent her first three months rebuilding it from the ground up.",
+    "By February, she had replaced the ageing perimeter firewalls, enforced multi-factor authentication on every staff account, and personally overseen the patching of every system listed in the asset register. She had deployed an intrusion detection system that monitored network traffic for suspicious patterns and sent alerts to her team. She had briefed the board. She had written the policies. She had run the phishing simulations — and staff pass rates were up. Her quarterly security report was, genuinely, the best Northgate had ever produced.",
+    "The attackers spent six weeks studying Northgate from the outside. They never looked at the firewalls. They never tried the phishing filters. What they found instead was a list of forty-seven third-party vendors with remote maintenance access to various corners of the hospital network — the HVAC system, the medical imaging software, the cafeteria payment terminals, the linen service scheduling platform, the parking management system. None of these vendors were in Nadia's asset register. None of them had been subject to her security programme. Several were small businesses with two or three IT staff and no dedicated security function.",
+    "The HVAC monitoring vendor had a remote support portal protected by a single password. One of their technicians had been using the same password since 2019 — the same password as his personal email account, which had been in a public breach database for three years. The attackers tried it on the vendor's portal at 3:47 AM on a Thursday. It worked.",
+    "From the HVAC management system they discovered a network segment that connected to Northgate's internal operational network. From there, moving quietly and slowly over four days, they identified a path toward the patient records database — the same database Nadia had locked down with every technical control she could find. She had secured it perfectly from the outside. She had not considered what 'the outside' actually meant to someone who was already inside.",
+    "Nadia found out on Monday morning when the IDS flagged an unusual outbound connection to an IP address registered to a commercial hosting provider. By then, patient records for approximately 40,000 people had already been copied. The HVAC vendor received a call from Nadia that afternoon. They had not been aware their portal had been accessed."
+  ],
+  "characters": [
+    {
+      "name": "Nadia Kumar",
+      "role": "Head of Information Security, Northgate Health Systems",
+      "description": "An experienced security professional who built a technically rigorous security programme — and discovered that the attack surface of a modern organisation extends far beyond its own systems. She became one of the strongest advocates for vendor security assessments and third-party risk management in her sector.",
+      "emoji": "🛡️"
+    }
+  ],
+  "mood": "tense"
+}

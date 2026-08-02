@@ -1,0 +1,31 @@
+{
+  "id": "m4-block-08-discussion",
+  "type": "discussion",
+  "order": 8,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Discussion",
+  "title": "Why the Report Is the Deliverable",
+  "prompt": "A junior consultant argues: 'The hardest part of this engagement was Phase 4. We compromised the domain controller, accessed the HR database, and demonstrated we could exfiltrate sensitive employee records. That was the real work — that was where we proved the organisation had a serious problem.'\n\nA senior consultant disagrees: 'You did not prove anything until the report was written. A successful compromise with no documentation is worth nothing to the client.'\n\nWho is right? Why?",
+  "discussion": {
+    "coreTension": "The junior consultant conflates technical achievement with professional value. The senior consultant understands that the client's goal is not to watch a demonstration — it is to receive actionable information they can use to reduce risk.",
+    "keyPoints": [
+      {
+        "point": "The client cannot act on knowledge they do not have",
+        "explanation": "If the consultant knows the domain controller is compromised but the CISO does not — because the report was never written — the vulnerability still exists, the risk is unchanged, and the client has paid for nothing they can use. Technical achievement without documentation has no commercial or security value."
+      },
+      {
+        "point": "The report is what gets fixed",
+        "explanation": "The development team does not watch the exploitation phase. The operations team does not attend the penetration test. The board does not see the terminal output. The report is the only artefact that reaches every stakeholder who needs to act. If the report does not reach them in a form they can understand and act on, the vulnerabilities do not get fixed."
+      },
+      {
+        "point": "Business risk is not the same as technical severity",
+        "explanation": "A CVSS 9.8 finding on an isolated internal development server with no external access has different business risk than a CVSS 6.5 finding on a public-facing payment page. The report must contextualise every finding — not just assign a CVSS score — and help the client understand which findings to address first given their specific environment and business operations."
+      },
+      {
+        "point": "The report is the evidence of due diligence",
+        "explanation": "If the organisation later experiences a breach, and regulators or insurers ask whether they conducted security testing, the report is the evidence they present. A completed penetration test with no deliverable report is as defensible in a post-breach investigation as no test at all. The document matters."
+      }
+    ],
+    "reflection": "Think about the last time you received a doctor's appointment result. The doctor examined you — that was the technical work. The written report with findings, diagnoses, and recommended treatment was the deliverable. If the doctor found a concerning anomaly but never wrote it in the report, from a practical standpoint, it was not found. Penetration testing operates on exactly the same principle: the finding exists professionally only once it is documented."
+  }
+}

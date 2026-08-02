@@ -1,0 +1,32 @@
+{
+  "id": "m2-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study",
+  "company": "SolarWinds",
+  "year": "2020",
+  "industry": "IT Software / Supply Chain",
+  "incident": "Nation-state attackers inserted malicious code into a routine software update used by 18,000 organisations worldwide — including multiple US government agencies — without touching any of those organisations directly. They attacked the supply chain.",
+  "whatHappened": [
+    "In October 2019, a nation-state threat actor group — later attributed to Cozy Bear (APT29), linked to Russia's Foreign Intelligence Service — gained access to the internal build environment of SolarWinds, a company that produces Orion, a widely-used IT monitoring platform trusted by major corporations and government agencies.",
+    "Over several months, the attackers carefully injected malicious code — later named SUNBURST — into the Orion software update process. The code was designed to be dormant for two weeks after installation to avoid triggering security testing, then establish a covert communication channel that mimicked legitimate Orion network traffic.",
+    "In March 2020, SolarWinds pushed a routine Orion software update to its customers. Approximately 18,000 organisations downloaded and installed it, including the US Treasury Department, the US State Department, the Department of Homeland Security, the Pentagon, and hundreds of Fortune 500 companies. They all installed the backdoor themselves, trusting the digitally-signed update from a trusted vendor.",
+    "The intrusion was discovered in December 2020 — not by any government agency or SolarWinds — but by FireEye, a private cybersecurity firm that noticed their own internal red team tools had been exfiltrated. Investigating the theft led them to SUNBURST. The backdoor had been active in some environments for 14 months before discovery."
+  ],
+  "whyItHappened": [
+    "Supply chain blind spot: Organisations assessed the security of their own systems and networks, but not the security of the software build processes of the vendors they trusted. The attack surface extended to every trusted supplier.",
+    "Trust without verification: Digitally-signed software updates are designed to prove authenticity — but they prove only that the update came from SolarWinds, not that SolarWinds's own systems had not been compromised. Trusted sources can be compromised.",
+    "Detection gap: The backdoor was designed specifically to evade security tooling — mimicking legitimate software behaviour, remaining dormant for two weeks, and blending outbound traffic with normal Orion communications. Standard security monitoring did not flag it."
+  ],
+  "lessonsLearned": [
+    "Attack surface is not just your network — it is every vendor, every piece of software, every trusted update pipeline in your environment. Nation-state actors look for the path of least resistance into many targets at once.",
+    "Attackers think at a different scale. Rather than attacking 18,000 organisations individually, one well-placed compromise of a trusted supplier achieves the same result without touching any individual target's defences.",
+    "Incident detection depends on independent monitoring paths. FireEye only discovered the attack because they noticed their own tools had been stolen — an indirect signal. Organisations that relied solely on their standard monitoring never detected the compromise."
+  ],
+  "impactStats": [
+    { "value": "18,000", "label": "Organisations that installed the backdoor" },
+    { "value": "14 months", "label": "Active before discovery" },
+    { "value": "100+", "label": "High-value targets actively exploited post-infection" }
+  ]
+}

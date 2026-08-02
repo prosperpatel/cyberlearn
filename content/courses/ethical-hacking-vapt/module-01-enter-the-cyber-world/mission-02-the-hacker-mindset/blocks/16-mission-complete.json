@@ -1,0 +1,21 @@
+{
+  "id": "m2-block-16-mission-complete",
+  "type": "mission-complete",
+  "order": 16,
+  "estimatedMinutes": 1,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Asymmetric — Complete",
+  "message": "You now see what attackers see.\n\nThey are not limited to your threat model. They are not looking at the systems you secured. They are looking at the systems you forgot, the vendors you trusted without verifying, the people you didn't include in your security programme.\n\nCIA — Confidentiality, Integrity, Availability — is not a certification topic. It is the lens through which every attack is understood and every defence is designed. Every time you encounter a breach, an incident, or a risk, your first question should be: which property failed, and why?\n\nThe asymmetric advantage means you will never achieve perfect security. But understanding how attackers think — what they look for, how they prioritise their effort, where they expect your blind spots to be — is the foundation of every skill you are about to build.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Threat Analyst",
+      "description": "Completed Mission 2: The Hacker Mindset — mastered CIA Triad, attack surface thinking, and threat actor classification."
+    }
+  ],
+  "nextSteps": [
+    "Mission 03: The Legal Landscape — learn the laws that govern every engagement, understand hacker classifications, and discover how bug bounty programmes create a legal framework for security research",
+    "Review the Flashcards and Cheat Sheet — CIA Triad classifications and threat actor types appear in quiz and exam questions throughout this course",
+    "Optional: Pick a recent data breach from the news and classify it: which CIA property was violated, which threat actor type was responsible, and what was the attack vector?"
+  ]
+}

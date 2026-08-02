@@ -1,0 +1,24 @@
+{
+  "id": "m5-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Memory Anchor",
+  "title": "Two Anchors for This Mission",
+  "anchor": {
+    "phrase": "Incredible Professionals Detect Risks Carefully",
+    "breakdown": [
+      { "letter": "I", "word": "Incredible", "maps_to": "Identify", "detail": "Know what assets you have, what risks you face, and what your current controls are. NIST CSF Function 1." },
+      { "letter": "P", "word": "Professionals", "maps_to": "Protect", "detail": "Implement the safeguards needed to limit the impact of a security event. NIST CSF Function 2." },
+      { "letter": "D", "word": "Detect", "maps_to": "Detect", "detail": "Identify the occurrence of a cybersecurity event — logging, monitoring, anomaly detection. NIST CSF Function 3." },
+      { "letter": "R", "word": "Risks", "maps_to": "Respond", "detail": "Take action after a detected event — contain, eradicate, communicate. NIST CSF Function 4." },
+      { "letter": "C", "word": "Carefully", "maps_to": "Recover", "detail": "Restore systems and capabilities. Learn from the incident. Improve. NIST CSF Function 5." }
+    ]
+  },
+  "acronym": null,
+  "additionalNote": "NIST CSF describes a security PROGRAMME — the continuous organisational effort to manage risk. It maps onto the incident lifecycle: before an attack (Identify + Protect), during (Detect + Respond), and after (Recover). Pentesters contribute primarily to Identify and Detect — their reports tell the organisation what they missed.",
+  "secondaryAnchor": {
+    "title": "CVE / CWE / NVD — Remember the Hierarchy",
+    "content": "CVE = specific case (this exact vulnerability in this exact software version)\nCWE = weakness category (the class of problem — SQL injection, SSRF, etc.)\nNVD = enriched database (adds CVSS score, patch info, exploit availability to CVE data)\n\nMemory cue: CWE is the *disease type* (diabetes). CVE is the *patient case* (Patient 12345 has diabetes). NVD is the *medical journal entry* that documents severity, treatment, and prognosis."
+  }
+}

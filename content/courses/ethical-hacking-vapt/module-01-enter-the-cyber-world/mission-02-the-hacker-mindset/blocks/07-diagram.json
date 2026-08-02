@@ -1,0 +1,48 @@
+{
+  "id": "m2-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Threat Actors",
+  "title": "The Threat Actor Landscape",
+  "description": "Not all attackers are the same. They differ by motivation, skill, resources, and the targets they choose. Understanding who is likely to target you — and why — is the first step in building proportionate defences.",
+  "nodes": [
+    {
+      "id": "script-kiddie",
+      "label": "Script Kiddie",
+      "type": "default",
+      "detail": "Motivation: curiosity, recognition, disruption. Skill: low — uses pre-built tools without deep understanding. Targets: anyone vulnerable, no discrimination. Risk: high volume, low sophistication. Don't underestimate them — they cause real damage with tools they didn't write and don't fully understand."
+    },
+    {
+      "id": "hacktivist",
+      "label": "Hacktivist",
+      "type": "default",
+      "detail": "Motivation: political or ideological goals. Skill: variable — some are highly capable. Targets: specific organisations for symbolic impact (governments, corporations, media). Common attacks: website defacement, public data leaks, DDoS. Examples: Anonymous operations against government targets."
+    },
+    {
+      "id": "cybercriminal",
+      "label": "Cybercriminal",
+      "type": "attacker",
+      "detail": "Motivation: financial profit. Skill: variable to high — organised groups operate like businesses. Targets: anyone with money or valuable data — healthcare, finance, retail. Common attacks: ransomware, financial fraud, data theft for resale. Some groups have customer support and negotiation teams."
+    },
+    {
+      "id": "insider",
+      "label": "Insider Threat",
+      "type": "attacker",
+      "detail": "Motivation: financial gain, disgruntlement, coercion, espionage. Skill: varies — but they already have access and institutional knowledge. Targets: their own employer. Most dangerous because they bypass perimeter defences entirely. Often goes undetected for months."
+    },
+    {
+      "id": "nation-state",
+      "label": "Nation-State / APT",
+      "type": "attacker",
+      "detail": "Motivation: espionage, geopolitical advantage, economic advantage, infrastructure disruption. Skill: very high — government-funded, long-term operations. Targets: governments, critical infrastructure, defence, technology companies. Characteristics: zero-day exploits, custom malware, supply chain attacks, years-long presence. SolarWinds (SUNBURST) is a textbook APT operation."
+    }
+  ],
+  "edges": [
+    { "from": "script-kiddie",  "to": "cybercriminal", "label": "Skills → profit",    "type": "normal" },
+    { "from": "hacktivist",     "to": "nation-state",  "label": "State sponsorship",  "type": "normal" },
+    { "from": "insider",        "to": "nation-state",  "label": "Recruited asset",    "type": "attack"  }
+  ],
+  "caption": "Click each threat actor type to understand their motivation, capability, and typical attack patterns. Note how some types overlap — a cybercriminal may be recruited by a nation-state; an insider threat may be financially motivated or coerced.",
+  "interactive": true
+}

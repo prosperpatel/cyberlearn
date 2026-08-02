@@ -1,0 +1,36 @@
+{
+  "id": "m2-block-12-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 12,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "The Hacker Mindset — Quick Reference",
+  "sections": [
+    {
+      "heading": "CIA Triad",
+      "rows": [
+        { "label": "Confidentiality", "value": "Information accessible only to authorised parties. Violated by: data theft, eavesdropping, credential compromise, unauthorised access. Ask: 'Who can see this who shouldn't?'" },
+        { "label": "Integrity",       "value": "Information has not been tampered with by unauthorised parties. Violated by: MitM attacks, SQL injection modifying records, fraudulent transactions. Ask: 'Can we trust that this hasn't been altered?'" },
+        { "label": "Availability",    "value": "Systems accessible to authorised users when needed. Violated by: ransomware, DDoS, backup destruction, infrastructure failure. Ask: 'What happens if this becomes inaccessible?'" }
+      ]
+    },
+    {
+      "heading": "Attack Chain",
+      "rows": [
+        { "label": "Vulnerability", "value": "A weakness — an unpatched CVE, a default credential, a misconfigured permission, a human who can be manipulated. The weakness alone causes no harm." },
+        { "label": "Exploit",       "value": "The technique that turns a vulnerability into unauthorised access. Not every vulnerability has a working exploit. A working exploit changes everything." },
+        { "label": "Payload",       "value": "What the attacker does after getting in: ransomware, reverse shell, credential dumper, data exfiltration script. The payload delivers the actual damage." }
+      ]
+    },
+    {
+      "heading": "Threat Actor Types",
+      "rows": [
+        { "label": "Script Kiddie",    "value": "Low skill, high volume. Uses pre-built tools. Motivation: curiosity/recognition. Dangerous because of scale, not sophistication." },
+        { "label": "Hacktivist",       "value": "Ideological motivation. Targets for symbolic impact. Common: DDoS, data leaks, defacement. Examples: Anonymous." },
+        { "label": "Cybercriminal",    "value": "Profit-motivated. Professional operations. Ransomware, financial fraud, stolen data resale. Often organised like businesses." },
+        { "label": "Insider Threat",   "value": "Already inside the perimeter. Has access and institutional knowledge. Motivated by greed, disgruntlement, or coercion. Hardest to detect." },
+        { "label": "Nation-State/APT", "value": "Government-sponsored. Long-term, sophisticated, well-resourced. Goals: espionage, infrastructure disruption, economic advantage. Think SolarWinds." }
+      ]
+    }
+  ]
+}

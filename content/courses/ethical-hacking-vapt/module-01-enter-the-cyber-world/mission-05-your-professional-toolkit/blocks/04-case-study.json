@@ -1,0 +1,42 @@
+{
+  "id": "m5-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study",
+  "caseStudy": {
+    "company": "Capital One Financial Corporation",
+    "year": "2019",
+    "industry": "Financial Services / Cloud Infrastructure",
+    "incident": "In July 2019, a former Amazon Web Services software engineer exploited a misconfigured Web Application Firewall running on Capital One's AWS infrastructure to steal the personal data of over 100 million customers and credit card applicants in the United States and Canada. The breach was not discovered by Capital One's security monitoring — it was reported to them by someone who found the stolen data posted in a GitHub repository.",
+    "whatHappened": [
+      "Capital One had migrated much of its infrastructure to Amazon Web Services and ran a Web Application Firewall (WAF) on an EC2 instance to protect their systems. The WAF instance was configured with an AWS IAM (Identity and Access Management) role that had significantly broader permissions than it needed.",
+      "Paige Thompson, a former AWS employee, identified that the Capital One WAF was vulnerable to Server-Side Request Forgery (SSRF). SSRF is a class of vulnerability where an attacker can cause the server to make outbound requests to internal resources by supplying a crafted URL.",
+      "Thompson used the SSRF vulnerability to make the WAF query the AWS EC2 instance metadata service — an internal AWS endpoint (169.254.169.254) that provides configuration data about the running instance, including its IAM role credentials.",
+      "The metadata service returned the temporary IAM credentials associated with the WAF's overpermissive IAM role. Using those credentials, Thompson was able to access Capital One's S3 buckets containing customer data.",
+      "Thompson downloaded data for approximately 100 million US customers and 6 million Canadian customers, including names, addresses, credit scores, credit limits, balances, and approximately 140,000 Social Security numbers.",
+      "She also used similar techniques against over 30 other AWS customers who had similar SSRF vulnerabilities and overpermissive IAM configurations, stealing data from multiple organisations beyond Capital One.",
+      "Thompson posted information about the stolen data in a GitHub repository under her own GitHub username and in a Slack group. A third party discovered the posts and reported the breach to Capital One in July 2019 — weeks after the initial exfiltration."
+    ],
+    "whyItHappened": [
+      "The WAF instance's IAM role had far more permissions than it needed to perform its function. Applying the principle of least privilege — granting only the minimum permissions required for a service to function — would have limited what Thompson could access even after obtaining the credentials.",
+      "SSRF is a well-documented vulnerability class that appears on the OWASP Top 10 (A10:2021). A thorough web application penetration test of the WAF configuration would have tested for SSRF and flagged the risk.",
+      "Capital One's internal monitoring did not detect the data exfiltration at the time it occurred. Unusual access patterns, unusually large data transfers from S3 buckets, and API calls from unexpected source IPs are all signals that a well-configured cloud security monitoring system should alert on.",
+      "The AWS metadata service endpoint (169.254.169.254) is a well-known SSRF target in AWS environments. AWS has since introduced IMDSv2, which requires a session-oriented request before credentials are returned — a security improvement specifically designed to mitigate this attack class. At the time of the Capital One breach, IMDSv2 was not enforced."
+    ],
+    "lessonsLearned": [
+      "SSRF is not a theoretical attack. It is OWASP A10:2021 — a real, widespread, and consequential vulnerability class that must be tested in every web application penetration test, especially those involving cloud-hosted infrastructure.",
+      "Least privilege is not optional in cloud environments. An IAM role should have exactly the permissions needed for its function, and no more. When credentials are compromised, the blast radius is bounded by the permissions associated with those credentials. Capital One's WAF credentials should not have had read access to S3 buckets containing customer data.",
+      "Detection matters as much as prevention. Capital One's monitoring did not catch the exfiltration. A breach is not just about whether an attacker gets in — it is about how quickly you detect it and how quickly you can contain the damage. Security Logging and Monitoring Failures is OWASP A09:2021 for exactly this reason.",
+      "The breach was reported by an external party, not discovered internally. This is a recurring pattern: organisations discover breaches through external reports, law enforcement notifications, or by finding their data for sale — not through their own monitoring. Post-breach, Capital One paid an $80 million fine to the OCC and a $190 million class-action settlement."
+    ],
+    "impactStats": [
+      "100 million US customer records stolen",
+      "6 million Canadian customer records stolen",
+      "140,000 Social Security numbers and 80,000 bank account numbers in the stolen data",
+      "$80 million fine from the US Office of the Comptroller of the Currency",
+      "$190 million class-action settlement",
+      "Data from over 30 additional AWS customers also stolen"
+    ]
+  }
+}

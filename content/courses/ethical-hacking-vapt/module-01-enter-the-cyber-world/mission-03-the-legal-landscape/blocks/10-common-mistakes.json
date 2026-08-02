@@ -1,0 +1,39 @@
+{
+  "id": "m3-block-10-common-mistakes",
+  "type": "common-mistakes",
+  "order": 10,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These four mistakes have ended careers and triggered criminal investigations. Every one of them has happened to a real researcher who believed they were doing the right thing.",
+  "mistakes": [
+    {
+      "title": "Accessing more data than needed to prove the vulnerability",
+      "wrong": "'I accessed twelve other accounts to make sure the vulnerability was consistent across different user types — I needed a thorough proof-of-concept.'",
+      "right": "Access only your own account or test accounts you own. One example is sufficient to prove any authentication bypass. Every additional account you access is an additional count of unauthorised access.",
+      "explanation": "Prosecutors and civil litigants count accesses. Marcus accessing three additional accounts versus Priya accessing zero was the central distinction in their legal outcomes. The vulnerability was equally valid with zero additional accesses. The technical thoroughness of your research is not a legal defence — and collecting data beyond what is necessary to document the flaw transforms a potential misdemeanour into a much more serious charge.",
+      "severity": "critical"
+    },
+    {
+      "title": "Publishing before contacting the vendor",
+      "wrong": "'I published immediately because companies always try to silence researchers who go to them first — public pressure is the only thing that makes them fix it.'",
+      "right": "Contact the vendor privately first, with full technical details. Give them a reasonable time to respond (five to seven business days for initial acknowledgement). Begin the 90-day countdown from first contact. Publish only if no patch is forthcoming.",
+      "explanation": "Publishing before vendor contact eliminates any argument that your intent was to help them fix the vulnerability. It also immediately enables attackers to exploit the flaw against every vulnerable user — a harm that could have been prevented by a coordinated patch. Many vendors do respond constructively to private disclosure. Some don't — and that is when public pressure becomes appropriate, after a good-faith attempt at coordination has failed.",
+      "severity": "critical"
+    },
+    {
+      "title": "Treating a bug bounty programme's scope as permission for everything",
+      "wrong": "'I was on HackerOne doing a test on example.com, so I also checked their admin subdomain and their mobile app — they're all the same company.'",
+      "right": "Scope means exactly and only what is listed. 'example.com' does not include admin.example.com, internal.example.com, or the company's mobile app unless each is explicitly listed in scope.",
+      "explanation": "Going out of scope — even on a target you are otherwise authorised to test — is unauthorised access to the out-of-scope system. Safe harbour clauses protect you for in-scope activity only. Organisations can and do take legal action against researchers who exceed scope, even while actively running bug bounty programmes. When in doubt, ask the programme owner before testing — and document their response.",
+      "severity": "critical",
+      "example": "A researcher testing a company's marketing website discovers a server misconfiguration that gives them visibility into an internal API. They probe the internal API thinking it is all part of the same system. The internal API was out of scope. The company's lawyers send a letter two weeks later."
+    },
+    {
+      "title": "Assuming 'no damages means no crime'",
+      "wrong": "'I didn't steal anything, I didn't break anything, I didn't even really access much — there's nothing to prosecute.'",
+      "right": "Computer crime law in most jurisdictions does not require actual damage, data theft, or financial loss. Unauthorised access is the offence. The fact that nothing went wrong is mitigating, not exculpatory.",
+      "explanation": "This misconception has caught many researchers off guard. The CFAA and Computer Misuse Act are constructed around the access itself — not its consequences. A zero-dollar-damage unauthorised access is still unauthorised access. Prosecutors may exercise discretion not to charge in clear cases of good faith and minimal access, but they are not legally required to, and corporate legal teams are under no such constraint when considering civil action.",
+      "severity": "warning"
+    }
+  ]
+}

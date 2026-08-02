@@ -1,0 +1,45 @@
+{
+  "id": "m3-block-14-flashcards",
+  "type": "flashcards",
+  "order": 14,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 3",
+  "cards": [
+    {
+      "front": "What is the key provision of the Computer Fraud and Abuse Act (CFAA) relevant to security researchers?",
+      "back": "The CFAA makes it a federal crime to access a computer without authorisation or to exceed authorised access. It does not require that damage occurred, that data was stolen, or that the intent was malicious. Accessing data a system was not intended to expose — even without a login screen — can constitute unauthorised access.",
+      "hint": "'Publicly accessible' ≠ 'authorised to access'."
+    },
+    {
+      "front": "What are the three offences under the UK Computer Misuse Act?",
+      "back": "1. Unauthorised access to computer material — the basic offence. No harm required.\n2. Unauthorised access with intent to commit further offences — e.g. accessing a system to steal data or install malware.\n3. Unauthorised modification of computer material — altering, deleting, or impairing data without authorisation.\n\nIntent affects which charge applies, not whether an offence occurred.",
+      "hint": "Access → Access + Intent → Modify. Three levels."
+    },
+    {
+      "front": "What is the difference between a black hat, white hat, and grey hat hacker?",
+      "back": "Black hat: no authorisation, malicious or self-interested intent. Criminal.\nWhite hat: full written authorisation, defined scope, professional context. Legal and ethical.\nGrey hat: no authorisation, benign intent. Still illegal — good intentions are not a legal defence.\n\nThere is no legally protected grey area. Only white hat activity within a documented engagement is safe.",
+      "hint": "Black = criminal. White = professional. Grey = wishful thinking."
+    },
+    {
+      "front": "What is responsible disclosure, and what is the standard timeline?",
+      "back": "Responsible disclosure: privately notifying the vendor of a discovered vulnerability with full technical details, giving them a defined period to develop a patch before publishing publicly.\n\nStandard timeline: 90 days from the date of first notification. After 90 days with no patch, the researcher publishes regardless — to protect users and apply vendor pressure.\n\nPopularised by Google Project Zero. Not a legal requirement — an industry standard.",
+      "hint": "Private first, 90 days, then public. Always."
+    },
+    {
+      "front": "What is the difference between responsible disclosure and full disclosure?",
+      "back": "Responsible disclosure: vendor notified privately → coordination window (typically 90 days) → patch released → public disclosure.\n\nFull disclosure: technical details published immediately, no vendor notification. Maximum transparency, immediate public pressure — but also immediate attacker capability before a patch exists.\n\nFull disclosure is considered an adversarial approach and should only be used when responsible disclosure has genuinely failed after good-faith effort.",
+      "hint": "Responsible = private first. Full = public first. Outcomes are very different."
+    },
+    {
+      "front": "What is a safe harbour clause, and why does its absence matter?",
+      "back": "A safe harbour clause is a written commitment in a bug bounty programme or vulnerability disclosure policy where the organisation formally promises not to pursue legal or civil action against researchers who comply with the programme's terms.\n\nIts absence means the organisation has not committed to protecting researchers — even those who act in perfect good faith within reasonable scope. Without a safe harbour clause, a researcher who discovers a vulnerability while attempting responsible behaviour has no written legal protection.",
+      "hint": "Safe harbour = 'we won't sue you for doing this correctly'. No clause = no promise."
+    },
+    {
+      "front": "What is coordinated vulnerability disclosure (CVD), and when is it used?",
+      "back": "CVD is a structured process where the researcher, the affected vendor, and sometimes a neutral third-party coordinator (CERT/CC, NCSC, or a national CERT) work together to develop a patch, agree on a disclosure timeline, and publish findings simultaneously.\n\nUsed for: complex vulnerabilities affecting many products, critical infrastructure, or cases where the vendor needs coordination with multiple affected parties before public disclosure. More formal than standard responsible disclosure.",
+      "hint": "Like responsible disclosure, but with a neutral coordinator in the middle."
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "m3-block-12-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 12,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "The Legal Landscape — Quick Reference",
+  "sections": [
+    {
+      "heading": "The Three Hats",
+      "rows": [
+        { "label": "Black Hat", "value": "No authorisation. Malicious or self-interested intent. Criminal in all jurisdictions. Goal: financial gain, disruption, espionage, or ideological impact." },
+        { "label": "White Hat", "value": "Full written authorisation (PSP framework). Defined scope. Documented findings. Professional context. Legal and ethical. Goal: improve security for the client." },
+        { "label": "Grey Hat",  "value": "No authorisation. Benign intent. Still criminal under CFAA and Computer Misuse Act. Good intentions are not a legal defence. Do not operate here." }
+      ]
+    },
+    {
+      "heading": "Key Laws",
+      "rows": [
+        { "label": "CFAA (US)",              "value": "Criminalises accessing a computer without authorisation or exceeding authorised access. No damage required. No data theft required. No malicious intent required. Federal offence." },
+        { "label": "Computer Misuse Act (UK)", "value": "Three offences: (1) unauthorised access, (2) unauthorised access with intent to commit further offences, (3) unauthorised modification. Intent only determines the charge level, not guilt." },
+        { "label": "IT Act 2000 (India)",     "value": "Section 66 criminalises dishonestly or fraudulently accessing any computer resource without authorisation. Penalties include imprisonment up to 3 years." }
+      ]
+    },
+    {
+      "heading": "Disclosure Methods",
+      "rows": [
+        { "label": "Responsible Disclosure", "value": "Notify vendor privately → 90-day countdown → patch released → publish. Professional standard. Protects users. Protects researcher. Builds relationships." },
+        { "label": "Full Disclosure",         "value": "Publish immediately, no vendor notification. Maximum pressure on vendor. Immediate risk to users. Elevated legal risk for researcher. Use as last resort." },
+        { "label": "Bug Bounty + Safe Harbour","value": "Formal programme with written authorisation, defined scope, financial rewards, and safe harbour clause. The safest framework for independent security research." }
+      ]
+    },
+    {
+      "heading": "Safe Disclosure Checklist",
+      "rows": [
+        { "label": "Before testing",     "value": "Confirm the target has a bug bounty programme OR a published VDP with safe harbour. Confirm your target is in scope. Read every rule." },
+        { "label": "During testing",     "value": "Access only your own accounts. Collect the minimum data needed to prove the flaw. Document everything with timestamps." },
+        { "label": "After finding",      "value": "Contact vendor privately. Do not share details with anyone. Set a 90-day timer. Keep records of all communication." },
+        { "label": "After 90 days",      "value": "If no patch: publish regardless. If patch released: coordinate disclosure timeline with vendor and publish together." }
+      ]
+    }
+  ]
+}

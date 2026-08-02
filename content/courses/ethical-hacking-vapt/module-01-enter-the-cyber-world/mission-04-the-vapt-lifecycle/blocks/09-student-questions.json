@@ -1,0 +1,30 @@
+{
+  "id": "m4-block-09-student-questions",
+  "type": "student-questions",
+  "order": 9,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Your Questions",
+  "title": "Questions Every New Consultant Asks",
+  "questions": [
+    {
+      "question": "What do I do if I find a critical vulnerability on a system that is out of scope?",
+      "answer": "Stop immediately. Do not attempt to exploit it, verify it further, or touch the system in any way beyond what you have already done.\n\nNext, document exactly what you found and how you found it — including the time, what you were doing on an in-scope system, and exactly how you became aware of the out-of-scope system.\n\nThen contact the client using the emergency contact listed in the RoE. Explain what you found, in which out-of-scope system, and what the apparent severity is. Ask for explicit written authorisation if they want you to investigate further.\n\nIf they say 'yes, investigate' — you now have a scope amendment. Document that authorisation (email confirmation is sufficient) and proceed.\nIf they say 'no, leave it' — leave it. Add a note in the report that a potentially significant issue was observed in an out-of-scope system and escalated to the client, who chose not to expand scope.\n\nYou are not responsible for remediating out-of-scope vulnerabilities. You are responsible for reporting what you found and escalating through the correct channel."
+    },
+    {
+      "question": "What if my testing accidentally takes a system offline?",
+      "answer": "This is why the RoE and Statement of Work exist.\n\nIf the system was in scope, and your testing methodology was within the agreed RoE, and the outage was unintentional — your contract governs liability. Most professional engagements explicitly address this: accidental disruption of in-scope systems during authorised testing within the agreed methodology is a risk the client accepts by signing the engagement documents.\n\nImmediately notify the client via emergency contact. Help them restore service if you can. Document precisely what you were doing when the outage occurred.\n\nIf the system was out of scope — this is a serious incident. Follow your firm's incident response procedure immediately, regardless of what time it is. This is exactly why emergency contacts exist.\n\nThe practical lesson: always read the documentation for any tool before running it against production systems. Many scan configurations can trigger service disruption. Know what your tool does before you run it."
+    },
+    {
+      "question": "Is doing OSINT on a company's public information legal before I have signed authorisation?",
+      "answer": "Passive OSINT using publicly available sources — WHOIS, DNS records, LinkedIn, Certificate Transparency logs, Shodan data that the target's own systems published — is generally legal without engagement authorisation, because you are not interacting with the target's systems.\n\nHowever, there is an important professional distinction: legality is not the only consideration. Doing passive OSINT on an organisation you have not been hired to assess is unprofessional — even if no law prevents it. The information could be misused, the research could be misinterpreted, and it creates a pattern of behaviour that is difficult to defend professionally.\n\nActive reconnaissance — connecting to the target's IP addresses, scanning their ports, interacting with their services — requires signed authorisation. Full stop. It does not matter how curious you are or how obvious the vulnerability appears. Without authorisation, it is unauthorised access under the CFAA and Computer Misuse Act.\n\nWait for the scope document. Start reconnaissance after it is signed."
+    },
+    {
+      "question": "How long does a real penetration test actually take?",
+      "answer": "It depends entirely on scope, and the scoping conversation should produce an accurate effort estimate before any contract is signed.\n\nCommon engagement timelines:\n- Small web application (single application, well-defined scope, no API): 3–5 days\n- Medium web application (application plus API plus admin interface): 1–2 weeks\n- Network infrastructure assessment (up to 100 hosts): 1–2 weeks\n- Large enterprise network assessment (hundreds of hosts, multiple subnets): 4–8 weeks\n- Red team engagement (simulated full adversary operation): 4–12 weeks\n- Comprehensive security audit (multiple systems, social engineering, physical): 1–3 months\n\nThe mismatch between client expectations and engagement size is one of the most common sources of poor pentest quality. A client who wants '5 days to test everything' for a large enterprise gets a surface-level scan with no real depth. The scoping conversation is where a professional consultant explains what is achievable in the agreed time — and pushes back when the scope is unrealistic."
+    },
+    {
+      "question": "What is the difference between a penetration test and a red team exercise?",
+      "answer": "A penetration test has a defined scope, a defined timeframe, and a goal of finding as many vulnerabilities as possible within that scope. The client usually knows the test is happening. The result is a findings report.\n\nA red team exercise simulates a real, targeted attack against the organisation. The scope is broader (often 'full organisation'), the timeframe is longer (weeks to months), and the goal is not to find all vulnerabilities — it is to determine whether the organisation can detect, respond to, and contain a realistic attack. The client's security team usually does NOT know the timing or nature of the exercise. The result includes not just vulnerabilities but an assessment of detection and response capability.\n\nA vulnerability assessment is narrower than either: an automated scan that produces a list of known vulnerabilities without manual verification or exploitation attempts.\n\nMost organisations start with vulnerability assessments, progress to penetration tests, and commission red team exercises only once they have mature security operations capable of responding to what the red team reveals."
+    }
+  ]
+}

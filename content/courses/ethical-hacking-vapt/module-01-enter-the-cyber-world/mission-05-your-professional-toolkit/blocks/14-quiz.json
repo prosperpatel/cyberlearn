@@ -1,0 +1,75 @@
+{
+  "id": "m5-block-14-quiz",
+  "type": "quiz",
+  "order": 14,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "The Capital One breach was caused by an attacker exploiting a misconfigured WAF to access the AWS instance metadata service and retrieve IAM credentials. Which OWASP Top 10 2021 category does this attack method belong to?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "A05: Security Misconfiguration", "isCorrect": false },
+        { "id": "b", "text": "A01: Broken Access Control", "isCorrect": false },
+        { "id": "c", "text": "A10: Server-Side Request Forgery (SSRF)", "isCorrect": true },
+        { "id": "d", "text": "A03: Injection", "isCorrect": false }
+      ],
+      "explanation": "The attack technique — making the WAF fetch a URL pointing to the internal AWS metadata service (169.254.169.254) to retrieve IAM credentials — is Server-Side Request Forgery (SSRF), which is exactly why SSRF was added to the OWASP Top 10 for the first time in the 2021 edition. The misconfigured IAM role (overpermissive) is A05 Security Misconfiguration, and it amplified the impact — but the initial attack vector was SSRF. The Capital One case is why SSRF belongs on the Top 10: it is disproportionately dangerous in cloud environments where metadata services expose credentials.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "A CVE entry on MITRE maps to CWE-89. What does this tell you about the vulnerability?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The vulnerability has a CVSS score of 8.9", "isCorrect": false },
+        { "id": "b", "text": "The vulnerability is a specific instance of SQL Injection — CWE-89 is the weakness category for SQL Injection", "isCorrect": true },
+        { "id": "c", "text": "The vulnerability affects 89 known products", "isCorrect": false },
+        { "id": "d", "text": "The vulnerability was assigned in 2089", "isCorrect": false }
+      ],
+      "explanation": "CWE-89 is the Common Weakness Enumeration identifier for SQL Injection — a specific weakness category in the CWE taxonomy maintained by MITRE. When a CVE maps to CWE-89, it means that specific vulnerability instance is a SQL Injection vulnerability. The CWE number describes the class of weakness; the CVE describes the specific instance in specific software. CVSS scores are separate from CWE numbers — they are on different scales and represent different things.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A CVSS v3.1 Base Score breakdown shows: Attack Vector: Network, Attack Complexity: Low, Privileges Required: None, User Interaction: None. Which of the following is the most accurate interpretation?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The vulnerability can only be exploited by someone with local access to the system", "isCorrect": false },
+        { "id": "b", "text": "The vulnerability requires the attacker to already have valid user credentials to exploit", "isCorrect": false },
+        { "id": "c", "text": "The vulnerability can be exploited remotely over a network by an unauthenticated attacker with no user interaction required", "isCorrect": true },
+        { "id": "d", "text": "The vulnerability requires a victim to click a malicious link before it can be exploited", "isCorrect": false }
+      ],
+      "explanation": "Reading the CVSS metrics directly: Attack Vector: Network means the attacker does not need local access — they can exploit this remotely over a network connection. Attack Complexity: Low means no special conditions are required. Privileges Required: None means the attacker needs no existing credentials or access to the system. User Interaction: None means no victim needs to take any action. Combined, these four metrics describe a remotely exploitable, unauthenticated, zero-interaction vulnerability — the highest possible exploitability profile, which pushes the Base Score toward Critical.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "Which OWASP Top 10 2021 category was directly illustrated by the SolarWinds SUNBURST attack introduced in Mission 2?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "A03: Injection", "isCorrect": false },
+        { "id": "b", "text": "A06: Vulnerable and Outdated Components", "isCorrect": false },
+        { "id": "c", "text": "A08: Software and Data Integrity Failures", "isCorrect": true },
+        { "id": "d", "text": "A09: Security Logging and Monitoring Failures", "isCorrect": false }
+      ],
+      "explanation": "SolarWinds SUNBURST is the defining case study for A08: Software and Data Integrity Failures. The attackers compromised SolarWinds' build pipeline — the software development and compilation process — and injected malicious code into legitimate software updates. The resulting malware was signed with SolarWinds' legitimate code-signing certificate and distributed through official channels. This is a supply chain attack made possible by insufficient software and build pipeline integrity verification. A09 (Logging and Monitoring Failures) also applied — many victims did not detect the compromise for months — but the root vulnerability class is A08.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "A learner wants to work as a penetration tester at a security consultancy. They have 8 months of self-study, can root HTB Easy machines in about 2 hours each, and have not yet obtained any certification. Which certification should they pursue first?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "OSCP — the industry standard; better to aim for the best credential immediately", "isCorrect": false },
+        { "id": "b", "text": "CEH — globally recognised and required by many employers", "isCorrect": false },
+        { "id": "c", "text": "eJPT — practical, accessible, and validates their current hands-on skill level before moving to more advanced certifications", "isCorrect": true },
+        { "id": "d", "text": "CompTIA Security+ — the most recognised entry-level credential for all security roles", "isCorrect": false }
+      ],
+      "explanation": "The learner's profile — 8 months of self-study, can compromise HTB Easy machines independently — suggests they have genuine practical skill at a foundational level. eJPT validates that practical skill in a low-stakes, affordable exam and gives them a credential to reference in job applications. OSCP is not appropriate yet — OSCP expects candidates to handle Medium and Hard machines comfortably; at 8 months, attempting OSCP risks an expensive failure. Security+ is valuable but signals general security knowledge, not offensive skill — less relevant for a penetration testing role. CEH signals HR-recognition but is knowledge-based, not practical. The correct sequence for this candidate: eJPT now, PNPT or more HTB practice next, OSCP when Medium machines are consistently approachable.",
+      "xpReward": 15
+    }
+  ]
+}

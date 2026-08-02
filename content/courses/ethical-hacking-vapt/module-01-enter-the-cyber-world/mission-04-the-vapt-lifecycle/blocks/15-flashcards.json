@@ -1,0 +1,45 @@
+{
+  "id": "m4-block-15-flashcards",
+  "type": "flashcards",
+  "order": 15,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 4",
+  "cards": [
+    {
+      "front": "What is the Penetration Testing Execution Standard (PTES), and what are its seven phases?",
+      "back": "PTES is an industry-standard framework that defines a consistent methodology for professional penetration testing, giving both testers and clients a common language and a shared quality baseline.\n\nThe seven phases:\n1. Pre-engagement Interactions\n2. Intelligence Gathering\n3. Threat Modelling\n4. Vulnerability Analysis\n5. Exploitation\n6. Post-Exploitation\n7. Reporting",
+      "hint": "Pre-engagement → Intelligence → Threat Modelling → Vulnerability → Exploit → Post-Exploit → Report"
+    },
+    {
+      "front": "What is the difference between a vulnerability scan and a penetration test?",
+      "back": "A vulnerability scan is an automated process using a tool (Nessus, OpenVAS) that compares system configurations and software versions against a database of known vulnerabilities. It produces a list of potential issues but cannot confirm whether any of them are exploitable in this specific environment.\n\nA penetration test involves a human tester who manually attempts to exploit discovered vulnerabilities to confirm real-world impact, chain vulnerabilities together, and discover configuration-level weaknesses that automated tools miss.\n\nKey difference: scans identify what might be wrong. Pentests confirm what is actually exploitable and demonstrate the real business impact.",
+      "hint": "Scan = automated, lists potential issues. Pentest = human, confirms actual exploitability."
+    },
+    {
+      "front": "What must an executive summary in a pentest report contain?",
+      "back": "A 1–3 page non-technical section written for business decision-makers (CISO, CEO, board) who need to understand risk without reading technical findings.\n\nMust contain:\n- Overall risk rating for the engagement (e.g., Critical/High/Medium/Low)\n- The 2–3 most significant findings described in business terms — not technical jargon\n- Business impact of those findings (what happens if exploited?)\n- Strategic recommendations (what should the organisation prioritise?)\n\nWhat it must never assume: that the reader knows what CVSS means, what SQL injection is, or what a domain controller does. Business language only.",
+      "hint": "Non-technical. Risk rating. Top findings in business language. Strategic recommendations. 1–3 pages max."
+    },
+    {
+      "front": "What is CVSS, what does each score range mean, and what is its limitation in pentest reporting?",
+      "back": "CVSS (Common Vulnerability Scoring System) rates vulnerability severity on a 0–10 scale based on: attack vector, attack complexity, privileges required, user interaction, and confidentiality/integrity/availability impact.\n\nRanges: 0 = None | 0.1–3.9 = Low | 4.0–6.9 = Medium | 7.0–8.9 = High | 9.0–10.0 = Critical\n\nLimitation: CVSS measures technical severity in isolation — not business risk. A CVSS 9.8 vulnerability on an isolated internal system may have lower business priority than a CVSS 6.5 vulnerability on a public-facing customer portal. Professional report prioritisation must contextualise CVSS with exposure level, exploitability in this environment, and asset business value.",
+      "hint": "CVSS = technical severity only. Business risk = CVSS + exposure + context + asset value."
+    },
+    {
+      "front": "What is the difference between passive and active reconnaissance?",
+      "back": "Passive reconnaissance gathers information about a target using publicly available sources without directly contacting the target's systems. No interaction with target infrastructure. Examples: WHOIS, DNS records, Shodan data, LinkedIn, job postings, Certificate Transparency logs, Google Dorks.\n\nActive reconnaissance involves directly interacting with the target's systems — actions that are logged by the target and that require authorisation. Examples: DNS zone transfer attempts, port scanning, banner grabbing, web spidering.\n\nKey rule: active reconnaissance requires a signed scope document. Passive OSINT using public sources does not require authorisation but should only be conducted for an engagement you have been hired for.",
+      "hint": "Passive = public sources, no target contact. Active = direct contact, requires authorisation."
+    },
+    {
+      "front": "What is an authorization letter, and what happens during an engagement without one?",
+      "back": "An authorization letter is a formal signed document from the target organisation, typically on company letterhead, explicitly authorising the penetration test. It states: who authorised the test (with their name and title), which systems are in scope, and for what date range.\n\nPurpose: if the penetration tester's activities are flagged by the client's own SOC, detected by an ISP, or investigated by law enforcement during the engagement, the authorization letter is the document that proves the activity was sanctioned.\n\nWithout one: the tester has no written evidence of consent. Even if the client verbally agreed, verbal authorisation is legally thin and easily deniable. An engagement conducted without a signed authorization letter exposes the tester to criminal prosecution for the same activities that the letter would make legal.",
+      "hint": "Authorization letter = written proof of consent. Verbal agreement is not enough. Carry it always."
+    },
+    {
+      "front": "What is post-exploitation in the PTES framework, and why is it a separate phase from exploitation?",
+      "back": "Post-exploitation explores the real-world impact achievable after gaining initial access — going beyond the initial compromise to understand what an attacker could actually do with that foothold.\n\nKey post-exploitation activities:\n- Privilege escalation: Can user-level access be escalated to admin/root?\n- Lateral movement: Can the compromised system reach other in-scope hosts using compromised credentials or vulnerabilities?\n- Persistence analysis: What would an attacker do to maintain long-term access? (Not implemented — assessed)\n- Data discovery: What sensitive data is reachable from this position?\n\nWhy separate: initial exploitation demonstrates that a vulnerability is exploitable. Post-exploitation demonstrates what the actual business impact is — the difference between 'we got in' and 'we could have stolen all 3 million customer records'. Post-exploitation findings inform remediation priority.",
+      "hint": "Exploitation = got initial access. Post-exploitation = assessed the full depth of what that access enables."
+    }
+  ]
+}

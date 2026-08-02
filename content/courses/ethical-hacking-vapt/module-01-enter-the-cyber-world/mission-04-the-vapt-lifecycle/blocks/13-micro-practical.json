@@ -1,0 +1,38 @@
+{
+  "id": "m4-block-13-micro-practical",
+  "type": "micro-practical",
+  "title": "Draft a Mini Scope Document",
+  "metadata": {
+    "order": 13,
+    "estimatedMinutes": 10,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "file-text",
+    "tags": ["scope", "rules-of-engagement", "pre-engagement", "professional-practice"]
+  },
+  "content": {
+    "objective": "Draft the essential sections of a scope document for a hypothetical penetration test engagement. This exercise forces you to think through the precision that real scope documents require — and reveals how much a vague scope can leave ambiguous.",
+    "requirements": [
+      "Pen and paper or any text editor"
+    ],
+    "scenario": "You have been hired by a fictional e-commerce company, ShopStream, to conduct a web application penetration test. Here is what you know: ShopStream has a staging environment at staging.shopstream.example.com and a production environment at www.shopstream.example.com. They process customer payments through a third-party provider. They want the test conducted over five business days during standard business hours. Their primary technical contact is their CTO. They are willing to expand scope to the admin panel at admin.shopstream.example.com if you discover vulnerabilities there that require it.",
+    "instructions": [
+      "Write the In-Scope Targets section. List every specific URL, IP range, or domain that you are authorised to test. Do not write 'the ShopStream website' — be specific.",
+      "Write the Out-of-Scope Items section. List everything that must not be touched during this engagement. Think carefully about the payment processor, the production environment, any third-party integrations.",
+      "Write the Testing Objective in one or two sentences. What specific question is this engagement answering for the client?",
+      "Write the Constraints section. List at least four specific constraints: things you are not permitted to do, or conditions that limit how you test. Consider: timing, environment, data, techniques.",
+      "Write the Emergency Contacts section. List at least two named contacts and what circumstances warrant contacting each of them.",
+      "Write the Testing Window section. Define the exact date range and daily hours during which active testing is authorised."
+    ],
+    "successCriteria": [
+      "In-scope targets use specific URLs and domain names — not generic descriptions like 'the website'",
+      "Out-of-scope explicitly names the production environment and the third-party payment processor as prohibited",
+      "Testing objective is specific to this engagement — not a generic statement about 'improving security'",
+      "Constraints include at least: no DoS/availability testing, no testing the production environment, no testing outside the agreed window, and no accessing or retaining customer PII beyond what is strictly necessary to document a finding",
+      "Emergency contacts include at least one technical contact (for system issues) and one business contact (for legal or escalation decisions)",
+      "Testing window specifies business days and hours, not just a date range"
+    ],
+    "reflection": "Notice what happens when you try to write 'In-Scope Targets' without specific IP addresses or domain names to work from. In a real engagement, the first meeting with the client is largely about obtaining this information precisely — because a vague scope creates legal ambiguity that affects every subsequent decision during the test. Also notice the out-of-scope section: every item you list there is an item a careless consultant might have tested without checking. The precision of the out-of-scope list protects the client's live systems and third-party relationships, and protects you from scope-creep liability."
+  }
+}

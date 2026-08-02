@@ -1,0 +1,16 @@
+{
+  "id": "m3-block-08-discussion",
+  "type": "discussion",
+  "order": 8,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Discuss",
+  "title": "What Should Marcus Have Done Differently?",
+  "prompt": "Marcus discovered a real, critical vulnerability — authentication bypass in a financial platform affecting tens of thousands of customers. His technical finding was legitimate and significant. But eleven months of legal proceedings, personal costs, and a terminated employment later, the outcome was a disaster. What should he have done instead — at each decision point from discovery to disclosure?",
+  "context": "Marcus made several distinct decisions, each of which could have gone differently. He accessed accounts beyond his own, he published before contacting the company, and he did not limit data collection to what was needed to prove the flaw. Each of these decisions increased his legal risk significantly — and none of them were necessary to prove the vulnerability or maximise its impact on improving security.",
+  "guideQuestions": [
+    "At the moment Marcus confirmed the vulnerability using his own account, what should his next action have been — before accessing any other account?",
+    "If the company had no published responsible disclosure policy or bug bounty programme, what options would Marcus have had for notifying them safely?",
+    "What would the minimum viable proof-of-concept look like for this vulnerability — what is the least amount of action needed to confirm and document the flaw without increasing legal risk?",
+    "If Marcus had gone to Priya and asked her to review his disclosure plan before he published anything, what do you think Priya would have told him to change?"
+  ]
+}

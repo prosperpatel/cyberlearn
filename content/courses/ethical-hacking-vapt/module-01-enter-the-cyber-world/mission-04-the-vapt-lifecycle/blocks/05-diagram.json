@@ -1,0 +1,82 @@
+{
+  "id": "m4-block-05-diagram",
+  "type": "diagram",
+  "order": 5,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "VAPT Lifecycle",
+  "title": "The VAPT Lifecycle — Five Phases",
+  "description": "A professional penetration test flows through five sequential phases. Each phase produces an output that the next phase depends on. The engagement cannot proceed to the next phase without completing the current one.",
+  "nodes": [
+    {
+      "id": "phase1",
+      "label": "Phase 1\nScoping",
+      "type": "primary",
+      "detail": "Define targets, objectives, constraints. Sign scope document, Rules of Engagement, authorization letter. Establish emergency contacts. OUTPUT: Signed agreements that authorise the engagement."
+    },
+    {
+      "id": "phase2",
+      "label": "Phase 2\nReconnaissance",
+      "type": "primary",
+      "detail": "Passive OSINT (WHOIS, DNS, Shodan, LinkedIn, Certificate Transparency) and active recon (DNS zone transfers, banner grabbing). OUTPUT: Target profile — technology stack, digital footprint, potential attack vectors."
+    },
+    {
+      "id": "phase3",
+      "label": "Phase 3\nScanning & Enumeration",
+      "type": "primary",
+      "detail": "Port scanning (Nmap), service detection, OS fingerprinting, vulnerability scanning (Nessus/OpenVAS), service enumeration (SMB, SNMP, web directories). OUTPUT: Structured vulnerability list with severity estimates."
+    },
+    {
+      "id": "phase4",
+      "label": "Phase 4\nExploitation",
+      "type": "primary",
+      "detail": "Attempt controlled exploitation of confirmed vulnerabilities. Document every step. Attempt privilege escalation and lateral movement. Identify reachable sensitive data. OUTPUT: Exploitation notes with evidence and confirmed business impact."
+    },
+    {
+      "id": "phase5",
+      "label": "Phase 5\nReporting",
+      "type": "primary",
+      "detail": "Executive summary, scope and methodology, findings summary, detailed findings (with CVSS, evidence, remediation), appendices. OUTPUT: Professional report the client can act on."
+    },
+    {
+      "id": "doc1",
+      "label": "Scope Document\n+ RoE",
+      "type": "output",
+      "detail": "The signed scope document defines what is tested. The Rules of Engagement defines how, when, and under what constraints. Both must be signed before any technical work begins."
+    },
+    {
+      "id": "doc2",
+      "label": "Target Profile",
+      "type": "output",
+      "detail": "A comprehensive dossier on the target organisation's digital footprint: exposed services, technology stack, employee structure, and initial attack surface map."
+    },
+    {
+      "id": "doc3",
+      "label": "Vulnerability List",
+      "type": "output",
+      "detail": "Structured inventory of discovered services and associated known vulnerabilities, annotated with version information, exposure level, and preliminary severity ratings."
+    },
+    {
+      "id": "doc4",
+      "label": "Exploitation Notes",
+      "type": "output",
+      "detail": "Timestamped, evidence-backed record of every exploitation attempt: what was tried, what succeeded, what access level was achieved, and what business impact is confirmed."
+    },
+    {
+      "id": "doc5",
+      "label": "Pentest Report",
+      "type": "output",
+      "detail": "The final deliverable. Contains executive summary, technical findings, risk matrix, remediation guidance, and appendices. This is what the client paid for."
+    }
+  ],
+  "edges": [
+    { "from": "phase1", "to": "doc1", "label": "produces", "type": "output" },
+    { "from": "doc1", "to": "phase2", "label": "authorises", "type": "dependency" },
+    { "from": "phase2", "to": "doc2", "label": "produces", "type": "output" },
+    { "from": "doc2", "to": "phase3", "label": "guides", "type": "dependency" },
+    { "from": "phase3", "to": "doc3", "label": "produces", "type": "output" },
+    { "from": "doc3", "to": "phase4", "label": "drives", "type": "dependency" },
+    { "from": "phase4", "to": "doc4", "label": "produces", "type": "output" },
+    { "from": "doc4", "to": "phase5", "label": "informs", "type": "dependency" },
+    { "from": "phase5", "to": "doc5", "label": "produces", "type": "output" }
+  ]
+}

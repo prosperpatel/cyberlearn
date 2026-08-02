@@ -1,0 +1,45 @@
+{
+  "id": "m2-block-14-flashcards",
+  "type": "flashcards",
+  "order": 14,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 2",
+  "cards": [
+    {
+      "front": "What are the three properties of the CIA Triad, and what does each protect?",
+      "back": "Confidentiality — protects information from being accessed by unauthorised parties.\nIntegrity — protects information from being altered by unauthorised parties.\nAvailability — ensures authorised users can access information and systems when they need them.\n\nEvery security control exists to protect one or more of these three properties.",
+      "hint": "Think: 'Who can See it, Who can Change it, Who can USE it.'"
+    },
+    {
+      "front": "What is an attack surface, and why does it extend beyond your own systems?",
+      "back": "The attack surface is the total set of points through which an attacker could enter a system or extract data — including servers, applications, employee accounts, third-party vendors with access, software supply chain, and human beings who can be socially engineered.\n\nIt extends beyond your own systems because attackers are not limited to your threat model — they will probe everything connected to you.",
+      "hint": "Every door, window, and skylight. Even the ones you forgot about."
+    },
+    {
+      "front": "What is the difference between an attack surface and an attack vector?",
+      "back": "Attack surface: the full set of all possible entry points — every potential vulnerability, every interface, every person.\nAttack vector: the specific path actually used in an attack — the phishing email, the unpatched port, the vendor's stolen credentials.\n\nReducing the attack surface means closing doors before attackers find them. Understanding the attack vector means knowing which door they used.",
+      "hint": "Surface = all possible ways in. Vector = the one way they used."
+    },
+    {
+      "front": "What is the chain from vulnerability to payload?",
+      "back": "Vulnerability → a weakness that exists in a system (unpatched software, default password, misconfigured service).\nExploit → the technique that weaponises that weakness to gain access or cause an unintended outcome.\nPayload → what the attacker deploys after exploitation: ransomware, backdoor, data exfiltration script, credential harvester.\n\nNot every vulnerability has a working exploit. Once an exploit exists, the payload determines the real-world impact.",
+      "hint": "Weakness → weaponise it → deliver the damage."
+    },
+    {
+      "front": "What distinguishes a nation-state APT from an organised cybercriminal group?",
+      "back": "Nation-state APT:\n• Motivation: espionage, geopolitical advantage, infrastructure disruption\n• Timeframe: months to years inside target environments\n• Characteristics: custom malware, zero-day exploits, supply chain attacks\n• Examples: SolarWinds/SUNBURST (APT29)\n\nOrganised cybercriminal group:\n• Motivation: financial profit\n• Timeframe: faster — monetise quickly\n• Characteristics: ransomware, financial fraud, data resale\n• Examples: LockBit, REvil ransomware groups",
+      "hint": "Nation-state plays long chess. Cybercriminals want the money now."
+    },
+    {
+      "front": "Why are insider threats considered particularly dangerous?",
+      "back": "Because they are already inside the perimeter. They have:\n• Legitimate credentials that don't trigger authentication alerts\n• Institutional knowledge of where valuable data is stored\n• Trusted network access that bypasses external defences\n• Behavioural patterns that blend in with normal activity\n\nDetecting an insider threat requires monitoring for anomalous behaviour by authorised users — much harder than detecting an external attacker trying to get past the firewall.",
+      "hint": "They already have the key to the front door."
+    },
+    {
+      "front": "What is the asymmetric advantage in cybersecurity, and why does it matter?",
+      "back": "Defenders must successfully protect all systems, all attack vectors, all the time.\nAttackers only need to succeed once — on one system, through one vector, at one moment in time.\n\nThis fundamental imbalance means attackers have a structural advantage that cannot be eliminated, only mitigated. It explains why even well-resourced organisations get breached, and why security is about reducing probability and impact rather than achieving perfection.",
+      "hint": "100 doors to defend. 1 door to find."
+    }
+  ]
+}

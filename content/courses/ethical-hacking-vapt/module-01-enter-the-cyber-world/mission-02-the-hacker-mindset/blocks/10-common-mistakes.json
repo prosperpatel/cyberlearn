@@ -1,0 +1,39 @@
+{
+  "id": "m2-block-10-common-mistakes",
+  "type": "common-mistakes",
+  "order": 10,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These four mistakes lead to security blind spots that attackers actively look for. Learn them now.",
+  "mistakes": [
+    {
+      "title": "Defining 'attack surface' as only your own systems",
+      "wrong": "'Our attack surface is our web servers, database servers, and employee laptops — we've assessed all of those.'",
+      "right": "Attack surface includes every third-party vendor with remote access, every SaaS application with access to internal data, every supplier in your software delivery pipeline, and every employee who can be socially engineered.",
+      "explanation": "The SolarWinds attack compromised 18,000 organisations without touching any of them directly. Northgate's hospital network was breached through an HVAC vendor's portal. Attackers actively look for the edge of your visibility — and your visibility almost always stops at your own estate. Third-party risk management is not a compliance checkbox; it is threat modelling done correctly.",
+      "severity": "critical"
+    },
+    {
+      "title": "Treating CIA Triad as a checklist rather than a lens",
+      "wrong": "'We encrypt data in transit (Confidentiality), we have logging enabled (Integrity), and we have 99.9% uptime (Availability). CIA Triad covered.'",
+      "right": "The CIA Triad is a framework for evaluating risk — not a compliance checklist. Use it as a question: for this specific system, which property is most critical, and what is the realistic threat to it?",
+      "explanation": "A hospital's priority is Availability — if patient records are inaccessible during an emergency, people can die. A bank's priority may be Integrity — if transaction data is altered, financial chaos follows. A law firm's priority may be Confidentiality — if client communications are leaked, careers end. The CIA Triad only becomes useful when you apply it specifically to the systems and contexts you are actually protecting.",
+      "severity": "warning"
+    },
+    {
+      "title": "Conflating vulnerability and exploit",
+      "wrong": "'The server has a vulnerability, so it's been compromised.'",
+      "right": "A vulnerability is a weakness. An exploit is the technique that turns that weakness into a breach. Not every vulnerability has a working exploit — and not every exploit works in every configuration.",
+      "explanation": "Vulnerability scanners like Nessus regularly flag dozens of theoretical weaknesses in a given environment. Many will never be exploited because no known working exploit exists, the configuration prevents the attack path, or the vulnerability is in a component not accessible from outside the network. The penetration tester's job is to identify which vulnerabilities are actually exploitable — turning a list of findings into a prioritised risk picture. A vulnerability without an exploit is a problem. A vulnerability with a working exploit is a breach waiting to happen.",
+      "severity": "warning",
+      "example": "CVE-2021-44228 (Log4Shell) was a critical vulnerability in the Java logging library Log4j — used in millions of systems worldwide. The vulnerability existed silently for over eight years before a working exploit was published. The day an exploit appeared, the threat level changed overnight. Same vulnerability, completely different risk profile."
+    },
+    {
+      "title": "Dismissing low-sophistication attackers as low-risk",
+      "wrong": "'We don't need to worry about script kiddies — they don't have the skills to get through our defences.'",
+      "right": "Sophisticated tools do not require sophisticated operators. A beginner with an automated exploit framework, a purchased ransomware-as-a-service subscription, or a pre-built phishing kit can cause catastrophic damage.",
+      "explanation": "The cybercrime ecosystem has professionalised to the point where fully-functional ransomware, exploit kits, and credential stuffing tools are available for purchase or rent, often with technical support included. The attacker's personal technical skill has become increasingly irrelevant; what matters is access to tooling. Dismissing low-skill actors is one of the fastest ways to underestimate your actual threat landscape.",
+      "severity": "warning"
+    }
+  ]
+}

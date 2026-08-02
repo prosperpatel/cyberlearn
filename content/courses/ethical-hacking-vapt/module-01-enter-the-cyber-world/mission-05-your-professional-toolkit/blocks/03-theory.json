@@ -1,0 +1,29 @@
+{
+  "id": "m5-block-03-theory",
+  "type": "theory",
+  "order": 3,
+  "estimatedMinutes": 7,
+  "sidebarLabel": "CVE, CWE & CVSS",
+  "title": "The Vulnerability Management Ecosystem: CVE, CWE, NVD, and CVSS",
+  "content": {
+    "introduction": "The global security community manages vulnerabilities using four interlocking systems. Understanding each system, and the relationship between them, is essential for reading professional reports, researching vulnerabilities, and communicating findings to clients and colleagues.",
+    "sections": [
+      {
+        "heading": "CVE — Common Vulnerabilities and Exposures",
+        "body": "CVE is a public catalogue of known, individually identified security vulnerabilities. Every distinct vulnerability in a specific piece of software gets its own CVE entry.\n\n**Who maintains it**: MITRE Corporation, funded by CISA (the US Cybersecurity and Infrastructure Security Agency). Organisations called CVE Numbering Authorities (CNAs) — including major vendors like Microsoft, Google, and Red Hat — can assign CVE IDs directly for vulnerabilities in their own products.\n\n**CVE ID format**: CVE-YEAR-NUMBER\n- CVE-2017-0144: EternalBlue, the NSA-developed exploit leaked by Shadow Brokers and used in WannaCry\n- CVE-2021-44228: Log4Shell, the critical remote code execution vulnerability in the Apache Log4j logging library\n- CVE-2014-6271: Shellshock, a vulnerability in the Bash shell affecting Linux and macOS systems\n\nThe year in the CVE ID is the year the CVE was assigned, not necessarily the year the vulnerability was discovered or exploited. Some vulnerabilities are assigned CVE IDs years after they were first identified.\n\n**What a CVE entry contains**: A description of the vulnerability, the affected software and version ranges, references to vendor advisories and patches, and links to the NVD for enriched analysis. A CVE entry deliberately contains only the basic facts — the NVD layer adds severity scores."
+      },
+      {
+        "heading": "CWE — Common Weakness Enumeration",
+        "body": "CWE is a taxonomy of software and hardware weakness types — categories of vulnerability classes, not specific instances.\n\n**Who maintains it**: MITRE Corporation (same organisation as CVE).\n\n**Examples**:\n- CWE-89: SQL Injection\n- CWE-79: Cross-Site Scripting (XSS)\n- CWE-200: Exposure of Sensitive Information to Unauthorised Actor\n- CWE-787: Out-of-Bounds Write\n- CWE-918: Server-Side Request Forgery (SSRF)\n\n**The relationship between CVE and CWE**: A CVE (specific vulnerability) maps to a CWE (weakness category).\n- CVE-2021-44228 (Log4Shell) maps to CWE-502 (Deserialization of Untrusted Data)\n- CVE-2017-0144 (EternalBlue) maps to CWE-119 (Improper Restriction of Operations within the Bounds of a Memory Buffer)\n\nThink of it this way: CWE is the disease taxonomy (what category of problem this is). CVE is the specific patient case (this exact vulnerability in this specific software version). When a developer asks 'what class of vulnerability should I be defending against?', they look at CWEs. When a pentester asks 'is this specific software version vulnerable?', they look at CVEs."
+      },
+      {
+        "heading": "NVD — National Vulnerability Database",
+        "body": "NVD is NIST's enriched, searchable database built on top of CVE data. Where a CVE entry contains basic facts, the NVD entry contains full technical analysis.\n\n**Who maintains it**: The National Institute of Standards and Technology (NIST), part of the US Department of Commerce.\n\n**What NVD adds to CVE data**:\n- CVSS Base Score and score breakdown\n- Severity rating (Critical/High/Medium/Low/None)\n- CPE (Common Platform Enumeration) — precise machine-readable identification of affected software configurations\n- Known exploit availability (is there a working exploit publicly known?)\n- Links to patches, advisories, and vendor statements\n\n**Access**: nvd.nist.gov — freely available, no login required. This is the first place to look when researching any CVE."
+      },
+      {
+        "heading": "CVSS — Common Vulnerability Scoring System",
+        "body": "CVSS is the scoring system that quantifies vulnerability severity on a 0–10 scale. The current version is CVSS v3.1, with CVSS v4.0 introduced in 2023.\n\n**The Base Score** reflects intrinsic characteristics that do not change across environments:\n\n*Exploitability metrics*:\n- Attack Vector (AV): Network [N] / Adjacent [A] / Local [L] / Physical [P] — how far away can an attacker be?\n- Attack Complexity (AC): Low [L] / High [H] — does exploitation require special conditions?\n- Privileges Required (PR): None [N] / Low [L] / High [H] — what access does the attacker already need?\n- User Interaction (UI): None [N] / Required [R] — does a human need to take an action?\n\n*Scope (S)*: Unchanged [U] / Changed [C] — does exploitation affect only the vulnerable component or does it impact other components?\n\n*Impact metrics*:\n- Confidentiality (C), Integrity (I), Availability (A): None [N] / Low [L] / High [H]\n\n**Score ranges**: 0.0 = None | 0.1–3.9 = Low | 4.0–6.9 = Medium | 7.0–8.9 = High | 9.0–10.0 = Critical\n\n**Temporal Score** adjusts for whether a patch or workaround is available and how mature public exploits are.\n\n**Environmental Score** allows organisations to adjust the base score for their specific context — a vulnerability on a non-critical internal system scores lower environmentally than the same vulnerability on a public-facing payment platform.\n\n**Critical limitation**: CVSS measures technical severity in isolation. It does not measure business risk, which also depends on asset value, exposure level, and compensating controls. A CVSS 9.8 vulnerability on a test server with no network access has different business priority than a CVSS 7.5 on a public-facing production API."
+      }
+    ]
+  }
+}

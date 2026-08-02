@@ -1,0 +1,35 @@
+{
+  "id": "mission-04-the-vapt-lifecycle",
+  "slug": "mission-04-the-vapt-lifecycle",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-01-enter-the-cyber-world",
+  "title": "The VAPT Lifecycle",
+  "tagline": "Knowing how to hack is not enough. You need to know what to test, when to test it, and how to deliver findings that actually get fixed.",
+  "description": "Walk through all five phases of a professional VAPT engagement — from the first client call to the final report. Learn what a scope document contains, what Rules of Engagement actually govern, why reporting is the deliverable that justifies the entire engagement, and what happens when organisations treat security testing as a compliance checkbox.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 45,
+  "xpReward": 100,
+  "order": 4,
+  "missionNumber": 4,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-03-the-legal-landscape"],
+  "tags": ["vapt", "methodology", "scope", "rules-of-engagement", "reporting", "ptes", "reconnaissance", "exploitation"],
+  "operativeCodename": "Operation Five Phases",
+  "learningObjectives": [
+    "Name and describe the five phases of a VAPT engagement in order, and explain the primary activity and output of each phase",
+    "Explain what a scope document contains and why its precision determines the safety and legality of the entire engagement",
+    "Describe what a Rules of Engagement document governs, including timing, permitted techniques, escalation protocols, and data handling",
+    "Explain why the report — not the exploitation — is the deliverable a client pays for, and what a professional pentest report must contain",
+    "Identify the seven phases of the Penetration Testing Execution Standard (PTES) and explain how they map to a real engagement"
+  ],
+  "skills": ["vapt-methodology", "scope-definition", "professional-reporting", "ptes", "reconnaissance"],
+  "badge": "VAPT Operative",
+  "missionIcon": "clipboard-list",
+  "completionRequirements": {
+    "minBlocksCompleted": 14,
+    "minQuizScore": 80
+  }
+}

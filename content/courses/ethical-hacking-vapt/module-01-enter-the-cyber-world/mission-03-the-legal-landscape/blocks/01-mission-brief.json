@@ -1,0 +1,28 @@
+{
+  "id": "m3-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "The Legal Landscape",
+  "operativeCodename": "Operation Safe Harbour",
+  "subtitle": "The law doesn't care how good your intentions were. Learn what it actually says.",
+  "briefing": "In 2013, a 28-year-old developer named Daniel was sitting in a coffee shop in Manchester. He had been looking at a local government website when he noticed something strange in the URL — a numeric ID that, when incremented by one, showed him a different resident's planning application data. Curious, he tried a few more. Each one showed a different person's private details.\n\nHe sent the council an email explaining what he had found and how he had found it. He included no personal data and requested no payment. He was trying to help.\n\nThe police turned up at his house two weeks later. He was interviewed under caution and faced potential prosecution under the Computer Misuse Act.\n\nHe had accessed computer material without authorisation. The fact that he had been trying to help was legally irrelevant. The fact that he had found a real vulnerability was legally irrelevant. The fact that no data had been copied or misused was legally irrelevant.\n\nThose three facts are still irrelevant today, under the same law.\n\nIn this mission, you will learn exactly what the law says — and how security researchers have built a framework (bug bounty programmes, responsible disclosure policies, and safe harbour clauses) that makes legitimate security research both possible and protected.",
+  "whyItMatters": "You cannot practise ethical hacking safely without understanding the legal framework that governs it. The skills you are building in this course are identical to the skills used by criminal attackers. What separates you from them is not your motivation — it is your understanding of authorisation, scope, and the legal frameworks that protect researchers who operate within them.\n\nKnowing the law is not optional. It is the foundation of a sustainable career.",
+  "objectives": [
+    "Understand what the Computer Misuse Act (UK) and the Computer Fraud and Abuse Act (US) actually prohibit — and why good intentions are not a defence",
+    "Learn the black hat / white hat / grey hat classification and why 'grey hat' is not a safe category",
+    "Understand what a bug bounty programme is and how it creates a legal authorisation framework for independent research",
+    "Learn the 90-day standard for responsible disclosure and why it matters",
+    "Understand what a safe harbour clause protects — and what happens when one is absent"
+  ],
+  "skillsUnlocked": [
+    "Reading and interpreting the legal provisions that govern computer access in major jurisdictions",
+    "Identifying whether a proposed security research activity has legal protection",
+    "Understanding bug bounty programme structures and responsible disclosure timelines"
+  ],
+  "closingMessage": "Daniel's story is not unusual. Dozens of security researchers have faced prosecution for discoveries made with no malicious intent. The legal framework has evolved significantly in response — but it is still imperfect, and the researcher's burden is to understand it before touching anything. Let's learn exactly what that framework looks like.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["law", "cfaa", "computer-misuse-act", "bug-bounty", "responsible-disclosure"]
+}

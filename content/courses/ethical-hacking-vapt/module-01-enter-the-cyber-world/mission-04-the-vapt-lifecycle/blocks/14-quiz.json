@@ -1,0 +1,75 @@
+{
+  "id": "m4-block-14-quiz",
+  "type": "quiz",
+  "order": 14,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "During a penetration test, you discover an unpatched vulnerability on a server that is clearly listed as out-of-scope in the signed scope document. What is the correct professional response?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Test it anyway — the vulnerability exists regardless of scope boundaries, and finding it serves the client's interests", "isCorrect": false },
+        { "id": "b", "text": "Ignore it completely and do not mention it anywhere", "isCorrect": false },
+        { "id": "c", "text": "Stop, document exactly what you observed and how, notify the client via the emergency contact, and request explicit written authorisation before proceeding", "isCorrect": true },
+        { "id": "d", "text": "Include it as an additional finding in the report under 'Observations'", "isCorrect": false }
+      ],
+      "explanation": "Out-of-scope means the system has not been authorised for testing. Any interaction beyond what you have already accidentally observed constitutes unauthorised access. The professional response is to stop all interaction, document what you saw, escalate to the client immediately, and wait for explicit written scope amendment before proceeding. Option B is also wrong — you must not silently ignore a potentially critical risk you observed; escalating it to the client (without exploiting it) is the appropriate action.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "Which VAPT phase produces the signed scope document and Rules of Engagement before any technical testing begins?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Reconnaissance", "isCorrect": false },
+        { "id": "b", "text": "Scanning and Enumeration", "isCorrect": false },
+        { "id": "c", "text": "Scoping / Pre-engagement", "isCorrect": true },
+        { "id": "d", "text": "Reporting", "isCorrect": false }
+      ],
+      "explanation": "Scoping (Phase 1 / Pre-engagement) is the administrative and legal foundation of the engagement. All technical work — reconnaissance, scanning, exploitation — depends on the authorisation established in this phase. No professional should begin reconnaissance, let alone scanning or exploitation, without a signed scope document and RoE in place.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A penetration test finds two vulnerabilities. Vulnerability A: CVSS 9.8 on an isolated internal development server with no external network access. Vulnerability B: CVSS 6.5 authentication bypass on a public-facing customer login portal. Which should be remediated first?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Vulnerability A — CVSS 9.8 is objectively more severe and should always be remediated first", "isCorrect": false },
+        { "id": "b", "text": "Vulnerability B — business context (public-facing, customer data) makes it the higher business risk despite the lower CVSS score", "isCorrect": true },
+        { "id": "c", "text": "Both simultaneously — CVSS severity and business context must always be weighted equally", "isCorrect": false },
+        { "id": "d", "text": "Neither — CVSS 6.5 is below the High threshold and does not require urgent remediation", "isCorrect": false }
+      ],
+      "explanation": "CVSS measures technical severity; business risk requires contextualisation. Vulnerability B — an authentication bypass on a public-facing customer login portal — is reachable by any internet user and potentially exposes customer data. Vulnerability A, despite its higher CVSS score, is on a system with no external access and would require prior network access to exploit. In a professional report, finding priority should reflect actual business risk. A good pentester will note Vulnerability A as Critical in isolation, but advise the client to address Vulnerability B first given its exposure and potential regulatory impact.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "In the Penetration Testing Execution Standard (PTES), which phase comes immediately after Exploitation?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Vulnerability Analysis", "isCorrect": false },
+        { "id": "b", "text": "Intelligence Gathering", "isCorrect": false },
+        { "id": "c", "text": "Post-Exploitation", "isCorrect": true },
+        { "id": "d", "text": "Reporting", "isCorrect": false }
+      ],
+      "explanation": "The PTES seven phases are: (1) Pre-engagement Interactions, (2) Intelligence Gathering, (3) Threat Modelling, (4) Vulnerability Analysis, (5) Exploitation, (6) Post-Exploitation, (7) Reporting. Post-Exploitation follows Exploitation and covers privilege escalation, lateral movement, persistence analysis, and data reachability assessment — exploring the full impact of achieved access before moving to the report. This phase determines the true depth of a successful compromise.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "What is the primary difference between a scope document and a Rules of Engagement (RoE) document?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The scope document defines what is tested; the RoE defines how it is tested, including timing, permitted techniques, escalation protocols, and communication requirements", "isCorrect": true },
+        { "id": "b", "text": "The scope document is used for large enterprise engagements; the RoE is used for small application assessments", "isCorrect": false },
+        { "id": "c", "text": "The scope document is signed by the penetration tester; the RoE is signed by the client's legal team only", "isCorrect": false },
+        { "id": "d", "text": "There is no meaningful distinction — both documents serve identical purposes and are interchangeable", "isCorrect": false }
+      ],
+      "explanation": "The scope document answers WHAT: which systems are in scope, what the testing objectives are, and what is explicitly out of scope. The Rules of Engagement answers HOW: what techniques are permitted and prohibited, during what time windows, with what escalation procedures, and what communication cadence. Both documents are required, and both must be signed before testing begins. Conflating them creates gaps — a scope document without a testing window is incomplete; an RoE without a target list is unanchored.",
+      "xpReward": 15
+    }
+  ]
+}

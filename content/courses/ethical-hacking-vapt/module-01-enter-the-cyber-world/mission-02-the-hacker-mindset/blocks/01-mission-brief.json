@@ -1,0 +1,28 @@
+{
+  "id": "m2-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "The Hacker Mindset",
+  "operativeCodename": "Operation Asymmetric",
+  "subtitle": "You are not in a fair fight. Understanding that changes everything.",
+  "briefing": "Here is the most important truth about cybersecurity, and most people take years to really absorb it:\n\nYou have to get it right every single time. They only have to get it right once.\n\nNadia Kumar spent six months hardening her hospital's network. She replaced the firewalls, enforced MFA on every account, patched every server in the asset register, and reviewed the intrusion detection configuration herself. Her security report to the board was the cleanest it had ever been.\n\nThe attackers never touched any of it. They found a third-party HVAC maintenance vendor with a reused password from a three-year-old email breach — and walked straight in through the back door.\n\nNadia had to defend everything. They only had to find one thing she didn't control.\n\nThat asymmetry — that fundamental imbalance between attacker and defender — is what makes cybersecurity uniquely hard. Before you can defend anything well, you need to understand how attackers think, what they look for, and why the things most people consider 'the system to protect' are often not what gets compromised at all.",
+  "whyItMatters": "The CIA Triad and the concept of attack surface are not abstract theory. They are the mental framework every ethical hacker, penetration tester, and security engineer uses to evaluate risk. When you understand what attackers are actually after — Confidentiality, Integrity, or Availability — you can prioritise what to protect. When you understand what they look for — every exposed interface, every human, every vendor — you can see what you might be missing.\n\nThink like them, and you become far harder to beat.",
+  "objectives": [
+    "Understand the CIA Triad — the three properties every attacker tries to violate and every defender tries to protect",
+    "Learn what 'attack surface' really means — it is not just your servers",
+    "Understand the chain from vulnerability to exploit to payload",
+    "Know the five threat actor types — who they are, what they want, and how they operate",
+    "Internalise the asymmetric advantage attackers hold, and what it means for how you defend"
+  ],
+  "skillsUnlocked": [
+    "Evaluating any attack by which CIA property it violates",
+    "Mapping an organisation's attack surface including third-party and human components",
+    "Identifying threat actor type from context clues in a real-world scenario"
+  ],
+  "closingMessage": "You are about to follow Nadia into the moment her perfect security posture failed — not because she made a technical mistake, but because she was thinking like a defender in a world where attackers are free to think differently. Let's find out what they saw that she didn't.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["cia-triad", "attack-surface", "threat-actors", "mindset"]
+}

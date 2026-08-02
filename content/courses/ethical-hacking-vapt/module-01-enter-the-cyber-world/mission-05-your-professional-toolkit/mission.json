@@ -1,0 +1,35 @@
+{
+  "id": "mission-05-your-professional-toolkit",
+  "slug": "mission-05-your-professional-toolkit",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-01-enter-the-cyber-world",
+  "title": "Your Professional Toolkit",
+  "tagline": "Tools are multipliers — they amplify what you already know. They cannot substitute for it.",
+  "description": "Build the foundational knowledge layer that connects your methodology to the real world: the CVE and CVSS systems that underpin every vulnerability report, the OWASP Top 10 that defines web application security standards, the frameworks professionals use to communicate risk, the tools that execute each VAPT phase, and the certification pathways that structure career development in offensive security.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 45,
+  "xpReward": 100,
+  "order": 5,
+  "missionNumber": 5,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-04-the-vapt-lifecycle"],
+  "tags": ["cve", "cvss", "owasp", "nist-csf", "tools", "certifications", "nmap", "burp-suite", "metasploit"],
+  "operativeCodename": "Operation Toolkit",
+  "learningObjectives": [
+    "Explain the CVE, CWE, NVD, and CVSS systems and describe the relationship between each of them",
+    "Name all ten OWASP Top 10 categories (2021) and describe what class of vulnerability each represents",
+    "Identify the five functions of the NIST Cybersecurity Framework and explain how they structure a security programme",
+    "Match representative professional security tools to their correct VAPT phase and explain what each tool category does",
+    "Describe the key certifications in offensive security — Security+, eJPT, CEH, PNPT, OSCP, CPTS — and explain what each tests and when to pursue it"
+  ],
+  "skills": ["cve-analysis", "owasp-awareness", "tool-selection", "certification-planning", "nist-csf"],
+  "badge": "Equipped Operative",
+  "missionIcon": "wrench",
+  "completionRequirements": {
+    "minBlocksCompleted": 14,
+    "minQuizScore": 80
+  }
+}

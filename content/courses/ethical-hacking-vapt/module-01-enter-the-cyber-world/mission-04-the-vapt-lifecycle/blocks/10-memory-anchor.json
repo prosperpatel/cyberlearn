@@ -1,0 +1,20 @@
+{
+  "id": "m4-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Memory Anchor",
+  "title": "Remember the Five Phases",
+  "anchor": {
+    "phrase": "Skilled Researchers Systematically Exploit Responsibly",
+    "breakdown": [
+      { "letter": "S", "word": "Skilled", "maps_to": "Scoping", "detail": "Define targets, objectives, and constraints before any technical work begins. Signed scope document + RoE." },
+      { "letter": "R", "word": "Researchers", "maps_to": "Reconnaissance", "detail": "Build a complete picture of the target through passive OSINT and authorised active recon. Output: target profile." },
+      { "letter": "S", "word": "Systematically", "maps_to": "Scanning & Enumeration", "detail": "Port scan, service detect, vulnerability scan, enumerate. Output: structured vulnerability list." },
+      { "letter": "E", "word": "Exploit", "maps_to": "Exploitation", "detail": "Confirm vulnerabilities are genuinely exploitable. Document every step with evidence. Output: exploitation notes." },
+      { "letter": "R", "word": "Responsibly", "maps_to": "Reporting", "detail": "Deliver a professional report: executive summary, detailed findings, CVSS ratings, and remediation guidance. Output: the deliverable the client paid for." }
+    ]
+  },
+  "acronym": null,
+  "additionalNote": "The two 'S' words — Skilled (Scoping) and Systematically (Scanning) — remind you that this work requires precision at both ends: the beginning (defining what you're doing) and the middle (doing it systematically). The two 'R' words — Researchers (Recon) and Responsibly (Reporting) — bracket the technical phases. Research without responsible documentation is incomplete work."
+}

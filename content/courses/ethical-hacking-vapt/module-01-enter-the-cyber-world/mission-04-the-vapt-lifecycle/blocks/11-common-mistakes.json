@@ -1,0 +1,45 @@
+{
+  "id": "m4-block-11-common-mistakes",
+  "type": "common-mistakes",
+  "order": 11,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Common Mistakes",
+  "title": "Five Ways Pentest Engagements Go Wrong",
+  "mistakes": [
+    {
+      "mistake": "Scope creep during testing",
+      "description": "During an engagement, the consultant notices a host that appears to be connected to the target network but is just outside the agreed scope. They 'quickly check' it because it looks interesting or appears to have a critical vulnerability.",
+      "whyItHappens": "Curiosity is a genuine professional asset in security work — but here it conflicts with professional and legal boundaries. The adjacent host is tantalising precisely because it may represent the most critical finding of the engagement.",
+      "consequence": "Even a brief interaction with an out-of-scope system is unauthorised access under the CFAA and Computer Misuse Act. 'Just checking' is not a legal defence. The incident may require mandatory breach notification by the system owner. The consultant's firm may lose the client, and the consultant may face personal legal exposure.",
+      "correctApproach": "Stop. Do not interact further. Document exactly what you observed and how. Contact the client's emergency contact and request a formal scope amendment. Proceed only with written authorisation."
+    },
+    {
+      "mistake": "Treating vulnerability scanner output as a report",
+      "description": "The engagement concludes and the consultant exports the Nessus or OpenVAS output as a PDF, adds a cover page, and submits it as the final deliverable.",
+      "whyItHappens": "Report writing is time-consuming, and scanner output looks comprehensive. Consultants under time pressure sometimes underestimate how much value comes from the human analysis layer that transforms raw findings into business-contextualised, prioritised, actionable recommendations.",
+      "consequence": "A scanner dump lists every detected issue with generic remediation advice pulled from the CVE database. It does not tell the CISO which three things to fix first. It does not contextualise which vulnerabilities are exploitable in this specific environment. The development team cannot prioritise from it. The board cannot understand it. Clients who receive this kind of report are — rightly — dissatisfied.",
+      "correctApproach": "The report is the product. Allocate time for it in the engagement timeline. Every finding must be manually reviewed, contextualised to the client's environment, assigned a business-risk-adjusted severity, and accompanied by specific, actionable remediation guidance. The executive summary must be written for a non-technical audience."
+    },
+    {
+      "mistake": "Running vulnerability scans without understanding what the tool will do",
+      "description": "The consultant launches a credentialed Nessus scan with default settings against a production web server. Several plugins in the default profile perform active service probing that causes the target to briefly crash or return errors.",
+      "whyItHappens": "Vulnerability scanners feel safe — they are designed to be automated and repeatable. New consultants often underestimate the impact some scan configurations can have on production services, especially older or custom-built applications.",
+      "consequence": "Service disruption in a production environment, even brief, may trigger the client's incident response team (who may not know the scan was planned), create downtime for end users, or produce a service log that the client's security monitoring interprets as an attack — leading to false escalations.",
+      "correctApproach": "Read the documentation for every scan profile and plugin category before running it. Run scans in staging before production. Confirm with the client before any scan configuration that could affect service availability. Always prefer staging environments over production for initial scans."
+    },
+    {
+      "mistake": "Using CVSS score as the only proxy for business risk",
+      "description": "The report orders findings by CVSS score. A CVE with CVSS 9.8 on an isolated internal development server appears as finding #1, above a CVSS 6.5 authentication bypass on a public-facing customer portal.",
+      "whyItHappens": "CVSS scores are objective and easy to sort by. Business context requires judgment and knowledge of the client's environment, which takes time to acquire and difficult to articulate.",
+      "consequence": "The client's development team patches the internal dev server first because it is listed as Critical. The authentication bypass on the customer portal — exploitable by any internet user, potentially exposing customer data — goes unaddressed for another sprint cycle.",
+      "correctApproach": "Always contextualise CVSS scores with: exposure level (internet-facing vs internal), exploitability in this specific environment (do prerequisites exist?), and business impact (what data or systems are reachable through this vulnerability?). The report's priority ordering should reflect actual business risk — not raw CVSS score."
+    },
+    {
+      "mistake": "Going dark during the engagement",
+      "description": "The consultant receives the signed documents, begins testing, and disappears for 5 days. No check-ins, no status updates, no communication until the final report arrives.",
+      "whyItHappens": "The consultant is focused on technical work and treats client communication as a distraction. They also may feel there is nothing to report until findings are complete.",
+      "consequence": "The client's SOC detects unusual scan traffic and does not know whether it is the authorised pentest or a real attacker — launching unnecessary incident response procedures. The client grows anxious without updates and loses confidence in the engagement. If something goes wrong mid-engagement, there is no communication channel for rapid escalation.",
+      "correctApproach": "Communicate proactively throughout the engagement. At minimum: a brief daily status email indicating what phase is underway and any significant preliminary findings. Notify the client before beginning each major phase, especially exploitation. Ensure the client's security monitoring team has the pentester's source IP addresses whitelisted for the engagement window."
+    }
+  ]
+}

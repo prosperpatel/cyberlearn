@@ -1,0 +1,29 @@
+{
+  "id": "m3-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Two Researchers, Two Outcomes",
+  "narrative": [
+    "In the same month, two security researchers independently discovered a serious authentication bypass vulnerability in a major financial services platform used by tens of thousands of small business customers across Europe. The vulnerability allowed any authenticated user to access any other customer's account by manipulating a session token in a predictable way. Both researchers found it while testing their own accounts on the platform. Neither had been hired to test anything.",
+    "Priya Mehta, the first researcher, documented the vulnerability carefully, photographed the proof-of-concept, and immediately closed her browser. She then searched the company's website for a responsible disclosure policy. Finding none, she sent an email to the company's general security contact address, describing the vulnerability in technical detail, including the proof-of-concept, and stating clearly that she had not accessed any accounts other than her own. She requested acknowledgement within five business days and stated she would follow a 90-day disclosure timeline — giving the company ninety days to release a patch before she published her findings.",
+    "Marcus Webb, the second researcher, accessed his own account to confirm the vulnerability, then accessed three other accounts to 'verify it worked across different customer types.' He published a detailed blog post with full proof-of-concept code that same evening, before contacting the company. He tagged the company in his social media post. The post went viral within twelve hours.",
+    "The company's legal team contacted Priya within twenty-four hours. After an initially tense exchange, they established a working relationship. Priya received a formal letter of thanks, a £2,500 bug bounty payment under an emergency programme they established specifically to handle her submission, and a reference for her professional portfolio. The vulnerability was patched in eighteen days. Priya's name appeared in the company's security acknowledgements page.",
+    "Marcus received a letter from the company's lawyers. He had accessed accounts he was not authorised to access — that constituted unauthorised computer access under the Computer Misuse Act regardless of his purpose. He had caused the company measurable reputational damage by going public before a patch was available. The criminal referral was ultimately dropped after Marcus agreed to remove the post and cooperate with the investigation — but the legal process took eleven months, cost him significant money in legal fees, and ended his career at his employer, who terminated him during the investigation."
+  ],
+  "characters": [
+    {
+      "name": "Priya Mehta",
+      "role": "Independent Security Researcher",
+      "description": "A developer who discovered a critical vulnerability while using a platform for her own business. Her disciplined approach to responsible disclosure — limit access to her own account, contact the company privately, set a professional timeline — turned an accidental discovery into a career milestone.",
+      "emoji": "🔒"
+    },
+    {
+      "name": "Marcus Webb",
+      "role": "Independent Security Researcher",
+      "description": "A technically skilled developer whose discovery was equally valid — but whose actions after the discovery turned a potential career highlight into an eleven-month legal ordeal. He accessed accounts he was not authorised to access and published a working exploit before giving the company any opportunity to respond.",
+      "emoji": "⚠️"
+    }
+  ],
+  "mood": "tense"
+}

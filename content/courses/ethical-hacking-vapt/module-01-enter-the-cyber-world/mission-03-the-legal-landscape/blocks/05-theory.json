@@ -1,0 +1,51 @@
+{
+  "id": "m3-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Core Concepts",
+  "title": "The Laws, the Hats, and the Framework",
+  "content": "Computer crime law exists in most countries in the world, and every security professional needs to understand at least the key provisions of the major jurisdictions they operate in.\n\n**The Computer Fraud and Abuse Act (CFAA) — United States**\nEnacted in 1986 and broadened several times since, the CFAA makes it a federal crime to access a computer without authorisation, or to exceed authorised access. Critically, the law does not require that any damage occurs, that any data is stolen, or that you had malicious intent. Accessing a system you were not given explicit permission to access is a crime under the CFAA. The AT&T case demonstrated that even accessing a publicly reachable API endpoint can constitute 'unauthorised access' if that data was not intended to be accessible.\n\n**The Computer Misuse Act 1990 — United Kingdom**\nThe Computer Misuse Act (CMA) creates three primary offences: unauthorised access to computer material (the basic offence), unauthorised access with intent to commit further offences, and unauthorised modification of computer material. Intent is relevant only to determining which charge applies — it is not a defence against the basic offence. 'I was trying to help them' has never been a successful CMA defence. Equivalent legislation exists in the EU (the Cybercrime Directive), Australia (the Criminal Code Act 1995), India (the IT Act 2000), and most other major jurisdictions.\n\n**The Three Hats**\nSecurity researchers and attackers are commonly categorised by the colour of their metaphorical hat, borrowed from Western film conventions:\n\n- **Black Hat**: Malicious attackers operating without authorisation. Their goal may be financial (cybercrime), political (hacktivism), or state-directed (espionage). All black hat activity is criminal.\n- **White Hat**: Ethical hackers operating with explicit written authorisation — the PSP framework from Mission 1. Penetration testers, bug bounty researchers, and internal security teams. All white hat activity is authorised and documented.\n- **Grey Hat**: Researchers who discover vulnerabilities without authorisation — not to cause harm, but to expose them. The AT&T Goatse Security case is a textbook grey hat scenario. Despite good intentions, grey hat activity involves unauthorised access and is illegal in most jurisdictions.\n\n**Bug Bounty Programmes**\nBug bounty programmes are formal agreements published by organisations inviting security researchers to test their systems and report vulnerabilities in exchange for recognition or financial reward. They solve the grey hat problem by creating explicit, written authorisation for security research within defined parameters.\n\nA well-designed bug bounty programme specifies: which systems are in scope, which attack techniques are authorised, what the researcher must and must not do, what the reward structure is, and what the organisation commits to in response to a valid submission. The programme's scope document is functionally a public Rules of Engagement — it converts an otherwise unauthorised activity into an explicitly authorised one.\n\n**Safe Harbour Clauses**\nSome bug bounty programmes — and an increasing number of vulnerability disclosure policies — include a safe harbour clause: a formal, written commitment that the organisation will not take legal action against researchers who comply with the programme's terms, even if their research would otherwise be technically illegal under computer crime law. A safe harbour clause is not legally guaranteed to protect a researcher in every jurisdiction, but its presence is a strong indicator that the organisation is serious about the programme and willing to defend researchers who operate within it. Its absence should be treated as a warning sign.",
+  "callouts": [
+    {
+      "type": "warning",
+      "title": "Grey Hat Is Not a Safe Category",
+      "text": "The phrase 'grey hat' is often used as if it describes a legitimate middle ground. It does not. Grey hat activity — accessing systems without authorisation, even with good intentions — is illegal under the CFAA, the Computer Misuse Act, and equivalent legislation in most countries. The research may be valuable. The researcher's intentions may be genuine. Neither fact provides legal protection. The only safe path for independent security research is through a published bug bounty programme with clear scope, a safe harbour clause, and written acknowledgement of participation."
+    },
+    {
+      "type": "info",
+      "title": "The 90-Day Standard",
+      "text": "The 90-day responsible disclosure timeline was popularised by Google's Project Zero team. After privately notifying a vendor of a vulnerability, researchers give them 90 calendar days to release a patch before publishing findings publicly. The rationale: 90 days is sufficient time for most organisations to develop and deploy a patch for most vulnerabilities. If no patch exists after 90 days, publishing puts public pressure on the vendor while informing users of the risk — even though no patch exists yet. Some programmes use different timelines; critical infrastructure vulnerabilities often warrant longer coordination periods."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Computer Fraud and Abuse Act (CFAA)",
+      "definition": "US federal law enacted in 1986 that criminalises accessing a computer without authorisation or exceeding authorised access. Does not require intent to harm, actual damage, or data theft. Applies to any computer connected to the internet."
+    },
+    {
+      "term": "Computer Misuse Act 1990 (CMA)",
+      "definition": "UK legislation that criminalises unauthorised access to computer material, unauthorised access with intent to commit further offences, and unauthorised modification of computer material. 'I was trying to help' is not a defence under the basic offence."
+    },
+    {
+      "term": "Bug Bounty Programme",
+      "definition": "A formal programme published by an organisation that invites security researchers to discover and report vulnerabilities within defined scope in exchange for recognition or financial reward. Creates explicit written authorisation for the research."
+    },
+    {
+      "term": "Responsible Disclosure",
+      "definition": "The practice of privately notifying a vendor of a discovered vulnerability, giving them a reasonable period to patch it (commonly 90 days), then publishing findings publicly — whether or not a patch has been released. Balances the vendor's need for time with the public's right to know about risks."
+    },
+    {
+      "term": "Full Disclosure",
+      "definition": "Releasing complete technical details of a vulnerability publicly immediately upon discovery, without prior notification to the vendor. Maximises pressure on the vendor to patch but immediately enables attackers to exploit the vulnerability against unpatched systems."
+    },
+    {
+      "term": "Safe Harbour",
+      "definition": "A clause in a bug bounty or vulnerability disclosure policy where the organisation formally commits not to pursue legal action against researchers who comply with the programme's terms. Not available in all programmes — its absence is a significant risk for researchers."
+    },
+    {
+      "term": "Coordinated Vulnerability Disclosure (CVD)",
+      "definition": "A structured process in which the researcher, the affected vendor, and sometimes a third-party coordinator (such as CERT/CC or the NCSC) work together to develop a patch and plan a disclosure timeline before any public announcement. The professional standard for complex or critical vulnerabilities."
+    }
+  ]
+}

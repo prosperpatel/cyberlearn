@@ -1,0 +1,26 @@
+{
+  "id": "m3-block-09-student-questions",
+  "type": "student-questions",
+  "order": 9,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Your Questions",
+  "intro": "The legal landscape around security research creates genuine confusion. These are the questions that come up most often — and the answers that matter for your practice.",
+  "faqs": [
+    {
+      "question": "If a website has no login screen and the data is just sitting there publicly accessible, can I access and collect it freely?",
+      "answer": "Not necessarily. 'Publicly accessible without authentication' is not the same as 'authorised for any use.' The AT&T case established clearly that accessing data a system was not intended to expose — even if no authentication was required — can constitute unauthorised access under the CFAA. The relevant question is not 'can I technically reach this?' but 'did the system owner intend for me to have access to this data?' If there is any doubt, the answer is to limit your access to the absolute minimum needed to confirm the finding and contact the owner before doing anything else."
+    },
+    {
+      "question": "I found a bug bounty programme that says it has a safe harbour clause. Does that mean I can do anything within the listed scope?",
+      "answer": "A safe harbour clause protects you if you follow the programme's rules — scope, permitted techniques, data handling requirements, disclosure timeline. It does not protect you if you go outside scope, use prohibited techniques, share discovered data with others, or disclose publicly without following the programme's timeline. Read the full programme document before starting any research. If anything is unclear, email the company's security team and ask for clarification before proceeding. Keep that email. That paper trail could matter."
+    },
+    {
+      "question": "What is the difference between a bug bounty programme and a responsible disclosure policy?",
+      "answer": "A bug bounty programme is a formal programme with financial rewards for valid vulnerability reports — it typically includes a scope document, rules of engagement, reward tiers, and sometimes a safe harbour clause. A responsible disclosure policy (also called a vulnerability disclosure policy or VDP) is a statement of how an organisation wants to receive vulnerability reports — it may not offer financial rewards and may not include a safe harbour clause. Both are better than nothing. A bug bounty programme with a safe harbour clause provides the strongest legal protection for researchers."
+    },
+    {
+      "question": "The 90-day timeline — is that a law? What happens if I publish before it?",
+      "answer": "The 90-day timeline is not a law — it is an industry standard developed over years of practice, popularised by Google Project Zero. It represents the consensus view of what is a reasonable time for a vendor to develop and deploy a patch for most vulnerabilities. Publishing before 90 days is legal if you have not accessed any system without authorisation, but it may expose affected users to risk before a patch exists — which is both an ethical concern and potentially a legal one if harm results. After 90 days have elapsed without a patch, the community consensus is that public disclosure is appropriate to pressure the vendor and warn users."
+    }
+  ]
+}

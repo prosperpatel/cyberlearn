@@ -1,0 +1,56 @@
+{
+  "id": "m3-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Disclosure Paths",
+  "title": "Vulnerability Disclosure: Three Paths, Three Outcomes",
+  "description": "When a researcher discovers a vulnerability, how they disclose it determines both the outcome for affected users and their own legal position. Three paths exist — with very different consequences for everyone involved.",
+  "nodes": [
+    {
+      "id": "discovery",
+      "label": "Discovery",
+      "type": "default",
+      "detail": "A researcher finds a vulnerability — in a bug bounty target, in software they use, or accidentally while browsing. The clock starts now. Every subsequent decision determines the legal and ethical outcome."
+    },
+    {
+      "id": "responsible",
+      "label": "Responsible Disclosure",
+      "type": "default",
+      "detail": "Privately notify the vendor with full technical details. Set a 90-day deadline for a patch before publication. Keep all details confidential during the window. If the vendor responds well: coordinate patch timing, receive acknowledgement or reward. If they ignore you: publish after 90 days regardless. Legal risk: minimal if conducted via bug bounty programme or with a safe harbour clause."
+    },
+    {
+      "id": "full",
+      "label": "Full Disclosure",
+      "type": "attacker",
+      "detail": "Publish complete technical details immediately, no vendor notification. Maximum transparency. Immediate public knowledge of the risk. Immediate attacker capability. The vendor is forced to patch under time pressure with no prior warning. Legal risk: significant — researchers have faced civil action for full disclosure depending on jurisdiction and how access was obtained."
+    },
+    {
+      "id": "no-disclosure",
+      "label": "No Disclosure",
+      "type": "default",
+      "detail": "Keep the vulnerability private indefinitely. May be appropriate for zero-days discovered during authorised testing (where scope prohibits independent disclosure). May indicate the researcher is planning to exploit it themselves — at which point the hat turns black."
+    },
+    {
+      "id": "outcome-safe",
+      "label": "Patch Released",
+      "type": "default",
+      "detail": "Users are protected. The researcher may be publicly credited, receive a bug bounty payment, and gain professional recognition. The vulnerability is assigned a CVE. This is the ideal outcome."
+    },
+    {
+      "id": "outcome-risk",
+      "label": "Users Exposed",
+      "type": "attacker",
+      "detail": "Published exploit available. Attackers use it immediately. Users remain at risk until a patch is released. May trigger legal action against the researcher from the affected vendor."
+    }
+  ],
+  "edges": [
+    { "from": "discovery",    "to": "responsible",   "label": "Best practice",  "type": "normal" },
+    { "from": "discovery",    "to": "full",           "label": "Adversarial",    "type": "attack"  },
+    { "from": "discovery",    "to": "no-disclosure",  "label": "Silence",        "type": "normal"  },
+    { "from": "responsible",  "to": "outcome-safe",   "label": "Coordinated",    "type": "normal"  },
+    { "from": "full",         "to": "outcome-risk",   "label": "Immediate risk", "type": "attack"  }
+  ],
+  "caption": "Click each node to understand what happens at each decision point. The responsible disclosure path is the professional standard — it protects users, protects the researcher, and produces the best outcome for everyone except attackers.",
+  "interactive": true
+}

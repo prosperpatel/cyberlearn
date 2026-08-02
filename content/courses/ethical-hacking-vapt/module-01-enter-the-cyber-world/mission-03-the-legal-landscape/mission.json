@@ -1,0 +1,34 @@
+{
+  "id": "mission-03-the-legal-landscape",
+  "slug": "mission-03-the-legal-landscape",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-01-enter-the-cyber-world",
+  "title": "The Legal Landscape",
+  "tagline": "The line between hero and criminal is exactly one piece of paper. Learn the laws before you touch the tools.",
+  "description": "Explore the computer crime laws that govern every security engagement worldwide, understand how hackers are classified by the hats they wear, and learn how bug bounty programmes and responsible disclosure create the legal framework for ethical security research.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 45,
+  "xpReward": 100,
+  "order": 3,
+  "missionNumber": 3,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-02-the-hacker-mindset"],
+  "tags": ["law", "cfaa", "computer-misuse-act", "bug-bounty", "hacker-types", "responsible-disclosure"],
+  "learningObjectives": [
+    "Explain the key provisions of the Computer Fraud and Abuse Act (CFAA) and the UK Computer Misuse Act and why they apply regardless of intent",
+    "Correctly classify hackers as black hat, white hat, or grey hat — and explain why grey hat is legally problematic despite good intentions",
+    "Describe what a bug bounty programme is and how it creates a legal framework for independent security research",
+    "Explain the difference between responsible disclosure and full disclosure, and the professional standard (90-day rule) that governs them",
+    "Explain what safe harbour provisions do in a bug bounty context and why their absence creates serious legal risk for researchers"
+  ],
+  "skills": ["legal-framework", "bug-bounty", "responsible-disclosure", "hacker-classification"],
+  "badge": "Legal Operative",
+  "missionIcon": "scale",
+  "completionRequirements": {
+    "minBlocksCompleted": 14,
+    "minQuizScore": 80
+  }
+}

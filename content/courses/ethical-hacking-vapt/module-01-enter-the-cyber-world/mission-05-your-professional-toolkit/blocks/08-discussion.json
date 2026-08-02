@@ -1,0 +1,63 @@
+{
+  "id": "m5-block-08-discussion",
+  "type": "discussion",
+  "order": 8,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Discussion",
+  "title": "Certifications: What They Signal, What They Prove, and When to Pursue Them",
+  "prompt": "Two candidates apply for a junior penetration tester role at a security consultancy.\n\nCandidate A holds CompTIA Security+, CEH, and a newly obtained OSCP. They have no professional security experience but have dedicated two years to studying for these certifications.\n\nCandidate B holds only eJPT and has documented twenty completed Hack The Box machines, a public GitHub with a custom tool they wrote for a specific enumeration task, and a write-up blog that demonstrates their methodology clearly.\n\nWhich candidate is more likely to get the role? Why?",
+  "discussion": {
+    "coreTension": "Certifications are a signal — they tell an employer something about you. But different certifications signal different things. The question is whether you are signalling knowledge recall or demonstrated skill, and whether the signal matches what the employer is actually looking for.",
+    "certificationBreakdown": [
+      {
+        "certification": "CompTIA Security+",
+        "type": "Knowledge-based",
+        "what_it_tests": "Broad defensive security concepts: cryptography, risk management, network security, identity management, threat detection. Multiple-choice exam.",
+        "who_values_it": "Entry-level employers, government contractors (DoD baseline requirement in the US), corporate IT security teams",
+        "when_to_pursue": "Early in your career as a first credential that demonstrates foundational knowledge. Strong for defensive and general security roles.",
+        "what_it_does_not_prove": "That you can perform a penetration test, configure a firewall, or respond to an incident — only that you can answer questions about these topics"
+      },
+      {
+        "certification": "eJPT (eLearnSecurity Junior Penetration Tester)",
+        "type": "Practical / hands-on",
+        "what_it_tests": "Real penetration testing tasks performed inside a virtual lab environment. You must complete actual attacks to pass — not answer questions about attacks.",
+        "who_values_it": "Junior penetration testing roles, security consultancies hiring entry-level practitioners",
+        "when_to_pursue": "Alongside or before Security+ if your goal is offensive security. Excellent starting point for practitioner-track learners.",
+        "what_it_does_not_prove": "Enterprise-grade engagement experience or advanced exploitation — but it proves you can perform basic pentesting, which many knowledge-based certs do not"
+      },
+      {
+        "certification": "CEH (Certified Ethical Hacker, EC-Council)",
+        "type": "Knowledge-based with optional practical component",
+        "what_it_tests": "Ethical hacking concepts, tools, methodologies, and legal framework. Primarily multiple-choice. The CEH Practical exam adds a hands-on component.",
+        "who_values_it": "HR departments, government contracts, international employers — particularly in the Middle East, India, and Southeast Asia where EC-Council has strong brand recognition",
+        "when_to_pursue": "If your target employer specifically lists CEH as a requirement, or if you are targeting markets where it is well-regarded. Less valued by technical hiring managers who prefer OSCP or PNPT.",
+        "what_it_does_not_prove": "Practical exploitation skill. CEH has faced criticism for testing tool awareness rather than ability to use tools in real scenarios"
+      },
+      {
+        "certification": "PNPT (Practical Network Penetration Tester, TCM Security)",
+        "type": "Fully practical",
+        "what_it_tests": "A 5-day exam simulating a full external and internal network penetration test engagement, including report writing. The student must also conduct a live 15-minute debrief with an examiner.",
+        "who_values_it": "Security consultancies, penetration testing firms, technical hiring managers in offensive security",
+        "when_to_pursue": "After eJPT or Security+, when you are ready for intermediate practical offensive security. Highly respected among practitioners.",
+        "what_it_does_not_prove": "The same depth as OSCP, which requires compromising machines under tighter time pressure and with less guidance"
+      },
+      {
+        "certification": "OSCP (Offensive Security Certified Professional)",
+        "type": "Fully practical — industry gold standard",
+        "what_it_tests": "A 24-hour exam in which the candidate must compromise a defined number of machines in an isolated network and write a penetration test report by the following day. No multiple choice. No hints.",
+        "who_values_it": "Universally respected by technical hiring managers in offensive security. The single most recognised pentesting certification worldwide.",
+        "when_to_pursue": "After practical experience with eJPT and/or PNPT, and after completing substantial hands-on practice (Hack The Box, TryHackMe, or equivalent labs). Attempting OSCP without solid practical foundations is expensive and demoralising.",
+        "what_it_does_not_prove": "Red team expertise, Active Directory depth, or web application specialisation — these have separate certifications. But it proves you can hack under pressure with no safety net."
+      },
+      {
+        "certification": "CPTS (HTB Certified Penetration Testing Specialist)",
+        "type": "Fully practical",
+        "what_it_tests": "A 10-day exam compromising a large, interconnected corporate network. Considered by many practitioners to be more technically demanding than OSCP.",
+        "who_values_it": "Growing rapidly in recognition, particularly among practitioners who consider it the most rigorous currently available practical certification",
+        "when_to_pursue": "At the same career stage as OSCP — significant practical experience required. Some pursue one, some pursue both."
+      }
+    ],
+    "answer": "Candidate B is more likely to get the role at a technical security consultancy — because their GitHub, their completed machines, and their write-ups demonstrate they can actually do the work. The eJPT confirms the practical skill. The documentation culture (write-ups, custom tools) signals the kind of analyst who will produce good reports and catch things automated tools miss.\n\nCandidate A's OSCP is genuinely impressive and should not be dismissed. But two years spent on certifications with no documented hands-on practice raises a question: how much of that time was spent understanding vs. memorising? The OSCP should mitigate that concern — but the absence of any public portfolio is a gap that the CEH and Security+ do not fill.\n\nThe lesson: certifications open doors and satisfy requirements. Practical portfolios — write-ups, tools, bug bounty findings, CTF writeups — demonstrate what you can actually do. Build both. Neither alone is sufficient.",
+    "reflection": "Think about your own certification goals. Are you pursuing a certification because it will teach you something you do not know, because it will signal something to a specific employer you have in mind, or because it is the next logical step in a structured progression? All three are valid reasons — but they are different reasons, and they should point you to different certifications."
+  }
+}

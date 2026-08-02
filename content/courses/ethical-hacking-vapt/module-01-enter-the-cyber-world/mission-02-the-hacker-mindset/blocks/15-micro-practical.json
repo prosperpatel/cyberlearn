@@ -1,0 +1,35 @@
+{
+  "id": "m2-block-15-micro-practical",
+  "type": "micro-practical",
+  "title": "Map Your Smartphone's Attack Surface",
+  "metadata": {
+    "order": 15,
+    "estimatedMinutes": 10,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "smartphone",
+    "tags": ["attack-surface", "cia-triad", "threat-modelling", "personal-security"]
+  },
+  "content": {
+    "objective": "Apply the concepts from this mission to a device you already own. Map the attack surface of your smartphone — identify what an attacker could reach if they compromised it, and classify each risk using the CIA Triad.",
+    "requirements": [
+      "Your own smartphone (Android or iPhone)",
+      "A notepad or notes app to record findings"
+    ],
+    "instructions": [
+      "Open your smartphone's Settings and navigate to App Permissions (on Android: Settings → Privacy → Permission Manager; on iPhone: Settings → Privacy & Security). Make a list of 5 apps that have access to sensitive capabilities: Camera, Microphone, Location, Contacts, or Storage.",
+      "For each app you listed, ask: 'If this app were compromised by an attacker, what could they access?' Think beyond the app itself — consider what data flows through it (messages, calls, locations, photos, stored passwords).",
+      "For each app, classify the primary risk using the CIA Triad: C (Confidentiality — private information could be read), I (Integrity — something could be altered without your knowledge), or A (Availability — you could be locked out of something you depend on).",
+      "Now think bigger: if your phone were stolen or your Google/Apple account were compromised, what other accounts become accessible? List the three most sensitive things an attacker could reach from your device.",
+      "Finally, identify one concrete action you could take today to reduce your phone's attack surface. (Examples: disable a permission you don't need, enable a PIN, enable 'erase after 10 failed attempts', or review which apps have access to your contacts.)"
+    ],
+    "successCriteria": [
+      "You have identified at least 5 apps on your device with access to sensitive permissions and recorded what each one can access.",
+      "You have classified the primary CIA risk (C, I, or A) for at least 3 of those apps and can explain your reasoning.",
+      "You have identified at least 3 sensitive things an attacker could access if your device or primary account were compromised.",
+      "You have identified and taken (or committed to take) one specific action to reduce your smartphone's attack surface."
+    ],
+    "reflection": "Most people have never thought about their phone as an attack surface. But it likely has access to your emails, your bank accounts, your two-factor authentication codes, your calendar, your location history, your contacts, your camera, and your microphone — sometimes simultaneously. If your phone were compromised, how many of the CIA properties would be at risk? What would the attacker's payload be? This is not a hypothetical: mobile device compromise is one of the most common initial access vectors in both targeted attacks and opportunistic financial fraud."
+  }
+}

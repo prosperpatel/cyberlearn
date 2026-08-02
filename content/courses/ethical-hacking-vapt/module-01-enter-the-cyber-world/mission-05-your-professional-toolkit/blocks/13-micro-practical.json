@@ -1,0 +1,38 @@
+{
+  "id": "m5-block-13-micro-practical",
+  "type": "micro-practical",
+  "title": "Research a Real CVE on the NVD",
+  "metadata": {
+    "order": 13,
+    "estimatedMinutes": 10,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "search",
+    "tags": ["cve", "cvss", "nvd", "vulnerability-research", "professional-practice"]
+  },
+  "content": {
+    "objective": "Navigate to the National Vulnerability Database and research a real, significant CVE. Decode the CVSS score breakdown to understand what it tells you about the vulnerability's characteristics — not just its severity rating.",
+    "requirements": [
+      "Web browser",
+      "Internet connection"
+    ],
+    "instructions": [
+      "Navigate to nvd.nist.gov in your browser.",
+      "In the search bar, search for: CVE-2021-44228. This is Log4Shell — one of the most significant vulnerabilities of the last decade, affecting the Apache Log4j library.",
+      "On the CVE detail page, find the CVSS v3.1 Base Score. Note the numeric score and the severity rating (Critical/High/Medium/Low).",
+      "Click the CVSS score to expand the score breakdown. Read each metric carefully:\n  - Attack Vector (AV): where does the attacker need to be?\n  - Attack Complexity (AC): does exploitation require special conditions?\n  - Privileges Required (PR): what access does the attacker need to start with?\n  - User Interaction (UI): does a user need to take an action to trigger the vulnerability?\n  - Scope (S): does exploitation only affect Log4j, or can it affect other components?\n  - Impact on Confidentiality (C), Integrity (I), Availability (A): what can an attacker achieve?",
+      "Read the vulnerability description. In one sentence, explain in your own words: what does Log4Shell allow an attacker to do?",
+      "Scroll to the References section. Find a link to the Apache security advisory or a patch announcement. Note which version(s) of Log4j contain the fix.",
+      "Optional: Search for the same CVE on exploit-db.com to see whether a public exploit was published, and when."
+    ],
+    "successCriteria": [
+      "You can state the CVSS v3.1 Base Score for CVE-2021-44228 and what the score means (Critical/High/Medium/Low)",
+      "You can explain in plain language what each of the six CVSS metric values means for this specific vulnerability — not just the generic definition",
+      "You can describe in one sentence what Log4Shell allows an attacker to do, without using the word 'exploit' as a verb",
+      "You can identify which version of Apache Log4j addresses the vulnerability",
+      "You can explain why this CVE has a high Scope score (Changed) — what other component is affected beyond Log4j itself?"
+    ],
+    "reflection": "CVE-2021-44228 had a CVSS Base Score of 10.0 — the maximum possible. When you read the score breakdown, the reason is clear: the attack vector is Network (reachable from anywhere on the internet), attack complexity is Low (no special conditions required), no privileges are required, no user interaction is needed, scope is Changed (the attacker can affect other components beyond Log4j itself), and the impact on all three CIA properties is High. Every metric pushed the score to its maximum.\n\nThis is what reading a CVSS score breakdown looks like in practice — not just a number, but a precise technical description of who can exploit this, from where, with what prerequisites, and what they can achieve. Every pentest finding you write should convey this same quality of analysis."
+  }
+}

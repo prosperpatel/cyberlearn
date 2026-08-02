@@ -1,0 +1,75 @@
+{
+  "id": "m2-block-13-quiz",
+  "type": "quiz",
+  "order": 13,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A ransomware attack encrypts all files on a hospital's servers. Patient data is not stolen — it remains on the servers but cannot be accessed. Which CIA property has been violated?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Confidentiality — the data has been hidden from authorised users", "isCorrect": false },
+        { "id": "b", "text": "Integrity — the data has been altered by an unauthorised party", "isCorrect": false },
+        { "id": "c", "text": "Availability — authorised users cannot access data they are supposed to be able to access", "isCorrect": true },
+        { "id": "d", "text": "All three — ransomware always violates the entire CIA Triad", "isCorrect": false }
+      ],
+      "explanation": "Ransomware is primarily an Availability attack. The data still exists and has not necessarily been viewed by the attacker or altered in content — it has been made inaccessible through encryption. Authorised users (doctors, nurses, administrators) cannot reach the data they need. This is a direct violation of Availability. Note: some ransomware operators also exfiltrate data before encrypting it — that would additionally violate Confidentiality — but the core ransomware mechanism targets Availability.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "What is the correct relationship between a vulnerability, an exploit, and a payload?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "They are three names for the same thing — the method an attacker uses to breach a system", "isCorrect": false },
+        { "id": "b", "text": "A vulnerability is found during reconnaissance; an exploit is the attack; a payload is the report", "isCorrect": false },
+        { "id": "c", "text": "A vulnerability is the weakness; an exploit turns it into access; a payload delivers the actual damage", "isCorrect": true },
+        { "id": "d", "text": "A payload is the vulnerability; an exploit discovers it; the attack delivers it", "isCorrect": false }
+      ],
+      "explanation": "The three terms describe the chain of an attack. A vulnerability is a weakness — a flaw that exists but has caused no harm yet. An exploit is the technique that takes advantage of that vulnerability to achieve unauthorised access or an unintended outcome. The payload is what the attacker deploys after gaining access — the ransomware, the backdoor, the data-exfiltration script. Not every vulnerability has a working exploit, and not every exploit delivers the same payload. Understanding this chain helps you understand where defences should intervene.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "Which of the following best describes an Advanced Persistent Threat (APT)?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "A particularly fast-moving automated malware campaign that spreads across networks in seconds", "isCorrect": false },
+        { "id": "b", "text": "A nation-state or state-sponsored group conducting long-term, targeted intrusions with high resources and sophistication", "isCorrect": true },
+        { "id": "c", "text": "Any attack that bypasses antivirus software by using advanced techniques", "isCorrect": false },
+        { "id": "d", "text": "An organised cybercriminal group focused exclusively on financial theft", "isCorrect": false }
+      ],
+      "explanation": "APT stands for Advanced Persistent Threat. 'Advanced' refers to the technical sophistication and custom tooling — including zero-day exploits not available to ordinary attackers. 'Persistent' refers to the long-term, stealthy nature of the operation — APTs may remain inside a target environment for months or years before detection. 'Threat' refers to the organised, intentional nature of the actor. The SolarWinds SUNBURST operation is a textbook APT: it ran for over 14 months before discovery and was attributed to a nation-state intelligence service.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "An attacker gains access to a bank's database and changes the balance on one account from £1,000 to £50,000. No data is stolen or deleted. Which CIA property has been violated?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Confidentiality — the attacker accessed a private database", "isCorrect": false },
+        { "id": "b", "text": "Integrity — the attacker modified data without authorisation", "isCorrect": true },
+        { "id": "c", "text": "Availability — the account information was disrupted", "isCorrect": false },
+        { "id": "d", "text": "Confidentiality and Availability — but not Integrity, since the data still exists", "isCorrect": false }
+      ],
+      "explanation": "Integrity is violated when data is modified by an unauthorised party. The attacker changed a value in the database — this is a direct Integrity violation. Note that the attacker DID access the database (potentially a Confidentiality violation), but the primary attack here — and the one that causes financial harm — is the unauthorised modification of data. The 2016 Bangladesh Bank heist used exactly this technique, compromising SWIFT banking messages to issue fraudulent transfer instructions totalling $81 million.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "Northgate Health Systems was breached through a third-party HVAC vendor's remote support portal. Which concept does this best illustrate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Attack vector — the specific technique used was password reuse from a breach database", "isCorrect": false },
+        { "id": "b", "text": "Exploit — the attacker used a known vulnerability in the HVAC monitoring software", "isCorrect": false },
+        { "id": "c", "text": "Attack surface — the hospital's exposure extended beyond its own systems to vendor access points it did not monitor", "isCorrect": true },
+        { "id": "d", "text": "Nation-state APT — the sophistication of the attack indicates government sponsorship", "isCorrect": false }
+      ],
+      "explanation": "The Northgate breach illustrates the attack surface concept — specifically, that an organisation's attack surface includes every third-party vendor with network access, not just its own systems. Nadia had secured the systems she knew about. The attackers found the ones she hadn't included in her threat model. The password reuse was the attack vector (the specific path taken); the attack surface was the much larger set of opportunities that existed because of forty-seven vendors with remote access.",
+      "xpReward": 15
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "m4-block-16-mission-complete",
+  "type": "mission-complete",
+  "order": 16,
+  "estimatedMinutes": 1,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Five Phases — Complete",
+  "message": "You now understand what actually happens in a professional penetration test — from the first signed document to the final report delivery.\n\nRavi's shock at spending an entire first day on paperwork makes sense now. The scope document, the Rules of Engagement, the authorization letter — these are not bureaucratic overhead. They are the legal and professional foundation that makes everything else possible. Without them, every action in Phases 2 through 4 is potentially criminal. With them, every action is authorised, traceable, and professionally defensible.\n\nYahoo's 3 billion compromised accounts show what happens when security reviews are treated as compliance checkboxes rather than genuine investigations. A real VAPT engagement — one that examined authentication systems, data-at-rest protections, and anomaly detection capabilities — would have surfaced the same weaknesses that attackers exploited for two years undetected.\n\nThe five phases now have meaning beyond labels: Scoping is the contract. Reconnaissance is the research. Scanning is the catalogue. Exploitation is the proof. Reporting is the product. Together, they constitute a professional engagement — one that produces findings organisations can act on, and one you can conduct with legal protection and professional confidence.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "VAPT Operative",
+      "description": "Completed Mission 4: The VAPT Lifecycle — demonstrated understanding of all five VAPT phases, scope documentation, Rules of Engagement, PTES methodology, and professional reporting standards."
+    }
+  ],
+  "nextSteps": [
+    "Mission 05: Your Professional Toolkit — move from methodology to tools and frameworks; learn CVE, CVSS, OWASP Top 10, industry certifications, and the tools that professionals use at each phase of an engagement",
+    "Review Flashcards — PTES phases, passive vs active recon, and CVSS score contextualisation appear in CEH and Security+ certification questions",
+    "Optional: Look up the PTES website (pentest-standard.org) and read the Pre-engagement section — notice how granular the professional standard is about what a scope document must contain"
+  ]
+}

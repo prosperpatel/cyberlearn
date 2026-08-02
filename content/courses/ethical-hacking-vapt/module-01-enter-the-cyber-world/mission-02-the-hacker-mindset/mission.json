@@ -1,0 +1,34 @@
+{
+  "id": "mission-02-the-hacker-mindset",
+  "slug": "mission-02-the-hacker-mindset",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-01-enter-the-cyber-world",
+  "title": "The Hacker Mindset",
+  "tagline": "You can't defend what you don't understand — and you can't understand your enemy until you see what they see.",
+  "description": "Learn how attackers think differently from defenders, why that asymmetry makes cybersecurity uniquely challenging, and how understanding the CIA Triad, attack surfaces, and threat actor motivations is the foundation of all defensive thinking.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 45,
+  "xpReward": 100,
+  "order": 2,
+  "missionNumber": 2,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-01-what-is-ethical-hacking"],
+  "tags": ["cia-triad", "attack-surface", "threat-actors", "mindset", "asymmetry"],
+  "learningObjectives": [
+    "Explain the CIA Triad and correctly identify which of the three properties is violated by a given attack",
+    "Define attack surface and explain why it extends beyond servers and software to include people and third-party vendors",
+    "Distinguish between a vulnerability, an exploit, and a payload — and explain how they chain together in a real attack",
+    "Identify and describe five major threat actor types by their motivation, skill level, and typical targets",
+    "Explain the asymmetric advantage attackers hold over defenders and why this shapes how security professionals must think"
+  ],
+  "skills": ["cia-triad", "attack-surface", "threat-analysis", "attacker-mindset"],
+  "badge": "Threat Analyst",
+  "missionIcon": "eye",
+  "completionRequirements": {
+    "minBlocksCompleted": 14,
+    "minQuizScore": 80
+  }
+}

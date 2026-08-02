@@ -1,0 +1,16 @@
+{
+  "id": "m2-block-08-discussion",
+  "type": "discussion",
+  "order": 8,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Discuss",
+  "title": "What Did the Attacker See That Nadia Didn't?",
+  "prompt": "Go back to Nadia's story. She had replaced the firewalls, enforced MFA, patched every server in her asset register, deployed intrusion detection, and run phishing simulations. Her security programme was genuinely strong. But the attackers never tried to get through any of it. What were they looking for instead — and why did they find it before Nadia thought to protect it?",
+  "context": "The attackers in Nadia's case were not technically superior to her. They did not have better tools or deeper knowledge of Northgate's systems. What they had was a different perspective: they were not limited to thinking about Northgate's own systems. They were free to look at everything — and they found what Nadia had not included in her threat model.",
+  "guideQuestions": [
+    "Nadia's asset register contained only Northgate's own systems. What did the attackers include in their view of Northgate's 'attack surface' that she did not?",
+    "Why would an attacker choose to go through a small HVAC vendor rather than directly attacking a hospital with a well-resourced security team?",
+    "If you were advising Nadia on what to do differently after the breach, what is the one most important addition to her security programme — and why?",
+    "The vulnerability that was exploited was a reused password from a three-year-old breach. How does this fit into the CIA Triad? Which property was violated first?"
+  ]
+}

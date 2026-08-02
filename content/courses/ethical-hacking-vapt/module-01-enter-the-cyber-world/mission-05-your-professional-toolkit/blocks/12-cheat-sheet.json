@@ -1,0 +1,76 @@
+{
+  "id": "m5-block-12-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 12,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Professional Toolkit — Quick Reference",
+  "sections": [
+    {
+      "heading": "CVE / CWE / NVD — Relationships",
+      "items": [
+        "CVE = specific vulnerability instance in specific software (CVE-YEAR-NUMBER, maintained by MITRE/CISA)",
+        "CWE = weakness category — the class of vulnerability (CWE-89 = SQL Injection, maintained by MITRE)",
+        "NVD = enriched CVE database with CVSS scores, patch info, exploit availability (NIST, nvd.nist.gov)",
+        "CVE maps to CWE: CVE-2021-44228 (Log4Shell) → CWE-502 (Deserialization of Untrusted Data)"
+      ]
+    },
+    {
+      "heading": "CVSS v3.1 Score Ranges",
+      "items": [
+        "0.0 = None",
+        "0.1–3.9 = Low",
+        "4.0–6.9 = Medium",
+        "7.0–8.9 = High",
+        "9.0–10.0 = Critical",
+        "CVSS = technical severity only. Business risk = CVSS + exposure + exploitability in context + asset value"
+      ]
+    },
+    {
+      "heading": "OWASP Top 10 (2021)",
+      "items": [
+        "A01: Broken Access Control — users acting outside intended permissions",
+        "A02: Cryptographic Failures — weak/absent encryption at rest or in transit",
+        "A03: Injection — untrusted data interpreted as commands (SQL, OS, LDAP)",
+        "A04: Insecure Design — fundamental design flaws (no rate limiting, logic flaws)",
+        "A05: Security Misconfiguration — defaults, unnecessary features, verbose errors",
+        "A06: Vulnerable and Outdated Components — unpatched libraries, plugins, servers",
+        "A07: Identification and Authentication Failures — weak auth, session management",
+        "A08: Software and Data Integrity Failures — supply chain, unsigned updates, deserialisation",
+        "A09: Security Logging and Monitoring Failures — insufficient detection capability",
+        "A10: Server-Side Request Forgery (SSRF) — server fetches attacker-controlled URLs"
+      ]
+    },
+    {
+      "heading": "NIST Cybersecurity Framework — Five Functions",
+      "items": [
+        "Identify — Know your assets, risks, and current controls",
+        "Protect — Implement safeguards to limit security event impact",
+        "Detect — Identify security events through monitoring and logging",
+        "Respond — Contain, eradicate, and communicate after detection",
+        "Recover — Restore capabilities; improve from incident lessons"
+      ]
+    },
+    {
+      "heading": "Tool Categories by VAPT Phase",
+      "items": [
+        "Reconnaissance (Phase 2): Nmap, theHarvester, Shodan, Maltego, OSINT Framework",
+        "Scanning & Enumeration (Phase 3): Nessus, OpenVAS, Nikto, Gobuster/ffuf",
+        "Web Application Testing (Phases 3+4): Burp Suite, OWASP ZAP, SQLMap",
+        "Exploitation (Phase 4): Metasploit, Cobalt Strike (red team), Havoc",
+        "Credential Testing (Phases 3+4): Hashcat, John the Ripper, Hydra, CrackMapExec",
+        "Traffic Analysis (All phases): Wireshark, tcpdump",
+        "Post-Exploitation (PTES Phase 6): Mimikatz, BloodHound, PowerView"
+      ]
+    },
+    {
+      "heading": "Certification Pathway — Offensive Security",
+      "items": [
+        "Entry: Security+ (knowledge, broadly recognised) | eJPT (practical, entry-level offensive)",
+        "Intermediate: CEH (knowledge, HR-recognised globally) | PNPT (fully practical, practitioner-respected)",
+        "Advanced: OSCP (24-hour practical exam, industry gold standard) | CPTS (10-day exam, highly rigorous)",
+        "Rule: build practical skill first (Hack The Box, TryHackMe, eJPT); pursue OSCP when HTB Medium machines take < 4 hours consistently"
+      ]
+    }
+  ]
+}

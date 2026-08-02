@@ -1,0 +1,75 @@
+{
+  "id": "m3-block-13-quiz",
+  "type": "quiz",
+  "order": 13,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A security researcher discovers that a company's website exposes user data through an unauthenticated API endpoint — no login required. They collect 5,000 user records to 'prove the extent of the vulnerability' then contact the company. Under the CFAA, which of the following is most accurate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The researcher is protected because no authentication was bypassed — the data was publicly accessible", "isCorrect": false },
+        { "id": "b", "text": "The researcher may have committed unauthorised access by collecting data the system was not intended to expose, regardless of authentication", "isCorrect": true },
+        { "id": "c", "text": "The researcher is protected because they contacted the company after collecting the data", "isCorrect": false },
+        { "id": "d", "text": "Collecting data without authentication cannot be a CFAA violation since the CFAA only applies to password-protected systems", "isCorrect": false }
+      ],
+      "explanation": "The CFAA does not require bypassing a login screen. The AT&T/iPad case established that accessing data a system was not intended to expose — even without authentication — can constitute unauthorised access. 'Publicly accessible without authentication' is not the same as 'authorised for any use.' Collecting 5,000 records when a single record would have documented the vulnerability significantly increases legal risk. The correct action is to collect only the minimum needed to confirm the flaw, then contact the company immediately.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following correctly describes a 'grey hat' hacker?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "A penetration tester who works for both offensive and defensive security teams", "isCorrect": false },
+        { "id": "b", "text": "A hacker who operates without authorisation but with the intention of exposing vulnerabilities rather than causing harm", "isCorrect": true },
+        { "id": "c", "text": "A security professional who operates in legal grey areas authorised by a bug bounty safe harbour clause", "isCorrect": false },
+        { "id": "d", "text": "A nation-state threat actor whose sponsorship status is unclear", "isCorrect": false }
+      ],
+      "explanation": "Grey hat describes a hacker who accesses systems without authorisation but with the stated intention of finding and exposing vulnerabilities rather than causing harm. Despite the benign intent, grey hat activity is illegal under the CFAA and Computer Misuse Act — intent is not a defence against the basic offence of unauthorised access. Grey hat is not a legally protected category, and treating it as one has ended careers. The only legally safe path for independent security research is through a bug bounty programme with explicit scope and a safe harbour clause.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A researcher privately discloses a critical vulnerability to a software vendor on Day 1. It is now Day 95 and no patch has been released. The vendor has acknowledged the report but says they need 'more time'. What is the appropriate action under responsible disclosure norms?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Wait indefinitely — publishing without a patch in place puts users at risk", "isCorrect": false },
+        { "id": "b", "text": "Publish full technical details publicly, since the 90-day standard has elapsed", "isCorrect": true },
+        { "id": "c", "text": "Sell the vulnerability to a third party — the vendor has forfeited their right to a grace period", "isCorrect": false },
+        { "id": "d", "text": "Contact a journalist first, then publish — media pressure will force the vendor to patch faster", "isCorrect": false }
+      ],
+      "explanation": "The 90-day responsible disclosure standard means the vendor has 90 calendar days from notification to release a patch. After that period, the researcher is within professional norms to publish — even without a patch. The rationale: users deserve to know about risks affecting them, and vendors should have sufficient time to develop a patch for most vulnerabilities. Some researchers extend beyond 90 days for complex infrastructure or critical systems where a patch is exceptionally difficult — this is a judgment call, not a requirement. Selling the vulnerability is never the appropriate response; it converts a disclosure into a potential criminal act.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "What is the primary function of a safe harbour clause in a bug bounty programme?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "It guarantees the researcher a minimum financial payment for any valid vulnerability submitted", "isCorrect": false },
+        { "id": "b", "text": "It grants the researcher immunity from all applicable computer crime laws in every jurisdiction", "isCorrect": false },
+        { "id": "c", "text": "It is a formal commitment from the organisation not to pursue legal action against researchers who comply with the programme's terms", "isCorrect": true },
+        { "id": "d", "text": "It gives the researcher permission to test any system the organisation owns, regardless of programme scope", "isCorrect": false }
+      ],
+      "explanation": "A safe harbour clause is a written commitment from the organisation that they will not pursue legal or civil action against researchers who operate within the programme's defined scope and rules. It does not override computer crime law in all jurisdictions (no private agreement can do that), but it significantly reduces legal risk by documenting the organisation's consent to the research. Its absence means the researcher has no written protection even if they follow best practices — the organisation could theoretically take legal action despite the researcher acting in good faith.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "Marcus accessed three customer accounts beyond his own to verify a financial platform vulnerability, then published immediately without contacting the company. Priya accessed only her own account and contacted the company privately. Both discovered the same vulnerability. Which of the following is accurate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Both researchers are legally protected because they were not hired by a competitor and did not profit from the data", "isCorrect": false },
+        { "id": "b", "text": "Marcus's disclosure was stronger because he verified the vulnerability across multiple accounts before publishing", "isCorrect": false },
+        { "id": "c", "text": "Priya acted within responsible disclosure norms; Marcus's additional access and immediate publication increased his legal exposure significantly", "isCorrect": true },
+        { "id": "d", "text": "Both are equally at risk because neither had written authorisation to test the platform at all", "isCorrect": false }
+      ],
+      "explanation": "Priya demonstrated responsible disclosure: minimum data access, private vendor notification, professional timeline. Marcus made two critical errors: he accessed accounts beyond his own (each a separate count of unauthorised access) and he published before giving the company any opportunity to patch (eliminating any good-faith argument and immediately exposing users). Priya's approach resulted in a bug bounty, public credit, and a professional reference. Marcus's resulted in legal proceedings, employment termination, and significant personal cost. Same vulnerability, completely different outcomes — driven entirely by what each researcher did after discovery.",
+      "xpReward": 15
+    }
+  ]
+}

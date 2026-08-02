@@ -1,0 +1,21 @@
+{
+  "id": "m3-block-16-mission-complete",
+  "type": "mission-complete",
+  "order": 16,
+  "estimatedMinutes": 1,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Safe Harbour — Complete",
+  "message": "You now understand the legal framework that makes ethical security research possible.\n\nThe line between Priya and Marcus was not skill, not discovery, not intent. It was discipline — the discipline to access only what was necessary, to contact the vendor before publishing, and to follow a professional process rather than acting on impulse.\n\nEvery security professional who builds a long career builds it on exactly this foundation: knowing the law, understanding what authorisation actually requires, and treating responsible disclosure not as an optional courtesy but as a professional obligation.\n\nGrey hat is not a career path. White hat — with written authorisation, defined scope, and professional disclosure standards — is the only sustainable way to do this work.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Legal Operative",
+      "description": "Completed Mission 3: The Legal Landscape — demonstrated understanding of computer crime law, hacker classification, and professional disclosure standards."
+    }
+  ],
+  "nextSteps": [
+    "Mission 04: The VAPT Lifecycle — move from foundations to methodology; learn what actually happens in each phase of a professional penetration test from first client call to final report delivery",
+    "Review Flashcards — the three hats, CFAA provisions, and responsible disclosure timeline appear frequently in certification-style questions",
+    "Optional: Search for a bug bounty programme for a product you use regularly and read their policy — notice how its structure reflects everything you have learned in this mission"
+  ]
+}

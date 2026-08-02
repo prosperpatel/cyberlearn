@@ -1,0 +1,32 @@
+{
+  "id": "m3-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Case Study",
+  "company": "AT&T / iPad User Data (2010)",
+  "year": "2010",
+  "industry": "Telecommunications",
+  "incident": "Two hackers exploited a misconfigured AT&T API that exposed the email addresses of 114,000 iPad users — including government officials and celebrities. They believed they were performing a public service by exposing the security flaw. One was subsequently convicted under the Computer Fraud and Abuse Act and sentenced to 41 months in federal prison.",
+  "whatHappened": [
+    "In June 2010, a group called Goatse Security discovered that AT&T's website contained a publicly accessible API endpoint. By submitting a valid SIM card ID (ICC-ID) as a parameter, the API would return the associated email address — no authentication required. ICC-IDs were predictable and sequential.",
+    "The researchers wrote a script that submitted approximately 114,000 ICC-IDs and collected the corresponding email addresses. The harvested data included email addresses of White House officials, military officers, executives, and celebrities. They then contacted Gawker Media, who published the story — revealing the flaw and a sample of the data.",
+    "AT&T patched the vulnerability within days of the public disclosure. But before the patch, the researchers had already collected 114,000 email addresses by automated enumeration. Federal prosecutors argued this constituted unauthorised access to a computer system to obtain information.",
+    "Andrew 'Weev' Auernheimer, the publicist for Goatse Security, was prosecuted under the Computer Fraud and Abuse Act. He was convicted in 2012, sentenced to 41 months in federal prison, and ordered to pay $73,167 in restitution. The conviction was later vacated on a jurisdictional technicality — but not on the merits of the case."
+  ],
+  "whyItHappened": [
+    "No prior contact with AT&T: the researchers did not alert AT&T before collecting data or before going to the press. There was no attempt to give AT&T an opportunity to fix the vulnerability quietly.",
+    "Data collection exceeded what was necessary to prove the flaw: accessing one or two email addresses would have demonstrated the vulnerability. Collecting 114,000 was far beyond what proof-of-concept required — and was the central element of the prosecution.",
+    "No legal authorisation: the API was publicly accessible without authentication, but the researchers were not authorised to access the data it returned. 'Publicly accessible without authentication' does not equal 'authorised to access'."
+  ],
+  "lessonsLearned": [
+    "Publicly accessible without authentication does not mean authorised. The CFAA does not require breaking encryption or bypassing a login screen — accessing data that a system was not intended to expose can still constitute unauthorised access.",
+    "Responsible disclosure requires limiting the data you collect to the minimum necessary to prove the vulnerability. Collecting 114,000 records when one would have sufficed turned a discovery into a prosecution.",
+    "The method of disclosure matters as much as the discovery itself. Publishing to the press before contacting the affected company eliminates any argument that the intent was to help — the harm to affected users came before any remediation was possible."
+  ],
+  "impactStats": [
+    { "value": "114,000", "label": "Email addresses harvested" },
+    { "value": "41 months", "label": "Federal prison sentence (later vacated)" },
+    { "value": "$73,167", "label": "Restitution ordered" }
+  ]
+}

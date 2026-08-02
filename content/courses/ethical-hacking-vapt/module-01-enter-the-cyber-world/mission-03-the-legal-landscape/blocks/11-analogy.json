@@ -1,0 +1,29 @@
+{
+  "id": "m3-block-11-analogy",
+  "type": "analogy",
+  "order": 11,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "The Investigative Journalist",
+  "realWorldThing": "An investigative journalist discovers that a public official has been falsifying expense reports. They have two choices: contact the official privately for comment before publication, giving them an opportunity to respond and allowing the journalist to include that response in the story — or publish immediately without prior contact, breaking the story first but potentially leaving important context out and setting the public figure up for surprise. Professional journalism ethics require prior contact and a right of reply before publication.",
+  "concept": "A security researcher discovers a critical vulnerability in a company's software. They have two choices: contact the company privately before publishing, giving them an opportunity to patch and protecting users during the window — or publish immediately without prior contact, maximising publicity but leaving all users vulnerable until the company can respond on their own timeline. Professional security ethics require prior vendor notification and a reasonable coordination window before publication.",
+  "comparison": "In both cases, the person making the discovery has real, important information that the public deserves to know. But how they release it — whether they give the subject a chance to respond before the public finds out — determines both the quality of the final outcome and their own professional standing. The journalist who publishes without prior contact gets the first-mover advantage but sacrifices accuracy and ethical standing. The researcher who publishes without prior contact gets publicity but harms users and risks legal consequences.",
+  "breakdown": [
+    {
+      "realWorld": "Journalist contacts the subject for comment — gives them 48 hours to respond",
+      "techEquivalent": "Researcher contacts the vendor privately with full technical details — gives them five business days to acknowledge"
+    },
+    {
+      "realWorld": "Subject responds, provides context that changes the story — the published piece is more accurate and legally defensible",
+      "techEquivalent": "Vendor responds, begins developing a patch — researcher receives acknowledgement and begins 90-day countdown"
+    },
+    {
+      "realWorld": "Subject doesn't respond in time — journalist publishes anyway, story goes out with 'declined to comment' note",
+      "techEquivalent": "Vendor doesn't patch within 90 days — researcher publishes anyway, with full disclosure, applying public pressure"
+    },
+    {
+      "realWorld": "Journalist who never contacts anyone publishes false or incomplete stories and eventually loses their job and credibility",
+      "techEquivalent": "Researcher who publishes without vendor contact faces legal risk, burns industry relationships, and may harm the users they were trying to protect"
+    }
+  ]
+}

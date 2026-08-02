@@ -1,0 +1,26 @@
+{
+  "id": "m2-block-09-student-questions",
+  "type": "student-questions",
+  "order": 9,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Your Questions",
+  "intro": "These are the questions every new student asks when they first encounter the CIA Triad and threat actor concepts. Good questions — the answers matter.",
+  "faqs": [
+    {
+      "question": "Is the CIA Triad only relevant to cybersecurity? It sounds like it applies everywhere.",
+      "answer": "You are right — the CIA Triad describes properties that matter in any information security context, not just digital systems. Physical document security, phone conversations, classified government material: all of these are evaluated against Confidentiality, Integrity, and Availability. Cybersecurity borrowed and formalized a framework that security professionals had been using in various forms since long before computers existed. In this course, you will apply it specifically to digital systems — but the logic is universal."
+    },
+    {
+      "question": "What is the difference between 'attack surface' and 'attack vector'? They sound the same.",
+      "answer": "The attack surface is the total set of all possible ways into a system — every door, window, skylight, and ventilation shaft in the building, to use the analogy. An attack vector is the specific path that was actually used: 'they came in through the third-floor window.' Reducing your attack surface means closing as many possible entry points as you can, ideally before an attacker tries any of them. Understanding attack vectors tells you how specific breaches happened so you can close those specific paths."
+    },
+    {
+      "question": "Are script kiddies actually dangerous? They're using tools they don't understand.",
+      "answer": "Very much so — and this is one of the most common mistakes new students make. A script kiddie with a fully automated ransomware deployment tool does not need to understand cryptography to encrypt your files. A teenager with a free DDoS service does not need to understand network protocols to take your website offline for a day. The damage caused by unsophisticated attackers using sophisticated tools is enormous. The WannaCry ransomware attack of 2017 — which hit hospitals, telecoms, and government agencies worldwide — was partially propagated by individuals and groups with no deep technical expertise who simply ran an exploit framework."
+    },
+    {
+      "question": "Why is an insider threat considered so dangerous if the attacker is just one employee?",
+      "answer": "Because perimeter security was designed to stop people getting in from outside. An insider is already inside. They have legitimate credentials, they are trusted by the network, their activity patterns look normal, and they have institutional knowledge that an external attacker would spend months trying to acquire. A disgruntled systems administrator with access to the backup system is a more dangerous threat actor than a nation-state team trying to get through the firewall, because the admin can accomplish in five minutes what the nation-state team might work on for six months. Insider threats are consistently responsible for some of the largest data breaches on record."
+    }
+  ]
+}

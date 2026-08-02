@@ -1,0 +1,12 @@
+{
+  "id": "m3-block-06-memory-anchor",
+  "type": "memory-anchor",
+  "order": 6,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "The Three Hats — and Why Grey Is Not Safe",
+  "concept": "Black hat: no authorisation, malicious intent — criminal. White hat: full written authorisation, defined scope — professional. Grey hat: no authorisation, good intent — still criminal. The law does not have a category for 'meant well but didn't ask first.'",
+  "anchor": "Remember the three hats as a traffic light. Black = stop immediately, it is a crime. White = green light, you are authorised and documented. Grey = red light dressed up as amber — it looks like it might be okay, but it is not. There is no legal middle ground between authorised and unauthorised.",
+  "explanation": "The grey hat concept is one of the most dangerous ideas in popular hacking culture, because it implies that good intentions create a legal grey area. They do not. The Computer Misuse Act in the UK and the CFAA in the US both make unauthorised access a crime regardless of intent. Dozens of security researchers have discovered this the hard way after doing exactly what the AT&T/Goatse Security researchers did: finding a real vulnerability, trying to expose it for public benefit, and discovering that the law does not care about their motivation.\n\nThe correct path for independent research is a published bug bounty programme with a safe harbour clause. If no such programme exists, the correct path is responsible disclosure — contact the vendor privately, limit what you access to the absolute minimum needed to confirm the vulnerability, and do not publish until a patch exists or the 90-day timeline has elapsed. Never access data beyond your own account. Never collect data beyond what confirms the flaw.",
+  "acronym": null
+}

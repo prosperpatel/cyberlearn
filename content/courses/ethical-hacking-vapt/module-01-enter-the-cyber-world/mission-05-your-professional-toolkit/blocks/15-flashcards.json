@@ -1,0 +1,45 @@
+{
+  "id": "m5-block-15-flashcards",
+  "type": "flashcards",
+  "order": 15,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 5",
+  "cards": [
+    {
+      "front": "What is the difference between CVE, CWE, and NVD — and how do they relate to each other?",
+      "back": "CVE (Common Vulnerabilities and Exposures): A specific identified vulnerability in specific software. Format: CVE-YEAR-NUMBER. Maintained by MITRE.\n\nCWE (Common Weakness Enumeration): A category of software weakness type. Not a specific vulnerability — the class it belongs to. Examples: CWE-89 (SQL Injection), CWE-918 (SSRF). Also maintained by MITRE.\n\nNVD (National Vulnerability Database): Enriches CVE data with CVSS scores, severity ratings, affected software details, patch availability, and exploit information. Maintained by NIST at nvd.nist.gov.\n\nRelationship: CVE is the case (specific vulnerability). CWE is the category (class of weakness). NVD is the journal that publishes enriched analysis of the case.",
+      "hint": "CVE = case. CWE = category. NVD = enriched journal."
+    },
+    {
+      "front": "What is OWASP A01:2021 Broken Access Control, and give two examples?",
+      "back": "Broken Access Control occurs when a user can perform actions or access resources that are outside their intended permissions — the application fails to properly enforce what authenticated users are and are not allowed to do.\n\nExamples:\n1. Insecure Direct Object Reference (IDOR): changing a URL parameter from ?id=1234 to ?id=1235 and accessing another user's account or data\n2. Vertical privilege escalation: a regular user accessing admin-only functionality because the application only hides the admin link in the UI but does not verify the user's role server-side\n3. Horizontal privilege escalation: user A accessing user B's private data by manipulating a request\n\nBroken Access Control is the #1 category in OWASP 2021, found in 94% of tested applications.",
+      "hint": "Doing things you are not supposed to be able to do, or seeing things you are not supposed to see."
+    },
+    {
+      "front": "What is SSRF (Server-Side Request Forgery), and why is it particularly dangerous in cloud environments?",
+      "back": "SSRF occurs when an attacker can cause a web application to make outbound HTTP requests to a destination the attacker controls — including internal resources that the attacker cannot access directly.\n\nStandard impact: access to internal services behind firewalls (databases, internal APIs, admin panels) that are not exposed to the public internet.\n\nCloud amplification: AWS, GCP, and Azure all expose an instance metadata service on a link-local IP (169.254.169.254 on AWS). If a server-side application makes an SSRF request to this address, it receives the cloud instance's IAM credentials. In the Capital One breach, this technique yielded credentials for an overpermissive IAM role that had access to S3 buckets containing 100 million customer records.\n\nSSRF was added to OWASP Top 10 for the first time in 2021 (A10) because of its disproportionate impact in cloud environments.",
+      "hint": "SSRF = make the server fetch a URL for you. In cloud = might get you IAM credentials from the metadata service."
+    },
+    {
+      "front": "What are the five functions of the NIST Cybersecurity Framework (CSF)?",
+      "back": "1. Identify: Understand the organisation's assets, business environment, governance, risk assessment, and risk management strategy. You cannot protect what you do not know you have.\n\n2. Protect: Implement safeguards to limit the impact of security events — access control, awareness training, data security, information protection processes, maintenance, and protective technology.\n\n3. Detect: Develop and implement capabilities to identify the occurrence of a cybersecurity event — anomaly detection, continuous monitoring, security event logging.\n\n4. Respond: Take action in response to a detected event — incident response planning, communications, analysis, mitigation, and improvements.\n\n5. Recover: Restore capabilities and services impaired by a cybersecurity incident — recovery planning, improvements, and communications.\n\nMnemonic: 'Incredible Professionals Detect Risks Carefully'",
+      "hint": "Identify → Protect → Detect → Respond → Recover. Before attack, during, after."
+    },
+    {
+      "front": "What does Burp Suite do that a browser's developer tools cannot?",
+      "back": "Browser developer tools let you observe requests the browser already made — you can inspect headers, parameters, and responses after the fact.\n\nBurp Suite sits between your browser and the web server as an intercepting proxy. It captures every request before it reaches the server, allowing you to:\n- Pause and modify any parameter (including hidden form fields, cookies, and request headers) before the server processes it\n- Send requests to the Repeater to test the same request multiple times with different values\n- Use the Intruder for automated parameter fuzzing with custom wordlists\n- Scan for common vulnerabilities (Pro edition)\n\nThe key capability: testing whether the server enforces security server-side, not just what the browser UI presents. A field the browser hides may still be accepted by the server — Burp Suite lets you send it.",
+      "hint": "Dev tools = observe. Burp = intercept, modify, and replay before the server sees the request."
+    },
+    {
+      "front": "What is the OSCP exam, and what does it require a candidate to demonstrate?",
+      "back": "OSCP (Offensive Security Certified Professional) is the most widely respected penetration testing certification in the industry, offered by Offensive Security.\n\nExam format: a 23 hours 45 minute standalone lab network containing multiple target machines at varying difficulty levels. The candidate must achieve a minimum point score by compromising targets, with proof-of-compromise flags submitted as evidence. The exam is followed by a 24-hour report writing window in which the candidate must produce a professional penetration test report.\n\nWhat it requires: The ability to perform real exploitation — not answer multiple-choice questions. Candidates must enumerate hosts, identify vulnerabilities, exploit them, and escalate privileges without assistance, hints, or collaborative tools. Metasploit is restricted to use on a single target.\n\nWhat it proves: that you can independently compromise machines under time pressure and produce professional documentation of the findings.",
+      "hint": "OSCP = 24-hour hands-on exam. No MCQ. Compromise machines + write a report. The industry gold standard."
+    },
+    {
+      "front": "A vulnerability has CVSS Attack Vector: Network, Privileges Required: High. What does this tell you about who can exploit it?",
+      "back": "Attack Vector: Network means the vulnerability is exploitable remotely — the attacker does not need physical or local access to the target machine. They can attack it from anywhere that can reach the target over a network connection.\n\nPrivileges Required: High means the attacker must already have high-level privileges on the target to trigger the vulnerability. This might mean: admin credentials, root access, or equivalent elevated permissions.\n\nCombined interpretation: this vulnerability is remotely reachable but requires the attacker to already have compromised a privileged account to exploit it. It is likely used in post-exploitation (after gaining initial admin access through another means) rather than as an initial access vector. This significantly reduces the effective risk compared to a vulnerability with Privileges Required: None, because the attacker must have already substantially compromised the target before this CVE becomes relevant.",
+      "hint": "Network + High Privileges = reachable remotely, but only by someone who is already an admin."
+    }
+  ]
+}

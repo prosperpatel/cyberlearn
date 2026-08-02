@@ -1,0 +1,12 @@
+{
+  "id": "m5-block-02-story",
+  "type": "story",
+  "order": 2,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Story",
+  "title": "Fatima's Toolkit Question",
+  "narrative": "Fatima Al-Rashidi had been studying cybersecurity for six months and had just rooted her first Hack The Box machine. She was proud of it. It had taken her three hours, three hints from the community forums, and one accidental system reset — but she had done it.\n\nThe next day she posted in the forum: 'Finally rooted my first box! Now what tools should I install to get better faster?'\n\nThe responses were immediate. Nmap. Burp Suite. Metasploit. theHarvester. Gobuster. Hashcat. BloodHound. PowerView. CrackMapExec. Cobalt Strike. Mimikatz.\n\nShe spent a weekend installing everything, spending more time on Kali dependency issues than actual learning. By Sunday evening she had a Kali Linux instance with thirty tools she did not know how to use, and less confidence than when she had started.\n\nShe messaged her mentor, Tariq.\n\n'I have all these tools but I don't know what to do with them. I don't know when to use Nmap vs Nessus vs OpenVAS. I don't understand why I need theHarvester when I can just Google. I installed Metasploit but I don't understand what modules are or how to pick one.'\n\nTariq replied: 'Good. Now you understand the actual problem. The tools are not the hard part. You can run Nmap without understanding TCP handshakes. You can run Metasploit without understanding why the exploit works. Tools give you output. Understanding tells you what that output means and what to do with it.'\n\n'So what should I do?' she asked.\n\n'Learn the CVE system. Learn OWASP. Learn what the tools are for before you learn how to use them. Understand the vulnerability taxonomy before you try to exploit individual instances of it. The tools will make sense then — because you'll know what problem you're trying to solve before you reach for the solution.'\n\nFatima closed her terminal. She opened a browser instead.",
+  "keyInsight": "Tools amplify knowledge — they cannot create it. Understanding the vulnerability management ecosystem, the weakness taxonomy, and the methodology gives the tools context. Without that context, you have output you cannot interpret.",
+  "protagonistName": "Fatima Al-Rashidi",
+  "protagonistRole": "Self-taught cybersecurity learner, six months into her first certification preparation"
+}

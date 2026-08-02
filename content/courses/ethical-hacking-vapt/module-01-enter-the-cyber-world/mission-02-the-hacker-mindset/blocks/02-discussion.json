@@ -1,0 +1,15 @@
+{
+  "id": "m2-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Reflect",
+  "title": "The Hundred Doors Problem",
+  "prompt": "Imagine you are responsible for securing a building with 100 doors. You lock 99 of them perfectly. Someone wants to break in. What is the only thing they need to find?",
+  "context": "This is not a trick question — but the answer reveals something fundamental about why cybersecurity is one of the hardest professions in the world. The disparity between what a defender must do and what an attacker must do is not a bug in the system. It is the defining challenge of the entire field, and understanding it changes how you approach every security decision.",
+  "guideQuestions": [
+    "If you are responsible for 100 doors and an attacker only needs to find one unlocked door, what does that say about the relationship between effort and success on each side?",
+    "Consider your own daily life — email accounts, phone, home WiFi, work computer, online banking. How many 'doors' do you have? How certain are you that every one of them is locked as securely as it could be?",
+    "What would it mean to 'think like the attacker' rather than 'think like the defender' when evaluating your own security? What might you notice that you would otherwise overlook?"
+  ]
+}

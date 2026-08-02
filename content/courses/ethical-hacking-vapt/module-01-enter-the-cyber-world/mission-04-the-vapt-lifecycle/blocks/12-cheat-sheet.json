@@ -1,0 +1,66 @@
+{
+  "id": "m4-block-12-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 12,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "VAPT Lifecycle — Quick Reference",
+  "sections": [
+    {
+      "heading": "The Five VAPT Phases",
+      "items": [
+        "Phase 1 — Scoping: Define in-scope targets, testing objectives, constraints, emergency contacts. Sign scope document + RoE + authorization letter. OUTPUT: Legal framework for the engagement",
+        "Phase 2 — Reconnaissance: Passive OSINT (WHOIS, DNS, Shodan, LinkedIn, Certificate Transparency) + active recon (within scope). OUTPUT: Target profile",
+        "Phase 3 — Scanning & Enumeration: Port scanning, service detection, vulnerability scanning, service enumeration. OUTPUT: Structured vulnerability list",
+        "Phase 4 — Exploitation: Controlled exploitation of confirmed vulnerabilities; privilege escalation; lateral movement assessment. OUTPUT: Exploitation notes with evidence",
+        "Phase 5 — Reporting: Executive summary + detailed findings + remediation guidance. OUTPUT: Professional report — the deliverable"
+      ]
+    },
+    {
+      "heading": "PTES — Penetration Testing Execution Standard (7 Phases)",
+      "items": [
+        "1. Pre-engagement Interactions — Scoping, contracts, authorisation",
+        "2. Intelligence Gathering — Reconnaissance; OSINT and active recon",
+        "3. Threat Modelling — Identify likely attackers, assets at risk, attack vectors",
+        "4. Vulnerability Analysis — Vulnerability discovery and validation",
+        "5. Exploitation — Confirmed exploitation within scope",
+        "6. Post-Exploitation — Privilege escalation, lateral movement, data discovery",
+        "7. Reporting — Findings documentation and remediation guidance"
+      ]
+    },
+    {
+      "heading": "Scope Document vs Rules of Engagement",
+      "items": [
+        "Scope Document = WHAT: In-scope targets, out-of-scope items, testing objectives, constraints, authorisation statement",
+        "Rules of Engagement = HOW: Testing window, permitted/prohibited techniques, escalation protocol, communication cadence, data handling"
+      ]
+    },
+    {
+      "heading": "Finding Severity Ratings",
+      "items": [
+        "Critical (CVSS 9.0–10.0): Immediate exploitation, severe business impact — e.g., unauthenticated RCE, SQL injection on production database",
+        "High (CVSS 7.0–8.9): Serious risk, likely exploitable — e.g., authentication bypass, privilege escalation to admin",
+        "Medium (CVSS 4.0–6.9): Moderate risk, requires conditions — e.g., CSRF, information disclosure, weak session management",
+        "Low (CVSS 0.1–3.9): Minor risk, difficult to exploit — e.g., unnecessary service exposure, weak cipher support",
+        "Informational (CVSS 0): No direct exploitability, best practice gap — e.g., missing security headers, verbose error messages"
+      ]
+    },
+    {
+      "heading": "Professional Report — Required Sections",
+      "items": [
+        "Executive Summary — Non-technical, for CISO/CEO/board. Overall risk rating, critical findings in business terms, strategic recommendations",
+        "Scope & Methodology — What was tested, when, how, and what was excluded (with reference to signed scope document)",
+        "Findings Summary — Risk matrix showing finding counts by severity level",
+        "Detailed Findings — Per vulnerability: title, severity, CVSS, affected system, description, evidence, steps to reproduce, remediation guidance",
+        "Appendices — Raw tool output, credentials used, tool versions"
+      ]
+    },
+    {
+      "heading": "Passive vs Active Reconnaissance",
+      "items": [
+        "Passive: Public sources, no direct target contact — WHOIS, DNS records, Shodan, LinkedIn, job postings, Certificate Transparency, Google Dorks",
+        "Active: Direct target interaction (requires authorisation) — DNS zone transfer, port scan, banner grabbing, web spidering"
+      ]
+    }
+  ]
+}

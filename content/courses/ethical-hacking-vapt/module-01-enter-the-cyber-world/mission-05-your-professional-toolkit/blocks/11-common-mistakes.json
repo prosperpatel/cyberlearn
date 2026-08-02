@@ -1,0 +1,45 @@
+{
+  "id": "m5-block-11-common-mistakes",
+  "type": "common-mistakes",
+  "order": 11,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Common Mistakes",
+  "title": "Five Mistakes New Practitioners Make with Tools, Frameworks, and Certifications",
+  "mistakes": [
+    {
+      "mistake": "Running tools without reading the documentation first",
+      "description": "A learner sees a Metasploit module that matches a CVE on a target, runs it without reading the module description, and accidentally crashes the target service. Or runs an aggressive Nmap scan with a timing template that generates thousands of packets per second and triggers the client's intrusion detection system, alerting their SOC team before the pentest has formally begun.",
+      "whyItHappens": "Tools appear to lower the threshold for action. The command is right there. The target is right there. Running the command feels like progress. Reading documentation feels like delay.",
+      "consequence": "Tool misuse in a professional engagement can crash production services, trigger false incident responses, alert threat actors to your presence, or consume the client's infrastructure resources in ways the RoE did not permit. In practice labs: you may reset machines unnecessarily or develop bad habits that translate directly into mistakes on real engagements.",
+      "correctApproach": "Before running any tool: read what it does. For Metasploit modules, run 'info' to see the full description, required options, and what the exploit does to the target. For Nmap scans, understand timing templates and their packet rate implications. The documentation is not supplementary material — it is the prerequisite."
+    },
+    {
+      "mistake": "Treating the OWASP Top 10 as a complete web app testing checklist",
+      "description": "A learner tests a web application by going through the OWASP Top 10 categories in order, checking each one off, and concludes the application is secure because none of the Top 10 categories have obvious findings.",
+      "whyItHappens": "The OWASP Top 10 is the most prominent web application security document, so new learners assume it is a comprehensive testing guide. It is not.",
+      "consequence": "The OWASP Top 10 covers the most prevalent categories — not all categories. Business logic vulnerabilities, application-specific access control issues, XML External Entity (XXE) injection, and many other vulnerability classes are not in the Top 10. A real web application test requires the OWASP Web Security Testing Guide (WSTG) for systematic coverage — not just Top 10 awareness.",
+      "correctApproach": "Use the OWASP Top 10 as a priority framework and communication tool. Use the OWASP WSTG as the technical testing reference. The Top 10 does not tell you everything that can go wrong — it tells you what most commonly goes wrong."
+    },
+    {
+      "mistake": "Conflating CVSS Base Score with business risk and prioritising accordingly",
+      "description": "A security team patches all Critical (CVSS 9.0+) vulnerabilities from a scan report before touching High findings, regardless of exposure, exploitability, or business value of the affected assets.",
+      "whyItHappens": "CVSS scores are objective, quantitative, and easy to sort. Business risk requires contextual judgment and domain knowledge about which systems matter and why — harder to defend in a meeting, harder to explain to management.",
+      "consequence": "A CVSS 9.8 vulnerability on an isolated test server that is not reachable from outside the building may have lower remediation priority than a CVSS 7.2 vulnerability on a public-facing customer authentication portal. Prioritising purely by CVSS leads to resources spent on low-business-impact findings while higher-impact, medium-severity issues remain open.",
+      "correctApproach": "Calculate effective business risk by combining CVSS Base Score with: attack surface exposure (internet-facing vs. internal vs. isolated), exploitability in the specific environment (are prerequisites present?), and asset business value (what data or function does this system serve?). Use CVSS Environmental Score adjustments to document this context formally."
+    },
+    {
+      "mistake": "Pursuing certifications in the wrong order",
+      "description": "A learner attempts OSCP six months into their security journey, after completing Security+ but without significant hands-on practice. They fail. The exam costs are not refunded. The experience is demoralising.",
+      "whyItHappens": "OSCP is the most recognised certification in offensive security. New learners want the most recognised credential first. They underestimate how much practical experience the exam assumes.",
+      "consequence": "OSCP exam attempts cost several hundred dollars. Failing due to insufficient preparation is an expensive and discouraging mistake. The 24-hour format is also exhausting — candidates who lack sufficient practical foundations do not just fail, they often fail badly and early.",
+      "correctApproach": "Build to OSCP systematically: start with practical hands-on experience (Hack The Box, TryHackMe, or similar), complete eJPT or PNPT first to validate your practical skill level in a lower-stakes environment, and attempt OSCP only when you can consistently compromise Hack The Box machines of medium difficulty within a few hours. The path matters more than the destination."
+    },
+    {
+      "mistake": "Ignoring the NVD and reading only the CVE description",
+      "description": "When researching a vulnerability, a learner reads only the brief MITRE CVE description ('A vulnerability in X version Y allows remote code execution') and proceeds to select an exploit — without reading the CVSS score breakdown, checking exploit availability, or understanding the attack prerequisites.",
+      "whyItHappens": "The CVE description answers 'what is this?' The NVD answers 'how severe, how exploitable, is there a fix?' — but the NVD is an extra click away.",
+      "consequence": "The learner may attempt an exploit that requires local access on a system they only have network access to (Attack Vector: Local — not Network), or attempt an exploit rated High attack complexity that requires specific configuration conditions that do not exist on the target. Time wasted; potentially unstable tool runs executed unnecessarily.",
+      "correctApproach": "Always start vulnerability research at nvd.nist.gov. Read the full CVSS score breakdown: Attack Vector, Attack Complexity, Privileges Required, and User Interaction tell you exactly what the exploit requires. Check whether a public exploit is known (NVD links to ExploitDB). This takes three minutes and saves hours of unsuccessful exploitation attempts."
+    }
+  ]
+}

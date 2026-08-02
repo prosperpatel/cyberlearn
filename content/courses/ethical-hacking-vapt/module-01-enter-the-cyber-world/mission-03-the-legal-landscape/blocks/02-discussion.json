@@ -1,0 +1,16 @@
+{
+  "id": "m3-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Reflect",
+  "title": "The Locksmith Problem",
+  "prompt": "A locksmith notices a flaw in a popular door lock design that would allow anyone to bypass it in under thirty seconds. They demonstrate this to a journalist and publish a video online showing the technique. Is this responsible? Is it legal? Does it matter that they were not trying to enable burglaries?",
+  "context": "This thought experiment mirrors real dilemmas that security researchers face constantly. The technical discovery is valuable — it identifies a real-world flaw that consumers deserve to know about. But the method of disclosure — publicly demonstrating it before a patch exists — immediately benefits every attacker who sees the video. The researcher's intent is irrelevant to the harm caused by publication. The same tension exists in every aspect of vulnerability disclosure in cybersecurity.",
+  "guideQuestions": [
+    "Does the locksmith (or security researcher) have a legal obligation to report the flaw before publishing it — or do they have the right to publish anything they discover about a commercial product?",
+    "What is the difference in outcome between telling the manufacturer privately first versus going straight to the media — for users, for the manufacturer, and for the researcher themselves?",
+    "If the researcher waits 90 days and the manufacturer still hasn't released a fix, what should they do? What competing interests need to be balanced?",
+    "Does your answer change if the flaw is in a hospital's door lock versus a hotel room versus a bank vault? Does context change the ethical obligation?"
+  ]
+}

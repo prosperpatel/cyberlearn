@@ -1,0 +1,19 @@
+{
+  "id": "m4-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mission Brief",
+  "operativeCodename": "Operation Five Phases",
+  "classification": "BEGINNER CLEARANCE",
+  "briefingOfficer": "Senior Instructor, CyberLearn Academy",
+  "missionStatement": "You have learned what ethical hacking is, how attackers think, and what the law permits. Now it is time to understand the process that turns those skills into a professional engagement.\n\nIn the field, ethical hacking is not freestyle — it follows a structured methodology. Every professional penetration test moves through five phases: Scoping, Reconnaissance, Scanning and Enumeration, Exploitation, and Reporting. Each phase has defined inputs, defined activities, and a defined output that feeds the next phase.\n\nYour mission: understand each phase well enough to explain it to a client, and understand the documents — scope agreement, Rules of Engagement, final report — that govern and record the entire engagement.",
+  "objectives": [
+    "Map the five VAPT phases in order and identify each phase's primary output",
+    "Explain what a scope document contains and why its precision is legally critical",
+    "Describe what Rules of Engagement govern and why they protect both parties",
+    "Understand why the report is the deliverable — not the exploitation",
+    "Learn the Penetration Testing Execution Standard (PTES) seven-phase framework"
+  ],
+  "operativeNote": "Organisations pay for reports, not exploits. A security engagement that produces thorough documentation is worth more than one that compromises every system but leaves no paper trail. Remember that as you move through this mission."
+}

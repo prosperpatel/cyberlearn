@@ -1,0 +1,19 @@
+{
+  "id": "m2-block-06-memory-anchor",
+  "type": "memory-anchor",
+  "order": 6,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "CIA — What Attackers Are Always After",
+  "concept": "Every cyberattack violates Confidentiality (stealing what shouldn't be seen), Integrity (changing what shouldn't be touched), or Availability (blocking what should be accessible). Every security control in the world exists to protect one or more of these three properties.",
+  "anchor": "Remember CIA — Confidentiality, Integrity, Availability. When you hear about any attack, ask one question first: which of these three did it violate? That one question tells you what was broken and what kind of defence could have stopped it.",
+  "explanation": "Ransomware? Availability attack — the files are still there, encrypted, inaccessible. Data theft? Confidentiality attack — the data wasn't destroyed, it was seen by someone who shouldn't have seen it. Financial fraud via tampered transactions? Integrity attack — the numbers were changed, the records can no longer be trusted.\n\nOnce you can instantly classify an attack by which CIA property it violates, you will always know what the defender should have been protecting and where the defence failed. This is how security professionals think when they read an incident report — not 'what happened technically' but 'which property failed, and why'.",
+  "acronym": {
+    "letters": ["C", "I", "A"],
+    "meanings": [
+      "Confidentiality — information is accessible only to those authorised to see it; violated by data theft, eavesdropping, credential compromise",
+      "Integrity — information has not been tampered with by unauthorised parties; violated by data manipulation, man-in-the-middle, fraudulent transactions",
+      "Availability — systems are accessible to authorised users when needed; violated by ransomware, DDoS, infrastructure destruction"
+    ]
+  }
+}

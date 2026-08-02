@@ -1,0 +1,55 @@
+{
+  "id": "m2-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Core Concepts",
+  "title": "How Attackers Think — and What They're After",
+  "content": "Every attacker — regardless of skill, motivation, or target — is trying to do one or more of three things: access information they shouldn't see, change information they shouldn't touch, or prevent access to something that's supposed to be available. Security professionals call these three properties the CIA Triad.\n\n**Confidentiality** is the property that information is accessible only to those authorised to have it. When attackers steal customer records, intercept network traffic, or crack password hashes, they are violating Confidentiality. The information existed — they just weren't supposed to have it.\n\n**Integrity** is the property that information has not been modified by unauthorised parties. When malware silently alters financial records, a man-in-the-middle attacker tampers with data in transit, or a SQL injection attack modifies a database, they are violating Integrity. The information still exists — but it can no longer be trusted.\n\n**Availability** is the property that systems and data are accessible to authorised users when they need them. When ransomware encrypts a hospital's files, a DDoS attack floods a website, or an attacker destroys backups, they are violating Availability. The information still exists and may not have been read by anyone — but the people who need it cannot get to it.\n\nEvery cyberattack violates at least one of these three properties. Every security control you will ever implement exists to protect one or more of them.",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "CIA in the Real World",
+      "text": "Ransomware is primarily an Availability attack — it does not need to steal data to cause enormous damage. A man-in-the-middle attack during a financial transaction violates both Confidentiality (the attacker reads the details) and potentially Integrity (they may alter the transaction). The 2016 Bangladesh Bank heist — where attackers sent fraudulent SWIFT transfers totalling $81 million — was an Integrity attack. Understanding which property is under threat tells you which controls to prioritise."
+    },
+    {
+      "type": "warning",
+      "title": "The Asymmetric Advantage",
+      "text": "You must protect all three properties, across every system, all the time. An attacker only needs to violate one property, on one system, once. This fundamental imbalance is not a design flaw that can be engineered away — it is the defining reality of defensive security, and it is why attackers are said to hold the 'asymmetric advantage'."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "CIA Triad",
+      "definition": "The three foundational properties of information security: Confidentiality (only authorised access), Integrity (data has not been tampered with), and Availability (accessible to authorised users when needed). Every security control is designed to protect one or more of these."
+    },
+    {
+      "term": "Attack Surface",
+      "definition": "The total set of points through which an attacker could try to enter a system or extract data. Includes not just servers and applications but also employee email accounts, physical access points, third-party vendor access, supply chain software, and human beings who can be socially engineered."
+    },
+    {
+      "term": "Attack Vector",
+      "definition": "The specific path or mechanism an attacker uses to reach a target — phishing email, unpatched web server, stolen credentials, malicious USB drive. The attack surface is all possible vectors; the attack vector is the one actually used."
+    },
+    {
+      "term": "Vulnerability",
+      "definition": "A weakness in a system, software, configuration, or process that could be exploited by an attacker. A vulnerability alone causes no harm — it must be discovered and exploited. Examples: unpatched software, default credentials left unchanged, weak encryption, misconfigured permissions."
+    },
+    {
+      "term": "Exploit",
+      "definition": "A piece of code, a technique, or a process that takes advantage of a vulnerability to achieve an unintended or unauthorised outcome. The exploit is the tool that converts a weakness into a breach. Not all vulnerabilities have known exploits."
+    },
+    {
+      "term": "Payload",
+      "definition": "The component of an attack that delivers the actual impact: ransomware that encrypts files, a reverse shell that gives the attacker control, a keylogger that records passwords, code that exfiltrates data. The payload is what the attacker does after getting in."
+    },
+    {
+      "term": "Threat Actor",
+      "definition": "Any individual, group, or entity that carries out or attempts to carry out a cyberattack. Threat actors differ in motivation, capability, resources, and targets — from bored teenagers to nation-state intelligence agencies."
+    },
+    {
+      "term": "APT (Advanced Persistent Threat)",
+      "definition": "A threat actor — typically nation-state-sponsored — characterised by high technical sophistication, substantial resources, and the intent to maintain long-term access to a specific target environment. APTs move slowly, hide carefully, and measure success in months or years, not minutes."
+    }
+  ]
+}

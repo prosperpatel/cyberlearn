@@ -1,0 +1,40 @@
+{
+  "id": "m4-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Case Study",
+  "caseStudy": {
+    "company": "Yahoo!",
+    "year": "2016",
+    "industry": "Internet Technology / Media",
+    "incident": "Yahoo disclosed in September 2016 that a breach in 2014 had exposed 500 million user accounts — the largest publicly disclosed data breach in history at the time. Three months later, they disclosed a second breach from 2013 affecting 3 billion accounts. Both breaches were discovered not by Yahoo's own security team, but during due diligence for Verizon's planned $4.8 billion acquisition.",
+    "whatHappened": [
+      "In 2014, a threat actor — later attributed to state-sponsored actors — gained access to Yahoo's network and stole data including names, email addresses, telephone numbers, dates of birth, hashed passwords, and encrypted or unencrypted security questions and answers.",
+      "Yahoo's internal security team did not detect the 2014 breach at the time it occurred. No breach notification was issued. No remediation was taken because no compromise was known.",
+      "In 2016, Verizon Communications began acquiring Yahoo for $4.8 billion. During the due diligence process, Verizon's team identified evidence of the 2014 breach — evidence that had been sitting undetected in Yahoo's own systems.",
+      "Yahoo disclosed the 2014 breach to the public in September 2016, two years after it occurred.",
+      "Three months later, in December 2016, Yahoo disclosed a separate 2013 breach affecting 1 billion accounts. In 2017, after forensic analysis, Yahoo revised that figure to 3 billion — every Yahoo account that existed at the time.",
+      "The stolen security questions and answers were particularly damaging because Yahoo stored many of them in plaintext or with reversible encryption, allowing attackers to use them for account recovery attacks on other services where users had recycled the same questions."
+    ],
+    "whyItHappened": [
+      "Yahoo had undergone external security audits and compliance reviews over the years. Those reviews did not surface the breach, in part because compliance-oriented security audits focus on whether controls exist — not on whether those controls are actually working or have been bypassed.",
+      "The 2014 breach persisted undetected for two years because Yahoo's internal monitoring was not correlating authentication anomalies, unusual data access patterns, and network egress in ways that would have flagged the exfiltration.",
+      "Security questions stored in plaintext violated basic data-at-rest protection principles. A serious VAPT engagement that included a database configuration review would have flagged this practice.",
+      "The security team at Yahoo was aware of some vulnerabilities in their systems but lacked the executive mandate and budget prioritisation to address them comprehensively. Internal risk reports flagged issues; remediation was deferred."
+    ],
+    "lessonsLearned": [
+      "Compliance is not security. Passing a security audit means you met the requirements of the audit's scope on the day it was conducted. It does not mean your systems are not currently compromised. Real security requires continuous monitoring and genuine penetration testing — not checkbox reviews.",
+      "Threat detection depends on correlation. A single anomalous login might be noise. Anomalous logins correlated with unusual data access correlated with abnormal egress traffic is a breach in progress. VAPT should always include a review of detection and response capabilities, not just vulnerabilities.",
+      "Data-at-rest protection is a VAPT finding category. Plaintext storage of security questions is a Critical finding. Any pentest that accesses a production database and does not flag unencrypted sensitive fields has not done its job.",
+      "The acquisition context matters: Verizon reduced their acquisition price by $350 million as a direct result of the breach disclosure. Yahoo paid $50 million in a class-action settlement and notified over 43 million users whose data appeared on dark web markets. Security failures have direct financial and legal consequences that extend beyond the affected organisation."
+    ],
+    "impactStats": [
+      "3 billion user accounts compromised across both breaches — the largest in history at time of disclosure",
+      "$350 million reduction in Verizon's acquisition price",
+      "$50 million class-action settlement",
+      "2 years between the 2014 breach and its public disclosure",
+      "Security questions stored in plaintext for millions of accounts"
+    ]
+  }
+}
