@@ -274,14 +274,17 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
     if (index < 0 || index >= total) return
     update(prev => {
       const completed = new Set(prev.completedBlocks)
-      const maxDone   = completed.size > 0 ? Math.max(...completed) : -1
-      const frontier  = maxDone + 1
 
-      if (index > frontier) return {}   // locked — reject silently
-
+      // Mark current block done BEFORE computing frontier, so forward navigation
+      // from a just-completed block isn't blocked on a fresh session.
       if (blockDoneRef.current) {
         completed.add(prev.activeBlockIndex)
       }
+
+      const maxDone  = completed.size > 0 ? Math.max(...completed) : -1
+      const frontier = maxDone + 1
+
+      if (index > frontier) return {}   // locked — reject silently
 
       return { activeBlockIndex: index, completedBlocks: [...completed] }
     })
