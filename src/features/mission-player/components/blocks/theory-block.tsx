@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { ChevronDown, FileText, Info, AlertTriangle } from 'lucide-react'
+import { FileText, Info, AlertTriangle } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { StandardBlock } from '@/types/mission-engine'
 
@@ -12,13 +11,12 @@ interface Callout {
 interface KeyTerm { term: string; definition: string }
 
 interface TheoryContent {
-  title?:      string
-  content?:    string
-  callouts?:   Callout[]
-  keyTerms?:   KeyTerm[]
+  title?:    string
+  content?:  string
+  callouts?: Callout[]
+  keyTerms?: KeyTerm[]
 }
 
-// Render a string that may contain **bold** and \n\n paragraphs / - lists
 function renderContent(raw: string) {
   return raw.split('\n\n').map((block, bi) => {
     const lines = block.split('\n')
@@ -49,68 +47,32 @@ function renderInline(text: string) {
 }
 
 const CALLOUT_STYLES: Record<string, { icon: React.ReactNode; border: string; bg: string; title: string }> = {
-  info:    { icon: <Info className="size-4 text-blue-400" />,          border: 'border-blue-500/30',   bg: 'bg-blue-500/8',   title: 'text-blue-400'   },
-  warning: { icon: <AlertTriangle className="size-4 text-orange-400"/>, border: 'border-orange-500/30', bg: 'bg-orange-500/8', title: 'text-orange-400' },
-  tip:     { icon: <Info className="size-4 text-green-400" />,          border: 'border-green-500/30',  bg: 'bg-green-500/8',  title: 'text-green-400'  },
-  danger:  { icon: <AlertTriangle className="size-4 text-red-400" />,   border: 'border-red-500/30',    bg: 'bg-red-500/8',    title: 'text-red-400'    },
-  insight: { icon: <Info className="size-4 text-purple-400" />,         border: 'border-purple-500/30', bg: 'bg-purple-500/8', title: 'text-purple-400' },
+  info:    { icon: <Info className="size-4 text-blue-400" />,           border: 'border-blue-500/30',   bg: 'bg-blue-500/8',   title: 'text-blue-400'   },
+  warning: { icon: <AlertTriangle className="size-4 text-orange-400" />, border: 'border-orange-500/30', bg: 'bg-orange-500/8', title: 'text-orange-400' },
+  tip:     { icon: <Info className="size-4 text-green-400" />,           border: 'border-green-500/30',  bg: 'bg-green-500/8',  title: 'text-green-400'  },
+  danger:  { icon: <AlertTriangle className="size-4 text-red-400" />,    border: 'border-red-500/30',    bg: 'bg-red-500/8',    title: 'text-red-400'    },
+  insight: { icon: <Info className="size-4 text-purple-400" />,          border: 'border-purple-500/30', bg: 'bg-purple-500/8', title: 'text-purple-400' },
 }
 
 export function TheoryBlock({ block }: { block: StandardBlock }) {
-  const [isExpanded, setIsExpanded] = useState(false)
   const c        = block.content as TheoryContent
   const title    = c.title    ?? block.title
   const content  = c.content  ?? ''
   const callouts = c.callouts ?? []
   const keyTerms = c.keyTerms ?? []
 
-  const excerpt = content.slice(0, 180)
-
-  if (!isExpanded) {
-    return (
-      <button
-        onClick={() => setIsExpanded(true)}
-        className="w-full text-left rounded-xl border border-blue-500/30 bg-base-900 overflow-hidden group transition-all hover:border-blue-500/60 hover:shadow-[0_0_16px_rgba(59,130,246,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/60"
-      >
-        <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-blue-500/20" />
-        <div className="px-5 py-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-blue-400 font-mono">
-              <FileText className="size-3" />
-              Theory
-            </span>
-            <span className="text-xs text-muted-foreground ml-auto">~{block.metadata.estimatedMinutes}min</span>
-          </div>
-          <h2 className="text-base font-bold text-foreground leading-snug">{title}</h2>
-          {excerpt && (
-            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-              {excerpt.replace(/\*\*/g, '')}{content.length > 180 ? '…' : ''}
-            </p>
-          )}
-          <div className="flex items-center gap-2 pt-1 border-t border-border/40 text-xs font-semibold text-blue-400 group-hover:text-blue-300 transition-colors">
-            Study Theory
-            <ChevronDown className="size-3.5 -rotate-90 group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        </div>
-      </button>
-    )
-  }
-
   return (
     <div className="rounded-xl border border-blue-500/40 bg-base-900 overflow-hidden">
       <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-blue-500/20" />
       <div className="px-5 sm:px-8 py-6 space-y-6">
+
         {/* Header */}
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-blue-400 font-mono">
-              <FileText className="size-3" />
-              Theory
-            </span>
-          </div>
-          <button onClick={() => setIsExpanded(false)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
-            <ChevronDown className="size-3.5" /> Collapse
-          </button>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-blue-400 font-mono">
+            <FileText className="size-3" />
+            Theory
+          </span>
+          <span className="text-xs text-muted-foreground ml-auto">~{block.metadata.estimatedMinutes}min</span>
         </div>
 
         <h2 className="text-xl font-bold text-foreground">{title}</h2>
@@ -148,10 +110,6 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
             </dl>
           </div>
         )}
-
-        <button onClick={() => setIsExpanded(false)} className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-colors border-t border-border/40 pt-4">
-          <ChevronDown className="size-3.5" /> Collapse theory
-        </button>
       </div>
     </div>
   )

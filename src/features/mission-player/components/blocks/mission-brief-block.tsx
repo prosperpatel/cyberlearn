@@ -1,18 +1,6 @@
-/**
- * MissionBriefBlock — full renderer for `mission-brief` blocks.
- *
- * Manages its own collapsed/expanded state so BlockRenderer and the registry
- * contract need no changes. In collapsed mode shows a preview card with an
- * "Open Briefing" CTA. In expanded mode shows the complete mission brief.
- */
-
-import { useState } from 'react'
-import { CheckCircle2, ChevronDown, Flag, Target, Zap } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { CheckCircle2, Flag, Target, Zap } from 'lucide-react'
 import type { StandardBlock } from '@/types/mission-engine'
 
-// The block JSON has more fields than the MissionBriefContent interface,
-// so we type the full shape here for safe access.
 interface MissionBriefRawContent {
   missionTitle?:      string
   operativeCodename?: string
@@ -24,12 +12,7 @@ interface MissionBriefRawContent {
   closingMessage?:    string
 }
 
-interface MissionBriefBlockProps {
-  block: StandardBlock
-}
-
-export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
+export function MissionBriefBlock({ block }: { block: StandardBlock }) {
   const c = block.content as MissionBriefRawContent
 
   const missionTitle      = c.missionTitle      ?? block.title
@@ -41,103 +24,27 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
   const skillsUnlocked    = c.skillsUnlocked     ?? []
   const closingMessage    = c.closingMessage      ?? ''
 
-  // ── Collapsed preview ──────────────────────────────────────────────────────
-  if (!isExpanded) {
-    return (
-      <button
-        onClick={() => setIsExpanded(true)}
-        className={cn(
-          'w-full text-left rounded-xl border border-cyan-500/30 bg-base-900 overflow-hidden',
-          'transition-all duration-200 hover:border-cyan-500/60 hover:shadow-[0_0_16px_rgba(0,217,255,0.08)]',
-          'group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60',
-        )}
-      >
-        {/* Cyan header bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-cyan-500 to-cyan-500/20" />
-
-        <div className="px-5 py-4 space-y-3">
-          {/* Top row: type badge + meta */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="flex items-center gap-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-cyan-400 font-mono">
-              <Flag className="size-3" />
-              Mission Brief
-            </span>
-            {block.metadata.xp > 0 && (
-              <span className="flex items-center gap-1 text-xs font-semibold text-primary">
-                <Zap className="size-3" />
-                +{block.metadata.xp} XP
-              </span>
-            )}
-            <span className="text-xs text-muted-foreground ml-auto">
-              ~{block.metadata.estimatedMinutes}min
-            </span>
-          </div>
-
-          {/* Codename */}
-          {operativeCodename && (
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-500/60">
-              {operativeCodename}
-            </p>
-          )}
-
-          {/* Mission title */}
-          <h2 className="text-lg font-bold text-foreground leading-snug">
-            {missionTitle}
-          </h2>
-
-          {/* Subtitle */}
-          {subtitle && (
-            <p className="text-sm text-muted-foreground leading-snug">{subtitle}</p>
-          )}
-
-          {/* Briefing excerpt */}
-          {briefing && (
-            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-              {briefing.slice(0, 180)}{briefing.length > 180 ? '…' : ''}
-            </p>
-          )}
-
-          {/* CTA row */}
-          <div className="flex items-center gap-2 pt-1 border-t border-border/40">
-            <span className="text-xs font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors">
-              Open Briefing
-            </span>
-            <ChevronDown className="size-3.5 text-cyan-400 rotate-[-90deg] group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        </div>
-      </button>
-    )
-  }
-
-  // ── Expanded full view ─────────────────────────────────────────────────────
   return (
     <div className="rounded-xl border border-cyan-500/40 bg-base-900 overflow-hidden">
-      {/* Cyan header bar */}
       <div className="h-1.5 w-full bg-gradient-to-r from-cyan-500 to-cyan-500/20" />
 
       <div className="px-5 sm:px-8 py-6 space-y-8">
 
-        {/* Top: badge row + collapse button */}
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="flex items-center gap-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-cyan-400 font-mono">
-              <Flag className="size-3" />
-              Mission Brief
+        {/* Badge row */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="flex items-center gap-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-cyan-400 font-mono">
+            <Flag className="size-3" />
+            Mission Brief
+          </span>
+          {block.metadata.xp > 0 && (
+            <span className="flex items-center gap-1 text-xs font-semibold text-primary">
+              <Zap className="size-3" />
+              +{block.metadata.xp} XP
             </span>
-            {block.metadata.xp > 0 && (
-              <span className="flex items-center gap-1 text-xs font-semibold text-primary">
-                <Zap className="size-3" />
-                +{block.metadata.xp} XP
-              </span>
-            )}
-          </div>
-          <button
-            onClick={() => setIsExpanded(false)}
-            className="shrink-0 text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-          >
-            <ChevronDown className="size-3.5" />
-            Collapse
-          </button>
+          )}
+          <span className="text-xs text-muted-foreground ml-auto">
+            ~{block.metadata.estimatedMinutes}min
+          </span>
         </div>
 
         {/* Operation codename */}
@@ -151,7 +58,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           </div>
         )}
 
-        {/* Mission title + subtitle */}
+        {/* Title + subtitle */}
         <div className="space-y-2">
           <h1 className="text-2xl sm:text-3xl font-black text-foreground leading-tight">
             {missionTitle}
@@ -161,7 +68,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           )}
         </div>
 
-        {/* ── Briefing ── */}
+        {/* Briefing */}
         {briefing && (
           <section className="space-y-3">
             <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
@@ -175,7 +82,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           </section>
         )}
 
-        {/* ── Why it matters ── */}
+        {/* Why it matters */}
         {whyItMatters && (
           <section className="space-y-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
             <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary font-mono">
@@ -189,7 +96,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           </section>
         )}
 
-        {/* ── Objectives ── */}
+        {/* Objectives */}
         {objectives.length > 0 && (
           <section className="space-y-3">
             <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
@@ -206,7 +113,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           </section>
         )}
 
-        {/* ── Skills unlocked ── */}
+        {/* Skills unlocked */}
         {skillsUnlocked.length > 0 && (
           <section className="space-y-3">
             <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-1.5">
@@ -224,7 +131,7 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
           </section>
         )}
 
-        {/* ── Closing message ── */}
+        {/* Closing message */}
         {closingMessage && (
           <section className="border-t border-border/40 pt-6">
             <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
@@ -234,17 +141,6 @@ export function MissionBriefBlock({ block }: MissionBriefBlockProps) {
             </div>
           </section>
         )}
-
-        {/* Collapse button at bottom */}
-        <div className="border-t border-border/40 pt-4">
-          <button
-            onClick={() => setIsExpanded(false)}
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5"
-          >
-            <ChevronDown className="size-3.5" />
-            Collapse briefing
-          </button>
-        </div>
       </div>
     </div>
   )

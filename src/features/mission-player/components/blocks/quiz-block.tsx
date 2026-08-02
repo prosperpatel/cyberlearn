@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckCircle2, XCircle, Trophy, Zap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useBlockCompletion } from '@/features/mission-player/context/block-completion-context'
 import type { StandardBlock } from '@/types/mission-engine'
 
 interface QuizOption   { id: string; text: string; isCorrect: boolean }
@@ -21,12 +22,18 @@ interface QuizContent {
 }
 
 export function QuizBlock({ block }: { block: StandardBlock }) {
+  const { complete } = useBlockCompletion()
   const c            = block.content as QuizContent
   const questions    = c.questions    ?? []
   const passingScore = c.passingScore ?? 80
 
   const [selected,  setSelected]  = useState<Record<string, string>>({})
   const [submitted, setSubmitted] = useState(false)
+
+  // Signal completion as soon as the quiz is submitted (regardless of score)
+  useEffect(() => {
+    if (submitted) complete()
+  }, [submitted, complete])
 
   const correctCount = submitted
     ? questions.filter(q => {

@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight, Eye, Layers } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useBlockCompletion } from '@/features/mission-player/context/block-completion-context'
 import type { StandardBlock } from '@/types/mission-engine'
 
 interface Flashcard { front: string; back: string; hint?: string }
@@ -11,6 +12,7 @@ interface FlashcardsContent {
 }
 
 export function FlashcardsBlock({ block }: { block: StandardBlock }) {
+  const { complete } = useBlockCompletion()
   const c       = block.content as FlashcardsContent
   const title   = c.title ?? block.title
   const cards   = c.cards ?? []
@@ -19,6 +21,11 @@ export function FlashcardsBlock({ block }: { block: StandardBlock }) {
   const [isFlipped, setIsFlipped] = useState(false)
   const [showHint,  setShowHint]  = useState(false)
   const [seen,      setSeen]      = useState<Set<number>>(new Set())
+
+  // Signal completion once every card has been flipped at least once
+  useEffect(() => {
+    if (cards.length > 0 && seen.size >= cards.length) complete()
+  }, [seen, cards.length, complete])
 
   const card  = cards[index]
   const total = cards.length
