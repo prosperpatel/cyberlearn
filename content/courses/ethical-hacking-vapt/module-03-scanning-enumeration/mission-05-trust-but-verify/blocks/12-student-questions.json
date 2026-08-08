@@ -1,0 +1,30 @@
+{
+  "id": "mod3m5-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Questions & Answers",
+  "intro": "These are the questions learners most commonly ask when they first encounter professional vulnerability validation. If you have been wondering about any of these, you are asking exactly the right things.",
+  "faqs": [
+    {
+      "question": "If the path traversal test reads /etc/passwd, isn't that already exploitation? Where is the line between validation and exploitation?",
+      "answer": "The line is drawn by purpose, technique, and impact.\n\nThe path traversal test sends one request, reads one file (/etc/passwd — a world-readable file containing no security-sensitive information), and stops. The purpose is to confirm whether the path traversal mechanism works. The impact on the target is zero: the file was already readable by any user on the system, no data was modified, and the server's state is identical before and after.\n\nExploitation would be using the same traversal mechanism to read /etc/shadow (password hashes — genuinely sensitive data), or advancing to the RCE component (sending a CGI script via the traversal path to execute commands), or automating a chain of actions to achieve privilege escalation.\n\nThe distinction in practice: validation produces evidence that the mechanism exists. Exploitation produces impact. Professional validation stops at the evidence. Everything beyond requires the exploitation phase of the engagement — with its own additional planning, authorisation confirmation, and safety considerations."
+    },
+    {
+      "question": "The legacy server returned HTTP 400. Does that mean it is safe? Can we mark it as not vulnerable?",
+      "answer": "No — and this is a critical professional distinction.\n\nHTTP 400 has two possible explanations: (1) the server rejected the traversal URL because the fix for CVE-2021-41773 is applied (backport or upgrade); or (2) an external control — a WAF, a load balancer, or a server-level configuration — rejected the request before it reached Apache. In explanation (2), the vulnerability might still exist inside the system but is protected from external access at this scanning position.\n\nProfessional documentation: 'Path traversal test returned HTTP 400. Finding is inconclusive — the result is consistent with patch backport applied (corroborated by Red Hat distribution suffix in banner) but cannot rule out external filtering. Internal configuration review recommended to confirm. Status: do not mark as cleared.'\n\nA cleared finding requires positive evidence of the absence of the vulnerability. An HTTP 400 response is ambiguous evidence. Ambiguity must be documented as ambiguity — not resolved as a clean result."
+    },
+    {
+      "question": "Why can't I just use an automated vulnerability scanner to verify — it's faster and checks more things?",
+      "answer": "Automated scanner verification modules are not safe validation tools. They are automation layers that combine multiple probe sequences into a single 'confirm' action — and those sequences are not reviewed or controlled by the assessor running them.\n\nThe case study in this mission illustrated the consequence: an automated verification module sent nineteen HTTP requests in eleven seconds, triggered a client's IDS, suspended the engagement for 36 hours, and generated an incident report. The human assessor saw one 'confirm' button. The target saw a probe chain.\n\nSafe validation requires manual composition of each request: you write the exact URL, you define what you expect from the response, you send one request, you record the result, and you stop. Every action is reviewed before it is executed. No automated module meets this standard — by definition, it executes actions the user did not individually plan."
+    },
+    {
+      "question": "What should I do if validation causes unintended disruption to the target?",
+      "answer": "Stop immediately. Document what happened — exact time, exact technique, exact result. Contact the client engagement point of contact through the incident escalation channel defined in the rules of engagement.\n\nMost professional engagement contracts include an incident escalation procedure: who to call if unexpected effects occur, how quickly, and what information to provide. The time to know this procedure is before the assessment starts — not after a server goes down.\n\nDo not continue testing while the target is in an uncertain state. Do not try to fix the problem yourself unless the client explicitly authorises specific remediation actions. Do not downplay what happened in communication with the client.\n\nUnintended disruption from validation — even from what seemed like a safe technique — is a professional incident. It should be treated as one: documented, disclosed, and learned from."
+    },
+    {
+      "question": "How is validation different in a bug bounty program versus a penetration test?",
+      "answer": "The principles are identical. The authorisation structure is different.\n\nIn a penetration test, the authorisation comes from a signed engagement letter that defines the scope, the permitted techniques, and the escalation procedures. Validation actions are reviewed against that document.\n\nIn a bug bounty program, the authorisation comes from the program's rules — a public document specifying which targets are in scope, what testing is permitted, and what is explicitly prohibited. Bug bounty rules almost universally require read-only proof-of-concept: 'demonstrate the vulnerability without accessing real user data or causing service disruption.' That is the SAFE framework described in slightly different language.\n\nIn both contexts: one targeted technique, minimum impact, documented evidence. The professional standard is the same. The accountability mechanism is different."
+    }
+  ]
+}

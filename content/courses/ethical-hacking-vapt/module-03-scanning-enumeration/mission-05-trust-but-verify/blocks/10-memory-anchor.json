@@ -1,0 +1,20 @@
+{
+  "id": "mod3m5-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "A CVE Proves a Weakness Exists. SAFE Proves It Exists Here.",
+  "concept": "Every validation — every confirmation that a finding is real in a specific environment — should be evaluated against four principles. Not speed. Not confidence in the CVE database. Not the CVSS score. These four principles, in this order, every time.",
+  "anchor": "Safe technique. Advisory alignment. Feature confirmed. Evidence documented. If any one of the four is missing, the finding is not complete. A finding without SAFE is a claim. A finding with SAFE is evidence.",
+  "explanation": "Throughout this module, you have built a professional workflow from first contact to confirmed vulnerability:\n\nMission 1 (PING) established which systems are alive. Mission 2 (OCF) mapped which ports are open, closed, or filtered. Mission 3 (BVR) confirmed the software name and version behind each port. Mission 4 (CPR) identified which CVEs are potential matches and what conditions would make them real.\n\nMission 5 adds SAFE — the validation layer that turns potential matches into confirmed findings.\n\n**S — Safe technique first**\n\nEvery validation action must be read-only, non-destructive, and targeted. One request where one is sufficient. /etc/passwd, not /etc/shadow. A response code, not an exploit payload. If the technique could cause service disruption, it is not a safe technique — it is exploitation.\n\n**A — Advisory alignment**\n\nThe validation technique must match what the vendor advisory says about the vulnerability. If the advisory says a patched server returns HTTP 400 for the traversal URL, an HTTP 400 response is meaningful evidence. If the advisory says mod_cgi is required for the RCE component, a 403 on /cgi-bin/ is meaningful evidence of that prerequisite.\n\nValidation without reading the advisory is guessing. The advisory tells you what to look for.\n\n**F — Feature confirmed**\n\nThe specific configuration condition the CVE requires must be verified as present — not assumed. For CVE-2021-41773: is mod_cgi enabled? Is there an unprotected directory outside the web root? These questions have answers. Getting the answers is the F step.\n\nA confirmed feature is what separates a potential finding from a finding with a severity rating you can defend.\n\n**E — Evidence documented**\n\nEvery validation result — positive, negative, or inconclusive — must be documented with the same precision:\n\n- What technique was used (the exact request)\n- What response was received (the exact response code and relevant response content)\n- What conclusion was drawn (confirmed / false positive / inconclusive)\n- Why that conclusion follows from the response\n\nDocumentation is not optional. A validated finding with no documentation cannot be defended. A false positive correctly ruled out with no documentation cannot be explained to the client. Evidence is the product of validation.",
+  "acronym": {
+    "letters": ["S", "A", "F", "E"],
+    "meanings": [
+      "Safe technique — read-only, non-destructive, targeted. One request where one is enough.",
+      "Advisory alignment — the technique and result must match what the vendor advisory says the vulnerability looks like.",
+      "Feature confirmed — the specific configuration condition required by the CVE is verified as present or absent.",
+      "Evidence documented — the exact technique, exact response, and exact conclusion recorded in the engagement log."
+    ]
+  }
+}

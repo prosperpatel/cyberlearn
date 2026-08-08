@@ -1,0 +1,75 @@
+{
+  "id": "mod3m5-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A vulnerability scanner runs its 'Exploit Verification' module against Apache httpd 2.4.49. The module confirms CVE-2021-41773 by returning /etc/passwd via path traversal. The module then automatically sends a CGI probe and twelve directory enumeration requests. The client's IDS detects the probe pattern and suspends the engagement. What was the core professional mistake?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Using curl instead of a more sophisticated tool for path traversal validation.", "isCorrect": false },
+        { "id": "b", "text": "Running the scanner's automated verification module without reviewing every request it would send. Safe validation requires manually composed, individually reviewed requests — not automated probe chains that are indistinguishable from attack tools to IDS systems.", "isCorrect": true },
+        { "id": "c", "text": "Confirming CVE-2021-41773 at all — validation should wait until exploitation is authorised.", "isCorrect": false },
+        { "id": "d", "text": "Not informing the client before running any validation technique on production systems.", "isCorrect": false }
+      ],
+      "explanation": "The mistake was using an automated verification module — not reviewing the full probe sequence it would execute. The first request (path traversal to /etc/passwd) was safe validation. The thirteen subsequent requests were not: they were automated probes that triggered IDS detection. Safe validation means manually composing each request, knowing exactly what it sends, and stopping when the validation question is answered. An 'Exploit Verification' module answers the validation question in one request — but also sends twelve more that nobody planned.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "What is a patch backport — and what does it mean for vulnerability validation when a server's Apache banner reads 'Apache/2.4.49 (Red Hat)'?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "A backport is when the vendor reverts to an older version after a new release causes problems. The Red Hat suffix means the server is running a downgraded Apache installation.", "isCorrect": false },
+        { "id": "b", "text": "A backport is when a Linux distribution applies a security fix to an older software version without changing the version number. 'Apache/2.4.49 (Red Hat)' indicates a Red Hat-managed package that may have CVE-2021-41773's fix applied via RHSA-2021:3610 — the banner says 2.4.49 but the vulnerability may not exist.", "isCorrect": true },
+        { "id": "c", "text": "A backport is when Apache releases a security patch that must be manually applied by administrators. The Red Hat suffix confirms the patch has been applied and the server is safe.", "isCorrect": false },
+        { "id": "d", "text": "A backport is irrelevant to validation — if the version string says 2.4.49, CVE-2021-41773 applies regardless of distribution packaging.", "isCorrect": false }
+      ],
+      "explanation": "A patch backport is the application of a security fix to an older package version without changing the version number. Red Hat and other Linux distributions do this routinely to provide security updates without requiring major software upgrades. RHSA-2021:3610 is Red Hat's advisory for their httpd package fix for CVE-2021-41773. A server with 'Apache/2.4.49 (Red Hat)' in its banner may have this fix applied. The safe path traversal validation test (HTTP 400 response to the traversal URL) is corroborating evidence. The validation result plus the distribution suffix together support the inconclusive finding that should be resolved via internal configuration review.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "You send the path traversal request 'curl http://45.77.180.10/cgi-bin/.%2e/.%2e/.%2e/etc/passwd' and receive HTTP 200 with the contents of /etc/passwd. You then run 'curl -I http://45.77.180.10/cgi-bin/' and receive HTTP 403. Applying the SAFE framework, what do the S, A, F, and E components look like for this validation?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "S: used automated scanner. A: checked NVD only. F: assumed mod_cgi from the 403 alone. E: noted 'confirmed' in personal notes.", "isCorrect": false },
+        { "id": "b", "text": "S: two targeted, read-only requests composed manually — no follow-up probes. A: results match the advisory (vulnerable server returns 200 for traversal; 403 on /cgi-bin/ indicates mod_cgi configured). F: path traversal confirmed via HTTP 200; mod_cgi presence indicated via HTTP 403 on cgi-bin. E: exact requests, exact responses, timestamps, and conclusion documented in engagement log.", "isCorrect": true },
+        { "id": "c", "text": "S: any technique is safe for read-only operations. A: advisory alignment is only required for high-CVSS findings. F: HTTP 200 on path traversal confirms full exploitability including RCE. E: a screenshot is sufficient evidence.", "isCorrect": false },
+        { "id": "d", "text": "S: used curl, which is always safe. A: aligned with the CVSS score, not the advisory. F: feature is confirmed — HTTP 200 proves mod_cgi is enabled. E: reported the finding verbally to the team lead.", "isCorrect": false }
+      ],
+      "explanation": "Option B correctly applies SAFE. S: two manually composed, targeted requests — a path traversal test and a HEAD request to cgi-bin. Neither sends an exploit payload; both are read-only. A: the advisory states that vulnerable servers process the %2e traversal URL (HTTP 200) and that mod_cgi must be enabled for RCE. HTTP 200 on the traversal and HTTP 403 on /cgi-bin/ both align with the advisory's indicators. F: path traversal confirmed via behaviour (HTTP 200 + /etc/passwd content); mod_cgi presence indicated by cgi-bin returning 403 (configured). Note: 'indicated' not 'confirmed' — 403 shows the directory is configured, not that CGI execution is enabled for all paths. E: engagement log with exact commands, exact responses, timestamps, and specific conclusions.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "Which of the following correctly describes when a professional should NOT proceed with validation?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "When the CVSS score is below 7.0 — low and medium findings do not require validation.", "isCorrect": false },
+        { "id": "b", "text": "When the engagement is in its final day — validation should only happen in the first half of the assessment.", "isCorrect": false },
+        { "id": "c", "text": "When the target is a critical production system during peak operational hours, when the specific action is not explicitly covered by the engagement authorisation, or when the technique could affect service availability.", "isCorrect": true },
+        { "id": "d", "text": "When the finding involves a configuration-dependent vulnerability — these require exploitation to confirm, not validation.", "isCorrect": false }
+      ],
+      "explanation": "Professional assessors know when to stop. Validation should be paused or deferred when: the target is in a high-risk operational state (end-of-month processing, peak trading, release window); the specific technique is not covered by the engagement authorisation or rules of engagement; there is any risk that the technique could affect service availability; or the target shows signs of an existing incident or unusual stress.\n\nProfessional judgment about when not to test is just as important as knowing how to test. A deferred finding, documented with the reason for deferral, is more professionally defensible than a finding obtained by testing at an inappropriate time.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "You are writing the final validation section of the Meridian Financial engagement report. Development server (45.77.180.10): path traversal test returned HTTP 200 with /etc/passwd content; /cgi-bin/ returned HTTP 403. Legacy server (45.77.180.11): path traversal test returned HTTP 400; banner shows 'Apache/2.4.49 (Red Hat).' Which set of finding statements is most professionally accurate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Dev server: CVE-2021-41773 confirmed — critical RCE, immediate patch required. Legacy server: CVE-2021-41773 not present — server is safe.", "isCorrect": false },
+        { "id": "b", "text": "Dev server: CVE-2021-41773 — path traversal component confirmed via safe validation (HTTP 200 + /etc/passwd returned). mod_cgi presence indicated (HTTP 403 on /cgi-bin/). RCE prerequisite likely met. Priority: Critical — schedule controlled exploitation validation in Module 4. Legacy server: CVE-2021-41773 — path traversal test inconclusive (HTTP 400 — consistent with backport patch; corroborated by Red Hat distribution suffix). Recommend internal configuration review to confirm RHSA-2021:3610 application status.", "isCorrect": true },
+        { "id": "c", "text": "Dev server: path traversal test returned 200. Legacy server: path traversal test returned 400. No further detail required.", "isCorrect": false },
+        { "id": "d", "text": "Both servers: CVE-2021-41773 confirmed — same version, same CVE. Dev server has additional evidence. Apply the same remediation to both.", "isCorrect": false }
+      ],
+      "explanation": "Option B is correct because it is evidence-based, differentiates the two servers accurately, and correctly characterises each finding.\n\nDevelopment server: path traversal confirmed (specific evidence cited), mod_cgi indicated (specific evidence cited), RCE likelihood noted as high without overclaiming 'confirmed' for the RCE component, and the next professional step identified.\n\nLegacy server: result is inconclusive — not 'not vulnerable.' The HTTP 400 response is consistent with a backport but is not conclusive. The Red Hat suffix is corroborating evidence, not proof. The recommended next step (internal configuration review for the RHSA advisory) is specific and actionable.\n\nOption A is wrong in both directions: dev server should not say 'critical RCE confirmed' when RCE hasn't been validated beyond the mod_cgi indicator; legacy server should not be called 'safe' based on HTTP 400 alone.",
+      "xpReward": 20
+    }
+  ]
+}

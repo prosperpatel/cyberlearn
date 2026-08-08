@@ -1,0 +1,41 @@
+{
+  "id": "mission-04-finding-weaknesses-not-victims",
+  "slug": "mission-04-finding-weaknesses-not-victims",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-03-scanning-enumeration",
+  "title": "Finding Weaknesses, Not Victims",
+  "tagline": "You have the version numbers. Now find out which doors are actually weak.",
+  "description": "The service map is complete. Eight confirmed software versions across two Meridian Financial hosts. Now comes the step that separates professional assessment from guesswork: systematic vulnerability research. Learn what a vulnerability actually is, how CVE and CWE relate, how to read a CVSS score correctly, how to use the NVD to connect version strings to known weaknesses, and how to distinguish a potential CVE match from a confirmed finding using the CPR framework.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 65,
+  "xpReward": 100,
+  "order": 4,
+  "missionNumber": 4,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-08T00:00:00Z",
+  "updatedAt": "2026-08-08T00:00:00Z",
+  "prerequisites": ["mission-03-who-are-you-really"],
+  "tags": ["vulnerability-assessment", "cve", "cvss", "nvd", "cwe", "cpe", "risk-prioritization", "professional-methodology", "scanning"],
+  "learningObjectives": [
+    "Explain what vulnerability assessment is — and what distinguishes it from exploitation",
+    "Explain the difference between a vulnerability, an exposure, a weakness, and a misconfiguration",
+    "Define CVE, CWE, CVSS, and CPE — what each standard covers and how they relate",
+    "Use the National Vulnerability Database (NVD) to research known vulnerabilities for a confirmed software version",
+    "Interpret a CVSS base score — what it measures, what it does not, and how professionals use it for prioritisation",
+    "Explain the difference between a false positive and a false negative — and why both create professional risk",
+    "Apply the CPR framework to evaluate a CVE before treating it as a confirmed finding"
+  ],
+  "skills": [
+    "Searching the NVD systematically using software name and exact version string",
+    "Reading and interpreting CVE entries — affected versions, CVSS score, prerequisites, references",
+    "Applying the CPR framework to distinguish potential CVE matches from confirmed vulnerabilities",
+    "Documenting vulnerability research findings with evidence-based professional precision"
+  ],
+  "badge": "Vulnerability Analyst",
+  "missionIcon": "🔬",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "mod3m4-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 4",
+  "cards": [
+    {
+      "front": "What is a CVE, and what does a CVE entry contain?",
+      "back": "CVE stands for Common Vulnerabilities and Exposures — a publicly assigned identifier for a specific, confirmed security vulnerability in a specific software version or product. Maintained by MITRE Corporation. Format: CVE-YEAR-NUMBER (e.g., CVE-2021-41773).\n\nA CVE entry contains:\n• Description: what the vulnerability is, how it works, what it allows\n• Affected products: which software and which version ranges (via CPE)\n• CVSS score: a standardised severity rating\n• CWE classification: the root cause weakness category\n• References: links to vendor advisories, proof-of-concept code, and patches\n\nImportant: a CVE is documentation of a vulnerability — not an exploit. A CVE without a public exploit is still a real finding. A CVE with a public exploit requires significantly more urgent attention.",
+      "hint": "CVE = documented identity for one specific vulnerability. YEAR-NUMBER tells you when it was assigned."
+    },
+    {
+      "front": "What is CWE, and how does it differ from CVE?",
+      "back": "CWE stands for Common Weakness Enumeration — a structured dictionary of software weakness categories, maintained by MITRE. Where CVE identifies specific, individual vulnerability instances, CWE classifies the root cause type.\n\nExamples:\n• CWE-22: Path Traversal — attacker traverses to files outside intended directories\n• CWE-78: OS Command Injection — attacker input executed as OS command\n• CWE-89: SQL Injection — attacker input interpreted as SQL command\n• CWE-79: Cross-Site Scripting — attacker content executed in victim's browser\n\nRelationship: CVE-2021-41773 is classified as CWE-22. CWE-22 is the weakness type. CVE-2021-41773 is one specific instance of that type in Apache httpd 2.4.49.\n\nWhy CWE matters: it helps you recognise patterns — if a software product has multiple CVEs classified as CWE-22, path traversal logic is a recurring weakness in that codebase.",
+      "hint": "CVE = one specific instance. CWE = the category it belongs to. Many CVEs share the same CWE."
+    },
+    {
+      "front": "What does CVSS measure — and what does it not measure?",
+      "back": "CVSS (Common Vulnerability Scoring System) produces a 0.0–10.0 severity rating for a vulnerability. The Base Score reflects the worst-case severity in a reference deployment.\n\nScore ranges: 0.0 = None, 0.1–3.9 = Low, 4.0–6.9 = Medium, 7.0–8.9 = High, 9.0–10.0 = Critical.\n\nBase Score IS based on: how the vulnerability is accessed (network vs local), complexity, authentication requirements, user interaction, and impact on CIA.\n\nBase Score is NOT based on:\n• Whether the vulnerable feature is actually enabled on your target\n• Whether the target is internet-facing\n• Whether a compensating control blocks the attack path\n• Whether a public exploit exists (that affects Temporal score)\n• Business impact for your specific organisation\n\nThe score starts the investigation. Evidence finishes it.",
+      "hint": "CVSS = worst-case severity in a reference scenario. It describes potential. CPR determines actual."
+    },
+    {
+      "front": "What is CPE, and how does it relate to CVE matching?",
+      "back": "CPE stands for Common Platform Enumeration — a standardised naming format for software products, hardware, and operating systems. Maintained by MITRE, used extensively by the NVD.\n\nExample: cpe:2.3:a:apache:http_server:2.4.49:*:*:*:*:*:*:*\nBreakdown: Type (a = application), Vendor (apache), Product (http_server), Version (2.4.49)\n\nHow it relates to CVE matching:\n• Each CVE entry in the NVD includes a list of affected CPE strings — these define exactly which product versions are affected\n• Vulnerability scanners use CPE matching: they detect the software version on a target, compare it against CPE records in the CVE database, and report matching CVEs\n• If your target's software does not match the CPE range for a CVE, that CVE does not apply\n\nWhy it matters: checking the CPE in a CVE entry tells you whether your exact target version falls within the affected range — the C in CPR.",
+      "hint": "CPE = exact product identifier. Scanners match your detected version against CVE CPE records to flag potential vulnerabilities."
+    },
+    {
+      "front": "What is a false positive in vulnerability assessment — and why is it dangerous?",
+      "back": "A false positive occurs when a vulnerability assessment flags a finding that appears to apply to a target but does not upon further investigation.\n\nCommon causes:\n• The target's version is in the affected range, but a prerequisite configuration is absent (mod_cgi disabled for CVE-2021-41773 RCE)\n• The system was backport-patched — the version string looks old, but the vulnerable code was replaced\n• The CVE-to-CPE match was broader than the actual affected versions\n• A scanner uses a pattern that triggers on behaviour unrelated to the vulnerability\n\nWhy it is dangerous:\n• Treating false positives as confirmed findings triggers unnecessary emergency responses, patch cycles, and downtime\n• It erodes client trust when findings are challenged and cannot be supported with evidence\n• It directs response resources away from real vulnerabilities\n• A report full of false positives loses professional credibility\n\nMitigation: read the CVE description and vendor advisory, apply CPR, and document your verification evidence.",
+      "hint": "False positive = looks like a vulnerability, isn't one in this environment. CPR catches them before they reach the report."
+    },
+    {
+      "front": "What is a false negative in vulnerability assessment — and why is it dangerous?",
+      "back": "A false negative occurs when a real vulnerability is not flagged by a scanner or initial research.\n\nCommon causes:\n• Scanner signature database is outdated — a recently published CVE has no signature yet\n• The software reports an incorrect or obscured version string\n• The vulnerability is in custom application code — no CVE exists for bespoke software\n• A zero-day vulnerability has not been publicly disclosed and has no assigned CVE\n• A misconfiguration creates risk but has no associated CVE\n\nWhy it is dangerous:\n• A clean assessment result does not mean no vulnerabilities exist — it means nothing was found with the methods applied\n• A client may trust a 'no vulnerabilities found' report and delay future assessments\n• A threat actor may find exactly what the scanner missed\n\nMitigation: complement automated scanning with manual configuration review, web application testing, and explicit acknowledgement in the report that scanner coverage has limits.",
+      "hint": "False negative = real vulnerability, not found. Scanners can only find what their databases and methods can reach."
+    },
+    {
+      "front": "What are the three CPR questions — and what happens when one of them fails?",
+      "back": "CPR is the professional framework for confirming a CVE finding before it enters a report:\n\nC — Confirm: Is the target's software version within the exact version range affected by this CVE? Check the NVD CPE and the vendor advisory for precise affected ranges.\n\nP — Prerequisites: Does the target environment meet the specific conditions required for exploitation? The CVE description and advisory will specify these — a feature must be enabled, a specific configuration must be present, an authentication state must exist.\n\nR — Reachability: Can the vulnerability be triggered from the attacker's position? Is the path to the vulnerable component accessible, or does a firewall, WAF, or network segment block it?\n\nWhat happens when one fails:\n• C fails: the CVE does not apply to this version — finding excluded\n• P fails: the vulnerability cannot be exploited in this configuration — finding downgraded or excluded; document the evidence\n• R fails: the vulnerability exists but cannot be reached from the attack position — document as present but not externally exploitable from this position\n\nAlways document the CPR analysis performed, regardless of whether the finding is confirmed or excluded.",
+      "hint": "CPR = Confirm, Prerequisites, Reachability. All three must pass for a CVE to become a confirmed finding."
+    }
+  ]
+}

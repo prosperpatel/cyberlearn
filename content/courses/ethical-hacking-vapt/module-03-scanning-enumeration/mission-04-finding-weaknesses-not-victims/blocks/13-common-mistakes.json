@@ -1,0 +1,47 @@
+{
+  "id": "mod3m4-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Avoid These Mistakes",
+  "intro": "These are the vulnerability assessment mistakes that appear most frequently in real assessments — from student labs to professional engagements. Each one is understandable. Each one produces findings that are either wrong, incomplete, or professionally indefensible.",
+  "mistakes": [
+    {
+      "title": "Treating CVSS Score as an Action Order",
+      "wrong": "'CVE-2021-41773 has CVSS 9.8. Critical. We need to escalate immediately and start exploitation.'",
+      "right": "CVSS 9.8 is a starting severity indicator — it tells you this requires urgent investigation. It does not tell you whether the conditions for that 9.8 exist on your target. Apply CPR before escalating.",
+      "explanation": "The CVSS Base Score reflects the worst-case severity in a reference scenario. It does not reflect your specific environment. CVE-2021-41773's 9.8 assumes mod_cgi is enabled. Without mod_cgi, the RCE vector does not exist and the effective severity drops significantly. Acting on CVSS score alone — without verifying version range, prerequisites, and reachability — risks false escalations, wasted emergency response resources, and damaged client trust when findings are challenged.",
+      "severity": "critical",
+      "example": "A team escalates CVE-2021-41773 as a critical RCE on a production server. An emergency Saturday patch cycle is triggered. Forty hours later: mod_cgi is not enabled. The RCE vector never existed. The correct response was a scheduled patch. The 9.8 had been treated as ground truth before CPR was applied."
+    },
+    {
+      "title": "Treating Every CVE Version Match as a Confirmed Vulnerability",
+      "wrong": "The NVD shows CVE-2021-41773 applies to Apache httpd 2.4.49. Our target runs Apache httpd 2.4.49. Finding confirmed.",
+      "right": "A version match is a hypothesis. Confirmation requires checking prerequisites and reachability. A version match without CPR is a potential finding, not a confirmed one.",
+      "explanation": "CVE databases and vulnerability scanners match software versions to CVE affected ranges. This matching is automated — it is fast and produces a useful starting list. But it is not confirmation. The version may be in the range but have a backport patch applied. The vulnerable feature may be disabled. The attack path may be blocked by a control the scanner cannot see. Every version match requires the three CPR questions before it becomes a report finding.",
+      "severity": "critical"
+    },
+    {
+      "title": "Trusting Scanner Output Without Validation",
+      "wrong": "The scanner found seventeen vulnerabilities. I have documented all seventeen in my report as confirmed findings.",
+      "right": "Scanner output is a research prompt. Each finding requires manual verification: read the CVE description, check the advisory, apply CPR. Scanners produce false positives. A report that documents scanner output without validation is not a professional assessment — it is a copy of a tool's guess.",
+      "explanation": "Vulnerability scanners are powerful tools for efficient coverage — they check many CVEs across many targets in a fraction of the time manual research would require. But they have known limitations: outdated signature databases, CPE over-matching, inability to check configuration-specific prerequisites, and no awareness of compensating controls. The professional step is using scanner output as the starting point for research, not the end of it. Every finding that goes into a report requires human verification.",
+      "severity": "critical",
+      "example": "A scanner reports twelve findings for a target. A professional reads each CVE description and advisory. Three fail the Prerequisites check — the vulnerable feature is not enabled. Two fail the Confirm check — the version is in the affected range but a vendor-confirmed backport patch was applied. The report contains seven confirmed findings. Five false positives were eliminated. The scanner found seventeen potential matches. Professional research produced seven defensible findings."
+    },
+    {
+      "title": "Equating CVSS Score with Business Risk",
+      "wrong": "The highest-CVSS finding gets patched first. Everything below 9.0 can wait. We prioritise by score.",
+      "right": "CVSS measures technical severity in a reference scenario. Business risk is the product of technical severity, asset value, exploitability in context, and compensating controls. A CVSS 5.8 on an internet-facing, unprotected, revenue-critical asset may require faster action than a CVSS 9.8 on an isolated test server with no sensitive data.",
+      "explanation": "Risk prioritisation in professional practice considers: What is the asset? What data does it hold? What is its exposure (internet-facing or internal)? Does a public exploit exist? Can the vulnerability be reached from realistic attacker positions? Are compensating controls present? CVSS informs but does not determine this analysis. A vulnerability with a lower CVSS score but an available public exploit on a business-critical internet-facing system may represent greater immediate risk than a higher-scoring finding on a segregated test environment.",
+      "severity": "warning"
+    },
+    {
+      "title": "Reporting 'No Vulnerabilities Found' Without Noting Scope Limitations",
+      "wrong": "The scanner found no vulnerabilities. Finding: no vulnerabilities present on this host.",
+      "right": "A negative scanner result means no CVEs matching the scanner's current database were identified within this scope. It does not mean no vulnerabilities exist. Document the methodology, the tools, the version of signature databases used, and any conditions that limited coverage.",
+      "explanation": "A clean scan result is not a clean bill of health. It is evidence that the assessment methods applied, within the scope defined, with the tools available, found no matches. Scanners miss things: zero-days have no CVE, outdated databases miss recent disclosures, custom application code is not in any CVE database, and misconfigurations are often invisible to automated tools. A professionally defensible report always scopes its conclusions to the methods used — and explicitly notes what those methods cannot detect.",
+      "severity": "warning"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "mod3m5-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "First — They Verify",
+  "narrative": [
+    "Monday, 4:02 PM. The vulnerability assessment log was complete. James had been staring at it for two minutes.",
+    "CVE-2021-41773. CVSS 9.8. Critical. Apache httpd 2.4.49 on four ports across both servers.",
+    "'We have it,' he said. 'The CVE is confirmed — version in range, externally reachable. Can we exploit it now?'",
+    "Maya was quiet for a moment. She did not look up from her notes.",
+    "'Professional testers never attack because a database says they can.'",
+    "James waited.",
+    "'First,' she said, finally looking up, 'they verify.'",
+    "James sat back. 'Verify what? The NVD says the version is affected. We confirmed the version. We confirmed the port is reachable. What else is there?'",
+    "'Whether it is actually exploitable in this specific environment. Right now.' Maya closed the vulnerability log. 'Think about what we still do not know. The mod_cgi prerequisite — we could not determine from our scanning position whether it is enabled. A CVSS 9.8 assumes it is. Our assessment says: inconclusive.' She turned to the screen. 'And there is another possibility we have not discussed. One that affects every version-based CVE finding.'",
+    "James looked at her. 'What possibility?'",
+    "'The patch may already be applied.'",
+    "James blinked. 'The server says Apache 2.4.49. That is the affected version.'",
+    "'The server says 2.4.49 in its banner,' Maya said. 'That does not necessarily mean the code running on it has the vulnerability. Version strings tell you what the package version is. They do not tell you whether a security patch has been applied to that package without changing the version number.' She pulled up a new tab. 'That is called a backport. We will come to it shortly.'",
+    "'So how do we verify?'",
+    "'Carefully,' Maya said. 'With the minimum technique needed to get an answer. One request. One response. Interpreted properly.' She opened a terminal window. 'And we start with the development server — the one where mod_cgi is most likely to be enabled, because it is a development environment and developers tend to enable everything.'",
+    "She typed a single curl command.",
+    "curl http://45.77.180.10/cgi-bin/.%2e/.%2e/.%2e/etc/passwd",
+    "'What is that doing?' James asked, leaning forward.",
+    "'It is asking the server to access /etc/passwd via a path that traverses outside the web root. The %2e characters are URL-encoded dots — so %2e%2e is two dots. A traversal sequence.' She paused. 'If the server is vulnerable to the path traversal component of CVE-2021-41773, it returns the file contents. If it has been patched — or if the traversal is blocked — it returns an error code.'",
+    "'That is it? Just one request?'",
+    "'One request,' Maya said. 'Targeted, non-destructive, read-only. /etc/passwd on a Linux system is world-readable by design — it is a public file. Reading it causes no harm and creates no change to the target. But it proves definitively whether the path traversal vulnerability exists.'",
+    "The response came back.",
+    "HTTP 200 OK — followed by the contents of /etc/passwd. Root. Daemon. Sys. James read the first three lines.",
+    "His voice was quieter when he spoke. 'It worked.'",
+    "'The path traversal component is confirmed on port 80 of the development server,' Maya said. She saved the response. 'Now the mod_cgi question.' She typed: curl -I http://45.77.180.10/cgi-bin/",
+    "HTTP 403 Forbidden.",
+    "'The cgi-bin directory exists and the server has directory listing disabled,' she said. 'A 403 on the cgi-bin path means the directory is configured. The CGI module is present — it is just preventing directory browsing, not disabling CGI execution. mod_cgi is here.'",
+    "James was looking at both results. Path traversal confirmed. mod_cgi present. 'The development server is fully vulnerable.'",
+    "'The path traversal is confirmed and the RCE prerequisite appears to be met,' Maya said precisely. 'Now we test the legacy server.'",
+    "She sent the same path traversal request to 45.77.180.11.",
+    "HTTP 400 Bad Request.",
+    "James stared at it. '400. Not 200. So... it did not work?'",
+    "'The server rejected the traversal URL,' Maya said. 'Returned an error rather than processing the path. Two possibilities.' She held up a finger. 'One: the server's Apache configuration blocks the traversal. A hardened configuration can prevent path normalisation issues.' A second finger. 'Two: the fix for CVE-2021-41773 has been applied to this server's Apache package. Not by upgrading the version — by backporting the patch.'",
+    "She leaned back.",
+    "'The banner on this server also says Apache 2.4.49. And the banner is telling the truth about the package version. But a Linux distribution — Red Hat, Debian, Ubuntu — can take the security fix from a newer Apache release and apply it to their 2.4.49 package without updating the version string. Same version number. Different code. The vulnerability no longer exists.'",
+    "James was quiet for a long moment. 'So the version number can be accurate and the server can still not be vulnerable.'",
+    "'Exactly,' Maya said. 'Which is why the version number is the beginning of the investigation. And why validation — actually testing the specific behaviour — is the only way to know.' She added the second result to the engagement log. 'Two Apache 2.4.49 instances. Same version. One confirmed vulnerable. One inconclusive — backport likely or configuration blocks the attack.'",
+    "She looked at him.",
+    "'That is what professional validation produces. Not a CVSS score. Evidence.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of experience. Maya had watched teams send automated exploit verification against production systems and learned exactly what happens next. She had never done it herself.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "Fifth week of his first real engagement. James had expected confirmation to be a formality. He was learning it was the science.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "discovery"
+}

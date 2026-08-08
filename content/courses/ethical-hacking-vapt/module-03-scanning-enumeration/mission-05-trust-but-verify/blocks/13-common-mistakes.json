@@ -1,0 +1,47 @@
+{
+  "id": "mod3m5-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Avoid These Mistakes",
+  "intro": "These are the validation mistakes that appear most frequently — from beginners in labs to experienced testers on real engagements. Each one is understandable. Each one produces findings that are wrong, dangerous, or professionally indefensible.",
+  "mistakes": [
+    {
+      "title": "Using a Scanner Verification Module as Safe Validation",
+      "wrong": "The scanner has an 'Exploit Verification' button. I'll use that to confirm the finding and get a screenshot for the report.",
+      "right": "Safe validation is a manually composed, single, targeted request. A scanner verification module is an automated probe chain. Review every request it sends before considering it safe validation — which means, in most cases, composing the request yourself instead.",
+      "explanation": "Scanner verification modules exist for convenience and speed. They send multiple probes — often without the assessor reviewing each one. From the target's perspective, this is indistinguishable from an automated attack tool. IDS/IPS systems match on probe patterns and volumes. A verification module that sends nineteen requests in eleven seconds will match attack signatures that a single hand-crafted request would not. The consequence: incident response triggered, engagement suspended, client trust damaged. Compose your validation requests manually. Know exactly what you are sending.",
+      "severity": "critical",
+      "example": "A team uses a scanner's verification module to confirm CVE-2021-41773. The module successfully confirms path traversal and then automatically probes for mod_cgi. The secondary probe triggers an IDS signature. The client's SOC declares an active intrusion. The engagement is suspended for 36 hours."
+    },
+    {
+      "title": "Treating a Negative Validation Result as a Cleared Finding",
+      "wrong": "The path traversal test returned HTTP 400. The server is not vulnerable. I'll remove this finding from the report.",
+      "right": "HTTP 400 has two explanations: the fix is applied, or an external control blocked the probe. Both must be noted. The finding is inconclusive — not cleared.",
+      "explanation": "A cleared finding requires positive evidence that the vulnerability does not exist in this environment: the advisory confirms this configuration is not affected, the distribution security team confirms the backport was applied, or internal configuration access confirms the prerequisite is absent. An HTTP 400 response is consistent with being patched — but also consistent with a WAF or configuration filtering the request before it reaches Apache. Until the ambiguity is resolved, the finding is inconclusive. Document it as inconclusive, note the evidence, and recommend internal verification.",
+      "severity": "critical"
+    },
+    {
+      "title": "Sending Multiple Probes When One Would Answer the Question",
+      "wrong": "I sent the path traversal test, then sent directory enumeration requests to map what else is accessible, then checked several other paths to confirm the depth of traversal.",
+      "right": "One request answers the validation question: does the path traversal mechanism work? Everything beyond that is reconnaissance, not validation. Stop at the answer.",
+      "explanation": "The minimum necessary principle is not a guideline — it is a protection mechanism. Every additional probe sent after the validation question is answered increases the risk of triggering detection, increases the amount of client system interaction that must be accounted for in the engagement log, and risks crossing from validation into exploitation. If the first request returns HTTP 200 with /etc/passwd content, the path traversal is confirmed. Send no more requests for that finding until the exploitation phase is specifically authorised.",
+      "severity": "warning"
+    },
+    {
+      "title": "Skipping Validation for High-CVSS Findings",
+      "wrong": "CVE-2021-41773 is CVSS 9.8 — Critical. It is obvious that this server is vulnerable. Validation is a formality I will skip to save time.",
+      "right": "High-CVSS findings require more scrutiny, not less. The case study in this mission shows exactly what happens when a Critical finding turns out to have an absent prerequisite: 40 engineering hours wasted on unnecessary emergency response.",
+      "explanation": "CVSS 9.8 means 'critical severity in the worst-case reference scenario.' It does not mean 'confirmed exploitable in this environment.' The higher the CVSS score, the more urgently the client will respond to the finding — and the more damaging a false positive will be. Emergency patch cycles have real costs: service downtime, engineering hours, operational risk from rushed changes. A false positive at CVSS 9.8, escalated without validation, is one of the most professionally damaging outcomes of a security assessment.",
+      "severity": "critical"
+    },
+    {
+      "title": "Documenting 'Vulnerability Confirmed' Without Recording the Evidence",
+      "wrong": "The path traversal worked. I took a mental note and wrote 'CVE-2021-41773 — confirmed' in the report.",
+      "right": "Every confirmed finding requires documented evidence: the exact technique used, the exact response received, and the exact reasoning that connects them to the conclusion. 'Confirmed' without evidence is an assertion — not a professional finding.",
+      "explanation": "A client who receives 'CVE-2021-41773 — confirmed' in a report has one follow-up question: how? The correct answer is documented evidence: 'Path traversal request sent to http://45.77.180.10/cgi-bin/.%2e/.%2e/.%2e/etc/passwd — HTTP 200 returned with /etc/passwd content. mod_cgi presence indicated by HTTP 403 on /cgi-bin/. Evidence recorded [timestamp, screenshots, response logs].' Anything less is not a professional finding. It cannot be independently verified, challenged, or reproduced. Document everything. Every time.",
+      "severity": "warning",
+      "example": "An assessor confirms a finding verbally but does not take a screenshot or record the response. The client challenges the finding. The assessor cannot reproduce it because the server was patched the same day. The finding is removed from the report. The client loses confidence in the assessment."
+    }
+  ]
+}

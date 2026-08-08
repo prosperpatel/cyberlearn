@@ -1,0 +1,21 @@
+{
+  "id": "mod3m4-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Apply Your Knowledge",
+  "prompt": "Maya opened the Meridian Financial service map and the NVD side by side. 'Let us apply CPR to every confirmed service. But first — before we look at any results — tell me what you expect to find.'",
+  "context": "The complete service map from Mission 3:\n\n45.77.180.10 — Development Server:\n22/tcp   OpenSSH 7.4 (protocol 2.0)\n80/tcp   Apache httpd 2.4.49 ((Unix))\n443/tcp  Apache httpd 2.4.49 ((Unix))\n3306/tcp [filtered — version unknown]\n\n45.77.180.11 — Legacy Server:\n22/tcp   OpenSSH 7.4 (protocol 2.0)\n80/tcp   Apache httpd 2.4.49 ((Unix))\n8443/tcp Apache Tomcat 7.0.37",
+  "predictBeforeReveal": {
+    "predictionPrompt": "Before we run any searches: James is looking at the service map. He points at port 8443 on the legacy server — Apache Tomcat 7.0.37, end-of-life since March 2021. 'That one,' he says. 'The Tomcat on the legacy server is the most dangerous finding. An unsupported version sitting there for years — there must be serious CVEs.' Think about James's prediction. What do you expect to find — and why might the reality be more complicated than he expects?",
+    "jamesAnswer": "Tomcat 7.0.37 is ancient. End-of-life. That is the biggest finding here — it hasn't received security updates in years. The development server's Apache 2.4.49 is probably fine by comparison.",
+    "revealSummary": "When Maya ran the research: Apache httpd 2.4.49 — running on FOUR open ports across BOTH servers — has CVE-2021-41773 with CVSS 9.8. Tomcat 7.0.37 has multiple CVEs across its version history, but none with a CVSS score matching CVE-2021-41773's severity for this specific release. James was right that Tomcat requires follow-up. He was wrong about which finding required the most urgent attention. The critical CVE was on the software he had almost overlooked.",
+    "whyItMatters": "Age and end-of-life status are risk signals — but they are not the same as severity. A recently disclosed, critical CVE on 'newer' software may represent greater immediate risk than an older, end-of-life product with no recent high-severity disclosures. CVE research determines severity. Age provides context. Both matter. Neither replaces the other."
+  },
+  "guideQuestions": [
+    "For CVE-2021-41773 on Apache httpd 2.4.49: apply CPR. What is the C question, the P question, and the R question for this specific finding?",
+    "Apache httpd 2.4.49 is running on four ports across two different servers. What does that mean for the scope of CVE-2021-41773 if it is confirmed?",
+    "For Apache Tomcat 7.0.37: the software is end-of-life. Does end-of-life status change how you should approach CVE research — and does it automatically mean every historical CVE is still exploitable?",
+    "The database port 3306 is filtered and its version is unknown. Can you conduct vulnerability assessment on this service? What should you document?"
+  ]
+}

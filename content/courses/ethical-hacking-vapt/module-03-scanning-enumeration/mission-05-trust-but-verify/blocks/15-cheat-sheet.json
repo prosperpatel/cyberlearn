@@ -1,0 +1,54 @@
+{
+  "id": "mod3m5-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Vulnerability Validation — Professional Reference",
+  "sections": [
+    {
+      "heading": "The SAFE Validation Framework",
+      "rows": [
+        { "label": "S — Safe technique", "value": "Read-only, non-destructive, targeted. One request where one is sufficient. Never a scanner verification module." },
+        { "label": "A — Advisory alignment", "value": "The technique and its expected result must match what the vendor advisory says a vulnerable vs patched server does." },
+        { "label": "F — Feature confirmed", "value": "The specific configuration condition required by the CVE must be verified as present. For CVE-2021-41773: mod_cgi status, directory access controls." },
+        { "label": "E — Evidence documented", "value": "Exact technique, exact response, exact conclusion — recorded in the engagement log with timestamps and evidence." }
+      ]
+    },
+    {
+      "heading": "Safe Validation Techniques for CVE-2021-41773",
+      "rows": [
+        { "label": "Path traversal test", "value": "curl http://[ip]/cgi-bin/.%2e/.%2e/.%2e/etc/passwd — HTTP 200 = traversal confirmed; HTTP 400 = rejected (possible backport); HTTP 403 = directory protected" },
+        { "label": "mod_cgi check", "value": "curl -I http://[ip]/cgi-bin/ — HTTP 403 = cgi-bin configured (mod_cgi likely present); HTTP 404 = cgi-bin not configured" },
+        { "label": "Banner check", "value": "curl -I http://[ip] — look for distribution suffix: (Red Hat), (Debian), (Ubuntu) indicates a managed package with possible backport" },
+        { "label": "Advisory confirmation", "value": "httpd.apache.org/security/vulnerabilities_24.html — check the specific advisory for configuration indicators" }
+      ]
+    },
+    {
+      "heading": "Interpreting HTTP Response Codes During Validation",
+      "rows": [
+        { "label": "HTTP 200", "value": "Server processed the request — path traversal worked, file was accessed" },
+        { "label": "HTTP 400 Bad Request", "value": "Server rejected the URL as malformed — consistent with a patched server rejecting the traversal sequence" },
+        { "label": "HTTP 403 Forbidden", "value": "Server recognised the path but denied access — directory exists but listing/access is protected" },
+        { "label": "HTTP 404 Not Found", "value": "The target path does not exist in the server's view — cgi-bin not configured, or the path is fully blocked" }
+      ]
+    },
+    {
+      "heading": "Patch Backport Indicators",
+      "rows": [
+        { "label": "Distribution suffix", "value": "Apache/2.4.49 (Red Hat), Apache/2.4.49 (Debian) — managed package that may have backport applied" },
+        { "label": "HTTP 400 on traversal", "value": "Server rejects the %2e traversal URL — consistent with backport that fixes path normalisation at the parsing stage" },
+        { "label": "Distribution advisory", "value": "RHSA-2021:3610 (Red Hat), DSA-4982 (Debian) — confirms whether backport was applied to the distribution's httpd package" }
+      ]
+    },
+    {
+      "heading": "When NOT to Test",
+      "rows": [
+        { "label": "Peak operational periods", "value": "End of month, release windows, peak trading hours — validation can wait; unnecessary risk to operations" },
+        { "label": "Outside authorisation scope", "value": "The action is not explicitly covered by the engagement authorisation letter or rules of engagement" },
+        { "label": "Target under stress", "value": "Unusual system behaviour suggests the target may already be in an incident or degraded state" },
+        { "label": "Technique could disrupt service", "value": "If there is any question whether the technique could affect availability, defer to client confirmation first" }
+      ]
+    }
+  ]
+}

@@ -39,6 +39,24 @@
       "estimatedMinutes": 60,
       "xpReward": 100,
       "tags": ["service-detection", "banner-grabbing", "nmap", "version-detection", "fingerprinting", "active-recon", "cve-research", "network-basics"]
+    },
+    {
+      "slug": "mission-04-finding-weaknesses-not-victims",
+      "title": "Finding Weaknesses, Not Victims",
+      "order": 4,
+      "difficulty": "beginner",
+      "estimatedMinutes": 65,
+      "xpReward": 100,
+      "tags": ["vulnerability-assessment", "cve", "cvss", "nvd", "cwe", "cpe", "risk-prioritization", "professional-methodology"]
+    },
+    {
+      "slug": "mission-05-trust-but-verify",
+      "title": "Trust, But Verify",
+      "order": 5,
+      "difficulty": "beginner",
+      "estimatedMinutes": 65,
+      "xpReward": 100,
+      "tags": ["vulnerability-validation", "safe-testing", "false-positive", "patch-backport", "configuration-review", "evidence-collection", "professional-methodology"]
     }
   ]
 }

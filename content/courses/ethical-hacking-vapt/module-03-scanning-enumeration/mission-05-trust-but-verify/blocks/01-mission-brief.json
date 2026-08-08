@@ -1,0 +1,29 @@
+{
+  "id": "mod3m5-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Trust, But Verify",
+  "operativeCodename": "Operation Safe Validation",
+  "subtitle": "The CVE database says the weakness is there. Professional assessment confirms it.",
+  "briefing": "Monday, 4:02 PM. The vulnerability assessment log from Mission 4 sat open between them.\n\nCVE-2021-41773 flagged against four Apache httpd 2.4.49 instances across both Meridian Financial servers. Version confirmed. Reachability confirmed. Prerequisites — whether mod_cgi is enabled — inconclusive from the external scanning position.\n\nJames looked at the finding and then at Maya.\n\n'We know Apache has CVE-2021-41773,' he said. 'Can we exploit it now?'\n\nMaya set down her pen.\n\n'Professional testers never attack because a database says they can.'\n\nShe pushed her chair back from the screen.\n\n'First — they verify.'\n\nThis mission is about vulnerability validation: the professional discipline of confirming that a potential finding is real using safe, non-destructive techniques before any exploitation is considered. Validation answers a different question from assessment. Assessment asks: what might be vulnerable? Validation asks: is it actually, specifically, in this environment, right now?",
+  "whyItMatters": "A CVE finding without validation is a hypothesis. A validated finding is evidence. The difference matters legally, professionally, and technically. An incorrect finding creates unnecessary emergency responses, wasted remediation effort, and client distrust. A destructive validation technique can take down a production service, trigger incident response, or violate the scope of an engagement authorisation. Professional validation protects both the assessment and the target — and produces the only kind of finding a client can rely on: one with evidence behind it.",
+  "objectives": [
+    "Explain the difference between vulnerability assessment, validation, and exploitation — and why they are distinct professional activities",
+    "Explain what a patch backport is, why the version number can appear affected while the fix is already applied, and how to detect it",
+    "Explain what configuration-dependent vulnerabilities are and why the same CVE can produce different outcomes on two servers running the same software version",
+    "Apply safe, read-only validation techniques to confirm or rule out CVE-2021-41773 on both Meridian Financial servers",
+    "Describe what evidence must be collected during validation and how to document it in professional format",
+    "Explain when NOT to test — the conditions under which validation should be paused, limited, or deferred"
+  ],
+  "skillsUnlocked": [
+    "Choosing safe, non-destructive validation techniques appropriate to the specific vulnerability type",
+    "Reading HTTP response codes and headers to infer server configuration without sending exploit payloads",
+    "Documenting validation evidence — technique, response, and conclusion — in professional engagement format"
+  ],
+  "closingMessage": "By the end of this mission, CVE-2021-41773 will be confirmed or ruled out on both Meridian Financial servers using safe, evidence-based techniques. You will have documented findings that are legally defensible, professionally sound, and ready for the next phase — professional exploitation — which begins in Module 4.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["vulnerability-validation", "safe-testing", "false-positive", "patch-backport", "configuration-review", "evidence-collection", "professional-methodology"]
+}

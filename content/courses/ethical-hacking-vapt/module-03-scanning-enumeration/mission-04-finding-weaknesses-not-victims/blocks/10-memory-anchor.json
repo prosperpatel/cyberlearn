@@ -1,0 +1,19 @@
+{
+  "id": "mod3m4-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "A CVE Is a Hypothesis. CPR Is How You Confirm It.",
+  "concept": "A version match in the CVE database is the beginning of an investigation — not the end. Before any CVE becomes a confirmed finding in your report, three questions must be answered. Every time. Without exception.",
+  "anchor": "Confirm. Prerequisites. Reachability. If any one of the three fails, the CVE is not confirmed. Document the attempt and the result — but do not report it as a finding until CPR passes.",
+  "explanation": "The CVE database contains tens of thousands of entries. A version string like Apache httpd 2.4.49 will return specific results — but returning a result is not confirmation. It is a starting point.\n\nThree questions separate a potential match from a confirmed finding:\n\n**C — Confirm** the version is in the affected range.\n\nEvery CVE specifies the exact software versions it affects. Sometimes a version looks old but falls outside the affected range. Sometimes a version has been patched with a backport — the version string looks identical, but the vulnerable code has been replaced. Check the CPE in the CVE entry. Check the vendor advisory for the precise affected range. If your target's version is not in the range, the CVE does not apply.\n\n**P — Prerequisites**\n\nMost vulnerabilities require specific conditions to be exploitable: a feature must be enabled, an authentication mechanism must be bypassed, a user must take an action, a specific configuration setting must be present. The CVE description and vendor advisory will state these conditions. CVE-2021-41773 requires mod_cgi enabled for its RCE component. If mod_cgi is disabled, the RCE path does not exist — regardless of what the CVSS score says.\n\n**R — Reachability**\n\nCan the vulnerability actually be triggered from the attacker's position? A database vulnerability on a service only accessible from the internal network segment is not reachable from an external scanning position. A web application vulnerability blocked by a WAF filtering the specific attack pattern is not reachable through that control. Reachability asks: given the network architecture, the firewall rules, and the controls in place — can an attacker actually send the exploit to the vulnerable component?\n\nWhen all three pass, document the confirmed finding with the supporting evidence. When any one fails, document what was found, what was checked, and why the CVE was not confirmed as exploitable in this environment.",
+  "acronym": {
+    "letters": ["C", "P", "R"],
+    "meanings": [
+      "Confirm — Is the target running a version within the exact range affected by this CVE?",
+      "Prerequisites — Does this environment meet the specific conditions required for exploitation?",
+      "Reachability — Can this vulnerability be triggered from the attacker's current position?"
+    ]
+  }
+}

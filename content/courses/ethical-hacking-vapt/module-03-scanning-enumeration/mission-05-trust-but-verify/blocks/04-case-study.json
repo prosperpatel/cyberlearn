@@ -1,0 +1,37 @@
+{
+  "id": "mod3m5-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Proof That Caused the Problem",
+  "company": "Logistics Technology Firm (anonymised, composite of real incidents)",
+  "year": "2022",
+  "industry": "Logistics / Supply Chain",
+  "incident": "A penetration testing team confirmed Apache httpd 2.4.49 on a production web server during an external assessment. To produce a proof-of-concept screenshot, the team's lead ran the automated 'Exploit Verification' module in their vulnerability scanner. The module sent the path traversal request successfully — and then automatically continued with a CGI probe and a series of secondary directory requests. These secondary probes triggered a pattern-matching rule in the client's Intrusion Detection System. The IDS blocked the assessment team's IP range and flagged an active intrusion. The client's SOC declared a live incident. The engagement was suspended for 36 hours while the client investigated.",
+  "whatHappened": [
+    "A penetration testing firm was engaged to assess the external attack surface of a logistics technology company. On day two of the assessment, the team's vulnerability scanner identified Apache httpd 2.4.49 and flagged CVE-2021-41773 automatically.",
+    "The team lead decided to confirm the finding immediately using the scanner's built-in 'Exploit Verification' feature — a convenience function that sends the path traversal payload and captures the response as proof of the vulnerability. The lead reviewed only the first probe in the module's output. They did not review the full sequence of requests the module sent.",
+    "The scanner sent the initial path traversal request, confirmed the path traversal by receiving /etc/passwd content, then automatically sent a secondary CGI probe to check for the RCE component, followed by a series of directory enumeration requests to map accessible paths. The full automated sequence — not a single targeted verification but a tool chain — sent nineteen HTTP requests in eleven seconds.",
+    "The client's IDS had a signature for rapid, sequential directory traversal probes. Nineteen requests in eleven seconds across multiple directory depths matched the signature. The IDS automatically blocked all traffic from the assessment team's IP range and sent an alert to the client's SOC.",
+    "The SOC received the alert, initiated an incident response procedure, notified their management, began log analysis, and revoked the VPN credentials used by the assessment team. The assessment team lost all access to the external testing environment.",
+    "Thirty-six hours later — after the client reviewed the logs, matched the source IP to the engagement authorisation letter, and confirmed with their management team — access was restored. The engagement timeline was compressed. One planned test day was lost. The final report had to be produced under time pressure."
+  ],
+  "whyItHappened": [
+    "The team lead used an automated verification module without reviewing its full behaviour. The module was not 'safe validation' — it was an automated exploit chain. Safe validation would have been a single, manually composed, targeted HTTP request.",
+    "The distinction between 'one careful request' and 'scanner verification module' was not understood. Scanner verification modules exist for speed and convenience. They are not designed to be invisible or minimally disruptive. They behave like attacks because, technically, they are.",
+    "The engagement's rules of engagement did not specify a maximum request rate or probe sequence limit. In future engagements, rules of engagement should define the acceptable testing profile explicitly — including whether automated verification modules are within scope.",
+    "The team had no procedure requiring review of all automated tool output before execution. Each tool used should be understood at the level of every request it sends, not just the result it returns."
+  ],
+  "lessonsLearned": [
+    "Safe validation is not a scanner verification module. It is a single, manually composed, targeted request designed to answer one specific question about one specific finding — nothing more.",
+    "Every request sent during validation should be explicitly reviewed before it is sent. 'I ran a verification tool' is not an acceptable description of what happened to a client whose IDS just fired.",
+    "Automated tools that behave like attack chains should not be described as 'verification.' They produce the same signatures as real attacks because their probe patterns are functionally identical.",
+    "Rules of engagement should specify testing behaviour in detail — not just scope boundaries, but testing methodology, acceptable probe rates, and whether automated verification modules are authorised."
+  ],
+  "impactStats": [
+    { "value": "19", "label": "Automated HTTP requests sent by the 'verification' module in 11 seconds" },
+    { "value": "36 hours", "label": "Engagement suspension while the client conducted incident response" },
+    { "value": "1", "label": "The number of requests safe validation would have required to confirm the same finding" },
+    { "value": "0", "label": "Times Maya has used an automated verification module on a production target" }
+  ]
+}

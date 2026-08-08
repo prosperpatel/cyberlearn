@@ -1,0 +1,14 @@
+{
+  "id": "mod3m4-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Think First",
+  "prompt": "Before we open the NVD and search for vulnerabilities — take a moment to predict what we are about to find, and what we should do with it.",
+  "guideQuestions": [
+    "Apache httpd 2.4.49 is a specific software version. How many CVEs do you think exist for it — just a few targeting this exact release, or hundreds because Apache is old software?",
+    "If we find a CVE with a CVSS score of 9.8 for Apache httpd 2.4.49, what should our professional next step be — and why is it not 'try to exploit it immediately'?",
+    "James says: 'Apache is old software. There must be hundreds of CVEs. This server is definitely vulnerable to something.' How much of that statement do you agree with — and what part should a professional push back on?",
+    "What is the difference between 'this software version has a known CVE' and 'this specific server is vulnerable to that CVE'?"
+  ]
+}

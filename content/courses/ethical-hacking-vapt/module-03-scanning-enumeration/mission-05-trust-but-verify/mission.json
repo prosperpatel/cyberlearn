@@ -1,0 +1,40 @@
+{
+  "id": "mission-05-trust-but-verify",
+  "slug": "mission-05-trust-but-verify",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-03-scanning-enumeration",
+  "title": "Trust, But Verify",
+  "tagline": "The CVE database says the weakness is there. Professional assessment confirms it.",
+  "description": "Mission 4 produced a prioritised vulnerability finding list. CVE-2021-41773 is flagged against four Apache httpd 2.4.49 instances. The prerequisites check is inconclusive. Before any exploitation is considered, professionals verify — using safe, read-only, targeted techniques designed to confirm or rule out each finding without causing harm. This mission teaches the validation discipline: what it means, how it works, why it differs from exploitation, and how to document the evidence it produces.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 65,
+  "xpReward": 100,
+  "order": 5,
+  "missionNumber": 5,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-08T00:00:00Z",
+  "updatedAt": "2026-08-08T00:00:00Z",
+  "prerequisites": ["mission-04-finding-weaknesses-not-victims"],
+  "tags": ["vulnerability-validation", "safe-testing", "false-positive", "patch-backport", "configuration-review", "evidence-collection", "professional-methodology", "scanning"],
+  "learningObjectives": [
+    "Explain the difference between vulnerability assessment, validation, and exploitation — and why they are distinct professional activities performed in sequence",
+    "Explain what a patch backport is, why it means a version number can display as affected while the fix is already applied, and how to detect it",
+    "Explain what configuration-dependent vulnerabilities are and why the same CVE can produce different outcomes on two servers running identical software versions",
+    "Apply safe, read-only validation techniques to confirm or rule out CVE-2021-41773 on the Meridian Financial engagement targets",
+    "Describe what evidence must be collected during validation and how to document it with professional precision",
+    "Explain when NOT to test — the conditions under which validation should be stopped, limited, or deferred"
+  ],
+  "skills": [
+    "Choosing safe, non-destructive validation techniques appropriate to the specific vulnerability type",
+    "Reading HTTP response codes and headers to infer server configuration without sending exploit payloads",
+    "Documenting validation evidence in professional engagement format — technique used, response received, conclusion drawn",
+    "Distinguishing a confirmed finding from a false positive and recording the difference clearly"
+  ],
+  "badge": "Field Validated",
+  "missionIcon": "🔬",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

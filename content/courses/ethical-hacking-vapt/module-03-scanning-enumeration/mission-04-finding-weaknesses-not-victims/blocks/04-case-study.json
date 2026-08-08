@@ -1,0 +1,37 @@
+{
+  "id": "mod3m4-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Emergency That Wasn't",
+  "company": "E-commerce Platform (anonymised, composite of real incidents)",
+  "year": "2021",
+  "industry": "Retail / E-commerce",
+  "incident": "A security scanner identified CVE-2021-41773 — CVSS 9.8, Critical, Remote Code Execution — on a production web server running Apache httpd 2.4.49. The finding was escalated immediately as a critical incident. An emergency patch cycle was triggered on a Saturday. Forty engineering hours later, the team discovered that mod_cgi was not enabled on the server. The RCE vector in CVE-2021-41773 requires mod_cgi. The finding had been reported, escalated, and patched as a Critical RCE — but the RCE component was never actually exploitable in that environment.",
+  "whatHappened": [
+    "A vulnerability scanner was run against the organisation's production environment as part of a routine assessment. One result stood out immediately: Apache httpd 2.4.49 running on a public-facing web server. The scanner matched this to CVE-2021-41773 — a path traversal and remote code execution vulnerability with a CVSS base score of 9.8 (Critical).",
+    "The security team escalated within the hour. The finding said: Critical RCE on a production web server. The response was proportionate to that description: an emergency Saturday patch cycle, an all-hands incident call, the CISO informed, a board notification prepared.",
+    "Patching took the web server offline for six hours during peak traffic season. The operations team applied the vendor patch, tested, and restored service. The security team marked the finding as remediated and closed the incident.",
+    "Three days later, a second engineer reviewed the CVE advisory in detail. CVE-2021-41773 has two components. The path traversal component affects all Apache httpd 2.4.49 installations. The remote code execution component requires mod_cgi to be enabled — a feature that extends Apache with support for executable scripts.",
+    "mod_cgi had not been enabled on this server. The server configuration confirmed it. The RCE vector had never existed in this environment.",
+    "What was present: a path traversal vulnerability with a CVSS of approximately 7.5 — serious, requiring prompt attention, but not a critical RCE emergency. The patch was still the correct action. The emergency response had not been."
+  ],
+  "whyItHappened": [
+    "The scanner matched the version string (Apache httpd 2.4.49) to the CVE. It did not check server configuration to determine whether mod_cgi was present. Scanners match CVEs to versions — they do not verify prerequisites.",
+    "The security team treated the scanner output as ground truth. The CVSS score of 9.8 was read as an action order — 'Critical means emergency response now.' Nobody asked whether the RCE prerequisite was met before escalating.",
+    "CVE-2021-41773's CVSS 9.8 score reflects the worst-case scenario: path traversal AND remote code execution in a configuration with mod_cgi enabled. Without mod_cgi, the score for the path traversal component alone is lower. The scanner reported the maximum-case CVSS without noting the prerequisite dependency.",
+    "There was no step in the process that required answering: 'Does this specific server meet the conditions required for this vulnerability to be exploitable?'"
+  ],
+  "lessonsLearned": [
+    "A CVE version match is a hypothesis. Before escalating, confirm the prerequisites. CVE-2021-41773 requires mod_cgi for its RCE vector. Checking the server configuration takes minutes and determines whether you have a critical emergency or a high-priority scheduled patch.",
+    "CVSS scores reflect the worst-case scenario, not the specific severity in your environment. A 9.8 in the right configuration becomes a 7.5 (or lower) when the primary attack vector's prerequisite is absent.",
+    "Scanner output is a starting point for human investigation — not a final report. Scanners match CVEs to versions. Professionals verify whether the matched CVE is actually exploitable in that specific environment before deciding on response urgency.",
+    "Emergency responses have costs: engineering hours, service downtime, client impact, team burnout. A false-positive escalation wastes those resources and erodes confidence in future assessments. Accuracy protects response capacity."
+  ],
+  "impactStats": [
+    { "value": "40 hours", "label": "Engineering time spent on Saturday emergency patch cycle" },
+    { "value": "6 hours", "label": "Production server downtime during peak traffic season" },
+    { "value": "1 question", "label": "That would have changed the response: 'Is mod_cgi enabled?'" },
+    { "value": "9.8 → ~7.5", "label": "CVSS score adjustment when RCE prerequisite is absent" }
+  ]
+}

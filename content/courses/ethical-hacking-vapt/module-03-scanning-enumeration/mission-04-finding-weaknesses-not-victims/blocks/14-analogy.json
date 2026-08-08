@@ -1,0 +1,20 @@
+{
+  "id": "mod3m4-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Right Analogy",
+  "title": "The Medical Diagnosis",
+  "realWorldThing": "How a doctor moves from a positive test result to a confirmed diagnosis — and why no responsible physician starts treatment before confirming the diagnosis",
+  "concept": "Vulnerability assessment — the process of moving from a potential CVE match to a confirmed, evidence-based finding before recommending action",
+  "comparison": "Imagine a patient arrives at a hospital with a set of symptoms. A blood test comes back positive for a specific marker — a result associated with a serious disease. The doctor looks at the test result.\n\nThe test result is not a diagnosis.\n\nIt is a signal worth investigating. The next steps are systematic: confirm the test is detecting the right thing, check whether the patient has the specific conditions the disease requires, determine whether the disease has actually reached the point where it can cause harm.\n\nIf the doctor skipped those steps and started aggressive treatment based on the test result alone, the consequences could be severe: unnecessary side effects, disrupted normal function, patient harm. The treatment itself has costs — and those costs are only justified when the diagnosis is confirmed.\n\nVulnerability assessment works the same way.\n\nA CVE version match is the positive test result. It is a signal that something worth investigating exists. The CVSS score is the severity rating assigned to that disease in a typical patient. The CPR framework is the diagnostic process: confirm the affected range, check prerequisites, verify reachability.\n\nWhen the diagnosis is confirmed — when CPR passes — the finding goes into the report and response planning begins. When the test result was a false positive — CPR fails on prerequisites — you document what you found, note the reason for exclusion, and move on without causing unnecessary disruption.\n\nA scanner reporting CVE-2021-41773 is a test result. CPR is the diagnosis. Exploitation is the treatment. No responsible professional starts treatment before confirming the diagnosis.",
+  "breakdown": [
+    { "realWorld": "The patient's blood test result — 'positive marker detected'", "techEquivalent": "Scanner reports CVE-2021-41773 matches Apache httpd 2.4.49 on the target" },
+    { "realWorld": "The disease severity in the general population", "techEquivalent": "CVSS Base Score — worst-case severity in the reference scenario" },
+    { "realWorld": "Confirming the test detects the right disease in this patient", "techEquivalent": "C — Confirm: Is the target's version within the exact affected range?" },
+    { "realWorld": "Checking whether the patient has the specific conditions the disease requires", "techEquivalent": "P — Prerequisites: Is mod_cgi enabled? Is the vulnerable configuration present?" },
+    { "realWorld": "Determining whether the disease has progressed to a harmful stage", "techEquivalent": "R — Reachability: Can the vulnerability be triggered from the attacker's position?" },
+    { "realWorld": "A false positive test result — the marker was present but the disease is not", "techEquivalent": "False positive: CVE matched the version range, but prerequisites are not met" },
+    { "realWorld": "Starting treatment before confirming the diagnosis", "techEquivalent": "Attempting exploitation without applying CPR — risks false escalation and unverified findings" }
+  ]
+}

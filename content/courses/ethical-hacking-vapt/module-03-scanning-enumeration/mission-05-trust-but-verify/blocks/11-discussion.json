@@ -1,0 +1,21 @@
+{
+  "id": "mod3m5-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Apply Your Knowledge",
+  "prompt": "Maya placed the Meridian Financial service map and the validation results side by side. 'Before we summarise these findings — predict something for me. Which server do you think is more dangerous right now?'",
+  "context": "Validation results collected so far:\n\n45.77.180.10 — Development Server (port 80):\nPath traversal test: HTTP 200 returned — /etc/passwd content read via traversal path. PATH TRAVERSAL CONFIRMED.\nmod_cgi check (/cgi-bin/): HTTP 403 returned — directory configured, listing denied. MOD_CGI INDICATED.\nServer header: Apache/2.4.49 (Unix) — no distribution suffix.\n\n45.77.180.11 — Legacy Server (port 80):\nPath traversal test: HTTP 400 returned — server rejected traversal URL. PATH TRAVERSAL: INCONCLUSIVE.\nServer header: Apache/2.4.49 (Red Hat) — distribution suffix present.\nStatus: possible backport patch (RHSA-2021:3610) or hardened configuration.",
+  "predictBeforeReveal": {
+    "predictionPrompt": "James says: 'The legacy server is still the bigger risk — it is end-of-life, it has Tomcat 7.0.37 on port 8443, and even if CVE-2021-41773 is inconclusive, there are other CVEs to worry about. The dev server's Apache might be vulnerable, but development servers are less critical.' How much of that reasoning is sound — and where does the professional picture actually point?",
+    "jamesAnswer": "The legacy server worries me more overall. It has more problems — end-of-life software, port 8443 with old Tomcat. Even if the path traversal on the dev server is confirmed, development servers are usually internal and less exposed.",
+    "revealSummary": "The development server is externally accessible with a confirmed path traversal and mod_cgi indicated — making CVE-2021-41773's full CVSS 9.8 profile the most likely scenario. James was right that the legacy server has more accumulated risk from end-of-life software. But 'development servers are less critical' is an assumption — this dev server is directly internet-accessible, no CDN, no WAF. The confirmed path traversal on an internet-facing server with mod_cgi present may represent the most immediately actionable finding of the entire engagement.",
+    "whyItMatters": "Asset criticality is defined by the client, not assumed by the tester. A development server that is internet-accessible with no protective controls may be more exposed than a legacy server behind configuration protections. Validation is partly about technical confirmation — and partly about understanding which confirmed findings matter most in context."
+  },
+  "guideQuestions": [
+    "For CVE-2021-41773 on the development server: apply the SAFE framework. What did the validation technique (S) confirm? Does the result align with the advisory (A)? Is the feature confirmed (F)? What evidence would you document (E)?",
+    "The legacy server returned HTTP 400 and has a 'Red Hat' distribution suffix. What are the two most professional explanations — and which one would require internal access to resolve definitively?",
+    "James said 'development servers are less critical.' What information would you need from the client to know whether that assumption is correct?",
+    "How should the Tomcat 7.0.37 finding on port 8443 be treated differently from CVE-2021-41773, given that no safe path traversal test exists for Tomcat's specific CVEs — and that it is end-of-life software?"
+  ]
+}

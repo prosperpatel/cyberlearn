@@ -1,0 +1,44 @@
+{
+  "id": "mod3m4-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Finding Weaknesses",
+  "narrative": [
+    "Monday, 2:14 PM. The service map was complete and in the engagement log — eight entries, eight confirmed software identities, all documented with both banner and -sV results.",
+    "James leaned back from his keyboard. 'We found everything,' he said. 'Two hosts. All open ports. All the service versions. Maya — we know what's running on every port.'",
+    "Maya looked up from her notes.",
+    "'No,' she said. 'We found the doors. Now we need to discover which ones are actually weak.'",
+    "James frowned. 'But we have the version numbers. Can't we just search them up and see what's vulnerable?'",
+    "'We can search them up,' Maya said. 'But searching for a version number is the beginning of a research process — not the end of one. Before you open a CVE database, I want you to think about what you are actually asking.'",
+    "She turned to face him fully.",
+    "'What does it mean for a server to be vulnerable?'",
+    "James thought about it. 'There is... a security issue in the software it is running?'",
+    "'That is a weakness,' Maya said. 'A vulnerability is more specific. It means the weakness is present in this installation, in this configuration, reachable from this position, with no other control blocking it. A weakness that exists in the software but cannot be reached from where we are is not something we can exploit. A weakness that requires a feature the server has disabled is not something we can trigger. A weakness that has been patched — even if the version number looks old — may not be exploitable at all.'",
+    "James was quiet for a moment. 'So finding a CVE for Apache 2.4.49 does not automatically mean this server is vulnerable to it.'",
+    "'Exactly,' Maya said. 'It means there is a potential match that requires confirmation. That confirmation process — systematic, evidence-based, documented — is vulnerability assessment.'",
+    "She opened her browser. nvd.nist.gov.",
+    "'Before we search,' she said, 'tell me what you expect to find when we search for Apache httpd 2.4.49. Be specific.'",
+    "James thought about it. 'I think... a lot of results? Apache has been around forever. There must be hundreds of vulnerabilities. We are probably vulnerable to something.'",
+    "Maya typed: apache httpd 2.4.49",
+    "The results loaded. Not hundreds — a targeted list, because 2.4.49 is a specific version, not a software family. CVE results for this exact release. The first entry caught them both.",
+    "CVE-2021-41773. Apache HTTP Server 2.4.49. Path traversal and remote code execution. CVSS: 9.8.",
+    "James stared at it. '9.8. That is...'",
+    "'Critical,' Maya said. 'The highest range. But before we document anything — three questions.' She turned to him. 'Three questions that every professional asks before a CVE becomes a finding. By the end of this mission, you will know what they are — and why they matter more than the score.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of experience. Maya had seen teams celebrate CVE findings before confirming them — and watched those celebrations turn into client complaints when the report was challenged.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "Fourth week of his first real engagement. James has the version numbers. He is learning what to do with them.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "discovery"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "mod3m4-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Questions & Answers",
+  "intro": "These are the questions learners most commonly ask when they first encounter vulnerability assessment. If you have been wondering about any of these, you are asking exactly the right things.",
+  "faqs": [
+    {
+      "question": "What is the difference between a vulnerability and an exploit?",
+      "answer": "A vulnerability is a documented weakness in a specific software version or configuration — it describes a security flaw that exists, the conditions under which it is exploitable, and what an attacker could do if those conditions are met. It lives in the CVE database.\n\nAn exploit is functional code or a method that actually triggers the vulnerability — it demonstrates or leverages the weakness to produce impact.\n\nNot every vulnerability has a public exploit. A vulnerability may be known and documented with a CVSS score, but the exploit code may not exist publicly, or may require highly specific conditions that a general-purpose exploit cannot handle.\n\nPractically: finding CVE-2021-41773 on a target tells you a vulnerability exists. Running a proof-of-concept that successfully retrieves /etc/passwd through path traversal demonstrates the exploit. Vulnerability assessment finds the CVE. Penetration testing runs the exploit — in Mission 5."
+    },
+    {
+      "question": "If a CVSS score is 9.8, why would we not immediately try to exploit it?",
+      "answer": "CVSS 9.8 tells you the worst-case severity of the vulnerability in the reference scenario the scoring committee assumed. It does not tell you whether that scenario exists on your specific target.\n\nBefore treating a 9.8 as an action order:\n- Confirm the version is in the affected range (not all 2.4.x are affected, only specific releases)\n- Check whether the prerequisites are met (CVE-2021-41773 requires mod_cgi for RCE)\n- Determine whether the path to the vulnerable component is reachable from your position\n\nIf any of these fail, the 9.8 does not apply as scored. The real risk may be a 7.5 (path traversal without RCE), or the finding may be a false positive in this specific environment.\n\nA professional documents what they found and what the research revealed — not what the score alone implies."
+    },
+    {
+      "question": "What is the difference between a false positive and a false negative?",
+      "answer": "A false positive is a finding that appears to be a vulnerability but is not, upon closer investigation. Example: a scanner reports CVE-2021-41773 on Apache httpd 2.4.49 — but mod_cgi is disabled, the RCE vector does not exist, and the server configuration rules out the primary attack path. The CVE version match is real. The exploitability in this context is not. Acting on the false positive without verification wastes resources and potentially causes unnecessary downtime.\n\nA false negative is a real vulnerability that is not flagged. Example: a scanner misses a custom-developed application component with no CVE, or uses an outdated signature database that does not include a recently published CVE. The vulnerability is real — the assessment just did not find it.\n\nBoth are dangerous. False positives create noise and erode trust in assessments. False negatives create a false sense of security. Reducing both requires reading vendor advisories, checking configurations manually, and not treating scanner output as ground truth."
+    },
+    {
+      "question": "Do we need to find every single vulnerability in a penetration test?",
+      "answer": "No — and claiming to is professionally dishonest.\n\nA penetration test or vulnerability assessment operates within a scope, a timeframe, and a set of access conditions. Within those constraints, professionals aim to find the most significant vulnerabilities — particularly those that could lead to serious impact: unauthorised access, data exposure, privilege escalation, or lateral movement.\n\nEvery professional report includes a scope statement and a methodology section precisely because it cannot claim to be exhaustive. A clean report does not mean no vulnerabilities exist — it means no vulnerabilities matching the methods used, the scope assessed, and the time available were found.\n\nThis is why false negatives are significant: a test that finds nothing may simply have missed something, not confirmed that nothing exists."
+    },
+    {
+      "question": "What is the difference between a vulnerability assessment and a penetration test?",
+      "answer": "Vulnerability assessment (VA) identifies and classifies potential weaknesses through research and analysis. It uses scanning tools, CVE databases, and manual review to produce a list of findings with severity ratings. It does not attempt exploitation. Output: a prioritised list of vulnerabilities with evidence and recommended remediation.\n\nPenetration testing (PT) takes the findings further: it attempts to demonstrate impact by actually triggering vulnerabilities under controlled conditions. A penetration tester does not just find a CVSS 9.8 CVE — they confirm whether it is exploitable in this environment by attempting to exploit it safely. Output: confirmed exploitability with demonstrated impact, not just potential severity.\n\nMany engagements include both phases in sequence: VA first to build the finding list, PT second to validate the highest-priority findings through controlled exploitation. Some clients want only VA — they want to know what is potentially weak without the risk of proof-of-concept exploitation. Understanding the difference is required for scoping any engagement correctly."
+    }
+  ]
+}

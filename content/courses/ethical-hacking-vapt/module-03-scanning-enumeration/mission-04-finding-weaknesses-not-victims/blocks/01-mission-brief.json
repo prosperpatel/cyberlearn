@@ -1,0 +1,30 @@
+{
+  "id": "mod3m4-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Finding Weaknesses, Not Victims",
+  "operativeCodename": "Operation Vulnerability Assessment",
+  "subtitle": "You have the version numbers. Now find out which ones are actually dangerous.",
+  "briefing": "Monday, 2:14 PM. The engagement log has eight confirmed service identities.\n\n45.77.180.10 — Development Server:\n22/tcp   OpenSSH 7.4 (protocol 2.0)\n80/tcp   Apache httpd 2.4.49 ((Unix))\n443/tcp  Apache httpd 2.4.49 ((Unix))\n3306/tcp [filtered — version unknown]\n\n45.77.180.11 — Legacy Server:\n22/tcp   OpenSSH 7.4 (protocol 2.0)\n80/tcp   Apache httpd 2.4.49 ((Unix))\n8443/tcp Apache Tomcat 7.0.37\n\nJames looked at the completed list and leaned back.\n\n'We found everything,' he said.\n\nMaya looked up from her notes and smiled.\n\n'No. We found the doors. Now we need to discover which ones are actually weak.'\n\nThis mission is about vulnerability assessment — the professional process of connecting confirmed version strings to known security weaknesses. Not guessing. Not assuming. Evidence-based research that transforms a service map into a prioritised risk picture.\n\nThe difference between a professional assessor and someone who installs tools is knowing what to do after you have the version number.",
+  "whyItMatters": "Every open port with a confirmed software version is a research question waiting to be answered. CVE databases exist precisely to answer it — but only if you approach them with professional discipline. A high CVSS score does not mean you are under attack. A low CVSS score does not mean the finding is safe. A CVE match does not mean the vulnerability is confirmed. Professional vulnerability assessment teaches you to ask the right questions, read the right sources, and reach evidence-based conclusions — producing a report that a client can trust and act on.",
+  "objectives": [
+    "Explain what vulnerability assessment is — and what distinguishes it from exploitation",
+    "Explain the difference between a vulnerability, an exposure, a weakness, and a misconfiguration",
+    "Define CVE, CWE, CVSS, and CPE — what each standard covers and how they relate to each other",
+    "Use the National Vulnerability Database (NVD) to research known vulnerabilities for a specific software version",
+    "Interpret a CVSS score — what it measures, what it does not, and how professionals use it for risk prioritisation",
+    "Explain the difference between a false positive and a false negative — and why both are professionally dangerous",
+    "Apply the CPR framework to evaluate a CVE before treating it as a confirmed finding"
+  ],
+  "skillsUnlocked": [
+    "Searching the NVD systematically using software name and exact version string",
+    "Reading and interpreting CVE entries — affected versions, CVSS score, prerequisites, and references",
+    "Applying the CPR framework to distinguish potential matches from confirmed vulnerabilities"
+  ],
+  "closingMessage": "By the end of this mission, you will have conducted a professional vulnerability assessment of the Meridian Financial service map. You will know which version strings connect to known CVEs, what those CVEs require in order to be exploitable, and how to document findings with evidence-based precision. That foundation is what Mission 5 builds on.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["vulnerability-assessment", "cve", "cvss", "nvd", "risk-prioritization", "cwe", "cpe", "professional-methodology"]
+}

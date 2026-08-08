@@ -1,0 +1,34 @@
+{
+  "id": "mod3m5-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Validation Workflow",
+  "title": "From Potential Finding to Confirmed Evidence: The Professional Validation Path",
+  "description": "The complete professional workflow from a CVE finding (Mission 4 output) to a confirmed, documented validation result. Each decision point corresponds to a professional question that must be answered before proceeding. The workflow ends in one of three outcomes: confirmed, ruled out (false positive), or inconclusive — all of which are valid and defensible professional results.",
+  "nodes": [
+    { "id": "cve_match", "label": "CVE Match\n(from Mission 4)", "type": "attacker", "detail": "A CVE version match from the vulnerability assessment phase — a hypothesis, not yet a confirmed finding" },
+    { "id": "read_advisory", "label": "Read the\nVendor Advisory", "type": "action", "detail": "What exact conditions does this CVE require? What does the advisory say about configuration prerequisites?" },
+    { "id": "identify_conditions", "label": "Identify Conditions\nfor Exploitation", "type": "action", "detail": "List the specific conditions: version range, required feature, required configuration, network access path" },
+    { "id": "choose_technique", "label": "Choose Safe\nValidation Technique", "type": "action", "detail": "Minimum necessary: one targeted HTTP request, response code analysis, header inspection — not a scanner module" },
+    { "id": "apply_safely", "label": "Apply Single\nSafe Request", "type": "probe", "detail": "Send one targeted request. Record the response completely." },
+    { "id": "interpret", "label": "Interpret\nResponse", "type": "action", "detail": "What does HTTP 200 / 400 / 403 / 404 tell you about the specific condition you were checking?" },
+    { "id": "cross_check", "label": "Cross-check with\nVendor Advisory", "type": "action", "detail": "Does the response match what the advisory says should happen if the vulnerability exists? Or if the patch is applied?" },
+    { "id": "confirmed", "label": "CONFIRMED\nDocument Evidence", "type": "result", "detail": "Finding confirmed: technique, response, conclusion, and evidence all documented in the engagement log" },
+    { "id": "false_positive", "label": "FALSE POSITIVE\nDocument Reasoning", "type": "filtered", "detail": "Finding ruled out: the condition was not present. Document what was tested and why the CVE does not apply in this environment." },
+    { "id": "inconclusive", "label": "INCONCLUSIVE\nDocument Limitation", "type": "target", "detail": "Result ambiguous: possible backport, possible configuration protection, possible external filtering. Document the limitation and defer to further investigation." }
+  ],
+  "edges": [
+    { "from": "cve_match", "to": "read_advisory", "label": "Start here", "type": "info" },
+    { "from": "read_advisory", "to": "identify_conditions", "label": "Conditions noted", "type": "info" },
+    { "from": "identify_conditions", "to": "choose_technique", "label": "Match to technique", "type": "info" },
+    { "from": "choose_technique", "to": "apply_safely", "label": "One request only", "type": "probe", "animated": true },
+    { "from": "apply_safely", "to": "interpret", "label": "Response received", "type": "info", "animated": true },
+    { "from": "interpret", "to": "cross_check", "label": "Match to advisory", "type": "info" },
+    { "from": "cross_check", "to": "confirmed", "label": "Response matches\nvulnerable indicator", "type": "success", "animated": true },
+    { "from": "cross_check", "to": "false_positive", "label": "Response matches\npatched indicator", "type": "filtered" },
+    { "from": "cross_check", "to": "inconclusive", "label": "Response is\nambiguous", "type": "probe" }
+  ],
+  "caption": "Three professional outcomes from validation — all defensible.\n\nConfirmed: the specific behaviour expected from the vulnerability was observed. The finding is real in this environment.\n\nFalse Positive: the behaviour expected from a vulnerable system was absent. The CVE matched the version range but the specific condition does not exist here.\n\nInconclusive: the result could be explained by the fix being applied (backport) or by an external control blocking the validation probe. Document the ambiguity, note both explanations, and defer to further investigation.\n\nCritically: all three outcomes require documentation of exactly what technique was used, what response was received, and how the conclusion was reached.",
+  "interactive": false
+}

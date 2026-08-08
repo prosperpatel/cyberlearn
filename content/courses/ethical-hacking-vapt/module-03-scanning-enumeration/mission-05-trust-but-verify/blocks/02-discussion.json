@@ -1,0 +1,14 @@
+{
+  "id": "mod3m5-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Think First",
+  "prompt": "Before we touch the Meridian Financial servers again — pause and think about what could go wrong if we act on the CVE finding without validating it first.",
+  "guideQuestions": [
+    "The NVD confirms CVE-2021-41773 applies to Apache httpd 2.4.49. James is ready to run an exploit to 'see if it works.' What are three things that could make this a bad decision right now — even if the CVE is genuine?",
+    "A penetration tester confirms a vulnerability by sending the full exploit payload against a production server. The server crashes. The engagement contract says testing must not disrupt services. What happens — and what professional step did they skip?",
+    "Maya says: 'First they verify.' What do you think verifying looks like in practice — and how is it different from exploiting?",
+    "Is it possible that two Meridian Financial servers running Apache httpd 2.4.49 — the same version, the same banner — could have different vulnerability status for CVE-2021-41773? What would cause that?"
+  ]
+}

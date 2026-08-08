@@ -1,0 +1,31 @@
+{
+  "id": "mod3m4-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Vulnerability Lifecycle",
+  "title": "From Discovery to Defence: How a CVE Enters the World",
+  "description": "The lifecycle of a publicly disclosed vulnerability — from the moment it is discovered to the moment it is patched in production systems. Understanding this timeline explains why some CVEs have public exploits, why CVSS Temporal scores change over time, and why patch timing determines exposure window.",
+  "nodes": [
+    { "id": "discovery", "label": "Discovery\nResearcher or Attacker\nFinds the Weakness", "type": "attacker", "detail": "A security researcher, or sometimes an attacker, identifies a way to exploit a software weakness" },
+    { "id": "disclosure", "label": "Responsible\nDisclosure\nVendor Notified", "type": "action", "detail": "The researcher reports the issue privately to the vendor. Responsible disclosure gives the vendor time to patch before public release." },
+    { "id": "cve_assigned", "label": "CVE ID\nAssigned\nCVE-YEAR-NUMBER", "type": "result", "detail": "A CNA (CVE Numbering Authority) assigns a CVE identifier. This may happen before or after patching." },
+    { "id": "patch_dev", "label": "Vendor Develops\nPatch or Fix", "type": "action", "detail": "The vendor confirms the issue and develops a security patch or configuration-based mitigation" },
+    { "id": "advisory", "label": "Vendor Advisory\nPublished", "type": "result", "detail": "The vendor publishes a security advisory describing the vulnerability, affected versions, and the fix. This is often the first public disclosure." },
+    { "id": "nvd_pub", "label": "NVD Entry\nPublished\nnvd.nist.gov", "type": "result", "detail": "The National Vulnerability Database publishes the full CVE entry with CVSS score, CPE, CWE classification, and references" },
+    { "id": "exploit_pub", "label": "Public Exploit\nPublished\n(Exploit-DB / GitHub)", "type": "attacker", "detail": "For some CVEs, working exploit code is published publicly — often within days of disclosure. This dramatically increases real-world risk." },
+    { "id": "patch_applied", "label": "Administrators\nApply Patch", "type": "target", "detail": "System administrators patch their installations. The time between advisory publication and patch application is the exposure window." }
+  ],
+  "edges": [
+    { "from": "discovery", "to": "disclosure", "label": "Reported privately", "type": "info" },
+    { "from": "disclosure", "to": "cve_assigned", "label": "ID reserved", "type": "info" },
+    { "from": "disclosure", "to": "patch_dev", "label": "Vendor confirms", "type": "info" },
+    { "from": "patch_dev", "to": "advisory", "label": "Fix ready", "type": "success" },
+    { "from": "advisory", "to": "nvd_pub", "label": "Details published", "type": "success", "animated": true },
+    { "from": "advisory", "to": "exploit_pub", "label": "Enables PoC development", "type": "probe", "animated": true },
+    { "from": "exploit_pub", "to": "patch_applied", "label": "Urgency increases", "type": "probe" },
+    { "from": "nvd_pub", "to": "patch_applied", "label": "Administrators notified", "type": "success", "animated": true }
+  ],
+  "caption": "The time between 'Vendor Advisory Published' and 'Administrators Apply Patch' is the exposure window — the period during which a system is publicly known to be vulnerable but not yet fixed.\n\nFor CVE-2021-41773 (Apache httpd 2.4.49), working exploits appeared within 24 hours of disclosure. The exposure window for unpatched servers was measured in hours.\n\nCVSS Temporal score tracks where a CVE is in this lifecycle: does a proof-of-concept exist? Is the exploit functional? Is a patch available? As these factors change, the Temporal score adjusts — even when the Base Score stays fixed.",
+  "interactive": false
+}

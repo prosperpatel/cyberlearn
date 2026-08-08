@@ -1,0 +1,20 @@
+{
+  "id": "mod3m5-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Right Analogy",
+  "title": "The Structural Engineer",
+  "realWorldThing": "How a structural engineer validates a safety concern — confirming a specific defect in a specific structure using non-destructive techniques — before recommending repair",
+  "concept": "Vulnerability validation — confirming that a specific CVE applies to a specific target in a specific environment using safe, targeted, non-destructive techniques before any exploitation is attempted",
+  "comparison": "A structural engineer receives a safety bulletin. It reads: 'A specific type of steel beam, installed between 1998 and 2002, may develop micro-fractures under certain loading conditions. Structures built during this period using this beam type should be assessed.'\n\nThe engineer does not read this bulletin and immediately declare that every building of that era is dangerous. They do not stress-test beams by applying extreme loads to see if they break. They do not start with demolition recommendations.\n\nThey go to the specific building. They identify the specific beams. They use non-destructive testing instruments — ultrasonic probes, magnetic particle inspection, visual analysis — to look for the specific type of fracture the bulletin describes. They check whether the beams in this building are the exact type named in the bulletin. They review the construction records to see if modifications were made that would change the risk profile. They compare what they find against the bulletin's description of what a safe beam versus a compromised beam looks like.\n\nOnly if the non-destructive tests indicate the specific defect does the engineer move to the next stage: recommending targeted structural work, or a more invasive investigation under controlled conditions.\n\nVulnerability validation works the same way. The CVE is the safety bulletin — a documented defect in a specific software type. The CVSS score is the severity classification in the worst case. The safe validation technique is the non-destructive test — a single, targeted probe designed to detect the specific behaviour the defect produces. The vendor advisory is the bulletin's technical specifications, telling you what the defect looks like and what a patched structure looks like.\n\nThe engineer does not test the beam by cutting it. The professional tester does not validate by sending an exploit payload.",
+  "breakdown": [
+    { "realWorld": "The safety bulletin identifying a defect in a specific beam type", "techEquivalent": "The CVE — a documented vulnerability in a specific software version" },
+    { "realWorld": "The worst-case severity classification in the bulletin", "techEquivalent": "The CVSS Base Score — severity in the reference worst-case scenario" },
+    { "realWorld": "Going to the specific building to check the specific beams", "techEquivalent": "Targeting validation at the specific server, specific port, specific software version" },
+    { "realWorld": "Non-destructive testing: ultrasonic probes, visual inspection", "techEquivalent": "Safe validation: targeted HTTP request, response code analysis, header inspection" },
+    { "realWorld": "Checking whether modifications were made that change the risk", "techEquivalent": "Checking for patch backports or configuration protections that change exploitability" },
+    { "realWorld": "Comparing findings to the bulletin's description of what a defect looks like", "techEquivalent": "Advisory alignment — does the response match what the advisory says a vulnerable server produces?" },
+    { "realWorld": "Testing the beam by cutting it or applying extreme load", "techEquivalent": "Exploitation — triggering the vulnerability to demonstrate impact" }
+  ]
+}

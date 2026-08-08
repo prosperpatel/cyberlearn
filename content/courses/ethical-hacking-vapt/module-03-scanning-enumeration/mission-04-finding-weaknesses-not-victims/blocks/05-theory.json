@@ -1,0 +1,35 @@
+{
+  "id": "mod3m4-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What Is Vulnerability Assessment?",
+  "title": "Vulnerability Assessment: Evidence-Based Risk Research",
+  "content": "'Okay,' James said. 'So what is vulnerability assessment, exactly? Because I thought it just meant running a scanner and reading the results.'\n\nMaya shook her head slowly. 'A scanner is one tool in the process. Vulnerability assessment is the professional discipline that tells you what to do before you run the scanner, what to do with what comes out, and how to verify the results before you put anything in a client report.'\n\n**What vulnerability assessment is — and what it is not**\n\nVulnerability assessment is the systematic process of identifying, classifying, and prioritising security weaknesses in a target environment. It answers the question: where are the real weaknesses, and how significant are they in the context of this specific environment?\n\nIt is not exploitation. It does not involve triggering vulnerabilities, running attack code, or demonstrating impact. That is what penetration testing and controlled exploitation do — and that comes later, in Mission 5.\n\nVulnerability assessment is research and analysis. The output is not access to a system. The output is an evidence-based, prioritised list of findings that a client can act on.\n\n**Four terms professionals keep separate**\n\n**Weakness** — a flaw in software design, implementation, or configuration that could potentially be exploited under the right conditions. A weakness exists in code or design. It is theoretical until confirmed in a specific environment. CWE (Common Weakness Enumeration) classifies weaknesses by type.\n\n**Vulnerability** — a weakness that is present in a specific system, reachable from a specific attack position, and exploitable under the conditions that exist in that environment. A weakness becomes a vulnerability when all the conditions for exploitation are met. CVE (Common Vulnerabilities and Exposures) identifies specific, publicly disclosed vulnerabilities in specific software versions.\n\n**Exposure** — an unnecessarily accessible service, data, or system component that increases attack surface without providing commensurate business value. An exposed administrative panel on a public interface. An API that returns internal server paths. Exposures are not always vulnerabilities — but they expand the area an attacker can reach.\n\n**Misconfiguration** — a security control that is incorrectly implemented, creating unnecessary risk. Default credentials on a database. Directory listing enabled on a web server. An open S3 bucket. Misconfigurations may or may not have a CVE — many of the most significant security incidents in history traced back to misconfiguration rather than software vulnerability.\n\n**Why these distinctions matter professionally**\n\nA scanner may report 'Apache httpd 2.4.49 — CVE-2021-41773.' That is a potential vulnerability match. Before it becomes a confirmed finding, a professional asks: is this a weakness, a vulnerability, or an exposure in this specific environment? Does the vulnerable condition exist here? Is it reachable from this position?\n\nA misconfiguration may not appear in any scanner output at all — it requires manual review of configurations, default settings, and access controls.\n\n**The professional workflow**\n\nVulnerability assessment follows the intelligence you have already built:\n\n- Reconnaissance identified the target and its external profile\n- Host discovery confirmed which systems are live\n- Port scanning mapped what is exposed\n- Service fingerprinting confirmed software identities and versions\n- Vulnerability assessment now researches what those identities mean for risk\n\nThe output of vulnerability assessment — a prioritised, evidence-based finding list — is the input for Mission 5: controlled validation.",
+  "callouts": [
+    {
+      "type": "insight",
+      "title": "Vulnerability Assessment vs Penetration Testing",
+      "text": "These terms are often used interchangeably — they should not be.\n\nVulnerability assessment identifies and classifies potential weaknesses through research and analysis. It does not prove exploitability. Output: a finding list with severity ratings.\n\nPenetration testing goes further: it attempts to demonstrate impact by actually triggering vulnerabilities under controlled conditions. Output: a finding list with confirmed exploitability and demonstrated impact.\n\nMany engagements include both. Some clients want only VA — they want to know what is potentially weak without the risk of proof-of-concept exploitation. Some want a full pentest. Understanding the difference is required to scope an engagement correctly."
+    },
+    {
+      "type": "info",
+      "title": "Where Misconfigurations Fit",
+      "text": "Some of the most damaging security incidents trace back not to a software vulnerability but to a misconfiguration: a storage bucket set to public, a database exposed without authentication, an admin panel reachable from the internet, default credentials unchanged since deployment.\n\nMisconfigurations rarely appear in CVE databases — they are not software flaws, so there is no CVE to assign. Identifying them requires checking configurations against security baselines and hardening guides, not just running a vulnerability scanner. Professional assessment covers both."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Vulnerability Assessment",
+      "definition": "The systematic process of identifying, classifying, and prioritising security weaknesses in a target environment using research, scanning, and evidence-based analysis. Vulnerability assessment does not involve exploitation — it produces a finding list that can be acted on without triggering the vulnerabilities it identifies."
+    },
+    {
+      "term": "Vulnerability",
+      "definition": "A weakness in a specific software version or configuration that is present, reachable, and exploitable under the conditions that exist in a specific environment. A vulnerability is not theoretical — it requires confirmation that the weakness actually applies in context."
+    },
+    {
+      "term": "Misconfiguration",
+      "definition": "A security control or system setting that is incorrectly implemented, creating unnecessary risk. Misconfigurations may or may not have assigned CVEs. They require manual review of system configurations, not just scanner output."
+    }
+  ]
+}

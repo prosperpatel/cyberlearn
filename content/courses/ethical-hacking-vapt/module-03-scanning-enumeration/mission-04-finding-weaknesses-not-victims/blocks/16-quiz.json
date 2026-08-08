@@ -1,0 +1,75 @@
+{
+  "id": "mod3m4-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Your NVD search for Apache httpd 2.4.49 returns CVE-2021-41773 with CVSS 9.8. The CVE description states: 'A flaw was found in a change made to path normalisation in Apache HTTP Server 2.4.49. An attacker could use a path traversal attack to map URLs to files outside the directories configured by Alias-like directives. If files outside of these directories are not protected by the usual default configuration of require all denied, these requests can succeed. If CGI scripts are also enabled for these aliased paths, this could allow for Remote Code Execution.' What is the correct professional next step?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Document CVE-2021-41773 as a confirmed Critical RCE finding. CVSS 9.8 confirms this is exploitable.", "isCorrect": false },
+        { "id": "b", "text": "Apply CPR. Confirm the version is in the affected range. Check whether CGI scripts are enabled (the RCE prerequisite). Determine whether the affected path is accessible from the external scanning position. Document the finding as confirmed only if all three pass.", "isCorrect": true },
+        { "id": "c", "text": "The CVSS 9.8 means immediate exploitation is required to demonstrate impact before documenting the finding.", "isCorrect": false },
+        { "id": "d", "text": "Search for a public exploit on Exploit-DB first. If no exploit exists, the CVE is not a confirmed finding.", "isCorrect": false }
+      ],
+      "explanation": "CVE-2021-41773's description explicitly states two conditions: path traversal affects unprotected paths, and RCE requires CGI scripts to be enabled. The CVSS 9.8 assumes these conditions are met. A professional applies CPR: Confirm the version (2.4.49 is in the exact affected range — confirmed), check Prerequisites (is CGI enabled — must be verified), and check Reachability (can the path be reached from the external position — must be verified). Without CPR, you cannot distinguish between a 9.8 RCE confirmed finding and a 7.5 path traversal finding or a false positive.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "What does CWE-22 represent — and how does it relate to CVE-2021-41773?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "CWE-22 is the CVSS impact metric for the highest-severity Apache vulnerabilities. CVE-2021-41773 uses CWE-22 because its CVSS score exceeds 9.0.", "isCorrect": false },
+        { "id": "b", "text": "CWE-22 is the Path Traversal weakness category — software that fails to restrict file path access to the intended directory. CVE-2021-41773 is an instance of CWE-22: a specific Path Traversal vulnerability in Apache httpd 2.4.49.", "isCorrect": true },
+        { "id": "c", "text": "CWE-22 is the CVE assigned to Apache httpd 2.4.49. CVE-2021-41773 is the CVSS score for CWE-22.", "isCorrect": false },
+        { "id": "d", "text": "CWE-22 identifies the remote code execution component of a vulnerability. CVE-2021-41773 is classified CWE-22 because of the RCE impact.", "isCorrect": false }
+      ],
+      "explanation": "CWE (Common Weakness Enumeration) is a dictionary of software weakness types — root cause categories. CWE-22 is Path Traversal: the root cause weakness that allows an attacker to access files outside the intended directory by manipulating path sequences. CVE-2021-41773 is classified under CWE-22 because the vulnerability involves a path normalisation flaw that allows traversal outside configured directories. CWE identifies the category of weakness. CVE identifies a specific instance of that weakness in a specific software version.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A vulnerability scanner reports CVE-2021-41773 on Apache httpd 2.4.49. You read the vendor advisory and discover that the server's Apache configuration explicitly disables mod_cgi and uses 'require all denied' for all directories outside the web root. Which statement correctly describes this finding?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The finding is confirmed — CVSS 9.8 cannot be reduced by configuration. The server is vulnerable regardless of mod_cgi status.", "isCorrect": false },
+        { "id": "b", "text": "The RCE component fails the Prerequisites check — mod_cgi is not present. The path traversal component also fails because all unprotected paths are blocked. This is a false positive for both the RCE and path traversal vectors in this specific configuration.", "isCorrect": true },
+        { "id": "c", "text": "Configuration settings cannot affect vulnerability status. The scanner's result is authoritative.", "isCorrect": false },
+        { "id": "d", "text": "The finding is downgraded to Medium because mod_cgi is not enabled, but the server is still confirmed vulnerable to path traversal.", "isCorrect": false }
+      ],
+      "explanation": "CPR in action. C — Confirm: version 2.4.49 is in the affected range — pass. P — Prerequisites: mod_cgi not enabled (RCE fails), all external directories protected with 'require all denied' (path traversal fails) — both vectors fail Prerequisites. R — Reachability: moot because Prerequisites already failed. This is a false positive in this specific environment. The CVE is real. The software version is affected. In this configuration, neither attack vector exists. Document the research performed and the configuration evidence that ruled it out — do not report it as a confirmed vulnerability.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "You are explaining CVSS to a colleague. They say: 'The CVSS Base Score is 9.8 — Critical. That means we need emergency response.' What is the most professionally accurate response?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Correct — CVSS 9.8 always requires emergency response. No further investigation is needed before escalating.", "isCorrect": false },
+        { "id": "b", "text": "CVSS 9.8 is the worst-case severity score in the reference scenario. It means urgent investigation is warranted. The actual severity in our environment depends on whether the prerequisites and conditions the score assumes are actually present here. We apply CPR before determining the response level.", "isCorrect": true },
+        { "id": "c", "text": "CVSS Base Score should be ignored — only Temporal and Environmental scores are professionally relevant.", "isCorrect": false },
+        { "id": "d", "text": "CVSS 9.8 is a high score but means the same as an 8.5 — both require patching within 90 days.", "isCorrect": false }
+      ],
+      "explanation": "CVSS Base Score communicates the potential severity of a vulnerability in a reference, worst-case scenario. It is the correct starting indicator for triage priority — but it is not ground truth about your environment. The Base Score for CVE-2021-41773 is 9.8 in a configuration with mod_cgi enabled. Without mod_cgi, the RCE vector does not exist and the effective severity changes. Emergency response is the right instinct. But before committing resources to an emergency, verify that the conditions the score assumes actually exist. That verification is fast — it takes minutes to check the vendor advisory and server configuration — and it determines whether 'emergency' or 'urgent scheduled patch' is the appropriate response.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "You are writing the vulnerability assessment section of the Meridian Financial report. Apache httpd 2.4.49 is running on four open ports across both servers. CVE-2021-41773 passes C (version confirmed in affected range) and R (internet-accessible, no WAF filtering the attack path), but the P check is inconclusive — you could not determine from your external scanning position whether mod_cgi is enabled. Which statement is the most professionally accurate finding?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "CVE-2021-41773 — Critical. Apache httpd 2.4.49 is confirmed vulnerable on all four ports. Remote code execution is confirmed.", "isCorrect": false },
+        { "id": "b", "text": "CVE-2021-41773 affects Apache httpd 2.4.49 (confirmed version range). Path traversal is the confirmed attack vector (version range affected, no access controls blocking the path from external position — Reachability confirmed). Remote code execution requires mod_cgi — prerequisite status could not be determined from external scanning position. Finding: confirmed path traversal component; RCE component requires internal configuration verification before severity can be assessed. Priority: high. Affects all four Apache instances.", "isCorrect": true },
+        { "id": "c", "text": "CVE-2021-41773 is inconclusive — mod_cgi status is unknown, so the finding cannot be documented until internal access is obtained.", "isCorrect": false },
+        { "id": "d", "text": "CVE-2021-41773 does not apply — the prerequisites could not be confirmed, so the CVE cannot be included in the report.", "isCorrect": false }
+      ],
+      "explanation": "Option B is correct because it is evidence-based, component-specific, and accurately reflects what was confirmed and what remains unknown.\n\nA professional finding documents: what was confirmed (version affected — 2.4.49 is in range; path traversal vector — reachable from external position), what was not confirmed (RCE component — mod_cgi status undetermined externally), why the uncertainty exists (external scanning limitation), what the next step is (internal verification of mod_cgi), and the scope of the finding (all four Apache instances on both servers).\n\nOption A overclaims — 'RCE confirmed' is not supported by the evidence when P could not be verified. Option C underclaims — the path traversal component is confirmed even when mod_cgi is unknown. Option D excludes a real finding because one component's prerequisite is unresolved — the confirmed components should still be documented.",
+      "xpReward": 20
+    }
+  ]
+}
