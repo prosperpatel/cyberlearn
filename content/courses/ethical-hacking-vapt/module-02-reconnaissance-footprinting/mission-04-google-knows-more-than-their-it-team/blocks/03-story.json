@@ -1,0 +1,55 @@
+{
+  "id": "mod2m4-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "We Haven't Even Started",
+  "narrative": [
+    "Day four of the Meridian Financial engagement. Maya had her notes open from the previous three days: WHOIS data, DNS records, subdomain findings, the Vultr VPS with the exposed development server. James had summarised it into a table — domain, IP addresses, services identified, findings flagged.",
+    "'I think we're ready to move to active scanning,' James said, reviewing the table. 'We know who registered the domain, their email is on Google Workspace, DNS is managed through Cloudflare, DMARC is at p=none, they have a Salesforce CRM, and the dev server is sitting on a VPS with a direct IP. That's a solid passive picture.'",
+    "Maya was quiet for a moment. She reached over and opened a browser tab. Not a terminal. Not a security tool. Google.com.",
+    "'What are you doing?' James asked.",
+    "'Finishing passive recon.' She typed into the search bar: site:meridian-financial.com",
+    "Google returned 14,800 results in 0.41 seconds.",
+    "James stared at the number. 'Their website has fourteen thousand pages?'",
+    "'Some of them are their website. Some of them are documents. Some of them are pages they posted years ago and forgot about. Some of them are things their web server made publicly accessible by accident.' Maya scrolled through the first page. 'Google has been crawling their domain for years. Every page it found, it indexed. Their IT team knows about their website. They may not know about all of this.'",
+    "She refined the query: site:meridian-financial.com filetype:pdf",
+    "Thirty-two results. The third one stopped her.",
+    "'Meridian_Financial_HR_Employee_Handbook_2023_DRAFT.pdf.' Maya did not click it. 'DRAFT. Someone uploaded a draft HR handbook to their web server. Google found it and indexed it. It has been publicly accessible ever since.' She wrote it down. 'What do you think is in an HR handbook?'",
+    "'Probably the employee leave policy,' James said. 'Org structure. Onboarding processes.'",
+    "'Employee salaries. Reporting chains. Names of every department head. Software systems referenced in IT policies. Internal processes that an attacker needs to know to impersonate someone convincingly in a phishing campaign.' She looked at him. 'HR documents are gold for social engineering preparation. And this one is sitting on Google.'",
+    "She typed: site:meridian-financial.com intitle:\"index of\"",
+    "Three results. She clicked the first one.",
+    "The browser loaded a plain white page: a web server directory listing. Rows and rows of filenames. Maya leaned forward. /backup/ — a folder. She looked at the date column. The backup folder had been last modified eight days ago.",
+    "'Their web server has directory listing enabled on a folder called /backup,' she said quietly. 'Eight days ago someone put something in it.' She looked at James. 'We are not clicking anything. We are not downloading anything. I am going to note the filenames visible in the listing and report this finding.' She read the filenames aloud, writing each one: 'database_backup_2024-07-01.sql.gz. config_backup_prod.tar.gz. apache_logs_june.zip.' She closed the tab. 'That is a database backup, a production configuration archive, and web server logs. All of them are sitting in a publicly accessible folder on their own website, indexed by Google. We will report these as critical findings and move on. We are not touching them.'",
+    "James had stopped writing. He was staring at the screen.",
+    "'One more,' Maya said. 'Then I'll show you the robots.txt trick.' She typed: site:meridian-financial.com inurl:admin",
+    "A result appeared: meridian-financial.com/admin/login — a login page. The page title in the Google result read: 'Meridian Admin Portal — Internal Use Only'.",
+    "'There is a publicly accessible admin login portal,' Maya said, 'indexed by Google, visible to anyone who searches for it. This is not a hidden path. It is not obscure. Anyone who searches site:meridian-financial.com inurl:admin finds it.' She opened the URL. An authentication page loaded — username, password, login button. No access control stopping people from reaching it. 'We now know the admin portal path, the fact that it requires credentials, and the URL structure. We will test this during active scanning — with explicit written authorisation for the admin portal in scope.'",
+    "Then she opened a new tab and typed: meridian-financial.com/robots.txt",
+    "The file loaded immediately. Maya read it aloud: 'User-agent: *. Disallow: /api/v1/internal. Disallow: /admin. Disallow: /staff-portal.'",
+    "'Their robots.txt lists the admin path and two more.' She typed /api/v1/internal into the browser.",
+    "The page loaded. A JSON response appeared, unformatted, live in the browser: {\"status\": \"ok\", \"version\": \"2.1.4\", \"environment\": \"production\", \"users\": 14329, \"pending_reviews\": 47}",
+    "'This API endpoint,' Maya said, her voice steady, 'is returning live production data. To anyone who visits it. No authentication required. The robots.txt told Google not to index it — but it did not make it private. Anything reachable by URL is reachable.' She took a screenshot. 'That is a separate critical finding. Fourteen thousand, three hundred and twenty-nine users. Forty-seven pending reviews. From an unauthenticated API call.'",
+    "James had put down his pen. He was looking at the screen.",
+    "'How long did that take?' he asked.",
+    "Maya checked the timestamp on her first Google query. 'Twenty-four minutes,' she said. 'And we found an exposed HR handbook, an open backup directory with database files, a publicly accessible admin portal, and an unauthenticated API leaking live production data.' She closed the browser tabs. 'You thought we were done with passive recon. We hadn't opened Google yet.'",
+    "'I will never assume passive recon is finished again,' James said.",
+    "'Good.' Maya saved the findings log. 'Now let me show you exactly how this works — and why most organisations have no idea this is happening.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of professional experience across financial services and government. Maya treats Google Dorking as a standard passive recon phase that consistently produces findings no technical scanner finds.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First year in professional security. Watching Maya find four critical issues in twenty-four minutes using a browser and Google is reshaping his understanding of what reconnaissance means.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "tense"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mod2m3-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Opening Question",
+  "title": "More Than Just an IP Address",
+  "prompt": "You already know that DNS translates domain names into IP addresses. But suppose I told you that DNS also contains public records about a company's mail servers, their CDN and cloud providers, the SaaS tools they use, their email security policy, their cloud migration history — and sometimes, accidentally, their internal server names and private IP addresses.\n\nBefore I explain how any of this works: why do you think a system designed purely to convert names to numbers would need to store all of that? If you were the engineer who designed DNS from scratch — and you needed it to serve every type of internet communication, not just web browsing — what other kinds of information would the system need to hold?",
+  "context": "This question is asking you to reason from first principles before you see the answer. The insight you are building toward: DNS has to serve every type of internet communication, not just web browsers. Email needs to find mail servers. Backup systems need secondary nameservers. Security tools need to verify which servers are allowed to send email on a domain's behalf. Cloud services need to verify domain ownership before they activate. All of this information has to live somewhere publicly accessible and globally queryable — and all of it lives in DNS records.",
+  "guideQuestions": [
+    "Email travels between servers — not between browsers and websites. If a mail server at gmail.com receives an email addressed to someone@meridian-financial.com, how does it know which server to deliver it to? All it has is the domain name — not an IP address.",
+    "When you set up a company email account with Google Workspace or Microsoft 365, the provider asks you to add specific DNS records to your domain before the email service activates. Why does a cloud email service need something added to DNS before it will work?",
+    "If a security researcher could see every DNS record for a target domain — not just the A record for the website — what kinds of information might they find that the organisation never intended to make obvious?"
+  ]
+}

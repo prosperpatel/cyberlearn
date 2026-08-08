@@ -1,0 +1,16 @@
+{
+  "id": "mod2m4-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Professional Decision",
+  "title": "The Indexed HR Files",
+  "prompt": "You are nine hours into an authorised penetration test against a mid-sized financial services firm.\n\nYour passive Google Dorking session returns the following result:\n\nsite:clientcompany.com filetype:pdf → returns 47 results.\n\nAmong them:\n— 'ClientCo_HR_Salary_Bands_2024_FINAL.xlsx' — hosted on client's public web server\n— 'ClientCo_Board_Meeting_Minutes_Q4_2023.pdf' — hosted on client's public web server\n— 'ClientCo_Active_Directory_Architecture_v3.pdf' — hosted on client's public web server\n\nAll three are directly downloadable via URL from the client's own website. Google indexed them six weeks ago. The organisation has no idea they are publicly accessible.\n\nThe third document — the Active Directory architecture — would give you a near-complete map of their internal identity infrastructure. It is directly relevant to later phases of the test. Downloading it would save hours of active reconnaissance.\n\nYou have full written authorisation to perform reconnaissance on this domain. The scope agreement says: 'All publicly accessible web content on the in-scope domain is in scope for passive testing.'\n\nThink through the following questions before reading the next block.",
+  "guideQuestions": [
+    "You have legal authorisation to access publicly accessible web content on this domain. The files are publicly accessible. Is downloading them appropriate? What factors should influence your decision?",
+    "The Active Directory architecture document is directly useful for the engagement. Does its operational relevance change whether you should download it? Or does the minimum necessary access principle apply regardless of usefulness?",
+    "What is the correct professional action right now — continue dorking, or pause and contact the client immediately about these three documents? What is the risk of waiting until the final report?",
+    "If you document these findings without downloading the files, what exactly should you include in your report? What evidence proves the exposure without requiring you to open or copy the documents?"
+  ],
+  "instructorNote": "The correct professional answer is: document the finding (URL, Google result screenshot, file size, last modified date visible in directory listing), do NOT download the documents, and contact the client immediately — not at report-out. The Active Directory architecture document is a critical sensitive exposure. The client's security team may need to act on it before the engagement ends. Operational usefulness does not override the minimum necessary access principle. A URL screenshot and a Google search result is sufficient evidence of the exposure — downloading the document is gathering data beyond what the proof requires."
+}

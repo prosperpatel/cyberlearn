@@ -1,0 +1,36 @@
+{
+  "id": "mod2m1-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Case Study: Target",
+  "company": "Target Corporation",
+  "year": "2013",
+  "industry": "Retail",
+  "incident": "One of the largest retail data breaches in history — initiated not by attacking Target directly, but by identifying a small vendor in a public contracts database and using them as the way in. The attackers spent weeks in reconnaissance before a single credential was compromised.",
+  "whatHappened": [
+    "In late 2013, attackers were looking for a way into Target's point-of-sale network — the system that handles payment card transactions at every checkout. Target's perimeter defences were solid. A direct attack on a company that size, with a full-time security team, would be difficult and noisy.",
+    "So the attackers didn't attack Target. They searched for who had ACCESS to Target.",
+    "Using publicly available contract records, LinkedIn, and a simple Google search for 'Target Corporation vendor' and 'Target refrigeration maintenance contractor', they identified Fazio Mechanical Services — a small HVAC company in Pennsylvania that had a service contract with Target. Fazio maintained the heating and refrigeration systems in several Target stores. More importantly, Fazio had remote access credentials to Target's vendor portal — a network connection that allowed them to submit invoices and check on maintenance requests.",
+    "Fazio Mechanical employed 120 people. They did not have a dedicated security team. Their employees used the same email provider as millions of small businesses. In November 2013, an employee at Fazio received a phishing email, clicked a link, and inadvertently installed a credential-harvesting trojan called Citadel.",
+    "The credentials captured included the username and password Fazio used to access Target's vendor portal.",
+    "Once inside Target's vendor network, the attackers moved laterally — finding that the network segmentation between the vendor portal and the internal payment systems was inadequate. They deployed custom point-of-sale malware to approximately 1,800 in-store payment terminals. For three weeks before anyone noticed, the malware captured payment card data in real time as customers swiped their cards.",
+    "The breach was eventually flagged by a routine alert from Target's own intrusion detection system — an alert that had been generated correctly but, under the volume of alerts the security team handled daily, was reviewed and deprioritised. By the time the breach was confirmed, 40 million payment card records had been exfiltrated."
+  ],
+  "whyItHappened": [
+    "The attackers used public information to identify a third-party vendor — an entity that was part of Target's attack surface but operated entirely outside Target's security controls. No amount of firewall configuration at Target's headquarters would have prevented this entry vector.",
+    "Fazio Mechanical had remote network access to Target's internal systems but was not required to meet Target's security standards. This is a supply chain security failure — and it began with reconnaissance.",
+    "Network segmentation between the vendor portal and the payment card network was insufficient. Once inside one, the attackers could reach the other."
+  ],
+  "lessonsLearned": [
+    "The attack surface of any organisation extends beyond its own systems to every supplier, vendor, contractor, and partner with network access. Reconnaissance that maps these relationships — using nothing but public information — can reveal softer targets that serve as entry points to hardened ones.",
+    "A company's security posture is only as strong as the weakest entity with access to its network. Vendor risk assessment is not an administrative formality — it is an attack surface management requirement.",
+    "Alert fatigue — too many alerts, too few reviewed properly — is a systemic security operations failure. Security teams need both quantity and quality in their monitoring. The tools that flagged this breach worked correctly. The process around them did not."
+  ],
+  "impactStats": [
+    { "value": "40M", "label": "Payment card records stolen" },
+    { "value": "$162M", "label": "Estimated total breach cost" },
+    { "value": "2", "label": "Executives fired — including the CEO" },
+    { "value": "3 weeks", "label": "Attacker dwell time before detection" }
+  ]
+}

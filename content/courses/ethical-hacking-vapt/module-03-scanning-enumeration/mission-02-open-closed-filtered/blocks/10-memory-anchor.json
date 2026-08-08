@@ -1,0 +1,19 @@
+{
+  "id": "mod3m2-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "Three States, Three Professional Responses",
+  "concept": "Every port you scan returns one of three answers. Your professional response to each answer is different. Getting this right is what separates a useful port scan from one that misleads its own author.",
+  "anchor": "Open → investigate it. Closed → note it and move on. Filtered → never assume it is empty — document it carefully and follow up. These three states require three different actions.",
+  "explanation": "You have now seen exactly what happens at the packet level in each of the three port states — what your SYN probe receives, what each response means, and what the state tells you about the target.\n\nOpen means a service is actively listening. You received SYN/ACK. Something is home at that specific door and it responded to your knock. This is a confirmed finding. Fingerprint it, test it, report it.\n\nClosed means the host responded with RST. No service is listening on this specific port, but the host is alive and answering. The result is definitive. Document it and move on — there is nothing hiding here.\n\nFiltered means your probe disappeared. The state of the port — open or closed — cannot be determined from your current scanning position. This is the most professionally demanding result. It is not a cleared finding. It requires documentation, follow-up investigation with alternative methods, and careful reporting that does not claim certainty where none exists.\n\nThe professional habit: treat open and filtered with equal seriousness. Both require further action. Only closed is a definitive answer that requires no follow-up.",
+  "acronym": {
+    "letters": ["O", "C", "F"],
+    "meanings": [
+      "Open — SYN/ACK received. Service listening. Fingerprint and test.",
+      "Closed — RST received from host. Port empty. Document and move on.",
+      "Filtered — no response. State unknown. Document carefully. Investigate further. Never mark as safe."
+    ]
+  }
+}

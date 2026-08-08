@@ -1,0 +1,36 @@
+{
+  "id": "mod2m2-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study: WannaCry",
+  "company": "WannaCry Ransomware — Global Incident",
+  "year": "2017",
+  "industry": "Global Critical Infrastructure",
+  "incident": "The WannaCry ransomware attack infected 230,000 computers across 150 countries in a single day. It was stopped by a 22-year-old researcher who spent $10.69 on a domain name after a ten-minute investigation — because he knew how to read domain registration records.",
+  "whatHappened": [
+    "On 12 May 2017, the WannaCry ransomware worm began spreading across the internet using a leaked NSA exploit called EternalBlue, which targeted a vulnerability in Windows file-sharing. Within hours, it had reached hospitals, telecom companies, railway operators, and logistics firms across Europe, Asia, and North America. The UK's National Health Service was among the hardest hit — hospital systems went offline, surgeries were cancelled, and ambulances were rerouted as clinical staff lost access to patient records. The estimated economic damage would reach over four billion dollars.",
+    "In Worcestershire, England, a 22-year-old malware researcher named Marcus Hutchins had been tracking the outbreak online. He obtained a sample of the malware and began analysing its code in a controlled environment. Inside the code, he found something unexpected: before executing its encryption payload, WannaCry made an HTTP request to a specific domain. The domain was a long, nonsensical string of characters: iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com.",
+    "The domain did not resolve to any server. It returned NXDOMAIN — the DNS response that means 'this domain does not exist.' Marcus ran a WHOIS lookup to confirm: the domain was unregistered, available for purchase through any registrar.",
+    "He formed a hypothesis. The domain check was a kill switch — a mechanism the malware authors had built in to protect their code from being studied in automated analysis sandboxes. Sandbox environments often redirect all DNS queries to return a positive response (because researchers want malware to execute so they can observe its behaviour). By checking for this specific domain — one that would never exist in the real world — the authors assumed the malware could detect whether it was in a sandbox. If the domain resolved: sandbox detected, shut down. If the domain did not resolve: real machine, execute the payload.",
+    "Marcus registered the domain through a registrar for $10.69. He configured it to respond to HTTP requests.",
+    "The moment the domain went live and began resolving, every instance of WannaCry in the wild that checked for it received a positive response — and immediately shut down its encryption payload. New infections stopped propagating almost instantly. Within hours, major security organisations confirmed that the global spread of WannaCry had halted.",
+    "Marcus Hutchins had stopped one of the most destructive ransomware campaigns in history. He did it in under ten minutes, on his lunch break, by knowing how to look up a domain registration record."
+  ],
+  "whyItHappened": [
+    "The WannaCry authors built a kill switch into the malware to detect sandbox analysis environments. They chose a domain registration check because it is technically simple and produces a predictable result — NXDOMAIN — in environments where malware normally runs. They assumed no one would ever register the specific domain they chose.",
+    "The kill switch was the attackers' operational security failure. They underestimated the ability of researchers to read malware code quickly and act on what they found. The kill switch became the fastest, cheapest cyberattack containment in recorded history.",
+    "Marcus Hutchins was able to act on this because domain intelligence — understanding how domain registration works, what a WHOIS lookup tells you, what NXDOMAIN means, and how to register a domain in minutes — is a core competency he had internalised. The technical knowledge turned a DNS lookup into a global intervention."
+  ],
+  "lessonsLearned": [
+    "Domain intelligence is not only a reconnaissance skill. It is equally valuable in threat detection, incident response, and malware analysis. Understanding who registered a domain, when, and what its DNS configuration reveals is used across all phases of security work.",
+    "Malware frequently communicates with command-and-control servers and performs operational checks through domain name requests. Analysing those domains — registration date, registrar, hosting provider, DNS configuration — is a primary technique in malware analysis and threat intelligence. Every analyst needs to know how to read these records.",
+    "Knowing how domain registration and DNS resolution work at a fundamental level — not just how to use tools, but why the system works the way it does — is what turned Marcus Hutchins's technical knowledge into a global intervention. Depth of understanding, not just tool familiarity, is what matters in a genuine incident."
+  ],
+  "impactStats": [
+    { "value": "230,000+", "label": "Computers infected in 150 countries" },
+    { "value": "$4B+", "label": "Estimated total economic damage" },
+    { "value": "$10.69", "label": "Cost to stop the global spread" },
+    { "value": "<10 min", "label": "Time spent reading the domain records before acting" }
+  ]
+}

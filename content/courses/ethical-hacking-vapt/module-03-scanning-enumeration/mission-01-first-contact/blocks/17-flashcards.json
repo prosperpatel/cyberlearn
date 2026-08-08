@@ -1,0 +1,50 @@
+{
+  "id": "mod3m1-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 1",
+  "cards": [
+    {
+      "front": "What is host discovery, and why does it always come before port scanning?",
+      "back": "Host discovery is the process of identifying which IP addresses in your target range actually have live systems behind them — systems that are powered on, connected, and responding to network probes right now.\n\nIt comes before port scanning because:\n1. Passive recon produces IPs from DNS, WHOIS, Shodan — all of which may be outdated. Some may have no live system today.\n2. Port scanning a dead IP produces only timeouts — wasted time with no useful output.\n3. A confirmed live host list makes every subsequent scan targeted and efficient.\n\nTwo minutes of host discovery saves hours of misdirected scanning.",
+      "hint": "The foundation. Every port scan, every service detection, every enumeration scan is built on the live host list."
+    },
+    {
+      "front": "What is ICMP and what is it used for in host discovery?",
+      "back": "ICMP — Internet Control Message Protocol — is a network protocol designed for diagnostic and control messages between devices. It does not carry application data; it communicates network conditions.\n\nIn host discovery, ICMP is used via the Echo Request and Echo Reply:\n• Echo Request: your machine sends 'are you there?' to the target IP\n• Echo Reply: a live target responds 'yes, I am here'\n\nThis exchange is called a 'ping.' A successful ping confirms the host is alive and reachable. An ICMP timeout is ambiguous — the host may be offline or filtering ICMP.",
+      "hint": "ICMP = the network's diagnostic language. Echo Request = the question. Echo Reply = the answer."
+    },
+    {
+      "front": "What is the difference between an ICMP Echo Request and an Echo Reply?",
+      "back": "Echo Request: the packet your machine sends TO the target. It asks: 'If you are alive, please respond.'\n\nEcho Reply: the packet the target sends BACK if it is alive and configured to respond. It confirms: 'I received your request. I am here.'\n\nSequence: your machine → Echo Request → target receives it → if alive and ICMP allowed, target → Echo Reply → your machine records the host as up.\n\nIf no Echo Reply arrives within the timeout window: either the host is offline, or ICMP is being filtered.",
+      "hint": "Request = you asking. Reply = them answering. Silence is ambiguous — not proof of absence."
+    },
+    {
+      "front": "A host does not reply to ping. What are the three possible explanations?",
+      "back": "1. The host is offline — no live system at that IP, or the system is powered off and disconnected.\n\n2. The host is alive but filtering ICMP — a firewall silently drops your Echo Requests. The host never receives them, so it never responds. Common on Windows servers, cloud instances, and enterprise firewalls.\n\n3. A network device between you and the target is dropping ICMP in transit — the host might be reachable, but something in the path absorbs the probe.\n\nAll three produce the same output: timeout.\n\nProfessional response: follow up with TCP probes before drawing any conclusion.",
+      "hint": "Three explanations for silence. Only one means the host is truly gone."
+    },
+    {
+      "front": "What is a TCP SYN probe and how does it reveal hosts that ICMP cannot?",
+      "back": "A TCP SYN probe sends the first packet of a TCP connection request (a SYN) to a specific port on the target.\n\nTwo possible responses — both prove the host is alive:\n• SYN/ACK: the port is open and a service is listening\n• RST: the port is closed, but the host received the packet and responded\n\nTotal silence = host offline or all probes filtered.\n\nTCP probes work when ICMP fails because firewalls often block ICMP (which is not business-critical) while allowing TCP/80 and TCP/443 (which are essential for web services). Blocking TCP/80 and TCP/443 would break the web application for every user — so most organisations cannot afford to block them.",
+      "hint": "SYN/ACK = port open + alive. RST = port closed + still alive. Both = evidence of life."
+    },
+    {
+      "front": "What does 'ICMP filtering' mean and which environments commonly use it?",
+      "back": "ICMP filtering means a firewall or network device is configured to silently drop ICMP packets — typically Echo Requests — without sending any reply. The packet simply disappears.\n\nSilent drops are preferred over sending 'ICMP Unreachable' messages because Unreachable messages reveal that a firewall exists and is active.\n\nCommon environments where ICMP filtering is the default:\n• Windows Server operating systems (block ICMP by default)\n• AWS Security Groups, Azure NSGs, Google Cloud VPC firewall rules\n• Enterprise perimeter firewalls protecting internet-facing services\n• CDN-fronted hosts where the CDN absorbs traffic before it reaches the origin",
+      "hint": "Filtering = silent drop. The packet vanishes. The host looks dead. It is not."
+    },
+    {
+      "front": "What does the Nmap flag -sn do, and what probes does it send by default?",
+      "back": "-sn tells Nmap to perform host discovery only — no port scanning.\n\nBy default, -sn sends four probe types simultaneously:\n1. ICMP Echo Request (ping)\n2. ICMP Timestamp Request\n3. TCP SYN to port 443\n4. TCP ACK to port 80\n\nAny response to any of these four probes classifies the host as 'up.'\n\nExample: nmap -sn 45.77.180.0/24\n\nOutput: list of live hosts with their latency. No port information — that comes in Mission 2.\n\n-sn replaced the older -sP flag. Both work the same way; -sn is the current standard.",
+      "hint": "Skip the (port) scan — just discover. -sn = four probes, any response = host is up."
+    },
+    {
+      "front": "What does the PING framework stand for in professional host discovery?",
+      "back": "P — Probe first: send discovery packets before any port scan. Verify which hosts are alive before investing scan time in them.\n\nI — Interpret carefully: no reply does not mean offline. ICMP filtering is common. Always follow up with TCP probes before concluding a host is dead.\n\nN — Note every response: document which IP, which probe type produced the response, the latency, and the timestamp. The live host list is evidence in your report.\n\nG — Go targeted: run port scans only against confirmed live hosts. Every subsequent scan is built on the validated list.",
+      "hint": "Probe, Interpret, Note, Go. In that order, every time, no exceptions."
+    }
+  ]
+}

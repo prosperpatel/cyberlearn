@@ -1,0 +1,50 @@
+{
+  "id": "mod2m5-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 5",
+  "cards": [
+    {
+      "front": "What is the SCOUT framework, and what do each of the five letters stand for?",
+      "back": "SCOUT is the professional passive reconnaissance methodology — five phases, in order:\n\nS — Scope first: Read the complete scope document before opening any tool. Extract in-scope assets, exclusions, RoE, emergency contacts, timeline.\n\nC — Collect passively: WHOIS → DNS enumeration → Search engine reconnaissance → OSINT. Zero contact with target systems.\n\nO — Organise findings continuously: Document every finding at moment of discovery with source, evidence, severity, and recommended action.\n\nU — Understand the attack surface: Build the priority map — Critical / High / Medium / Low tiers — before active testing begins.\n\nT — Tell immediately: Critical findings go to the client emergency contact now. Not in the final report.",
+      "hint": "Surgeon. Case. Atlas. Sniper. Telegraph. The phases in order — not a checklist to skip."
+    },
+    {
+      "front": "What is an attack surface map, and what are the four priority tiers?",
+      "back": "The attack surface map is the output of intelligence analysis — a prioritised list of every entry point identified through passive reconnaissance, organised by how actionable and impactful a finding there would be.\n\nCRITICAL: Active exposure right now — no further exploitation needed. Escalate immediately. (Unauthenticated APIs returning live data, open database backups, active credentials.)\n\nHIGH: Direct attack paths — reachable and likely to yield access if tested. (Dev/legacy servers with direct IPs, publicly accessible admin portals, DMARC p=none.)\n\nMEDIUM: Worth testing but requires more effort to confirm exploitability. (CDN-protected main application, portals with unknown versions.)\n\nLOW: Background intelligence. (Registration data, email provider ID, unconfirmed technology hints.)",
+      "hint": "The map tells active testing where to start. Without it, scanning is random."
+    },
+    {
+      "front": "What is a scope document, and why is reading it completely non-negotiable before starting any reconnaissance?",
+      "back": "The scope document is the contractual agreement defining: which assets are authorised for testing (domains, IP ranges, applications), which assets are explicitly excluded, what techniques are authorised (passive OSINT, active scanning, exploitation), when testing is permitted (business hours only? 24/7?), and who to contact in an emergency.\n\nReading it completely first is non-negotiable because:\n1. Every action you take during the engagement must be authorised by the scope document. An action against an out-of-scope asset is a scope violation — potentially computer crime, regardless of intent.\n2. Scope drives prioritisation: knowing what is in scope tells you where to focus.\n3. Scope violations during an engagement can end the engagement, create legal liability, and damage the client relationship.\n\nNo exceptions. Read it completely. Before any tool. Every time.",
+      "hint": "Scope document = the legal authorisation for everything that follows."
+    },
+    {
+      "front": "What is the difference between passive and active reconnaissance?",
+      "back": "The distinction: does your action create a log entry on the target's systems?\n\nPASSIVE: You query databases and indexes not controlled by the target. WHOIS queries go to the registrar. DNS queries go to public resolvers (8.8.8.8). Google Dorking queries go to Google. Shodan queries go to Shodan. No contact with the target's systems. No log entries. No alerts. Invisible to the target.\n\nACTIVE: You send requests directly to the target's systems. Port scanning (Nmap), HTTP requests to specific URLs, zone transfer attempts — these all create log entries on the target's servers, IDS alerts, and firewall logs.\n\nWhy it matters: passive recon is generally legal regardless of authorisation (you're querying public data). Active recon against a target without authorisation is typically computer crime. Engagements often have separate authorisation requirements for each phase.",
+      "hint": "Passive = querying about the target. Active = querying the target."
+    },
+    {
+      "front": "What is immediate escalation, and what types of findings require it?",
+      "back": "Immediate escalation means contacting the client during the engagement — not waiting for the final report.\n\nRequired for:\n1. Evidence of real attacker activity (webshell on an in-scope server, malware beaconing from a discovered IP, active credential use from a leaked password)\n2. Active data exposure that is live right now (unauthenticated API returning customer data, publicly accessible production database backup, live customer records in an open directory)\n3. Discovery of active phishing infrastructure targeting the client's customers\n4. Out-of-scope critical findings (domain not in scope but clearly owned by the client and showing critical exposure)\n\nWho to contact: the emergency contact named in the Rules of Engagement — not just the project manager.\n\nWhy: A critical finding reported ten days later in a final report means the exposure was active for ten extra days. Immediate escalation protects the client during the engagement. That is the professional standard.",
+      "hint": "If it's live harm now: call first, report later."
+    },
+    {
+      "front": "What is the corroboration principle in intelligence analysis?",
+      "back": "Corroboration is the practice of requiring multiple independent passive sources to confirm a finding before treating it as established fact rather than a hypothesis.\n\nSingle-source finding → hypothesis. Mark as 'to be confirmed in active testing.'\nExample: Shodan shows Apache Tomcat 7.0.57 on port 8080 — this is one data point from one scan, potentially months old.\n\nMulti-source finding → established fact.\nExample: Salesforce CRM confirmed by (1) portal CNAME pointing to force.com, (2) TXT record containing SF_domain_auth token, (3) SPF record including _spf.salesforce.com. Three independent sources — one data point could be outdated, but three independently confirming sources establish the technology as fact.\n\nWhy it matters: single-source findings in a report lead to recommendations about vulnerabilities that may not exist. Multi-source corroborated findings produce accurate, defensible intelligence.",
+      "hint": "One source = maybe. Three sources = established."
+    },
+    {
+      "front": "What is the diminishing returns test, and when does it signal that passive reconnaissance is complete?",
+      "back": "The diminishing returns test: run passive reconnaissance continuously. When two consecutive hours produce no new finding categories that are not already represented in the attack surface map, passive reconnaissance has reached its practical limit.\n\nThis means:\n— The attack surface map has findings at all four tiers (Critical, High, Medium, Low)\n— New queries are confirming existing findings, not discovering new categories\n— The intelligence picture is coherent and actionable\n\nThis is the signal to transition to active testing.\n\nImportant: 'diminishing returns' does not mean 'found nothing in the last query.' It means the last two hours of queries produced only additional examples of existing categories — more Medium findings that look like the Medium findings already documented, more Low-priority background data. A two-hour window protects against prematurely stopping because one specific query returned nothing.",
+      "hint": "Two consecutive unproductive hours = the map is as complete as passive methods can make it."
+    },
+    {
+      "front": "What is the intelligence profile, and what five sections does it contain?",
+      "back": "The intelligence profile is the written output of the passive reconnaissance phase — a structured document answering 'what do we know about this target and what does it mean?' Delivered before active testing begins.\n\nFive sections:\n\n1. Asset Inventory — every domain, subdomain, and IP attributed to the target (in-scope and discovered-but-out-of-scope, clearly labelled)\n\n2. Infrastructure Architecture — CDN vs direct-IP assets, hosting providers, CDN gaps, single points of failure, relationships between assets\n\n3. Technology Stack — email platform, CRM/SaaS, CDN, hosting, software versions, multi-source confirmed vs single-source hypothesis\n\n4. Email Security Posture — SPF (authorised senders, enforcement), DMARC (p= value, rua address), DKIM status, overall spoofability assessment\n\n5. Critical Findings — each Critical and High finding with discovery method, URL/source, evidence type, severity, status (active/remediated), recommended action",
+      "hint": "The intelligence profile is the case file. Five sections, built continuously during recon."
+    }
+  ]
+}

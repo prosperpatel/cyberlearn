@@ -1,0 +1,30 @@
+{
+  "id": "mod2m5-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "The Reconnaissance Playbook",
+  "operativeCodename": "Operation Full Spectrum",
+  "subtitle": "Individual techniques are skills. A methodology is what makes you a professional.",
+  "briefing": "In 2019, a penetration testing firm sent two testers to a large regional bank — simultaneously, without coordination, as part of an internal methodology review.\n\nThe first tester opened his laptop, pulled up the scope document, and went straight to Nmap. Twenty-three minutes later, the bank's intrusion detection system flagged the scan. The engagement was suspended. The security operations team was paged. Three hours of incident response followed. The tester had not found a single vulnerability.\n\nThe second tester spent day one reading the scope document. She made a list of every in-scope domain. She ran WHOIS lookups on all of them. She built a DNS enumeration report. She ran Google Dorks for each domain. She checked Shodan. She checked the Wayback Machine. She searched GitHub for credential leaks. By end of day one she had a fourteen-page intelligence report. She had not touched a scanner. The bank's IDS had no record she had ever existed.\n\nOn day two, she began active testing. She already knew which systems were directly reachable (not behind CDN), which subdomains had older software, which login portals existed, and which API endpoints appeared unauthenticated. Her scanning was not random — it was targeted, based on what passive reconnaissance had already told her.\n\nShe completed the engagement in three and a half days. The first tester's engagement was restarted after a written apology and a revised plan. It took seven days and found fewer critical issues.\n\nThe difference between them was not skill. It was methodology.\n\nThis mission is about methodology.",
+  "whyItMatters": "A professional penetration tester does not begin an engagement by running tools. They begin by understanding what they are looking for, what they are allowed to do, and what they already know — before making a single active request to the target. The passive reconnaissance phase, done properly, produces an intelligence picture that makes every subsequent phase faster, more targeted, and more effective. The methodology you learn in this mission is the framework used by professional testers at every major security consultancy in the world.",
+  "objectives": [
+    "Describe the complete professional passive reconnaissance workflow from scope review to recon report",
+    "Explain how to plan a reconnaissance phase before beginning any information gathering",
+    "Combine WHOIS, DNS enumeration, and search engine reconnaissance into a single coherent intelligence profile",
+    "Prioritise an attack surface into Critical, High, Medium, and Low tiers based on passive findings",
+    "Identify when passive reconnaissance is complete and active testing can begin",
+    "Explain professional standards for scope, escalation, and immediate reporting of critical findings"
+  ],
+  "skillsUnlocked": [
+    "Planning a passive reconnaissance phase from a client scope document",
+    "Building a structured intelligence profile correlating WHOIS, DNS, and OSINT findings",
+    "Prioritising an attack surface by severity and exploitability",
+    "Making professional judgement calls on scope boundaries and escalation"
+  ],
+  "closingMessage": "The second tester's methodology had a name. She called it her playbook — the specific sequence she followed on every engagement, adapted to each client's scope. By the end of this mission, you will have your own. It will be built from everything you have learned across this module. And it will be the foundation for every technical skill you develop from here forward.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["reconnaissance", "methodology", "scope", "passive-recon", "attack-surface", "professional-workflow"]
+}

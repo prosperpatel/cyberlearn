@@ -1,0 +1,39 @@
+{
+  "id": "mission-02-domain-intelligence",
+  "slug": "mission-02-domain-intelligence",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-02-reconnaissance-footprinting",
+  "title": "Domain Intelligence",
+  "tagline": "Every website on the internet starts with an address. Behind that address is an ownership trail that any professional knows how to read.",
+  "description": "Go deep on the first technical OSINT skill in every professional reconnaissance engagement: domain intelligence. Learn what domains, IP addresses, and DNS really are — from scratch. Understand WHOIS, registrars, registries, TLDs, DNS record types, and ASNs. By the end, you can read any organisation's complete internet infrastructure from public records alone.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 70,
+  "xpReward": 100,
+  "order": 2,
+  "missionNumber": 2,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-01-the-internet-never-forgets"],
+  "tags": ["domain", "dns", "whois", "ip-address", "registrar", "tld", "asn", "domain-intelligence", "reconnaissance", "mx-record"],
+  "learningObjectives": [
+    "Define what a domain is and explain the difference between a domain and a website",
+    "Explain what an IP address is and describe how it relates to domain names",
+    "Describe how DNS resolution works in plain language",
+    "Identify the five key DNS record types and what each one reveals about an organisation's infrastructure",
+    "Explain WHOIS, registrar, registry, and TLD — and what each one tells an investigator",
+    "Define ASN and explain why knowing an organisation's ASN reveals their complete IP range"
+  ],
+  "skills": [
+    "Reading WHOIS records to extract registrar, registration date, nameservers, and registrant data",
+    "Querying all DNS record types to map mail infrastructure, cloud providers, CDN usage, and SaaS relationships",
+    "Using ASN data to discover the full IP range of a target's internet-facing infrastructure"
+  ],
+  "badge": "Nameserver",
+  "missionIcon": "🌐",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

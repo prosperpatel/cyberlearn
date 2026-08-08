@@ -1,0 +1,21 @@
+{
+  "id": "mod3m1-block-19-mission-complete",
+  "type": "mission-complete",
+  "order": 19,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Complete",
+  "headline": "Mission Complete — First Contact",
+  "message": "Monday, 11:42 AM. The host discovery sweep was done.\n\nMaya reviewed the engagement log:\n\n45.77.180.10 — CONFIRMED ALIVE. ICMP Echo Reply, latency 14ms. The development server. Primary target.\n45.77.180.11 — CONFIRMED ALIVE. No ICMP response. TCP SYN to port 80: SYN/ACK received, latency 18ms. Web service running. ICMP filtered by firewall.\n45.77.180.23 — NO RESPONSE. Probed with ICMP, TCP SYN/80, TCP SYN/443, TCP ACK/80. Documented as 'no response to any probe at time of sweep.' Scheduled for re-test.\n198.51.100.42 — NOT SCANNED. CDN provider IP — belongs to the CDN, not Meridian Financial.\n\nJames stared at 45.77.180.11. 'I would have missed it.'\n\n'You did miss it,' Maya said — not unkindly. 'Your first scan said no response. You were ready to mark it offline.'\n\n'And then you ran the TCP probe.'\n\n'And then I ran the TCP probe.' She saved the output to the engagement folder. Three formats: normal, XML, grepable. 'That server appeared in a Shodan record in March. Running a web service on port 80. Blocking ICMP. If you had trusted the ping result, it would have been invisible for the rest of the engagement. Every scan we run in this module would have missed it. The final report would have said nothing about it.'\n\nJames was quiet for a moment. 'What might be on it?'\n\n'That's the right question,' Maya said. 'And that's what Missions 2 and 3 will answer. For now: we have two confirmed targets. Everything from here is built on this list.'\n\nShe pulled up a new terminal window.\n\n'Now that we know who's home,' she said — and looked at James, waiting — 'how do we discover which doors are open?'\n\n---\n\nIn this mission, you crossed the line from passive to active. For the first time, packets you sent left records on systems you were testing. You made the engagement visible — to the logs of those two servers, and eventually to your engagement report.\n\nYou also learned the first discipline of active scanning: the question before the command. Not 'which tool should I run?' but 'which question am I trying to answer?' The first question in every active assessment is: which systems are actually alive? Everything else depends on that answer.\n\nAnd you learned — from James's near-miss with 45.77.180.11 — why professionals never accept ICMP silence as proof of absence. One TCP probe revealed what ping could not. That discovery just became the second most important target on the engagement.\n\nThe PING framework is your methodology from here. Probe first. Interpret carefully. Note everything. Go only where confirmed.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "First Signal",
+      "description": "Completed Mission 1: First Contact — crossed from passive reconnaissance into active scanning. Ran host discovery using ICMP and TCP probe types, correctly interpreted ICMP filtering on a live host that appeared offline to ping, documented live host findings in a professional engagement log, and built the validated host list that serves as the foundation for all subsequent scanning in Module 3."
+    }
+  ],
+  "nextSteps": [
+    "Mission 2: Open, Closed, or Filtered — You have two confirmed live hosts. Now comes the next professional question: which ports are open on each one? Mission 2 introduces port scanning — the technique that maps every reachable service port and tells you which doors exist on each live system.",
+    "Optional: Return to the host discovery lab and attempt the 'silent host' challenge — identify a live host that responds to neither ICMP nor TCP/80, but reveals itself on a different TCP port. This builds the instinct for thorough discovery under realistic conditions.",
+    "Review: The PING framework (Probe → Interpret → Note → Go) is your host discovery methodology from here forward. Apply it every time you begin an active assessment, on every engagement, for every target range."
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "mod2m3-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "DNS Enumeration Quick Reference",
+  "sections": [
+    {
+      "heading": "The Eight DNS Record Types",
+      "rows": [
+        { "label": "A Record", "value": "Maps domain/subdomain to IPv4 address. Starting point — always run IP WHOIS on result. Multiple A records = load balancing or CDN. Wildcard (*.domain.com) = default IP for any undefined subdomain." },
+        { "label": "AAAA Record", "value": "Maps domain/subdomain to IPv6 address. Same purpose as A record, different format. IPv6 infrastructure is often less monitored and may bypass IPv4-only CDN coverage. Always query both." },
+        { "label": "MX Record", "value": "Specifies which server(s) receive email. Priority value: lower = higher priority. aspmx.l.google.com = Google Workspace. mail.protection.outlook.com = Microsoft 365. Own server hostname = self-hosted, real IP, no CDN." },
+        { "label": "NS Record", "value": "Specifies authoritative nameservers for the zone. Reveals DNS hosting provider (Cloudflare, AWS Route 53, self-managed). Self-managed NS = potential zone transfer target. NS accounts = DNS hijacking risk." },
+        { "label": "TXT Record", "value": "Text data: SPF (email sender policy), DMARC (spoofing protection — check p= value), DKIM, service verification tokens. p=none = spoofable domain. Every token = cloud vendor disclosure." },
+        { "label": "CNAME Record", "value": "Alias pointing to another domain name. Reveals CDN (Cloudflare), SaaS tools (Salesforce force.com, HubSpot, Atlassian). Dangling CNAME (destination NXDOMAIN) = potential subdomain takeover." },
+        { "label": "PTR Record", "value": "Reverse DNS: IP address to hostname. Stored at in-addr.arpa. Reveals server purpose from hostname. Used by mail servers for anti-spam validation. Run on any IP you discover." },
+        { "label": "SRV Record", "value": "Service locator: _service._proto.domain → port and target server. _sip._tcp = VoIP. _autodiscover._tcp = Exchange email. _ldap._tcp = Active Directory/LDAP. Confirms specific communication infrastructure." }
+      ]
+    },
+    {
+      "heading": "DMARC Policy Values",
+      "rows": [
+        { "label": "p=none", "value": "Monitoring only. Emails failing authentication are delivered anyway. Domain CAN be spoofed in phishing. This is a finding — document it." },
+        { "label": "p=quarantine", "value": "Failed emails go to spam/junk folder. Spoofing is harder but recipients may still see the email." },
+        { "label": "p=reject", "value": "Failed emails are rejected and not delivered. Strongest protection. Spoofed emails from this domain will be blocked." }
+      ]
+    },
+    {
+      "heading": "Zone Transfer and Subdomain Enumeration",
+      "rows": [
+        { "label": "Zone Transfer (AXFR)", "value": "Mechanism for copying complete DNS zone from primary to secondary nameserver. Misconfigured = any IP can request complete zone dump. Command: dig axfr @ns1.target.com target.com. ACTIVE — requires written authorisation." },
+        { "label": "Subdomain Brute Force", "value": "Systematically query common subdomain names (dev, staging, mail, vpn, api, admin, portal, legacy, test). Tools: amass, subfinder, dnsrecon, gobuster. Can be done passively through public resolvers." },
+        { "label": "Certificate Transparency", "value": "crt.sh — every SSL certificate ever issued for any subdomain is logged publicly. Best passive subdomain discovery source. No contact with target's systems." },
+        { "label": "Dangling CNAME check", "value": "Query CNAME for each subdomain → check if destination resolves → if NXDOMAIN, check if destination can be claimed. Potential subdomain takeover." }
+      ]
+    },
+    {
+      "heading": "Professional DNS Enumeration Sequence",
+      "rows": [
+        { "label": "Step 1", "value": "Query A and AAAA records for main domain → IP WHOIS on results → identify CDN or direct server" },
+        { "label": "Step 2", "value": "Query MX records → identify email provider → if self-hosted, IP WHOIS on mail server IP" },
+        { "label": "Step 3", "value": "Query NS records → identify DNS hosting provider → note for zone transfer attempt" },
+        { "label": "Step 4", "value": "Query TXT records → find DMARC p= value → list all SPF include: entries → document service verification tokens" },
+        { "label": "Step 5", "value": "Subdomain enumeration: crt.sh first (passive) → wordlist queries → check each CNAME destination" },
+        { "label": "Step 6", "value": "A and AAAA records for each discovered subdomain → IP WHOIS → flag any direct IPs (no CDN)" },
+        { "label": "Step 7", "value": "PTR lookups on all discovered IPs → hostname reveals server role" },
+        { "label": "Step 8", "value": "Zone transfer attempt (ACTIVE — authorised engagements only): dig axfr @[NS] [domain]" }
+      ]
+    },
+    {
+      "heading": "Key Tools",
+      "rows": [
+        { "label": "dig (Mac/Linux)", "value": "dig A target.com | dig MX target.com | dig TXT target.com | dig NS target.com | dig AAAA target.com | dig -x IP (PTR) | dig axfr @ns1 target.com (zone transfer, active)" },
+        { "label": "nslookup (Windows)", "value": "nslookup -type=MX target.com | nslookup -type=TXT target.com | nslookup -type=NS target.com" },
+        { "label": "mxtoolbox.com", "value": "DNS Lookup, MX Lookup, TXT/DMARC Lookup — browser-based, no installation" },
+        { "label": "crt.sh", "value": "Certificate Transparency search — passive subdomain discovery" },
+        { "label": "bgp.he.net", "value": "PTR lookup and ASN discovery" }
+      ]
+    }
+  ]
+}

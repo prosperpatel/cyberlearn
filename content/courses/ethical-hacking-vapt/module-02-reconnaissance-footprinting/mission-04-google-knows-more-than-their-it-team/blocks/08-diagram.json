@@ -1,0 +1,138 @@
+{
+  "id": "mod2m4-block-08-diagram",
+  "type": "diagram",
+  "order": 8,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "How Google Indexes",
+  "title": "Two Paths: How Public Information Becomes a Reconnaissance Finding",
+  "description": "This diagram shows two parallel flows. On the left: the path from a web server to a Google search result — how accidental exposures become indexed. On the right: the reconnaissance flow — how a professional uses Google's index to discover those exposures without ever contacting the target's systems.",
+  "nodes": [
+    {
+      "id": "web-server",
+      "label": "Target Web Server",
+      "sublabel": "meridian-financial.com",
+      "type": "target",
+      "position": "top-left"
+    },
+    {
+      "id": "public-dir",
+      "label": "Public Web Directory",
+      "sublabel": "/backup/ (directory listing on)",
+      "type": "vulnerability",
+      "position": "mid-left"
+    },
+    {
+      "id": "googlebot",
+      "label": "Googlebot Crawler",
+      "sublabel": "Visits every few days",
+      "type": "system",
+      "position": "center-left"
+    },
+    {
+      "id": "google-index",
+      "label": "Google Search Index",
+      "sublabel": "14,800 results for site:meridian-financial.com",
+      "type": "system",
+      "position": "center"
+    },
+    {
+      "id": "search-result",
+      "label": "Search Result",
+      "sublabel": "Meridian_Financial_HR_Handbook_2023_DRAFT.pdf",
+      "type": "finding",
+      "position": "center-right"
+    },
+    {
+      "id": "professional",
+      "label": "Security Researcher",
+      "sublabel": "Google Dork: site:meridian-financial.com filetype:pdf",
+      "type": "actor",
+      "position": "top-right"
+    },
+    {
+      "id": "robots-txt",
+      "label": "robots.txt",
+      "sublabel": "Disallow: /admin, /api/v1/internal, /backup/",
+      "type": "info",
+      "position": "bottom-left"
+    },
+    {
+      "id": "admin-portal",
+      "label": "Exposed Admin Portal",
+      "sublabel": "/admin/login — publicly accessible, not in sitemap",
+      "type": "finding",
+      "position": "bottom-center"
+    },
+    {
+      "id": "report",
+      "label": "Reconnaissance Report",
+      "sublabel": "4 critical findings. Zero target systems contacted.",
+      "type": "output",
+      "position": "bottom-right"
+    }
+  ],
+  "edges": [
+    {
+      "from": "web-server",
+      "to": "public-dir",
+      "label": "Misconfigured directory listing",
+      "type": "vulnerability"
+    },
+    {
+      "from": "public-dir",
+      "to": "googlebot",
+      "label": "Crawler visits public URL",
+      "type": "flow"
+    },
+    {
+      "from": "web-server",
+      "to": "googlebot",
+      "label": "Crawls all public pages",
+      "type": "flow"
+    },
+    {
+      "from": "googlebot",
+      "to": "google-index",
+      "label": "Adds all found content to index",
+      "type": "flow"
+    },
+    {
+      "from": "professional",
+      "to": "google-index",
+      "label": "Queries with Google Dork operators",
+      "type": "action"
+    },
+    {
+      "from": "google-index",
+      "to": "search-result",
+      "label": "Returns matching indexed content",
+      "type": "flow"
+    },
+    {
+      "from": "search-result",
+      "to": "report",
+      "label": "Document finding (without downloading)",
+      "type": "action"
+    },
+    {
+      "from": "web-server",
+      "to": "robots-txt",
+      "label": "Lists sensitive paths as Disallow",
+      "type": "info"
+    },
+    {
+      "from": "robots-txt",
+      "to": "admin-portal",
+      "label": "Disallow announcement = path list for testers",
+      "type": "insight"
+    },
+    {
+      "from": "admin-portal",
+      "to": "report",
+      "label": "Login portal path discovered via robots.txt",
+      "type": "finding"
+    }
+  ],
+  "caption": "Notice that the security researcher (top right) never connects to the target web server directly. Every finding comes from querying Google's index — which Googlebot populated by visiting the target's public URLs. The target has no knowledge that this reconnaissance is happening. The only direct path to the target in this diagram is the crawler visits — and those are initiated by Google, not the researcher. This is what makes Google Dorking a purely passive technique.",
+  "interactive": true
+}

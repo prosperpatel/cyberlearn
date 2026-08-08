@@ -1,0 +1,25 @@
+{
+  "id": "mod3m1-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Host Discovery with Nmap",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 30,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "terminal",
+    "tags": ["host-discovery", "nmap", "icmp", "tcp-probe", "active-recon", "ping-sweep"]
+  },
+  "content": {
+    "objective": "Run a professional host discovery sweep against an authorised lab target network. Using Nmap's host discovery flags, identify all live hosts using ICMP and TCP probe types. Practice interpreting ambiguous results — including hosts that appear offline to ICMP but reveal themselves to TCP probes. Document your findings exactly as you would in a real engagement log.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "Host Discovery with Nmap",
+      "estimatedTime": "30 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm working on a host discovery lab using Nmap. My goal is to identify all live hosts in an authorised target IP range using both ICMP and TCP probe types.\n\nHere is what I know going in:\n- ICMP Echo Request is how ping works — and it can be silently blocked by firewalls\n- TCP SYN probes (nmap -PS80,443) can reveal hosts that do not respond to ping\n- The Nmap -sn flag does host discovery only, without port scanning\n- 'No response to ping' does not mean the host is offline\n- I should always document what I tried and what I received, not just whether a host 'is up' or 'is down'\n\nI want you to act as a senior penetration tester guiding me — but never giving me direct answers. Ask questions instead.\n\nWhen I describe what I have tried and what output I received, ask me questions that help me reason through the interpretation myself. For example:\n- If I say 'this host is not responding to ping,' ask me: 'What else could cause a timeout besides the host being offline? What would a professional try next?'\n- If I say 'all my probes timed out on this IP,' ask me: 'What would you write in your engagement log for this result? What exact language would you use?'\n- If I say 'I found two live hosts,' ask me: 'How confident are you that you found ALL live hosts? What would make you more confident?'\n\nAlso push back professionally if I:\n- Conclude a host is offline from a single failed ping without trying TCP probes first\n- Try to scan IPs that are outside the authorised lab range\n- Skip documenting results and just keep them in my head\n- Use -T5 timing on a standard lab network\n- Run a full port scan before completing host discovery\n\nHelp me build the professional instinct for thorough, documented host discovery — not just the ability to run a command and read the output."
+  }
+}

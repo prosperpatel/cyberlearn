@@ -1,0 +1,41 @@
+{
+  "id": "mission-03-who-are-you-really",
+  "slug": "mission-03-who-are-you-really",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-03-scanning-enumeration",
+  "title": "Who Are You Really?",
+  "tagline": "You know which doors are open. Now find out who is standing behind each one.",
+  "description": "The port map is built. Eight open ports across two Meridian Financial hosts. But the service column shows IANA labels — conventions, not identities. Service fingerprinting is the technique that turns an open port number into a confirmed software version. Learn manual banner grabbing, Nmap service version detection, why hidden banners do not prevent identification, and why the version number is the key that unlocks the entire vulnerability research process.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 60,
+  "xpReward": 100,
+  "order": 3,
+  "missionNumber": 3,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-08T00:00:00Z",
+  "updatedAt": "2026-08-08T00:00:00Z",
+  "prerequisites": ["mission-02-open-closed-filtered"],
+  "tags": ["service-detection", "banner-grabbing", "nmap", "version-detection", "fingerprinting", "active-recon", "cve-research", "network-basics", "scanning"],
+  "learningObjectives": [
+    "Explain what a service banner is and why many services announce their software identity when first contacted",
+    "Use manual banner grabbing with curl and netcat to retrieve service information from open ports",
+    "Explain how Nmap's -sV flag probes services to determine what software and version is running",
+    "Interpret service fingerprinting output — software name, version string, and protocol details",
+    "Explain why version numbers are required for systematic vulnerability research using the CVE database",
+    "Explain why hidden or modified banners do not make systems secure against professional assessment",
+    "Document service fingerprinting findings with professional precision as the foundation for vulnerability research"
+  ],
+  "skills": [
+    "Manual banner grabbing using curl -I and netcat against web, SSH, and custom services",
+    "Running Nmap service version detection (-sV) against confirmed open ports",
+    "Interpreting Nmap -sV output — software name, version, protocol, and confidence level",
+    "Connecting version numbers to CVE database research using the NVD"
+  ],
+  "badge": "Identity Confirmed",
+  "missionIcon": "🔍",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

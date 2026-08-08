@@ -1,0 +1,75 @@
+{
+  "id": "mod2m5-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You are two days into passive reconnaissance on an authorised engagement. During DNS enumeration you find a subdomain — staging.client.com — that resolves to a direct IP address (no CDN). WHOIS on that IP shows it belongs to a small VPS provider. A Shodan query shows the IP has port 8080 open with a banner reading 'Apache Tomcat/7.0.57'. Apache Tomcat 7.0.57 reached end of life in 2021. What is the correct professional sequence from this moment?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Run Nmap on port 8080 immediately to confirm what is running — this is a critical finding and speed matters.", "isCorrect": false },
+        { "id": "b", "text": "Document the finding as High priority on the attack surface map (direct IP, no CDN, EOL software version from Shodan), note it as a primary active testing target, continue passive recon, and scan it during the active testing phase.", "isCorrect": true },
+        { "id": "c", "text": "Shodan data may be outdated — skip this finding until active testing confirms the version is still 7.0.57.", "isCorrect": false },
+        { "id": "d", "text": "Document it as Low priority — staging servers are typically isolated from production and rarely have significant vulnerabilities.", "isCorrect": false }
+      ],
+      "explanation": "Passive reconnaissance produces intelligence; active testing confirms and exploits. The Shodan banner is a single-source passive finding — it may be months old. The correct action is to document it as a High-priority hypothesis: a direct-IP server (no CDN, reachable for scanning), running software that Shodan last saw as an EOL version (Apache Tomcat 7.0.57 reached end of life 2021-03-31). This goes on the attack surface map as High — first in the active testing queue. Scanning port 8080 now would cross into active testing before the passive phase is complete and the attack surface map is built. The attack surface map guides active testing; it does not happen during passive recon.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "You have completed three days of passive reconnaissance on a financial services client. Your attack surface map has: 2 Critical findings (both remediated during engagement), 4 High findings, 7 Medium findings, and 11 Low findings. James suggests spending two more days extending passive recon 'to make sure we haven't missed anything.' You have been in the last two hours producing only Medium and Low findings that duplicate categories already present in the map. What is the professional decision?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Agree with James — more recon is always better. Spend the two additional days to ensure completeness.", "isCorrect": false },
+        { "id": "b", "text": "Passive recon has reached diminishing returns. The attack surface map is populated at all four tiers. Transition to active testing. The additional recon time is better spent on the High-priority targets.", "isCorrect": true },
+        { "id": "c", "text": "Stop passive recon immediately — three days is always the maximum for any engagement.", "isCorrect": false },
+        { "id": "d", "text": "Two more days is reasonable — the critical and high findings may not be complete even if the last two hours were low-yield.", "isCorrect": false }
+      ],
+      "explanation": "The diminishing returns test: two consecutive hours of passive recon producing no new finding categories signals that the attack surface map is as complete as passive methods can make it. The map has all four tiers populated (Critical, High, Medium, Low). Extending passive recon further consumes engagement time without proportionate intelligence gain — time that is better spent on the High-priority active testing targets (the 4 High findings on the map). Professional reconnaissance is not 'as much as possible' — it is 'as much as needed to build an actionable attack surface map.' The map is actionable. Active testing begins.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "During passive reconnaissance on targetcompany.com, you discover a Google Dork result: site:targetcompany.com filetype:pdf returns a document titled 'Internal_Salary_Review_2024_CONFIDENTIAL.pdf'. The document is hosted at targetcompany.com/hr/internal/. The scope document authorises passive OSINT and active testing on targetcompany.com and all subdomains. What is the correct set of actions?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Download and read the document — it is hosted on an in-scope domain and the scope authorises access to all public content on that domain.", "isCorrect": false },
+        { "id": "b", "text": "Screenshot the Google result and the URL. Confirm the file is accessible (HTTP response code check only). Document as High finding: internal confidential document publicly indexed. Contact the client to report the exposure. Do not download the document.", "isCorrect": true },
+        { "id": "c", "text": "The file is marked confidential — do not access it at all. Report that a document with a confidential filename was found in Google results, but do not confirm whether it is accessible.", "isCorrect": false },
+        { "id": "d", "text": "Download and review the document to fully assess the severity of the exposure — the more complete the evidence, the stronger the finding.", "isCorrect": false }
+      ],
+      "explanation": "Minimum necessary access governs this decision. To document this as a professional finding, you need: (1) evidence the document appeared in Google search results (screenshot of the Google result showing the URL and filename), (2) confirmation the document is publicly accessible (one HTTP request confirming a 200 response — file accessible, not 403/404). That is the minimum required to prove the finding. You do not need to download the document, read its contents, or extract any salary information. The file is marked CONFIDENTIAL for a reason — reading it goes beyond what is needed to prove the exposure, and downloading sensitive employee data to your laptop introduces legal complexity. Document, confirm accessibility, report immediately to the client.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "You are preparing the attack surface map for the Meridian Financial engagement. You have the following findings from passive reconnaissance: (A) DMARC p=none on meridian-financial.com, (B) dev.meridian-financial.com resolving to a direct IP with no CDN, (C) a job posting mentioning AWS Lambda, (D) WHOIS showing the domain was registered with GoDaddy in 2009. Rank these findings in correct priority order from highest to lowest.",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "D → A → B → C (oldest infrastructure first suggests most risk)", "isCorrect": false },
+        { "id": "b", "text": "B → A → D → C (direct-IP server is most actionable for active testing; domain spoofable is high but requires social engineering; registration data and unconfirmed job posting are lower)", "isCorrect": true },
+        { "id": "c", "text": "A → B → C → D (email spoofing is always the highest priority finding)", "isCorrect": false },
+        { "id": "d", "text": "C → B → A → D (newer technologies are always higher risk)", "isCorrect": false }
+      ],
+      "explanation": "Priority is based on reachability and direct impact on active testing: B (dev.meridian-financial.com, direct IP) is High — it is directly reachable with no CDN filtering, making it the first active testing target. A (DMARC p=none) is High — the domain can be spoofed in phishing — but it does not represent a direct technical attack path for active scanning; it is an email security finding. D (GoDaddy registration, 2009) is Low — it is background intelligence. C (AWS Lambda job posting) is Low — a single-source unconfirmed inference from a job posting, not corroborated by DNS or Shodan data. The correct order: B (High, most actionable for active testing) → A (High, critical email security posture finding) → D (Low, established background) → C (Low, unconfirmed hypothesis).",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "On day 3 of a penetration test, passive reconnaissance produces a Shodan result showing an IP address in the agreed scope with an open port 5432 (PostgreSQL) — responding to Shodan's scanner without authentication. The PostgreSQL version banner shows version 9.6.24 (end of life since 2021). You query the IP address in WHOIS and confirm it belongs to the client. The IP is listed in the scope document. What is the correct immediate action and why?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Connect to port 5432 directly to confirm the database is accessible — Shodan data may be outdated.", "isCorrect": false },
+        { "id": "b", "text": "Document as Critical-candidate finding. Contact the client immediately to report that an in-scope IP appears to have a PostgreSQL database on port 5432 accessible without authentication according to Shodan. Do not connect to the database. Get client confirmation before any active testing of this port.", "isCorrect": true },
+        { "id": "c", "text": "Log it as a High finding on the attack surface map and test it during the active testing phase without contacting the client first.", "isCorrect": false },
+        { "id": "d", "text": "Ignore it — Shodan data is often wrong. Test it during the active phase and report only if confirmed.", "isCorrect": false }
+      ],
+      "explanation": "An internet-facing PostgreSQL database responding without authentication is a potential Critical finding — it means real data may be accessible to anyone. The professional response is: document the Shodan finding immediately with source (Shodan, date, query, result screenshot). Contact the client NOW — not Thursday when active testing begins. The Shodan data may be outdated, but the risk of waiting is that it is current and live customer data is exposed. The client needs to know a Shodan scan shows their database may be open. Connecting to port 5432 from your IP would be active testing — which requires active-phase authorisation and creates a log entry on the database server. The passive finding (Shodan data) is sufficient to trigger immediate client notification. The active confirmation (actually connecting to the database) happens with explicit client sign-off that they have checked and want you to proceed.",
+      "xpReward": 20
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mod2m3-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Open Zone Transfer",
+  "title": "The Server That Told You Everything",
+  "prompt": "You are conducting an authorised penetration test for a mid-sized insurance company. On day one of DNS enumeration, you run a zone transfer request against their primary nameserver — expecting it to fail, as it should on a properly configured server.\n\nIt does not fail.\n\nThe nameserver responds with 1,847 DNS records. Every internal hostname. Every IP address. Every service the company runs on the internet. You can see internal mail servers, VPN gateways, database servers with names like 'db-prod-01' and 'db-backup-02', a Jenkins CI/CD server, an internal HR portal, development and staging environments for three different products, and what appears to be a legacy payroll processing system that has not been updated since 2019.\n\nYou have a complete internal network map — assembled passively, in under two minutes, before you have contacted a single system.\n\nWalk through what you do next. Step by step. With your reasoning at each step.",
+  "context": "This scenario tests professional judgement in a situation where finding something valuable creates both an opportunity and a responsibility. The open zone transfer is itself a critical finding — independent of what the records reveal. How you handle it, and in what order, says something significant about the kind of security professional you are becoming.",
+  "guideQuestions": [
+    "You have just found what might be the most valuable intelligence in the entire engagement. Does that mean you should immediately begin scanning the most interesting targets from the zone transfer — the prod database, the legacy payroll system? Or does something else come first?",
+    "Your scope agreement covers 'all internet-facing systems of the client.' The zone transfer reveals internal hostnames and what appear to be private IP addresses for internal-only systems. Are those internal systems in scope? And if not, what do you do with the information about them?",
+    "The open zone transfer itself is a critical finding — regardless of what the records contain. When do you report it? At the end of the engagement in your final report, or immediately? Walk through the consequences of each choice.",
+    "The client's IT director calls you an hour after you started. She asks casually how things are going. You have 1,847 DNS records in front of you revealing the company's entire network structure. How much do you tell her, and how?"
+  ]
+}

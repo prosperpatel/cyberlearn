@@ -1,0 +1,25 @@
+{
+  "id": "mod2m4-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Google Dorking & Website Footprinting Lab",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 30,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "search",
+    "tags": ["google-dorking", "osint", "search-operators", "robots-txt", "sitemap", "metadata", "directory-listing", "passive-recon", "information-disclosure"]
+  },
+  "content": {
+    "objective": "Apply Google Dorking and website footprinting techniques hands-on against an authorised target. You will run systematic search operator queries, read robots.txt and sitemap.xml as reconnaissance sources, discover and document information disclosures, extract document metadata, and produce a structured passive reconnaissance summary — using nothing but publicly available information.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "Google Dorking & Website Footprinting",
+      "estimatedTime": "30 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm doing a Google Dorking and website footprinting lab. I want you to help me think like a professional — not give me answers.\n\nContext: I'm running passive search reconnaissance on an authorised target as part of an ethical hacking exercise. I've been taught to use Google operators: site:, filetype:, intitle:, inurl:, intext:, and cache:. I'm also reading the target's robots.txt and sitemap.xml, checking the Wayback Machine, and extracting metadata from any documents I find.\n\nWhen I get stuck, I'll share what I've found — specific Google Dork results, directory listings, robots.txt content, or metadata output — and I want you to ask me questions that help me interpret the findings, not explain them to me directly.\n\nFor example, if I find a robots.txt with 'Disallow: /api/v2/internal', don't tell me what this means. Instead ask: 'What does the fact that this path is in robots.txt suggest about how the organisation views it? And what would you do next with that path?'\n\nHelp me build the skill of reading reconnaissance findings — not the habit of asking someone else to read them for me. Push back if I try to take actions that would cross from passive recon into active testing."
+  }
+}

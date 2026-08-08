@@ -1,0 +1,45 @@
+{
+  "id": "mod3m3-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 3",
+  "cards": [
+    {
+      "front": "What is a service banner, and why do services send them?",
+      "back": "A service banner is a text string that a networked service transmits when a connection is first established — the service's identification message, sent automatically before the connecting party says anything.\n\nServices send banners because they were originally designed for administrators connecting to their own systems. The banner was a debugging and identification aid: 'you are connected to this server, running this software, version X.' Most services still include the full banner in their default configuration because administrators rarely change it.\n\nExamples:\n• SSH: SSH-2.0-OpenSSH_7.4\n• HTTP header: Server: Apache httpd 2.4.49 ((Unix))\n• Tomcat: Server: Apache Tomcat/7.0.37\n\nBanners are the simplest form of service identification — but they can be modified, so they should be verified with behavioural fingerprinting.",
+      "hint": "A banner is the service's greeting. Most greetings are honest. Verify all of them with -sV."
+    },
+    {
+      "front": "What is banner grabbing, and which tools are used for which services?",
+      "back": "Banner grabbing is the technique of connecting to a networked service and capturing whatever the service sends first.\n\nTools by service type:\n• curl -I http://[ip] — HTTP banner (response headers, no body)\n• curl -Ik https://[ip]:[port] — HTTPS banner (-k ignores certificate errors)\n• nc -nv [ip] [port] — raw TCP connection; reads SSH, FTP, SMTP banners automatically\n\nBanner grabbing works well when:\n• The service transmits a banner automatically (SSH, FTP)\n• The service includes version information in response headers (HTTP, HTTPS)\n\nBanner grabbing is limited when:\n• The banner has been modified or removed\n• The service does not send anything without a specific trigger\n\nIn those cases, use Nmap -sV for behavioural fingerprinting.",
+      "hint": "curl for web, nc for everything else. Connect and read."
+    },
+    {
+      "front": "How does Nmap -sV work, and when is it more reliable than banner grabbing?",
+      "back": "Nmap -sV activates service version detection through behavioural fingerprinting:\n\n1. Sends specific probe strings from its nmap-service-probes database to each open port\n2. Analyses how the service responds to each probe\n3. Compares response patterns against thousands of known software signatures\n4. Returns the software name and version when a match is found\n\nThis is identifying a service by how it behaves — not by what it announces.\n\n-sV is more reliable than banner grabbing when:\n• The banner has been modified or suppressed\n• The banner includes only the software name (not the version)\n• The service is on a non-standard port with no IANA label\n• You need corroboration of a banner result before committing it to the report\n\nProfessional approach: run both. Banner grabbing for speed; -sV for completeness and confirmation.",
+      "hint": "Probe → response → signature match. Behaviour identifies the software that changed its badge."
+    },
+    {
+      "front": "What is security through obscurity — and why does banner hiding not prevent fingerprinting?",
+      "back": "Security through obscurity is hiding information about a system's implementation rather than fixing the underlying vulnerability. Banner suppression — removing or changing the Server header — is a common example.\n\nWhy it does not prevent fingerprinting:\n\nA service's response behaviour is determined by its code, not its configuration. Apache and nginx handle HTTP requests differently. They structure response headers in different characteristic orders. They produce different error pages. They negotiate TLS in subtly different ways.\n\nChanging the Server header does not change any of this behaviour. Nmap -sV sends specific probes designed to trigger these differences — and matches the responses against its signature database regardless of what the banner claims.\n\nResult: behavioural fingerprinting identifies the software correctly even when the banner says something completely different.\n\nThe correct security measure: patch or upgrade the vulnerable software. The banner change is cosmetic.",
+      "hint": "The badge can be changed. The accent cannot. Behaviour always reveals identity."
+    },
+    {
+      "front": "Why is the version number the most important output of service fingerprinting?",
+      "back": "The version number is the key to systematic vulnerability research.\n\nCVE databases index every publicly disclosed vulnerability by affected product and version range. The NVD (nvd.nist.gov) is the authoritative source.\n\nWithout a version number:\n• CVE database searches return unfiltered results that cannot be confirmed as applicable\n• You cannot determine which known vulnerabilities affect this specific installation\n• Your finding is 'web server present' — an observation, not intelligence\n\nWith a version number:\n• 'Apache Tomcat 7.0.37' → NVD search → specific CVEs for 7.0.x range → confirmed affected versions → evidence-based finding\n• 'Apache httpd 2.4.49' → CVE-2021-41773 → critical path traversal → public exploit available\n\nService type = category. Version number = the intelligence that makes the assessment systematic.",
+      "hint": "No version → can't search the CVE database. Version confirmed → research can begin."
+    },
+    {
+      "front": "What does it mean when -sV returns no version for a filtered port?",
+      "back": "Filtered means the port scan probe was blocked by a firewall — Mission 2. When -sV is run against a filtered port, the same thing happens: the version detection probe is dropped before reaching the host. The service never receives the probe. There is no response to analyse.\n\n'No version' on a filtered port means: the version detection probe could not reach the service from this scanning position.\n\nIt does NOT mean:\n• The service is absent\n• The service has no known vulnerabilities\n• The port is safe or cleared\n\nProfessional documentation:\n'Version detection attempted on [port]/tcp — probe blocked by firewall filtering. Version and state of any service behind this filter remain unknown from the external scanning position. Follow-up investigation required.'\n\nFiltered is still an active unknown. Filtered ≠ cleared.",
+      "hint": "Filtered probe = blocked = version unknown. Unknown ≠ absent. Unknown ≠ safe."
+    },
+    {
+      "front": "What is the NVD and how does a professional use it after service fingerprinting?",
+      "back": "The NVD — National Vulnerability Database — at nvd.nist.gov is the authoritative US government repository of publicly disclosed security vulnerabilities. Maintained by NIST.\n\nWhat it contains for each CVE:\n• Affected product and version range\n• CVSS severity score (0–10; 9+ is Critical)\n• Technical description of the vulnerability\n• Links to patches, advisories, and proof-of-concept code\n\nProfessional workflow after fingerprinting:\n1. Open nvd.nist.gov\n2. Search: [software name] [version] — e.g., 'apache tomcat 7.0.37' or 'apache httpd 2.4.49'\n3. Review each CVE: what is the severity, which versions are affected, is there a public exploit, is there a patch?\n4. Document relevant CVEs in the engagement log\n5. Prioritise by severity and exploitability for Mission 4\n\nThe version number from Mission 3 is the direct input to this search.",
+      "hint": "nvd.nist.gov — software name + version in → CVEs out. Version is the key."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mod3m3-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Think First",
+  "title": "Before You Fingerprint: What Do You Expect to Find?",
+  "prompt": "Port 8443 on 45.77.180.11 is open. The service column says 'https-alt' — the IANA label for that port number, the same way port 80 is labelled 'http' and port 22 is labelled 'ssh.'\n\nYou are about to fingerprint this service — to find out what is actually running there, not just what the port number convention suggests.\n\nBefore Maya runs a single command: what do you think might be on port 8443? And more importantly — why would a professional care about the specific version of whatever that is, rather than just knowing the service type?\n\nThink about this before you continue.",
+  "context": "In Mission 1's passive recon briefing, there was a detail worth remembering: 'a Tomcat version banner Shodan captured months ago.' Shodan had seen this server's service announcement before — during passive reconnaissance, before the active phase of this engagement began.\n\nActive fingerprinting will confirm whether the same service is still running, and whether the version recorded months ago still matches what is installed today. Version strings decay. Systems get updated. Or they do not — which is exactly the kind of finding that professional assessments are hired to discover.",
+  "guideQuestions": [
+    "The service label 'https-alt' is the IANA convention for port 8443. What does this label actually confirm about the software running there — and what does it not confirm?",
+    "If you could send a network packet to port 8443 and read the reply — what kind of information might the service include in its response? Why would a service announce that information at all?",
+    "Why does the specific version number matter for a penetration tester — why is 'Tomcat 7.0.37' more useful than simply 'Tomcat'?",
+    "If an administrator changed their server's banner to say 'internal-server-v1' instead of 'Apache Tomcat/7.0.37' — would that make the server harder to fingerprint? Why or why not?"
+  ]
+}

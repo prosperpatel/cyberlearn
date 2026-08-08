@@ -1,0 +1,41 @@
+{
+  "id": "mod3m1-block-06-theory",
+  "type": "theory",
+  "order": 6,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "ICMP and Ping",
+  "title": "ICMP: How Computers Ask 'Are You There?'",
+  "content": "You now understand that an IP address is a label, not a guarantee. So how do you find out if a live system is actually behind it?\n\nYou send a message that says, in effect: 'If you are alive, please reply.'\n\nThe technical name for this mechanism is ICMP — the Internet Control Message Protocol.\n\n**What ICMP is (and why it exists)**\n\nICMP is a type of network message designed specifically for network management and diagnostics. Not for sending data, not for loading web pages — for sending control signals between devices. Think of it as the network's way of saying: 'This is not a business call. This is me checking that you exist.'\n\nThe internet is built on the assumption that things will sometimes go wrong. Packets get lost. Destinations become unreachable. Routers get overloaded. ICMP is the system that reports these conditions. When a router cannot deliver a packet, it uses ICMP to send back a 'Destination Unreachable' message. When a packet has been bouncing around the network too long, ICMP sends a 'Time Exceeded' message.\n\nAmong all the ICMP message types, the one used for host discovery is the most direct: the Echo Request.\n\n**How an ICMP Echo Request works**\n\nHere is what happens step by step when your computer sends an ICMP Echo Request:\n\n1. Your machine packages a small ICMP message: 'Echo Request, from my IP, to 45.77.180.10'\n2. The packet travels through the network toward the destination — hopping across routers\n3. The destination machine receives the Echo Request\n4. If it is alive and configured to respond, it immediately sends back: 'Echo Reply, from 45.77.180.10, to my IP'\n5. Your machine receives the reply — and records: that host is alive\n\nThis is ping. The word 'ping' comes from submarine sonar — a sonar operator sends a sound pulse into the ocean and listens for it to bounce back off a submarine. The bounce confirms something is out there. ICMP Echo Request is the computer network's version of that sonar pulse.\n\n**What a ping response tells you**\n\nWhen a host replies to your ping, you have confirmed:\n\n- The system is powered on at this moment\n- It has an active network connection\n- It is configured to respond to ICMP Echo Requests\n- The round-trip travel time tells you roughly how far away it is\n\nThe ping output also shows the latency — how long the packet took to reach the destination and return, measured in milliseconds. A response of 14ms is typical for a server in the same country or region. A response of 200ms suggests a server on another continent.\n\n**The ping command**\n\nFrom any terminal, you can run the ping command directly:\n\n```\nping 45.77.180.10\n```\n\nOr using Nmap for a more controllable version:\n\n```\nnmap -sn -PE 45.77.180.10\n```\n\nThe output when a host is alive:\n\n```\n64 bytes from 45.77.180.10: icmp_seq=1 ttl=64 time=14.3 ms\n```\n\nThis means: the host responded. 64 bytes came back. The round-trip took 14.3 milliseconds — a typical time for a server in the same country. (You will notice 'ttl=64' in the output. TTL is a technical field you will learn about in a later mission — for now, the key fact is: a reply arrived. The host is alive.)\n\nBut what happens when the output is:\n\n```\nRequest timeout for icmp_seq 1\nRequest timeout for icmp_seq 2\n```\n\nThis is where host discovery becomes interesting.",
+  "callouts": [
+    {
+      "type": "tip",
+      "title": "The Sonar Analogy",
+      "text": "Submarine sonar operators send a sound pulse into the water and listen for it to echo back off a solid object. If it echoes: something is out there. If it does not echo: nothing in that direction, OR the sound got absorbed, OR it did not travel far enough.\n\nICMP Echo Request is the digital sonar pulse. Echo Reply is the echo. But — just like in the ocean — the absence of an echo does not guarantee nothing is there. Some materials absorb sound. Some firewalls absorb ICMP packets. The analogy holds in both directions."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "ICMP",
+      "definition": "Internet Control Message Protocol. A network protocol used for sending diagnostic and control messages between networked devices. ICMP does not carry application data — it exists to communicate network conditions (destination unreachable, time exceeded) and to support host discovery tools like ping."
+    },
+    {
+      "term": "Echo Request",
+      "definition": "An ICMP message type sent to a target to ask 'are you there?' The target responds with an Echo Reply if it is alive and configured to respond. The Echo Request is the packet your machine sends when you run the ping command."
+    },
+    {
+      "term": "Echo Reply",
+      "definition": "The ICMP response sent by a live host when it receives an Echo Request. An Echo Reply confirms the host is alive and reachable at the time the request was sent. The round-trip time between Echo Request and Echo Reply is the ping latency."
+    },
+    {
+      "term": "Ping",
+      "definition": "The common name for the utility that sends ICMP Echo Requests to a target and listens for Echo Replies. A successful ping — receiving a reply — confirms the host is alive. Ping is built into every major operating system and is the fastest host discovery technique when ICMP is not filtered."
+    }
+  ],
+  "codeBlocks": [
+    {
+      "language": "bash",
+      "code": "# Standard ping (built into every OS)\nping 45.77.180.10\n\n# Nmap ICMP Echo scan (single host)\nnmap -sn -PE 45.77.180.10\n\n# Nmap default host discovery sweep of a /24 range\nnmap -sn 45.77.180.0/24",
+      "caption": "Three ways to perform ICMP-based host discovery. The Nmap -sn flag performs host discovery only — no port scanning."
+    }
+  ]
+}

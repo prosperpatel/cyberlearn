@@ -1,0 +1,16 @@
+{
+  "id": "mod3m2-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Think First",
+  "title": "Before You Scan: What Is a Port?",
+  "prompt": "You have two confirmed live hosts. The host discovery phase is complete. The next command you want to run is something like:\n\nnmap 45.77.180.10\n\nBefore you do — stop for a moment.\n\nYou are about to scan for open ports. But what is a port, exactly? Not the word — the concept. Why does a port number exist at all? What problem does it solve?\n\nAnd when Nmap comes back and says a port is 'open' — what does that actually mean at the network level? What is the difference between open, closed, and a third state you may not have encountered yet?\n\nThink about this yourself before you continue.",
+  "context": "This is not a trick question and there is no single correct answer — yet. The goal is to notice what assumptions you are already making when you reach for a port scanner. You have probably typed port numbers before — port 80 for web, port 22 for SSH. But why those numbers? What are they numbers of? And what is actually happening on the network when a port responds?\n\nIn professional security work, understanding what your tool is measuring — not just how to run it — is what separates someone who can interpret results from someone who can only collect them.",
+  "guideQuestions": [
+    "If nmap returns '80/tcp open http' — what specifically is 'open'? What network condition does that word describe?",
+    "What is the difference between a port being 'closed' and a port being 'filtered'? Which result is more concerning for a penetration tester — and why?",
+    "Nmap scans roughly 1,000 ports by default. There are 65,535 possible ports. What might be running on the other 64,535 — and should you always check?",
+    "If a firewall is silently dropping packets to a specific port — what would Nmap report for that port's state? How would you know the port might be hiding something?"
+  ]
+}

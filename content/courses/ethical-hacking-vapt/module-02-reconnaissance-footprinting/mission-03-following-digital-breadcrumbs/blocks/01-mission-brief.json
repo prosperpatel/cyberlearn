@@ -1,0 +1,28 @@
+{
+  "id": "mod2m3-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Following Digital Breadcrumbs",
+  "operativeCodename": "Operation Zone Transfer",
+  "subtitle": "Every server, service, and system an organisation runs leaves a public trail. DNS is where that trail lives — and most organisations have no idea how much of it is readable.",
+  "briefing": "In the first hour of an authorised penetration test against a multinational logistics company, a security researcher did exactly one thing.\n\nShe ran DNS queries.\n\nNo port scanning. No vulnerability testing. No traffic sent to any of the company's servers. Just queries — the same kind your browser makes automatically every time you visit a website.\n\nIn forty-five minutes, she had assembled the following from DNS records alone:\n\n— Twenty-three subdomains the company had never publicly advertised, including a development server, a staging environment, and what appeared to be a legacy payment processing interface from a system migration two years prior — still live, still connected to the internet, running software no longer receiving security updates.\n\n— The make and configuration of their internal mail server — revealed by the hostname in the MX record, which pointed to an on-premises Exchange deployment rather than a cloud provider, confirming the server was internet-facing and directly reachable.\n\n— Confirmation that the company had recently migrated to Salesforce CRM — found in a TXT record containing the Salesforce domain verification token that had been added during setup and never removed.\n\n— A CNAME record on a forgotten subdomain pointing to a cloud application that had been deleted months earlier — a configuration that would allow anyone to register that deleted application name and serve any content from the company's trusted subdomain.\n\n— The company's VPN gateway hostname and its direct IP address — found by querying a subdomain that had been configured years earlier and never placed behind the CDN that protected everything else.\n\nNone of this required hacking. None of it required special tools. It required knowing how to ask the right questions of the Domain Name System — a public database that every organisation in the world writes to, continuously, without ever considering who might be reading.\n\nDNS is not just the system that converts google.com into an IP address. It is the public record of everything an organisation runs on the internet. Every server. Every service. Every cloud provider. Every vendor relationship. Every piece of infrastructure they forgot to clean up.\n\nThis mission teaches you how to read it.",
+  "whyItMatters": "DNS enumeration is performed immediately after WHOIS lookups on every professional penetration test and bug bounty investigation. It is where reconnaissance transitions from 'who owns this domain' to 'what does their entire internet-facing infrastructure look like.' Each DNS record type answers a different intelligence question. Knowing which question each record answers — and knowing that most organisations never audit what their DNS reveals — is what separates a surface-level reconnaissance from the kind that finds what a target least expects you to know.",
+  "objectives": [
+    "Explain what DNS enumeration is and why it reveals far more than just IP addresses",
+    "Identify and interpret all eight DNS record types: A, AAAA, MX, NS, TXT, CNAME, PTR, and SRV",
+    "Explain what a DNS zone transfer is, why it exists, and what it exposes when misconfigured",
+    "Describe subdomain enumeration — what it is, how it works, and why subdomains are often the most valuable reconnaissance findings",
+    "Recognise the professional implications of each DNS record type in a real engagement"
+  ],
+  "skillsUnlocked": [
+    "Querying and interpreting all eight DNS record types using free command-line and web tools",
+    "Identifying what each DNS record type reveals about infrastructure, email security, and vendor relationships",
+    "Recognising misconfigured zone transfers and understanding their professional implications"
+  ],
+  "closingMessage": "That researcher's forty-five-minute DNS session produced the most significant finding of the entire engagement — the forgotten legacy payment interface — before a single vulnerability scanner had been opened. The fix took the client three months and a complete infrastructure audit. The discovery took forty-five minutes of DNS queries. You are about to learn exactly what she knew.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["dns", "dns-enumeration", "a-record", "mx-record", "ns-record", "txt-record", "cname", "ptr", "srv", "zone-transfer", "subdomain-enumeration"]
+}

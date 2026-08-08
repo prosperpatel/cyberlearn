@@ -1,0 +1,39 @@
+{
+  "id": "mod2m2-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These are the four mistakes beginners make most consistently when learning domain and DNS intelligence. Each one produces either a false conclusion, a missed finding, or — in the case of the last one — a legal problem. In a professional engagement, any of these outcomes has real consequences.",
+  "mistakes": [
+    {
+      "title": "Assuming the A record IP belongs to the target — and jumping straight to scanning",
+      "wrong": "'I looked up their domain. The A record shows IP 104.16.148.24. That's their server. Let me run a port scan.'",
+      "right": "Always run an IP WHOIS lookup on the resolved IP before drawing any conclusion. If the IP block belongs to Cloudflare, Akamai, or AWS CloudFront — you are looking at a CDN node, not the target's server. The real server is behind it.",
+      "explanation": "Scanning a Cloudflare IP is not scanning the target. It is scanning Cloudflare's infrastructure — which you have no authorisation to scan, even if your scope agreement covers the target domain. The results will have nothing to do with the target's actual servers. Beyond wasting time, you have now probed infrastructure outside your authorised scope, which creates legal exposure. IP WHOIS lookup takes thirty seconds and prevents this mistake entirely. Make it automatic.",
+      "severity": "critical"
+    },
+    {
+      "title": "Stopping at the A record — treating DNS as only a name-to-IP translator",
+      "wrong": "'I looked up the IP address for their domain. That's DNS done. Moving on.'",
+      "right": "Query all five major record types for every domain. The A record gives you the server IP. MX gives you the email provider and often real server IPs. TXT gives you email security posture — specifically whether the domain can be spoofed. NS gives you the infrastructure provider. CNAME gives you CDN and SaaS tool relationships.",
+      "explanation": "The A record alone is the least intelligence-rich DNS lookup available. A DMARC TXT record set to p=none tells you the domain can be impersonated in email — a finding that appears directly in professional penetration testing reports. An MX record pointing to a self-hosted mail server often reveals the real origin IP behind a CDN. NS records pointing to AWS Route 53 tell you the entire infrastructure is on AWS. CNAME records reveal Salesforce portals, HubSpot integrations, and Atlassian tools. Stopping at the A record and calling it done is like reading only the title of a document.",
+      "severity": "warning"
+    },
+    {
+      "title": "Confusing a domain with a website — and only looking at the main site",
+      "wrong": "'I visited their website. I know what their public presence looks like. That covers the domain.'",
+      "right": "A domain is an address. A website is one of potentially dozens of services running under that address. Always enumerate subdomains, check all DNS record types, and investigate historical records. The most valuable findings are rarely on the main website.",
+      "explanation": "The main website is the front door. Everything interesting is on subdomains. Legacy systems, staging environments, developer portals, admin interfaces, internal tools — these are almost universally on subdomains. They are frequently not behind the CDN that protects the main site. They are often running older software. In Mission 1, Maya found the subdomains through Certificate Transparency logs before she looked at the main website at all. A professional who only examines the main website has examined one item in a warehouse and declared the warehouse empty.",
+      "severity": "warning"
+    },
+    {
+      "title": "Not checking for typosquatting and lookalike domains",
+      "wrong": "'They have one domain — the one on their website. That's all I need to investigate.'",
+      "right": "As part of every domain intelligence phase, check for registered variants of the client's domain: missing or added hyphens, different TLDs, transposed letters, added words ('portal-', 'secure-', 'my-'). An active phishing domain with a mail server is an immediate client notification — before any other work continues.",
+      "explanation": "Attackers register typosquatting domains weeks or months before a phishing campaign begins, giving them time to warm up the domain's email reputation and prepare the fake website. Most organisations have zero monitoring for new registrations that resemble their own domain. A penetration tester who finds an active lookalike domain during domain intelligence may have just uncovered a live threat operation that the client was completely unaware of. This is not a scope question — it is a professional duty of care. The client's wellbeing takes precedence over scope boundaries when an active external threat is discovered.",
+      "severity": "critical",
+      "example": "On day two of the Meridian Financial engagement, Maya found meridianfinancial.com — identical to the client's domain except for a missing hyphen — registered two months prior, with an active mail server hosted in Eastern Europe. She sent an urgent email to the engagement contact before doing anything else that morning. The client confirmed they had already received reports from staff of suspicious emails appearing to come from internal addresses — sent from the fake domain. The penetration testers found the source of the attack in four minutes of passive domain investigation."
+    }
+  ]
+}

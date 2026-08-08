@@ -1,0 +1,63 @@
+{
+  "id": "mod3m1-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Host Discovery — Professional Reference",
+  "sections": [
+    {
+      "heading": "Core Nmap Host Discovery Flags",
+      "rows": [
+        { "label": "-sn", "value": "Host discovery only — no port scan. Use for discovery sweeps." },
+        { "label": "-PE", "value": "ICMP Echo Request probe. Standard ping — fast, often blocked." },
+        { "label": "-PS [ports]", "value": "TCP SYN probe to specified ports. Example: -PS80,443" },
+        { "label": "-PA [ports]", "value": "TCP ACK probe to specified ports. Example: -PA80" },
+        { "label": "-Pn", "value": "Skip host discovery — treat all hosts as up. Last resort only." },
+        { "label": "--reason", "value": "Show why Nmap marked a host up or down (echo-reply, syn-ack, reset)" },
+        { "label": "-T4", "value": "Timing: fast (professional default)" },
+        { "label": "-T2", "value": "Timing: polite (slower, quieter — for sensitive networks)" },
+        { "label": "-oA [filename]", "value": "Save output in all formats: normal, XML, grepable" }
+      ]
+    },
+    {
+      "heading": "Discovery Commands — In Order of Use",
+      "rows": [
+        { "label": "Step 1: Default sweep", "value": "nmap -sn -oA host-discovery 45.77.180.0/24" },
+        { "label": "Step 2: Follow-up TCP", "value": "nmap -sn -PS80,443 45.77.180.11" },
+        { "label": "Step 3: ACK probe", "value": "nmap -sn -PA80 45.77.180.11" },
+        { "label": "Step 4: All probes combined", "value": "nmap -sn -PE -PS80,443 -PA80 45.77.180.11" },
+        { "label": "Last resort: skip discovery", "value": "nmap -Pn 45.77.180.11" }
+      ]
+    },
+    {
+      "heading": "Interpreting Host Discovery Output",
+      "rows": [
+        { "label": "Host is up (reason: echo-reply)", "value": "ICMP Echo Request got a reply — host confirmed alive" },
+        { "label": "Host is up (reason: syn-ack)", "value": "TCP SYN got SYN/ACK — port open and host alive" },
+        { "label": "Host is up (reason: reset)", "value": "TCP SYN got RST — port closed but host alive" },
+        { "label": "No response (timeout)", "value": "Ambiguous — could be offline OR filtering probes. Try TCP next." },
+        { "label": "Host seems down", "value": "Nmap's phrasing when all default probes fail — NOT a confirmed offline status" }
+      ]
+    },
+    {
+      "heading": "Professional Host Discovery Workflow",
+      "rows": [
+        { "label": "1. Check scope", "value": "Confirm which IPs are authorised before sending any probe" },
+        { "label": "2. Default sweep", "value": "nmap -sn [range] — ICMP + TCP combined" },
+        { "label": "3. Follow up", "value": "TCP probes on any expected-live host that did not respond" },
+        { "label": "4. Document", "value": "Note every result: IP, probe type, response, latency, timestamp" },
+        { "label": "5. Build the list", "value": "Confirmed live hosts become the input for all port scans" }
+      ]
+    },
+    {
+      "heading": "PING Framework",
+      "rows": [
+        { "label": "P — Probe first", "value": "Send discovery packets before any port scan" },
+        { "label": "I — Interpret carefully", "value": "No reply ≠ offline. ICMP filtering is common." },
+        { "label": "N — Note everything", "value": "Method, response, latency, timestamp — all of it" },
+        { "label": "G — Go targeted", "value": "Scan only confirmed live hosts" }
+      ]
+    }
+  ]
+}

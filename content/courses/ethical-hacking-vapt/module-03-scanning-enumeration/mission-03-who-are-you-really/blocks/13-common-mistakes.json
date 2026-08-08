@@ -1,0 +1,47 @@
+{
+  "id": "mod3m3-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Avoid These Mistakes",
+  "intro": "These are the service fingerprinting mistakes that appear most frequently in real assessments — from student labs to professional engagements. Each one is understandable. Each one produces incomplete or misleading findings.",
+  "mistakes": [
+    {
+      "title": "Treating the Service Name as a Complete Finding",
+      "wrong": "'Port 80 is open — running a web server.' That is the finding. Moving on.",
+      "right": "Service type is a category. Service version is the intelligence. 'Apache httpd 2.4.49' is a finding. 'Web server present' is an incomplete observation that cannot be connected to any CVE.",
+      "explanation": "CVE databases are indexed by product name and version range. 'Web server' is not a searchable identifier. Without a version number, there is no way to systematically identify known vulnerabilities for the service. Every service fingerprinting effort must produce a version number — not just a service category. If version detection fails, document the limitation precisely: not 'no vulnerabilities found' but 'version could not be determined.'",
+      "severity": "critical",
+      "example": "A team notes 'web server on port 80' and moves to the next host. The server is running Apache httpd 2.4.49. CVE-2021-41773 — critical path traversal, public exploit available — directly affects Apache httpd 2.4.49. The report says the web server was assessed. The critical vulnerability is never identified."
+    },
+    {
+      "title": "Assuming a Modified Banner Means the Service Cannot Be Identified",
+      "wrong": "The Server header is blank. I cannot identify the web server software. I'll note it as 'unknown service' and move on.",
+      "right": "A blank or modified banner is a starting point, not a conclusion. Run Nmap -sV, which identifies most web servers through behavioural fingerprinting regardless of what the Server header says.",
+      "explanation": "Banner grabbing relies on what the service chooses to announce. Nmap -sV relies on how the service behaves — which is determined by its code, not its configuration. A blank Server header stops banner-reading tools. It does not stop behavioural fingerprinting. Run -sV and let the probe database do the work.",
+      "severity": "warning",
+      "example": "A server's banner has been changed to a blank string. A learner notes 'banner removed — service unknown.' Running nmap -sV returns 'Apache httpd 2.4.49' — the software identified through response behaviour, confirmed independently of the banner."
+    },
+    {
+      "title": "Recommending 'Remove the Banner' as a Security Fix",
+      "wrong": "Finding: Server header exposes Apache version. Recommendation: Remove the Server header to prevent version enumeration.",
+      "right": "Banner suppression is a defence-in-depth observation — document it as such. The correct recommendation for a vulnerable version is to patch or upgrade the software. Removing the banner does not change the underlying vulnerability.",
+      "explanation": "If a server is running a vulnerable version of software, changing the Server header does not reduce that vulnerability. The CVEs still apply. The exploits still work. An assessor using behavioural fingerprinting identifies the software regardless of the banner. Always recommend patching as the primary remediation and note banner suppression as an optional additional measure — never as a substitute.",
+      "severity": "warning"
+    },
+    {
+      "title": "Reporting 'No Version Found' on a Filtered Port as a Positive Finding",
+      "wrong": "Port 3306 is filtered. I ran -sV. No version returned. I'll note it as 'MySQL — no vulnerabilities identified.'",
+      "right": "A filtered port returns no version information because the probe never reached the service. 'No version' on a filtered port means the version is unknown — not that there are no vulnerabilities.",
+      "explanation": "When a port is filtered, Nmap's probes are dropped by the firewall before reaching the host. The service receives no probe and sends no response. 'No version identified' on a filtered port is not a cleared finding. It is an unresolved question that must be documented accurately: 'Version detection attempted — probe blocked by filtering. State and version of any service behind this filter remain unknown.'",
+      "severity": "warning"
+    },
+    {
+      "title": "Running Version Detection Before Port Scanning",
+      "wrong": "I'll run nmap -sV against the entire IP range to get service versions in one scan — why do a separate port scan first?",
+      "right": "Run port scanning first to identify open ports, then run -sV against confirmed open ports only. Running -sV against the full IP range or full port range on every host is significantly slower and produces the same results as the two-step approach.",
+      "explanation": "Service version detection works by connecting to each port and sending probes. If you run -sV on all 65,535 ports of all target hosts, you are sending probe sequences to thousands of closed or filtered ports that return nothing useful — and spending minutes doing it. The professional workflow: port scan first to identify open ports, then -sV targeted at those specific ports. Same intelligence, much faster.",
+      "severity": "warning"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "mod2m3-block-19-mission-complete",
+  "type": "mission-complete",
+  "order": 19,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Zone Transfer — Complete",
+  "message": "Here's what James said when they wrapped up day three.\n\nMaya had just finished documenting the Meridian Financial DNS findings. MX records revealing Google Workspace. TXT records with DMARC p=none — the domain that could be spoofed. The Salesforce verification token that nobody had asked for. CNAME records mapping the organisation's SaaS footprint. The portal subdomain aliasing to Salesforce. And most critically: dev.meridian-financial.com resolving to a Vultr VPS with a direct IP — no CDN, probably running the same application code as production, likely updated less often.\n\nThey had identified the organisation's email platform, their CRM, their cloud security posture, their DNS hosting provider, and their most exposed attack surface — all from nineteen minutes of DNS queries. All passive. All public. Zero contact with any of their systems.\n\nJames looked at the report and said: 'We haven't scanned a single port. And we already know more about their infrastructure than their own IT team probably does.'\n\nThat is not an exaggeration. It is how infrastructure reconnaissance actually works.\n\nYou now know how to read an organisation's DNS. Not just look things up — read them. You know that MX records tell you which vendor runs the mail room, and that a self-hosted mail server often has a real IP the CDN doesn't cover. You know that NS records tell you which company holds the master account for the entire DNS zone. You know that TXT records are a vendor disclosure form — every service verification token is a cloud product announcement. You know that CNAME records map the relationship between a company's hostnames and the services they rely on — and that a dangling CNAME is an unlocked door. You know that PTR records let you read an IP address backwards and find the server name. You know what a zone transfer is, why it was designed to exist, and why an authorised zone transfer attempt against a misconfigured nameserver hands you the complete building blueprint.\n\nAnd you know the most important thing: the development and legacy subdomains — the branches no one at headquarters thinks about — are often the entry point the organisation never expected anyone to find.\n\nThe Meridian Financial engagement is not finished. Maya and James have a target: dev.meridian-financial.com, direct IP, no CDN protection. But before active scanning, there is one more passive phase. And this one doesn't touch DNS at all.\n\nSearch engines have been crawling the public internet for decades. Every file an organisation accidentally left publicly accessible, every directory listing they forgot to disable, every admin portal that got indexed before they added access controls — Google has it. And there are search operators that let you query that index with surgical precision.\n\nWhen Maya opens the browser for day four, she won't open a terminal. She'll open a search bar.\n\nMission 4: Google Knows More Than Their IT Team.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Zone Reader",
+      "description": "Completed Mission 3: Following Digital Breadcrumbs — can enumerate all eight DNS record types, identify CDN gaps and dangling CNAMEs, interpret DMARC policy values, discover subdomains through Certificate Transparency and brute force, and understand zone transfers. Reads infrastructure stories from public DNS records."
+    }
+  ],
+  "nextSteps": [
+    "Mission 04: Google Knows More Than Their IT Team — advanced search operators (Google Dorking), finding exposed admin portals, publicly indexed configuration files, directory listings, and infrastructure details that organisations never intended to be publicly visible",
+    "Optional: Complete the DNS Enumeration Lab if you haven't — applying enumeration techniques hands-on is what converts knowledge into skill",
+    "Review the DNS Enumeration Cheat Sheet — the eight record types, DMARC p= values, and professional sequence appear constantly from this point forward"
+  ]
+}

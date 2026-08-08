@@ -1,0 +1,69 @@
+{
+  "id": "mod3m2-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Port Scanning — Professional Reference",
+  "sections": [
+    {
+      "heading": "Core Nmap Port Scanning Flags",
+      "rows": [
+        { "label": "-sS", "value": "TCP SYN scan — professional default. Requires root." },
+        { "label": "-sT", "value": "TCP connect scan — no root needed, slower, more visible." },
+        { "label": "-p [ports]", "value": "Scan specific ports. Example: -p 22,80,443,8443,3306" },
+        { "label": "-p-", "value": "Scan all 65,535 ports (full-range). Same as -p 1-65535." },
+        { "label": "--top-ports N", "value": "Scan the N most common ports. Example: --top-ports 100" },
+        { "label": "-F", "value": "Fast mode — top 100 ports only. Quick initial check." },
+        { "label": "-T4", "value": "Timing: fast (professional default for standard networks)" },
+        { "label": "-T2", "value": "Timing: polite — slower, quieter, for sensitive networks" },
+        { "label": "-oA [filename]", "value": "Save all formats: .nmap, .xml, .gnmap" },
+        { "label": "--reason", "value": "Show why Nmap assigned each port state (reset, syn-ack, no-response)" }
+      ]
+    },
+    {
+      "heading": "Scanning Commands — In Order of Use",
+      "rows": [
+        { "label": "Step 1: Default scan", "value": "nmap -sS -T4 -oA port-scan-[ip] [ip]" },
+        { "label": "Step 2: Full-range scan", "value": "nmap -sS -p- -T4 -oA fullscan-[ip] [ip]" },
+        { "label": "Step 3: Targeted follow-up", "value": "nmap -sS -p [specific-ports] [ip]" },
+        { "label": "Without root", "value": "nmap -sT -T4 -oA port-scan-[ip] [ip]" }
+      ]
+    },
+    {
+      "heading": "Interpreting Port States",
+      "rows": [
+        { "label": "open", "value": "SYN/ACK received. Service listening. Fingerprint and test." },
+        { "label": "closed", "value": "RST received from host. Port empty. Document and move on." },
+        { "label": "filtered", "value": "No response. Probe blocked. Unknown state. Investigate further." },
+        { "label": "open|filtered", "value": "UDP scan result — Nmap cannot distinguish open from filtered on UDP." }
+      ]
+    },
+    {
+      "heading": "Common Port Reference",
+      "rows": [
+        { "label": "21", "value": "FTP — file transfer" },
+        { "label": "22", "value": "SSH — secure remote terminal" },
+        { "label": "25", "value": "SMTP — email sending" },
+        { "label": "80", "value": "HTTP — unencrypted web" },
+        { "label": "443", "value": "HTTPS — encrypted web" },
+        { "label": "3306", "value": "MySQL — database" },
+        { "label": "3389", "value": "RDP — Windows remote desktop" },
+        { "label": "5432", "value": "PostgreSQL — database" },
+        { "label": "8080", "value": "Alternative HTTP (dev servers, proxies)" },
+        { "label": "8443", "value": "Alternative HTTPS (management interfaces, admin panels)" }
+      ]
+    },
+    {
+      "heading": "Professional Port Scanning Workflow",
+      "rows": [
+        { "label": "1. Confirm targets", "value": "Only scan hosts confirmed alive in host discovery (Mission 1)" },
+        { "label": "2. Default scan", "value": "nmap -sS — quick initial picture of open, closed, filtered" },
+        { "label": "3. Full-range scan", "value": "nmap -sS -p- — on every high-priority target" },
+        { "label": "4. Document separately", "value": "Open, closed, and filtered — never grouped together" },
+        { "label": "5. Flag filtered for follow-up", "value": "Never mark filtered as safe or cleared" },
+        { "label": "6. Build the port map", "value": "Input for service fingerprinting — Mission 3" }
+      ]
+    }
+  ]
+}

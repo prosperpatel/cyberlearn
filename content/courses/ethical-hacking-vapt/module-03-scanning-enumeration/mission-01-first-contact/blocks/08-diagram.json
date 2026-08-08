@@ -1,0 +1,30 @@
+{
+  "id": "mod3m1-block-08-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "How It Flows",
+  "title": "Host Discovery: Three Scenarios",
+  "description": "Three scenarios showing what happens during host discovery depending on how the network is configured. Scenario 1: ICMP works normally. Scenario 2: A firewall blocks ICMP — the host looks offline but is not. Scenario 3: A TCP probe reveals the hidden host.",
+  "nodes": [
+    { "id": "attacker", "label": "Your Machine\n(Kali Linux)", "type": "attacker", "detail": "Running Nmap host discovery" },
+    { "id": "internet", "label": "Internet\n(Routers)", "type": "network", "detail": "Routes packets toward destination" },
+    { "id": "live_host_icmp", "label": "Live Host\n45.77.180.10", "type": "target", "detail": "Responds to ICMP — scenario 1" },
+    { "id": "firewall", "label": "Firewall", "type": "security", "detail": "Configured to block ICMP silently" },
+    { "id": "hidden_host", "label": "Live Host\n45.77.180.11", "type": "target", "detail": "Alive, but ICMP is blocked — scenarios 2 and 3" },
+    { "id": "tcp_probe_node", "label": "TCP Probe\nPort 80", "type": "action", "detail": "Alternative probe when ICMP fails" },
+    { "id": "tcp_response_node", "label": "TCP Response\n(Host Replied)", "type": "result", "detail": "Any TCP response confirms host is alive" }
+  ],
+  "edges": [
+    { "from": "attacker", "to": "internet", "label": "ICMP Echo Request", "type": "probe", "animated": true },
+    { "from": "internet", "to": "live_host_icmp", "label": "Packet arrives", "animated": true },
+    { "from": "live_host_icmp", "to": "attacker", "label": "Echo Reply → HOST IS UP", "type": "success", "animated": true },
+    { "from": "attacker", "to": "firewall", "label": "ICMP Echo Request", "type": "probe", "animated": true },
+    { "from": "firewall", "to": "hidden_host", "label": "BLOCKED — packet dropped silently", "type": "blocked" },
+    { "from": "attacker", "to": "firewall", "label": "TCP Probe to port 80", "type": "probe", "animated": true },
+    { "from": "firewall", "to": "hidden_host", "label": "TCP allowed through", "animated": true },
+    { "from": "hidden_host", "to": "attacker", "label": "TCP Response → HOST IS UP", "type": "success", "animated": true }
+  ],
+  "caption": "Scenario 1: ICMP Echo Request reaches a live host, which returns an Echo Reply. Host confirmed alive.\n\nScenario 2: Firewall blocks the ICMP packet silently. The host receives nothing, sends nothing. Ping times out. The host appears offline — it is not.\n\nScenario 3: A TCP probe is sent to port 80. Firewalls cannot block TCP/80 without breaking web access for every user — so the probe gets through. The host responds with a TCP reply. Either way: the host that was invisible to ICMP is revealed. (The specific names of these TCP responses are covered in the TCP Discovery section.)",
+  "interactive": false
+}

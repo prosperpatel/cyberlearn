@@ -1,0 +1,75 @@
+{
+  "id": "mod3m1-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You are beginning the active phase of a penetration test. You have 15 IP addresses from passive reconnaissance. Why should you run a host discovery sweep before starting port scanning?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Because host discovery is legally required before active scanning under most security frameworks.", "isCorrect": false },
+        { "id": "b", "text": "Because some IPs from passive recon may have no live system behind them right now. Scanning dead hosts wastes time, generates only timeouts, and produces no useful output. Host discovery confirms which IPs have live systems before you invest scan time in them.", "isCorrect": true },
+        { "id": "c", "text": "Because port scanning cannot detect firewalls without host discovery data as input.", "isCorrect": false },
+        { "id": "d", "text": "Because Nmap requires a confirmed live host list as a prerequisite before running port scans.", "isCorrect": false }
+      ],
+      "explanation": "The core purpose of host discovery is validation — confirming that the IPs from passive recon actually have live systems behind them right now. Network topology changes between the time a scope is written and the time testing begins: servers get decommissioned, VPS contracts expire, cloud instances get terminated. A port scan against a dead IP produces only timeouts, wastes scan time, and generates noise. A two-minute host discovery sweep makes every subsequent scan faster, more accurate, and more efficient.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "You ping 45.77.180.10 and receive: '64 bytes from 45.77.180.10: icmp_seq=1 ttl=64 time=14.3 ms'. What does this confirm — and what does it NOT confirm?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "It confirms the host is alive and reachable. It does NOT confirm which services are running, which ports are open, or whether a firewall is present.", "isCorrect": true },
+        { "id": "b", "text": "It confirms the host is a Linux system with no firewall, and that all ports are open. A ping response means the host is fully unprotected.", "isCorrect": false },
+        { "id": "c", "text": "It confirms the host is running a web server. Port 64 is the HTTP port on Linux systems.", "isCorrect": false },
+        { "id": "d", "text": "It confirms all 65,535 ports on this host are open and accepting connections.", "isCorrect": false }
+      ],
+      "explanation": "An ICMP Echo Reply confirms the host is alive and reachable at that moment. That is the single thing a successful ping tells you. It says nothing about which ports are open, which services are running, or what the host is configured to do — those questions are answered by port scanning in Mission 2. It also does not confirm the absence of a firewall — many firewalls allow ICMP through while blocking other types of traffic entirely. (You may have noticed 'ttl=64' in the output above. TTL is a technical field that will be covered in a later mission — you do not need to understand it yet.)",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "You ping 45.77.180.11 and receive only 'Request timeout' — no reply at all. Which statement correctly describes what you know at this point?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The host is definitely offline. Timeouts always mean no system is present at that address.", "isCorrect": false },
+        { "id": "b", "text": "The host is definitely alive but blocking ICMP. Timeouts on ping always mean ICMP filtering.", "isCorrect": false },
+        { "id": "c", "text": "The ICMP probe received no response — which could mean the host is offline, or ICMP is being filtered by a firewall. The result is ambiguous. Follow up with TCP probes before concluding anything.", "isCorrect": true },
+        { "id": "d", "text": "The IP address is invalid — if a host existed there, ping would always get a response.", "isCorrect": false }
+      ],
+      "explanation": "A timeout on ICMP is ambiguous — it has three possible explanations: (1) the host is offline or decommissioned, (2) a firewall is silently dropping ICMP packets — the host is alive but invisible to ping, or (3) a network device in the path is filtering ICMP before it reaches the host. All three produce the same result: timeout. Windows Server blocks ICMP by default. Cloud security groups frequently block ICMP. The professional response is to follow up with TCP probes: nmap -sn -PS80,443 45.77.180.11. Only after multiple probe types return nothing should you document the host as 'no response to any probe.'",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "A host expected to be alive does not respond to ICMP ping. Which Nmap command is the correct first follow-up?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "nmap -sn 45.77.180.11 (run the default ping scan again — it may have been a temporary network glitch)", "isCorrect": false },
+        { "id": "b", "text": "nmap -sn -PS80,443 45.77.180.11 (TCP SYN probes to ports 80 and 443)", "isCorrect": true },
+        { "id": "c", "text": "nmap -p 1-65535 45.77.180.11 (a full port scan — any open port will reveal the host is alive)", "isCorrect": false },
+        { "id": "d", "text": "nmap -sn -T5 45.77.180.11 (run the same scan at maximum speed to force a response)", "isCorrect": false }
+      ],
+      "explanation": "When ICMP is blocked, the correct first follow-up is targeted TCP probes. nmap -sn -PS80,443 sends TCP SYN packets to ports 80 and 443 — two ports that firewalls commonly allow through because blocking them would break web access to the server. If the host is alive, it responds with SYN/ACK (port open) or RST (port closed, but host present). Either response confirms the host is up. A full port scan would eventually reveal a live host but is far slower and noisier than a targeted TCP probe during the discovery phase. Running the default scan again at -T5 would risk packet loss, which could make the situation worse.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "On the Meridian Financial engagement, nmap -sn 45.77.180.11 returns no response. You follow up with nmap -sn -PS80,443 45.77.180.11 and receive: 'Host is up (0.021s latency) — reason: syn-ack'. What does this tell you — and what was the cause of the earlier failure?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The host is alive, running a web service on port 80. The earlier ICMP timeout was caused by ICMP filtering — the firewall blocked ping but allowed TCP/80.", "isCorrect": true },
+        { "id": "b", "text": "The host briefly came online between the first and second scans. It was genuinely offline during the ICMP probe.", "isCorrect": false },
+        { "id": "c", "text": "The SYN/ACK response proves the host has no firewall. Firewalls always block both ICMP and TCP together.", "isCorrect": false },
+        { "id": "d", "text": "The -PS flag overrides ICMP filtering by using a different network protocol that bypasses all firewalls.", "isCorrect": false }
+      ],
+      "explanation": "'Reason: syn-ack' means Nmap sent a TCP SYN to port 80 and the host responded with SYN/ACK — the second step of the TCP handshake. This confirms two things: (1) the host is alive (it received and responded to the packet), and (2) there is a service listening on port 80 (closed ports return RST, not SYN/ACK). The earlier ICMP timeout was caused by a firewall silently dropping the Echo Request — the host never received the ping, and never sent a reply. The host was alive the entire time. This is the false negative scenario that makes TCP probes essential in professional host discovery.",
+      "xpReward": 20
+    }
+  ]
+}

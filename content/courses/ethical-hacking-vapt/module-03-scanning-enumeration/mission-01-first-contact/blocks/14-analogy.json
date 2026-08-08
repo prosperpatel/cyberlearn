@@ -1,0 +1,20 @@
+{
+  "id": "mod3m1-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Right Analogy",
+  "title": "Calling Before You Drive",
+  "realWorldThing": "Checking whether someone is home before driving across town to visit them",
+  "concept": "Host discovery — verifying that a system is alive and reachable before spending time scanning its ports",
+  "comparison": "Imagine you want to visit a friend who lives 30 minutes away. You could just get in your car and drive — and risk arriving to an empty house, having wasted an hour. Or you could call first to check they are home.\n\nThey do not pick up. Does that mean they are out? Not necessarily. Their phone might be on silent. They might be in the shower. They might be screening calls. So you send a text. Still nothing? You try the landline. If every contact method fails after a reasonable attempt, you can reasonably conclude they might not be home — but you have used multiple methods before drawing that conclusion, rather than assuming from the first missed call.\n\nHost discovery works exactly this way. ICMP ping is the first call. No answer? Try a TCP probe to port 80 (the text). Still nothing? Try port 443 (the landline). Only after multiple probe types return nothing should you document the host as 'no response to any probe' — never 'definitely offline.'",
+  "breakdown": [
+    { "realWorld": "Calling before making the drive", "techEquivalent": "Running host discovery before port scanning" },
+    { "realWorld": "The phone call", "techEquivalent": "ICMP Echo Request (ping)" },
+    { "realWorld": "Phone on silent — no answer", "techEquivalent": "Host is alive but blocking ICMP — appears offline" },
+    { "realWorld": "Sending a text as a backup", "techEquivalent": "TCP SYN probe to port 80 when ICMP fails" },
+    { "realWorld": "Trying the landline", "techEquivalent": "TCP SYN probe to port 443 as a second fallback" },
+    { "realWorld": "Still no answer after three methods", "techEquivalent": "No response to ICMP, TCP/80, TCP/443 — document carefully, may retry later" },
+    { "realWorld": "Driving over anyway if you are certain they are home", "techEquivalent": "Using -Pn to skip discovery and scan a host you are confident is alive" }
+  ]
+}

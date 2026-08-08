@@ -1,0 +1,19 @@
+{
+  "id": "mod3m3-block-10-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "Version First. Vulnerability Second.",
+  "concept": "Service type is a category. Service version is the intelligence that makes security testing systematic. The version number is the key that unlocks the CVE database — and without it, you cannot research known vulnerabilities for the software you found.",
+  "anchor": "Read the banner. Confirm the version. Then — and only then — search the CVE database. This sequence is non-negotiable. Skipping the version does not save time. It makes the rest of the assessment impossible to do correctly.",
+  "explanation": "You have now learned the complete service identification workflow.\n\nBanner grabbing gives you what the service volunteers — fast, simple, and sufficient when the banner is accurate. Curl for web services, netcat for SSH and raw TCP services.\n\nNmap -sV gives you what behavioural fingerprinting can determine — more reliable, works when banners are hidden or modified, confirms the version through response analysis rather than self-reporting.\n\nBoth techniques aim at the same output: the software name and version number.\n\nThat version number is the key. The CVE database is indexed by product name and version range. 'Web server present' is not a searchable term. 'Apache Tomcat 7.0.37' returns specific results — every publicly known vulnerability affecting that exact release. That is the difference between an observation and intelligence that leads somewhere.\n\nVersion strings can be modified in a banner. Behavioural fingerprinting confirms them regardless. A confident version identification always comes from corroborating the banner against the behavioural signature — not from trusting either source alone.\n\nWhen both agree: record the version and begin CVE research. When they disagree: the discrepancy is itself a finding worth investigating.",
+  "acronym": {
+    "letters": ["B", "V", "R"],
+    "meanings": [
+      "Banner — read what the service announces. Record the exact string.",
+      "Version — confirm the version number through -sV. This is the intelligence that enables research.",
+      "Research — search the CVE database for known vulnerabilities affecting this exact version."
+    ]
+  }
+}

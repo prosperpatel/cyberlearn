@@ -1,0 +1,49 @@
+{
+  "id": "mod2m1-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Reconnaissance Quick Reference",
+  "sections": [
+    {
+      "heading": "Reconnaissance Types",
+      "rows": [
+        { "label": "Passive Recon", "value": "Information gathering with ZERO contact with target systems. No packets sent. No logs created on the target. Read-only access to public sources. Legal without a contract. The Ghost mode." },
+        { "label": "Active Recon", "value": "Information gathering by directly interacting with the target's infrastructure. Packets sent, logs created, target may detect the activity. Requires explicit written authorisation. The Visitor mode." },
+        { "label": "OSINT", "value": "Open Source Intelligence. All intelligence gathered from publicly available sources. Always passive by definition. The foundation of Phase 1 in every professional engagement." }
+      ]
+    },
+    {
+      "heading": "Key OSINT Sources",
+      "rows": [
+        { "label": "WHOIS / who.is", "value": "Domain registration records: owner, registrar, registration date, name servers. First stop for any domain-based target." },
+        { "label": "crt.sh", "value": "Certificate Transparency log search. Reveals every subdomain that has ever received an SSL certificate — including internal staging and development environments." },
+        { "label": "LinkedIn", "value": "Employee names, job titles, team structure, technology skills listed. One of the richest human-layer intelligence sources available." },
+        { "label": "Job Postings", "value": "Reveals the exact technology stack in use: security tools, cloud platforms, frameworks, internal systems. Companies list these publicly to attract candidates." },
+        { "label": "Shodan.io", "value": "Search engine for internet-connected devices. Reading cached Shodan data is passive. Triggering a new Shodan scan of a specific target is active." },
+        { "label": "HaveIBeenPwned", "value": "Checks if a company's email domain has appeared in known breach databases. Confirms exposure and reveals real employee email addresses." },
+        { "label": "GitHub Search", "value": "Search public repositories for the company name, domain, or email format. Often reveals accidentally committed credentials, API keys, and internal naming conventions." },
+        { "label": "archive.org", "value": "Historical website snapshots. Old versions of a website sometimes contain more information than the current version: staff directories, internal links, technology headers." },
+        { "label": "Google Dorking", "value": "Advanced search operators: site:target.com, filetype:pdf, intitle:\"index of\", inurl:admin. Finds publicly indexed sensitive pages and files." }
+      ]
+    },
+    {
+      "heading": "Core Definitions",
+      "rows": [
+        { "label": "Digital Footprint", "value": "The total trail of data an organisation has left across the internet — intentionally and incidentally. Assembled through OSINT. The larger the footprint, the larger the attack surface." },
+        { "label": "Attack Surface", "value": "Every potential entry point for an attacker: public web properties, APIs, remote access, cloud services, vendors, employees, legacy systems. Extends beyond the organisation's own perimeter." },
+        { "label": "Supply Chain Vector", "value": "Using a vendor or third party with target access as an entry point into the primary target — often easier due to weaker security controls. The Target/Fazio breach is the canonical example." }
+      ]
+    },
+    {
+      "heading": "Professional Sequence",
+      "rows": [
+        { "label": "Step 1", "value": "Passive OSINT — exhaust all public sources before any active technique. Build the target dossier: technology stack, employees, subdomains, breach history, vendor relationships." },
+        { "label": "Step 2", "value": "Analyse and organise — structure the OSINT findings into categories. Identify the most likely attack vectors before touching a single tool." },
+        { "label": "Step 3", "value": "Confirm authorisation — verify that every technique planned for the active phase is explicitly covered by the scope agreement." },
+        { "label": "Step 4", "value": "Active reconnaissance — with the passive picture complete and authorisation confirmed, begin structured active enumeration targeting the highest-priority attack vectors." }
+      ]
+    }
+  ]
+}

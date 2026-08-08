@@ -1,0 +1,20 @@
+{
+  "id": "mod3m3-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Right Analogy",
+  "title": "The Name Badge and the Accent",
+  "realWorldThing": "Identifying a person by their name badge versus identifying them by how they speak — and which method works when the badge has been changed",
+  "concept": "Service fingerprinting — identifying the true software and version behind an open port, regardless of what the service banner claims",
+  "comparison": "Imagine you are working security at a large conference where thousands of people are in attendance. You have two methods of identifying delegates.\n\nThe first method: read their name badge. Quick, easy, requires no effort. Most badges are accurate. But badges can be changed, covered, or left blank — and some delegates remove theirs because they prefer privacy.\n\nThe second method: have a conversation with them. Listen to how they speak — their vocabulary, their idioms, how they structure sentences, which words they reach for automatically. A person who grew up speaking French will have characteristic patterns in their English, even decades later. A native speaker of Mandarin handles English stress patterns in a recognisable way. These patterns are encoded in how a person was raised, not in what their badge says.\n\nSomeone can change their badge in thirty seconds. They cannot change how they speak without years of deliberate effort.\n\nService banner grabbing is the name badge. It is fast and usually accurate. But an administrator can change it as easily as swapping a badge. A modified Server header that reads 'internal-server-v1' instead of 'Apache httpd 2.4.49' is a swapped badge.\n\nNmap -sV is the conversation. It sends specific inputs and listens for characteristic patterns — the way Apache handles HTTP/1.0 requests, the structure of its error pages, the signature of its SSL negotiation. These patterns are in the web server code. The administrator who changed the Server header did not rewrite the web server's HTTP handling logic. The software responds with its original accent regardless of what the badge says.\n\nThis is why behavioural fingerprinting identifies software that banner hiding cannot conceal.",
+  "breakdown": [
+    { "realWorld": "The delegate's name badge", "techEquivalent": "The service banner — self-reported, fast to read, can be modified" },
+    { "realWorld": "The delegate's accent and speech patterns", "techEquivalent": "Service response behaviour — determined by code, not configuration" },
+    { "realWorld": "Swapping the name badge for privacy or misdirection", "techEquivalent": "Banner suppression — changing the Server header or removing version information" },
+    { "realWorld": "Reading the badge to identify someone", "techEquivalent": "Banner grabbing with curl or netcat" },
+    { "realWorld": "Listening to their accent to identify their background", "techEquivalent": "Nmap -sV behavioural fingerprinting — probe and match" },
+    { "realWorld": "Accent reveals origin even when the badge says something different", "techEquivalent": "-sV identifies Apache even when the Server header claims to be nginx" },
+    { "realWorld": "A conversation gives more information than a badge alone", "techEquivalent": "-sV often extracts more detail — protocol version, build info — than the banner alone" }
+  ]
+}

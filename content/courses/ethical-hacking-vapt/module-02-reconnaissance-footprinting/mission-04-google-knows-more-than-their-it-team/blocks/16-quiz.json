@@ -1,0 +1,75 @@
+{
+  "id": "mod2m4-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You are in the passive reconnaissance phase of an authorised penetration test. You check the target's robots.txt file and find: 'Disallow: /api/v1/internal'. You visit that URL directly in your browser and receive a JSON response containing live customer data with no authentication required. Which of the following best describes this finding and the correct next action?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The endpoint is protected by robots.txt — visiting it requires a separate authorisation. Document it as out of scope.", "isCorrect": false },
+        { "id": "b", "text": "This is a critical finding: an unauthenticated API endpoint returning live data, discovered by reading robots.txt. Document the URL, the JSON response structure, and the data visible, then report immediately — do not call the endpoint repeatedly or explore further.", "isCorrect": true },
+        { "id": "c", "text": "robots.txt listed it as Disallow, so Google would not have indexed it. It is not a finding because nobody else could find it.", "isCorrect": false },
+        { "id": "d", "text": "This is a medium finding — API endpoints with no authentication are common. Document it for the final report.", "isCorrect": false }
+      ],
+      "explanation": "robots.txt Disallow directives tell cooperative crawlers to skip a path — they have no effect on access control. Any human visitor can visit a Disallow path directly, as can any crawler that ignores robots.txt. The API endpoint returned live data with no authentication. That is a critical finding regardless of how it was discovered. The correct professional action is to document it thoroughly (URL, response headers, a single response showing the data structure — not bulk querying), report it to the client immediately rather than waiting for final report-out, and stop making requests beyond what establishes the proof. robots.txt listing the path is itself a finding: it announced the path's existence.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "You run the dork: site:target.com intitle:\"index of\" and find an open directory at target.com/backup/ containing a file called database_prod_2024-06-01.sql.gz (2.4MB). This file appears to be a database backup. You are in the passive reconnaissance phase of an authorised engagement and have written authorisation for all publicly accessible content on the domain. What is the professionally correct action?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Download the backup file and extract its contents to confirm the database credentials — this confirms the severity of the finding and strengthens the report.", "isCorrect": false },
+        { "id": "b", "text": "Note the URL in your findings and report the open directory as a critical finding. The file size and modification date visible in the directory listing are sufficient to characterise the exposure without downloading the database.", "isCorrect": true },
+        { "id": "c", "text": "The file is publicly accessible and the engagement authorises access to public content — downloading it is within scope and appropriate.", "isCorrect": false },
+        { "id": "d", "text": "Skip the finding — backup files in public directories are expected behaviour that organisations accept as a trade-off.", "isCorrect": false }
+      ],
+      "explanation": "Minimum necessary access is the professional standard. To prove that an open directory containing a production database backup is a critical exposure, you need: a screenshot of the Google result showing the directory, a screenshot of the directory listing showing the filename and file size, and confirmation that the URL is accessible (HTTP 200 response). You do not need to download the backup. The backup likely contains customer data, credentials, or both. Downloading 2.4MB of a client's production database to your personal laptop — even with written authorisation for 'publicly accessible content' — introduces data handling complexity. The finding is proved by the directory listing alone. The severity is obvious. Download nothing beyond the evidence of access.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A penetration tester runs the dork: site:github.com \"targetcompany.com\" password and finds a public GitHub repository from three years ago containing a config file with database connection strings including a username and password. The developer has since deleted the file from the repository. What is the correct professional conclusion?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The file was deleted — it no longer presents a risk. The repository is clean and this is not a finding.", "isCorrect": false },
+        { "id": "b", "text": "The credential may still be active. Git history preserves all committed content regardless of later deletion. This is a high-severity finding — the credential should be verified as still-active and rotated immediately by the client.", "isCorrect": true },
+        { "id": "c", "text": "This is a historical finding with no current risk — three-year-old credentials are automatically expired.", "isCorrect": false },
+        { "id": "d", "text": "Searching GitHub is active reconnaissance — this finding is outside the passive recon phase scope.", "isCorrect": false }
+      ],
+      "explanation": "Git repositories preserve complete commit history. Deleting a file from a repository removes it from the current working tree, but the commit that added the file still exists in the history and is accessible to anyone who cloned the repository at any point, or who uses GitHub's API to retrieve historical commits. The credential is preserved in the git history permanently unless the repository's history is explicitly rewritten (git filter-repo or BFG Repo Cleaner). Three years is irrelevant — database credentials are often not automatically rotated. This is a high-severity finding because: (1) the credential is accessible via public git history, (2) it may still be valid, and (3) the client may have no idea this exposure exists. The correct action is to document the repository, the commit hash, and the credential type, then report immediately so the client can rotate the credential.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "You extract metadata from a PDF document discovered via Google Dorking on an authorised target's domain. ExifTool returns: Author: Sarah Mitchell | Organisation: Meridian Financial — IT Security | Software: Microsoft Word 2016 | File Path: C:\\Users\\sarah.mitchell\\Documents\\IT\\Network_Diagram_2021.docx. Which combination of intelligence is most valuable for the engagement, and why?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The author name (Sarah Mitchell) is the most valuable — it confirms a real employee exists.", "isCorrect": false },
+        { "id": "b", "text": "The software version (Word 2016) is most valuable — it identifies a vulnerability to exploit immediately.", "isCorrect": false },
+        { "id": "c", "text": "The combination of employee name (Sarah Mitchell), department (IT Security), file path structure (suggesting Windows domain C:\\Users\\[firstname.lastname]), and software era (Word 2016 suggests the document is from the 2016-2020 era) together builds a useful intelligence profile — employee identity for social engineering, naming convention for internal accounts, and a signal about how recently the IT infrastructure was documented.", "isCorrect": true },
+        { "id": "d", "text": "Metadata has no relevance in penetration testing — it is useful only for journalists and investigators.", "isCorrect": false }
+      ],
+      "explanation": "Each metadata field contributes to a different part of the intelligence picture. The author name confirms a real person (Sarah Mitchell) who works in IT Security. The organisation field confirms their division. The file path 'C:\\Users\\sarah.mitchell\\Documents' reveals the Windows username format — firstname.lastname — which is almost certainly the Active Directory username format for the organisation. This is directly useful for later phases involving authentication testing or social engineering. The software version (Word 2016) and the original filename (Network_Diagram_2021.docx) tell you this document was likely created in 2021 on Word 2016 — suggesting either that this user's software was not updated, or that this represents the infrastructure state as of 2021. None of this intelligence individually is a vulnerability. Together, it adds depth to the picture of who the organisation is, how they name accounts, and which individuals work in security-relevant roles.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "A security consultant discovers during passive Google Dorking that the target organisation has 14 results for site:target.com intitle:\"index of\" — fourteen separate directories with listing enabled. Three contain backup files, two contain uploaded documents, and nine appear to contain only web assets (CSS, images). The engagement is a black-box penetration test with a 2-week timeline. What is the correct priority order?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Investigate all fourteen directories in alphabetical order — consistency is more important than prioritisation.", "isCorrect": false },
+        { "id": "b", "text": "Investigate the three directories with backup files first (highest severity), then the two with uploaded documents, then include all fourteen in the report. The nine with web assets are lower priority but still document all findings.", "isCorrect": true },
+        { "id": "c", "text": "Only report the three backup directories — the others are too minor to include in a professional report.", "isCorrect": false },
+        { "id": "d", "text": "Directory listings are not a security finding if they only contain files the organisation has uploaded — ignore all fourteen and continue to other reconnaissance.", "isCorrect": false }
+      ],
+      "explanation": "Risk-based prioritisation is how professional assessments work within time constraints. Directories containing backup files are a critical severity: backup files typically contain databases, credentials, or both. These are investigated first — document the directory URL, the filenames and file sizes visible in the listing, and note the finding as critical in the engagement log. Directories with uploaded documents are high severity: they may contain internal documents, configuration, or sensitive business information. The nine directories with web assets (CSS, images) are still findings — directory listing is a misconfiguration regardless of what is currently in the directory — but they are lower priority. All fourteen should appear in the final report as: 'web server directory listing enabled — 14 directories found publicly accessible — 3 critical (backup files), 2 high (uploaded documents), 9 medium (web assets only).' Nothing gets omitted from the report; risk-based ordering determines what gets investigated first.",
+      "xpReward": 20
+    }
+  ]
+}

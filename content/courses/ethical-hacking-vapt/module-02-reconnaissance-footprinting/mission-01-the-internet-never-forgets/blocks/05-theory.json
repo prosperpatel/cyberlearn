@@ -1,0 +1,35 @@
+{
+  "id": "mod2m1-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What Is Reconnaissance?",
+  "title": "Reconnaissance: The Phase That Determines Everything",
+  "content": "Here is a question most people never think to ask:\n\nBefore the 2013 Target breach, before the attackers compromised a single account or installed a single piece of malware — what did they do first?\n\nThey did research.\n\nNot hacking. Not exploiting. Research. They looked at public records, LinkedIn pages, and Google search results. They found out who Target's vendors were. They identified which vendor was small enough to compromise easily and still had network access to Target. They built a complete picture of their target before they touched anything.\n\nThis is reconnaissance — and it is Phase 1 of every professional penetration test and every real-world attack.\n\n**The one-sentence definition:**\nReconnaissance is the systematic process of gathering as much information as possible about a target before taking any offensive action.\n\nThink of it like a detective investigating a suspect. The best detectives don't rush to make an arrest the moment they have a name. They spend days, sometimes weeks, building a complete picture first — checking public records, reviewing newspapers, learning the suspect's routine, understanding their relationships. When they finally act, they act with precision.\n\nAn attacker who skips reconnaissance is like a burglar who picks a house at random, walks up in broad daylight, and rings the doorbell to see if anyone is home. They might get lucky — but they are also very likely to get caught, or to waste time on a target with nothing of value.\n\nAn attacker who does reconnaissance properly already knows:\n• Which specific vulnerability exists and where\n• Which person or system to target first\n• What the organisation's defences look like\n• Which vendor or partner might be the easier entry point\n• When and how to act without triggering an alert\n\n**Why reconnaissance comes before everything else**\n\nIn the VAPT lifecycle — the five-phase methodology that governs every professional penetration test — reconnaissance is Phase 1, and it shapes everything that follows.\n\nHere is why: every subsequent phase (Scanning, Exploitation, Reporting) depends on the quality of the intelligence gathered in Phase 1. A penetration tester who rushes reconnaissance will spend time scanning the wrong systems, attempting to exploit vulnerabilities that don't apply to this organisation, and missing the entry point that actually matters — the one that an attacker would find immediately.\n\nThis is not a theoretical concern. Experienced penetration testers consistently find that the vulnerabilities with the highest real-world impact — credential reuse from a historical breach, a forgotten subdomain running outdated software, a third-party vendor with excessive access — are discovered during reconnaissance, not during active scanning.\n\n**The beginner's mistake**\n\nThe most common mistake a new security student makes is assuming that reconnaissance means running Nmap — the network scanning tool — against a target's IP address. It does not. Nmap belongs to Phase 2: Scanning.\n\nReconnaissance comes first, and much of it does not involve sending any traffic to the target at all. It involves reading. Searching. Observing. Building intelligence from what is already publicly available.\n\nThe moment you open Nmap against a target without doing reconnaissance first, you are starting Phase 2 with Phase 1's knowledge gap — and that gap is where the most valuable vulnerabilities hide.",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "Where Reconnaissance Sits in the VAPT Lifecycle",
+      "text": "Phase 1: Scoping — define targets, authorisation, rules of engagement\nPhase 2: Reconnaissance — gather intelligence on the target\nPhase 3: Scanning — actively probe the target for open ports and vulnerabilities\nPhase 4: Exploitation — attempt to exploit confirmed vulnerabilities\nPhase 5: Reporting — document findings, severity ratings, remediation steps\n\nReconnaissance feeds everything. Skip it, and you are guessing. Do it well, and you arrive at Scanning already knowing what you are looking for."
+    },
+    {
+      "type": "tip",
+      "title": "Real-World Use",
+      "text": "In a professional penetration testing engagement, reconnaissance is where the engagement document says 'begin with OSINT and passive intelligence gathering before any active scanning.' In a bug bounty programme, reconnaissance is how experienced hunters find targets that automated scanners miss entirely. In a Security Operations role, defenders use the same reconnaissance techniques to understand what an attacker could learn about their organisation from public sources."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Reconnaissance",
+      "definition": "The systematic gathering of information about a target before taking any offensive action. Phase 1 of the VAPT lifecycle. The goal is to build the most complete picture of the target possible — technology, personnel, vendors, history — before a single packet is sent to the target's systems."
+    },
+    {
+      "term": "Intelligence Gathering",
+      "definition": "The broader term for the process of collecting and analysing information to build situational awareness. In cybersecurity, this includes both technical information (open ports, software versions, network topology) and human information (who works there, what access they have, what their responsibilities suggest about the organisation's structure)."
+    },
+    {
+      "term": "Black-box Engagement",
+      "definition": "A penetration testing engagement where the tester is given only the target's name and publicly available information — simulating a real-world external attacker starting from zero. Reconnaissance is especially critical in black-box engagements because it is the only way to build a target picture from scratch."
+    }
+  ]
+}

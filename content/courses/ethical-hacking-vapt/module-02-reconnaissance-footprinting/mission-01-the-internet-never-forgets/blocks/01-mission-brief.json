@@ -1,0 +1,28 @@
+{
+  "id": "mod2m1-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "The Internet Never Forgets",
+  "operativeCodename": "Operation Open Source",
+  "subtitle": "The most powerful reconnaissance tool ever built is the one you already have open.",
+  "briefing": "In August 2012, a technology journalist received a message from a stranger: \"Guess what? I'm deleting all your stuff.\"\n\nWithin 30 minutes, his iPhone was wiped. His iPad was erased. His MacBook was remotely locked. Seven years of photographs of his newborn daughter — gone. His Gmail account, which he had used as his primary identity online, was deleted. His Twitter account was hijacked and used to post racist messages.\n\nThe attackers did not break a single password. They did not write a single line of malicious code. They called Apple Support and Amazon Customer Service. They used information they found through a Google search.\n\nHis billing address was in a public property record. The last four digits of his credit card were visible in an Amazon account summary page — which Apple used as identity verification. That combination was enough to reset his Apple ID. From there, iCloud's remote wipe feature did the rest.\n\nThis is what reconnaissance looks like. Not code — information. Information that was always public. Information the target didn't know was dangerous.\n\nReconnaissance is the first phase of every real-world attack and every professional penetration test. It determines what is possible, what is worth pursuing, and how to proceed without triggering a single alert. The attacker who does reconnaissance well has already won most of the fight — before they have done anything technically offensive at all.",
+  "whyItMatters": "Every professional penetration test begins with reconnaissance. It shapes the scope of everything that follows: what you scan, what you test, what you prioritise, and how you approach the client's environment. Security teams that skip or rush reconnaissance miss the vulnerabilities that matter most — the ones that don't show up in automated scanners but are plainly visible in public records, job postings, and social media.\n\nThis module covers what reconnaissance is, how to do it legally and systematically, and how to interpret what you find — which separates someone who runs tools from someone who builds intelligence.",
+  "objectives": [
+    "Define reconnaissance and explain its role as Phase 1 of the VAPT lifecycle",
+    "Distinguish between passive and active reconnaissance — and when each is appropriate",
+    "Explain OSINT (Open Source Intelligence) and identify five public sources used in professional recon",
+    "Define digital footprint and describe what it reveals about an organisation",
+    "Map an organisation's attack surface beyond its own systems"
+  ],
+  "skillsUnlocked": [
+    "Choosing the right reconnaissance technique for a given intelligence goal",
+    "Recognising when passive recon crosses into active recon — and why that line matters legally",
+    "Building a mental model of an organisation's exposure from public data alone"
+  ],
+  "closingMessage": "The journalist's name was Mat Honan. He wrote about his experience in Wired Magazine and it became one of the most-read cybersecurity articles of the decade — because every reader recognised that the same attack could happen to them. In this mission, you are going to understand exactly how it happened, what techniques the attackers used, and how those same techniques are used — ethically and legally — by professionals like you.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["reconnaissance", "osint", "passive-recon", "digital-footprint", "attack-surface"]
+}

@@ -1,0 +1,84 @@
+{
+  "id": "mod2m1-block-08-diagram",
+  "type": "diagram",
+  "order": 8,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Recon Spectrum",
+  "title": "The Reconnaissance Spectrum: From Ghost to Visitor",
+  "description": "Reconnaissance exists on a spectrum from fully passive (no contact with the target at all) to fully active (direct interaction with the target's systems). Every technique you will learn in this module sits somewhere on this spectrum. Understanding where a technique falls — and what that means for your authorisation requirements — is a core professional skill.",
+  "nodes": [
+    {
+      "id": "whois",
+      "label": "WHOIS Lookup",
+      "type": "passive",
+      "detail": "Queries public domain registration records to find: domain owner, registration date, registrar, and name servers. Completely passive — you are reading a public database, not contacting the target. Tells you who owns a domain and when it was registered."
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn Research",
+      "type": "passive",
+      "detail": "Searching LinkedIn for a company's employees reveals names, job titles, team structures, and — crucially — the technologies they list in their profiles and the tools mentioned in their endorsements. Passive: you are reading a public social network."
+    },
+    {
+      "id": "jobads",
+      "label": "Job Postings",
+      "type": "passive",
+      "detail": "A job ad asking for 'experience with CrowdStrike Falcon and Cisco Meraki' reveals the security tools and network infrastructure in use. 'AWS with Terraform' reveals cloud platform and infrastructure-as-code tools. Passive intelligence with direct operational value."
+    },
+    {
+      "id": "crt",
+      "label": "Certificate Transparency",
+      "type": "passive",
+      "detail": "Every SSL/TLS certificate issued for a domain is logged in public Certificate Transparency logs. Querying crt.sh for a domain reveals every subdomain that has ever had a certificate issued — including internal staging environments, development portals, and forgotten legacy systems. Passive: reading a public log."
+    },
+    {
+      "id": "github",
+      "label": "GitHub Search",
+      "type": "passive",
+      "detail": "Searching GitHub for a company's name, email domain, or internal naming conventions can reveal accidentally committed credentials, API keys, internal configuration files, and naming patterns. Passive: reading public repositories. The target may not even know the repository exists."
+    },
+    {
+      "id": "shodan",
+      "label": "Shodan Lookup",
+      "type": "borderline",
+      "detail": "Shodan is a search engine that indexes internet-connected devices by continuously scanning the public internet. Reading Shodan's existing results for an IP address is passive — someone else sent the packets. Requesting a fresh Shodan scan of a specific target is active. Know which one you are doing."
+    },
+    {
+      "id": "dns",
+      "label": "DNS Enumeration",
+      "type": "borderline",
+      "detail": "Querying public DNS servers for a domain's A, MX, TXT, and NS records retrieves publicly intended information — borderline passive. Attempting a DNS zone transfer (asking the target's nameserver to send its entire record set) is active: you are making a direct request to the target's infrastructure."
+    },
+    {
+      "id": "portscan",
+      "label": "Port Scanning (Nmap)",
+      "type": "active",
+      "detail": "Nmap sends TCP and UDP probes to the target's IP addresses to discover which ports are open and which services are running. This is fully active: packets are sent to the target's systems, and responses are logged on both sides. Requires explicit written authorisation. This is Phase 3 (Scanning), not Phase 2 (Reconnaissance)."
+    },
+    {
+      "id": "banner",
+      "label": "Banner Grabbing",
+      "type": "active",
+      "detail": "Connecting to a service (e.g. an SSH or FTP server) and reading the response banner, which often contains the software name and version number. Fully active: a connection is made to the target's system and the target's service responds. Creates a log entry on the target."
+    },
+    {
+      "id": "webcrawl",
+      "label": "Web Crawling / Directory Brute-force",
+      "type": "active",
+      "detail": "Sending HTTP requests to a web server to discover hidden paths, admin panels, backup files, and unlisted pages. Fully active: every request is logged by the target's web server. Requires authorisation. Produces significant log noise that a monitoring team will notice."
+    }
+  ],
+  "edges": [
+    { "from": "whois",    "to": "linkedin",  "label": "Both passive",    "type": "normal" },
+    { "from": "linkedin", "to": "jobads",    "label": "Both passive",    "type": "normal" },
+    { "from": "jobads",   "to": "crt",       "label": "Both passive",    "type": "normal" },
+    { "from": "crt",      "to": "github",    "label": "Both passive",    "type": "normal" },
+    { "from": "github",   "to": "shodan",    "label": "Approach border", "type": "normal" },
+    { "from": "shodan",   "to": "dns",       "label": "Borderline",      "type": "normal" },
+    { "from": "dns",      "to": "portscan",  "label": "Cross the line",  "type": "attack"  },
+    { "from": "portscan", "to": "banner",    "label": "Both active",     "type": "attack"  },
+    { "from": "banner",   "to": "webcrawl",  "label": "Both active",     "type": "attack"  }
+  ],
+  "caption": "Click each technique to understand what information it reveals, whether it is passive or active, and what the authorisation implications are. The colour of each node indicates its classification: passive (left/green), borderline (centre/amber), active (right/red). Reconnaissance is the green zone. Scanning is the red zone — and it requires a signed contract.",
+  "interactive": true
+}

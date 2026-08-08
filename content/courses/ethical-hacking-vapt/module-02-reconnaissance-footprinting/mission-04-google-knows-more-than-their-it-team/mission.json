@@ -1,0 +1,40 @@
+{
+  "id": "mission-04-google-knows-more-than-their-it-team",
+  "slug": "mission-04-google-knows-more-than-their-it-team",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-02-reconnaissance-footprinting",
+  "title": "Google Knows More Than Their IT Team",
+  "tagline": "The world's most powerful reconnaissance tool is the same search box everyone uses every day. Most people just don't know how to ask it the right questions.",
+  "description": "Master Google Dorking — the professional technique of using advanced search operators to find information organisations never intended to make public. Learn how search engines index sensitive documents, exposed login portals, open directory listings, and forgotten backup files. Understand robots.txt, sitemap.xml, cached pages, and document metadata. Learn exactly how professionals use Google as a reconnaissance tool before touching any target system.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 70,
+  "xpReward": 100,
+  "order": 4,
+  "missionNumber": 4,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-03-following-digital-breadcrumbs"],
+  "tags": ["google-dorking", "osint", "search-operators", "information-disclosure", "robots-txt", "sitemap", "cached-pages", "metadata", "directory-listing", "reconnaissance", "passive-recon"],
+  "learningObjectives": [
+    "Explain how search engines index information and why organisations accidentally expose sensitive data",
+    "Use core Google search operators: site:, filetype:, intitle:, inurl:, intext:, cache:, and combinations",
+    "Explain what robots.txt and sitemap.xml are, and why robots.txt is not a security control",
+    "Describe how document metadata reveals author identity, software versions, and organisational structure",
+    "Recognise directory listings and exposed login portals as reconnaissance findings",
+    "Explain the professional and ethical boundaries of search engine reconnaissance"
+  ],
+  "skills": [
+    "Constructing targeted Google Dork queries using multiple combined operators",
+    "Interpreting robots.txt and sitemap.xml as reconnaissance sources",
+    "Identifying document metadata using free tools",
+    "Recognising the difference between information that is publicly indexed and information that is intentionally public"
+  ],
+  "badge": "Open Book",
+  "missionIcon": "🔍",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

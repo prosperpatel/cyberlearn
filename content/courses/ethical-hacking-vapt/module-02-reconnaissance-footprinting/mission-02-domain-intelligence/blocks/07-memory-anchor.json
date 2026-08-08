@@ -1,0 +1,19 @@
+{
+  "id": "mod2m2-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 7,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "The Phone Book That Never Sleeps",
+  "concept": "The internet needs a system that automatically translates human-readable names (domains) into machine-readable numbers (IP addresses) — for every request, from every device, across the entire planet, in under 100 milliseconds. That system is DNS. Understanding it is not optional for anyone working in security. It is the foundation everything else is built on.",
+  "anchor": "DNS is the phone book of the internet. You look up a name — you get a number. Except this phone book contains billions of entries, updates in real time, answers over 4 trillion queries per day, and every single entry is readable by anyone in the world — including you.",
+  "explanation": "Before phone books became obsolete, they served a precise function: you knew the name of the person or business you wanted to contact, and the book gave you their number. DNS does exactly this for internet traffic. You know the name (meridian-financial.com). DNS gives you the number (104.22.7.45). Your computer uses the number to make the actual connection.\n\nBut there is a critical difference between a physical phone book and DNS that matters enormously for security work: DNS records are not just publicly available — they are actively queryable by anyone, at any time, from anywhere, using free tools built into every operating system.\n\nYou do not need to be a customer of the target. You do not need a subscription. You do not need permission. You can query DNS records for any domain, any time, using 'dig' or 'nslookup' from your command line, or from any of dozens of free web tools.\n\nAnd what DNS records reveal is substantial. Not just the IP address of the website. Also: which company handles their email (MX record), which cloud provider they use (NS and CNAME records), whether their domain can be used for phishing emails (TXT record — specifically DMARC policy), and which providers supply each part of their infrastructure.\n\nIn the story you read, Maya's WHOIS lookup on the suspicious domain took two minutes. A complete DNS investigation of meridian-financial.com — querying every record type, mapping every service, tracing every IP — takes about twenty minutes. What it produces is a complete map of the organisation's internet-facing infrastructure, assembled entirely from public information, before a single packet has been sent to any system they own.",
+  "acronym": {
+    "letters": ["D", "N", "S"],
+    "meanings": [
+      "Domains translated to IP addresses — the core function of the entire system",
+      "Nameservers hold all records — and those records are publicly queryable by anyone",
+      "Security intelligence flows from DNS — mail servers, cloud providers, CDN usage, and email spoofing risk are all visible"
+    ]
+  }
+}

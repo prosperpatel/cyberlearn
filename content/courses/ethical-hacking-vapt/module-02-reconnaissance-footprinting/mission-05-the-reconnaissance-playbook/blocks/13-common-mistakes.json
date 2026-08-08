@@ -1,0 +1,45 @@
+{
+  "id": "mod2m5-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These five mistakes define the gap between someone who knows individual reconnaissance techniques and someone who uses them professionally. They are not technical errors — they are methodology errors. You can run every tool correctly and still make every one of these mistakes. Each one is correctable by a single habit change.",
+  "mistakes": [
+    {
+      "title": "Starting active scanning before passive reconnaissance is complete",
+      "wrong": "'We found a development server with a direct IP. Let me run Nmap on it now while I continue the other recon.'",
+      "right": "Complete the passive reconnaissance phase first. Build the full attack surface map. Then begin active scanning — guided by the map, targeting the highest-priority systems first.",
+      "explanation": "This is the most consequential methodology mistake. The problem is not just out-of-sequence work — it is that active scanning while passive recon is ongoing produces findings that are not connected to the intelligence picture. The active findings land in isolation. Meanwhile, the passive recon phase may be incomplete — and the active scan may be targeting the wrong systems because the attack surface map is not yet built. The junior tester's instinct is: 'I found something interesting, I want to know what's on it.' The professional discipline is: 'I found something interesting. I'm documenting it as High priority on the attack surface map. Active testing starts Thursday.'",
+      "severity": "critical"
+    },
+    {
+      "title": "Collecting information without documenting it in real time",
+      "wrong": "'I'll take proper notes at the end of the day. Right now I want to keep investigating while I have momentum.'",
+      "right": "Document every finding at the moment of discovery: source, evidence, severity, recommended action. The reconnaissance report is built continuously, not retrospectively.",
+      "explanation": "Retrospective documentation produces two failure modes. First: you cannot remember exactly where you found something. 'I saw a Google result that showed an admin portal — I think it was yesterday afternoon' is not a professional finding. A professional finding has a specific query, a specific result, a timestamp, and a screenshot. Second: time pressure. Active testing starts Thursday. If passive recon notes are not documented in real time, Thursday arrives and the documentation is not done. The choice becomes: delay active testing to write up three days of notes, or start active testing with undocumented passive findings. Neither is acceptable. Document continuously, every finding, immediately.",
+      "severity": "critical"
+    },
+    {
+      "title": "Chasing interesting findings that are outside scope or outside priority",
+      "wrong": "'This subdomain resolves to an interesting CMS. It is not in our scope but I want to see what version it's running — just for curiosity.'",
+      "right": "Stay on scope. Interesting findings outside scope are flagged to the client and documented as 'noted but not investigated.' Everything else proceeds in priority order: Critical first, then High, then Medium, then Low.",
+      "explanation": "This mistake has two forms. The first is chasing out-of-scope targets — which is a scope violation regardless of curiosity or apparent relevance. The second is chasing in-scope targets out of priority order: finding a medium-interest discovery and spending two hours on it instead of working through the High-priority attack surface entries. Professional reconnaissance is disciplined. The attack surface map exists precisely to prevent this — if you have a prioritised map, every hour of work is guided by it. Curiosity is not a reconnaissance methodology. The map is.",
+      "severity": "warning"
+    },
+    {
+      "title": "Treating single-source findings as confirmed facts",
+      "wrong": "'Their Shodan result shows OpenSSH 7.4 on port 22. That's their SSH version.' (Report written as confirmed fact.)",
+      "right": "Single-source findings are hypotheses. They are documented with the source ('Shodan banner data, date') and marked as 'to be confirmed in active testing.' Multi-source findings — confirmed by three independent passive sources — are documented as established.",
+      "explanation": "Shodan data may be weeks or months old. A banner captured six months ago may not reflect the current software version. A job posting saying they use AWS may reflect infrastructure they planned but not yet deployed. A LinkedIn profile listing a specific technology may be outdated. Each of these is a valid data point for a hypothesis — not a confirmed fact. The intelligence analysis phase specifically exists to identify which findings have multi-source corroboration (established fact) and which are single-source (hypothesis pending confirmation). A report that states 'the target runs OpenSSH 7.4' based on Shodan data alone risks recommending remediation of a vulnerability that has already been patched.",
+      "severity": "warning"
+    },
+    {
+      "title": "Waiting for the final report to notify the client of critical findings",
+      "wrong": "'We found an open database backup in a public directory. I'll include it in the final report next Friday.'",
+      "right": "Critical findings — live data exposure, accessible production backups, evidence of real attacker activity — are reported to the client immediately during the engagement. Not at report-out.",
+      "explanation": "A final penetration test report is delivered at the end of the engagement — sometimes two weeks after the active testing concludes. If a critical finding (live customer data accessible publicly, production database backup downloadable by anyone) is discovered on Tuesday and the report is delivered on the following Friday, the organisation has been exposed for an additional ten days while you sat on the finding. In this case study: Maya found the unauthenticated API endpoint on day four. She contacted the client that afternoon. It was remediated by evening. If she had waited for the report, it would have been live for at least another ten days. Immediate escalation of critical findings is the professional and ethical standard. It is not optional.",
+      "severity": "critical"
+    }
+  ]
+}

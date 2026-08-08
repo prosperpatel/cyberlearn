@@ -1,0 +1,17 @@
+{
+  "id": "mod3m1-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Apply Your Knowledge",
+  "title": "Back to Meridian Financial — Reading the Results",
+  "prompt": "You have run the host discovery sweep on the Meridian Financial engagement. Here is what you have:\n\nCommand run: nmap -sn 45.77.180.0/24\n\nResults:\n• 45.77.180.10 — Host is up (reason: echo-reply, latency: 14ms)\n• 45.77.180.11 — No response (timeout on all default probes)\n• 45.77.180.23 — No response (timeout on all default probes)\n\nNote: 198.51.100.42 was deliberately excluded — it belongs to the CDN provider, not Meridian Financial.\n\nJames looks at the output. 'So 45.77.180.10 is alive. 45.77.180.11 and 45.77.180.23 are offline. Two dead hosts.'\n\nMaya shakes her head slowly. 'Not yet. Read the result more carefully. What does it actually say about those two hosts?'\n\nJames looks again. It says 'no response.' Not 'host is down.' Not 'offline.' Just: no response.\n\n'What should we do?' he asks.\n\nWhat IS the correct professional sequence here? What do you do with a host that appears non-responsive — before concluding anything?",
+  "context": "The passive recon confirmed that 45.77.180.11 was alive as recently as March — Shodan had active data from it. That is five months ago, which means it might be decommissioned, or it might still be running and filtering ICMP. The mystery IP at 45.77.180.23 appeared once in an old DNS record — less confident it ever had a system behind it.\n\nBoth scenarios require a different follow-up approach. The professional response to ambiguous host discovery results is not to mark them as offline and move on — it is to eliminate the ambiguity.",
+  "guideQuestions": [
+    "The Nmap output says 'no response' — not 'host is down.' What is the professional significance of that exact wording?",
+    "The Shodan data from March showed activity on 45.77.180.11. Does that change how you interpret today's timeout? Why?",
+    "What specific Nmap command would you run next on 45.77.180.11 before concluding it is offline?",
+    "If the TCP SYN probe to port 80 on 45.77.180.11 returns SYN/ACK, what does that tell you? What does it change about your engagement plan?",
+    "How would you write the engagement log entry for 45.77.180.23 after trying every available probe type and receiving no response?"
+  ]
+}

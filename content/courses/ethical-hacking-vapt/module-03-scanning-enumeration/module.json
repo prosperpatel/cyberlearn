@@ -1,0 +1,44 @@
+{
+  "id": "module-03-scanning-enumeration",
+  "slug": "module-03-scanning-enumeration",
+  "courseSlug": "ethical-hacking-vapt",
+  "title": "Scanning & Enumeration",
+  "description": "Cross into active territory for the first time. Learn host discovery, port scanning, service fingerprinting, and service enumeration — the techniques that transform your passive intelligence picture into confirmed, actionable findings. Discover which systems are alive, which ports are open, and what software is running behind each door.",
+  "order": 3,
+  "estimatedHours": 4,
+  "tags": ["scanning", "enumeration", "nmap", "host-discovery", "port-scanning", "active-recon", "service-detection"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "lessons": [],
+  "missions": [
+    {
+      "slug": "mission-01-first-contact",
+      "title": "First Contact",
+      "order": 1,
+      "difficulty": "beginner",
+      "estimatedMinutes": 60,
+      "xpReward": 100,
+      "tags": ["host-discovery", "nmap", "icmp", "active-recon", "ping-sweep", "tcp-probe", "network-basics"]
+    },
+    {
+      "slug": "mission-02-open-closed-filtered",
+      "title": "Open, Closed, or Filtered",
+      "order": 2,
+      "difficulty": "beginner",
+      "estimatedMinutes": 60,
+      "xpReward": 100,
+      "tags": ["port-scanning", "nmap", "tcp-syn-scan", "port-states", "active-recon", "service-detection", "network-basics"]
+    },
+    {
+      "slug": "mission-03-who-are-you-really",
+      "title": "Who Are You Really?",
+      "order": 3,
+      "difficulty": "beginner",
+      "estimatedMinutes": 60,
+      "xpReward": 100,
+      "tags": ["service-detection", "banner-grabbing", "nmap", "version-detection", "fingerprinting", "active-recon", "cve-research", "network-basics"]
+    }
+  ]
+}

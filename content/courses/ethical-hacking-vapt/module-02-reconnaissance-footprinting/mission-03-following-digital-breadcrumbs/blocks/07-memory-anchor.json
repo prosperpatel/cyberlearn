@@ -1,0 +1,20 @@
+{
+  "id": "mod2m3-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 7,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "The Company Building You Can Read Without Entering",
+  "concept": "Every organisation's internet infrastructure is like a large building — and DNS is the building's public information directory. Each DNS record type is a different section of that directory. The organisation wrote every entry themselves. All of it is publicly readable. None of it requires permission to access.",
+  "anchor": "DNS records are the building directory: A = front door address. MX = mail room. NS = management office. TXT = notice board. CNAME = forwarding sign. PTR = reverse directory. SRV = services catalog. An investigator who reads every section of the directory before entering the building always arrives knowing more than the building expected.",
+  "explanation": "Picture a large corporate office building. Before you enter, there is a public information directory in the lobby that anyone can read. It lists:\n\n— The building's street address (A record)\n— Where the mail room is located (MX record)\n— Which office manages the official building records (NS record)\n— The notice board with posted announcements, security certifications, and vendor relationships (TXT record)\n— A forwarding sign: 'For payroll services, proceed to Annex Building B on Oak Street' (CNAME record)\n— The reverse directory: cross-reference a room number to find whose office it is (PTR record)\n— The services catalog: 'Legal consultation available at Suite 405, Room 12' (SRV record)\n\nNow imagine that the organisation wrote every entry in this directory themselves. They added each one because a specific service needed it to function. They never thought about who else might read it.\n\nDNS enumeration is reading the entire directory before deciding where to go — which door to knock on, which department to investigate, which annex building might be less well-guarded than the headquarters. The organisation gave you the map. You are simply learning to read it.",
+  "acronym": {
+    "letters": ["E", "N", "U", "M"],
+    "meanings": [
+      "Every record type tells a different story — A, AAAA, MX, NS, TXT, CNAME, PTR, SRV are eight different intelligence sources",
+      "Nameservers are the authoritative source — always query them directly for zone transfer attempts",
+      "Uncover subdomains systematically — the forgotten branches are often the most exposed",
+      "Map the complete infrastructure before touching anything — DNS gives you the blueprint before active scanning begins"
+    ]
+  }
+}

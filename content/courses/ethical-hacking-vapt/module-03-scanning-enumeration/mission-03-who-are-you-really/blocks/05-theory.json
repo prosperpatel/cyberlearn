@@ -1,0 +1,31 @@
+{
+  "id": "mod3m3-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What Is a Banner?",
+  "title": "Service Banners: How Services Introduce Themselves",
+  "content": "'What was that Server line in the curl output?' James asked, scrolling back through the terminal.\n\n'That is the banner,' Maya said. 'Or more precisely, one part of it. The service's announcement — the message it sends when you first connect, before you have even said anything.'\n\n'Why would a server volunteer that information?'\n\nMaya set down her coffee. 'Because when these protocols were designed, the person connecting was usually an administrator managing their own systems. They needed to know exactly what they were connecting to — which server, which software, which version. The banner was documentation. A convenience. Most deployments still include it by default, because nobody changes the default.'\n\n**What a banner is**\n\nA service banner is a piece of text that a networked service sends when a connection is first established. It is the service's identification message — transmitted automatically by many services before the connecting party says anything.\n\nNot every service uses the same banner format or delivers it in the same place. But for most standard protocols, the banner is available and contains the same core information.\n\n**SSH banner**\n\nThe SSH protocol sends this automatically when any client connects to port 22:\n\nSSH-2.0-OpenSSH_7.4\n\nThree pieces of information in one line: SSH protocol version (2.0), software name (OpenSSH), and the version number (7.4). The SSH protocol specification defines this format — every compliant SSH server sends it.\n\n**HTTP Server header**\n\nReturned in the response headers of any HTTP or HTTPS request:\n\nServer: Apache httpd 2.4.49 ((Unix))\n\nSoftware: Apache httpd. Version: 2.4.49. Platform hint: Unix. This header appears in the response to every request — including a simple HEAD request that asks for headers only.\n\n**Tomcat banner**\n\nApache Tomcat returns its identity in the same HTTP Server header:\n\nServer: Apache Tomcat/7.0.37\n\nSoftware: Apache Tomcat. Version: 7.0.37. The same three characters that appeared in Maya's terminal — and that Shodan had captured months earlier.\n\n**What banners typically contain**\n\nBanners vary by service and configuration, but commonly include:\n\n- **Service name** — what software is listening (Apache, OpenSSH, Tomcat, nginx, IIS)\n- **Version number** — which version is installed. The most important piece for vulnerability research.\n- **Protocol version** — which version of the network protocol the service is using (SSH-2.0, HTTP/1.1)\n- **Platform hints** — sometimes includes operating system or build environment details\n\n**Why the version number is the intelligence that matters**\n\nThe service name tells you what category of software you are dealing with. The version number is what makes security testing systematic.\n\nThe CVE database (Common Vulnerabilities and Exposures) indexes every publicly disclosed security vulnerability by affected product and version range. Without a version number, the CVE database cannot be searched meaningfully — 'web server' is not a searchable identifier. With a version number — 'Apache Tomcat 7.0.37' — you can find every known vulnerability affecting that exact release and confirm whether it applies to this installation.\n\nThe professional difference: 'web server on port 8443' is an observation. 'Apache Tomcat 7.0.37 on port 8443' is intelligence that begins a CVE research sequence.",
+  "callouts": [
+    {
+      "type": "insight",
+      "title": "Why Services Announce Themselves By Default",
+      "text": "The original purpose of service banners was administrative: when system administrators connected to their own servers for maintenance, they needed to quickly confirm which system they were on and which software version was running.\n\nModern deployments may run dozens or hundreds of servers. The banner was — and remains — a debugging aid. The security problem is not that banners exist; it is that most deployments use default configurations that include the full version string, and many administrators never consider disabling it."
+    },
+    {
+      "type": "info",
+      "title": "Not Every Service Sends a Banner Immediately",
+      "text": "Some services wait for the client to speak first — they do not transmit any data until the connecting party sends a request. HTTP is one example: the server waits for a request ('GET / HTTP/1.1') before responding with headers.\n\nFor these services, banner grabbing requires sending a minimal request to trigger the response. Nmap's service version detection handles this automatically — its probe database includes the appropriate first-message for each service type."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Service Banner",
+      "definition": "A text string that a networked service transmits when a connection is first established, typically including the software name and version number. Many services send banners by default as an identification and debugging aid. Banners are the simplest form of service identification, but they can be modified or disabled by administrators."
+    },
+    {
+      "term": "Version String",
+      "definition": "The part of a service banner that identifies the specific version of the software — for example, '7.0.37' in 'Apache Tomcat/7.0.37'. The version string is what makes systematic vulnerability research possible: CVEs are indexed against specific version ranges, and without a version number, known vulnerabilities cannot be identified."
+    }
+  ]
+}

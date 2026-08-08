@@ -1,0 +1,33 @@
+{
+  "id": "mod2m1-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The First Day of Recon",
+  "narrative": [
+    "Maya Patel had been doing this for six years. She had broken into banks, hospitals, government departments, and Fortune 500 companies — all with signed contracts and written authorisation sitting in a folder on her desk. She had never once introduced herself to the security team before the job was done.",
+    "The morning Maya and her junior colleague James started their engagement for Meridian Financial, they sat in a coffee shop three blocks from the client's headquarters. They had a laptop, two coffees, and a company name. The scope agreement was signed. Nothing else had been provided. The client wanted a black-box test — the kind that simulates a real-world attacker who starts from zero.",
+    "James had expected to open Nmap. He reached for the terminal.",
+    "'Not yet,' Maya said. 'We don't know enough to know what we're looking for.'",
+    "She opened a browser. Within forty-five minutes, without sending a single packet to Meridian's systems, Maya had assembled this:\n\n• Meridian's IT team of 31 people — names, job titles, LinkedIn profiles, and start dates. Including the woman who managed all network infrastructure and the contractor who maintained their legacy payment systems.\n\n• Their email format: first.lastname@meridian-financial.com — confirmed by cross-referencing a sales manager's publicly listed email on a conference speaker page.\n\n• Four job postings currently live. One was for an 'AWS Cloud Engineer with experience in Terraform and Kubernetes.' Another asked for 'familiarity with CrowdStrike Falcon.' A third required 'experience with Cisco Meraki network infrastructure.' Maya circled that one.\n\n• Three subdomains that didn't appear on the main website: dev.meridian-financial.com, staging-app.meridian-financial.com, and legacy.meridian-financial.com. Found through a public SSL certificate log at crt.sh.\n\n• A GitHub repository from 2021, no longer maintained, where a junior developer had accidentally committed a configuration file containing database connection strings. The database server it pointed to was gone — but the format of their internal naming conventions was now visible.\n\n• Meridian Financial's domain had appeared in the 2019 Collection #1 breach data. Eleven email addresses from their company were in the dataset. The passwords were hashed, but the email addresses were real.",
+    "James stared at the screen. 'We haven't touched their systems yet,' he said.",
+    "'We won't,' Maya said, 'until we know exactly where to look.' She saved everything to the engagement folder and closed the browser. 'This is reconnaissance. We know what technology they run. We know who manages it. We know which door to knock on. The scanning phase starts Monday — and when it does, we already know which three subdomains to start with.'",
+    "Meridian Financial had a professional security team. Their firewall was configured correctly. They paid for a premium endpoint detection product. None of that mattered, because none of it was watching what Maya had just done. She hadn't sent a single packet to their network. She hadn't triggered a single alert. She had spent forty-five minutes reading information that Meridian Financial had already made public — job listings, SSL certificates, a GitHub repository, a LinkedIn page — and assembled it into a complete intelligence picture.",
+    "This is what reconnaissance means. Not tools. Not exploits. Not code. Information. And the most dangerous kind is the kind that was always public."
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of professional experience across financial services, healthcare, and government. Maya's philosophy: attackers always do their homework. The job of a good pen tester is to do it better — and faster — than they can.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First year in professional security, strong technical background. James knows how to run tools. He's learning — from Maya — when not to.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "tense"
+}

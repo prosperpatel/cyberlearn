@@ -1,0 +1,41 @@
+{
+  "id": "mod3m2-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Which Doors Are Open",
+  "narrative": [
+    "Monday, 11:44 AM. The coffee had gone cold.",
+    "James had the engagement log open. Two confirmed live hosts. He knew the next step — he had done this a dozen times in labs. Port scan. Find the open ports.",
+    "He typed: nmap 45.77.180.10",
+    "Maya glanced over. 'What state do you expect the ports to come back as?'",
+    "James paused, finger over the Enter key. 'Open or closed.'",
+    "'And what does open actually mean? Not the word. What happens on the network when a port is open?'",
+    "James thought about it. He had typed port numbers hundreds of times. Port 80 for web. Port 22 for SSH. He knew the port numbers — but he had never asked himself why those numbers existed, or what 'open' meant at the level of packets and processes.",
+    "'There's... a service listening on it?' he offered.",
+    "'Close. There is a process on the target machine registered to that port number, waiting to accept incoming connections. When your scanner sends a packet to that port, the process is there to receive it. That is what open means — something is home at that specific door, and the door is unlocked.'",
+    "James nodded slowly.",
+    "'Now,' Maya said. 'What about closed?'",
+    "'Nothing listening?'",
+    "'Right. The host is alive — we confirmed that in Mission 1. But on this specific port, no process is waiting. The host receives your probe — and sends back a rejection. That rejection is a real answer from a real system. The door is there, but it is locked and empty.'",
+    "'Open and closed. Okay.' James started to type again.",
+    "Maya put her hand on his arm. 'There is a third state.'",
+    "James looked up.",
+    "'Filtered,' she said. 'The hardest one to interpret. The one most beginners do not think about — and the one that hides the most interesting things on a real engagement.' She turned back to the screen. 'Let me show you what happens at the network level in each case.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of experience. Maya has never run a port scan without knowing precisely what each result means — and what it does not.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "Second week of his first real engagement. James knows how to use Nmap. He is learning what Nmap is actually measuring.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "discovery"
+}

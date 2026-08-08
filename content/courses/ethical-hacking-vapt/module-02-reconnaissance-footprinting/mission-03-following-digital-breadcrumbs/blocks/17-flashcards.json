@@ -1,0 +1,50 @@
+{
+  "id": "mod2m3-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 3",
+  "cards": [
+    {
+      "front": "What is DNS enumeration, and how is it different from just looking up an A record?",
+      "back": "DNS enumeration is the systematic querying of ALL available DNS record types (A, AAAA, MX, NS, TXT, CNAME, PTR, SRV) for a domain and all its subdomains.\n\nLooking up one A record gives you one IP. DNS enumeration gives you:\n— The email provider (MX)\n— The DNS hosting provider (NS)\n— Every cloud vendor in use (TXT verification tokens)\n— Whether the domain can be spoofed (DMARC p= value)\n— Every CDN and SaaS relationship (CNAME)\n— The complete list of subdomains and their IPs\n\nOne lookup is a phone number. Enumeration is the complete directory.",
+      "hint": "DNS has 8 record types. A record is one of them."
+    },
+    {
+      "front": "What does the MX record reveal, and why is a self-hosted MX record significant?",
+      "back": "MX (Mail Exchange) record reveals which server receives email for the domain.\n\naspmx.l.google.com = Google Workspace\nmail.protection.outlook.com = Microsoft 365\nA company's own hostname = self-hosted mail server\n\nSelf-hosted MX is significant because mail servers communicate directly via SMTP — no CDN proxying. The mail server's IP is a real, direct, internet-facing address. Running IP WHOIS on it often reveals the organisation's actual hosting infrastructure — bypassing any CDN protection on the main website.",
+      "hint": "MX = mail room address. What service runs the mail room?"
+    },
+    {
+      "front": "What does the NS record reveal, and why does it matter for security?",
+      "back": "NS (Nameserver) record reveals which servers are authoritative for the domain's DNS — the official source of all DNS records.\n\nns1.cloudflare.com = Cloudflare manages DNS (and likely CDN)\nawsdns = AWS Route 53 (infrastructure likely on AWS)\nCustom NS = self-managed, possible zone transfer target\n\nSecurity implication: compromising the account that manages NS records (Cloudflare account, Route 53 account) allows changing all DNS records — redirecting website, email, everything. NS records tell you where the critical DNS management account lives.",
+      "hint": "NS = management office. Who runs the building's official records?"
+    },
+    {
+      "front": "What does a DMARC TXT record p= value tell you, and what does p=none mean?",
+      "back": "DMARC (v=DMARC1) controls what happens when an email fails authentication.\n\np=none = monitoring only — failing emails are DELIVERED ANYWAY. The domain can be spoofed in phishing emails. This is a finding in every professional penetration test report.\n\np=quarantine = failing emails go to spam. Harder to phish but not impossible.\n\np=reject = failing emails are rejected entirely. Strongest protection — spoofed emails blocked.\n\nQuery: dig TXT _dmarc.target.com",
+      "hint": "p=none means the door is unlocked — emails can be faked."
+    },
+    {
+      "front": "What is a dangling CNAME, and why is it a security vulnerability?",
+      "back": "A dangling CNAME is a DNS CNAME record whose destination domain or cloud resource no longer exists, but the DNS record was never removed.\n\nExample: blog.company.com CNAME company.wpcomstaging.com → company's WordPress account was deleted → NXDOMAIN\n\nIf the destination resource can be claimed (register the WordPress subdomain name), the claimant controls what is served from blog.company.com — the company's trusted subdomain.\n\nThis is subdomain takeover — serving malicious content from a corporate domain without touching their systems.",
+      "hint": "A CNAME pointing somewhere that no longer exists = unlocked door."
+    },
+    {
+      "front": "What does a PTR record do, and what does it reveal in reconnaissance?",
+      "back": "PTR (Pointer) record is reverse DNS: it maps an IP address to a hostname.\n\nWhere A records go name → IP, PTR records go IP → name.\n\nReconnaissance use: run a PTR lookup on any discovered IP address. The hostname often reveals the server's purpose:\nvpn-gw-01.company.com → VPN gateway\ndb-primary.company.com → primary database server\njenkins.company.com → CI/CD server\n\nPTR records reveal internal naming conventions and server roles — information not always visible in forward DNS.",
+      "hint": "PTR = reverse phone book. Number → name."
+    },
+    {
+      "front": "What is a DNS zone transfer (AXFR) and what does it reveal when misconfigured?",
+      "back": "A zone transfer (AXFR query) copies the complete DNS zone from primary to secondary nameserver for synchronisation. Legitimate between authorised servers.\n\nWhen misconfigured to accept requests from any IP: it dumps EVERY DNS record in the zone to the requester — all internal hostnames, all IP addresses, all server names, all services.\n\nCommand (in authorised engagement): dig axfr @ns1.target.com target.com\n\nIMPORTANT: Zone transfer is an ACTIVE technique — it contacts the target's nameserver directly. Requires written authorisation.",
+      "hint": "Zone transfer = accidentally handing out the complete building blueprint."
+    },
+    {
+      "front": "Why are development and legacy subdomains often the most valuable reconnaissance findings?",
+      "back": "Development and legacy subdomains are high-value targets because:\n\n— They often resolve to direct IPs (no CDN protection)\n— They run the same application code as production, but often with older versions\n— They are patched less frequently ('it's just dev')\n— They are not on anyone's active security monitoring list\n— They may contain real credentials in configuration files\n— They may have weaker access controls ('it's internal only')\n\nThe organisation built and deployed them — then forgot about them. The DNS record stayed. Anyone who does DNS enumeration finds them.\n\nThe main website may be impenetrable. The dev subdomain running a two-year-old framework version may not be.",
+      "hint": "Forgotten branches run old software. Nobody patches what nobody knows is there."
+    }
+  ]
+}

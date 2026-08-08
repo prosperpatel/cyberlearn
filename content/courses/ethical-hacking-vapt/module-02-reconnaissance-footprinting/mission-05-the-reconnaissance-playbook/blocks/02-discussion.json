@@ -1,0 +1,16 @@
+{
+  "id": "mod2m5-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Think First",
+  "title": "Before the Tools: How Do You Start?",
+  "prompt": "You have just been handed a penetration testing engagement. The client is a financial services company. The scope document lists fifteen domain names, three IP ranges, and two web applications. You have:\n\n• Four days for the passive reconnaissance phase\n• One junior tester (James)\n• Full written authorisation to perform passive OSINT, active scanning, and exploitation against in-scope assets\n\nYou know how to run WHOIS lookups. You know how to enumerate DNS records. You know how to Google Dork. You know how to use Shodan. You know how to extract document metadata.\n\nBut right now, on day one, hour one — before you open any tool — what do you actually do first?\n\nThink through these questions carefully.",
+  "guideQuestions": [
+    "You have fifteen domains in scope. Do you start working through them in alphabetical order, or is there a more intelligent way to prioritise where to begin? What information would help you decide which domain to investigate first?",
+    "You are running a WHOIS lookup and discover that one of the in-scope domains is registered to a completely different company — not the client. What are the possible explanations, and what should you do before proceeding?",
+    "During passive reconnaissance on day two, you find a Google Dork result showing an open directory with a database backup. The domain is clearly the client's. But that specific IP address is not listed in the scope document — it is a subdomain that resolves to a server not included in the agreed IP ranges. What is the professional response?",
+    "James suggests stopping passive recon after three days because 'we've found enough.' How do you decide whether passive recon is actually complete — versus just having reached the point of diminishing returns?"
+  ],
+  "instructorNote": "The goal of this discussion is to surface the planning instinct: professional reconnaissance is not about running every tool you know. It is about asking 'what do I need to know, and in what order should I find it?' The questions progressively introduce: prioritisation, scope anomalies, out-of-scope findings requiring judgment, and the concept of recon completion criteria. All of these will be answered in the theory blocks that follow."
+}

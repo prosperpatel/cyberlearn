@@ -1,0 +1,75 @@
+{
+  "id": "mod2m2-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A penetration tester looks up a target company's primary domain and the A record returns IP address 104.16.148.24. An IP WHOIS lookup on that address shows it is registered to Cloudflare, Inc. What is the correct next action?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Begin an Nmap port scan against 104.16.148.24 — this is the target's server IP", "isCorrect": false },
+        { "id": "b", "text": "Note that the website is behind Cloudflare's CDN, and investigate MX records and subdomains to find the target's real origin server IPs", "isCorrect": true },
+        { "id": "c", "text": "Conclude that the company uses Cloudflare as their hosting provider and owns the 104.16.x.x IP range", "isCorrect": false },
+        { "id": "d", "text": "Stop the investigation — CDN protection makes further domain intelligence impossible", "isCorrect": false }
+      ],
+      "explanation": "An A record resolving to a Cloudflare IP means the domain is behind Cloudflare's CDN or proxy service. The IP belongs to Cloudflare, not the target organisation. Scanning it would scan Cloudflare's infrastructure — outside your authorised scope — and produce results with nothing to do with the target's actual servers. The correct approach is to look for paths around the CDN: MX records frequently reveal self-hosted mail server IPs not protected by Cloudflare, subdomains discovered through Certificate Transparency logs often resolve directly, and historical DNS records may show the original IP before the CDN was added.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "You query the TXT records for a target domain and find: 'v=DMARC1; p=none; rua=mailto:dmarc-reports@targetcompany.com'. What is the security implication of this record?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The domain has strict email protection — p=none means no external email is permitted from this domain", "isCorrect": false },
+        { "id": "b", "text": "The domain's DMARC policy is in monitoring-only mode — emails that fail authentication are not blocked, meaning the domain can be spoofed in phishing emails", "isCorrect": true },
+        { "id": "c", "text": "The domain has no email infrastructure configured at all", "isCorrect": false },
+        { "id": "d", "text": "The DMARC record is invalid — it should specify an IP address, not an email address", "isCorrect": false }
+      ],
+      "explanation": "In DMARC, 'p=none' means the policy is in monitoring/reporting mode only. When an email fails DMARC authentication (not sent from an authorised server, missing valid DKIM signature), it is delivered anyway — no rejection, no quarantine. The 'rua' address receives reports about these failures, but the emails still reach recipients. This means the domain CAN be spoofed: an attacker can craft email appearing to come from @targetcompany.com and it will pass most mail server checks. This is a finding in professional penetration testing reports because it directly enables phishing simulations and represents real-world risk. p=quarantine sends failing emails to spam. p=reject blocks them outright.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "Marcus Hutchins stopped the WannaCry ransomware by registering a domain for $10.69. Which fundamental concept about DNS made this intervention possible?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "DNS zone transfers — he downloaded WannaCry's complete DNS zone file to understand its infrastructure", "isCorrect": false },
+        { "id": "b", "text": "DNS resolution — the malware checked for a specific domain before executing, and registering the domain caused it to resolve successfully, triggering the kill switch the authors had built in", "isCorrect": true },
+        { "id": "c", "text": "WHOIS privacy protection — he blocked the malware from identifying its own registration data", "isCorrect": false },
+        { "id": "d", "text": "ASN routing — he modified the Border Gateway Protocol routes for WannaCry's command and control servers", "isCorrect": false }
+      ],
+      "explanation": "WannaCry contained a kill switch: before encrypting a victim's files, it checked whether a specific domain name resolved to a server. The authors built this to detect sandbox analysis environments, which often return positive DNS responses for all queries. Marcus Hutchins saw the domain call in the malware's code, looked it up, found it was unregistered, and registered it himself. Once the domain resolved successfully, every WannaCry instance checking for it received a positive response — and shut down. DNS resolution — the basic mechanism of translating a domain name to an IP address — is what made this possible. Understanding how DNS works is what made it visible.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "During passive reconnaissance, you discover that a target company's MX record points to 'mail.targetcompany.com' — their own mail server — rather than a cloud provider. You perform an IP WHOIS lookup on the mail server's IP and find it is registered to the target company directly. Why is this significant?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "It is not significant — mail server IPs are always publicly visible and provide no additional intelligence", "isCorrect": false },
+        { "id": "b", "text": "It reveals that the target company runs its own email server, and the mail server's IP is likely in the same IP range as their other self-hosted infrastructure — which may not be protected by a CDN", "isCorrect": true },
+        { "id": "c", "text": "It means the company's email is unencrypted and vulnerable to interception", "isCorrect": false },
+        { "id": "d", "text": "It indicates the company is small and does not have a professional IT team", "isCorrect": false }
+      ],
+      "explanation": "Mail servers using SMTP communicate directly with other mail servers without CDN proxying — there is no mail delivery equivalent of Cloudflare's web proxy. A self-hosted mail server's IP address belongs to the target organisation or their hosting provider, and is directly reachable from the internet. This IP is often in the same IP range (same ASN) as the target's other self-hosted infrastructure. A WHOIS lookup on this IP can reveal the organisation's full IP block and ASN — allowing you to map their complete internet-facing infrastructure from a single DNS record query. This is why mail server IPs are a primary tool for finding origin IPs behind CDNs.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "A penetration tester is investigating TargetBank Ltd. She queries WHOIS for targetbank.com and finds the domain was registered three months ago with privacy protection enabled, pointing to nameservers in a different country from where the bank operates. She also finds targetbank.co.uk (the bank's primary domain for fifteen years) is registered to a verified corporate entity. What is the most likely correct interpretation of targetbank.com?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "TargetBank Ltd. recently registered targetbank.com as a secondary domain for international expansion and enabled privacy protection for legal reasons", "isCorrect": false },
+        { "id": "b", "text": "targetbank.com is a likely typosquatting or phishing domain registered by a third party — the combination of recent registration, privacy protection, foreign nameservers, and the established .co.uk as the bank's real domain are strong indicators of malicious intent", "isCorrect": true },
+        { "id": "c", "text": "The investigation cannot proceed because WHOIS privacy protection hides the registrant information needed to draw conclusions", "isCorrect": false },
+        { "id": "d", "text": "targetbank.com is an expired domain that someone else acquired by accident when the bank forgot to renew it", "isCorrect": false }
+      ],
+      "explanation": "The combination of factors here is a strong signal of malicious intent rather than legitimate business activity. A UK bank with a 15-year history on .co.uk would not obscure a legitimate secondary domain behind privacy protection. The foreign nameservers are inconsistent with a domestic bank's normal infrastructure. The recent registration date (three months ago) matches the typical lead time for building phishing infrastructure. The correct professional response is to treat this as a likely phishing or typosquatting domain, document the specific evidence (WHOIS data, nameserver location, registration timeline), and immediately notify the client — before any other work in the engagement continues. WHOIS privacy not preventing this assessment: the combination of observable metadata tells the story even without registrant contact details.",
+      "xpReward": 20
+    }
+  ]
+}

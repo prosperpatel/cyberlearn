@@ -1,0 +1,50 @@
+{
+  "id": "mod2m2-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 2",
+  "cards": [
+    {
+      "front": "What is a domain name, and what is the difference between a domain and a website?",
+      "back": "A domain name is a human-readable label that represents a location on the internet (e.g. meridian-financial.com). It maps to IP addresses through DNS.\n\nA website is content served from infrastructure at that address. One domain can have dozens of subdomains pointing to different services on different servers.\n\nDomain = the address. Website = one of potentially many things living there.",
+      "hint": "Think: building name (domain) vs the offices inside it (websites)."
+    },
+    {
+      "front": "What is an IP address, and why do both domain names and IP addresses exist?",
+      "back": "An IP address is the numerical label computers use to route traffic (e.g. 104.22.7.45 IPv4). Computers cannot route by name — they need numbers.\n\nDomain names exist because humans are bad at memorising long number strings.\n\nDNS automatically translates between the name you type and the number the computer uses. Both are needed: names for humans, numbers for machines.",
+      "hint": "Domain name = building name. IP address = GPS coordinates of the building."
+    },
+    {
+      "front": "Describe the three levels of the DNS hierarchy in order.",
+      "back": "1. Root Nameservers — know where every TLD nameserver is. There are 13 root server addresses, globally distributed.\n\n2. TLD Nameservers — know which authoritative nameserver handles each registered domain within that TLD.\n\n3. Authoritative Nameservers — hold the actual DNS records (A, MX, NS, TXT, CNAME) for the domain. The definitive answer source.",
+      "hint": "Root → TLD → Authoritative. Country → City → Street."
+    },
+    {
+      "front": "What does each of these DNS record types reveal? A, MX, NS, TXT, CNAME",
+      "back": "A → Server's IPv4 address (then do IP WHOIS to see who owns it)\nMX → Email provider (Google Workspace? Microsoft 365? Self-hosted?)\nNS → DNS hosting provider (Cloudflare, AWS, custom)\nTXT → Email security policy (SPF, DMARC p=none/quarantine/reject), cloud service verification\nCNAME → CDN and SaaS tools (Cloudflare, Salesforce, HubSpot, Atlassian)\n\nEach type answers a different infrastructure question.",
+      "hint": "Think: which server, which email, which DNS host, which security policy, which vendors."
+    },
+    {
+      "front": "What is WHOIS, and what does a domain WHOIS record contain?",
+      "back": "WHOIS is a public protocol for querying internet resource registration data — the internet's property deed.\n\nA domain WHOIS record contains:\n— Registrant name/email (may be hidden by privacy service)\n— Registration date (creation)\n— Expiry date\n— Registrar (company domain was purchased from)\n— Authoritative nameservers\n\nQuery at who.is. IP addresses have WHOIS records too — they reveal the IP block owner.",
+      "hint": "WHOIS = who owns this piece of internet real estate?"
+    },
+    {
+      "front": "What is the difference between a Registrar and a Registry?",
+      "back": "Registrar: The company you BUY a domain from — GoDaddy, Namecheap, Cloudflare Registrar. Accredited resellers that submit registrations to the registry.\n\nRegistry: The organisation that OPERATES a TLD's authoritative database. Verisign operates .com and .net. Nominet operates .uk. The official source — registrars submit to it.\n\nRegistrar = estate agent. Registry = the land title office.",
+      "hint": "You pay a registrar. The registrar files with the registry."
+    },
+    {
+      "front": "What is a TLD, and what do these specific TLDs tell you: .gov, .edu, .io, .co.uk?",
+      "back": "TLD (Top-Level Domain) = the last segment of a domain.\n\n.gov → Restricted to verified US government entities only\n.edu → Restricted to US higher education institutions only\n.io → Originally British Indian Ocean Territory, now the default TLD for tech startups globally\n.co.uk → Country-code TLD for the United Kingdom — reveals geographic jurisdiction\n\ngTLD = generic (not country-specific). ccTLD = country-code (geographic jurisdiction).",
+      "hint": "TLD is context: who they are, where they are, what restrictions apply."
+    },
+    {
+      "front": "What is an ASN, and why does knowing a target's ASN matter in reconnaissance?",
+      "back": "ASN (Autonomous System Number) = a unique ID assigned to a network block managed by a single organisation.\n\nWhy it matters: Knowing a target's ASN reveals EVERY IP address range they own — not just the IPs attached to their website. This maps the complete scope of their internet-facing infrastructure from a single public lookup.\n\nLookup at bgp.he.net. Enter any of their known IPs. Find their ASN. See all their IP blocks.",
+      "hint": "ASN = the organisation's complete IP address book, made public."
+    }
+  ]
+}

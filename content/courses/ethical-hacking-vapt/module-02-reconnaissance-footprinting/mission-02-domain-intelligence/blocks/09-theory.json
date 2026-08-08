@@ -1,0 +1,43 @@
+{
+  "id": "mod2m2-block-09-theory",
+  "type": "theory",
+  "order": 9,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "DNS Record Types",
+  "title": "Reading the DNS Records: What Each Type Reveals",
+  "content": "DNS is not just a name-to-number translator. It is a public database containing multiple record types about a domain — and each type tells a different story about the organisation's infrastructure.\n\nHere are the five record types that matter most in reconnaissance, and exactly what each one reveals to a professional investigator.\n\n---\n\n**A Record (Address Record)**\n\nThe most fundamental DNS record. Maps a domain or subdomain to an IPv4 address.\n\nWhat it reveals: Which IP address handles traffic for this domain right now.\n\nProfessional use: This is your starting position. You take the IP from the A record and immediately look it up in IP WHOIS — which tells you who owns that IP block. If it belongs to AWS EC2, the target is on Amazon cloud. If it belongs to Cloudflare, they're using Cloudflare as a CDN or DDoS protection layer — and their actual servers are elsewhere. If it belongs to the organisation itself, they run their own infrastructure.\n\nExample: meridian-financial.com → A record → 104.22.7.45 → IP WHOIS → Cloudflare, Inc. Conclusion: website is behind Cloudflare. Real servers are at a different IP.\n\n---\n\n**MX Record (Mail Exchange Record)**\n\nSpecifies which servers handle incoming email for the domain.\n\nWhat it reveals: The email platform and infrastructure the organisation uses.\n\nProfessional use: The MX record is one of the most intelligence-rich DNS lookups available — and it frequently reveals the real server IP because mail servers often bypass CDN protection.\n\nCommon patterns:\n— 'aspmx.l.google.com' → Google Workspace (Gmail for Business)\n— 'mail.protection.outlook.com' → Microsoft 365 / Exchange Online\n— 'mx.zoho.com' → Zoho Mail\n— 'mail.meridian-financial.com' → self-hosted mail server — this server has a real IP address that is almost certainly NOT behind a CDN\n\nA self-hosted mail server's IP is often in the same IP range as the organisation's other infrastructure, revealing their actual hosting environment.\n\n---\n\n**NS Record (Nameserver Record)**\n\nSpecifies which nameservers are authoritative for the domain.\n\nWhat it reveals: Who manages the domain's DNS — which is frequently the same provider managing the rest of their infrastructure.\n\nProfessional use:\n— 'ns1.cloudflare.com' → DNS managed by Cloudflare (strong signal that Cloudflare is also proxying their web traffic)\n— 'ns-xxx.awsdns-xx.com' → DNS managed through AWS Route 53 → organisation is likely on AWS\n— 'ns1.digitalocean.com' → DNS through DigitalOcean\n— Custom nameservers ('ns1.meridian-financial.com') → organisation manages its own DNS — potentially on-premises servers\n\nThe nameserver provider tells you the organisation's likely DNS and cloud infrastructure provider.\n\n---\n\n**TXT Record (Text Record)**\n\nA flexible record that can contain any text string. Originally designed for human-readable annotations, now the standard mechanism for email security configuration and cloud service domain verification.\n\nWhat it reveals: Email security posture and cloud service relationships.\n\nCritical patterns:\n— 'v=spf1 include:_spf.google.com ...' → Google Workspace for email\n— 'v=spf1 include:spf.protection.outlook.com ...' → Microsoft 365\n— 'v=DMARC1; p=none' → DMARC in monitoring mode only — the domain CAN be spoofed\n— 'v=DMARC1; p=quarantine' → Spoofed emails go to spam\n— 'v=DMARC1; p=reject' → Spoofed emails are rejected outright\n— 'MS=ms12345678' → Microsoft 365 domain verification — even if they've migrated MX records away from Microsoft, this tells you they use Microsoft 365 services\n— 'atlassian-domain-verification=...' → Uses Atlassian tools (Jira, Confluence)\n— 'docusign=...' → Uses DocuSign for contracts\n\nA DMARC policy of p=none means the domain can be impersonated in email. This is a finding that appears in professional penetration testing reports — it directly enables phishing simulations and highlights real-world risk.\n\n---\n\n**CNAME Record (Canonical Name Record)**\n\nAn alias record — instead of pointing to an IP address, a CNAME points to another domain name. The DNS system then looks up the target domain name to find the actual IP.\n\nWhat it reveals: Which third-party services and providers the organisation uses for specific parts of their infrastructure.\n\nProfessional use:\n— 'www.meridian-financial.com CNAME meridian.cdn.cloudflare.net' → Website behind Cloudflare CDN\n— 'blog.meridian-financial.com CNAME meridianfinancial.wpcomstaging.com' → Blog on WordPress.com\n— 'status.meridian-financial.com CNAME meridian-financial.statuspage.io' → Status page on Atlassian\n— 'portal.meridian-financial.com CNAME meridian.force.com' → Customer portal on Salesforce\n— 'meet.meridian-financial.com CNAME ghs.googlehosted.com' → Google Workspace Meet\n\nEach CNAME is a declaration of a specific technology or SaaS tool in use. Together, they build a complete picture of the organisation's vendor ecosystem — without touching any of their servers.",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "How to Query DNS Records — Right Now",
+      "text": "These tools are built into every operating system:\n\nWindows (Command Prompt):\nnslookup meridian-financial.com\nnslookup -type=MX meridian-financial.com\nnslookup -type=TXT meridian-financial.com\n\nMac / Linux (Terminal):\ndig meridian-financial.com\ndig MX meridian-financial.com\ndig TXT meridian-financial.com\ndig NS meridian-financial.com\n\nBrowser-based tools (no installation required):\nmxtoolbox.com — DNS lookup, MX check, TXT/DMARC lookup\ndnschecker.org — Query from multiple global locations\nviewdns.info — Reverse IP, historical DNS, IP WHOIS\n\nAll of these query public DNS records. No authorisation is required. No logs are created on the target's systems."
+    },
+    {
+      "type": "warning",
+      "title": "DNS Zone Transfer — Active, Not Passive",
+      "text": "A DNS zone transfer (AXFR query) asks a nameserver to dump ALL its DNS records at once. On a misconfigured nameserver, this reveals every hostname, IP address, and record in the domain — essentially the organisation's complete internal network map.\n\nIMPORTANT: A zone transfer request is an active technique. It sends a direct query to the target's nameserver and creates a log entry on their systems. Attempting one without written authorisation is considered active reconnaissance. Most modern nameservers are configured to reject unauthorised zone transfer requests — but attempting one still leaves a trace. Never attempt a zone transfer on anything outside your written scope."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "A Record",
+      "definition": "Maps a domain or subdomain to an IPv4 address. The primary DNS record for resolving domain names to server IPs. Starting point for IP WHOIS investigation to determine who owns the server infrastructure (the target directly, or a CDN provider)."
+    },
+    {
+      "term": "MX Record",
+      "definition": "Mail Exchange record. Specifies which servers handle incoming email for the domain. Reveals email provider (Google Workspace, Microsoft 365, or self-hosted). Self-hosted mail server IPs frequently bypass CDN protection — making them a valuable path to real origin server IPs."
+    },
+    {
+      "term": "TXT Record",
+      "definition": "Text record containing arbitrary string data. Used for email authentication standards (SPF, DKIM, DMARC) and cloud service domain verification. DMARC policy value (p=none/quarantine/reject) directly indicates whether the domain can be spoofed in phishing emails."
+    },
+    {
+      "term": "CNAME Record",
+      "definition": "Canonical Name — an alias that points a subdomain to another domain name. Reveals CDN providers (Cloudflare, Akamai), SaaS platforms (Salesforce, HubSpot), and third-party hosting relationships. A map of the organisation's vendor ecosystem."
+    },
+    {
+      "term": "NS Record",
+      "definition": "Nameserver record. Specifies the authoritative nameservers for the domain. Reveals DNS hosting provider — which frequently indicates the cloud provider used for the organisation's broader infrastructure. Custom nameservers suggest self-managed, potentially on-premises infrastructure."
+    }
+  ]
+}

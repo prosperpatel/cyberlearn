@@ -1,0 +1,42 @@
+{
+  "id": "mod2m2-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Reading the Trail",
+  "narrative": [
+    "The morning after assembling Meridian Financial's initial intelligence dossier, James arrived at the coffee shop first. He had the engagement folder open on his screen and a question he'd been turning over since the night before.",
+    "'Maya — something doesn't add up,' he said when she sat down. 'Look at this.'",
+    "He pointed to the subdomains they'd found the previous day through crt.sh: dev.meridian-financial.com, staging-app.meridian-financial.com, legacy.meridian-financial.com.",
+    "'The company's been around since 2009. Fifteen years. But look at the domain itself — meridian-financial.com. When was it first registered?'",
+    "Maya looked at him. 'Pull up the WHOIS record.'",
+    "James navigated to who.is and typed in meridian-financial.com. The record loaded in a few seconds. He read it aloud: 'Registration date: March 2021. Registrar: Namecheap. Registrant: REDACTED — privacy protection enabled.' He looked up. 'They've been in business for fifteen years but this domain is only three years old?'",
+    "'Means they rebranded,' Maya said, 'or migrated from an older domain. We should find out what they operated on before.' She paused. 'Also — run the same search on meridianfinancial.com. No hyphen.'",
+    "James typed it. Both of them read the result at the same time.",
+    "Registrant: REDACTED — privacy protection enabled. Registration date: August 2024 — two months ago. Registrar: GoDaddy. Nameservers: pointing to a hosting provider in Eastern Europe.",
+    "Neither of them spoke for a moment.",
+    "'That's not them,' Maya said quietly.",
+    "'Someone registered the no-hyphen version two months ago?'",
+    "'Two months ago. With privacy protection on. And they're pointing it at a server in Eastern Europe.' Maya was already saving the record to the engagement folder. 'That is not their secondary domain. That is someone preparing a phishing campaign against them. They've registered a domain that looks almost identical to the client's. Notice: meridian-financial.com has a hyphen. meridianfinancial.com does not. Most people won't catch that in an email address. Right now, someone is probably sending emails from a @meridianfinancial.com address — no hyphen — and waiting for Meridian's customers or staff to click a link.'",
+    "James stared at the two WHOIS records side by side. They had found this in under four minutes. Two lookups. Two domain names. And they had discovered what appeared to be an active threat operation that the client had no idea about.",
+    "'Do we tell them now?' James asked.",
+    "'Right now. Before anything else happens today.' Maya was already composing the email. 'This is why domain intelligence comes before everything else in a professional engagement. We haven't run a scan. We haven't touched their infrastructure. We just looked at public registration records — and we found the most urgent security issue they currently have.'",
+    "She hit send. Then she opened a new browser tab and typed meridian-financial.com into the dig command.",
+    "'Now,' she said. 'Let me show you everything we can still learn from these two domains — and why what you just saw is only the beginning of what WHOIS and DNS records can tell us.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of professional experience across financial services, healthcare, and government. Maya's first move on any new engagement is always the domain records — they tell you more than most professionals realise, and they sometimes surface threats the client didn't know existed.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First year in professional security. Yesterday he learned what reconnaissance really means. Today he's learning to read the infrastructure of a target from public registration records — and to spot threats that were hiding in plain sight.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "focused"
+}

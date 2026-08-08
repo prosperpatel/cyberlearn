@@ -1,0 +1,36 @@
+{
+  "id": "mod2m4-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Memory Anchor",
+  "title": "The Library That Remembers Everything",
+  "hook": "Here is the thing that trips people up about Google Dorking: it sounds like a special skill. It is not. Google has already done the work — it has spent years crawling the internet and collecting everything publicly reachable. Dorking is just knowing how to query what Google already found. The library exists. You are learning how to use the catalogue.",
+  "analogy": "Imagine the world's largest library. Every day, an army of librarians goes to every building on Earth, walks into every room that is not locked, reads every document left on every table, and brings a copy back to the library. The library then catalogs everything by keyword, file type, URL, and page title.\n\nThe library is Google.\nThe librarians are Googlebot.\nThe catalog is the search index.\n\nNow imagine most organisations in the world have some rooms they meant to lock but forgot. The librarians walked in, copied the documents, and brought them back. The organisations have no idea.\n\nA Google Dork is asking the cataloguer a very specific question: 'Show me every document from Building X that has the word CONFIDENTIAL on the cover page and is in spreadsheet format.' The cataloguer checks the files and hands them over.\n\nYou are not breaking into anything. You are asking a very specific question of a very thorough cataloguer.",
+  "acronym": {
+    "word": "DORK",
+    "letters": [
+      {
+        "letter": "D",
+        "stands_for": "Documents exposed",
+        "explanation": "filetype: operator finds PDFs, spreadsheets, and documents Google has indexed from a target domain. Organisations routinely upload internal documents to public web servers by mistake."
+      },
+      {
+        "letter": "O",
+        "stands_for": "Open directories",
+        "explanation": "intitle:\"index of\" finds web servers with directory listing enabled — the server is displaying its own file structure like an open cupboard. Open directories often contain backup files, logs, and configuration archives."
+      },
+      {
+        "letter": "R",
+        "stands_for": "Routes and portals",
+        "explanation": "inurl: finds admin panels, login pages, and internal tools that are accessible via URL and indexed by Google. Discovering these paths is passive — visiting them for testing requires authorisation."
+      },
+      {
+        "letter": "K",
+        "stands_for": "Keywords in content",
+        "explanation": "intext: finds pages where the body contains specific words: 'confidential', 'internal use only', 'password', 'BEGIN RSA PRIVATE KEY'. What Google indexed is what was publicly accessible — regardless of whether the organisation intended it."
+      }
+    ]
+  },
+  "consolidation": "The next time you use Google, you are looking at the same index a professional penetration tester queries during reconnaissance. The difference is knowing which operators make the questions specific enough to find what the target does not know is visible.\n\nOne memorable rule: if robots.txt lists a path, visit that path directly. robots.txt is not a lock. It is a sign that says 'we consider this sensitive' — which is exactly the information a professional needs."
+}

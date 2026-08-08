@@ -1,0 +1,35 @@
+{
+  "id": "mod2m2-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What Is a Domain?",
+  "title": "Domains: The Human-Readable Layer of the Internet",
+  "content": "Let's start with something most people assume they understand — but have never had properly explained.\n\nWhat is a domain?\n\nHere is the precise answer in plain English:\n\n**A domain name is a human-readable label that represents a location on the internet.**\n\nThat is it. It is a name. A label. A human-friendly shortcut for something a computer uses to route a connection across a global network of billions of devices.\n\n'google.com' is a domain name. So is 'meridian-financial.com'. So is 'nhs.uk'. So is 'mit.edu'. They all follow the same structure: words separated by dots, ending in a top-level extension.\n\n**Why does this exist?**\n\nBecause computers don't understand names. They understand numbers.\n\nEvery machine connected to the internet has a numerical address — called an IP address. To route a message to Google's servers, your computer actually uses a number like 142.250.191.14, not the string 'google.com'. The string 'google.com' exists because humans are very bad at memorising long strings of numbers and reasonably good at remembering names.\n\nSomeone had to design a system that automatically translates 'google.com' (the name you type) into '142.250.191.14' (the number your computer actually uses). That system is called DNS — the Domain Name System. We will cover it in detail shortly.\n\n**Domain vs Website — the distinction most people miss**\n\nThis is the first thing beginners get wrong, and it matters throughout your entire career.\n\nA domain is NOT a website. A domain is an address. A website is what lives at that address.\n\nThink of it this way. 'The Empire State Building' is the name of a specific address in Manhattan. Inside that building there are hundreds of offices, businesses, and tenants. The building name is not a business — it is an address. The businesses live inside it.\n\nA domain works identically. 'google.com' is an address. The Google Search interface is one thing that lives there. But:\n\n— mail.google.com is Gmail\n— maps.google.com is Google Maps\n— drive.google.com is Google Drive\n— play.google.com is the Play Store\n\nOne domain. Many services. Each subdomain pointing to a completely different server, running completely different software, in a completely different location.\n\n**This is why domains matter so much in reconnaissance.**\n\nWhen you discover that a target organisation uses the domain 'meridian-financial.com', you have not found their website. You have found the tip of an infrastructure iceberg. Beneath it: all the subdomains pointing to different services, the servers those services run on, the email infrastructure revealed by DNS records, the cloud provider revealed by who owns their IP blocks, and the full registered IP range revealed by their ASN data.\n\nOne domain is a window into an entire infrastructure. Every element of that infrastructure leaves a public record that a professional knows how to read.",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "Domain vs Subdomain",
+      "text": "A domain is the registered name you purchase: meridian-financial.com\nA subdomain is a prefix the owner creates in DNS: dev.meridian-financial.com\n\nThe organisation that controls meridian-financial.com can create any subdomains they want — dev, staging, mail, vpn, portal, legacy, api — and point each one to a completely different server. Subdomains are not registered separately; they are created in DNS records.\n\nThis is why Certificate Transparency logs (Mission 1) are so valuable: every time a subdomain gets an SSL certificate, that certificate is logged publicly — revealing infrastructure the organisation never explicitly advertised."
+    },
+    {
+      "type": "tip",
+      "title": "The Beginner Mistake to Avoid Right Now",
+      "text": "Beginners often say 'I found their website' when they find a domain. This is like saying 'I found a city' when you find a street address. The domain is the address. The website is one of potentially many things that live there. In professional reconnaissance, the domain is your starting position — not your destination."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Domain Name",
+      "definition": "A human-readable label that represents one or more locations on the internet. Mapped to IP addresses through the Domain Name System (DNS). Registered through domain registrars and recorded in public WHOIS databases. The starting point for all domain intelligence investigation."
+    },
+    {
+      "term": "Subdomain",
+      "definition": "A prefix added to a registered domain, creating a child namespace that can point to a completely different server or service. Subdomains are created in DNS by the domain owner and do not require separate registration. Discoverable through Certificate Transparency logs, DNS enumeration, or brute-force."
+    },
+    {
+      "term": "Domain vs Website",
+      "definition": "A domain is an address — a registered name that maps to infrastructure. A website is content served from that infrastructure. One domain can serve many services via subdomains. The domain is the investigative starting point; the website is one artefact attached to it."
+    }
+  ]
+}

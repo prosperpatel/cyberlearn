@@ -1,0 +1,15 @@
+{
+  "id": "mod2m1-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Opening Question",
+  "title": "Before You Know the Technique",
+  "prompt": "Forget everything you've heard about hacking. Imagine you know nothing about reconnaissance tools or techniques. Someone gives you only a company's name — nothing else — and asks you to find out as much as possible about it in 30 minutes using only a web browser and public websites. Where would you start? What would you look for first?",
+  "context": "There is no wrong answer here. This is a genuine question about how you would naturally approach the problem before you learn the formal technique. Professional security researchers have found that the most creative reconnaissance approaches often come from people who haven't yet learned to follow a rigid checklist. Your instincts about where to look may already be pointing in the right direction.",
+  "guideQuestions": [
+    "If you found the company's website, what on it would be most useful to a potential attacker?",
+    "Beyond the website — where else online does a company leave a trail of information?",
+    "If you could only find one piece of information, what would be the single most valuable thing to know about your target?"
+  ]
+}

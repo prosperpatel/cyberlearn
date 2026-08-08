@@ -1,0 +1,33 @@
+{
+  "id": "mod2m3-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "The Company with Many Offices",
+  "realWorldThing": "A large company does not operate from one location. It has a headquarters, regional branch offices, a dedicated mail room facility in another part of the city, a warehouse and logistics centre, a data archive facility, and a handful of small satellite offices from old expansion projects that were scaled back years ago. You can learn about all of these from public records — the company registry, postal directories, utility records, and the local business licensing database — without visiting any of them. The satellite offices that were scaled back still appear in the postal directory. The archive facility still has a public address. Some of them are staffed by a skeleton crew. Some are essentially abandoned.",
+  "concept": "An organisation's internet infrastructure works identically. The main website is the headquarters. Subdomains are the branch offices — some current, some legacy, some effectively abandoned. The mail server is the dedicated mail room. The DNS nameservers are the management office that keeps official records. The TXT records are the public notice board outside headquarters. The CNAME records are forwarding signs pointing to services operated elsewhere. And somewhere in the zone there may be a 'satellite office' — a forgotten subdomain running decade-old software, no longer on anyone's maintenance list, directly accessible from the internet — that represents the most significant vulnerability the organisation has.",
+  "comparison": "In both cases, the complete picture is available from public records. In both cases, the organisation created those records as a byproduct of normal business operation — not because they intended to create an intelligence resource for investigators. In both cases, the most interesting targets are not the headquarters (which is visible, professional, and well-maintained) but the forgotten branches — the satellite offices in the postal directory that nobody at headquarters thinks about anymore. An investigator who reads only the headquarters address and stops has missed the entire story.",
+  "breakdown": [
+    {
+      "realWorld": "Company headquarters — the main, well-maintained, professionally staffed public face",
+      "techEquivalent": "Main domain (A record → CDN IP) — the visible, CDN-protected, regularly updated primary website"
+    },
+    {
+      "realWorld": "Mail room facility — a separate location dedicated to handling incoming and outgoing post",
+      "techEquivalent": "MX record → mail server — a separate server dedicated to handling incoming and outgoing email, with its own direct IP address"
+    },
+    {
+      "realWorld": "Management office records — the official registry that knows about every property and service the company operates",
+      "techEquivalent": "NS records → authoritative nameservers — the official DNS servers that know about every hostname and service in the zone"
+    },
+    {
+      "realWorld": "Public notice board — posted announcements from the company about their vendor relationships and compliance certifications",
+      "techEquivalent": "TXT records — SPF, DMARC, and service verification tokens disclosing email policies and every cloud vendor relationship"
+    },
+    {
+      "realWorld": "Forgotten satellite offices — facilities from old expansion projects, still in the directory, still staffed minimally, never properly maintained",
+      "techEquivalent": "Legacy and dev subdomains — hostnames from old infrastructure projects, still in DNS, still running, often unpatched and directly internet-accessible"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mod2m5-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Reconnaissance Methodology Lab",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 35,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "clipboard-list",
+    "tags": ["reconnaissance", "methodology", "osint", "scope", "attack-surface", "intelligence-profile", "passive-recon", "professional-workflow"]
+  },
+  "content": {
+    "objective": "Apply the complete SCOUT passive reconnaissance methodology on an authorised target — from scope review to finished intelligence profile. You will run every technique in sequence (WHOIS, full DNS enumeration, search engine reconnaissance, supplementary OSINT), document every finding at the moment of discovery, build an attack surface map with all four tiers populated, and produce a professional intelligence profile ready to hand off to the active testing phase.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "Reconnaissance Methodology",
+      "estimatedTime": "35 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm doing a full passive reconnaissance methodology lab on an authorised target. I've been taught the SCOUT framework: Scope first, Collect passively, Organise findings, Understand attack surface, Tell immediately for critical findings.\n\nI want you to act as a senior penetration tester mentoring me through the lab — but never giving me direct answers.\n\nWhen I get stuck, I'll share what I've found — specific WHOIS results, DNS records, Google Dork results, robots.txt contents, Shodan data — and I want you to respond with questions that help me figure out the professional interpretation myself.\n\nFor example, if I share an MX record pointing to aspmx.l.google.com, don't tell me it means Google Workspace. Instead ask: 'What does this hostname tell you about who manages email for this organisation?' Make me reason it through.\n\nI also want you to push back professionally if I:\n— Start active techniques before completing the passive phase\n— Skip documenting a finding before moving to the next query\n— Treat a single-source finding as confirmed fact\n— Consider downloading sensitive documents I find\n— Start investigating an asset I haven't confirmed is in scope\n\nHelp me build the professional instincts — not just the answers."
+  }
+}

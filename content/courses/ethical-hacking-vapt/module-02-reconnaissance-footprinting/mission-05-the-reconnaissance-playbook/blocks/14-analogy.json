@@ -1,0 +1,33 @@
+{
+  "id": "mod2m5-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mind Map",
+  "title": "The Detective's Case File",
+  "realWorldThing": "A detective investigating a complex fraud case does not walk into the suspect's office on day one and start asking confrontational questions. That would alert the subject, destroy evidence, and almost certainly produce nothing useful. Instead, the detective spends weeks in the library, at the courthouse, reviewing public records: company registration documents, land registry records, court filings, newspaper archives, company accounts filed with the regulator. They build a map of who owns what, when things changed hands, who the associates are, and what the financial picture looks like — all from public records, all before making a single direct contact.\n\nWhen they finally make that first direct contact — the interview, the search warrant, the confrontation — they already know the answers to the questions they are asking. The direct phase is targeted because the library phase told them exactly where to look. The suspect who lies is caught immediately, because the detective already knows the truth from the records. The suspect who tells the truth confirms what the detective already knew — and reveals the next thing to look for.",
+  "concept": "Professional passive reconnaissance is the detective's library phase. WHOIS is the company registration record. DNS enumeration is the corporate directory and property deed. Google Dorking is the newspaper archive and court filings — what has been published publicly that the organisation may not have intended to become part of the public record. The intelligence profile is the case file — everything the detective has assembled before making the first direct contact.\n\nActive testing is the direct contact phase. It is faster, more targeted, and more effective because the case file exists. The tester asking the server 'what software are you running?' already knows from the passive phase that it is a Vultr VPS, possibly running an older framework, not behind CDN, with an admin portal at a specific path. The active phase confirms and exploits. The passive phase is what made the active phase possible.",
+  "comparison": "In both cases, the skilled practitioner does not make the mistake of thinking that the direct phase — the exciting, confrontational, action-oriented phase — is where the real work happens. The real work happens in the quiet, methodical, undetectable phase that comes first. The detective who skips the library and goes straight to the confrontation tips off the suspect and finds nothing. The penetration tester who skips passive recon and goes straight to scanning triggers IDS alerts on day one, finds nothing in the most-hardened systems, and misses the forgotten development server that passive recon would have revealed in twenty minutes.",
+  "breakdown": [
+    {
+      "realWorld": "The detective's public records research — company registry, land title, court filings, newspaper archive",
+      "techEquivalent": "Passive reconnaissance — WHOIS, DNS enumeration, Google Dorking, Shodan, Wayback Machine. All public data. No contact with the subject."
+    },
+    {
+      "realWorld": "The case file — organised, sourced, evidenced map of everything the detective has found",
+      "techEquivalent": "The intelligence profile and attack surface map — structured documentation of every passive finding with source, evidence, severity, and recommended action"
+    },
+    {
+      "realWorld": "The detective's constraints — jurisdictional authority, warrant requirements, evidence rules",
+      "techEquivalent": "Scope document and Rules of Engagement — what assets are authorised, what techniques are permitted, emergency escalation contacts"
+    },
+    {
+      "realWorld": "The moment of direct contact — the interview, the search, the confrontation. Precise because the case file said exactly where to look",
+      "techEquivalent": "Active testing — targeted scanning and exploitation, guided by the attack surface map that passive recon built"
+    },
+    {
+      "realWorld": "The detective's report to the prosecutor — evidence chain, sources cited, conclusions supported by documented findings",
+      "techEquivalent": "The penetration test report — findings with source, evidence, severity, recommended action, and a narrative that any professional can follow"
+    }
+  ]
+}

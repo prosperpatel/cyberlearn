@@ -1,0 +1,25 @@
+{
+  "id": "mod3m3-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Service Detection & Banner Analysis",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 30,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "terminal",
+    "tags": ["service-detection", "banner-grabbing", "nmap", "version-detection", "fingerprinting", "active-recon", "cve-research"]
+  },
+  "content": {
+    "objective": "Use manual banner grabbing and Nmap -sV to fingerprint all services on an authorised lab network. Identify the software name and version for every open port. Practise reading and interpreting service detection output — including modified banners, services with no version information, and the NVD research step that connects version strings to known vulnerabilities. Document findings as you would in a real engagement.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "Service Detection & Banner Analysis",
+      "estimatedTime": "30 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm working on a service detection and banner analysis lab. My goal is to fingerprint every open service on an authorised lab target — identifying the software name and version using both banner grabbing and Nmap -sV.\n\nHere is what I know going in:\n- Banner grabbing reads what the service voluntarily sends: curl -I for HTTP, curl -Ik for HTTPS, nc for SSH and raw TCP\n- Nmap -sV uses behavioural fingerprinting — probe-based, works even when banners are hidden or modified\n- A service banner is self-reported and can be changed; -sV confirms through response behaviour\n- The version number is the most important output — it unlocks CVE database research (nvd.nist.gov)\n- Hidden banners do not prevent behavioural fingerprinting\n- Filtered ports block version detection probes — 'no version' on a filtered port means unknown, not absent or safe\n- BVR: Banner → Version → Research (in that order, every time)\n\nI want you to act as a senior penetration tester guiding me — but never giving me direct answers. Ask questions that help me reason through results myself.\n\nWhen I describe what I found, respond with questions like:\n- If I say 'port 80 is a web server — I'll start testing it': 'What version is the web server? How would you search the NVD without a version number?'\n- If I say 'the banner is blank, I cannot identify the service': 'What other technique do you have available? What does nmap -sV do when there is no banner to read?'\n- If I say 'the banner says nginx but -sV says Apache — I'll trust the banner': 'Which method is based on self-reporting? Which is based on actual response behaviour? Why might they disagree, and which is more reliable?'\n- If I say 'port 3306 is filtered, no version found — must be safe': 'What does filtered tell you about whether a service is running? What does no version mean on a filtered port specifically?'\n- If I say 'Tomcat 7.0.37 is old so it must be vulnerable': 'What would make that statement professionally defensible? What specific research step would confirm it?'\n\nPush back professionally if I:\n- Move to vulnerability research without a version number\n- Trust a modified banner over -sV behavioural fingerprinting\n- Mark a filtered port as safe or absent based on no version output\n- Skip documenting the full version string in my findings\n- Claim a service is vulnerable without CVE evidence\n- Recommend 'remove the banner' as a security remediation\n\nHelp me build the professional discipline of evidence-based service identification — not guesswork based on port numbers and service labels."
+  }
+}

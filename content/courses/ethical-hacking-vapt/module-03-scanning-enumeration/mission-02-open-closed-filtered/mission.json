@@ -1,0 +1,41 @@
+{
+  "id": "mission-02-open-closed-filtered",
+  "slug": "mission-02-open-closed-filtered",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-03-scanning-enumeration",
+  "title": "Open, Closed, or Filtered",
+  "tagline": "You know who's home. Now find which doors are unlocked.",
+  "description": "Host discovery confirmed two live hosts in the Meridian Financial network. Now the engagement moves to its second active question: which ports are open on each system? Learn port scanning from first principles — what a port is and why it exists, how the TCP SYN scan works, what the three port states mean at the packet level, and why the filtered state is never the same as 'nothing there.' Discover why a default scan is not a complete scan — and what professional assessors find when they look further.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 60,
+  "xpReward": 100,
+  "order": 2,
+  "missionNumber": 2,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-03T00:00:00Z",
+  "updatedAt": "2026-08-03T00:00:00Z",
+  "prerequisites": ["mission-01-first-contact"],
+  "tags": ["port-scanning", "nmap", "tcp-syn-scan", "port-states", "active-recon", "service-detection", "network-basics", "scanning"],
+  "learningObjectives": [
+    "Explain what a port is and why networked systems use port numbers to route traffic to the correct application",
+    "Describe the three port states — Open, Closed, and Filtered — and what each state means at the packet level",
+    "Explain how the TCP SYN scan works: what packet is sent, what responses are possible, and why the handshake is never completed",
+    "Use Nmap to run a professional port scan against confirmed live hosts — default range and full range",
+    "Interpret Nmap port scan output line by line: port number, protocol, state, and service label",
+    "Explain what the Filtered state means, why it is not a dead end, and what professionals do about it",
+    "Document port scan findings in the engagement log with professional precision and correct state labels"
+  ],
+  "skills": [
+    "Running Nmap TCP SYN scans against individual hosts — default range and all 65,535 ports",
+    "Interpreting all three port states and deciding the correct professional follow-up for each",
+    "Distinguishing IANA service labels from confirmed service identities",
+    "Documenting port scan findings — including filtered ports — in a professional engagement log"
+  ],
+  "badge": "Door Mapper",
+  "missionIcon": "🚪",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "mod2m1-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Map an Organisation's Digital Footprint",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 15,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "search",
+    "tags": ["osint", "passive-recon", "digital-footprint", "attack-surface", "whois", "linkedin"]
+  },
+  "content": {
+    "objective": "Conduct a structured passive OSINT investigation on a real organisation using only publicly available sources. Build a mini target dossier. Identify at least three facts about the organisation's technology or people that they probably did not intend to make obvious — but did. Discover what an attacker (or a penetration tester) would find in the first hour of reconnaissance.",
+    "requirements": [
+      "A web browser",
+      "An internet connection",
+      "A text editor or notebook to record your findings"
+    ],
+    "instructions": [
+      "Choose your target. Pick one of the following: (a) a large publicly listed company you are interested in (avoid financial institutions and government — they have more aggressive monitoring), (b) a university or college, or (c) a well-known technology company. Do not choose a small private business, and do not choose any organisation you work for or have a personal connection to without explicit permission from the appropriate authority.",
+      "Run a WHOIS lookup. Go to who.is or whois.domaintools.com and enter the organisation's primary domain. Record: who registered the domain, when, and which name servers are listed. Note whether the registration uses privacy protection or reveals real contact details.",
+      "Search LinkedIn. Find the company's LinkedIn page and look at their list of employees. Without creating an account or logging in, note: approximately how many employees are listed, what job titles appear in the IT or engineering department, and whether any employees list specific security tools or cloud platforms in their profiles.",
+      "Find their job postings. Search '[company name] jobs site:linkedin.com' or '[company name] careers'. Look at any IT, engineering, or security roles. List every specific technology, tool, or platform mentioned in the requirements. You are building a technology stack profile.",
+      "Search crt.sh. Go to crt.sh and type the organisation's primary domain in the search box. Look at the results. List any subdomains you can see that are not on the main public website. Pay attention to prefixes like 'dev.', 'staging.', 'internal.', 'legacy.', 'vpn.', 'mail.', 'gitlab.', or similar.",
+      "Run a simple Google Dork. In Google, search: site:[their domain]. Browse the results. Then try: site:[their domain] filetype:pdf. Note any documents that appear in the results that contain internal information, staff names, or internal procedures.",
+      "Write up your findings. In one to two paragraphs, summarise: what you learned about the organisation's technology, which OSINT source was most productive, and what one specific finding surprised you most. End with: 'If I were an attacker, the first entry point I would investigate is ________ — because _________.'"
+    ],
+    "successCriteria": [
+      "You completed a WHOIS lookup and recorded at least two useful facts from the registration data.",
+      "You identified at least three specific technologies, tools, or platforms the organisation uses — sourced from job postings, LinkedIn profiles, or press releases.",
+      "You found at least one subdomain through crt.sh that is not listed on the company's main website.",
+      "You can describe, in plain language, what an attacker's first hour of reconnaissance on this target would look like and what they would learn."
+    ],
+    "reflection": "Look at everything you found. Now consider: did the organisation intend to share all of this? Some of it, yes — the website, the press releases, the LinkedIn company page. But the subdomains in the certificate logs? The technology stack revealed by job postings? The employee names and internal project hints from LinkedIn profiles?\n\nAll of this is public. None of it required any special skill or any illegal action. It required patience, a browser, and knowing where to look.\n\nNow ask yourself: what would you want to know, if you were responsible for protecting this organisation? And how would you find out what an attacker could see?",
+    "aiCompanionPrompt": "I'm working through a passive OSINT exercise where I need to build a digital footprint profile of an organisation using only public sources. I've done a WHOIS lookup and LinkedIn search, and I understand that Certificate Transparency logs can reveal subdomains. I'm now trying to understand what other public sources would give me technology stack information about my target. Can you ask me questions to help me think through where else organisations leave visible traces of their technology without realising it — rather than just giving me a list of sources?"
+  }
+}

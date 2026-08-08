@@ -1,0 +1,38 @@
+{
+  "id": "mission-01-the-internet-never-forgets",
+  "slug": "mission-01-the-internet-never-forgets",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-02-reconnaissance-footprinting",
+  "title": "The Internet Never Forgets",
+  "tagline": "Before the first packet is sent, the picture is already forming.",
+  "description": "Discover what reconnaissance really means and why it is the most important phase of any attack — or any defence. Learn the difference between passive and active recon, understand OSINT, map an organisation's digital footprint, and see how attackers build a complete target picture without touching a single system.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 65,
+  "xpReward": 100,
+  "order": 1,
+  "missionNumber": 1,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-05-your-professional-toolkit"],
+  "tags": ["reconnaissance", "osint", "passive-recon", "active-recon", "digital-footprint", "attack-surface", "information-gathering"],
+  "learningObjectives": [
+    "Define reconnaissance and explain its role as Phase 1 of the VAPT lifecycle",
+    "Distinguish between passive and active reconnaissance with examples of each",
+    "Explain what OSINT is and name at least five public sources used in professional recon",
+    "Describe what a digital footprint is and what it reveals about an organisation",
+    "Define attack surface and explain why it extends beyond an organisation's own systems"
+  ],
+  "skills": [
+    "Identifying which recon technique to apply given a specific intelligence goal",
+    "Recognising when passive recon crosses into active recon",
+    "Mapping an organisation's attack surface from public information alone"
+  ],
+  "badge": "Ghost Protocol",
+  "missionIcon": "🔍",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

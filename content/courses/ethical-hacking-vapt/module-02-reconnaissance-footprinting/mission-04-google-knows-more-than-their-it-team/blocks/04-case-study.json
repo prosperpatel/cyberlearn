@@ -1,0 +1,36 @@
+{
+  "id": "mod2m4-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study: The Open Book",
+  "company": "The Google Hacking Database — Johnny Long, 2004 to Present",
+  "year": "2004 — present",
+  "industry": "Cross-industry (government, healthcare, financial services, education, military)",
+  "incident": "In 2004, security researcher Johnny Long demonstrated that Google's search index — built from years of quietly crawling the public internet — contained sensitive data from thousands of organisations worldwide. His technique, now known as Google Dorking, required no hacking tools, no special access, and no contact with any target system. It required only knowing how to ask Google the right questions.",
+  "whatHappened": [
+    "Between 2003 and 2004, security researcher Johnny Long developed a systematic method of using Google's advanced search operators to find sensitive information that organisations had accidentally made publicly accessible. The technique exploited a fundamental gap between what an organisation believed was private and what Google had found, crawled, and indexed.",
+    "Long's queries found: web servers with directory listings enabled — displaying the contents of server directories like an open file cabinet; configuration files containing database credentials, API keys, and internal network addresses; forgotten admin login pages that had been crawled and indexed before access controls were applied; internal documents uploaded to web servers and made publicly accessible by misconfiguration; backup files left in public web directories.",
+    "His most striking early finding: a query for intitle:\"index of\" passwd returned thousands of servers worldwide — hospitals, banks, universities, government agencies — that had web directories publicly listed, many containing password files, authentication databases, and system configuration. None of these organisations knew their data was visible. None of them had been hacked in any conventional sense. Their web servers had simply been misconfigured, and Google had found the misconfiguration.",
+    "In 2004, Long created the Google Hacking Database (GHDB) — a searchable collection of Google Dork queries categorised by what they found: login portals, sensitive files, network infrastructure, configuration errors, server information. He published the GHDB openly. The security community has maintained and expanded it continuously since. By 2024, it contained over 4,000 documented queries.",
+    "The GHDB is hosted today at exploit-db.com/google-hacking-database and is used by penetration testers, bug bounty hunters, and security researchers worldwide — as well as, inevitably, by attackers. The same query that a professional uses to find an organisation's exposed admin panel and report it responsibly is the same query an attacker uses to find it for other purposes.",
+    "Every major penetration testing methodology — including the Penetration Testing Execution Standard (PTES), OWASP's testing guide, and the methodologies behind CEH and OSCP certifications — includes Google Dorking as a mandatory step in the passive reconnaissance phase. It is not an optional technique. It is a baseline.",
+    "The principle that Long demonstrated in 2004 remains unchanged: Google is not just a search engine for websites. It is the world's largest index of everything publicly accessible on the internet — including information organisations never intended to share. Understanding what Google has already found about a target is the first question in professional reconnaissance."
+  ],
+  "whyItHappened": [
+    "Organisations configure their systems for internal use — knowing where sensitive data lives, knowing which paths require authentication, knowing which files are meant to be internal. They do not always account for the fact that any publicly accessible URL can be crawled by a search engine and served to anyone with a browser.",
+    "Web servers default to serving any file placed in their document root. If an employee uploads a document to a web server directory and the directory is publicly accessible, the document is immediately publicly accessible — with no notification to the organisation and no mechanism to prevent indexing. Google's crawler visits regularly, finds the new file, and adds it to the search index within days.",
+    "robots.txt — a convention used to request that search engines not index certain paths — is widely misunderstood. It is a request, not an enforcement mechanism. Malicious crawlers ignore it entirely. Even for cooperative crawlers like Google, robots.txt only prevents indexing; it does not prevent access. A path listed in robots.txt as Disallow is still fully accessible to anyone who visits it directly."
+  ],
+  "lessonsLearned": [
+    "Access control must be enforced at the server, not at the file system. A file on a web server is accessible to anyone with the URL unless the server is specifically configured to require authentication. Placing a file in a web directory without access controls is publishing it — regardless of whether the organisation intended that.",
+    "Google Dorking your own organisation is a defensive practice. Running site:yourorganisation.com filetype:pdf reveals every PDF Google has indexed — including any that were uploaded accidentally. This is the same query an attacker runs. Running it first means finding the exposure before they do.",
+    "robots.txt is a disclosure risk, not a protection. Every path listed in robots.txt as Disallow is a public announcement that the path exists. A professional reads robots.txt on every engagement specifically because it reveals paths the organisation considers sensitive — and those paths are then tested directly."
+  ],
+  "impactStats": [
+    { "value": "4,000+", "label": "Queries in the Google Hacking Database (exploit-db.com/google-hacking-database)" },
+    { "value": "0", "label": "Contact with target systems required to find sensitive data via Google Dorking" },
+    { "value": "20 years", "label": "Time since Johnny Long introduced the technique — still effective today" },
+    { "value": "100%", "label": "Professional penetration testing methodologies that include Google Dorking as a mandatory passive recon step" }
+  ]
+}

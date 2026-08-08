@@ -1,0 +1,62 @@
+{
+  "id": "module-02-reconnaissance-footprinting",
+  "slug": "module-02-reconnaissance-footprinting",
+  "courseSlug": "ethical-hacking-vapt",
+  "title": "Reconnaissance & Footprinting",
+  "description": "Master the first phase of every professional pentest: gathering intelligence without triggering a single alert. Learn OSINT, digital footprint analysis, domain intelligence, DNS enumeration, and subdomain discovery.",
+  "order": 2,
+  "estimatedHours": 3,
+  "tags": ["reconnaissance", "osint", "footprinting", "dns", "whois", "digital-footprint", "attack-surface"],
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "lessons": [],
+  "missions": [
+    {
+      "slug": "mission-01-the-internet-never-forgets",
+      "title": "The Internet Never Forgets",
+      "order": 1,
+      "difficulty": "beginner",
+      "estimatedMinutes": 65,
+      "xpReward": 100,
+      "tags": ["reconnaissance", "osint", "passive-recon", "digital-footprint", "attack-surface"]
+    },
+    {
+      "slug": "mission-02-domain-intelligence",
+      "title": "Domain Intelligence",
+      "order": 2,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["domains", "whois", "registrars", "ip-addressing", "asn", "dns-basics"]
+    },
+    {
+      "slug": "mission-03-following-digital-breadcrumbs",
+      "title": "Following Digital Breadcrumbs",
+      "order": 3,
+      "difficulty": "beginner",
+      "estimatedMinutes": 45,
+      "xpReward": 100,
+      "tags": ["dns", "dns-records", "zone-transfer", "subdomain-enumeration", "dns-enum"]
+    },
+    {
+      "slug": "mission-04-google-knows-more-than-their-it-team",
+      "title": "Google Knows More Than Their IT Team",
+      "order": 4,
+      "difficulty": "beginner",
+      "estimatedMinutes": 70,
+      "xpReward": 100,
+      "tags": ["google-dorking", "osint", "search-operators", "information-disclosure", "robots-txt", "metadata", "passive-recon"]
+    },
+    {
+      "slug": "mission-05-the-reconnaissance-playbook",
+      "title": "The Reconnaissance Playbook",
+      "order": 5,
+      "difficulty": "beginner",
+      "estimatedMinutes": 65,
+      "xpReward": 100,
+      "tags": ["reconnaissance", "methodology", "osint", "scope", "attack-surface", "passive-recon", "professional-workflow"]
+    }
+  ]
+}

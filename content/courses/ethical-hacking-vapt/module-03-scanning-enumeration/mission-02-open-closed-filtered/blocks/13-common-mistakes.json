@@ -1,0 +1,47 @@
+{
+  "id": "mod3m2-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Avoid These Mistakes",
+  "intro": "These are the port scanning mistakes that appear most frequently on real assessments — from student labs and professional engagements alike. Each one is understandable. Each one can cause findings to be missed or reported incorrectly.",
+  "mistakes": [
+    {
+      "title": "Treating 'Filtered' as 'Nothing There'",
+      "wrong": "Port 3306 is filtered — the firewall is protecting the database. I'll mark it as not accessible and move on.",
+      "right": "Filtered means the probe received no response — not that the port is empty. Document it as unknown, investigate with alternative probes, and report it as a finding that could not be fully assessed.",
+      "explanation": "Filtered means one specific probe type was blocked. It does not confirm the port is empty, the service is absent, or the firewall is effective. Many critical findings live behind filtered ports — management interfaces, databases, legacy services. Reporting a filtered port as 'protected' implies you have confirmed the protection is effective. You have confirmed only that a SYN probe received no response.",
+      "severity": "critical",
+      "example": "James notes '3306/tcp filtered' and writes 'database protected by firewall — no risk' in his draft report. Two days later, he discovers the web application on port 80 has a SQL injection vulnerability providing direct read access to the same database. The filtered port was not protecting nothing — it was protecting a running service from direct external access. Indirect access was wide open."
+    },
+    {
+      "title": "Stopping at the Default Port Range",
+      "wrong": "I ran nmap against both hosts. The default scan found SSH, HTTP, and HTTPS. The port discovery phase is complete.",
+      "right": "The default scan covered roughly 1,000 of 65,535 possible ports. For confirmed high-priority targets, always follow up with a full-range scan (-p-). Document what port range was scanned in every report.",
+      "explanation": "The case study in this mission showed exactly what this oversight costs: a management interface on port 8443 — completely invisible on a default-only scan, trivially accessible with default credentials. Non-standard ports are where forgotten services, legacy interfaces, and misconfigured administrative tools live. Every professional assessment of a high-priority target requires a full-range scan.",
+      "severity": "critical",
+      "example": "Maya's full-range scan of 45.77.180.11 revealed port 8443 — an HTTPS service not present in the default scan results. If the team had reported on default-only findings, the legacy server's exposure on that port would have been invisible in the final report."
+    },
+    {
+      "title": "Treating the Service Column as Confirmed Identity",
+      "wrong": "Port 22 shows 'ssh' so that is SSH. Port 80 shows 'http' so that is a web server. I know what I am dealing with.",
+      "right": "The service column shows the IANA-registered name for the port number — a convention-based label, not a confirmed identity. Always fingerprint the service (Mission 3) before drawing conclusions about what is actually running.",
+      "explanation": "An administrator running SSH on port 2222, a web application on port 3000, or a database on a non-standard port would all show IANA labels that do not match the actual service. Assuming label equals identity means you could investigate the wrong vulnerability class, miss important version information, or incorrectly assess the risk of a service.",
+      "severity": "warning"
+    },
+    {
+      "title": "Not Saving Output to a File",
+      "wrong": "I can see the results in my terminal. I'll note the important ones and keep scanning.",
+      "right": "Run every Nmap scan with -oA [filename] from the start. The output file is your evidence, your reference, and your record of exactly what was done.",
+      "explanation": "Terminal output disappears when you close the window or your session drops. If you need to reference specific port states three days later during report writing — or if a client disputes a finding — your saved scan file is the only authoritative record. The -oA flag saves three formats simultaneously with no extra effort. Name files with the target IP: -oA port-scan-45.77.180.10 creates three self-documenting files.",
+      "severity": "warning"
+    },
+    {
+      "title": "Scanning IP Addresses Outside the Authorised Scope",
+      "wrong": "The scan output mentions a related host — I'll scan that too to get a fuller picture of the environment.",
+      "right": "Only scan IP addresses explicitly listed in the engagement scope document. Any IP not in scope is completely off-limits — regardless of how it appeared in scan output.",
+      "explanation": "Every packet sent to an IP address outside your scope is unauthorised access to a system you have no permission to touch. The consequences range from engagement termination to legal liability. On cloud hosting providers, IP addresses in the same range as your targets often belong to entirely different organisations — as the Mission 1 case study demonstrated.",
+      "severity": "critical"
+    }
+  ]
+}

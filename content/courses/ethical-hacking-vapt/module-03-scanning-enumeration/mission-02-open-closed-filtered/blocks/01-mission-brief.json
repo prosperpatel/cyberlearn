@@ -1,0 +1,29 @@
+{
+  "id": "mod3m2-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Open, Closed, or Filtered",
+  "operativeCodename": "Operation Map the Doors",
+  "subtitle": "You know who's home. Now find which doors are unlocked.",
+  "briefing": "Monday, 11:42 AM. The host discovery sweep is complete.\n\nYour engagement log shows two confirmed live hosts.\n\n45.77.180.10 — the development server — alive and responding to ICMP. Latency: 14ms. Direct IP, no CDN.\n45.77.180.11 — the legacy server — invisible to ping, but a TCP probe to port 80 returned SYN/ACK. Alive. ICMP filtered by firewall.\n\nMaya closed the host discovery log. 'So we know who's home,' she said. 'Now the next question.'\n\nShe turned to James.\n\n'Which doors are open?'\n\nHost discovery gives you a list of live systems. Port scanning tells you what those systems are exposing to the network right now. Every open port is a potential entry point. Every service running behind that port is something to probe, fingerprint, and assess for vulnerabilities.\n\nAnd if you only check the obvious ports — the ones every beginner looks at — you may miss the door that matters most.",
+  "whyItMatters": "Port scanning is the bridge between knowing a system exists and knowing what it exposes. A confirmed live host with no port data tells you almost nothing about risk. The port scan is the step that transforms 'we found two servers' into 'we found an SSH service, two web applications, and what appears to be a database listener — one of which was invisible until we scanned beyond the defaults.' Everything that follows in this module — service fingerprinting, version detection, vulnerability identification — is built on the port map you produce here.",
+  "objectives": [
+    "Explain what a port is and why networked systems use port numbers to route traffic to the correct application",
+    "Describe the three port states — Open, Closed, and Filtered — and what each state means for a penetration test",
+    "Use Nmap's TCP SYN scan to run a professional port discovery sweep against confirmed live hosts",
+    "Interpret Nmap port scan output line by line — port number, protocol, state, and service label",
+    "Explain what the Filtered state means, why it is not a dead end, and what professionals do about it",
+    "Document port scan findings in the engagement log with professional precision"
+  ],
+  "skillsUnlocked": [
+    "Running Nmap TCP SYN scans against individual hosts — default range and all 65,535 ports",
+    "Interpreting all three port states and deciding the correct professional follow-up for each",
+    "Reading and documenting Nmap output in a professional engagement log"
+  ],
+  "closingMessage": "By the end of this mission, you will have a complete port map for both Meridian Financial hosts. You will know which services are exposed, which ports are blocked, and — critically — which results are ambiguous and require further investigation. That port map becomes the input for every scan that follows.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["port-scanning", "nmap", "tcp-syn-scan", "port-states", "active-recon", "service-detection", "network-basics"]
+}

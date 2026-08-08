@@ -1,0 +1,38 @@
+{
+  "id": "mod3m3-block-06-theory",
+  "type": "theory",
+  "order": 6,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Banner Grabbing",
+  "title": "Banner Grabbing: The Simplest Form of Service Identification",
+  "content": "'So I just connect and read what comes back?' James said.\n\n'That is exactly it,' Maya said. 'Banner grabbing is the simplest possible form of service identification — you establish a connection and read what the service sends. No special tools, no probe databases, no signature matching. Just a connection and a response.'\n\n**The technique**\n\nBanner grabbing means opening a network connection to a specific port and capturing whatever the service transmits first. Depending on the protocol, this either happens automatically when you connect, or requires you to send a minimal trigger.\n\nThe tools you need are already installed on every penetration testing platform:\n\n**curl — for HTTP and HTTPS services**\n\ncurl sends a request and returns the response. The -I flag (HEAD request) asks the server for headers only — which is exactly where the Server banner lives — without downloading the full page body:\n\n```\n# HTTP banner grab — response headers only\ncurl -I http://45.77.180.10\n\n# HTTPS banner grab — ignore certificate errors with -k\ncurl -Ik https://45.77.180.11:8443\n```\n\nThe -k flag tells curl to proceed even if the SSL/TLS certificate is self-signed or expired, which is common on internal or development servers.\n\nSample output from the Meridian Financial legacy server:\n\n```\nHTTP/1.1 200 OK\nServer: Apache Tomcat/7.0.37\nContent-Type: text/html;charset=UTF-8\n```\n\nReading it line by line:\n\n- **HTTP/1.1 200 OK** — the service responded. Connection succeeded. HTTP version: 1.1.\n- **Server: Apache Tomcat/7.0.37** — the banner. Software: Apache Tomcat. Version: 7.0.37.\n- **Content-Type** — confirms this service is returning HTML — a web application.\n\n**netcat — for SSH and other raw TCP services**\n\nnetcat (nc) opens a raw TCP connection and passes whatever comes back to your terminal. SSH sends its banner automatically on connect:\n\n```\n# SSH banner grab\nnc -nv 45.77.180.10 22\n```\n\nSample output:\n\n```\n(UNKNOWN) [45.77.180.10] 22 (ssh) open\nSSH-2.0-OpenSSH_7.4\n```\n\nReading it:\n\n- **open** — the port is open. Connection established.\n- **SSH-2.0-OpenSSH_7.4** — the SSH banner. Protocol: SSH-2.0. Software: OpenSSH. Version: 7.4.\n\nThe SSH banner format is standardised by the protocol specification: SSH-[protocol version]-[software]_[version]. It is sent automatically as part of the SSH handshake before any authentication occurs.\n\n**What banner grabbing tells you — and what it doesn't**\n\nBanner grabbing gives you what the service voluntarily announces. For many services, this is sufficient to identify the software and version. But it has one significant limitation: it depends entirely on what the service chooses to say.\n\n- **Services with full banners** — SSH, FTP, most web servers — announce themselves clearly and banner grabbing succeeds immediately\n- **Services with modified banners** — administrators sometimes change the Server header to obscure the software identity or remove the version number\n- **Services with no banners** — some applications or hardened services send nothing useful on connect\n\nWhen banner grabbing works, it is fast and decisive. When it is limited, you need a more sophisticated approach: service fingerprinting using behavioural analysis.",
+  "callouts": [
+    {
+      "type": "tip",
+      "title": "curl -I vs curl -Ik for HTTPS",
+      "text": "curl -I sends a HEAD request to an HTTP service and returns only the response headers — the part where the Server banner lives. No body is downloaded, making it faster than a full GET request.\n\ncurl -Ik adds the -k flag, which tells curl to ignore SSL/TLS certificate validation errors. This is essential when a server uses a self-signed or expired certificate — without -k, curl refuses to connect and returns an SSL error instead of the banner.\n\nOn real assessments, always note when a server uses a self-signed or expired certificate — that is itself a finding worth documenting."
+    },
+    {
+      "type": "warning",
+      "title": "Banner Grabbing Creates a Log Entry",
+      "text": "When you connect to a service — even just to read its banner — that connection appears in the server's access log with your source IP and timestamp.\n\nThis is expected and appropriate on an authorised engagement. Both you and the client know active testing is occurring. However, it is one reason to only banner-grab services within the authorised scope — every connection leaves a record."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Banner Grabbing",
+      "definition": "A reconnaissance technique that involves connecting to a networked service and capturing whatever text the service transmits at the start of the connection. Uses standard tools like curl and netcat to retrieve service announcements that typically include software name and version information."
+    },
+    {
+      "term": "HEAD Request",
+      "definition": "An HTTP request method that asks a server to return only the response headers — not the response body. Used in banner grabbing because the Server header (which contains the banner) is in the response headers. Retrieves the banner without downloading the full page."
+    }
+  ],
+  "codeBlocks": [
+    {
+      "language": "bash",
+      "code": "# HTTP banner grab — headers only\ncurl -I http://45.77.180.10\n\n# HTTPS banner grab — ignore certificate errors\ncurl -Ik https://45.77.180.11:8443\n\n# SSH banner grab with netcat\nnc -nv 45.77.180.10 22\n\n# Netcat with 3-second timeout (for services that wait for input)\nnc -nv -w 3 45.77.180.10 80",
+      "caption": "Banner grabbing commands. Use curl for HTTP/HTTPS services; use netcat for SSH and other raw TCP services."
+    }
+  ]
+}

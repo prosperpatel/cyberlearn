@@ -1,0 +1,35 @@
+{
+  "id": "mod3m1-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What 'Alive' Means",
+  "title": "What Does It Mean for a Computer to Be 'Alive' on a Network?",
+  "content": "'Okay,' Maya said, pulling up a fresh terminal window. 'Before we run anything — I want to know what you think it means for a computer to be alive on a network. What does that actually mean to you?'\n\nJames considered it. He had been around computers his whole life. 'It has an IP address?' he offered. 'Like, if it has an address, it must exist, right?'\n\n'Does your childhood home stop existing the day you move out?'\n\nJames paused. 'No.'\n\n'The address on that house still works. Mail still gets delivered to it. But you are not there.' Maya leaned back. 'An IP address is just a label. Like a street number on a building — it tells the network where to look. But it says nothing about whether the lights are on, whether anyone is home, or whether anyone will answer if you knock.'\n\nJames stared at the four IP addresses on his screen. He had been assuming each one had a live system behind it — simply because they had addresses. A reasonable assumption. The kind any beginner would make.\n\n'So we need to actually check,' he said slowly.\n\n'Exactly. And this is where it gets interesting.' Maya turned to face him. 'Let me show you what is actually happening at the network level.'\n\n---\n\n**The problem of sending a message to a stranger**\n\nImagine you want to send a letter to someone you have never met. The post office needs an address — a specific location that tells the postal system where to deliver it. Without an address, your letter goes nowhere.\n\nComputers have exactly the same problem. The internet connects billions of devices — laptops, servers, phones, cameras, smart TVs — all of them potentially able to communicate with each other. To send a message from one device to another, you need two things:\n\n1. An address for the destination\n2. A way to package and send the message\n\n**The IP address: a computer's home address**\n\nEvery device on a network has an IP address — a unique identifier that works like a home address. When one computer wants to talk to another, it writes the destination's IP address on the 'envelope.'\n\nAn IPv4 address looks like this: 45.77.180.10\n\nFour numbers, separated by dots. Each number is between 0 and 255. This format — four numbers in this range — is what the internet has used for decades to identify devices.\n\nThe IP address does not tell you what is at that address. It is just a label. Exactly like a house address on a map tells you where a building is — not whether anyone is home, not whether the building is still standing, not whether the lights are on.\n\n**The packet: the digital envelope**\n\nWhen computers send information across a network, they package it into a 'packet.' A packet is like an envelope: it has a 'from' address (the sender's IP), a 'to' address (the destination IP), and the message inside.\n\nThe network — routers, switches, fibre optic cables — reads the destination address on each packet and decides which direction to send it. Exactly like the postal system reads an address and routes the letter toward its destination.\n\n**What 'alive' actually means**\n\nFor a host to be considered 'alive' on a network, four conditions must be true at the same time:\n\n1. The system is powered on\n2. It has an active network connection\n3. It has a valid IP address assigned and configured\n4. It is responding to network communication\n\nAll four. If any one of them is false, the host either does not exist on the network or cannot be reached.\n\nHere is the important part: **a host can satisfy conditions 1, 2, and 3 — and still appear dead to your probes**, because condition 4 is controlled by software. A host can be configured to ignore specific types of network messages. A firewall can be configured to drop specific types of packets before they even reach the host.\n\nThis means that from the outside — from where you are sitting with your terminal — a live, connected, fully running system can look exactly like nothing is there.\n\n**Why this matters for the Meridian Financial engagement**\n\nThe passive recon produced four IP addresses. Each of those addresses appeared in public records at some point. But right now, at this moment, the question is: which of those IP addresses has a live system actively running behind it?\n\nThe answer is not in the passive recon data. The passive recon data is historical. The answer requires asking the network directly — which is exactly what host discovery does.",
+  "callouts": [
+    {
+      "type": "insight",
+      "title": "The Three Questions Host Discovery Answers",
+      "text": "1. Is there a system at this IP address right now?\n2. Is that system powered on and connected to the network?\n3. Is that system configured to respond to my probe?\n\nA 'yes' to all three = the host is alive and reachable. That is what you are building toward."
+    },
+    {
+      "type": "info",
+      "title": "IPv4 vs IPv6",
+      "text": "The four-number format (45.77.180.10) is called IPv4 — the system most of the internet still uses. A newer format called IPv6 uses longer addresses (like 2001:db8::1) and is increasingly common in modern infrastructure. This mission uses IPv4 examples throughout. The same host discovery concepts apply to IPv6, with minor differences in Nmap flag usage."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "IP Address",
+      "definition": "A unique numerical label assigned to each device on a network, used to identify the device and route messages to it. In IPv4, an IP address is four numbers between 0 and 255, separated by dots (for example, 45.77.180.10). The IP address is the 'home address' of a networked device — it tells the network where to deliver packets."
+    },
+    {
+      "term": "Packet",
+      "definition": "A unit of data transmitted over a network. A packet contains a source IP address (where it came from), a destination IP address (where it is going), and a payload (the actual data). Network communication consists entirely of packets being routed from source to destination across routers, switches, and cables."
+    },
+    {
+      "term": "Live Host",
+      "definition": "A system that is powered on, connected to the network, and currently responding to network probes. A live host is reachable — it can receive packets and send responses. Identifying which IP addresses have live hosts is the purpose of host discovery."
+    }
+  ]
+}

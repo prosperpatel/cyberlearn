@@ -1,0 +1,45 @@
+{
+  "id": "mod3m2-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 2",
+  "cards": [
+    {
+      "front": "What is a port, and why do networked systems use port numbers?",
+      "back": "A port is a number (0–65,535) embedded in a network packet header that tells the operating system which application should receive the packet.\n\nAn IP address identifies the machine. The port number identifies the application on that machine.\n\nA server running a web application, an SSH daemon, and a database simultaneously needs a way to route incoming traffic to the right program. When a packet arrives, the OS reads the port number and delivers it to the registered application.\n\nAnalogy: IP address = the building. Port number = the department number inside the building.",
+      "hint": "IP = building address. Port = department number. Without port numbers, all traffic would pile up at the front door."
+    },
+    {
+      "front": "What are the three port states in a TCP SYN scan — and what does each mean at the packet level?",
+      "back": "OPEN: Your SYN reached a listening service. SYN/ACK came back — the port is open and active. Something is home.\n\nCLOSED: Your SYN reached the host, but no service is on this port. RST came back from the host itself — a definitive 'nothing here.' The host is alive; this door is empty.\n\nFILTERED: Your SYN was blocked before it reached the host. No response arrived. The port state — open or closed — cannot be determined.\n\nProfessional response:\nOpen → fingerprint and test\nClosed → document, move on\nFiltered → document carefully, investigate further, never mark as safe",
+      "hint": "SYN/ACK = open. RST from host = closed. Silence = filtered (unknown, not safe)."
+    },
+    {
+      "front": "How does the TCP SYN scan work, and why is it the professional default?",
+      "back": "The SYN scan sends a SYN packet to each port and analyses the response:\n• SYN/ACK → port open (service listening)\n• RST → port closed (host alive, nothing here)\n• No response → port filtered (probe blocked)\n\nAfter receiving SYN/ACK, Nmap immediately sends RST to tear down the half-open connection — never completing the three-way handshake.\n\nWhy it is the professional default:\n1. Fast — no session maintenance, no full connections\n2. Reduced footprint — many application logs record only completed connections\n3. Reliable — all three states are clearly distinguishable\n4. Standard — universally understood by security professionals\n\nRequires root or administrator privileges.",
+      "hint": "SYN sent → response analysed → RST sent immediately. Handshake never completes."
+    },
+    {
+      "front": "What does 'filtered' mean, and why is it not the same as 'nothing there'?",
+      "back": "Filtered means the SYN probe was intercepted by a firewall before reaching the host. No response was received within the timeout window.\n\nFiltered contains two possible realities:\n1. A service IS running behind the filter — reachable from trusted networks but not from your scanning position\n2. The port is empty — but the firewall happens to be blocking it anyway\n\nFrom outside the firewall, these look identical. You cannot distinguish them with a SYN scan.\n\nWhy it matters: management interfaces, databases, and administrative panels frequently live on filtered ports. A firewall rule was specifically written for this port — which means someone decided it needed protection.\n\nProfessional response: document precisely, investigate alternative probes, report as unknown — never as cleared.",
+      "hint": "Filtered = probe blocked = state unknown. A guard in front of a door does not prove the room is empty."
+    },
+    {
+      "front": "The service column in Nmap output shows 'http' on port 80 and 'mysql' on port 3306. What do these labels actually tell you?",
+      "back": "They tell you: Nmap looked up those port numbers in the IANA port number registry and found the conventional service assignment.\n\nPort 80 → conventionally HTTP\nPort 3306 → conventionally MySQL\n\nThey do NOT tell you:\n• What software is actually running on these ports\n• What version of the software is installed\n• How the service is configured\n• Whether the service matches the label at all\n\nA web application running on port 3000 would show as 'ppp' (a dial-up protocol — the IANA assignment). A database on a non-standard port would show an unrelated label.\n\nService labels are starting hypotheses. Confirmed service identity requires fingerprinting (Mission 3).",
+      "hint": "Label = IANA convention for the port number. Identity = what fingerprinting confirms is actually running."
+    },
+    {
+      "front": "Why run a full-range scan (-p-) in addition to the default scan? When should you do it?",
+      "back": "The default Nmap scan covers roughly 1,000 ports based on historical frequency data — not ports 1 through 1,000. Approximately 64,535 ports are not checked.\n\nServices on non-standard ports — management interfaces, legacy applications, forgotten administrative tools — are precisely what lives outside the default range. The case study showed: port 8443, outside the default range, hosting a management panel with default credentials.\n\nWhen to run the full-range scan:\n• On every confirmed high-priority target\n• After the default scan shows interesting services worth investigating thoroughly\n• Whenever you need to state with confidence that the full port space was assessed\n\nCommand: nmap -sS -p- -T4 -oA fullscan-[ip] [ip]\n\nDocument what you scanned in every report.",
+      "hint": "Default = fast + high-yield. Not complete. Full range = -p-. Always run on high-priority targets."
+    },
+    {
+      "front": "What is the professional port scanning workflow on a real engagement?",
+      "back": "1. Confirm targets — only hosts verified alive from host discovery\n2. Default scan — nmap -sS -T4 -oA port-scan-[ip] [ip]: quick initial picture\n3. Full-range scan — nmap -sS -p- on every high-priority target\n4. Document all three states separately — open, closed, filtered (never grouped)\n5. Flag filtered for follow-up — investigate with alternative probes, never mark as safe\n6. Note service labels — preliminary hypotheses for fingerprinting next\n7. Build the port map — the input for Mission 3 service fingerprinting\n\nSave every output file. Name files with target IP and scan type.",
+      "hint": "Confirm → Default → Full-range → Document all three states → Flag filtered → Fingerprint next."
+    }
+  ]
+}

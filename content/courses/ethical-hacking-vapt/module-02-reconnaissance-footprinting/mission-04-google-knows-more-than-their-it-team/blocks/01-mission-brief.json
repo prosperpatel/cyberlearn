@@ -1,0 +1,30 @@
+{
+  "id": "mod2m4-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Google Knows More Than Their IT Team",
+  "operativeCodename": "Operation Open Book",
+  "subtitle": "The world's most powerful reconnaissance tool is available to anyone. Most organisations have no idea what it has already found.",
+  "briefing": "In 2004, a security researcher named Johnny Long opened Google and typed a single search query.\n\nHe was not looking for a website. He was looking for a kind of website — specifically, web servers that had accidentally left their directory listings visible to the public. The query was simple: intitle:\"index of\" passwd\n\nGoogle returned thousands of results. Servers all over the world, belonging to hospitals, banks, universities, and government agencies, had accidentally configured their web servers to display their file directory like an open cupboard — every file visible, every folder clickable, every backup downloadable.\n\nNobody had hacked anything. Nobody had scanned a port or exploited a vulnerability. Johnny Long had asked Google a very specific question, and Google — which had been quietly crawling and indexing the public internet for years — answered it with thousands of servers their owners had no idea were exposed.\n\nHe called this technique Google Dorking. He built a database of search queries that found sensitive information — exposed passwords, configuration files, database backups, admin login panels, internal documents — all indexed by Google, all accessible without touching a single target system.\n\nThe Google Hacking Database he created still exists today at exploit-db.com/google-hacking-database. It contains thousands of queries, updated continuously by the security community.\n\nThe technique has not changed in twenty years. The data available has only grown.\n\nThis mission teaches you exactly how it works.",
+  "whyItMatters": "Search engine reconnaissance is performed by professional penetration testers, red teamers, and bug bounty hunters on every engagement — before a single active scan is run. It is purely passive: you are querying Google's index, not the target's systems. And it routinely produces findings that no technical scanner would ever find: a forgotten HR document with employee salary data, an admin login portal that nobody knew was publicly accessible, a backup file with database credentials, a cached page showing content that was taken down after an incident. Understanding this technique is not optional for anyone studying security — it is foundational.",
+  "objectives": [
+    "Explain how search engines index information and why organisations accidentally expose sensitive data",
+    "Use core Google search operators: site:, filetype:, intitle:, inurl:, intext:, and cache:",
+    "Explain what robots.txt and sitemap.xml are and why robots.txt is not a security control",
+    "Describe how document metadata reveals author identity, software versions, and internal structure",
+    "Recognise directory listings and exposed login portals as reconnaissance findings",
+    "Understand the professional and ethical limits of search engine reconnaissance"
+  ],
+  "skillsUnlocked": [
+    "Constructing targeted Google Dork queries using multiple combined operators",
+    "Reading robots.txt and sitemap.xml as reconnaissance sources",
+    "Extracting and interpreting document metadata",
+    "Distinguishing between publicly indexed and intentionally public information"
+  ],
+  "closingMessage": "Johnny Long's insight was not a technical breakthrough. It was a change in perspective. He asked: 'What has Google already found that organisations don't know about?' That question — applied systematically — is one of the most powerful tools in professional reconnaissance. By the end of this mission, you will know exactly how to ask it.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["google-dorking", "osint", "search-operators", "information-disclosure", "passive-recon"]
+}

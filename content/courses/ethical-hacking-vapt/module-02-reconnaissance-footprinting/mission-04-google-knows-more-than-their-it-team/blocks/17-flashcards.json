@@ -1,0 +1,50 @@
+{
+  "id": "mod2m4-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 4",
+  "cards": [
+    {
+      "front": "What is Google Dorking, and what makes it different from a normal Google search?",
+      "back": "Google Dorking is using Google's advanced search operators to find specific types of content in Google's index — not 'find pages about X' but 'find actual X on this specific domain in this specific file format.'\n\nA normal search: 'meridian financial annual report' → Google returns what it thinks is most relevant.\n\nA Google Dork: site:meridian-financial.com filetype:pdf → Google returns every PDF it has indexed from that domain.\n\nThe difference is precision. Dorks constrain the query to structural criteria, not keyword relevance. The result is surgical: you see what Google has indexed that matches a very specific pattern.",
+      "hint": "Dork = very specific question to a very thorough cataloguer."
+    },
+    {
+      "front": "What does the site: operator do, and why is it the first query professionals run on a target domain?",
+      "back": "site:target.com limits all Google results to pages Google has indexed from that domain.\n\nIt is the first query because:\n1. The result count shows the total indexed footprint (small = limited exposure; large = more surface area to explore)\n2. Scanning the first few pages of results reveals the categories of content Google has found: pages, PDFs, subdomains, tool interfaces\n3. It identifies unexpected content — indexed results the organisation may not know about\n\nFrom site:target.com, professionals progressively add operators: filetype: to narrow to documents, intitle: to find directories, inurl: to find portals.",
+      "hint": "site: is the starting point. It answers: 'What does Google know about this domain?'"
+    },
+    {
+      "front": "What does robots.txt actually do — and what does it NOT do?",
+      "back": "robots.txt is a text file at target.com/robots.txt that tells cooperative search engine crawlers (Googlebot, Bingbot) which paths to skip during crawling.\n\nWhat it DOES: Requests that cooperative crawlers not index listed paths. Google respects this.\n\nWhat it does NOT do:\n— It does not restrict access. Anyone can visit a Disallow path directly.\n— It does not affect non-cooperative crawlers (security scanners, custom bots).\n— It does not delete content from Google's index that was already indexed before the Disallow entry was added.\n\nCritical professional insight: robots.txt is publicly readable. Every path listed as Disallow is an announcement of sensitive paths. Security professionals read robots.txt specifically to find these paths — and then visit them directly.",
+      "hint": "robots.txt = a sign asking people not to enter. Not a lock."
+    },
+    {
+      "front": "What is directory listing (index of), how does it happen, and why is it a critical security finding?",
+      "back": "Directory listing occurs when a web server is configured to display the contents of a directory as a browsable file list — instead of returning an index page or an access-denied response.\n\nHow it happens: Apache, Nginx, and IIS have directory listing disabled by default. It is enabled accidentally through misconfiguration — either deliberately for convenience ('let me share these files temporarily') or by enabling the wrong server option.\n\nWhy it is critical: An open directory containing backup files, configuration archives, or log files gives direct access to:\n— Database backups (often contain credentials and all customer data)\n— Configuration files (database passwords, API keys, internal hostnames)\n— Log files (IP addresses, usernames, error messages revealing the tech stack)\n\nGoogle Dork: site:target.com intitle:\"index of\"",
+      "hint": "Directory listing = the server forgot to close the cupboard door."
+    },
+    {
+      "front": "What is document metadata, and what does it reveal that the document's content does not?",
+      "back": "Metadata is the hidden layer of data embedded in a file that describes the file itself — separate from the file's content.\n\nDocument metadata typically reveals:\n— Author: full name of the person who created or last saved the file\n— Organisation: company/department registered to the software licence\n— Software and version: application used (Microsoft Word 2019, Adobe Acrobat)\n— Creation and modification dates: when the file was created and last edited\n— Revision count: how many times the document was edited\n— Embedded file path: the local path where the file was saved, revealing internal directory naming conventions and often the Windows username\n\nThe file path C:\\Users\\sarah.mitchell\\Documents\\HR reveals: the Windows username format (firstname.lastname), the department name, and the internal directory structure — without reading a word of the document.",
+      "hint": "Metadata = the label on the box, not what's inside."
+    },
+    {
+      "front": "Why is cached page content in Google useful in reconnaissance, and what are its limitations?",
+      "back": "A cached page is Google's last saved snapshot of a web page — taken when Googlebot last crawled it.\n\nUseful because:\n— Shows content that has since been removed or changed (pages deleted after an incident)\n— Reveals what was visible before authentication was added (admin pages that were accidentally public)\n— Shows software version numbers, headers, or content that has been scrubbed from the live page\n— Persists for days to weeks after the live page is changed\n\nLimitations:\n— It is historical, not current — the live server may be different\n— Not all pages are cached; Google may have never indexed the specific URL\n— The cache: operator is being phased out in some Google markets\n\nThe Wayback Machine (web.archive.org) goes further: historical snapshots dating back years, not just the last Google crawl.",
+      "hint": "Cached page = yesterday's newspaper. Shows what was there, not necessarily what's there now."
+    },
+    {
+      "front": "What is the Google Hacking Database (GHDB) and how do professionals use it?",
+      "back": "The Google Hacking Database (GHDB) is a searchable collection of Google Dork queries catalogued by what they find. Created by Johnny Long in 2004. Maintained by the security community at exploit-db.com/google-hacking-database.\n\nContains 4,000+ queries in categories including:\n— Files containing passwords\n— Sensitive directories\n— Error messages revealing software details\n— Login portals\n— Network devices (routers, switches)\n— Remote access systems (VPN portals, RDP, SSH)\n\nProfessional use: After running standard dorks (site:, filetype:, intitle:, inurl:), professionals reference the GHDB to ensure they haven't missed a known exposure pattern. The GHDB is updated as new misconfigurations are documented — what it contains today may not have been known when a security assessment was last conducted.",
+      "hint": "GHDB = the library catalogue of security-relevant Google queries. At exploit-db.com."
+    },
+    {
+      "front": "What is the minimum necessary access principle, and how does it apply when finding sensitive documents via Google Dorking?",
+      "back": "Minimum necessary access means: gather only the minimum evidence required to prove a vulnerability exists. Do not collect, copy, or exfiltrate data beyond what the proof requires.\n\nApplied to Google Dorking findings:\n\nExample: You find database_prod.sql.gz in an open directory.\n— Minimum necessary: screenshot of the Google result, screenshot of the directory listing showing the filename and file size, confirm the URL is accessible (HTTP 200 response). This proves: the directory is open, the backup exists, it is directly accessible.\n— NOT necessary: downloading the 2.4MB database file. That is well beyond proof of exposure.\n\nWhy it matters: Downloading a client's production database to your laptop — even with written authorisation for 'publicly accessible content' — introduces data handling complexity, potential legal liability, and data you did not need. The finding is proved without the download.\n\nDocument the exposure. Report immediately. The client's team handles remediation and breach assessment.",
+      "hint": "Prove the door is open. Don't walk through it further than the proof requires."
+    }
+  ]
+}

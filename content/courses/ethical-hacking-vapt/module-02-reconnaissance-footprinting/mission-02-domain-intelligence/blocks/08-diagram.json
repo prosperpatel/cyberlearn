@@ -1,0 +1,65 @@
+{
+  "id": "mod2m2-block-08-diagram",
+  "type": "diagram",
+  "order": 8,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "How DNS Works",
+  "title": "DNS Resolution: The Journey from Name to Number",
+  "description": "When you type a domain name into your browser, a precise chain of events happens in under 100 milliseconds. Every step involves a different system, and understanding each one reveals why DNS records are so rich with intelligence — and why DNS attacks like cache poisoning, zone transfer abuse, and DNS hijacking are possible.",
+  "nodes": [
+    {
+      "id": "browser",
+      "label": "Your Browser",
+      "type": "passive",
+      "detail": "You type 'meridian-financial.com' and press Enter. The browser needs an IP address to make the connection. First, it checks its own local DNS cache — if you visited this domain recently, the answer might already be stored locally and the entire resolution chain is skipped. If not, the query begins."
+    },
+    {
+      "id": "local-cache",
+      "label": "Local DNS Cache",
+      "type": "passive",
+      "detail": "Every operating system maintains a local cache of recent DNS lookups. DNS records include a TTL (Time To Live) — the number of seconds a cached record is valid before it must be refreshed. Short TTLs (60 seconds) mean frequent re-querying; long TTLs (86400 seconds — 24 hours) mean cached results may be outdated. Malicious infrastructure operators deliberately use very short TTLs to make their domains harder to block by staying ahead of blacklists."
+    },
+    {
+      "id": "recursive-resolver",
+      "label": "Recursive Resolver",
+      "type": "borderline",
+      "detail": "If the local cache has no answer, the query goes to a Recursive Resolver — typically provided by your ISP or a public DNS service (Google's 8.8.8.8, Cloudflare's 1.1.1.1). The resolver's job is to find the answer by querying the DNS hierarchy on your behalf. It also has its own cache. Most queries are answered from cache at this level — the full resolution chain below is only needed when the resolver doesn't have the answer."
+    },
+    {
+      "id": "root-server",
+      "label": "Root Nameserver",
+      "type": "borderline",
+      "detail": "There are 13 root nameserver addresses, operated by organisations including Verisign, NASA, ICANN, and the US Army Research Lab. The root server does not know the IP address of meridian-financial.com — but it knows which server is authoritative for every top-level domain. It responds: 'For .com domains, ask the .com TLD nameserver.'"
+    },
+    {
+      "id": "tld-server",
+      "label": "TLD Nameserver (.com)",
+      "type": "borderline",
+      "detail": "The TLD nameserver for .com — operated by Verisign — maintains a database of every registered .com domain and which nameservers are authoritative for each one. It responds: 'The authoritative nameserver for meridian-financial.com is ns1.nameserver-provider.com.' This is where the WHOIS-listed nameservers become relevant — they are the servers the TLD knows to refer questions to."
+    },
+    {
+      "id": "authoritative-ns",
+      "label": "Authoritative Nameserver",
+      "type": "active",
+      "detail": "This is the nameserver listed in the domain's WHOIS record — the one the domain owner configured to hold their DNS records. It has the definitive, authoritative answer: the A record (IP address), MX records (mail servers), NS records (nameservers), TXT records (email policies and service verification), CNAME records (aliases to other domains). This is the server Maya queries during reconnaissance — it holds all the public intelligence about the domain's infrastructure."
+    },
+    {
+      "id": "browser-connects",
+      "label": "Browser Connects to IP",
+      "type": "active",
+      "detail": "The recursive resolver returns the IP address to your browser. Your browser caches it locally (for the TTL duration), then opens a TCP connection to the IP on port 443 (HTTPS) or port 80 (HTTP). The website loads. DNS is no longer involved — from this point, all communication is direct IP-to-IP. Total time elapsed: typically 20–100 milliseconds, most of which is network latency between resolver levels."
+    }
+  ],
+  "edges": [
+    { "from": "browser", "to": "local-cache", "label": "Check local cache first", "type": "normal" },
+    { "from": "local-cache", "to": "recursive-resolver", "label": "Cache miss — ask resolver", "type": "normal" },
+    { "from": "recursive-resolver", "to": "root-server", "label": "Where is the .com TLD?", "type": "normal" },
+    { "from": "root-server", "to": "tld-server", "label": "Which NS handles this .com domain?", "type": "normal" },
+    { "from": "tld-server", "to": "authoritative-ns", "label": "Ask the authoritative NS for records", "type": "normal" },
+    { "from": "authoritative-ns", "to": "recursive-resolver", "label": "Return IP address and DNS records", "type": "normal" },
+    { "from": "recursive-resolver", "to": "browser", "label": "Return IP to browser", "type": "normal" },
+    { "from": "browser", "to": "browser-connects", "label": "Connect directly to IP", "type": "attack" }
+  ],
+  "caption": "The authoritative nameserver — the rightmost node in this chain — is the key target for DNS reconnaissance. It holds all public records about the domain. Querying it reveals A records (server IPs), MX records (email infrastructure), NS records (DNS provider), TXT records (email security policy), and CNAME records (CDN and SaaS relationships). All of this is passive — no contact with the target's own systems.",
+  "interactive": true
+}

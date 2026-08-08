@@ -1,0 +1,30 @@
+{
+  "id": "mod3m3-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Questions & Answers",
+  "intro": "These are the questions learners most commonly ask when they first encounter service fingerprinting. If you have been wondering about any of these, you are asking exactly the right things.",
+  "faqs": [
+    {
+      "question": "What is the difference between banner grabbing and Nmap -sV? When should I use each?",
+      "answer": "Banner grabbing is the simplest approach: you connect to a port and read what the service sends first. It uses standard tools (curl, netcat) and requires no special knowledge. Use it for quick checks on well-known services that announce themselves clearly — SSH on port 22, web servers on 80 and 443.\n\nNmap -sV is more sophisticated: it sends specific probe sequences from its signature database and matches responses against thousands of known software patterns. It works even when banners are absent or modified. Use it for systematic coverage of all open ports before moving to vulnerability research.\n\nIn practice: use both. Banner grabbing gives an immediate answer when you are curious about a specific service. Nmap -sV gives complete, reliable coverage of everything — it is the tool that goes into the engagement log."
+    },
+    {
+      "question": "Can I trust the version string in a banner? What if the administrator changed it?",
+      "answer": "You cannot trust a banner alone — which is exactly why Nmap -sV uses behavioural fingerprinting in addition to reading the banner.\n\nWhen a banner accurately reflects the running software, it is a useful first data point. When it has been modified, -sV identifies the software through its response behaviour regardless of what the header claims.\n\nProfessional approach: record the banner as reported, run -sV to confirm through behavioural analysis, and note any discrepancy. If the banner says 'nginx' but -sV returns 'Apache httpd 2.4.49,' document both — the discrepancy is itself a finding worth investigating."
+    },
+    {
+      "question": "Why does nmap -sV slow down the scan? Is there a faster way?",
+      "answer": "Service version detection adds time because it establishes a connection to each open port, sends probe sequences, waits for responses, and processes them against the signature database. For a host with many open ports, this is significantly slower than a port scan that only checks for SYN/ACK.\n\nFaster approaches:\n• Run -sV on specific ports only: nmap -sV -p 22,80,443,8443 [ip]\n• Use --version-intensity 0 for very fast but less accurate detection\n• Run the port scan first, identify open ports, then run -sV only against those ports\n\nProfessional approach: the time cost of -sV is almost always justified. You are spending minutes to produce intelligence that enables the rest of the assessment. Always run it — but target it at confirmed open ports rather than the full port range."
+    },
+    {
+      "question": "The output shows '3306/tcp filtered mysql' with no version. Does that mean there's no MySQL, or that it's safe?",
+      "answer": "Neither. A filtered port means the probe was blocked by a firewall before reaching the host. The service — if running — never received the probe and could not respond.\n\nFiltered with no version means: the version detection probe could not reach the service from this scanning position. It does not mean the service is absent. It does not mean there are no vulnerabilities.\n\nProfessional documentation: 'Version detection attempted on 3306/tcp — result inconclusive due to port filtering. The version of any database service running behind this filter remains unknown from the external scanning position.'\n\nThe filtered port is still an active unknown that requires follow-up investigation."
+    },
+    {
+      "question": "How do I actually research CVEs? Where do I go after I have the version number?",
+      "answer": "The NVD — National Vulnerability Database — at nvd.nist.gov is the authoritative starting point. It is maintained by NIST and indexes every publicly disclosed vulnerability with standardised severity scores, technical descriptions, affected version ranges, and links to patches.\n\nSearching it:\n1. Go to nvd.nist.gov\n2. Search for the software name and version: 'apache tomcat 7.0.37' or 'apache httpd 2.4.49'\n3. Review each CVE result: what is the severity (CVSS score), which version range is affected, is there a public exploit, and is there a patch?\n4. Document the relevant CVEs in the engagement log\n\nCVSS scores: 0–3.9 Low, 4–6.9 Medium, 7–8.9 High, 9–10 Critical.\n\nThe version number you obtained in this mission is the direct input for this search. That CVE research process is what Mission 4 covers."
+    }
+  ]
+}

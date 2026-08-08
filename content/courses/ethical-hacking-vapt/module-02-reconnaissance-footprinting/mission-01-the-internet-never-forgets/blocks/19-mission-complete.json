@@ -1,0 +1,21 @@
+{
+  "id": "mod2m1-block-19-mission-complete",
+  "type": "mission-complete",
+  "order": 19,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Complete",
+  "headline": "Ghost Protocol — Complete",
+  "message": "You have just learned something that most people — including many people who work in IT — do not know.\n\nBefore any tool is launched, before any packet is sent, before any login is attempted — there is a phase of work that determines everything that follows. It is not technical. It does not require Kali Linux or any special software. It requires patience, a browser, and knowing where to look. And it produces the intelligence that separates a precise, targeted operation from a blind, noisy scan that misses the most important vulnerabilities entirely.\n\nThis is what Mat Honan's attackers understood. They never wrote a single line of malicious code. They used Google. They used Apple Support. They used publicly available billing information. And they deleted seven years of photographs and hijacked a man's entire digital identity in thirty minutes.\n\nThis is what the Target attackers understood. They didn't try to break through Target's perimeter. They found the dog flap — an HVAC contractor listed in a public contracts database, with network access credentials that took Target's payment systems completely by surprise.\n\nThis is what Maya understood on the first morning of her engagement with Meridian Financial. She made a coffee, opened a browser, and within forty-five minutes had assembled a complete intelligence picture of the target — technology stack, employee directory, email format, subdomains, breach history — without sending a single packet to anyone's network.\n\nYou now understand what reconnaissance is. Why it comes first. What passive and active mean, and why the line between them is a legal boundary, not a technical one. What OSINT is and where it comes from. What a digital footprint reveals. What an attack surface actually includes — and why it always extends further than organisations realise.\n\nThat is not a set of memorised definitions. That is the beginning of a professional way of thinking.\n\nMission 2 is where this thinking becomes a technical skill. We are going to take the first OSINT source on the professional checklist — domain intelligence — and go deep. WHOIS records. DNS. Registrars. IP address ownership. Autonomous System Numbers. The structure of how domains and networks are registered and owned, and what that structure tells an investigator about a target's infrastructure.\n\nEvery domain on the internet leaves a trail. Mission 2 is about learning to read it.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Ghost Protocol",
+      "description": "Completed Mission 1: The Internet Never Forgets — understood reconnaissance, OSINT, digital footprint, attack surface, and the passive/active distinction that defines the legal boundary of intelligence gathering."
+    }
+  ],
+  "nextSteps": [
+    "Mission 02: Domain Intelligence — WHOIS records, DNS architecture, IP ownership, and how to read the infrastructure of any organisation from public registration data alone",
+    "Optional: Complete the Mission 1 OSINT practical exercise if you haven't already — find three things about an organisation they probably didn't realise were public",
+    "Review the Cheat Sheet and Flashcards — the OSINT sources and passive/active distinction appear in every mission from here forward"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "mod2m2-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Domain Intelligence Quick Reference",
+  "sections": [
+    {
+      "heading": "Core Concepts",
+      "rows": [
+        { "label": "Domain Name", "value": "A human-readable label for a location on the internet (e.g. meridian-financial.com). NOT a website — an address. One domain can have dozens of subdomains pointing to different services on different servers." },
+        { "label": "IP Address", "value": "The numerical label computers actually use to route traffic (e.g. 104.22.7.45 IPv4; 2606:4700::1 IPv6). Domain names are for humans. IP addresses are for machines." },
+        { "label": "DNS", "value": "Domain Name System — the global infrastructure that translates domain names to IP addresses. Hierarchy: Root Nameserver → TLD Nameserver → Authoritative Nameserver. All records are publicly queryable." },
+        { "label": "Subdomain", "value": "A prefix added to a registered domain (dev.meridian-financial.com). Created in DNS by the domain owner — no separate registration needed. Discoverable through Certificate Transparency logs." }
+      ]
+    },
+    {
+      "heading": "DNS Record Types and What They Reveal",
+      "rows": [
+        { "label": "A Record", "value": "Maps domain to IPv4 address. Always follow with an IP WHOIS lookup. If IP belongs to Cloudflare/Akamai/AWS — you're seeing a CDN, not the target's actual server." },
+        { "label": "MX Record", "value": "Mail Exchange. Reveals email provider. aspmx.l.google.com = Google Workspace. mail.protection.outlook.com = Microsoft 365. Own server IP = real infrastructure, often NOT CDN-protected." },
+        { "label": "NS Record", "value": "Nameserver. Reveals DNS hosting provider. ns.cloudflare.com = Cloudflare. awsdns = AWS Route 53. Custom NS = self-managed DNS, possibly on-premises." },
+        { "label": "TXT Record", "value": "Email policies (SPF, DMARC, DKIM) and cloud service verification. DMARC p=none = domain CAN be spoofed. DMARC p=reject = domain is protected. Cloud service tokens reveal SaaS tools in use." },
+        { "label": "CNAME Record", "value": "Alias pointing to another domain. Reveals CDN (Cloudflare), SaaS platforms (Salesforce, HubSpot, Atlassian), and third-party hosting relationships. Each CNAME is a vendor disclosure." }
+      ]
+    },
+    {
+      "heading": "Ownership Layer",
+      "rows": [
+        { "label": "WHOIS", "value": "Public registration record — registrant, creation date, expiry, registrar, nameservers. The internet's property deed. Query at who.is. Registrant may be hidden by privacy service." },
+        { "label": "Registrar", "value": "Company where domain was purchased (GoDaddy, Namecheap, Cloudflare Registrar). Accredited reseller. Submits registration to the registry on your behalf. NOT the same as the registry." },
+        { "label": "Registry", "value": "Organisation that operates a TLD's authoritative database (Verisign for .com, Nominet for .uk). Not a storefront — the official source of truth registrars submit to." },
+        { "label": "TLD", "value": "Top-Level Domain — the last segment (.com, .org, .uk). gTLD = generic. ccTLD = country-specific (reveals geographic jurisdiction). .gov/.edu = restricted to US government/education." },
+        { "label": "ASN", "value": "Autonomous System Number — unique ID for an organisation's IP network block. Reveals ALL IP ranges owned by the organisation. Lookup at bgp.he.net. The complete IP scope map." }
+      ]
+    },
+    {
+      "heading": "Professional Tools",
+      "rows": [
+        { "label": "who.is / domaintools.com", "value": "Domain WHOIS — registrant, dates, nameservers. DomainTools has historical WHOIS to find what was visible before privacy protection was enabled." },
+        { "label": "dig / nslookup", "value": "Command-line DNS query. dig MX target.com | dig TXT target.com | dig NS target.com (Linux/Mac). nslookup -type=MX target.com (Windows)." },
+        { "label": "mxtoolbox.com", "value": "Web-based DNS, MX, TXT, and DMARC lookup. No installation. Fast. Useful for checking email security configuration." },
+        { "label": "bgp.he.net", "value": "ASN lookup and IP range discovery. Enter any IP address or organisation name to find their Autonomous System and full IP block ownership." },
+        { "label": "viewdns.info", "value": "Reverse IP lookup (all domains on a shared IP), historical DNS records, IP WHOIS. Passive. Useful for finding origin IPs behind CDNs." }
+      ]
+    },
+    {
+      "heading": "Professional Domain Intelligence Sequence",
+      "rows": [
+        { "label": "Step 1", "value": "WHOIS lookup on the primary domain → record registrant, creation date, registrar, nameservers. Check for WHOIS privacy and note if enabled." },
+        { "label": "Step 2", "value": "DNS A record → IP address → IP WHOIS → confirm IP block owner (CDN or direct). If CDN, note the provider." },
+        { "label": "Step 3", "value": "DNS MX record → identify email provider → if self-hosted, run IP WHOIS on mail server IP." },
+        { "label": "Step 4", "value": "DNS TXT record → check SPF, DMARC policy (p=none/quarantine/reject), cloud service tokens." },
+        { "label": "Step 5", "value": "DNS NS record → identify DNS hosting provider." },
+        { "label": "Step 6", "value": "Check for typosquatting variants — missing/added hyphens, different TLDs, transposed letters. Any active mail server on a lookalike domain = immediate client notification." },
+        { "label": "Step 7", "value": "ASN lookup on known IPs → discover full IP range → map complete internet-facing scope." }
+      ]
+    }
+  ]
+}

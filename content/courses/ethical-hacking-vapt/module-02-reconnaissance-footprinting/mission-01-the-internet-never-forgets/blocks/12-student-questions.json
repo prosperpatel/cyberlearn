@@ -1,0 +1,30 @@
+{
+  "id": "mod2m1-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Your Questions",
+  "intro": "These are the questions every student asks when they first encounter reconnaissance. They are good questions, and the answers matter more than they seem.",
+  "faqs": [
+    {
+      "question": "Is it legal to search LinkedIn, read job postings, or look up WHOIS records for a company without their permission?",
+      "answer": "Yes. Accessing publicly available information — information that a company has deliberately made public or that appears in public databases by design — is entirely legal. You are not accessing a computer system without authorisation; you are reading information that was already published. This is the foundation of passive reconnaissance. The legal line is crossed when you begin interacting with the target's actual systems: sending network packets, making requests to their servers, attempting logins. That is active reconnaissance, and that requires explicit written authorisation. Many students are surprised to discover how much genuinely useful intelligence is available before any legal boundary is anywhere near."
+    },
+    {
+      "question": "Why don't companies just remove sensitive information from LinkedIn and job postings to make reconnaissance harder?",
+      "answer": "Most organisations never think about their job postings and LinkedIn pages as security documents — they think of them as recruitment and marketing materials. They post detailed technology requirements because they need to attract qualified candidates. They maintain rich LinkedIn company pages because it builds credibility with customers and recruits. The security team almost never reviews these before they go live. Some security-mature organisations do implement 'technology stack hygiene' — deliberately vague job descriptions that omit specific tools — but this is rare, and it is largely ineffective anyway. The information is also distributed: even if a company removes its own postings, archiving services and recruitment aggregators may have cached them. And the information leaks from employee profiles independently, which the company cannot control."
+    },
+    {
+      "question": "Does OSINT only apply to companies, or does it also apply to individual people?",
+      "answer": "It applies to both — and this is important to understand. Everything covered in this mission about organisational OSINT applies equally to individuals. This is exactly how targeted social engineering attacks are constructed: an attacker finds a specific person's LinkedIn profile, identifies their manager, their team, their current projects, their professional interests, and their email format. Then they craft a spear-phishing email that appears to come from someone the target knows and references something the target is actually working on. The Mat Honan attack described in the mission briefing was built on individual OSINT: Apple's support team was manipulated because publicly available information about Mat Honan was used to pass their identity verification. This is also why the human layer of reconnaissance — mapping people, not just technology — is one of the most productive sources of intelligence in a professional engagement."
+    },
+    {
+      "question": "If I'm learning this to become a security professional, how do I practise reconnaissance legally?",
+      "answer": "Several legitimate options exist. First: practise on your own organisation or institution, with explicit permission from whoever owns the infrastructure. Second: many companies have public bug bounty programmes (Google, Microsoft, GitHub, HackerOne directory) that explicitly permit OSINT research on their public assets within defined rules. Third: for technical passive recon skills, you can practise on deliberately exposed training targets — TryHackMe and HackTheBox both include OSINT challenges. Fourth: do what Maya did in the story you just read — pick a large, publicly listed company and see how much you can learn from public sources alone. This is completely legal, builds real skills, and might surprise you. One absolute rule: never practise reconnaissance on any system or person you do not have explicit permission to investigate."
+    },
+    {
+      "question": "How long does reconnaissance take in a real professional engagement?",
+      "answer": "It varies significantly depending on the scope, the size of the target, and the quality of information available. For a small company, a thorough passive reconnaissance phase might take four to eight hours. For a large enterprise with many subsidiaries, vendor relationships, and public-facing systems, a week is not uncommon — and some specialised OSINT investigators on major engagements spend considerably longer. The important principle is that active scanning and exploitation never begin until reconnaissance is considered complete and its findings are organised. The quality of reconnaissance is directly correlated with the value of the final engagement. Rushing it is a classic mistake — and it consistently produces penetration test reports that miss the most important findings."
+    }
+  ]
+}

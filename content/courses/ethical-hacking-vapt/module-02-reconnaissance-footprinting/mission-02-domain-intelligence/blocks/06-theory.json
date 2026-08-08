@@ -1,0 +1,35 @@
+{
+  "id": "mod2m2-block-06-theory",
+  "type": "theory",
+  "order": 6,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "IP Addresses",
+  "title": "IP Addresses: What Computers Actually Use",
+  "content": "You just learned that a domain is a human-readable label. Now let's talk about what's underneath it.\n\n**What is an IP address?**\n\nAn IP address (Internet Protocol address) is a numerical label assigned to every device connected to the internet. It is what computers actually use to route traffic to each other.\n\nWhen you type 'meridian-financial.com' into your browser, your computer translates that name into an IP address — something like 104.22.7.45 — and then uses that number to actually send and receive data. The domain name was for you. The IP address is for the network.\n\nThere are two formats currently in use:\n\n**IPv4**: The original format. Four numbers separated by dots, each between 0 and 255. Example: 192.168.1.1 or 104.22.7.45. There are approximately 4.3 billion possible IPv4 addresses — far fewer than the number of internet-connected devices in existence today. IPv4 is the format you will work with most in reconnaissance.\n\n**IPv6**: The newer format, designed to solve the address shortage. Eight groups of four hexadecimal characters separated by colons. Example: 2606:4700:20::681c:72d. There are 340 undecillion possible IPv6 addresses — effectively unlimited. Adoption is growing but IPv4 remains dominant in most corporate environments.\n\n**Why the domain-to-IP mapping matters in investigation**\n\nHere is where this gets interesting from a security perspective.\n\n**One IP address can serve many domains.** This is called virtual hosting — a single server responds to requests for hundreds of different domains, routing each request to the right content based on the 'Host' header in the HTTP request. A shared hosting environment, for example, might host thousands of websites on a single IP.\n\nThis means: if you know the IP address of a server, you can reverse-lookup all the domains that point to it. This is called reverse DNS lookup. If a suspicious domain shares an IP with twenty other domains all registered within the same week, all pointing to the same Eastern European host — that is a strong indicator of a coordinated attack infrastructure.\n\n**One domain can resolve to many IPs.** Load balancers and Content Delivery Networks (CDNs) use this to distribute traffic globally. A query for 'google.com' returns different IP addresses depending on where in the world you are — different CDN nodes serve different regions. The domain is constant; the IP varies.\n\n**The CDN problem — the most important thing to understand here**\n\nMany large organisations place their internet presence behind a CDN like Cloudflare, Akamai, or AWS CloudFront. This means the IP address you get when you look up their domain belongs to the CDN provider — not to the target organisation.\n\nCloudflare's IP ranges (starting with 104.16.x.x and 172.64.x.x, among others) are well known. If an A record resolves to one of these, you are looking at Cloudflare's infrastructure, not the target's servers.\n\nBut here is the critical point: the target's actual servers — their origin servers — still have real IP addresses. Finding those origin IPs behind the CDN is a classic passive reconnaissance challenge. Common approaches:\n\n— **MX records**: Mail servers communicate directly without CDN proxying. The mail server IP often belongs to the target's real hosting environment.\n— **Historical DNS records**: Before they added the CDN, what IP did the domain point to? Historical DNS services preserve these records.\n— **Subdomains**: Development and staging environments are frequently not routed through the CDN and resolve directly to real server IPs.\n— **Certificate Transparency**: Subdomains discovered through CT logs may resolve directly to origin IPs.\n\n**The professional chain**\n\nWhen Maya investigates Meridian Financial's domain, the chain is:\n\n1. Domain → DNS A record → IP address (where does this domain point right now?)\n2. IP address → IP WHOIS → IP block owner (who owns this IP — Cloudflare, AWS, or Meridian themselves?)\n3. IP block owner → ASN lookup → all IP ranges owned by that organisation (what is the complete scope of their internet-facing infrastructure?)\n\nEach step answers a different question. Together, they build a complete picture of who owns what — before a single packet reaches the target.",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "Private vs Public IP Addresses",
+      "text": "Not all IP addresses are reachable from the public internet. Private IP ranges are reserved for internal networks and cannot be routed across the internet:\n— 10.0.0.0 to 10.255.255.255\n— 172.16.0.0 to 172.31.255.255\n— 192.168.0.0 to 192.168.255.255\n\nIf you encounter one of these ranges in a DNS record or error message, the system is behind a private network. Internal IP addresses sometimes leak in error messages, HTTP response headers, and misconfigured APIs — which is itself a finding in a professional engagement."
+    },
+    {
+      "type": "warning",
+      "title": "Never Scan Until You Check IP Ownership",
+      "text": "Before any active scanning, always verify that the IP address in the A record actually belongs to the target — not a CDN provider. Scanning a Cloudflare IP without authorisation is not scanning the target: it is scanning Cloudflare's infrastructure, which is outside your scope, outside your authorisation, and potentially a legal issue. IP WHOIS first. Always."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "IP Address",
+      "definition": "A numerical label assigned to every internet-connected device, used to route traffic across the network. IPv4 uses four decimal numbers separated by dots. IPv6 uses hexadecimal groups separated by colons. The number computers actually use — domain names are a human-readable layer on top."
+    },
+    {
+      "term": "Virtual Hosting",
+      "definition": "A technique where a single server with one IP address hosts multiple domain names simultaneously. The server uses the HTTP 'Host' header to determine which domain's content to serve. Enables reverse IP lookup — finding all domains hosted on a given IP address."
+    },
+    {
+      "term": "CDN (Content Delivery Network)",
+      "definition": "A globally distributed network of servers (Cloudflare, Akamai, Fastly, AWS CloudFront) that sits in front of a target's actual infrastructure. CDN IPs belong to the provider, not the target. Finding the origin IP behind a CDN — the real server — is a standard passive reconnaissance challenge."
+    }
+  ]
+}

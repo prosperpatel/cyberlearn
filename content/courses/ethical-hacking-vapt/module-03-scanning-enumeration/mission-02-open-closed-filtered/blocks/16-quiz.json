@@ -1,0 +1,75 @@
+{
+  "id": "mod3m2-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A port scan returns '22/tcp open ssh'. What does this confirm — and what does it NOT confirm?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "It confirms a service is listening on TCP port 22 and responded to the SYN probe with SYN/ACK. It does NOT confirm the service is SSH, its version, its configuration, or whether it is vulnerable.", "isCorrect": true },
+        { "id": "b", "text": "It confirms SSH is running on port 22 and is accessible to any attacker with a valid username. The word 'open' means the service has no authentication barrier.", "isCorrect": false },
+        { "id": "c", "text": "It confirms the host is running Linux, that SSH version 2.0 is installed, and that password authentication is enabled.", "isCorrect": false },
+        { "id": "d", "text": "It confirms both the service identity and that the port is open to connections from any IP address worldwide without restriction.", "isCorrect": false }
+      ],
+      "explanation": "An open port state confirms one specific thing: a service sent a SYN/ACK response — something is listening on this port and accepted the connection probe. The service label 'ssh' comes from the IANA port number registry, not from analysing the actual service. The service running on port 22 might be a standard SSH daemon, a non-standard application, or something else entirely. Confirming the actual service identity, version, and configuration requires fingerprinting — covered in Mission 3.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "Nmap reports '3306/tcp filtered mysql' on the Meridian Financial development server. Which statement correctly describes what this means professionally?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The MySQL database is filtered and therefore safe. The firewall is protecting it effectively and no further investigation is needed.", "isCorrect": false },
+        { "id": "b", "text": "The SYN probe to port 3306 received no response — a firewall is dropping it before it reaches the host. The state of the port cannot be determined. This requires documentation and follow-up investigation.", "isCorrect": true },
+        { "id": "c", "text": "Port 3306 is filtered because there is no database on this host. Filtered always means the port is empty behind the firewall.", "isCorrect": false },
+        { "id": "d", "text": "Filtered and closed are effectively the same result. Both mean no service is currently accessible on that port.", "isCorrect": false }
+      ],
+      "explanation": "Filtered means exactly one thing: the probe did not produce a response. Nmap cannot distinguish between 'port filtered and empty' and 'port filtered and hiding an active service.' A firewall rule was specifically written to protect port 3306 — which means someone made a deliberate decision about this port. The database may be running and reachable through indirect paths, such as a web application vulnerability. Filtered is never safe — it is unknown. Professional follow-up includes alternative probes, indirect investigation, and clear reporting to the client.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "The default Nmap scan of 45.77.180.11 shows only SSH and HTTP open. Maya runs nmap -sS -p- and finds port 8443 also open. What is the core professional lesson?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The default scan found all the security-relevant services. Port 8443 is a minor alternative HTTPS port that is rarely significant.", "isCorrect": false },
+        { "id": "b", "text": "Maya wasted time — the full-range scan takes too long and the extra port is probably not important on a legacy server.", "isCorrect": false },
+        { "id": "c", "text": "The default scan covers only roughly 1,000 of 65,535 possible ports. For confirmed high-priority targets, a full-range scan is required. Services on non-standard ports — especially management interfaces — are exactly where critical findings live.", "isCorrect": true },
+        { "id": "d", "text": "Port 8443 appeared due to a timing issue in the default scan. Running the default scan again with different timing would eventually have found it.", "isCorrect": false }
+      ],
+      "explanation": "The default Nmap scan covers the roughly 1,000 ports most frequently found to have services running in the wild — not ports 1 through 1,000. Port 8443 is a registered port commonly used for alternative HTTPS services, management interfaces, and administrative panels — but it falls outside the default scan range. The case study showed the exact cost: a management interface with default credentials, completely invisible to a default-only scan, found immediately on the full-range follow-up. Full-range scans are not optional for high-priority targets.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "Which Nmap command correctly runs a TCP SYN scan of all 65,535 ports on 45.77.180.10, saves output in all formats, and uses fast timing?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "nmap -sS -p- -T4 -oA fullscan-45.77.180.10 45.77.180.10", "isCorrect": true },
+        { "id": "b", "text": "nmap -sT -p 1-1000 -T5 45.77.180.10", "isCorrect": false },
+        { "id": "c", "text": "nmap -sS -p 65535 -T4 45.77.180.10", "isCorrect": false },
+        { "id": "d", "text": "nmap --full-range --syn-scan --save 45.77.180.10", "isCorrect": false }
+      ],
+      "explanation": "The correct command: -sS requests a TCP SYN scan (requires root). -p- is shorthand for -p 1-65535, scanning all possible ports. -T4 applies fast timing suited to standard internet connections. -oA fullscan-45.77.180.10 saves output in all three formats (.nmap, .xml, .gnmap) with a descriptive filename.\n\nOption B uses -sT (connect scan, no root needed but slower), scans only ports 1-1000, and uses -T5 (insane timing — too aggressive for most real networks). Option C scans only port 65535, not all ports. Option D uses flags that do not exist in Nmap.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "In a TCP SYN scan, a port returns RST. What does this mean — and how is it fundamentally different from a filtered result?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "RST means the host is online but blocking all connections. Filtered means the host is offline but routing is still working. Both mean the port is inaccessible.", "isCorrect": false },
+        { "id": "b", "text": "RST means the host received the probe and responded: the port is closed, nothing is listening. Filtered means the probe was blocked and never reached the host — the port state is completely unknown. These require different professional responses.", "isCorrect": true },
+        { "id": "c", "text": "RST and filtered are both negative results and are professionally equivalent — both mean the port has nothing of interest.", "isCorrect": false },
+        { "id": "d", "text": "RST identifies a Windows host. Filtered identifies a Linux host with iptables configured. The difference reveals the operating system.", "isCorrect": false }
+      ],
+      "explanation": "RST (closed) and filtered are fundamentally different outcomes that require different professional responses.\n\nWhen a port is closed, the host itself responded — it received your SYN and returned RST. This is a confirmed negative: the host is alive and the port is empty. Document it and move on.\n\nWhen a port is filtered, the probe never reached the host (or the response was blocked returning). The host may have a service running behind the firewall — you cannot determine this from your scanning position. Filtered is an active unknown that requires follow-up.\n\nIn professional reporting: closed ports are confirmed negatives. Filtered ports are unresolved questions that must be documented, investigated further, and never reported as cleared.",
+      "xpReward": 20
+    }
+  ]
+}

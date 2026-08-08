@@ -1,0 +1,45 @@
+{
+  "id": "mod2m3-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These are the five mistakes beginners make most consistently when first learning DNS enumeration. Each one either misses critical intelligence, produces false conclusions, or — in one case — creates legal exposure. All five are correctable with one simple habit: slow down and read every record type before moving on.",
+  "mistakes": [
+    {
+      "title": "Thinking DNS only converts names to IP addresses — and stopping after the A record",
+      "wrong": "'I did the DNS lookup. It returned 104.22.7.45. DNS done. Moving to the next step.'",
+      "right": "Query all eight record types: A, AAAA, MX, NS, TXT, CNAME, PTR, and SRV. The A record is the least intelligence-rich DNS lookup available. The MX record reveals the email provider. The TXT records reveal the email security posture and every cloud service vendor. The NS records reveal the DNS hosting provider. CNAME records reveal CDN and SaaS relationships and potential dangling records.",
+      "explanation": "DNS has eight record types for a reason. Each one was added to the DNS standard because a specific part of the internet needed a place to publish a specific kind of addressing information. A security professional who only queries the A record has read the title of a dossier and put it back on the shelf. In the Meridian Financial engagement, the most significant finding — the development server with a direct exposed IP — came from subdomain A records, not the main domain's A record. The DMARC finding — the domain can be spoofed — came from a TXT record. Neither would have been found by a one-and-done A record lookup.",
+      "severity": "critical"
+    },
+    {
+      "title": "Treating subdomains as separate websites with no relationship to the main domain",
+      "wrong": "'dev.meridian-financial.com is a completely separate site from meridian-financial.com. It probably has nothing to do with their main systems.'",
+      "right": "Subdomains are branches of the same organisation. A development subdomain almost certainly runs the same application code as production — just with test data. A legacy subdomain is running the same systems, just older. Every subdomain is part of the same attack surface, governed by the same organisational security posture, and often less well-protected than the main domain.",
+      "explanation": "The reason dev and staging environments are so valuable in a professional engagement is precisely because they mirror production. The authentication system is usually the same. The application logic is the same. The database schema is the same. When you find a vulnerability in dev.company.com, the first question is: 'Is this present in production too?' The answer is almost always yes — because staging and production share the same codebase. The false assumption that subdomains are independent sites leads professionals to deprioritise findings that may be their most important.",
+      "severity": "warning"
+    },
+    {
+      "title": "Ignoring TXT records because 'they're just text'",
+      "wrong": "'TXT records just contain plain text. There's nothing technical to investigate there.'",
+      "right": "TXT records contain SPF policy (complete inventory of email sending vendors), DMARC policy (whether the domain can be spoofed in phishing attacks), and verification tokens for every cloud service the company has ever connected to their domain. A DMARC record with p=none is a finding that belongs in every professional report. Cloud service tokens reveal the entire SaaS stack.",
+      "explanation": "The TXT record is consistently one of the three most intelligence-rich DNS records — alongside MX and NS. In the Meridian Financial engagement, three TXT records revealed: the email provider (Google Workspace via SPF), that the domain can be spoofed (DMARC p=none), and that the company uses Salesforce CRM (SF_domain_auth token). All three of these shaped the approach to the active phase of the engagement. A professional who ignores TXT records misses the email spoofing vulnerability and the CRM platform disclosure.",
+      "severity": "critical"
+    },
+    {
+      "title": "Assuming every organisation has one web server — one IP behind one domain",
+      "wrong": "'I found their IP address. That's their server. There's one target here.'",
+      "right": "Most organisations run multiple servers under multiple subdomains. The main domain might be behind a CDN. But there are often development servers, legacy systems, API servers, admin portals, and internal tools — many with direct IP addresses, not behind any CDN — each representing a separate attack surface.",
+      "explanation": "In the Meridian Financial example, the main domain resolved to a Cloudflare IP — heavily protected. But dev.meridian-financial.com resolved directly to a Vultr VPS — no CDN, no DDoS protection, likely running older software. Legacy.meridian-financial.com was on another direct IP. These are completely different servers with completely different security profiles. The main domain might be impenetrable. The development server might have a remotely exploitable vulnerability in a framework version that was deprecated two years ago. Stopping at one IP means missing the most valuable targets.",
+      "severity": "warning"
+    },
+    {
+      "title": "Confusing DNS enumeration with vulnerability scanning — and running active tools prematurely",
+      "wrong": "'I've done the DNS lookup and found the dev server IP. Let me run Nmap to see what ports are open and then launch a vulnerability scanner.'",
+      "right": "DNS enumeration is passive reconnaissance. Vulnerability scanning is an active phase that requires written authorisation. DNS enumeration tells you WHAT exists and WHERE to focus. Vulnerability scanning is what happens AFTER DNS enumeration, in the active phase, against explicitly scoped targets. Never jump from a DNS lookup directly to an active scan without explicit authorisation for that specific system.",
+      "explanation": "The sequence is non-negotiable: passive OSINT (DNS, WHOIS, Certificate Transparency) → analysis → confirm scope → active scanning. Jumping from a DNS lookup to an active scan is skipping the analysis step, skipping the scope confirmation step, and potentially scanning systems that are outside the agreed engagement boundaries. DNS enumeration for dev.meridian-financial.com reveals the system exists and has a direct IP. Whether that system is in scope for active scanning depends on the engagement scope agreement. The scope agreement must be checked before any scan is run.",
+      "severity": "critical"
+    }
+  ]
+}

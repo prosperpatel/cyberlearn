@@ -1,0 +1,49 @@
+{
+  "id": "mod2m4-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 7,
+  "sidebarLabel": "How Google Finds Everything",
+  "title": "Search Engine Reconnaissance: Why Google Already Knows",
+  "introduction": "Before you can use Google as a reconnaissance tool, you need to understand what Google actually is. Most people think of it as a search engine for websites. It is actually something much broader: a continuous, automated cataloguing system for everything publicly accessible on the internet — whether or not the people who put it there wanted it to be found.",
+  "sections": [
+    {
+      "heading": "What Google actually does (it never stops crawling)",
+      "content": "Google operates a programme called Googlebot — an automated piece of software that visits websites continuously, reads every page, follows every link, downloads every publicly accessible file, and sends all of that content back to Google's servers to be indexed.\n\nGooglebot is not doing this once. It is doing it constantly, every day, for billions of web pages worldwide. Every time it visits a site, it notes what changed since the last visit. New pages get indexed within hours. Files uploaded to public web directories get indexed within days.\n\nThink of it like this: imagine a librarian who visits every building in the world, every day, reads every document left in publicly accessible rooms, and makes a complete catalogue of what they found. That catalogue is the Google index. And the index is what you query every time you search.\n\nThe key insight: Google's index reflects what is publicly accessible — not what organisations intended to make public. Those are different things.",
+      "callout": {
+        "type": "insight",
+        "title": "The indexing gap",
+        "content": "An employee uploads an internal document to a web server directory by mistake. Google's crawler visits within 48 hours, indexes the document, and serves it in search results. The employee has left the company. The organisation has no idea the document is indexed. This gap between 'was accidentally made public' and 'was intentionally published' is where Google Dorking lives."
+      }
+    },
+    {
+      "heading": "Why organisations accidentally expose information",
+      "content": "Three things cause most accidental information exposure via search engines:\n\n**1. Web server misconfiguration.** Web servers have a setting called 'directory listing.' When enabled, visiting a directory URL — instead of returning 'access denied' — shows a file browser of everything in that folder. It looks like the server is displaying its own folder structure. This is a configuration error, not a deliberate choice. And once directory listing is on, every file in that directory is publicly accessible and crawlable.\n\n**2. Wrong folder for uploads.** A company's website might be served from /var/www/html/. An employee who needs to share a file temporarily uploads it to /var/www/html/internal/documents/. They send the link internally. But that file is now on a publicly accessible web server in a public directory. Google will find it.\n\n**3. Forgotten paths.** A web application from 2018 had an admin panel at /admin/. The application was replaced in 2021, but the admin path was never removed. It still returns a response. Google indexed it in 2018 and still has it. A simple Google Dork finds it in 2026.",
+      "callout": {
+        "type": "warning",
+        "title": "Google does not need a link to find a page",
+        "content": "A common misconception: 'If nobody links to it, Google can't find it.' This is wrong. If a URL is reachable — even with no inbound links — Google's crawler will eventually find it by crawling related URLs, checking robots.txt (which often lists sensitive paths), or discovering it through sitemaps. A file on a public web server is a public file, regardless of whether anyone links to it."
+      }
+    },
+    {
+      "heading": "What kinds of information Google indexes (the professional reconnaissance view)",
+      "content": "In a professional engagement, the questions to ask about a target's Google index are:\n\n**Documents**: Has the organisation accidentally indexed internal documents? HR policies, board minutes, financial spreadsheets, network diagrams, and project plans are all commonly found. filetype:pdf, filetype:xlsx, filetype:docx, filetype:txt will surface these.\n\n**Login portals**: Does the organisation have admin panels, VPN portals, or internal tools indexed by Google? These are entry points that can be tested during active scanning — with authorisation. inurl:admin, inurl:login, inurl:portal are the starting points.\n\n**Open directories**: Are there web directories with directory listing enabled? intitle:\"index of\" is the classic dork. An open directory with backup files or configuration files is a critical finding.\n\n**Configuration files**: Have any configuration files been uploaded to publicly accessible directories? filetype:env, filetype:conf, filetype:cfg, filetype:.git/config are all documented in the GHDB as valuable targets.\n\n**Cached pages**: Does Google's cache contain versions of pages that have since been taken down? The cache: operator retrieves Google's last saved copy of a page — sometimes revealing content the organisation deleted.",
+      "callout": {
+        "type": "professional",
+        "title": "Why professionals run Google Dorking before any active scan",
+        "content": "Google Dorking is passive — it queries Google's database, not the target's systems. No log entries on the target. No alerts triggered. No evidence left. And it regularly produces critical findings that active scanners never find: documents, misconfigured directories, and login portals all appear in Google before they appear in automated vulnerability scanner output. Running it first is standard practice."
+      }
+    },
+    {
+      "heading": "The Streisand Effect and robots.txt",
+      "content": "In 2003, singer Barbra Streisand sued a photographer to remove an aerial photograph of her Malibu home from a public database. Before the lawsuit, the photograph had been downloaded exactly six times. After the lawsuit made news, it was downloaded over 420,000 times in a month. The attempt to suppress public information made it vastly more public. This is the Streisand Effect.\n\nrobots.txt experiences an equivalent problem. A file called robots.txt at the root of a web server (yoursite.com/robots.txt) tells search engine crawlers which paths to skip. The file is public — any visitor can read it. When an organisation writes:\n\nDisallow: /admin\nDisallow: /api/v1/internal\nDisallow: /staff-portal\n\n...they have just published a list of their most sensitive paths to anyone who checks robots.txt. Penetration testers read robots.txt specifically because it often contains the most interesting paths to investigate. The content is protected neither by robots.txt nor by obscurity — both paths are directly accessible to anyone who visits them."
+    }
+  ],
+  "keyTerms": [
+    { "term": "Googlebot", "definition": "Google's automated web crawler. Visits public web pages continuously, indexes their content, and returns results in Google search queries." },
+    { "term": "Google Index", "definition": "Google's catalogue of everything its crawler has found on the public internet. Search queries query this index — not the live web." },
+    { "term": "Directory Listing", "definition": "A web server configuration that displays the contents of a directory as a browsable file list when no index page exists. A misconfiguration that exposes all files in that directory." },
+    { "term": "Information Disclosure", "definition": "When a system reveals information that should not be publicly available. Accidental exposure via search engine indexing is a common form." },
+    { "term": "Passive Reconnaissance", "definition": "Gathering information about a target without directly contacting their systems. Querying Google's index is passive — Google contacts the target's systems, not the researcher." }
+  ]
+}

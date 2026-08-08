@@ -1,0 +1,43 @@
+{
+  "id": "mod2m2-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Run a Complete Domain Intelligence Investigation",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 20,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "globe",
+    "tags": ["domain", "dns", "whois", "ip-address", "asn", "mx-record", "txt-record", "dmarc", "passive-recon"]
+  },
+  "content": {
+    "objective": "Conduct a complete domain intelligence investigation on a real, publicly accessible organisation using only free, passive tools. By the end, you will have built a domain intelligence profile covering: WHOIS registration data, all five DNS record types, IP block ownership, email platform identification, DMARC policy assessment, and ASN scope mapping — using nothing but public lookups, no special tools, no accounts required.",
+    "requirements": [
+      "A web browser",
+      "An internet connection",
+      "Access to: who.is, mxtoolbox.com, viewdns.info, bgp.he.net",
+      "Optional (command line): dig (Mac/Linux) or nslookup (Windows)"
+    ],
+    "instructions": [
+      "Choose your target. Pick a large publicly-listed company, a well-known university, or a major technology company. Suitable choices: a large global retailer, a major university (.edu domain), a well-known technology company. Avoid: government agencies (.gov), small private businesses, any organisation you work for or have a personal connection to, or any financial institution in your own country.",
+      "WHOIS lookup. Go to who.is and enter the primary domain. Record: (a) the registration date, (b) the registrar name, (c) the nameserver addresses listed, (d) whether WHOIS privacy protection is enabled. If privacy is enabled, note this — it is itself intelligence.",
+      "A Record lookup. In mxtoolbox.com, select 'DNS Lookup', enter the domain, select 'A'. Record the IP address returned. Then go to who.is again and enter THAT IP ADDRESS (not the domain — the IP). Find who owns the IP block. Is it the target company? A CDN (Cloudflare, Akamai, AWS CloudFront)? A hosting provider?",
+      "MX Record lookup. In mxtoolbox.com, select 'MX Lookup'. Enter the domain. Record the mail server name(s). Identify the email platform: aspmx.l.google.com = Google Workspace. mail.protection.outlook.com = Microsoft 365. If neither — the organisation runs their own mail server. Note the mail server address.",
+      "TXT Record and DMARC lookup. In mxtoolbox.com, use 'TXT Lookup' for the main domain. Look for the SPF record (starts with 'v=spf1'). Then do a separate lookup for DMARC: enter '_dmarc.yourdomain.com' in the TXT lookup. Find the p= value. Is it p=none (monitoring only — domain can be spoofed), p=quarantine (suspicious email goes to spam), or p=reject (strongest protection)?",
+      "NS Record lookup. In mxtoolbox.com, use 'NS Lookup'. Identify the DNS hosting provider from the nameserver names. Does this match what you saw in WHOIS?",
+      "Check for CNAME records on common subdomains. Try: www.yourdomain.com, mail.yourdomain.com, blog.yourdomain.com. In mxtoolbox.com, use 'DNS Lookup' and select CNAME. Note any aliases pointing to third-party services.",
+      "ASN lookup. Go to bgp.he.net. Enter one of the IP addresses you found (from the A or MX record lookup). Find the ASN listed for that IP address. Click on the ASN to see the list of IP prefixes (ranges) registered to that organisation. How many IP address blocks do they own? Is it a large range (suggesting self-hosted infrastructure) or a single block?",
+      "Write a domain intelligence summary. In one paragraph, describe: who registered the domain, whether they use a CDN (and which one), which email platform they use, whether their DMARC policy is enforced or can be spoofed, and the approximate scope of their IP infrastructure based on their ASN data."
+    ],
+    "successCriteria": [
+      "You ran a WHOIS lookup and recorded the registrar, registration date, and nameserver provider",
+      "You performed an IP WHOIS lookup on the A record IP and correctly identified whether it belongs to the target or a CDN provider",
+      "You identified the organisation's email platform from the MX record",
+      "You found and correctly interpreted the DMARC TXT record — specifically the p= value and what it means for email spoofing",
+      "You found the organisation's ASN and can name at least one IP prefix registered to them"
+    ],
+    "reflection": "Look at the profile you just built. You used public tools, free to anyone with a browser. You touched nothing the organisation owns. Every piece of information was published by the organisation themselves — through domain registration choices, DNS configuration, and email infrastructure deployment.\n\nNow think like an attacker: if the DMARC policy is p=none, that domain can be spoofed in phishing emails targeting the organisation's customers or staff. If the MX record points to a self-hosted mail server with a real IP — not behind Cloudflare — that server might be a more accessible entry point than the CDN-protected website. If the NS records point to AWS Route 53, the infrastructure is probably on AWS, which narrows the attack surface considerably.\n\nNow think like a defender: if you ran this same investigation on your own organisation, what would an attacker find? Is your DMARC policy at p=reject? Is your mail server IP exposed when it shouldn't be? Are there subdomains resolving directly that should be behind the CDN?\n\nDomain intelligence is how both sides see the same picture. Your job is to see it first.",
+    "aiCompanionPrompt": "I just completed a domain intelligence investigation where I ran WHOIS lookups, queried all five DNS record types, checked IP ownership, found the email provider from the MX record, and interpreted a DMARC TXT record. I found that the DMARC policy is set to p=none (monitoring only) and the MX record points to a self-hosted mail server with an IP that belongs to the organisation directly, not a CDN. Can you ask me questions that help me reason through the security implications of these two findings specifically — rather than explaining them to me? I want to work out the attack surface implications myself."
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "mod2m5-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Memory Anchor",
+  "title": "The Surgeon Doesn't Cut First",
+  "hook": "Here is the insight that separates professional passive reconnaissance from amateur tool running.\n\nA surgeon does not walk into an operating theatre, pick up a scalpel, and start cutting. They review the patient's imaging. They build a plan. They understand the complete anatomy of the area before the first incision. The cutting — the technically skilled part — comes last. And it is targeted and precise because of everything that came before.\n\nThis is reconnaissance methodology. The scanning — the technically exciting part — comes last. And it is targeted and precise because of everything that came before.\n\nBefore you run a single tool: read the scope. Plan the sequence. Then gather intelligence in order, correlate what you find, build the attack surface map, document everything, and only then start active testing.\n\nThe people who skip directly to the scanning are the ones who trigger IDS alerts on day one.",
+  "analogy": "Imagine you are an architect hired to assess the structural safety of a building you have never seen. You would not arrive with a drill and start making holes in the walls to test the concrete. You would start with the building's public records: the floor plans, the construction history, the permit applications. You would walk the perimeter and observe what is visible without entering. You would check the city's records for any prior structural reports.\n\nOnly then — with a complete picture of what you are dealing with — would you begin the invasive testing: the core samples, the load calculations, the structural stress tests.\n\nThe building records are WHOIS and the registration history. The DNS records are the directory of every room and what each one contains. Google Dorking is checking what other people have already published about the building. And the structural tests are active scanning.\n\nThe architect who starts drilling holes without the plans makes unnecessary holes and misses the cracks in the foundation. The architect who reads the plans first knows exactly where to drill and what they are looking for when they get there.",
+  "acronym": {
+    "word": "SCOUT",
+    "letters": [
+      {
+        "letter": "S",
+        "stands_for": "Scope first",
+        "explanation": "Read the complete scope document before touching any tool. Understand what is in scope, what is out of scope, what techniques are authorised, and who to contact in an emergency. Every decision in the engagement flows from the scope."
+      },
+      {
+        "letter": "C",
+        "stands_for": "Collect passively before acting",
+        "explanation": "WHOIS, DNS, Google Dorking, Shodan, Wayback Machine — all passive. No contact with the target's systems. No log entries. No alerts. Build the complete intelligence picture before making a single active request."
+      },
+      {
+        "letter": "O",
+        "stands_for": "Organise findings continuously",
+        "explanation": "Document every finding at the moment of discovery: source, evidence, severity, recommended action. Do not wait until the end to write up notes. The reconnaissance report is built continuously during the investigation, not retrospectively after it."
+      },
+      {
+        "letter": "U",
+        "stands_for": "Understand the attack surface before scanning",
+        "explanation": "Build the attack surface map. Know which systems are directly reachable, which have older software, where the admin portals are, what the email security posture is. Active scanning is targeted because the attack surface map already told you where to look."
+      },
+      {
+        "letter": "T",
+        "stands_for": "Tell the client about critical findings immediately",
+        "explanation": "Immediate escalation is not optional. An unauthenticated API, an open database, a real attacker's webshell — these go to the client emergency contact now, not in the final report. The final report documents everything. Immediate escalation protects the client during the engagement."
+      }
+    ]
+  },
+  "consolidation": "The SCOUT framework is the professional passive reconnaissance methodology in five words. Every professional engagement — penetration testing, red teaming, bug bounty — begins with SCOUT. The specific tools change. The specific techniques evolve. The five phases do not.\n\nThe next time you begin any security investigation: before you open a single tool, say SCOUT. Scope first. Collect passively. Organise findings. Understand the attack surface. Tell immediately when critical. In that order, every time."
+}

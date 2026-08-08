@@ -1,0 +1,16 @@
+{
+  "id": "mod2m2-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Double Domain",
+  "title": "The Domain That Doesn't Add Up",
+  "prompt": "You are a penetration tester on day two of an authorised black-box engagement for Meridian Financial. During your domain intelligence phase, you have found the following:\n\nmeridian-financial.com (your client's domain):\n— Registered: March 2021 | Registrar: Namecheap | WHOIS privacy: enabled\n— Nameservers: Cloudflare | A record: Cloudflare IP | MX: Google Workspace\n— DMARC: v=DMARC1; p=none (monitoring only — domain can be spoofed)\n\nmeridianfinancial.com (no hyphen — not your client's domain):\n— Registered: two months ago | Registrar: GoDaddy | WHOIS privacy: enabled\n— Nameservers: pointing to a small hosting provider in Eastern Europe\n— A record: currently not resolving\n— MX record: active mail server at the same Eastern European host\n\nThe no-hyphen domain is not owned by your client. Your client confirmed this when you asked. They have no knowledge of it and do not know it exists.\n\nYour scope agreement covers Meridian Financial's own systems and infrastructure. The fake domain is outside your scope.\n\nWhat do you do? Think through it carefully — there is no clean answer, and that is exactly the point.",
+  "context": "This scenario is based on the type of discovery that happens regularly during professional domain intelligence investigations. A penetration tester doing their job — conducting passive OSINT before any active scanning — sometimes surfaces threats that the client was completely unaware of. What they do with that information, and when, is a question of professional responsibility — not just scope management.",
+  "guideQuestions": [
+    "The no-hyphen domain has an active mail server but no live website. What specific attack does this configuration suggest is being prepared — and how would you confirm your hypothesis before raising the alarm?",
+    "Your scope agreement does not cover this domain. Does that change your obligation to the client? Is scope management ever a reason to delay reporting a potential active threat operation?",
+    "You have two choices for timing: call the client contact immediately, or document it in your final report in two weeks. Walk through the consequences of each choice — specifically, what happens to Meridian's customers and employees during those two weeks if you choose the report option.",
+    "If you were the attacker who registered meridianfinancial.com two months ago, what would your timeline look like — and at what point in that timeline would you expect to be discovered? Does your answer change how urgently you act?"
+  ]
+}

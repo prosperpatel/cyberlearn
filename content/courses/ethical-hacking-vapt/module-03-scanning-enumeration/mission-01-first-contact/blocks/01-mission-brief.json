@@ -1,0 +1,29 @@
+{
+  "id": "mod3m1-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "First Contact",
+  "operativeCodename": "Operation Alive Signal",
+  "subtitle": "Every scan starts with a single question: is anyone actually home?",
+  "briefing": "For five missions, you have been invisible.\n\nYou queried public databases. You read DNS records. You searched SSL certificate logs. You ran Google Dorks. You studied job postings. You used Shodan. And the entire time, not a single packet touched Meridian Financial's systems. Their firewalls saw nothing. Their logs show nothing. Their security team has no idea you exist.\n\nYou have a complete passive intelligence picture: four potential targets, three subdomains of interest, a development server on a direct IP with no CDN protection, and seventeen findings — from a DMARC policy that allows spoofing to a Tomcat version banner Shodan captured months ago.\n\nNow that changes.\n\nToday, you send your first packet.\n\nBefore James could reach for his keyboard, Maya had a question. Not a command — a question:\n\n'What is the first thing you need to know about a target before you start scanning it?'\n\nJames thought about it. He thought about ports, about services, about version numbers.\n\nMaya waited.\n\n'Whether it's... there?' James said finally.\n\n'Whether it's there,' Maya confirmed. 'Whether those IP addresses we found actually have live systems behind them right now. Because scanning a dead host is noise. And in this job, unnecessary noise is a mistake.'\n\nThis mission is about the moment everything goes active. And it starts — not with a port scan — but with one question.",
+  "whyItMatters": "Host discovery is not a technicality. It is the foundation every subsequent scan is built on. Every port scan, every service detection, every script that runs in later missions — all of it operates against the list you build here. A host discovery sweep that misses a live system means that system goes unscanned. A host discovery sweep that wastes time on dead IPs means the real systems get less attention. Getting this right is not optional.",
+  "objectives": [
+    "Explain why host discovery comes before port scanning — what goes wrong if you skip it",
+    "Describe what 'alive' means for a networked system from first principles",
+    "Explain how ICMP echo request and reply work — and what they prove about a host",
+    "Explain why a non-response to ping does not prove a host is offline",
+    "Use Nmap host discovery flags to run a professional ping sweep",
+    "Document live host findings in an engagement log with method and timestamp"
+  ],
+  "skillsUnlocked": [
+    "Running targeted host discovery sweeps using multiple probe types",
+    "Interpreting host discovery output — including the 'filtered' case that trips up beginners",
+    "Building the live host list that becomes the input for every subsequent scan"
+  ],
+  "closingMessage": "By the end of this mission, you will have sent your first packet in anger. Not at a random target — at a specific, scoped, authorised system. You will know what that packet is, where it goes, what it is designed to learn, and how to interpret the answer. You will also know what to do when there is no answer at all.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["host-discovery", "nmap", "icmp", "active-recon", "ping-sweep", "tcp-probe", "network-basics"]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "mod3m3-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "A Service Introduces Itself",
+  "narrative": [
+    "Monday, 12:36 PM. Maya pulled up a new terminal window and set her coffee cup to one side.",
+    "The port map was complete. Eight open ports across two hosts. The service column on each line showed an IANA label — 'ssh,' 'http,' 'https,' 'https-alt.' Each one a convention. None of them a confirmed identity.",
+    "'Eight open ports,' Maya said. 'Eight labels that tell us what port number conventions suggest. What we do not have yet is a single confirmed service identity. We do not know what software is running on any of these ports, or which version.'",
+    "James looked at port 8443 on the legacy server. 'So how do we find out?'",
+    "'The simplest way first,' Maya said. 'We connect and read what the service says about itself.'",
+    "She typed: curl -Ik https://45.77.180.11:8443",
+    "The terminal returned output almost immediately.",
+    "HTTP/1.1 200 OK",
+    "Server: Apache Tomcat/7.0.37",
+    "Content-Type: text/html;charset=UTF-8",
+    "James leaned forward. He read the second line twice. 'It just... told us?'",
+    "'It introduced itself,' Maya said. 'The Server header is the banner — the service's greeting. Many services are configured to send it by default, because administrators originally needed to know what they were connecting to. Whoever deployed this server never turned it off.'",
+    "'So we know what it is.'",
+    "'We know what it says it is,' Maya said precisely. 'A banner is self-reported. But yes — Apache Tomcat. And the version.' She pointed at the screen. 'Seven. Zero. Thirty-seven.'",
+    "James looked at it. The numbers meant nothing to him yet. 'Is that recent?'",
+    "Maya was quiet for a moment. She opened a second terminal.",
+    "'Do you remember the passive recon briefing?' she said, not looking up. 'There was a note about a Tomcat version banner that Shodan had captured from this server months ago. Before we even started the active phase of this engagement.'",
+    "James remembered.",
+    "'Same server,' Maya said. 'Same port. Same software.' A pause. 'Seven-point-zero-point-thirty-seven. The version hasn't changed since Shodan saw it.'",
+    "She turned to face him. 'Apache Tomcat 7.x reached end-of-life in March 2021. This server has been running an unsupported version for years, and nobody updated it.' She saved the output and opened a new scan. 'I want to see everything else.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of experience. Maya had seen the Tomcat version string before — and she knew exactly what it meant.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "Third week of his first real engagement. Learning that a version number is not just metadata — it is intelligence.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "tense"
+}

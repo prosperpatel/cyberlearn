@@ -1,0 +1,50 @@
+{
+  "id": "mod2m1-block-17-flashcards",
+  "type": "flashcards",
+  "order": 17,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Flashcards",
+  "title": "Key Terms — Mission 1",
+  "cards": [
+    {
+      "front": "What is reconnaissance, and where does it sit in the VAPT lifecycle?",
+      "back": "Reconnaissance is the systematic gathering of information about a target before taking any offensive action. It is Phase 1 of the VAPT lifecycle: Scoping → Reconnaissance → Scanning → Exploitation → Reporting. It shapes everything that follows — quality of intelligence determines quality of outcome.",
+      "hint": "Think: what does a detective do before making an arrest?"
+    },
+    {
+      "front": "What is the difference between passive and active reconnaissance?",
+      "back": "Passive recon: gathering information from public sources with ZERO contact with the target's systems. No packets sent. No logs created. The target cannot detect it. Legal without a contract.\n\nActive recon: gathering information by directly interacting with the target's systems. Packets sent. Target may detect it. Requires written authorisation.",
+      "hint": "Ghost = passive (no trace). Visitor = active (leaves a trace)."
+    },
+    {
+      "front": "What does OSINT stand for, and what makes something an OSINT source?",
+      "back": "Open Source Intelligence. 'Open source' means publicly available — accessible to anyone without special credentials. OSINT sources include WHOIS records, LinkedIn, job postings, SSL certificate logs, breach databases, GitHub, and news archives. All passive by definition.",
+      "hint": "Open source = publicly available, not open-source software."
+    },
+    {
+      "front": "What is a digital footprint, and what creates it?",
+      "back": "The digital footprint is the total trail of data an organisation has left across the internet — intentionally (websites, press releases, LinkedIn pages) and incidentally (certificate logs, GitHub commits, breach databases, archived web pages). It is assembled through OSINT. A larger footprint generally means a larger attack surface.",
+      "hint": "Like footprints in wet sand — some were deliberate steps, some were accidental."
+    },
+    {
+      "front": "What is an attack surface, and why does it extend beyond an organisation's own systems?",
+      "back": "The attack surface is every potential entry point for an attacker: web properties, APIs, remote access, cloud services, employee accounts, legacy systems. It extends beyond the organisation's own systems because vendors, suppliers, and partners with network access create additional entry points outside the organisation's direct control. The Target/Fazio Mechanical breach is the canonical example.",
+      "hint": "Every door, window, and dog flap into the building — including the ones the building owner didn't install."
+    },
+    {
+      "front": "What is Certificate Transparency, and why is crt.sh valuable in reconnaissance?",
+      "back": "Certificate Transparency is a public log of every SSL/TLS certificate issued by Certificate Authorities. Every subdomain that has ever received an HTTPS certificate is logged there. crt.sh makes this searchable. It reveals subdomains that are not advertised on the main website — including development, staging, and legacy systems that may be running outdated software.",
+      "hint": "SSL certificates must be public. That means every subdomain with HTTPS is discoverable."
+    },
+    {
+      "front": "What is Google Dorking, and give two examples of useful operators?",
+      "back": "Google Dorking uses advanced Google search operators to find specific types of publicly indexed information that are not prominently displayed.\n\nExamples:\nsite:company.com filetype:pdf — finds all PDFs on a company's domain\nsite:company.com inurl:admin — finds admin panels\nintitle:\"index of\" site:company.com — finds directory listings\n\nPassive: you are using Google's index, not contacting the target.",
+      "hint": "Google has already crawled it. You are just asking the right question."
+    },
+    {
+      "front": "What is a supply chain attack vector, and what does it look like in practice?",
+      "back": "A supply chain attack vector exploits a third-party vendor, supplier, or contractor with access to the primary target. The vendor is compromised first (often easier due to weaker security controls), and their access credentials or network connection are used to reach the ultimate target.\n\nReal example: Fazio Mechanical (HVAC vendor) → Target Corporation payment network. The reconnaissance that identified this vector came from public contract records.",
+      "hint": "Don't attack the castle. Attack the supplier who has a key to the back gate."
+    }
+  ]
+}

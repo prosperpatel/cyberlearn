@@ -1,0 +1,33 @@
+{
+  "id": "mod2m4-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mind Map",
+  "title": "The World's Most Thorough Librarian",
+  "realWorldThing": "Imagine a city that has hired the world's most dedicated librarian. Every single day, this librarian walks through every building in the city that has an unlocked door, reads every document left in a publicly accessible room, and brings a copy back to an enormous library. The library catalogues everything by keyword, document type, and the name of the building where it was found.\n\nMost building owners know their front lobby is public. Some of them know the librarian visits. But many of them have accidentally left doors open in rooms they thought were internal — a storage room with the previous manager's personnel files, a photocopy room with a memo that was meant to be confidential, a break room with the building's master key chart left on the table. The librarian copied all of it. It has all been in the library catalogue for months.\n\nSomebody who knows how to use the library catalogue can walk in and ask: 'Show me all documents from Building X that contain the word CONFIDENTIAL and are in spreadsheet format.' The cataloguer checks the files. If the librarian found any, they are in the answer.\n\nNo one broke into Building X. The librarian walked through an unlocked door.",
+  "concept": "Google is that librarian and that library simultaneously. Googlebot walks through every publicly accessible URL on the internet — every unlocked door — and indexes what it finds. The Google index is the catalogue. A Google Dork is a very specific question to the cataloguer. The answer comes from what Googlebot already found — not from anything the researcher does to the target.\n\nOrganisations that have misconfigured their web servers, uploaded documents to wrong directories, or forgotten to remove old portals have left doors open. Google found them. The catalogue has them. And they have been there for months.",
+  "comparison": "In both cases, the information was made accessible by the owner's choices — even if unintentionally. The librarian (Google) is not doing anything wrong by copying and cataloguing what is left in public rooms. The researcher is not doing anything wrong by asking the catalogue specific questions. The responsibility for what gets left in a publicly accessible room belongs to the building owner — or in this case, the organisation's IT team.\n\nThe critical professional distinction: the librarian's catalogue contains copies of documents from rooms left accidentally open. A professional who uses the catalogue is doing research. A professional who then goes to the room and takes the original documents — or takes more copies than needed to prove the room was accessible — has crossed into territory that requires more careful judgment.",
+  "breakdown": [
+    {
+      "realWorld": "The city's librarian who visits every unlocked room daily and catalogues everything found",
+      "techEquivalent": "Googlebot — Google's automated crawler that visits every publicly accessible URL, indexes the content, and returns it in search queries"
+    },
+    {
+      "realWorld": "The enormous library catalogue containing copies of everything the librarian found",
+      "techEquivalent": "The Google Search Index — the database you query every time you use Google, containing copies of all publicly crawled content"
+    },
+    {
+      "realWorld": "Asking the cataloguer a very specific question: 'all spreadsheets from Building X containing the word SALARY'",
+      "techEquivalent": "A Google Dork: site:target.com filetype:xlsx intext:salary — querying the index for specific content from a specific domain"
+    },
+    {
+      "realWorld": "The building owner's sign on a room: 'Employees Only — Do Not Enter'",
+      "techEquivalent": "robots.txt with Disallow directives — a request not to index certain paths. Not a lock. Not an access control. A sign the librarian may or may not read, and that any visitor can choose to ignore."
+    },
+    {
+      "realWorld": "The floor map the building owner distributes to all visitors to help them navigate",
+      "techEquivalent": "sitemap.xml — the organisation's own map of their intended public content. The baseline that shows what they meant to be public, making it easier to identify what shouldn't be."
+    }
+  ]
+}

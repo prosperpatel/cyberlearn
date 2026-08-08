@@ -1,0 +1,48 @@
+{
+  "id": "mod3m1-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Avoid These Mistakes",
+  "intro": "These are the host discovery mistakes that appear most frequently on real assessments. Each one is understandable — and each one can cause serious problems.",
+  "mistakes": [
+    {
+      "title": "Treating 'No Ping Reply' as 'Host Is Offline'",
+      "wrong": "Ping timed out on 45.77.180.11. I'll mark it as offline and move on to the next target.",
+      "right": "A timeout on ICMP means the probe received no response — which could mean offline, or ICMP filtering. Follow up with TCP probes before concluding anything.",
+      "explanation": "This is the most consequential mistake in host discovery. A live Windows server behind default firewall settings will not respond to ping. A live cloud instance behind a standard security group will not respond to ping. Marking them as offline means they never get scanned, their vulnerabilities never get reported, and the client never learns about them.\n\nThe damage is invisible. The report shows those IPs as 'non-responsive' — which sounds like due diligence. But two TCP probes would have revealed them in ten seconds.",
+      "severity": "critical",
+      "example": "James marks 45.77.180.11 as offline after a single failed ping. The legacy server — running an unpatched SSH service with a known CVE — goes unscanned for the entire engagement. The final report says nothing about it. Six months later, an external attacker compromises the client through that exact server."
+    },
+    {
+      "title": "Skipping Host Discovery and Port Scanning Directly",
+      "wrong": "I already know the target's IP from passive recon. I'll run the port scan directly — why add an extra step?",
+      "right": "Always run host discovery first. Verify the host is alive and responding before running a port scan against it. Two minutes of discovery saves hours of misdirected scanning.",
+      "explanation": "Passive recon gives you IPs that resolved at some point — not necessarily IPs with live systems right now. Networks change. Servers get decommissioned. Cloud instances get terminated. A port scan against a dead IP sends 1,000 probes (or 65,535 if you run a full scan) and waits on timeouts for every single one. Every timeout wastes time and generates noise with zero useful output.",
+      "severity": "warning",
+      "example": "A team runs a full port scan against 48 IPs without host discovery. 16 have no live host — the client migrated off those servers two months ago. The team waits three hours for timeouts, generates an abuse report by scanning reassigned IPs, and spends the next day explaining the incident to the client."
+    },
+    {
+      "title": "Scanning IP Addresses Outside the Authorised Scope",
+      "wrong": "I'll sweep the whole /24 range to see what else is interesting — some of those IPs might be worth investigating.",
+      "right": "Only send probes to IP addresses explicitly authorised in the scope document. Host discovery — like all active scanning — must stay within the defined scope.",
+      "explanation": "The scope document defines what you are authorised to touch. Scanning IPs outside the scope — even just to check if they are alive — is a scope violation. In professional engagements, scope violations can terminate the engagement immediately, create legal liability, and damage the client relationship. In the worst case, you contact a third-party system that shares the IP range.",
+      "severity": "critical",
+      "example": "The scope authorises 45.77.180.10 and 45.77.180.11. A tester sweeps the full /24 range 'just to check.' IP 45.77.180.50 belongs to a different company that happens to share the same hosting provider. The hosting provider flags the scan as unauthorised access. The engagement is terminated."
+    },
+    {
+      "title": "Using Maximum Scan Speed (-T5) on Any Real Network",
+      "wrong": "I'll use -T5 (insane timing) to get host discovery results faster.",
+      "right": "Use -T4 as the default timing for most professional assessments. -T5 is designed for very fast local networks and causes packet loss and false negatives on standard internet connections.",
+      "explanation": "Nmap's timing templates range from -T0 (paranoid — very slow) to -T5 (insane — maximum speed). At -T5, Nmap sends probes so rapidly that on any real network connection, packets are dropped. The replies from live hosts arrive after Nmap has already moved on — so those hosts appear offline when they are not. -T4 is fast enough for professional assessments and reliable enough to avoid false negatives.",
+      "severity": "warning"
+    },
+    {
+      "title": "Not Saving Host Discovery Output to a File",
+      "wrong": "I can see the results in my terminal. I'll just remember which hosts were alive.",
+      "right": "Always save scan output to a file using -oN or -oA. The host discovery results are evidence in your engagement documentation.",
+      "explanation": "Terminal output disappears when you close the window. If your connection drops, if your VM crashes, or if you need to reference the exact latency from a host discovery result three days later during report writing — you need the saved file. The professional habit is to save everything: nmap -sn -oA host-discovery 45.77.180.0/24. The -oA flag saves three formats simultaneously (normal, XML, and grepable). This takes zero extra effort and prevents the frustration of reconstructing information you already gathered.",
+      "severity": "warning"
+    }
+  ]
+}

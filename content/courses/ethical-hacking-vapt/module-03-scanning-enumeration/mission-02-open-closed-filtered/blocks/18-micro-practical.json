@@ -1,0 +1,25 @@
+{
+  "id": "mod3m2-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "Port Scanning with Nmap",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 30,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "terminal",
+    "tags": ["port-scanning", "nmap", "syn-scan", "port-states", "active-recon", "full-range-scan"]
+  },
+  "content": {
+    "objective": "Run a professional port scanning sweep against an authorised lab target network. Using Nmap's TCP SYN scan, identify open, closed, and filtered ports on confirmed live hosts. Practice interpreting all three port states — including filtered ports — and discover the difference between what a default scan finds and what a full-range scan reveals. Document your findings in an engagement log exactly as you would on a real assessment.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "Port Scanning with Nmap",
+      "estimatedTime": "30 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm working on a port scanning lab using Nmap. My goal is to build a complete port map of authorised lab hosts — identifying open, closed, and filtered ports using the TCP SYN scan, and practising interpretation of all three states.\n\nHere is what I know going in:\n- The TCP SYN scan (-sS) is the professional default — it sends SYN, reads the response, never completes the handshake\n- Open = SYN/ACK received (service listening)\n- Closed = RST received from the host (host alive, port empty)\n- Filtered = no response (probe blocked, state unknown — NOT the same as empty)\n- The default scan covers roughly 1,000 ports — not all 65,535\n- The service column shows IANA-registered names for port numbers, not confirmed service identities\n- Filtered ports are NOT safe — they require follow-up and honest reporting\n- Always save output with -oA, named with the target IP\n\nI want you to act as a senior penetration tester guiding me — but never giving me direct answers. Ask questions that help me reason through the results myself.\n\nWhen I describe what I found, respond with questions like:\n- If I say 'port 3306 is filtered — the database must be protected': 'What does filtered actually tell you about the port state? What are the two realities that filtered could represent?'\n- If I say 'default scan is done, port mapping complete': 'What percentage of the total port range did you actually scan? What might be on the ports you did not check?'\n- If I say 'port 80 shows http so it is a web server': 'How does Nmap determine the service label? What would you need to do to confirm what is actually running there?'\n- If I say 'I found three open ports': 'How confident are you that you found ALL open ports? What would make your port map more complete?'\n\nPush back professionally if I:\n- Mark a filtered port as safe without investigating\n- Report the assessment as complete after only the default scan\n- Treat service labels as confirmed service identities\n- Skip saving output to a file\n- Group closed and filtered ports together in my documentation\n\nHelp me build the professional instinct for thorough, interpreted port scanning — not just the ability to read numbers off a terminal."
+  }
+}

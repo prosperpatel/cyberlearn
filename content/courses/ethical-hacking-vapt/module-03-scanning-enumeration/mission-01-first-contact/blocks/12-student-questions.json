@@ -1,0 +1,30 @@
+{
+  "id": "mod3m1-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Questions & Answers",
+  "intro": "These are the questions learners ask most often when they first encounter host discovery. If you have been wondering about any of these, you are asking exactly the right things.",
+  "faqs": [
+    {
+      "question": "Why not just scan all 65,535 ports of every IP and see what responds? That would also reveal which hosts are alive.",
+      "answer": "Yes — it would, eventually. But the cost is enormous.\n\nScanning all 65,535 ports of a single host takes several minutes. Scanning all ports of a /24 range (256 IPs) takes hours, potentially days. And if 200 of those IPs have no live host, you are spending the vast majority of that time waiting on timeouts from addresses that have nothing behind them.\n\nA host discovery sweep takes two to five minutes for an entire /24 range. It tells you which of those 256 IPs are alive — so you spend the rest of your scanning time on the 15 or 20 that actually matter.\n\nIn professional assessments, time is a real constraint. Clients pay for results within a specific window. Host discovery is how you spend that time efficiently."
+    },
+    {
+      "question": "Can the target tell we are doing a host discovery sweep?",
+      "answer": "Yes, potentially. ICMP Echo Requests appear in network logs. On security-aware networks, an IDS (Intrusion Detection System) may alert on a ping sweep — especially if multiple probes arrive rapidly from the same source IP.\n\nThis is why professional penetration testing always operates under written authorisation — the client's security team knows testing is happening.\n\nIn terms of stealth: a ping sweep is less noisy than a full port scan, but it is not invisible. In red team engagements where stealth is a requirement, professionals use slower scan rates (-T1 or -T2 timing) and targeted probes rather than a broad sweep. For standard penetration testing, accuracy and thoroughness take priority over stealth."
+    },
+    {
+      "question": "What if a host responds to ping but all of its ports are closed when I scan them later?",
+      "answer": "It still belongs on your live host list, and you still need to scan it properly.\n\nA host that responds to ping is confirmed alive — which means it gets a port scan. Even if a default port scan returns no open ports, the host may have services on non-standard ports (not in the default top-1000 list), or may require specific scan types to reveal its ports (such as a UDP scan for UDP-based services).\n\nNever interpret 'no open ports on the default scan' as 'nothing interesting on this host.' That conclusion requires a full 65,535-port scan — not just the default top-1000. Mission 2 covers this in detail."
+    },
+    {
+      "question": "Nmap says 'Host is up (0.014s latency).' What does the latency number tell me?",
+      "answer": "Latency is the round-trip time — how long your probe took to reach the host and the reply to travel back. It is measured in seconds in Nmap output (0.014s = 14 milliseconds).\n\nLatency gives a rough indicator of geographic or network distance:\n• Under 5ms: same local network or datacenter\n• 5–50ms: same country or nearby region\n• 50–150ms: cross-continental\n• 150ms and above: likely a different continent, or high network congestion\n\nFor the Meridian Financial engagement, 14ms on 45.77.180.10 is consistent with a VPS in a nearby datacenter. Unusually high latency on a specific host might indicate traffic is being rerouted — for example, through a load balancer or CDN — which is itself useful intelligence."
+    },
+    {
+      "question": "What is a /24 range and how many hosts does it contain?",
+      "answer": "The /24 notation is called CIDR (Classless Inter-Domain Routing). In 45.77.180.0/24, the /24 means the first 24 bits of the IP address define the network, and the remaining 8 bits identify individual hosts on that network.\n\n8 bits can represent 256 values (0 through 255). So 45.77.180.0/24 covers all addresses from 45.77.180.0 to 45.77.180.255 — 256 addresses total. Two of those are reserved (the network address at .0 and the broadcast address at .255), leaving 254 usable host addresses.\n\nCommon CIDR ranges you will see in penetration testing:\n• /32 — single host (one IP only)\n• /24 — 256 addresses (typical for a small office network)\n• /16 — 65,536 addresses (larger organisations)\n• /8 — 16 million addresses (rare in scope documents)"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mod3m1-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Think First",
+  "title": "Before You Type a Single Command",
+  "prompt": "You are about to go active for the first time. The passive reconnaissance is complete — you have Meridian Financial's attack surface documented. Four IP addresses are in front of you:\n\n• 45.77.180.10 — the development server, confirmed via DNS (direct IP, no CDN)\n• 45.77.180.11 — the legacy server, appeared in a Shodan record from March\n• 198.51.100.42 — the main application, sitting behind a CDN provider\n• 45.77.180.23 — a mystery IP that appeared once in an old DNS record and has never been seen anywhere else\n\nYou have your terminal open. The first command you would type is probably something like: nmap 45.77.180.10\n\nBefore you do — stop for just a moment.\n\nWhat question is that command actually trying to answer? And is that the right first question?\n\nThink about this yourself before you continue: what should the very first question be when you have a list of target IP addresses and are ready to begin active scanning?",
+  "context": "This is not a trick question and there is no single correct answer — yet. The goal is to notice what assumptions you are already making when you look at an IP address and reach for a scanning tool. Are you assuming the IP has a live system behind it right now? Are you assuming it is reachable at this moment? Are you assuming the passive intelligence from months ago is still current?\n\nIn professional security work, the discipline of asking 'what question am I trying to answer?' before running a command is what separates a thoughtful practitioner from a tool runner.",
+  "guideQuestions": [
+    "If you ran nmap 45.77.180.10 right now and got no output at all — what would that tell you? What would it NOT tell you?",
+    "What is the difference between 'no system at this IP' and 'a system is there but not responding to that type of request'?",
+    "The passive recon found some of these IPs months ago. How confident should you be that the same systems are still there today?",
+    "If you scanned all 65,535 ports of an IP address that had no live system behind it, what would happen? How long would it take? What would the results look like?"
+  ]
+}

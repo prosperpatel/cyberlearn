@@ -1,0 +1,29 @@
+{
+  "id": "mod3m2-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Three States",
+  "title": "Port States: What Happens at the Network Level",
+  "description": "Three scenarios showing what happens during a TCP SYN scan depending on the port state. The response — or absence of response — is exactly what Nmap measures to determine each port's state.",
+  "nodes": [
+    { "id": "attacker", "label": "Your Machine\n(Kali Linux)", "type": "attacker", "detail": "Running nmap -sS" },
+    { "id": "open_port", "label": "Target Port\nState: OPEN", "type": "target", "detail": "A service is listening — SYN/ACK returned" },
+    { "id": "nmap_rst", "label": "Nmap sends RST\n(tears down connection)", "type": "action", "detail": "Half-open connection immediately closed — handshake never completes" },
+    { "id": "closed_port", "label": "Target Port\nState: CLOSED", "type": "target", "detail": "Host alive, no service listening — RST returned by host" },
+    { "id": "firewall", "label": "Firewall", "type": "security", "detail": "Configured to drop packets to this port silently" },
+    { "id": "filtered_port", "label": "Target Port\nState: FILTERED", "type": "target", "detail": "State unknown — may or may not have a service" }
+  ],
+  "edges": [
+    { "from": "attacker", "to": "open_port", "label": "SYN", "type": "probe", "animated": true },
+    { "from": "open_port", "to": "attacker", "label": "SYN/ACK → PORT IS OPEN", "type": "success", "animated": true },
+    { "from": "attacker", "to": "nmap_rst", "label": "Nmap sends RST immediately (never completes handshake)", "type": "info" },
+    { "from": "attacker", "to": "closed_port", "label": "SYN", "type": "probe", "animated": true },
+    { "from": "closed_port", "to": "attacker", "label": "RST → PORT IS CLOSED", "type": "warning", "animated": true },
+    { "from": "attacker", "to": "firewall", "label": "SYN", "type": "probe", "animated": true },
+    { "from": "firewall", "to": "filtered_port", "label": "BLOCKED — packet dropped silently", "type": "blocked" },
+    { "from": "attacker", "to": "attacker", "label": "No response → PORT IS FILTERED", "type": "blocked" }
+  ],
+  "caption": "OPEN: Your SYN reaches the target port. A service is listening and responds with SYN/ACK — connection accepted. Nmap immediately sends RST to close the half-open connection. Port confirmed open.\n\nCLOSED: Your SYN reaches the host, but no service is listening on this port. The host itself sends RST — a definitive 'nothing here.' The host is alive and responding; this specific door is simply empty.\n\nFILTERED: Your SYN is intercepted by a firewall before it reaches the host. No response arrives. Nmap cannot determine whether the port is open or closed — the state is unknown. Filtered is not the same as empty.",
+  "interactive": false
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mod2m1-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Photograph",
+  "title": "The Photograph You Weren't Supposed to See",
+  "prompt": "You are three days into the passive reconnaissance phase of an authorised penetration test for a mid-sized financial services company. While researching employee profiles on LinkedIn, you find that the Head of IT Infrastructure — one of the most senior technical people in the organisation — has posted a photo from his home office celebrating a work anniversary. In the background, clearly visible and in focus, is a whiteboard. On the whiteboard are internal IP address ranges, server naming conventions, what appears to be a network segmentation diagram, and the names of three critical internal systems.\n\nThe photo is public. He posted it himself. It was posted fourteen months ago. Nothing in your scope agreement prohibits using publicly available social media information.\n\nWhat do you do?",
+  "context": "This scenario has no clean answer — and that is exactly why it matters. It tests professional judgement in a situation that has legal, ethical, and practical dimensions all at once. The question is not whether you legally can use this information. The question is what a professional does when they find it, and why the way you handle it says something important about the kind of security professional you are becoming.",
+  "guideQuestions": [
+    "The information is legally public — he posted it publicly on a public platform. Does that automatically make it appropriate to include in your engagement intelligence? Or does 'legal' and 'appropriate' sometimes diverge?",
+    "From a purely practical standpoint: the network diagram on the whiteboard would save you significant reconnaissance time. Does the efficiency argument change your answer — and should it?",
+    "Who does the client expect you to report this to? Is this a vulnerability, an OSINT finding, a human error that needs immediate notification, or all three? And does your answer change depending on how sensitive the information in the photograph appears to be?",
+    "If you were the Head of IT Infrastructure and your penetration testing firm told you about this photo on day three of the engagement — before the active testing had even begun — how would you feel? And what does that tell you about the right call here?"
+  ]
+}

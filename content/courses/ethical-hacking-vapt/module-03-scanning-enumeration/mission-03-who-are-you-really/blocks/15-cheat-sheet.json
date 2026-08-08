@@ -1,0 +1,60 @@
+{
+  "id": "mod3m3-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Service Detection — Professional Reference",
+  "sections": [
+    {
+      "heading": "Banner Grabbing Commands",
+      "rows": [
+        { "label": "curl -I http://[ip]", "value": "HTTP banner grab — returns response headers including Server" },
+        { "label": "curl -Ik https://[ip]:[port]", "value": "HTTPS banner grab — -k ignores certificate errors" },
+        { "label": "nc -nv [ip] [port]", "value": "Netcat banner grab — connects and reads raw response (SSH, FTP, SMTP)" },
+        { "label": "nc -nv -w 3 [ip] [port]", "value": "Netcat with 3-second timeout for services that wait for input first" }
+      ]
+    },
+    {
+      "heading": "Nmap Service Detection Flags",
+      "rows": [
+        { "label": "-sV", "value": "Service version detection — probe-based behavioural fingerprinting" },
+        { "label": "--version-intensity 0", "value": "Minimal probing — fastest, least accurate" },
+        { "label": "--version-intensity 5", "value": "Default intensity — balanced speed and accuracy" },
+        { "label": "--version-intensity 9", "value": "Maximum probing — slowest, most thorough. Use on unusual or non-standard ports." },
+        { "label": "-sS -sV", "value": "Combine SYN port scan with version detection in one pass" },
+        { "label": "-sV -p [ports]", "value": "Run version detection on specific ports only — faster than full host scan" },
+        { "label": "-oA [filename]", "value": "Save all output formats — always use for engagement documentation" }
+      ]
+    },
+    {
+      "heading": "Service Detection Workflow — In Order",
+      "rows": [
+        { "label": "Step 1: Quick check", "value": "curl -Ik https://[ip]:[port] — immediate banner read for web services" },
+        { "label": "Step 2: SSH banner", "value": "nc -nv [ip] 22 — reads SSH banner automatically on connect" },
+        { "label": "Step 3: Full -sV sweep", "value": "nmap -sV -T4 -oA service-[ip] [ip] — systematic version detection" },
+        { "label": "Step 4: Difficult services", "value": "nmap -sV --version-intensity 9 -p [port] [ip] — maximum probing" },
+        { "label": "Step 5: CVE research", "value": "nvd.nist.gov — search with software name and version string" }
+      ]
+    },
+    {
+      "heading": "Reading Nmap -sV Output",
+      "rows": [
+        { "label": "PORT STATE SERVICE VERSION", "value": "The four columns in -sV output" },
+        { "label": "OpenSSH 7.4 (protocol 2.0)", "value": "Software: OpenSSH. Version: 7.4. SSH protocol version: 2.0" },
+        { "label": "Apache httpd 2.4.49 ((Unix))", "value": "Software: Apache httpd. Version: 2.4.49. Platform: Unix" },
+        { "label": "Apache Tomcat 7.0.37", "value": "Software: Apache Tomcat. Version: 7.0.37" },
+        { "label": "ssl/http [software]", "value": "HTTP service over SSL/TLS — HTTPS" },
+        { "label": "filtered [no version]", "value": "Port filtered — version detection probe blocked. Version unknown." }
+      ]
+    },
+    {
+      "heading": "The BVR Professional Sequence",
+      "rows": [
+        { "label": "B — Banner", "value": "Read what the service announces. Record the exact string." },
+        { "label": "V — Version", "value": "Confirm the version through -sV. This is the intelligence that enables CVE research." },
+        { "label": "R — Research", "value": "Search nvd.nist.gov for known vulnerabilities affecting this exact version." }
+      ]
+    }
+  ]
+}

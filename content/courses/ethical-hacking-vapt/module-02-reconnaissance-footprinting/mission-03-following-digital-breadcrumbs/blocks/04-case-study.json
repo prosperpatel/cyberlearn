@@ -1,0 +1,36 @@
+{
+  "id": "mod2m3-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study: The Dangling CNAME",
+  "company": "Multiple Fortune 500 Organisations — Subdomain Takeover Research",
+  "year": "2016 — present",
+  "industry": "Cross-industry (technology, retail, airlines, financial services)",
+  "incident": "Security researchers discovered that hundreds of major organisations had left DNS CNAME records pointing to cloud services they had discontinued — allowing anyone to register the deleted cloud resource and serve content from the company's own trusted subdomain. Every single discovery was made through DNS enumeration. No hacking required.",
+  "whatHappened": [
+    "In 2016, security researchers began systematically documenting a class of vulnerability called 'subdomain takeover.' The discovery method was entirely passive: enumerate a company's subdomains through DNS queries, check each CNAME record to see where it pointed, then verify whether the destination still existed.",
+    "The vulnerability appeared when companies cancelled a third-party service — a Heroku application, an AWS S3 bucket, a GitHub Pages site, an Azure Web App, a Fastly CDN configuration — but forgot to remove the DNS CNAME record that still directed traffic to it. The cloud resource was freed up and available to anyone who wanted it. The DNS record was not.",
+    "Because cloud resources are registered on a first-come-first-served basis, any researcher — or attacker — could claim the freed resource by simply registering the now-available name. Once claimed, any request to the company's trusted subdomain would be served from the researcher's newly registered cloud account. The company's name appeared in the browser's address bar. The content came from somewhere else entirely.",
+    "Researchers tested this against companies participating in public bug bounty programmes — where testing is explicitly authorised. They found vulnerable configurations at major retailers, airlines, technology companies, and financial services firms. In every case, the discovery method was the same: DNS enumeration revealed CNAME records pointing to destinations that no longer resolved.",
+    "One documented example involved a large coffee retailer's careers subdomain, which had a CNAME record pointing to a job board platform the company had stopped using. The platform slot was available. A researcher registered it, which caused the retailer's careers subdomain to serve the researcher's content — appearing to job seekers as an official page on the company's domain. This could have been a phishing page collecting applicant credentials.",
+    "Another example involved a technology company's developer documentation subdomain pointing to an AWS S3 bucket that had been deleted during an infrastructure migration. The bucket name was available. Content placed in the bucket would have been served from the company's trusted developer domain — with no indication to visitors that anything was wrong.",
+    "The GitHub repository 'Can I Take Over XYZ?' was created in 2018 to document which cloud services are vulnerable to subdomain takeover and how to identify each pattern. By 2024, it listed over 150 services. Hundreds of company subdomains had been reported as vulnerable through systematic DNS enumeration across bug bounty programmes."
+  ],
+  "whyItHappened": [
+    "DNS records have no automatic expiry or self-validation mechanism. When a company deletes a cloud service, the cloud resource disappears — but the DNS CNAME record pointing to it persists indefinitely until someone manually removes it. Most organisations do not audit their DNS records after infrastructure changes. A CNAME added in 2019 for a vendor that was discontinued in 2021 will still be present in DNS in 2026 unless someone specifically goes looking for it.",
+    "The discovery method is entirely passive and leaves no trace. A researcher querying CNAME records and checking whether destinations resolve is doing nothing that could be detected, logged, or flagged by the target organisation. The vulnerability is found by reading public DNS records — the same records any browser reads every time it makes a request.",
+    "DNS record ownership has no clear organisational home. The team that adds a CNAME when a service is set up is often different from the team that decommissions the service. Neither team checks whether the DNS record was cleaned up. The result is orphaned records across large organisations' DNS zones — sometimes accumulating for years."
+  ],
+  "lessonsLearned": [
+    "DNS CNAME records must be audited whenever services are discontinued. A CNAME pointing to a deleted cloud resource is the digital equivalent of a company's name still appearing on the directory of a building they vacated — except anyone can move into that space and put whatever they want in the listing.",
+    "Subdomain enumeration is the technique that discovers this class of vulnerability. An organisation that regularly enumerates its own subdomains and validates every CNAME destination finds these problems before researchers and attackers do. This is an internal security practice, not just an external attack technique.",
+    "Every CNAME record is a declaration of trust. It says: 'traffic to this subdomain goes to this third-party service, and we trust whatever that service returns.' When the service no longer exists and someone else claims it, that trust is inherited by whoever fills the space. DNS does not know — or care — that ownership has changed."
+  ],
+  "impactStats": [
+    { "value": "150+", "label": "Cloud services documented as vulnerable to CNAME-based subdomain takeover" },
+    { "value": "100%", "label": "Vulnerability discoveries made through passive DNS enumeration — no hacking required" },
+    { "value": "$0", "label": "Cost to discover the vulnerability (free DNS query tools)" },
+    { "value": "Indefinite", "label": "Time a dangling CNAME persists in DNS if not manually removed" }
+  ]
+}

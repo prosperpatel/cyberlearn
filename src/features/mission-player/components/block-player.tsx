@@ -223,17 +223,35 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
       el.scrollTo({ top: 0, behavior: 'instant' })
     }
 
-    // For scroll-strategy blocks: if the content fits without scrolling, complete immediately
+    // For scroll-strategy blocks: complete immediately when the content fits on screen.
+    //
+    // Why exitMs + 150 and not the original 120 ms:
+    // AnimatePresence mode="wait" keeps the OLD block in the DOM for dur × 1000 ms (the
+    // exit animation). At 120 ms the old block was still present, so scrollHeight measured
+    // the WRONG content — intermittently blocking or prematurely completing the new block.
+    // Firing after exitMs + 150 ms guarantees the new block has mounted and painted.
+    const exitMs = prefersReducedMotion ? 0 : Math.ceil(dur * 1000)
     const tid = setTimeout(() => {
       const el2 = contentRef.current
       if (!el2 || strategyRef.current !== 'scroll') return
+      console.debug(
+        '[BlockPlayer] fits-check',
+        `block=${activeIndex}`,
+        `scrollHeight=${el2.scrollHeight}`,
+        `clientHeight=${el2.clientHeight}`,
+        `fits=${el2.scrollHeight <= el2.clientHeight + 60}`,
+        `blockDone=${blockDoneRef.current}`,
+      )
       if (el2.scrollHeight <= el2.clientHeight + 60) {
         handleBlockComplete()
       }
-    }, 120)
+    }, exitMs + 150)
 
     return () => clearTimeout(tid)
-  }, [activeIndex, handleBlockComplete])
+  // prefersReducedMotion is intentionally included: if the user changes OS motion
+  // settings mid-session, we want the correct delay on the next block transition.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex, handleBlockComplete, prefersReducedMotion])
 
   // ── Sidebar auto-scroll ─────────────────────────────────────────────────────
   useEffect(() => {
@@ -272,6 +290,7 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
   // ── goTo ─────────────────────────────────────────────────────────────────────
   const goTo = useCallback((index: number) => {
     if (index < 0 || index >= total) return
+    console.debug('[BlockPlayer] goTo called', `index=${index}`, `blockDone=${blockDoneRef.current}`, `indexRef=${indexRef.current}`)
     update(prev => {
       const completed = new Set(prev.completedBlocks)
 
@@ -284,6 +303,7 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
       const maxDone  = completed.size > 0 ? Math.max(...completed) : -1
       const frontier = maxDone + 1
 
+      console.debug('[BlockPlayer] goTo update', `prev.activeBlockIndex=${prev.activeBlockIndex}`, `frontier=${frontier}`, `rejected=${index > frontier}`)
       if (index > frontier) return {}   // locked — reject silently
 
       return { activeBlockIndex: index, completedBlocks: [...completed] }
@@ -308,6 +328,15 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
     // Only scroll-based blocks complete via scroll; interactive blocks own their state
     if (strategyRef.current === 'scroll' && !blockDoneRef.current) {
       const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 80
+      console.debug(
+        '[BlockPlayer] scroll',
+        `block=${activeIndex}`,
+        `scrollTop=${Math.round(el.scrollTop)}`,
+        `clientHeight=${el.clientHeight}`,
+        `scrollHeight=${el.scrollHeight}`,
+        `atBottom=${atBottom}`,
+        `blockDone=${blockDoneRef.current}`,
+      )
       if (atBottom) handleBlockComplete()
     }
 
@@ -564,7 +593,10 @@ export function BlockPlayer({ mission, blocks, nextMission }: BlockPlayerProps) 
               </button>
             ) : (
               <button
-                onClick={() => { if (canProceed) goTo(activeIndex + 1) }}
+                onClick={() => {
+                  console.debug('[BlockPlayer] Next clicked', `canProceed=${canProceed}`, `blockDoneRef=${blockDoneRef.current}`, `activeIndex=${activeIndex}`)
+                  if (canProceed) goTo(activeIndex + 1)
+                }}
                 disabled={!canProceed}
                 aria-label={canProceed ? 'Next block' : 'Complete this block to continue'}
                 aria-disabled={!canProceed}

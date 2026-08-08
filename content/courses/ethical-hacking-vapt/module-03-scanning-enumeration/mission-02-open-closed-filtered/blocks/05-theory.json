@@ -1,0 +1,35 @@
+{
+  "id": "mod3m2-block-05-theory",
+  "type": "theory",
+  "order": 5,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "What Is a Port?",
+  "title": "What Is a Port? From First Principles.",
+  "content": "'Before we run any scan,' Maya said, pulling up a blank terminal window, 'one question. What is a port?'\n\nJames shrugged. 'A number. Port 80 is web. Port 22 is SSH.'\n\n'Right — but why? Why not just send traffic to the IP address directly? What is the number actually for?'\n\nJames stared at the screen. He had typed port numbers hundreds of times. He had never asked what they were numbers of.\n\n'Think about it this way,' Maya said. 'That development server — 45.77.180.10 — is probably running several programs at the same time. A web server. An SSH service. Maybe a database. When a packet arrives at that IP address, the operating system needs to know: which program should receive this? How does it decide?'\n\nJames thought about it. 'The port number tells it.'\n\n'Exactly.'\n\n---\n\n**The problem of one address, many programs**\n\nAn IP address identifies a machine on the network. But a machine can run dozens of programs simultaneously — all of them listening for incoming traffic at the same time.\n\nWhen a packet arrives at the IP address, the operating system needs to route it to the correct program. The port number is how it does that. It is a number embedded in the packet header that says: 'Deliver this to the program registered on port 80.' The OS reads that number and delivers the packet to the right application.\n\nThe best analogy: an IP address is the address of a large office building. The building has dozens of departments — accounting, legal, IT support, server rooms. The port number is the department number. When someone arrives at the building asking for department 80, the reception desk routes them there. Without department numbers, everyone asking for 'the building' would pile up confused at the entrance.\n\n**The port number range**\n\nPorts are numbered from 0 to 65,535 — that is 65,536 possible ports for TCP and another 65,536 for UDP. The practical scanning range is 1 to 65,535.\n\nThey are divided into three groups:\n\n**Well-known ports (0–1023):** Reserved for standard, widely-used services. These are internationally standardised by IANA (the Internet Assigned Numbers Authority):\n- Port 22: SSH — secure remote terminal\n- Port 25: SMTP — email\n- Port 80: HTTP — unencrypted web\n- Port 443: HTTPS — encrypted web\n- Port 3389: RDP — Windows remote desktop\n\n**Registered ports (1024–49151):** Assigned to specific applications by convention. Not strictly reserved, but widely used:\n- Port 3306: MySQL database\n- Port 5432: PostgreSQL database\n- Port 8080: Alternative HTTP (development servers, proxies)\n- Port 8443: Alternative HTTPS (management interfaces, admin panels)\n\n**Dynamic/private ports (49152–65535):** Not assigned to any standard service. Often used temporarily when your machine initiates an outgoing connection.\n\n**Why port numbers matter for penetration testing**\n\nPort numbers tell you where to look. An open port 22 suggests an SSH service — something to probe for weak credentials or known vulnerabilities. An open port 3306 suggests a database — potentially accessible directly if misconfigured. An open port 8443 might be a management interface — often running default credentials because it was installed, connected to the network, and never properly secured.\n\nHere is the crucial point: the service column in Nmap output shows the IANA-registered name for the port number — Nmap's informed guess at what is running. That guess is usually correct. But it is not confirmed until you probe the service directly. That step is service fingerprinting — Mission 3.",
+  "callouts": [
+    {
+      "type": "insight",
+      "title": "TCP vs UDP: Why This Matters",
+      "text": "Ports exist for both TCP and UDP — the two main transport protocols.\n\nTCP is the one you have been working with: reliable, ordered delivery, three-way handshake. Most critical services (web, SSH, databases) use TCP.\n\nUDP is connectionless — packets are sent without a handshake, with no guarantee of delivery. Some services use UDP: DNS (port 53), DHCP, VoIP.\n\nPort scans in this mission target TCP. UDP scanning is slower and produces more ambiguous results — it is covered in later missions. When Nmap output shows '22/tcp', the '/tcp' tells you the protocol."
+    },
+    {
+      "type": "info",
+      "title": "The IANA Port Registry",
+      "text": "The official port number registry is maintained by IANA. When Nmap shows 'ssh' next to port 22 or 'http' next to port 80, it is looking up the port number against this registry. The names in the service column are IANA assignments — conventional labels, not confirmed identities. IANA does not control what software developers actually install on any given port."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Port",
+      "definition": "A number from 0 to 65,535 embedded in a network packet header that tells the operating system which application should receive the packet. An IP address identifies the machine; the port identifies the application on that machine. Ports exist for both TCP and UDP."
+    },
+    {
+      "term": "Well-Known Port",
+      "definition": "A port number between 0 and 1023, standardised by IANA for a specific protocol or service. For example, port 80 is the well-known port for HTTP and port 443 for HTTPS. Services on well-known ports follow published standards and are what port scanners prioritise."
+    },
+    {
+      "term": "Service",
+      "definition": "A program running on a host and listening on a specific port for incoming connections. In Nmap output, the 'service' column shows the conventional IANA name associated with the port number — a starting hypothesis, not a confirmed identity. Actual service confirmation requires fingerprinting."
+    }
+  ]
+}

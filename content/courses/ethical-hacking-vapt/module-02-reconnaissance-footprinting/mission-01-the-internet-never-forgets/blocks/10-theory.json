@@ -1,0 +1,39 @@
+{
+  "id": "mod2m1-block-10-theory",
+  "type": "theory",
+  "order": 10,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Footprint & Attack Surface",
+  "title": "Digital Footprint and Attack Surface: Mapping What Can Be Reached",
+  "content": "There are two connected concepts that professional security practitioners use to think about an organisation's exposure. Understanding both — and the relationship between them — is essential for everything that follows in this module.\n\n**Digital Footprint**\n\nEvery organisation that operates online leaves a trail of data across the internet. Some of it is intentional — the website they built, the LinkedIn page they manage, the press releases they published. Some of it is incidental — the subdomains that were set up for a project three years ago and never taken down, the SSL certificates logged for internal development servers, the employee LinkedIn profiles listing internal tools. Some of it was never intended to be public at all — the GitHub repository a developer forgot existed, the job posting that described the entire security stack.\n\nThis trail — everything the organisation has left across the internet, intentional or not — is its digital footprint.\n\nThe digital footprint is not a single list you can request from the organisation. It is assembled by looking at the organisation from the outside: searching databases, reading public records, and aggregating information from dozens of separate sources. This is exactly what the OSINT phase of reconnaissance produces.\n\nThink of a digital footprint like the marks left in wet sand after walking across a beach. The person who walked there may not remember exactly where they stepped. They may not even know which footprints are theirs and which belong to the company they work for. But every mark is there, readable to anyone who looks carefully. And some of those marks point directly to a door.\n\n**Attack Surface**\n\nThe attack surface is every possible point through which an attacker could attempt to enter, access, or cause damage to an organisation's systems.\n\nImagine a house. The attack surface is:\n— The front door (main website, login portals)\n— The back door (admin panels, management interfaces)\n— Every window (API endpoints, remote access tools like VPN and RDP)\n— The basement door (forgotten subdomains, legacy servers, old development environments)\n— The skylight (cloud services, SaaS platforms connected to internal systems)\n— The dog flap (third-party vendors and suppliers with network access)\n\nA professional security assessment does not just check the front door. It maps the entire house — every entrance, every way in, every path that might connect one room to another.\n\n**The critical insight: your attack surface extends beyond your own systems**\n\nThis is the lesson the Target breach teaches. Target's own systems were defended. The attack came through the dog flap — a small HVAC contractor with remote access credentials that Target never treated as part of its own security perimeter.\n\nEvery organisation's real attack surface includes:\n— Third-party vendors and suppliers with network access (like Fazio Mechanical)\n— Cloud services provisioned by employees and forgotten (shadow IT)\n— SaaS applications that connect to internal systems (Salesforce, Slack, GitHub)\n— Employees who reuse passwords from their personal accounts\n— Legacy systems that were 'switched off' but still respond\n— Contractors and freelancers who were given access and never had it revoked\n\nA reconnaissance phase that only looks at the organisation's own domain misses most of this. Professional reconnaissance maps the entire attack surface — including the suppliers, partners, and external systems that create entry points the organisation itself may not have considered.\n\n**Why this matters for the work you'll do**\n\nIn a professional penetration test, the reconnaissance phase does not end when you have a list of the client's IP addresses. It ends when you have a complete map of their attack surface — including third-party relationships, legacy systems, and cloud exposure.\n\nIn a bug bounty programme, the most valuable findings often come from attack surface analysis: discovering a subdomain the company didn't know was still running, or identifying a SaaS integration that exposes internal data through a misconfigured API.\n\nIn a Security Operations role, defenders use attack surface management tools to continuously monitor their own digital footprint — watching for new subdomains, new cloud services, and new vendor connections that expand the attack surface faster than the security team can keep up.\n\nThe question that drives this work is always the same:\n\nIf an attacker spent an hour studying this organisation from the outside, what would they find — and what would they do with it?",
+  "callouts": [
+    {
+      "type": "info",
+      "title": "Attack Surface vs Digital Footprint",
+      "text": "These two concepts are related but distinct:\n\nDigital Footprint = everything the organisation has left visible across the internet (the data trail)\n\nAttack Surface = every point an attacker could potentially use to enter, access, or cause damage (the entry points)\n\nThe digital footprint reveals the attack surface. Reconnaissance maps the footprint. The attack surface assessment uses that map to identify where to focus."
+    },
+    {
+      "type": "warning",
+      "title": "The Third-Party Blind Spot",
+      "text": "Most organisations know their own systems reasonably well. Very few have a complete inventory of every third party with network access to their environment. This is consistently one of the most productive areas in professional penetration tests: mapping the supply chain and vendor relationships visible in OSINT, then identifying which vendors are likely to have weaker security controls than the primary target. The breach vector in the Target case was found through public contract records — information the organisation itself had published."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Digital Footprint",
+      "definition": "The total trail of data an organisation has left across the internet — on its own domains, on third-party platforms, in public records, and in databases it never contributed to intentionally. The digital footprint is assembled through OSINT and forms the raw material of the reconnaissance phase. A larger footprint generally means a larger attack surface."
+    },
+    {
+      "term": "Attack Surface",
+      "definition": "Every potential entry point through which an attacker could attempt to access or damage an organisation's systems. Includes: all public-facing web properties, network services, remote access tools, third-party vendors with network connections, cloud services, employee accounts, and legacy systems. The attack surface extends beyond what the organisation considers 'its own' systems."
+    },
+    {
+      "term": "Shadow IT",
+      "definition": "Software, services, or infrastructure deployed by employees without the knowledge or approval of the IT or security team. Cloud storage, SaaS tools, development environments, and collaboration platforms provisioned without IT involvement expand the attack surface without appearing in official asset inventories. Shadow IT is a significant and often underestimated attack surface component."
+    },
+    {
+      "term": "Supply Chain Attack Vector",
+      "definition": "An attack route that exploits a third-party vendor, supplier, or contractor with access to the primary target's environment. The vendor is attacked first (often easier due to weaker security controls), and their access credentials or network connection are used to reach the ultimate target. The Target/Fazio Mechanical breach is the canonical example."
+    }
+  ]
+}

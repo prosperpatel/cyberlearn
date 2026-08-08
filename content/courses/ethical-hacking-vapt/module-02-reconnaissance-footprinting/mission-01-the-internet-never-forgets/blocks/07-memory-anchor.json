@@ -1,0 +1,21 @@
+{
+  "id": "mod2m1-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 7,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "The Ghost and the Visitor",
+  "concept": "There are two modes in reconnaissance. In the first, you are invisible — gathering information without the target ever knowing you exist. In the second, you make contact — and the moment you do, you leave a trace. Professional security work demands that you know exactly which mode you are in at every moment.",
+  "anchor": "Passive recon: Be the Ghost — observe, never touch, leave no trace. Active recon: Become the Visitor — contact is made, logs are written, authorisation is required. The line between them is not a technicality. It is a legal boundary.",
+  "explanation": "The Ghost and the Visitor is a mental model you will use for the rest of your career. Before any reconnaissance action, ask: 'Am I touching the target's systems, or am I reading information that already exists publicly?' If no packet is sent to the target — if you are reading WHOIS records, LinkedIn profiles, job postings, breach databases, SSL certificate logs — you are the Ghost. If any request goes to the target's infrastructure — a port scan, a web request, a DNS query to their nameservers — you are the Visitor. Visitors require written authorisation. Ghosts do not. The distinction is not about stealth. It is about legality. Both techniques are taught in this course. But they have different rules, and confusing them can end a career.",
+  "acronym": {
+    "letters": ["G", "H", "O", "S", "T"],
+    "meanings": [
+      "Gather from public sources only",
+      "Handle no direct contact with target systems",
+      "Observe what is already visible",
+      "Send zero packets to the target",
+      "Target remains unaware you exist"
+    ]
+  }
+}

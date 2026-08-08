@@ -1,0 +1,79 @@
+{
+  "id": "mod2m3-block-08-diagram",
+  "type": "diagram",
+  "order": 8,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "DNS as Infrastructure Map",
+  "title": "How DNS Records Map to Real Infrastructure",
+  "description": "DNS records are not abstract database entries. Each one maps to a real piece of infrastructure that the organisation runs or pays for. This diagram shows how querying each DNS record type for meridian-financial.com reveals a different layer of their actual internet presence — from web servers to email infrastructure to cloud vendor relationships. Every node here was discovered passively, before any scan was run.",
+  "nodes": [
+    {
+      "id": "domain",
+      "label": "meridian-financial.com",
+      "type": "passive",
+      "detail": "The registered domain — the starting point. From this single string, DNS enumeration reveals the entire infrastructure picture below. Everything flows from knowing the domain name."
+    },
+    {
+      "id": "a-record",
+      "label": "A Record → 104.22.7.45",
+      "type": "passive",
+      "detail": "The main domain's A record resolves to 104.22.7.45. An IP WHOIS lookup reveals this is Cloudflare's IP range — their website is behind Cloudflare's CDN. The real origin servers are elsewhere. This IP alone tells us the CDN provider but not the actual web server."
+    },
+    {
+      "id": "mx-record",
+      "label": "MX Record → aspmx.l.google.com",
+      "type": "passive",
+      "detail": "The MX record reveals Google Workspace for email. Priority 1 — only one mail server, no backup. This tells us the email platform, that phishing simulations targeting employees should use Google login templates, and that email security testing should focus on Google Workspace configurations."
+    },
+    {
+      "id": "ns-record",
+      "label": "NS Record → ns1.cloudflare.com",
+      "type": "passive",
+      "detail": "Cloudflare manages their entire DNS zone. All DNS record changes go through a Cloudflare account. Compromising that account would allow an attacker to redirect the entire domain's DNS — website, email, everything. The nameservers here are the targets of zone transfer attempts."
+    },
+    {
+      "id": "txt-record",
+      "label": "TXT Records (3 found)",
+      "type": "passive",
+      "detail": "Three TXT records revealed:\n1. SPF: v=spf1 include:_spf.google.com ~all → Google is authorised to send email on their behalf\n2. DMARC: v=DMARC1; p=none → domain can be spoofed in phishing emails (monitoring-only)\n3. SF_domain_auth_4a92f1e7 → Salesforce CRM domain verification token — confirms Salesforce is in use"
+    },
+    {
+      "id": "portal-cname",
+      "label": "portal → force.com (CNAME)",
+      "type": "passive",
+      "detail": "portal.meridian-financial.com has a CNAME pointing to meridian-portal.force.com — a Salesforce Force.com domain. Their customer portal runs on Salesforce. This is consistent with the Salesforce TXT verification token. Customer data likely lives in this Salesforce instance."
+    },
+    {
+      "id": "dev-subdomain",
+      "label": "dev → 45.77.180.10 (A Record)",
+      "type": "borderline",
+      "detail": "dev.meridian-financial.com has an A record pointing directly to 45.77.180.10. IP WHOIS: Vultr Holdings LLC (VPS provider). This development server has a direct IP address — NOT behind Cloudflare. No CDN protection. Directly internet-reachable. Likely running less-patched development versions of their applications."
+    },
+    {
+      "id": "legacy-subdomain",
+      "label": "legacy → 45.77.180.11 (A Record)",
+      "type": "borderline",
+      "detail": "legacy.meridian-financial.com resolves to 45.77.180.11 — another Vultr IP in the same range as the dev server. The name 'legacy' combined with a direct IP (no CDN) suggests an older system that predates their Cloudflare adoption. Legacy systems are frequently the most exploitable targets."
+    },
+    {
+      "id": "attack-surface",
+      "label": "Mapped Attack Surface",
+      "type": "active",
+      "detail": "From DNS enumeration alone, the complete attack surface includes: the CDN-protected main website, Google Workspace email infrastructure, a Salesforce CRM and customer portal, two directly accessible servers (dev and legacy) bypassing CDN protection, and a DMARC policy that permits email spoofing. Active scanning starts with the two direct-IP subdomains."
+    }
+  ],
+  "edges": [
+    { "from": "domain", "to": "a-record", "label": "Query A record", "type": "normal" },
+    { "from": "domain", "to": "mx-record", "label": "Query MX record", "type": "normal" },
+    { "from": "domain", "to": "ns-record", "label": "Query NS record", "type": "normal" },
+    { "from": "domain", "to": "txt-record", "label": "Query TXT records", "type": "normal" },
+    { "from": "domain", "to": "portal-cname", "label": "Subdomain CNAME query", "type": "normal" },
+    { "from": "domain", "to": "dev-subdomain", "label": "Subdomain A record", "type": "normal" },
+    { "from": "domain", "to": "legacy-subdomain", "label": "Subdomain A record", "type": "normal" },
+    { "from": "dev-subdomain", "to": "attack-surface", "label": "No CDN — direct target", "type": "attack" },
+    { "from": "legacy-subdomain", "to": "attack-surface", "label": "No CDN — direct target", "type": "attack" },
+    { "from": "txt-record", "to": "attack-surface", "label": "DMARC p=none → spoofable", "type": "attack" }
+  ],
+  "caption": "Every node in this diagram was discovered passively through DNS record queries. No traffic reached Meridian Financial's servers. No scans were run. The two orange nodes (dev and legacy subdomains) are the highest-priority targets for active scanning — they bypass CDN protection and are directly internet-reachable. DNS enumeration produced this complete infrastructure map in nineteen minutes.",
+  "interactive": true
+}

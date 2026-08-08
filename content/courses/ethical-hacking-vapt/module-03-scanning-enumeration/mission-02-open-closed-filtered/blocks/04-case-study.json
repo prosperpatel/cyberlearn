@@ -1,0 +1,38 @@
+{
+  "id": "mod3m2-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Port That Was Never Scanned",
+  "company": "Mid-Sized Manufacturing Company (anonymised, composite of real incidents)",
+  "year": "2024",
+  "industry": "Manufacturing",
+  "incident": "A penetration testing team ran a standard port scan using Nmap's default settings, found no critical issues, and delivered a largely clean report. Six months later, a different team ran a full-range scan and discovered a management interface on a non-standard port — with default credentials still in place and a direct path into the internal network.",
+  "whatHappened": [
+    "A penetration testing team was engaged to assess the external attack surface of a mid-sized manufacturing company. The scope included eight IP addresses belonging to various internet-facing systems.",
+    "The team ran their initial port scan using Nmap with default settings — covering the most commonly used service ports on each host. The scan completed in under ten minutes. Several web applications were found, along with SSH and database services on some hosts. No critical vulnerabilities were identified during that phase.",
+    "The team delivered their report: no critical findings, several medium-severity issues, various patching recommendations. The client accepted the report and considered their external attack surface assessed.",
+    "Six months later, the client engaged a second team for a follow-up assessment. This team ran a full-range port scan — checking all 65,535 ports on every host. On one IP address, they found a management interface running on port 8443. Port 8443 had not appeared in the first team's default scan because it was outside the default range.",
+    "The management interface was a vendor-supplied administrative panel for a network device that controlled physical access to several manufacturing facilities. It had been deployed two years earlier and never reconfigured by the client. The default username and password — both printed in the vendor's publicly available user manual — were still active.",
+    "Full administrative access to the device was obtained in under two minutes. From that position, the second team identified a network path into the internal facility management system — a finding that had direct physical security implications.",
+    "The first team's report had stated that the external attack surface had been assessed. It had — for approximately 1.5% of the possible port range. The other 98.5% had never been touched."
+  ],
+  "whyItHappened": [
+    "The first team used Nmap's default port range without questioning whether it was sufficient for the engagement scope. Default settings were treated as complete coverage rather than a deliberate starting point with known limitations.",
+    "No team member documented which port range had been scanned — leaving the client unaware that the vast majority of the port space had not been checked.",
+    "There was no standard workflow requiring a full-range follow-up scan on confirmed high-priority targets. The decision to scan beyond defaults was left to individual habit.",
+    "The report's findings section described what was found — but not what was not scanned. The gap between 'assessed' and 'completely assessed' was never communicated."
+  ],
+  "lessonsLearned": [
+    "A default port scan covers roughly 1,000 ports out of 65,535. This is a high-yield starting point, not a complete assessment. Every report should explicitly state which port range was scanned.",
+    "Non-standard ports are exactly where forgotten services, legacy interfaces, and vendor-supplied management panels tend to live. They are deployed and never reconfigured — making them prime targets.",
+    "For every confirmed high-priority target, a full-range scan should be run as standard practice. The most consequential finding on an engagement can live on any port number.",
+    "The professional obligation includes communicating the limitations of every scan — not just reporting what was found."
+  ],
+  "impactStats": [
+    { "value": "8,443", "label": "Port where the admin panel was found — outside the default scan range" },
+    { "value": "~1.5%", "label": "Of the total 65,535 port range covered by the first team's default scan" },
+    { "value": "< 2 min", "label": "Time to gain full administrative access after discovering the panel" },
+    { "value": "0", "label": "Mentions of this vulnerability in the first team's report" }
+  ]
+}

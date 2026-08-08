@@ -1,0 +1,42 @@
+{
+  "id": "mod3m2-block-06-theory",
+  "type": "theory",
+  "order": 6,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "The SYN Scan",
+  "title": "The TCP SYN Scan: How Professionals Map Open Ports",
+  "content": "You know what a port is. You know why it exists. The question now is: how do you find out which ports on a remote host are open — without any credentials or prior access?\n\nThe answer is the TCP SYN scan. It is Nmap's default scanning method and the professional standard for port discovery on every penetration test.\n\n**Why the TCP handshake is the key**\n\nRecall from Mission 1: when two computers want to establish a TCP connection, they go through three steps:\n\n1. Your machine sends a **SYN** packet: 'I want to connect.'\n2. If a service is listening on that port, the target responds: **SYN/ACK** — 'Yes, let's connect.'\n3. Your machine sends **ACK**: 'Great, we are connected.'\n\nStep 3 completes the connection. Both sides enter a fully established TCP session.\n\nHere is the key insight: **you do not need step 3 to learn whether a port is open.**\n\nThe SYN/ACK in step 2 already tells you everything. A SYN/ACK means a service is listening and the port is open. An RST instead of SYN/ACK means the host is alive but the port is closed. You can learn both facts without completing the handshake.\n\n**How the SYN scan works**\n\nThe SYN scan sends a SYN packet to each target port and classifies the port based on the response:\n\n- **SYN/ACK received → port is OPEN.** A service is listening. It accepted the incoming connection request.\n- **RST received → port is CLOSED.** The host is alive but nothing is listening on this port. The host itself rejected the probe.\n- **No response → port is FILTERED.** A firewall intercepted the SYN before it reached the host. The state of the port is unknown.\n\nWhen a port responds with SYN/ACK (open), Nmap immediately sends RST to tear down the half-open connection. The handshake is never completed. Nmap learned what it needed and withdrew without establishing a full session.\n\n**Why this matters: what the half-open technique gives you**\n\nMany application-layer systems — web server logs, SSH daemon logs, database audit logs — only record fully-established connections. A connection that goes SYN → SYN/ACK → RST (instead of SYN → SYN/ACK → ACK) may not appear in those logs at all.\n\nThis does not make the SYN scan invisible — network devices and dedicated IDS systems can still detect it. But it reduces the footprint compared to a full connect scan, which completes the handshake and is much more likely to leave records.\n\n**The command**\n\n```\n# Standard professional port scan\nnmap -sS -T4 -oA port-scan-45.77.180.10 45.77.180.10\n```\n\nFlag breakdown:\n- **-sS** — TCP SYN scan (the default; included here explicitly for learning clarity)\n- **-T4** — Timing: fast. Reliable for standard internet connections without causing packet loss\n- **-oA port-scan-45.77.180.10** — Save all three output formats simultaneously, named for the target\n\nAdditional useful variations:\n\n```\n# Scan specific ports only\nnmap -sS -p 22,80,443,8080,8443,3306 45.77.180.10\n\n# Full range — all 65,535 ports (essential for thorough assessments)\nnmap -sS -p- -T4 -oA fullscan-45.77.180.10 45.77.180.10\n\n# Without root: TCP connect scan (equivalent results, slower and more visible)\nnmap -sT -T4 -oA port-scan-45.77.180.10 45.77.180.10\n```\n\n**Why the SYN scan is the professional default**\n\nFour reasons professionals reach for -sS on every engagement:\n\n1. **Speed.** No session maintenance. Probes go out, responses come back, state is recorded. Faster than completing handshakes.\n2. **Reduced footprint.** Half-open connections may not appear in application-layer logs.\n3. **Reliable results.** All three port states are distinguishable — SYN/ACK for open, RST for closed, silence for filtered.\n4. **Universal understanding.** When a professional writes 'TCP SYN scan' in a report, every reader knows exactly what technique was used, what the results mean, and what the scan's limitations are.",
+  "callouts": [
+    {
+      "type": "warning",
+      "title": "Root / Administrator Required",
+      "text": "The SYN scan sends raw packets, which requires root on Linux/macOS or Administrator on Windows. Without elevated privileges, Nmap automatically falls back to the TCP connect scan (-sT), which completes the full three-way handshake. On Kali Linux — the standard penetration testing platform — root access is typically assumed. If you see 'Permission denied' when running -sS, check that you are running with sudo or as root."
+    },
+    {
+      "type": "tip",
+      "title": "Always Save Output — The Professional Standard",
+      "text": "Every scan you run should be saved to a file before you start interpreting results. The -oA flag saves three formats simultaneously:\n\n• .nmap — human-readable plain text\n• .xml — machine-readable, imports into reporting tools\n• .gnmap — grepable, for filtering with command-line tools\n\nName the file with the target IP and scan type: -oA port-scan-45.77.180.10\n\nThis turns your output folder into self-documenting evidence — you can reconstruct exactly what was run, against which target, at what time, without relying on memory."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "SYN Scan (-sS)",
+      "definition": "Nmap's default port scanning method. Sends a TCP SYN packet to each target port and classifies the port based on the response: SYN/ACK = open, RST = closed, no response = filtered. Never completes the three-way handshake. Requires root or administrator privileges to send raw packets."
+    },
+    {
+      "term": "Half-Open Connection",
+      "definition": "A TCP connection that was initiated (SYN sent and SYN/ACK received) but never completed (no ACK was sent). The SYN scan works by creating and immediately abandoning half-open connections — which is what makes it faster and potentially less visible than a full connect scan."
+    },
+    {
+      "term": "TCP Connect Scan (-sT)",
+      "definition": "An alternative port scanning method that completes the full three-way handshake. Does not require root privileges because it uses the OS's standard network socket calls. Slower and more visible than the SYN scan. Used when root access is unavailable."
+    }
+  ],
+  "codeBlocks": [
+    {
+      "language": "bash",
+      "code": "# Standard SYN scan — professional default\nnmap -sS -T4 -oA port-scan-45.77.180.10 45.77.180.10\n\n# Scan specific known ports\nnmap -sS -p 22,80,443,3306,8080,8443 45.77.180.10\n\n# Full-range scan — all 65,535 ports (run on every high-priority target)\nnmap -sS -p- -T4 -oA fullscan-45.77.180.10 45.77.180.10\n\n# Without root: TCP connect scan (equivalent results, slower)\nnmap -sT -T4 -oA port-scan-45.77.180.10 45.77.180.10",
+      "caption": "Port scanning commands from standard to full-range. Run the default scan first for a quick initial picture, then the full-range scan on every confirmed high-priority target."
+    }
+  ]
+}

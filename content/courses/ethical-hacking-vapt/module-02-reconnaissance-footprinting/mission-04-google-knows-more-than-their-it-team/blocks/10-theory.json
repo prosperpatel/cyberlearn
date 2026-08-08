@@ -1,0 +1,54 @@
+{
+  "id": "mod2m4-block-10-theory",
+  "type": "theory",
+  "order": 10,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Professional Search Recon",
+  "title": "Bing, DuckDuckGo, Shodan, and the Wayback Machine: Beyond Google",
+  "introduction": "Google is the dominant search engine, and most Google Dork operators work there first. But professional search reconnaissance does not stop with Google. Different search engines index different content. Different tools are built specifically for infrastructure discovery. And one archive preserves the internet's history in a way Google never intended to.",
+  "sections": [
+    {
+      "heading": "Bing and DuckDuckGo: different indexes, different results",
+      "content": "Google, Bing, and DuckDuckGo all maintain independent search indexes. They do not share data. A file that Google indexed may not appear in Bing's results. A page that Google deindexed (after a takedown request) may still be in Bing's index.\n\nBing supports many of the same search operators as Google:\nsite:target.com — Bing limits results to the domain\nfiletype:pdf site:target.com — works in Bing\nintitle:\"index of\" — works in Bing\n\nProfessional practice: Run your Google Dorks first. Then repeat the same queries in Bing. It takes five minutes and regularly surfaces results that Google missed — or that Google removed after a legal request but Bing has not yet processed.\n\nDuckDuckGo does not support as many advanced operators but is useful for a quick cross-check on filetype: and site: queries.",
+      "callout": {
+        "type": "professional",
+        "title": "Why professionals check multiple search engines",
+        "content": "An organisation that discovers a sensitive document indexed by Google can submit a deindex request to Google. Google usually processes these within days. But deindexing from Google does not affect Bing's index, DuckDuckGo's index, or the Internet Archive. A document that was available is still potentially available, even after the Google removal. Professional reconnaissance checks multiple indexes."
+      }
+    },
+    {
+      "heading": "Shodan: the search engine for internet-connected devices",
+      "content": "Shodan is not a search engine for web pages. It is a search engine for internet-connected devices — servers, routers, industrial control systems, webcams, databases, and anything else with an IP address and an open port.\n\nWhere Google sends Googlebot to crawl web pages, Shodan continuously scans every IP address on the internet, connects to open ports, and records what it finds: the service banner, the software version, the SSL certificate, the HTTP response headers.\n\nThe result is a searchable database of the internet's infrastructure.\n\nRelevant Shodan queries for a target (used with authorisation):\norg:\"Meridian Financial\" — finds servers registered to that organisation's ASN\nssl:\"meridian-financial.com\" — finds servers presenting SSL certificates for that domain\nhostname:meridian-financial.com — finds servers with that hostname\n\nWhat Shodan reveals:\n— Open ports on internet-facing servers (what services are running)\n— Software versions from service banners (Apache 2.4.51, OpenSSH 7.4, etc.)\n— SSL certificate details (alternative names, issue date, issuer)\n— HTTP response headers (server technology, security headers — or their absence)\n— Historical snapshots of what a port was running at a previous date\n\nShodan is partially passive — it queries Shodan's already-collected data rather than scanning the target directly. However, Shodan does perform its own scans of the internet, which means targeted queries on an organisation's IP ranges are a grey area in terms of passivity. The professional convention is to use Shodan for general infrastructure intelligence and confirm findings with active scanning during the authorised active phase.",
+      "callout": {
+        "type": "warning",
+        "title": "Shodan and scope boundaries",
+        "content": "Shodan queries using an organisation's ASN or IP range will surface all their internet-facing infrastructure — including systems that may not be in your engagement scope. A Shodan result showing an exposed database on IP x.x.x.x is a finding only if that IP is in scope. Document the discovery and confirm scope before any further investigation. Shodan findings should always be cross-referenced against the scope agreement."
+      }
+    },
+    {
+      "heading": "The Wayback Machine: the internet's historical record",
+      "content": "The Internet Archive (web.archive.org) has been taking snapshots of public websites since 1996. Enter any domain and the Wayback Machine shows a calendar of every date it captured a snapshot — sometimes daily, sometimes weekly, sometimes just once a year for older sites.\n\nWhat this reveals in reconnaissance:\n\n**Old admin panel paths.** An organisation renamed their admin panel from /manager/ to /admin/console/ in 2021. The Wayback Machine has snapshots from 2019 showing /manager/ — and that path may still respond on the current server.\n\n**Historical technology stack.** A 2018 snapshot of a website that now runs React may show the original PHP application in the source code. Old framework versions, old plugin versions, old error messages that reveal stack details — all preserved.\n\n**Former employees.** The 2020 'About Us' page lists the IT Director's name and photograph. The current website does not. The Wayback Machine does. This information feeds social engineering preparation.\n\n**Deleted documents.** A press release from 2019 contained a link to a PDF that has since been removed from the server. The Wayback Machine's snapshot of that press release page still shows the link — and sometimes has a copy of the PDF itself archived.\n\n**Previous subdomains.** Historical DNS records and website headers sometimes reveal subdomains that no longer appear in current DNS — but may still respond on old servers.",
+      "callout": {
+        "type": "insight",
+        "title": "The professional Wayback Machine workflow",
+        "content": "1. Enter the target domain at web.archive.org\n2. Note the oldest available snapshot — establishes when the organisation has been online\n3. Compare the oldest and newest snapshots — technology changes, structural changes, removed pages\n4. Check the 'robots.txt' history — previously excluded paths may reveal infrastructure that was later hidden\n5. Download the HTML of key historical pages and extract any links to resources that may still be accessible on the current server"
+      }
+    },
+    {
+      "heading": "Pastebin, GitHub, and code repositories: where secrets get accidentally published",
+      "content": "Two sources that standard Google Dorking misses but professionals always check:\n\n**GitHub and public code repositories.** Developers sometimes accidentally push code containing credentials, API keys, or internal configuration to public GitHub repositories. They may remove the file — but git history is permanent. The credential exists in the repository history even after deletion.\n\nGoogle Dork: site:github.com \"meridian-financial.com\" password\nAlso useful: site:github.com \"meridian-financial\" api_key OR secret OR token\n\nDedicated tools (GitDorker, Gitleaks, TruffleHog) scan GitHub repositories specifically for credential patterns — AWS keys, private keys, database passwords, API tokens.\n\n**Pastebin and similar services.** Developers occasionally paste configuration snippets, error outputs, or troubleshooting notes to Pastebin for sharing. These can contain internal hostnames, IP addresses, usernames, or credentials — and are indexed by Google.\n\nGoogle Dork: site:pastebin.com \"meridian-financial\"\n\nPastebin findings are rare but high-value when they occur — credentials and configuration data occasionally surface here after internal incidents or careless debugging sessions.",
+      "callout": {
+        "type": "professional",
+        "title": "Why GitHub leaks are a critical passive finding",
+        "content": "A developer pushes a configuration file to a public GitHub repository containing the production database password. They notice immediately and delete the file. But git commit history preserves the content permanently — anyone who cloned the repository or saved the commit hash can see the deleted content. GitHub has a secret scanning service that alerts on detected credentials, but by the time the alert fires, the credential may already be in use elsewhere. In professional engagements, GitHub credential searches routinely produce the highest-severity findings of the entire passive phase."
+      }
+    }
+  ],
+  "keyTerms": [
+    { "term": "Shodan", "definition": "A search engine that scans and indexes internet-connected devices based on open ports and service banners. Reveals server software, versions, and configurations without accessing the target directly." },
+    { "term": "Wayback Machine", "definition": "The Internet Archive's historical snapshot service at web.archive.org. Contains dated copies of web pages dating back to 1996 — revealing deleted content, historical technology stacks, and former infrastructure." },
+    { "term": "Service Banner", "definition": "Text data a server returns when a connection is made to an open port. Often contains the service name and version (e.g., 'SSH-2.0-OpenSSH_8.2p1'). Shodan records these as part of its scanning." },
+    { "term": "Git History", "definition": "The complete record of every change ever committed to a git repository. Credentials accidentally committed to a public repository remain in git history even after the file is deleted." },
+    { "term": "TruffleHog / Gitleaks", "definition": "Open-source tools that scan git repositories for credential patterns — API keys, private keys, database passwords — in current files and historical commit history." }
+  ]
+}

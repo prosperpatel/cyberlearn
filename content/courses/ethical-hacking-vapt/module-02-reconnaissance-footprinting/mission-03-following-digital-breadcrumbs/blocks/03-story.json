@@ -1,0 +1,48 @@
+{
+  "id": "mod2m3-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Everything in the Records",
+  "narrative": [
+    "The urgent email about the phishing domain had been sent twenty minutes earlier. Meridian Financial's IT director had already replied: 'Investigating now. Thank you.' Maya saved the thread to the engagement folder and picked up her coffee.",
+    "'Right,' she said. 'That was the most urgent problem they have today. Now let's get back to our actual job, which is finding every problem they have.' She opened a terminal window on her laptop.",
+    "James had his notebook open. 'We already looked at their domain — WHOIS, nameservers, the A record. What's left?'",
+    "'We looked at two DNS records,' Maya said. 'There are eight types. Each one answers a different question about what they run. We've barely started.' She looked at the terminal. 'Watch what DNS actually knows about Meridian Financial.'",
+    "She typed the first query. MX record lookup for meridian-financial.com.",
+    "'aspmx.l.google.com. Priority: 1.' She turned to James. 'Google Workspace for email. We confirmed this in Mission Two. But notice the priority value — 1. That means this is their primary and only mail server. If they had an email backup, it would appear here with a higher number. One mail server. No failover. Worth noting.' She made a note.",
+    "Next: NS records. 'ns1.cloudflare.com, ns2.cloudflare.com. Cloudflare manages their entire DNS zone. Any time they change a DNS record — add a subdomain, modify where something points, remove a service — it goes through their Cloudflare account. If that account gets compromised, someone can redirect their entire web presence.'",
+    "Then: TXT records. Three of them came back.",
+    "'First: v=spf1 include:_spf.google.com ~all. That's their SPF record — Google is authorised to send email on Meridian's behalf. Second: v=DMARC1; p=none; rua=mailto:dmarc@meridian-financial.com. DMARC in monitoring mode. We know this one — their domain can be spoofed.' She paused on the third record.",
+    "'SF_domain_auth_4a92f1e7c81d2b3a.' She opened a new browser tab and searched the prefix. 'That is a Salesforce domain verification token. Added when they connected their domain to a Salesforce CRM instance. Probably done a year or two ago and forgotten about.' She looked at James. 'Meridian Financial has a Salesforce CRM. That's where their customer data lives. We now know which CRM platform to investigate if we ever get to the stage of testing their cloud integrations.'",
+    "James was writing quickly.",
+    "'Now for the interesting part.' Maya launched a subdomain enumeration query — not just querying the main domain, but systematically looking for every hostname registered under meridian-financial.com. The results came back over the next thirty seconds.",
+    "dev.meridian-financial.com. staging-app.meridian-financial.com. portal.meridian-financial.com. legacy.meridian-financial.com. mail.meridian-financial.com.",
+    "'Five subdomains beyond the main site,' James said.",
+    "'Let me check what each one actually points to.' Maya ran individual record queries for each.",
+    "portal.meridian-financial.com had a CNAME record: it pointed to meridian-portal.force.com. 'That's Salesforce again — their customer-facing portal runs on Salesforce's Force.com platform. Consistent with the TXT record.'",
+    "mail.meridian-financial.com had an A record pointing to a Cloudflare IP. 'That's odd,' Maya said. 'A mail subdomain behind a CDN? Usually mail servers are direct. Let me check the MX again — yes, their actual mail goes to Google. This mail subdomain might be a web interface. Or a redirect. Or something old.' She flagged it for further investigation.",
+    "Then dev.meridian-financial.com.",
+    "'A record,' Maya said quietly. '45.77.180.10.' She opened a new tab and ran an IP WHOIS lookup. 'Registered to Vultr Holdings LLC. That is a small VPS provider.' She looked up. 'This development server has a direct IP address — not Cloudflare, not a CDN, nothing in between. Whatever is running on that server is directly reachable from the internet.'",
+    "'How exposed is that?' James asked.",
+    "'It depends entirely on what's running and how it's configured. But a development server running directly on the internet with no CDN protection, on a cheap VPS, is often running older, less-patched software — because the people who maintain it assume nobody outside the company knows it exists.' She paused. 'And it's probably running the same application code as their production site, just with test data. So if it has a vulnerability, production almost certainly has the same one.'",
+    "James looked at the list. Five subdomains, two of which pointed directly to real servers. All found through DNS. No scan had been run. No system had been touched.",
+    "'How long did that take?' he asked.",
+    "'Nineteen minutes,' Maya said. 'We now know their email provider, their email security posture, their CRM platform, their customer portal stack, the existence of a development server with an exposed direct IP, and a naming convention that suggests there may be more subdomains we haven't found yet.' She saved the session. 'Active scanning starts Monday. And when it does, we already know exactly which three systems matter most.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of professional experience across financial services and government. For Maya, DNS enumeration is not optional housekeeping — it is the intelligence phase that turns a domain name into a prioritised attack surface map.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First year in professional security. Watching Maya work through DNS records in real time is showing him that reconnaissance is not about running one tool once — it is about reading the infrastructure story an organisation has written in public records.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "focused"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "mod3m1-block-10-theory",
+  "type": "theory",
+  "order": 9,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "TCP Host Discovery",
+  "title": "When the Doorbell Is Blocked: TCP Host Discovery",
+  "content": "Ping is blocked. What do you do?\n\nYou knock on a different kind of door.\n\n**A brief, necessary introduction to TCP**\n\nICMP is not the only way computers communicate. The other major protocol is TCP — Transmission Control Protocol. TCP is how your browser loads web pages, how email is delivered, how most internet services work.\n\nWhen one computer wants to establish a TCP connection with another, it goes through three steps — the TCP handshake:\n\n**Step 1 — SYN:** Your computer sends a 'SYN' packet (Synchronise). This is the connection request: 'I want to start a conversation.'\n\n**Step 2 — SYN/ACK:** If the target is alive and a service is listening on that port, it responds with 'SYN/ACK' (Synchronise/Acknowledge): 'Yes, I'm here, let's talk.'\n\n**Step 3 — ACK:** Your computer sends 'ACK' (Acknowledged): 'Great, we're connected.'\n\nBut here is the crucial part for host discovery: **even if no service is listening on the port, the target still responds.**\n\nIf you send a SYN packet to a port with nothing listening on it — say, port 80 on a server that does not run a web server — the host sends back a 'RST' packet (Reset): 'Nothing listening here. Connection refused.'\n\nA RST response proves the host is alive. The system received your packet and responded — even though it rejected the connection. Both SYN/ACK and RST responses are evidence of life.\n\nThink of it like sending a letter to an address asking for a meeting. If you receive a reply that says 'wrong person, I cannot help you' — that reply proves someone was there to receive it, read it, and write back. The RST packet is that 'wrong person' reply: the host was present and reachable enough to send it.\n\n**Using TCP probes for host discovery**\n\nWhen ICMP is blocked, Nmap can send TCP probes instead. The flags:\n\n**-PS [port list]** — TCP SYN probe to specified ports\n```\nnmap -sn -PS80,443 45.77.180.11\n```\nSends SYN packets to ports 80 and 443. If the host is alive, it responds with SYN/ACK (port open) or RST (port closed). Either = host is alive.\n\n**-PA [port list]** — TCP ACK probe\n```\nnmap -sn -PA80 45.77.180.11\n```\nSends an ACK packet (which is not a valid connection start). A live host responds with RST because the ACK is unexpected. An offline host does not respond.\n\n**Why TCP probes penetrate firewalls that block ICMP**\n\nFirewalls block ICMP because it is not essential for business operations. But TCP traffic on ports 80 and 443 is the core of how the web works. If a firewall blocks TCP port 443, the web application behind it becomes unreachable to every customer, partner, and employee who uses a browser.\n\nMost organisations cannot afford that. So firewalls that block ICMP entirely still allow TCP/80 and TCP/443 through — which means a TCP SYN probe to those ports will often reach the host and produce a response that ICMP could never get.\n\n**Combining probe types: the professional approach**\n\nNmap's default host discovery (-sn) already combines probe types automatically — ICMP Echo Request, ICMP Timestamp, TCP SYN to port 443, and TCP ACK to port 80. Any response to any probe marks the host as alive.\n\nFor targeted follow-up on a host that appears offline:\n\n```\n# First: default scan (ICMP + TCP combined)\nnmap -sn 45.77.180.11\n\n# If no response, follow up with TCP probes explicitly:\nnmap -sn -PS80,443 45.77.180.11\n\n# If still nothing, try more ports:\nnmap -sn -PS22,21,25,3389,8080 45.77.180.11\n\n# Last resort: assume the host is up and scan it anyway:\nnmap -Pn 45.77.180.11\n```\n\nThe -Pn flag tells Nmap: 'Skip host discovery entirely. Treat this host as alive and proceed directly to port scanning.' Use this only when you have strong reason to believe the host is alive but blocking every probe type — because it will be slow if the host is genuinely offline.",
+  "callouts": [
+    {
+      "type": "tip",
+      "title": "The Professional Two-Stage Workflow",
+      "text": "Stage 1: Run nmap -sn against the full IP range. Note every host that responds.\n\nStage 2: For any IP that passive recon confirmed should be live but did not respond — run nmap -sn -PS80,443 against that specific IP. If it responds now, ICMP is being filtered but the host is alive.\n\nOnly after both stages, with no response to any probe type, should you document the host as 'no response to any probe at time of sweep' — not 'offline.'"
+    },
+    {
+      "type": "insight",
+      "title": "How to Document an Unresponsive Host",
+      "text": "Professional engagement log entry for a non-responsive host:\n\n'45.77.180.23 — No response to ICMP Echo Request, TCP SYN/80, TCP SYN/443, TCP ACK/80. Host appears non-responsive at time of sweep [timestamp]. Reason: offline, ICMP+TCP filtering, or decommissioned. Recommend re-testing at a different time of day.'\n\nThis is precise and honest. It records exactly what was sent and received. It does not claim the host is offline — only that it did not respond to these specific probes at this specific time."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "TCP",
+      "definition": "Transmission Control Protocol. One of the core protocols of internet communication. TCP provides reliable, ordered delivery of data between systems. Most web browsing, email, file transfer, and application traffic uses TCP. TCP connections are established through the three-way handshake: SYN, SYN/ACK, ACK."
+    },
+    {
+      "term": "SYN Packet",
+      "definition": "The first packet in a TCP connection attempt. SYN stands for 'Synchronise.' A SYN packet says: 'I want to start a connection with you.' In host discovery, a SYN probe reveals whether a host is alive by triggering a SYN/ACK (port open, service responding) or RST (port closed, but host alive) response."
+    },
+    {
+      "term": "RST Packet",
+      "definition": "A TCP Reset packet. Sent by a host when it receives a connection attempt it cannot accept — for example, a SYN to a port with no listening service. Receiving an RST proves the host is alive and reachable, even though it rejected the connection request."
+    }
+  ],
+  "codeBlocks": [
+    {
+      "language": "bash",
+      "code": "# Default host discovery (ICMP + TCP probes combined — start here)\nnmap -sn 45.77.180.0/24\n\n# ICMP Echo Request only\nnmap -sn -PE 45.77.180.10\n\n# TCP SYN probes to ports 80 and 443 (when ICMP is blocked)\nnmap -sn -PS80,443 45.77.180.11\n\n# TCP ACK probe to port 80 (alternative when SYN is also filtered)\nnmap -sn -PA80 45.77.180.11\n\n# All probe types combined (most thorough discovery)\nnmap -sn -PE -PS80,443 -PA80 45.77.180.0/24\n\n# Skip host discovery entirely — treat host as alive (last resort only)\nnmap -Pn 45.77.180.11",
+      "caption": "Host discovery commands from default to targeted. Always start with the default; escalate to specific probe types only when a host expected to be live does not respond."
+    }
+  ]
+}

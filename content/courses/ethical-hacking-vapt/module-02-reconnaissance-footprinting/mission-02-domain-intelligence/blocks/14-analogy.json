@@ -1,0 +1,33 @@
+{
+  "id": "mod2m2-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "The City's Public Records",
+  "realWorldThing": "A city has public infrastructure records that anyone can access without entering the city. You can look up: the land registry (who owns which property, when they acquired it), the postal system (how letters get routed to each address), business registration records (which companies operate at which addresses), the utilities database (which energy, water, and communications providers serve each building), and official planning records (what other addresses are associated with the same owner). From these public records alone, you can build a detailed picture of any property in the city — who owns it, what businesses operate there, which service providers they use, and how much other real estate the same owner controls — without ever visiting the city.",
+  "concept": "An organisation's internet infrastructure works identically. Domain names are street addresses. DNS is the postal system that routes traffic to the right location when you write the address in your request. WHOIS records are the land registry — who registered this domain, when they acquired it, through which company. DNS record types (A, MX, NS, TXT, CNAME) are the business and utilities records — revealing which services operate under the domain and which providers supply each one. ASN data is the planning record — showing all internet real estate under the same organisation's control, not just the one address you started with.",
+  "comparison": "Both city records and internet infrastructure records are public by design — because property ownership and network routing both require transparency to function. In a city, you can determine who owns a building, when they purchased it, what utilities they use, which businesses operate inside, and what other properties the same owner controls — all from public records, without entering the building. Online, you can determine who registered a domain, when, which cloud provider hosts their servers, which email platform they use, whether their email domain can be spoofed, which SaaS tools they depend on, and the full range of IP addresses they control — all from public DNS and WHOIS records, without contacting a single server they own.",
+  "breakdown": [
+    {
+      "realWorld": "Street address — uniquely identifies a location within the city's address system",
+      "techEquivalent": "Domain name — uniquely identifies a location within the internet's namespace"
+    },
+    {
+      "realWorld": "Postal system — routes letters to the right building based on the address written on the envelope",
+      "techEquivalent": "DNS — routes internet traffic to the right server when a domain name is requested"
+    },
+    {
+      "realWorld": "Land registry — public record of who owns which property and when they acquired it",
+      "techEquivalent": "WHOIS database — public record of who registered which domain, when, and through which registrar"
+    },
+    {
+      "realWorld": "Business and utilities records — which companies operate at this address, which providers supply power, water, communications",
+      "techEquivalent": "DNS record types (A, MX, NS, TXT, CNAME) — which services operate under this domain and which providers supply email, CDN, and SaaS infrastructure"
+    },
+    {
+      "realWorld": "Property ownership map — all real estate controlled by the same owner across the entire city",
+      "techEquivalent": "ASN database — all IP address ranges controlled by the same organisation across the entire internet"
+    }
+  ]
+}

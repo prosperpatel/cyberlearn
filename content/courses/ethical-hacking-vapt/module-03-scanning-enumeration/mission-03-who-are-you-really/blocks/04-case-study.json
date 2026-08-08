@@ -1,0 +1,37 @@
+{
+  "id": "mod3m3-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Version They Never Found",
+  "company": "Regional Financial Services Firm (anonymised, composite of real incidents)",
+  "year": "2021",
+  "industry": "Financial Services",
+  "incident": "A penetration testing team scanned a web server, noted 'web server present' in their report, and never ran version detection. Three weeks later, CVE-2021-41773 was publicly disclosed — a critical path traversal and remote code execution vulnerability affecting exactly the Apache version running on that server. The team had been within one command of finding it.",
+  "whatHappened": [
+    "A penetration testing team was engaged to assess the external attack surface of a regional financial services company. During active scanning, they identified port 80 open on a host responding to HTTP requests. The server returned a landing page. The team performed basic web application testing and noted 'web server present — no critical vulnerabilities found.'",
+    "They did not run Nmap's version detection flag (-sV). They did not retrieve the HTTP Server header with curl. The service type was noted. The version was not.",
+    "Three weeks after the assessment was delivered, Apache published a security advisory for CVE-2021-41773 — a path traversal vulnerability in Apache HTTP Server version 2.4.49 specifically. An attacker with no authentication could traverse directories outside the web root and access arbitrary files. In some configurations, remote code execution was possible.",
+    "The CVSS score reached 9.8 in affected configurations. Working exploits were published within 24 hours of the CVE disclosure. CISA issued an emergency directive. Exploitation was observed in the wild within days.",
+    "The server the penetration testing team had visited was running Apache 2.4.49. The exact version. The Server header would have returned 'Apache/2.4.49 (Unix)' in response to any HTTP request — including a simple curl -I.",
+    "The organisation was not compromised. Their operations team patched quickly after the CISA advisory. But the penetration testing report — delivered three weeks earlier — had given them no warning. The team had the access. They had the target. They did not have the version."
+  ],
+  "whyItHappened": [
+    "The team noted the service type — 'web server' — but not the service version. Without a version number, the CVE database could not be searched specifically. 'Web server' is not a CVE search term. 'Apache 2.4.49' is.",
+    "Version detection was not a required step in the team's workflow. The scan found an open port. Basic testing found no obvious issues. The finding was marked complete.",
+    "The language 'no critical vulnerabilities found' in the report implied thorough testing. The version had never been identified. Version-specific vulnerabilities had therefore never been researched.",
+    "There was no step in the process that required connecting a confirmed service to a specific version string before closing the finding."
+  ],
+  "lessonsLearned": [
+    "Service type is a category. Service version is the intelligence that makes security testing systematic. CVEs are indexed by version — without one, the database cannot be searched.",
+    "Version detection is mandatory for every open port on every confirmed target, not an optional follow-up for suspicious services.",
+    "A report that says 'no critical vulnerabilities found' must be backed by evidence that the assessment covered the complete service identity — including version numbers.",
+    "The time between a CVE disclosure and active exploitation is measured in hours. An engagement that did not identify version numbers carries an invisible blind spot for all version-specific vulnerabilities."
+  ],
+  "impactStats": [
+    { "value": "9.8", "label": "CVSS score for CVE-2021-41773 in affected configurations" },
+    { "value": "24 hours", "label": "Time between CVE-2021-41773 disclosure and working public exploits" },
+    { "value": "1", "label": "Command that would have identified the vulnerable version (curl -I)" },
+    { "value": "0", "label": "Mentions of Apache version or CVE-2021-41773 risk in the original report" }
+  ]
+}

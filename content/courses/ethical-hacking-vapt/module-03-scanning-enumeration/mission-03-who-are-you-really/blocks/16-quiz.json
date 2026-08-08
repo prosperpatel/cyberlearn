@@ -1,0 +1,75 @@
+{
+  "id": "mod3m3-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "curl -Ik https://45.77.180.11:8443 returns 'Server: Apache Tomcat/7.0.37' in the response headers. What does this tell you — and what additional step should you take?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "It confirms Apache Tomcat 7.0.37 is running. No further step is needed — the banner is authoritative.", "isCorrect": false },
+        { "id": "b", "text": "It reports the service's self-described identity as Apache Tomcat 7.0.37. You should also run nmap -sV to confirm through behavioural fingerprinting — corroborating the banner against probe-based analysis makes the identification more reliable.", "isCorrect": true },
+        { "id": "c", "text": "It confirms Apache Tomcat 7.0.37 is running and that no firewall is in place — a firewall would prevent the curl response entirely.", "isCorrect": false },
+        { "id": "d", "text": "It identifies the service type (Tomcat = application server) but the version number in banners is not reliable and should be ignored.", "isCorrect": false }
+      ],
+      "explanation": "A service banner is the service's self-reported identity — useful and typically accurate, but potentially modified by an administrator. Running nmap -sV alongside banner grabbing provides corroboration through behavioural fingerprinting: it identifies the software by how it responds to specific probes, regardless of what the Server header says. When both methods return the same version, confidence is high. When they disagree, the discrepancy is itself a finding.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "Why is the version number '7.0.37' the most professionally significant piece of information in 'Apache Tomcat 7.0.37'?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Because the version number confirms the server is running an old Tomcat installation, which proves the system is misconfigured.", "isCorrect": false },
+        { "id": "b", "text": "Because CVE databases are indexed by product name and version range. 'Apache Tomcat 7.0.37' enables a specific NVD search that returns known vulnerabilities for that exact release. 'Web server on port 8443' enables no such search.", "isCorrect": true },
+        { "id": "c", "text": "Because version 7.0.37 predates the current stable release, which proves that patches are not being applied to this server.", "isCorrect": false },
+        { "id": "d", "text": "Because the version number is required by Nmap to confirm the service identity — without it, the identification is not complete.", "isCorrect": false }
+      ],
+      "explanation": "The version number is the key to the CVE database. The NVD and similar databases index every publicly disclosed vulnerability by affected product and version range. Without a version number, a CVE database search returns unfiltered results that cannot be confirmed as applicable. With 'Apache Tomcat 7.0.37,' you can find every known vulnerability affecting that specific release and verify whether it applies. That is the difference between 'a finding exists somewhere in here' and 'these specific CVEs apply to this specific installation.'",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "A web server's Server header has been changed from 'Apache httpd 2.4.49' to a blank string. Which statement correctly describes how this affects a professional assessment?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The modification is effective — without an accurate banner, the software identity cannot be determined and the assessment cannot proceed.", "isCorrect": false },
+        { "id": "b", "text": "The modification prevents banner grabbing from identifying the software. Nmap -sV will still identify Apache httpd 2.4.49 through behavioural fingerprinting. The blank banner is noted but does not stop the assessment.", "isCorrect": true },
+        { "id": "c", "text": "The modification is irrelevant — banner grabbing is not used in professional assessments, only nmap -sV.", "isCorrect": false },
+        { "id": "d", "text": "The modification makes the server immune to version detection, because version strings are only available in the Server header.", "isCorrect": false }
+      ],
+      "explanation": "Banner modification prevents banner-reading tools from identifying the software — which is what it is designed to do. Nmap -sV uses behavioural fingerprinting: it sends specific probe sequences and matches response patterns against its signature database. These patterns are determined by the web server's code — how it handles HTTP requests, how it structures response headers, how it processes edge cases. An administrator who blanked the Server header did not change any of this behaviour. -sV identifies Apache httpd 2.4.49 regardless of what the header says.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "Nmap -sV is run against port 3306 on 45.77.180.10, which is filtered. The output shows no VERSION information. What does this mean professionally?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "There is no service running on port 3306 — a running database would have returned a version string even through a firewall.", "isCorrect": false },
+        { "id": "b", "text": "The MySQL installation is secure — services with no detectable version have no known exploitable vulnerabilities.", "isCorrect": false },
+        { "id": "c", "text": "The version detection probe was blocked by the firewall before reaching the host. The version of any service on this port is unknown — not absent. The port remains an active unknown requiring follow-up.", "isCorrect": true },
+        { "id": "d", "text": "nmap -sV does not support MySQL fingerprinting — a database-specific tool is required to detect MySQL versions.", "isCorrect": false }
+      ],
+      "explanation": "When a port is filtered, Nmap's version detection probes are blocked by the firewall before reaching the host — the same firewall that blocked the port scan probe in Mission 2. The service never receives the probe and cannot respond. 'No version information' on a filtered port means the version detection probe could not reach the service. It does not mean the service is absent, and it absolutely does not mean there are no vulnerabilities. Document it as: 'Version detection attempted on 3306/tcp — result inconclusive due to port filtering. The version and state of any service behind this filter remain unknown from the external scanning position.'",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "You are writing the service detection section of your engagement report for Meridian Financial. Port 8443 on the legacy server is running Apache Tomcat 7.0.37. Which statement is the most professionally accurate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Apache Tomcat 7.0.37 is confirmed on port 8443/tcp of 45.77.180.11 via banner grab and nmap -sV. Apache Tomcat 7.x reached end-of-life in March 2021 and no longer receives security patches. CVE research is required to identify specific vulnerabilities affecting this version.", "isCorrect": true },
+        { "id": "b", "text": "Apache Tomcat 7.0.37 is running on port 8443 and is definitely vulnerable. This is an old version and should be considered compromised. Immediate shutdown is recommended.", "isCorrect": false },
+        { "id": "c", "text": "A legacy web application was detected on port 8443 of 45.77.180.11. The service appears to be Tomcat-based. Further investigation may be warranted.", "isCorrect": false },
+        { "id": "d", "text": "Port 8443 returned banner: Apache Tomcat/7.0.37. This version string is self-reported and cannot be verified without source code access.", "isCorrect": false }
+      ],
+      "explanation": "Option A is correct because it is specific, evidence-based, factually accurate, and identifies the next required professional action.\n\nIt states: (1) the confirmed version from two independent methods — banner and -sV; (2) the confirmed end-of-life status with a specific date that is verifiable; (3) the immediate next step — CVE research. It does not claim 'definitely vulnerable' (that requires research), does not recommend action without evidence, and does not create false certainty.\n\nOption B is not professionally defensible — 'old' does not automatically mean 'vulnerable,' and 'definitely vulnerable' and 'compromised' require specific evidence that has not yet been gathered. Option C omits the version number — the most important finding. Option D creates false uncertainty — -sV confirms identity through behavioural fingerprinting, not just the banner, so the identification is reliable.",
+      "xpReward": 20
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mod2m4-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Think First",
+  "title": "James Thinks They Are Done",
+  "prompt": "After completing WHOIS lookups and DNS enumeration over three days of reconnaissance, James leans back and says: 'I think we've covered everything publicly available. We know who registered the domain, their email provider, their cloud vendors, and we found that dev server with a direct IP. What else could there be?'\n\nMaya opens a browser, navigates to google.com, and types: site:meridian-financial.com\n\nGoogle returns 14,800 results.\n\nShe types: site:meridian-financial.com filetype:pdf\n\n32 results. The third result is titled: 'Meridian_Financial_HR_Employee_Handbook_2023_DRAFT.pdf'\n\nShe does not click it. She turns to James and asks: 'What do you think that PDF contains?'\n\nBefore we see what Maya finds, think through these questions yourself.",
+  "guideQuestions": [
+    "Why would a company's internal HR handbook appear in Google search results? Did someone at the company intend for Google to index it, or could this have happened accidentally?",
+    "If you were a security professional, what kinds of documents or pages would you specifically search for in Google to understand an organisation's attack surface?",
+    "You have never visited the company's website. You have never touched their systems. Is using Google to find their public documents considered hacking? Where is the legal and ethical line?",
+    "If an organisation's sensitive document is publicly accessible and indexed by Google, whose responsibility is it to fix the exposure — Google, the organisation, or someone else?"
+  ],
+  "instructorNote": "The goal of this discussion is to surface the intuitive discomfort learners feel when they realise Google is already a surveillance tool for careless infrastructure. The key insight to prime: 'publicly accessible' and 'intentionally public' are not the same thing. A file can be publicly accessible because someone made a configuration mistake — but that does not make accessing it ethically equivalent to accessing data an organisation chose to publish."
+}

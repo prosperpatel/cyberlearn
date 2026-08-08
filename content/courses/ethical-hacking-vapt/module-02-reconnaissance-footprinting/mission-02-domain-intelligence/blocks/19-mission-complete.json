@@ -1,0 +1,21 @@
+{
+  "id": "mod2m2-block-19-mission-complete",
+  "type": "mission-complete",
+  "order": 19,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Complete",
+  "headline": "Operation Nameserver — Complete",
+  "message": "Let's go back to Marcus Hutchins for a moment.\n\nHe was 22 years old. He had no special access. He had no classified databases, no government clearance, no proprietary tools that ordinary people cannot use. He had a browser, a command line, and the knowledge you now have.\n\nHe looked at a domain name in a piece of malware. He ran a WHOIS lookup. He saw it was unregistered. He understood what that meant — because he understood how DNS resolution works, what NXDOMAIN means, and why malware might check for a domain before executing. He registered the domain. He watched a global ransomware epidemic stop.\n\nThis is what separates people who know how to use tools from people who understand what the tools are actually doing.\n\nYou now understand what you are actually doing when you investigate a domain.\n\nYou know that a domain is an address — not a website — and that one address is the entry point to an entire infrastructure. You know that DNS is the public phone book of the internet, and that every record type in it (A, MX, NS, TXT, CNAME) tells a different part of the infrastructure story. You know that WHOIS is the property deed — who registered this domain, when, and through whom. You know the difference between a registrar (where you buy) and a registry (where ownership is officially recorded). You know that TLDs carry context — geographic jurisdiction, regulatory constraints, operational signals. And you know that an ASN is the complete IP address map of an organisation's internet presence, accessible to anyone who knows to look.\n\nOn day two of the Meridian Financial engagement, Maya and James found an active phishing operation in four minutes. They hadn't scanned a single server. They hadn't opened a terminal. They looked at public registration records and read them the way a trained professional reads them — which is the only way that matters.\n\nYou can now read them the same way.\n\nMission 3 is where this expands from a single domain to the entire visible internet. Google has indexed billions of pages, files, and login portals — many of which organisations never intended to be publicly visible. Advanced search operators (which professionals call 'Google Dorking') let you query that index with precision: find exposed admin portals, publicly indexed configuration files, directory listings, and internal documents that the target posted publicly without realising the implication.\n\nThe tool is a search bar. The technique is knowing exactly what to ask for.\n\nMission 3: The Search Engine Knows Everything.",
+  "xpEarned": 100,
+  "badgesUnlocked": [
+    {
+      "name": "Nameserver",
+      "description": "Completed Mission 2: Domain Intelligence — understood domains, IP addresses, DNS resolution, all five DNS record types, WHOIS, registrar, registry, TLD, and ASN. Can read any organisation's internet infrastructure from public records alone."
+    }
+  ],
+  "nextSteps": [
+    "Mission 03: The Search Engine Knows Everything — Google Dorking, advanced search operators, and how to find exposed infrastructure, files, and portals that organisations never intended to be publicly visible",
+    "Optional: Complete the Mission 2 domain intelligence practical if you haven't — run a full WHOIS, DNS, and ASN investigation on a real organisation and build your first domain intelligence profile",
+    "Review the Cheat Sheet — the DNS record types and WHOIS workflow appear in every domain-related task from here forward and are worth committing to muscle memory"
+  ]
+}

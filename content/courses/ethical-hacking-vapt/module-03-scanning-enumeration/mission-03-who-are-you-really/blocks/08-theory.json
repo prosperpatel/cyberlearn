@@ -1,0 +1,42 @@
+{
+  "id": "mod3m3-block-08-theory",
+  "type": "theory",
+  "order": 8,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Nmap Service Detection",
+  "title": "Nmap Service Detection (-sV): Professional Fingerprinting",
+  "content": "'What if the server hadn't announced its version in the banner?' James asked. 'What if the admin had removed that Server header?'\n\n'Good question,' Maya said. She was already typing. 'Banner grabbing relies on what the service chooses to say. For professional assessments, we need something more reliable.' She typed: nmap -sV -p 22,80,443,8443 45.77.180.11. 'This does not just read what the service announces. It sends specific test inputs — sequences of bytes that trigger known responses from specific software — and compares those responses against a database of signatures.'\n\n**How Nmap service version detection works**\n\nNmap's -sV flag activates its service version detection engine. Instead of — or in addition to — reading the banner, it actively probes each open port:\n\n1. For each open port, Nmap sends a series of probe strings from its nmap-service-probes database\n2. The service responds to each probe\n3. Nmap compares the response patterns against thousands of known signatures\n4. When a match is found: software name and version are confirmed\n\nThis is behavioural fingerprinting — identifying a service by how it responds to specific inputs, not by what it claims in a banner. An administrator can change the Server header. They cannot change how the underlying web server code handles an HTTP/1.0 request or a malformed probe packet.\n\n**The command**\n\n```\n# Service version detection on specific open ports\nnmap -sV -p 22,80,443,8443 45.77.180.11\n\n# Service detection with output saved\nnmap -sV -T4 -oA service-45.77.180.11 45.77.180.11\n\n# Maximum probe intensity for difficult or custom services\nnmap -sV --version-intensity 9 -p 8443 45.77.180.11\n```\n\n**Reading the Meridian Financial service detection output**\n\nHere is the -sV output for both hosts:\n\n```\nNmap scan report for 45.77.180.10\n\nPORT     STATE    SERVICE   VERSION\n22/tcp   open     ssh       OpenSSH 7.4 (protocol 2.0)\n80/tcp   open     http      Apache httpd 2.4.49 ((Unix))\n443/tcp  open     ssl/http  Apache httpd 2.4.49 ((Unix))\n3306/tcp filtered mysql\n\nNmap scan report for 45.77.180.11\n\nPORT     STATE  SERVICE   VERSION\n22/tcp   open   ssh       OpenSSH 7.4 (protocol 2.0)\n80/tcp   open   http      Apache httpd 2.4.49 ((Unix))\n8443/tcp open   ssl/http  Apache Tomcat 7.0.37\n```\n\n**Line by line**\n\n**22/tcp open ssh OpenSSH 7.4 (protocol 2.0)**\n\nPort 22 is open. The service is SSH. The specific software: OpenSSH version 7.4, using SSH protocol version 2.0. Not just 'SSH service' — a specific version that can be searched in the CVE database.\n\n**80/tcp open http Apache httpd 2.4.49 ((Unix))**\n\nPort 80 is open. The service is HTTP. Software: Apache httpd version 2.4.49, on a Unix-based system. Note: Nmap uses 'Apache httpd' in its signature database — this matches the Apache HTTP Server software, not Apache Tomcat.\n\n**443/tcp open ssl/http Apache httpd 2.4.49 ((Unix))**\n\nPort 443 is open. Same Apache 2.4.49 instance, serving over SSL/TLS. The 'ssl/http' label confirms TLS is in use on this port. Same version on both HTTP and HTTPS — the same software serves both.\n\n**3306/tcp filtered mysql**\n\nPort 3306 is filtered — as Mission 2 established. The version detection probe is blocked by the firewall before reaching the host. No version can be determined. The service state remains an active unknown.\n\n**8443/tcp open ssl/http Apache Tomcat 7.0.37**\n\nPort 8443 is open. HTTPS service. Software: Apache Tomcat version 7.0.37. This confirms the curl banner grab result through behavioural analysis — two methods, same version, high confidence.\n\n**The VERSION column: what it means**\n\nEvery entry in the VERSION column is the result of Nmap sending service-specific probes and matching responses against its signature database. The more detail in the version field — '(protocol 2.0)', '((Unix))' — the more probe data was used to build the identification.",
+  "callouts": [
+    {
+      "type": "tip",
+      "title": "Version Intensity: When Default Is Not Enough",
+      "text": "The --version-intensity flag controls how many probes Nmap sends per port. Scale: 0 (minimal) to 9 (maximum).\n\n• 0: Only probes that match by port number — very fast, lower accuracy\n• 5: Default — balanced speed and accuracy for standard services\n• 9: All available probes — slowest, most thorough. Use on unusual ports or custom applications.\n\nFor standard services on their registered ports (SSH on 22, HTTP on 80), the default intensity usually succeeds. For services on non-standard ports like 8443, a higher intensity may reveal what the default cannot."
+    },
+    {
+      "type": "info",
+      "title": "Combining Port Scan and Service Detection",
+      "text": "Port scanning and service detection can be combined in one command:\n\nnmap -sS -sV -T4 -oA fullscan-45.77.180.11 45.77.180.11\n\nThis runs the SYN scan (-sS) to discover open ports and immediately runs version detection (-sV) against every open port found. More efficient than running them separately, and produces a single output file with complete port and version information."
+    }
+  ],
+  "keyTerms": [
+    {
+      "term": "Service Version Detection (-sV)",
+      "definition": "Nmap's flag that activates its service fingerprinting engine. Sends probe strings from its nmap-service-probes database against each open port, analyses the responses, and matches them against known signatures to determine the specific software name and version running on each port."
+    },
+    {
+      "term": "Behavioural Fingerprinting",
+      "definition": "Identifying a service by how it responds to specific inputs rather than by what it announces in its banner. Works even when banners are hidden or modified, because the underlying software's response patterns are determined by its code — not its configuration."
+    },
+    {
+      "term": "Version Intensity",
+      "definition": "A parameter (0–9) controlling how many probe strings Nmap sends during service version detection. Higher intensity sends more probes, increasing accuracy at the cost of scan time. Default is 5. Use --version-intensity 9 for custom services or non-standard port numbers."
+    }
+  ],
+  "codeBlocks": [
+    {
+      "language": "bash",
+      "code": "# Service version detection on specific open ports\nnmap -sV -p 22,80,443,8443 45.77.180.11\n\n# Service detection with output saved (all formats)\nnmap -sV -T4 -oA service-45.77.180.11 45.77.180.11\n\n# Combined port scan and service detection in one pass\nnmap -sS -sV -T4 -oA fullscan-45.77.180.11 45.77.180.11\n\n# Maximum probe intensity for difficult or non-standard services\nnmap -sV --version-intensity 9 -p 8443 45.77.180.11",
+      "caption": "Service version detection commands. Run -sV on all confirmed open ports after port mapping is complete. Save output with -oA for engagement documentation."
+    }
+  ]
+}

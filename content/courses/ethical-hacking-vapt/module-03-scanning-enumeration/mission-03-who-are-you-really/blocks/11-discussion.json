@@ -1,0 +1,16 @@
+{
+  "id": "mod3m3-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Apply Your Knowledge",
+  "title": "Back to Meridian Financial — Reading the Service Map",
+  "prompt": "The service fingerprinting sweep is complete. Here is the full picture:\n\n45.77.180.10 — Development Server:\n22/tcp   open     ssh      OpenSSH 7.4 (protocol 2.0)\n80/tcp   open     http     Apache httpd 2.4.49 ((Unix))\n443/tcp  open     ssl/http Apache httpd 2.4.49 ((Unix))\n3306/tcp filtered mysql    [version unknown — probe blocked by firewall]\n\n45.77.180.11 — Legacy Server:\n22/tcp   open     ssh      OpenSSH 7.4 (protocol 2.0)\n80/tcp   open     http     Apache httpd 2.4.49 ((Unix))\n8443/tcp open     ssl/http Apache Tomcat 7.0.37\n\nJames reads the output twice. 'Apache 2.4.49 on both servers. OpenSSH 7.4 on both servers. The same versions on both machines.'\n\nMaya opens a browser. She navigates to nvd.nist.gov and types: apache tomcat 7.0.37. The results appear within seconds. James leans over to read the severity labels. High. Medium. High. She switches tabs. Another search already running: apache httpd 2.4.49. More results fill the screen.\n\n'Is any of that remotely exploitable?' James asks.\n\n'That,' Maya says, 'is Mission 4. But you should understand what you are looking at right now, before we get there.'\n\nBefore you continue: what do the service fingerprinting results tell you about the security posture of each host? Which findings demand the most urgent follow-up — and why?",
+  "context": "Apache Tomcat 7.x reached end-of-life in March 2021 — the Apache Software Foundation no longer issues security patches for any vulnerability discovered after that date. A server running Tomcat 7.0.37 receives no security updates regardless of how severe a newly discovered vulnerability is.\n\nApache httpd 2.4.49 is a specific version with a publicly documented history. The NVD is the authoritative source.\n\nOpenSSH 7.4 was released in 2016. Whether a specific version is exploitable depends heavily on configuration, which requires deeper investigation.\n\nPort 3306/tcp on the development server remains filtered — version unknown. The state of whatever might be running there cannot be confirmed from the current scanning position.",
+  "guideQuestions": [
+    "Looking at both hosts — which service version do you consider the highest priority for follow-up, and what specifically about the version string informs that priority?",
+    "Both servers run the same Apache version (2.4.49) and the same OpenSSH version (7.4). What does this pattern likely indicate about how these systems were built or maintained — and why does it matter for the engagement?",
+    "Port 3306 on the development server is filtered — version unknown. How would you document this limitation precisely and accurately in the engagement log?",
+    "James says: 'Tomcat 7.0.37 is old, so it must be vulnerable to something.' Is that statement professionally defensible as written? What would make it more precise?"
+  ]
+}

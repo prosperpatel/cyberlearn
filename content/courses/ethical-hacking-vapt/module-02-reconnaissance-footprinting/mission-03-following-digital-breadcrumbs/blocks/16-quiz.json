@@ -1,0 +1,75 @@
+{
+  "id": "mod2m3-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "During passive DNS enumeration of a target company, you query their TXT records and find: 'v=DMARC1; p=quarantine; rua=mailto:security@company.com'. You also find: 'SF_domain_verification_a4c2d1'. What two things has this TXT record query revealed?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The company's email is hosted by Salesforce, and their domain can be spoofed because p=quarantine means no protection", "isCorrect": false },
+        { "id": "b", "text": "The company's DMARC policy sends suspicious emails to spam (p=quarantine), and the Salesforce verification token confirms they use Salesforce CRM", "isCorrect": true },
+        { "id": "c", "text": "The company uses Salesforce for email (SF prefix), and their DMARC policy means all emails are rejected", "isCorrect": false },
+        { "id": "d", "text": "Nothing useful — TXT records only contain human-readable notes with no security relevance", "isCorrect": false }
+      ],
+      "explanation": "Two separate intelligence findings here. First: the DMARC record with p=quarantine means emails failing DMARC authentication go to the recipient's spam/junk folder rather than being delivered normally — this is better than p=none (which allows delivery) but less strict than p=reject (which blocks entirely). Second: 'SF_domain_verification' is a Salesforce domain verification token — added to DNS when the company connected their domain to a Salesforce CRM instance. This is not an email provider (Salesforce does not provide general email) — it reveals they use Salesforce as a CRM platform. TXT records accumulate these verification tokens from every cloud service ever connected to the domain, making them one of the richest passive intelligence sources in DNS.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "A penetration tester queries DNS for jobs.targetcompany.com and receives: 'jobs.targetcompany.com CNAME targetcompany.greenhouse.io'. She then queries greenhouse.io and finds it resolves normally. She queries targetcompany.greenhouse.io and receives NXDOMAIN. What is the correct interpretation and next step?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The CNAME is working correctly. The job listings are temporarily offline — no action needed", "isCorrect": false },
+        { "id": "b", "text": "The CNAME is pointing to a Greenhouse job board slot that no longer exists — this is a potential subdomain takeover. The tester should document the finding and check whether she is authorised to verify it", "isCorrect": true },
+        { "id": "c", "text": "The CNAME indicates the company uses Greenhouse for recruiting, which is useful intelligence but not a security finding", "isCorrect": false },
+        { "id": "d", "text": "NXDOMAIN on a CNAME destination always means DNS is propagating — wait 24 hours and check again", "isCorrect": false }
+      ],
+      "explanation": "This is the dangling CNAME pattern that enables subdomain takeover. greenhouse.io itself resolves — the domain exists and operates. But targetcompany.greenhouse.io specifically returns NXDOMAIN — the specific Greenhouse account for this company has been deleted. The DNS CNAME on jobs.targetcompany.com still points to that deleted account. If the Greenhouse platform allows registration of the targetcompany slot, whoever registers it controls what is served from jobs.targetcompany.com — a trusted company subdomain. The correct professional response is to document this as a potential subdomain takeover finding, verify the scope allows investigating it, and test whether the Greenhouse slot can be claimed through the platform's normal registration process (without actually claiming it, unless the scope explicitly authorises verification). This is a finding that belongs in the report.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "You query NS records for target.com and find: 'ns1.target.com, ns2.target.com' — the company manages its own nameservers. Which action is appropriate in the passive reconnaissance phase, and which requires active authorisation?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Passive: record the NS hostnames and query their A records to find their IPs. Active (requires authorisation): attempt a zone transfer against those nameservers", "isCorrect": true },
+        { "id": "b", "text": "Both querying NS records and attempting zone transfer are passive — they both use public DNS", "isCorrect": false },
+        { "id": "c", "text": "Custom nameservers indicate the company manages their own DNS, so neither zone transfer nor NS querying requires special authorisation", "isCorrect": false },
+        { "id": "d", "text": "Querying NS records is active reconnaissance because it contacts the target's DNS infrastructure directly", "isCorrect": false }
+      ],
+      "explanation": "The distinction is important. Querying NS records through a public recursive resolver (like 8.8.8.8) is passive — the resolver fetches the NS records from the authoritative server and returns them to you; the target's nameserver sees the resolver's IP, not yours. Looking up the A records of the NS hostnames is also passive. But a zone transfer request (dig axfr @ns1.target.com target.com) goes directly from your IP to the target's nameserver — it is an active query that creates a log entry on their system. Zone transfer attempts require written authorisation in the scope agreement. Self-managed nameservers (custom NS records) do historically have higher rates of misconfiguration than hosted providers, which makes the zone transfer test more likely to succeed — but that only makes the authorisation requirement more important, not less.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "During DNS enumeration you discover that api.targetcompany.com resolves to IP address 52.23.104.18 (an AWS EC2 IP), while www.targetcompany.com resolves to 104.16.244.47 (a Cloudflare IP). What does this difference reveal?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "The company uses both AWS and Cloudflare — two different companies may be managing different parts of their infrastructure and this is unusual", "isCorrect": false },
+        { "id": "b", "text": "The main website is protected by Cloudflare's CDN while the API server connects directly to an AWS EC2 instance — the API server may be directly reachable and lacks CDN protection", "isCorrect": true },
+        { "id": "c", "text": "Both IPs belong to the same organisation — 104.16.x.x is the company's Cloudflare account and 52.23.x.x is their AWS account", "isCorrect": false },
+        { "id": "d", "text": "The API subdomain is probably not in use — having a different IP than the main domain suggests it is a misconfiguration", "isCorrect": false }
+      ],
+      "explanation": "104.16.244.47 is in Cloudflare's IP range — www.targetcompany.com is behind Cloudflare's CDN, which provides DDoS protection and hides the origin server. 52.23.104.18 is an AWS EC2 IP — api.targetcompany.com points directly to a server in AWS without CDN protection. This is extremely common: companies protect their main website behind a CDN but forget to route their API through the same protection. The API server is directly reachable from the internet, its real IP is known, and it does not have the DDoS and rate-limiting protection the main website has. In a professional engagement, the API server is a higher-priority target for active scanning precisely because it lacks CDN protection and can be reached directly.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "A penetration tester discovers via PTR lookup that the IP 45.77.180.10 resolves to 'dev-app-01.meridian-financial.com'. The WHOIS for this IP shows it belongs to a VPS provider. Which combination of inferences is most defensible from this evidence?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "This is a development server, directly internet-accessible without CDN protection, likely running application code that mirrors production and may have different (lower) patch levels than the main site", "isCorrect": true },
+        { "id": "b", "text": "This is a test server with no real data on it — the 'dev' hostname means it is completely isolated from production systems", "isCorrect": false },
+        { "id": "c", "text": "This IP cannot be a production-related server because it belongs to a VPS provider rather than the company's own infrastructure", "isCorrect": false },
+        { "id": "d", "text": "The PTR record reveals this is a server the company plans to decommission — 'dev' in the hostname indicates it is being phased out", "isCorrect": false }
+      ],
+      "explanation": "The PTR record confirming 'dev-app-01' tells us this is a development server — from the hostname. The VPS hosting tells us it is a cloud instance on an inexpensive provider, not the company's primary CDN-protected infrastructure. The absence of a CDN (direct IP rather than a Cloudflare address) tells us it is internet-accessible without the DDoS protection and rate-limiting the main site has. The inference about patch levels is defensible: development servers are routinely less rigorously patched than production, because developers prioritise functionality over security and assume 'nobody knows about dev.' The inference that it mirrors production code is also defensible: the purpose of a development environment is to test the application before it goes to production. The wrong answers represent common misconceptions — dev servers often contain production credentials in configuration files, have real data from testing, and are anything but isolated.",
+      "xpReward": 20
+    }
+  ]
+}

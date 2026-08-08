@@ -1,0 +1,119 @@
+{
+  "id": "mod2m5-block-08-diagram",
+  "type": "diagram",
+  "order": 8,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Recon Workflow",
+  "title": "The Complete Passive Reconnaissance Workflow",
+  "description": "This diagram shows the full professional passive reconnaissance workflow from client brief to active testing authorisation. Each node is a phase or decision point. The edges show the sequence and the outputs that flow from each phase into the next. The critical decision diamond — 'Critical finding during passive recon?' — shows the immediate escalation path that runs parallel to the normal workflow.",
+  "nodes": [
+    {
+      "id": "client-brief",
+      "label": "Client Brief",
+      "sublabel": "Engagement kickoff: scope document, RoE, timeline",
+      "type": "start",
+      "position": "top"
+    },
+    {
+      "id": "scope-review",
+      "label": "Phase 1: Scope Review",
+      "sublabel": "Read scope completely. Extract: in-scope assets, exclusions, RoE, emergency contacts, timeline",
+      "type": "phase",
+      "position": "upper-center"
+    },
+    {
+      "id": "recon-plan",
+      "label": "Reconnaissance Plan",
+      "sublabel": "Asset list, priority order, technique authorisations, documentation standards",
+      "type": "output",
+      "position": "upper-right"
+    },
+    {
+      "id": "passive-recon",
+      "label": "Phase 2: Passive Information Gathering",
+      "sublabel": "WHOIS → DNS Enumeration → Search Engine Recon → OSINT",
+      "type": "phase",
+      "position": "center-left"
+    },
+    {
+      "id": "whois",
+      "label": "Registration Intelligence",
+      "sublabel": "WHOIS: registrar, dates, nameservers, privacy",
+      "type": "technique",
+      "position": "mid-left-top"
+    },
+    {
+      "id": "dns-enum",
+      "label": "DNS Enumeration",
+      "sublabel": "All 8 record types, subdomain discovery, zone transfer attempt",
+      "type": "technique",
+      "position": "mid-left-mid"
+    },
+    {
+      "id": "search-recon",
+      "label": "Search Engine Recon",
+      "sublabel": "Google Dorking, robots.txt, Shodan, GitHub, Wayback Machine",
+      "type": "technique",
+      "position": "mid-left-bottom"
+    },
+    {
+      "id": "critical-decision",
+      "label": "Critical Finding?",
+      "sublabel": "Active breach? Unauthenticated live data? Out-of-scope critical exposure?",
+      "type": "decision",
+      "position": "center"
+    },
+    {
+      "id": "immediate-escalation",
+      "label": "Immediate Escalation",
+      "sublabel": "Contact client emergency contact NOW — do not wait for final report",
+      "type": "action-urgent",
+      "position": "center-right"
+    },
+    {
+      "id": "intelligence-analysis",
+      "label": "Phase 3: Intelligence Analysis",
+      "sublabel": "Correlate findings. Confirm multi-source. Build infrastructure picture.",
+      "type": "phase",
+      "position": "lower-center-left"
+    },
+    {
+      "id": "attack-surface",
+      "label": "Phase 4: Attack Surface Map",
+      "sublabel": "Critical / High / Medium / Low tiers. Entry point prioritisation.",
+      "type": "phase",
+      "position": "lower-center"
+    },
+    {
+      "id": "recon-report",
+      "label": "Phase 5: Recon Report",
+      "sublabel": "Documented findings with source, evidence, severity, recommended action",
+      "type": "output",
+      "position": "lower-right"
+    },
+    {
+      "id": "active-testing",
+      "label": "Active Testing Begins",
+      "sublabel": "Targeted scanning, exploitation — guided by attack surface map",
+      "type": "end",
+      "position": "bottom"
+    }
+  ],
+  "edges": [
+    { "from": "client-brief", "to": "scope-review", "label": "Engagement begins", "type": "flow" },
+    { "from": "scope-review", "to": "recon-plan", "label": "Extract asset list and RoE", "type": "output" },
+    { "from": "scope-review", "to": "passive-recon", "label": "Plan complete — begin gathering", "type": "flow" },
+    { "from": "passive-recon", "to": "whois", "label": "Step 1", "type": "flow" },
+    { "from": "whois", "to": "dns-enum", "label": "Step 2", "type": "flow" },
+    { "from": "dns-enum", "to": "search-recon", "label": "Step 3 (with expanded subdomain list)", "type": "flow" },
+    { "from": "search-recon", "to": "critical-decision", "label": "Findings accumulate", "type": "flow" },
+    { "from": "critical-decision", "to": "immediate-escalation", "label": "YES — escalate now", "type": "action-urgent" },
+    { "from": "critical-decision", "to": "intelligence-analysis", "label": "NO — continue", "type": "flow" },
+    { "from": "immediate-escalation", "to": "intelligence-analysis", "label": "After client notified — continue recon", "type": "flow" },
+    { "from": "intelligence-analysis", "to": "attack-surface", "label": "Correlated findings → tiered map", "type": "flow" },
+    { "from": "attack-surface", "to": "recon-report", "label": "Map drives report structure", "type": "output" },
+    { "from": "recon-report", "to": "active-testing", "label": "Report delivered, active phase authorised", "type": "flow" }
+  ],
+  "caption": "The critical decision diamond appears during the passive gathering phase — not at the end. Critical findings (active breach, unauthenticated live data, credentials in active use) trigger immediate escalation to the client emergency contact. This runs parallel to the investigation, not at the end of it. Everything else accumulates into the intelligence analysis phase, flows into the attack surface map, and produces the reconnaissance report that is delivered before active testing begins. Active testing is the final phase — not the first.",
+  "interactive": true
+}

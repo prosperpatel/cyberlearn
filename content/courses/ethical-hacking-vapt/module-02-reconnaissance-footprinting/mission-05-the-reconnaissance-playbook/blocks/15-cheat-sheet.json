@@ -1,0 +1,59 @@
+{
+  "id": "mod2m5-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Professional Passive Reconnaissance — Complete Reference",
+  "sections": [
+    {
+      "heading": "The SCOUT Framework (5 Phases)",
+      "rows": [
+        { "label": "S — Scope first", "value": "Read scope document completely. Extract: in-scope assets, exclusions, authorised techniques, RoE, emergency contacts, timeline. Write a one-page reconnaissance plan before opening any tool." },
+        { "label": "C — Collect passively", "value": "WHOIS → DNS (all 8 record types + subdomain enum) → Search engine (Google Dorks + robots.txt + sitemap.xml) → OSINT (Shodan, Wayback Machine, GitHub, LinkedIn). In that sequence. Zero contact with target systems." },
+        { "label": "O — Organise findings", "value": "Document every finding at moment of discovery: source, evidence (screenshot/text), severity (Critical/High/Medium/Low), recommended action. The report is built continuously — not retrospectively." },
+        { "label": "U — Understand attack surface", "value": "Build the attack surface map. Prioritise: Critical (active exposure) → High (direct attack paths) → Medium (requires more work) → Low (background intelligence). This map guides active testing." },
+        { "label": "T — Tell immediately", "value": "Critical findings (live data exposure, active breach indicators, production backups publicly accessible) go to client emergency contact NOW — not in the final report. Document the notification in the engagement log." }
+      ]
+    },
+    {
+      "heading": "Passive Recon Sequence (per in-scope domain)",
+      "rows": [
+        { "label": "Step 1 — Registration", "value": "WHOIS: registrar, registration date, nameservers, privacy status. Validate: does this domain actually belong to the client? Registration date indicates infrastructure age." },
+        { "label": "Step 2 — DNS (all 8 types)", "value": "A, AAAA, MX, NS, TXT, CNAME, PTR, SRV. Add every discovered subdomain to investigation queue. Note: CDN IPs vs direct IPs (CDN gap). DMARC p= value. Service verification tokens in TXT." },
+        { "label": "Step 3 — Subdomain enum", "value": "crt.sh (Certificate Transparency — passive). Wordlist brute force (active — confirm RoE). Zone transfer attempt on self-managed NS (active — confirm RoE). Repeat steps 1–2 on each discovered subdomain." },
+        { "label": "Step 4 — Search engine recon", "value": "site:domain.com (footprint). filetype:pdf/xlsx/docx/env (documents). intitle:\"index of\" (directories). inurl:admin/login/portal (portals). robots.txt + sitemap.xml. Wayback Machine. GitHub + Pastebin. Shodan (org:, ssl:, hostname:)." },
+        { "label": "Step 5 — Document metadata", "value": "ExifTool on any discovered documents. Author, organisation, software version, embedded file paths, revision dates." }
+      ]
+    },
+    {
+      "heading": "Attack Surface Priority Matrix",
+      "rows": [
+        { "label": "CRITICAL — escalate immediately", "value": "Unauthenticated endpoints returning live data. Open directories with production backups. Active credentials in passive sources. Active attacker activity. Active phishing targeting client's customers." },
+        { "label": "HIGH — first active testing priority", "value": "Dev/legacy servers with direct IPs (no CDN). Admin portals publicly accessible. DMARC p=none (domain spoofable). Exposed internal documents. Legacy systems on direct IP." },
+        { "label": "MEDIUM — active testing, normal priority", "value": "CDN-protected main application. Subdomains with unknown software versions. Cloud vendor disclosures. Document metadata findings. Portals with unknown versions." },
+        { "label": "LOW — documented, low priority", "value": "Standard registration data. Email provider identification. Technology stack inference from job postings (unconfirmed). Historical Wayback Machine data." }
+      ]
+    },
+    {
+      "heading": "Intelligence Profile Sections",
+      "rows": [
+        { "label": "1. Asset Inventory", "value": "Complete list of domains, subdomains, IPs attributed to target. In-scope vs discovered-but-not-in-scope. Source for each asset." },
+        { "label": "2. Infrastructure Architecture", "value": "CDN-protected vs direct-IP assets. Hosting providers. CDN gap. Relationships between assets. Single points of failure (e.g., DNS account control)." },
+        { "label": "3. Technology Stack", "value": "Email platform (MX). CRM/SaaS (TXT tokens). CDN (NS/CNAME). Hosting (IP WHOIS). Software versions (Shodan, metadata, cached pages). Multi-source vs single-source confirmed." },
+        { "label": "4. Email Security Posture", "value": "SPF: authorised senders, enforcement level (~all / -all). DMARC: p= value, rua reporting address. DKIM: confirmed or unconfirmed. Overall spoofability assessment." },
+        { "label": "5. Critical Findings", "value": "Each critical and high finding with: discovery method, URL, evidence type, severity, status (active/remediated), recommended action." }
+      ]
+    },
+    {
+      "heading": "Professional Standards",
+      "rows": [
+        { "label": "Scope first, always", "value": "Read scope document completely before any information gathering. Confirm every action against RoE before performing it." },
+        { "label": "Minimum necessary access", "value": "Prove the exposure exists. Do not read, download, or use content beyond what the proof requires." },
+        { "label": "Immediate escalation", "value": "Critical findings go to client emergency contact during the engagement. Not in the final report. Not at report-out." },
+        { "label": "Source every finding", "value": "Query / tool / date / result / screenshot. Every finding. No exceptions. An unsourced finding is not a professional finding." },
+        { "label": "Diminishing returns test", "value": "Two consecutive hours of passive recon with no new finding categories = passive recon at completion. The attack surface map is actionable when this test is met." }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "mod2m5-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 5,
+  "sidebarLabel": "Case Study: The Skipped Phase",
+  "company": "Anonymous — Composite case from professional penetration testing literature",
+  "year": "2021",
+  "industry": "Financial services",
+  "incident": "A penetration testing team with strong technical skills skipped structured passive reconnaissance and went straight to active scanning on a large client engagement. They found forty-three medium-severity findings in six days. An independent audit of the same target using a complete passive reconnaissance methodology first found eight additional critical findings — none of which required a scanner to discover. All eight had been present during the first engagement and were missed entirely.",
+  "whatHappened": [
+    "A financial services firm hired a penetration testing company for a two-week black-box assessment. The scope included the main corporate domain, four subdomains, and three web applications. The testing team — two experienced testers — spent the first day reviewing the scope document and then began active scanning on day two.",
+    "Over six days of active testing, they produced a report with forty-three findings — a mix of missing security headers, outdated TLS configurations, and four medium-severity input validation issues. The report was comprehensive in the active testing sense: every in-scope URL was tested, every parameter was checked, every application received thorough manual review.",
+    "Six months later, the firm's insurance carrier required an independent audit before renewing their cyber insurance policy. An independent security consultancy was brought in. Their first step was structured passive reconnaissance: two days of WHOIS analysis, DNS enumeration, Google Dorking, Shodan, and Wayback Machine review — before any active testing.",
+    "In those two days, the second consultancy found:\n\n— A development server with a direct IP address (no CDN) running an application version three major releases behind production. This server was in scope — the subdomain appeared in the agreed scope document. The first team had scanned it but only checked the same parameters as the main application. Because they had not done DNS enumeration systematically, they did not know it was running older software and had not targeted their scanning accordingly.\n\n— An admin portal at a path revealed by robots.txt that had been indexed by Google. The first team's scanner had crawled the main application but had not checked robots.txt and had not run Google Dorks. The portal was at an unusual path that their crawler had not discovered. It had a known authentication bypass vulnerability in the version it was running.\n\n— Three PDFs on the web server containing internal network diagrams, including one that showed the segmentation between the DMZ and internal networks — relevant to planning an attack path if active exploitation were performed.\n\n— A GitHub repository from a former employee containing hardcoded AWS access keys that were still valid. The repository was three years old. The keys had never been rotated.",
+    "The second consultancy's passive reconnaissance phase — two days, no active scanning — produced eight critical findings. The first team's six days of active scanning produced zero critical findings.",
+    "The difference was not technical skill. The first team were capable, experienced testers. The difference was that they had no structured passive reconnaissance methodology. They went directly to active scanning and found what their scanners found — but not what careful passive intelligence gathering would have shown them was there."
+  ],
+  "whyItHappened": [
+    "Active scanning tools find what they are designed to find. They crawl URLs, test parameters, check for known vulnerabilities in known paths. They do not read robots.txt as an intelligence source. They do not search Google for the target's indexed documents. They do not check GitHub for credential leaks. They do not pull Shodan data for infrastructure intelligence.",
+    "Passive reconnaissance surfaces the information that makes active scanning targeted rather than random. Without it, scanners operate on the public-facing application surface — which is the most heavily secured layer. The critical findings often live in the forgotten development server, the legacy admin path, the accidentally indexed PDF, and the GitHub repository from three years ago. None of those appear in a scanner's output unless a human first found them through passive reconnaissance and directed the scanner there.",
+    "The first team skipped the phase that would have told them where to look."
+  ],
+  "lessonsLearned": [
+    "Passive reconnaissance is not a preliminary formality. It is the intelligence phase that makes every subsequent phase more effective. Skipping it does not save time — it changes which vulnerabilities you find.",
+    "The highest-severity findings in professional engagements often come from passive OSINT sources: forgotten subdomains, exposed admin portals found via robots.txt, documents indexed by Google, credentials leaked on GitHub. These findings require no scanner — they require methodology.",
+    "A structured passive reconnaissance phase with documented sources produces findings that can be presented in a professional report with a complete evidence chain. An unstructured approach produces findings without context — and misses the ones that context would have surfaced."
+  ],
+  "impactStats": [
+    { "value": "0", "label": "Critical findings from six days of active scanning (no passive recon phase)" },
+    { "value": "8", "label": "Critical findings from two days of structured passive reconnaissance" },
+    { "value": "100%", "label": "Critical findings that required no active scanner to discover" },
+    { "value": "3 years", "label": "Age of the GitHub credential leak that had never been rotated" }
+  ]
+}

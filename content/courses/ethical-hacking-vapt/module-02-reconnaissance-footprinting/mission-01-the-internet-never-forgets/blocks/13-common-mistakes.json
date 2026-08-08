@@ -1,0 +1,32 @@
+{
+  "id": "mod2m1-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These are the three mistakes most commonly made by beginners in reconnaissance. Each one has real professional consequences — not just marks lost in an exam, but errors that compromise real engagements, create legal exposure, or produce intelligence failures that make every subsequent phase of the work less effective.",
+  "mistakes": [
+    {
+      "title": "Starting with active tools instead of passive research",
+      "wrong": "'I have scope. The first thing I'll do is run Nmap against their IP range to see what's open.'",
+      "right": "Exhaust all passive OSINT sources before any active tool is launched. WHOIS, LinkedIn, job postings, certificate transparency logs, breach databases, GitHub, and Shodan come first. Nmap comes later.",
+      "explanation": "This is the single most common beginner mistake — and it is completely understandable, because Nmap is exciting and produces immediate, tangible output. But launching an active scan without prior reconnaissance is like arriving at a door you found at random, instead of the door you found on the blueprint. Passive OSINT tells you which systems matter, which are likely to be vulnerable, and which entry point is worth pursuing. An Nmap scan without that context produces a list of open ports — and without intelligence, that list is noise. More critically: active scanning in some environments triggers immediate security alerts. If your client's SOC detects your Nmap scan on day one, before you have a clear picture of what you are looking for, you have reduced the value of the entire engagement.",
+      "severity": "warning"
+    },
+    {
+      "title": "Assuming passive reconnaissance means incomplete reconnaissance",
+      "wrong": "'Passive recon is just the warm-up. The real intelligence comes from active scanning.'",
+      "right": "Passive reconnaissance frequently produces the highest-value intelligence in an entire engagement — information that active scanning cannot find because it does not exist in the live infrastructure.",
+      "explanation": "A subdomain discovered in a certificate transparency log might lead to a forgotten staging environment running software from three versions ago. A GitHub repository found through OSINT might contain a valid API key. A breach database result might reveal that five accounts at the target organisation have had their passwords exposed. None of this appears in an Nmap scan. In professional penetration testing, the findings that produce the highest severity ratings — the ones that demonstrate the most alarming real-world risk — frequently come from OSINT, not from active tool output. Treat passive reconnaissance as your primary intelligence phase, not as a preliminary formality.",
+      "severity": "warning"
+    },
+    {
+      "title": "Ignoring the human and organisational layer",
+      "wrong": "'Reconnaissance means finding IP addresses, open ports, and software versions. People are a social engineering problem — not a recon problem.'",
+      "right": "Employee names, job titles, email formats, team structures, vendor relationships, and individual professional histories are critical reconnaissance intelligence — because people are almost always part of the attack path.",
+      "explanation": "The most technically hardened network in the world can be entered through a convincingly worded email to the right person. The right person is identified through reconnaissance. The Mat Honan attack used zero technical exploitation — it was entirely built on human-layer OSINT (public records, a billing address, the last four digits of a credit card visible in an account summary). The Target breach started with identifying the right HVAC vendor through public contracts, then targeting their employees. Professional reconnaissance maps technology AND people — who they are, what access they have, what their responsibilities suggest about the organisation's decision-making, and which of them is most likely to represent an entry point. Skipping the human layer is not a minor omission. It is the omission that causes the most consequential findings to be missed entirely.",
+      "severity": "critical",
+      "example": "During a professional engagement, a penetration tester finds through LinkedIn that a senior IT administrator has recently announced they are leaving the company. Departing employees frequently have access that hasn't yet been revoked — and departing administrators sometimes have broader access than anyone. This is an entry point that no technical scanner would find. It requires human-layer reconnaissance."
+    }
+  ]
+}

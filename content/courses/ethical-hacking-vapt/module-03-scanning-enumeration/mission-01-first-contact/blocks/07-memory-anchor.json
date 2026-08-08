@@ -1,0 +1,20 @@
+{
+  "id": "mod3m1-block-07-memory-anchor",
+  "type": "memory-anchor",
+  "order": 10,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Remember This",
+  "title": "Probe Before You Scan",
+  "concept": "Host discovery is not an optional step you skip when you are in a hurry. It is the first active action of every professional assessment — the foundation everything else is built on. The live host list you build here is the input for every scan that follows. Get it right.",
+  "anchor": "Before any port scan, before any service detection, before any enumeration: PROBE. Verify which hosts are alive. Everything else starts from that verified list.",
+  "explanation": "You have just learned two critical facts:\n\n1. ICMP ping is the fastest way to check if a host is alive — but firewalls silently block it, making live systems disappear from your results.\n2. TCP probes penetrate those firewalls because blocking TCP/80 and TCP/443 would break every web application for every user.\n\nPut them together: probe with multiple methods, interpret results carefully (silence never means offline), document everything precisely, and only scan hosts you have confirmed.\n\nThe PING framework is how professionals hold that discipline under pressure — when the client is waiting, when the deadline is close, when it is tempting to skip the verification step and go straight to port scanning. It is not a checklist you follow reluctantly. It is the habit that prevents you from building an entire engagement on an incomplete host list.\n\nThis applies every time. Not just on large ranges. Not just when you have time. Every engagement, every target, every mission — host discovery before port scanning.",
+  "acronym": {
+    "letters": ["P", "I", "N", "G"],
+    "meanings": [
+      "Probe first — send discovery packets before any port scan",
+      "Interpret carefully — no reply does not mean the host is offline",
+      "Note every response with method, latency, and timestamp",
+      "Go targeted — only scan confirmed live hosts"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "id": "mod2m3-block-18-micro-practical",
+  "type": "micro-practical",
+  "title": "DNS Enumeration Lab",
+  "metadata": {
+    "order": 18,
+    "estimatedMinutes": 25,
+    "optional": false,
+    "xp": 25,
+    "difficulty": "beginner",
+    "icon": "terminal",
+    "tags": ["dns", "enumeration", "mx-record", "txt-record", "cname", "subdomain", "dmarc", "zone-transfer", "passive-recon"]
+  },
+  "content": {
+    "objective": "Apply everything you learned in this mission in a guided hands-on lab. You will run complete DNS enumeration on a real target — querying all eight record types, discovering subdomains, identifying infrastructure relationships, and documenting your findings like a professional.",
+    "labPlaceholder": {
+      "icon": "🧪",
+      "title": "Recommended Lab",
+      "name": "DNS Enumeration",
+      "estimatedTime": "25 minutes",
+      "launchLabel": "Launch Lab →"
+    },
+    "aiCompanionPrompt": "I'm doing a DNS enumeration lab and I want you to help me think like a professional, not give me the answers.\n\nContext: I'm running DNS enumeration on an authorised target as part of an ethical hacking exercise. I've been taught to query all eight DNS record types: A, AAAA, MX, NS, TXT, CNAME, PTR, and SRV. I'm looking for: the email provider from MX records, the DMARC policy from TXT records, CDN relationships from CNAME records, dangling CNAMEs that might indicate subdomain takeover opportunities, and direct IP addresses on subdomains that bypass CDN protection.\n\nWhen I get stuck, I'll share what I've found so far — the actual record values I'm seeing — and I want you to ask me questions that help me interpret them, not explain them to me directly. For example, if I show you an MX record pointing to mail.protection.outlook.com, ask me: 'What does that MX hostname tell you about how this company handles email?' rather than telling me 'This means they use Microsoft 365.'\n\nHelp me build the skill of reading DNS records — not the habit of asking someone else to read them for me."
+  }
+}

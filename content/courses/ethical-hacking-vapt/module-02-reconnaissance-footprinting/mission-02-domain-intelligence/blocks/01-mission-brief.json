@@ -1,0 +1,29 @@
+{
+  "id": "mod2m2-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Domain Intelligence",
+  "operativeCodename": "Operation Nameserver",
+  "subtitle": "Every website on the internet starts with an address. Behind that address is an ownership trail that any professional knows how to read.",
+  "briefing": "On 12 May 2017, a 22-year-old British security researcher named Marcus Hutchins was sitting at his computer watching a malware sample spread across the world at terrifying speed.\n\nThe malware was WannaCry. Within 24 hours, it had infected over 230,000 computers in 150 countries. The UK's National Health Service was paralysed — hospitals cancelled surgeries, ambulances were rerouted, doctors lost access to patient records. FedEx, Deutsche Bahn, Telefónica, Nissan — all hit. The damage would reach billions of dollars.\n\nMarcus examined the malware's code. Inside it, he found something curious: before doing anything, WannaCry made a request to a specific domain name — a long, nonsensical string that appeared to be randomly generated. iuqerfsodp9ifjaposdfjhgosurijfaewrwergwea.com.\n\nThe domain was unregistered. Nobody owned it.\n\nMarcus looked it up. It took him about two minutes. The domain was genuinely available — for $10.69.\n\nHe bought it.\n\nThe moment he registered the domain and it went live, the global spread of WannaCry stopped. The malware had been programmed to check for that domain before executing. If the domain existed, it assumed it was running in a security researcher's sandbox and shut itself down. The attackers had built a kill switch into their own weapon — and Marcus Hutchins found it by knowing how to read domain records. He activated it by spending the price of a pizza.\n\nHe stopped a global cyberattack on his lunch break.\n\nThis is what domain intelligence looks like. The ability to look up who owns a domain, when they registered it, which infrastructure it points to, and what that reveals about the person or organisation behind it — is one of the most powerful and most underestimated skills in cybersecurity.",
+  "whyItMatters": "Domain intelligence is typically the first technical OSINT task on every professional penetration test and every threat intelligence investigation. Every organisation on the internet has at least one domain. That domain leaves a public registration record — a property deed for a piece of internet real estate. Understanding who registered it, when, through which company, which nameservers they chose, what IP addresses those nameservers reveal, and which email infrastructure they expose tells you an enormous amount about the organisation's infrastructure, cloud provider, and operational security maturity — before you have touched a single system they own.",
+  "objectives": [
+    "Define what a domain is and explain the difference between a domain and a website",
+    "Explain what an IP address is and describe the relationship between domains and IP addresses",
+    "Describe how DNS (Domain Name System) works in plain language, step by step",
+    "Identify the five most important DNS record types and what each one reveals about infrastructure",
+    "Explain WHOIS, registrar, registry, and TLD — and what each tells you as an investigator",
+    "Define ASN (Autonomous System Number) and explain why it reveals the full scope of an organisation's IP infrastructure"
+  ],
+  "skillsUnlocked": [
+    "Reading WHOIS records to extract registrar, registration date, nameservers, and registrant data",
+    "Querying all DNS record types to map mail infrastructure, cloud providers, CDN usage, and SaaS relationships",
+    "Using ASN data to identify the full IP range of a target's internet-facing infrastructure"
+  ],
+  "closingMessage": "Marcus Hutchins spent ten minutes reading a domain record and stopped one of the most destructive cyberattacks in history. You are going to learn exactly what he knew — and why domain intelligence is the foundation of every professional reconnaissance operation from here forward.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["domain", "dns", "whois", "ip-address", "registrar", "tld", "asn", "domain-intelligence"]
+}

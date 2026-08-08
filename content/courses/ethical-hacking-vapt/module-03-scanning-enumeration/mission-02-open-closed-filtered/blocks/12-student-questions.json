@@ -1,0 +1,30 @@
+{
+  "id": "mod3m2-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Questions & Answers",
+  "intro": "These are the questions learners most commonly ask when they first run a port scan and start reading results. If you have been wondering about any of these, you are thinking about exactly the right things.",
+  "faqs": [
+    {
+      "question": "What is the difference between -sS and -sT, and which should I use?",
+      "answer": "-sS (SYN scan) sends a SYN and analyses the response without completing the handshake. It requires root or administrator privileges to send raw packets. This is the professional default.\n\n-sT (TCP connect scan) completes the full three-way handshake using the operating system's standard network call. It does not need root privileges. It is slower and more visible — completed connections are more likely to appear in application logs.\n\nFor standard penetration testing work: use -sS whenever you have root privileges. Use -sT if you are operating without elevated access and the environment requires it. The port state results are equivalent; the differences are speed and visibility."
+    },
+    {
+      "question": "Why does Nmap scan around 1,000 ports by default? Which ports does it actually check?",
+      "answer": "Nmap maintains an internal frequency database that records how often each port number is found open across millions of real scans. The default range covers the roughly 1,000 ports most frequently discovered to have services running — not ports 1 through 1,000.\n\nSome ports in the default range are above 1,024 (the MySQL port 3306, for example). Some ports below 1,024 are not in the default range because they are almost never seen open.\n\nPractical implication: the default scan is a high-yield starting point, not complete coverage. Port 8443 — a common management port — is outside the default range. Port 3306 (MySQL) is inside it. For any confirmed high-priority target, always follow up with a full-range scan (-p-) and document what you actually scanned."
+    },
+    {
+      "question": "The service column says 'http' on port 80. Does that mean a web server is definitely running there?",
+      "answer": "No. The service column shows the IANA-registered name for that port number — a convention, not a confirmation.\n\nPort 80 is the well-known port for HTTP, so Nmap labels it 'http'. The actual service running there could be:\n• Apache, Nginx, or IIS (the expected web servers)\n• A custom internal application or framework\n• A development server or API gateway\n• In rare cases, a completely different service running on an unusual port\n\nThe service name is your first hypothesis. Mission 3 — service fingerprinting — tests that hypothesis by probing the service directly and analysing what it sends back."
+    },
+    {
+      "question": "I found a filtered port. Should I just document it and move on?",
+      "answer": "Document it — yes. Move on without follow-up — no.\n\nFiltered means one specific type of probe (TCP SYN) received no response. It does not mean the port has been fully investigated. Professional follow-up includes:\n\n1. Try alternative probe types: UDP scan, ACK probe, or different source ports\n2. Investigate indirectly: if the host has a web application, can that application reach the filtered service?\n3. Note it clearly in your report as 'state unknown from external scanning position'\n4. Consider re-testing later — sometimes firewall rules change, or the service comes online at different times\n\nMany critical findings live behind filtered ports. Treating them as resolved without follow-up is the most common way to produce an incomplete assessment."
+    },
+    {
+      "question": "How long does a full scan of all 65,535 ports actually take?",
+      "answer": "It depends on network conditions and Nmap timing settings. For a single host over a typical internet connection:\n\n• -T4 timing: 3–8 minutes for a host with mostly closed ports\n• Filtered ports slow this down significantly — each filtered port requires waiting the full timeout before moving on\n• A heavily filtered host (where most ports are filtered) can take 20+ minutes for a full-range scan at -T3\n\nProfessional approach: run the default scan first for a quick initial picture (seconds). Identify your high-priority targets. Then run the full-range scan (-p-) on those specific hosts. You do not need to full-scan every IP in scope — but you should full-scan every host that the default scan showed as interesting."
+    }
+  ]
+}

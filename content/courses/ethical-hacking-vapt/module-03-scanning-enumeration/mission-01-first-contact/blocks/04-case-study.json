@@ -1,0 +1,36 @@
+{
+  "id": "mod3m1-block-04-case-study",
+  "type": "case-study",
+  "order": 4,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The Cost of Skipping",
+  "company": "Mid-Sized Financial Services Firm (anonymised, composite of real incidents)",
+  "year": "2023",
+  "industry": "Financial Services",
+  "incident": "A penetration testing team skipped host discovery and began port scanning a target IP range directly, wasting hours and triggering an unintended abuse report — all because they assumed every authorised IP had a live system behind it.",
+  "whatHappened": [
+    "A penetration testing team was given a scope document listing 48 IP addresses belonging to a financial services client. The network range was recently migrated — sixteen of the IPs had been decommissioned when the client moved workloads to a new cloud provider. The IP range remained in scope as written in the original scope document, but the servers behind those IPs were gone.",
+    "The team began port scanning the full set of 48 IPs without running a host discovery sweep. Nmap's default scan sent probes to the most commonly used service ports on each address — more than a thousand different port numbers, covering the services most systems run.",
+    "For each of the 16 decommissioned IPs, Nmap waited for connection timeouts before marking ports as filtered or closed. When no live system exists behind an IP address, the scanner waits for a response that never arrives — around 30 seconds of waiting per group of ports, per dead host. Across more than a thousand ports multiplied by 16 dead hosts, the team was burning hours on connections that would never complete.",
+    "After three hours of scanning, the team noticed the output was unusually sparse — no open ports on most targets, no service banners, nothing. Only then did they realise they had been scanning dead IPs.",
+    "Meanwhile, the 16 decommissioned IP addresses had been reassigned by the hosting provider to a different customer. The port scan probes reached the new tenant's infrastructure. The hosting provider's abuse detection system flagged the scanning activity and notified both the original client and the new tenant — creating a situation the engagement team had to spend significant time explaining."
+  ],
+  "whyItHappened": [
+    "The team assumed every IP in the scope document had a live host behind it — without verifying first.",
+    "Host discovery was treated as optional rather than as the mandatory first step of every active scanning phase.",
+    "No documented workflow step required host discovery before port scanning. It depended on individual habit rather than process.",
+    "The team prioritised starting active scanning quickly over validating that the target list was current."
+  ],
+  "lessonsLearned": [
+    "A scope document lists authorised IP addresses — it does not guarantee those IPs have live systems behind them today. Network topology changes between the time the scope is defined and the time the test begins.",
+    "Host discovery must be the first active action of every engagement, every time. It is not an optional step for large ranges — it is the mandatory foundation.",
+    "A two-minute host discovery sweep would have immediately identified the 16 dead IPs, saving hours of scan time and preventing any contact with the unintended third-party tenant.",
+    "IP addresses can be reassigned. Scanning without confirming current ownership is not just an efficiency problem — it is a scope and legal risk."
+  ],
+  "impactStats": [
+    { "value": "3 hours", "label": "Wasted scanning dead IPs" },
+    { "value": "16 of 48", "label": "IPs with no live host — not detected before scanning" },
+    { "value": "1", "label": "Abuse report filed by hosting provider" },
+    { "value": "~2 minutes", "label": "Time a host discovery sweep would have taken" }
+  ]
+}

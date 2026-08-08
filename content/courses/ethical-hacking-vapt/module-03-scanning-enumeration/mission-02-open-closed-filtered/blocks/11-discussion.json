@@ -1,0 +1,16 @@
+{
+  "id": "mod3m2-block-11-discussion",
+  "type": "discussion",
+  "order": 11,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Apply Your Knowledge",
+  "title": "Back to Meridian Financial — Reading the Port Map",
+  "prompt": "You have run the port scan on both Meridian Financial hosts. Here is what the default scan returned:\n\n**45.77.180.10 — Development Server:**\n22/tcp    open     ssh\n80/tcp    open     http\n443/tcp   open     https\n3306/tcp  filtered mysql\n8080/tcp  closed   http-proxy\n\n**45.77.180.11 — Legacy Server:**\n22/tcp    open     ssh\n80/tcp    open     http\n\nJames looks at the output for 45.77.180.11. 'Just two open ports. SSH and HTTP. Cleaner than the dev server.'\n\nMaya says nothing. She types:\n\nnmap -sS -p- -T4 45.77.180.11\n\nThirty seconds pass. New output appears:\n\n22/tcp    open   ssh\n80/tcp    open   http\n8443/tcp  open   https-alt\n\nJames stares at it. 'Eight-four-four-three. That was not in the first scan.'\n\n'No,' Maya said. 'It was not in the default range.'\n\nBefore you continue: what are the professional implications of this discovery? And what would James have concluded about 45.77.180.11 if Maya had not run the full-range scan?",
+  "context": "Port 8443 is a registered port commonly used for alternative HTTPS services — web management interfaces, administrative panels, API endpoints, and monitoring tools. It is not in Nmap's default scan range. Services on port 8443 are frequently legacy or administrative interfaces that get deployed and then forgotten — exactly the category of service most likely to be running default credentials or an outdated software version.\n\nThe development server's 3306/tcp filtered result is also unresolved. A MySQL port, filtered from external access, on a development server. The filter confirms someone decided this port needed protection. It does not confirm the database is inaccessible through all possible paths — especially if the web application on port 80 or 443 has database connectivity.",
+  "guideQuestions": [
+    "If Maya had not run the full-range scan on 45.77.180.11 — what would the engagement log have said about the legacy server? What would the client have been told?",
+    "Port 3306/tcp is filtered on the development server. James believes the database is protected by the firewall. Is that a safe conclusion? What would a professional do next with this finding?",
+    "Looking at both hosts side by side: which appears more exposed right now? What is your reasoning, and what would you document in the engagement log?",
+    "Port 8443 on 45.77.180.11 is open — but the service column just says 'https-alt'. What does that label actually tell you? What do you need to do next to find out what is really running there?"
+  ]
+}

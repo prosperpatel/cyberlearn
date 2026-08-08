@@ -1,0 +1,36 @@
+{
+  "id": "mod3m1-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "The First Packet",
+  "narrative": [
+    "Monday, 09:14 AM. The coffee was still hot. Maya had her notes open — the Meridian Financial passive intelligence profile, twenty-three pages, seventeen confirmed findings, four targets marked as priority.",
+    "James had his terminal open. He typed: nmap 45.77.180.10",
+    "'Wait,' Maya said, without looking up.",
+    "James stopped. 'What?'",
+    "'What question is that command trying to answer?'",
+    "James thought about it. 'Finding out what's running on it?'",
+    "'Right. But we don't know if it's running anything at all yet.' Maya closed her notes and turned to face him. 'Think about what we actually have. Those IP addresses in our attack surface map — they came from DNS records, Shodan, certificate logs. Some of that data is months old. We do not know which of those systems are alive right now, at 9 AM on a Monday morning. Servers get decommissioned. VPS contracts expire. A development server goes offline after the launch. Things change.'",
+    "'So you're saying — before we scan ports, we need to know if there's even a system there?'",
+    "'Exactly. Think about what happens if you run a full port scan against a dead IP. It times out. You wait. Nothing comes back. You don't know if the host is dead, or if it's alive but blocking your scan. You've wasted time, generated noise — and you don't even know which outcome you're looking at.' She pulled her chair next to his. 'Host discovery first. Verify which systems are alive and responding. Then — and only then — we scan ports. Every port scan we run should target a host we have already confirmed is there.'",
+    "James nodded slowly. 'How do we do that?'",
+    "Maya smiled. 'The same way you check if someone's home before you drive across town to visit them.'",
+    "She opened a new terminal window. 'You call first. Let me show you what computers use instead of a phone call.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of experience. Maya has never wasted a scan on a dead host — because she always verifies first.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First real engagement beyond the lab. James knows the tools. He is learning — from Maya — when and how to use them.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "discovery"
+}

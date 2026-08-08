@@ -1,0 +1,15 @@
+{
+  "id": "mod2m2-block-02-discussion",
+  "type": "discussion",
+  "order": 2,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Opening Question",
+  "title": "Before You Know How It Works",
+  "prompt": "Right now, without looking anything up — in your own words, what do you think happens when you type 'google.com' into a web browser and press Enter? Walk through it step by step, even if you're guessing. Where does the request go? How does your computer know which machine on the internet to connect to? What is happening in those few seconds between pressing Enter and the page appearing?",
+  "context": "Most people who use the internet every day — including many people who work in technology — cannot answer this question accurately. That is not a criticism. The internet is specifically designed to make this complexity invisible to the user. But in cybersecurity, invisible infrastructure is exactly what we need to see clearly. Your guess here — whatever it is — will help you recognise the moment later in this mission when something clicks into place and you finally understand what was actually happening all along.",
+  "guideQuestions": [
+    "Your computer has to find Google's servers somewhere among billions of internet-connected devices. How do you think it knows where to look — given that you only typed a name, not an address?",
+    "The word 'google.com' is human-readable. But computers route traffic using numbers, not words. What do you think translates between the word you typed and the number the computer actually needs?",
+    "If a brand new company registered a domain today — 'my-new-startup.com' — what would need to happen before your browser could successfully visit it? What parts of the internet would need to be updated?"
+  ]
+}

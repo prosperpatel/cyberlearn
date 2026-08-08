@@ -1,0 +1,66 @@
+{
+  "id": "mod2m4-block-15-cheat-sheet",
+  "type": "cheat-sheet",
+  "order": 15,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Cheat Sheet",
+  "title": "Google Dorking & Search Reconnaissance Quick Reference",
+  "sections": [
+    {
+      "heading": "Core Google Search Operators",
+      "rows": [
+        { "label": "site:", "value": "Limit to one domain. site:target.com — shows all indexed pages. The result count indicates the size of the indexed footprint." },
+        { "label": "filetype:", "value": "Find specific file types. site:target.com filetype:pdf | filetype:xlsx | filetype:docx | filetype:env | filetype:sql | filetype:conf" },
+        { "label": "intitle:", "value": "Match page title. intitle:\"index of\" → directory listings. intitle:\"index of\" site:target.com → open directories on target." },
+        { "label": "inurl:", "value": "Match URL content. inurl:admin | inurl:login | inurl:portal | inurl:phpmyadmin | inurl:wp-admin | inurl:manager" },
+        { "label": "intext:", "value": "Match body content. intext:\"confidential\" | intext:\"internal use only\" | intext:\"BEGIN RSA PRIVATE KEY\" | intext:password" },
+        { "label": "cache:", "value": "Google's last saved copy. cache:target.com/page — shows content as Google last crawled it. Useful for deleted pages (where still available)." },
+        { "label": "\"exact phrase\"", "value": "Require exact match. \"target company name\" filetype:xlsx — finds spreadsheets mentioning the target anywhere on the web." },
+        { "label": "- (minus)", "value": "Exclude term. site:target.com -www — focuses on subdomains other than www." }
+      ]
+    },
+    {
+      "heading": "Professional Dork Combinations",
+      "rows": [
+        { "label": "Sensitive documents", "value": "site:target.com filetype:pdf intitle:confidential | site:target.com filetype:xlsx | site:target.com filetype:docx \"internal use only\"" },
+        { "label": "Open directories", "value": "site:target.com intitle:\"index of\" | site:target.com intitle:\"index of\" inurl:backup | site:target.com intitle:\"index of\" inurl:upload" },
+        { "label": "Login portals", "value": "site:target.com inurl:admin | site:target.com inurl:login | site:target.com inurl:wp-admin | site:target.com inurl:phpmyadmin" },
+        { "label": "Configuration files", "value": "site:target.com filetype:env | site:target.com filetype:conf | site:target.com filetype:cfg | site:target.com filetype:log" },
+        { "label": "GitHub credential leaks", "value": "site:github.com \"target.com\" password | site:github.com \"target company\" api_key OR secret OR token" },
+        { "label": "Pastebin mentions", "value": "site:pastebin.com \"target company name\"" }
+      ]
+    },
+    {
+      "heading": "robots.txt and sitemap.xml",
+      "rows": [
+        { "label": "robots.txt location", "value": "Always at root: target.com/robots.txt — Read it first on every engagement. Lists paths the organisation considers sensitive as Disallow directives." },
+        { "label": "What robots.txt does", "value": "Requests cooperative crawlers skip listed paths. Does NOT restrict access. Does NOT prevent non-cooperative crawlers. Listed paths are directly accessible." },
+        { "label": "sitemap.xml location", "value": "Usually at target.com/sitemap.xml (or referenced in robots.txt Sitemap: directive) — Complete list of intended public URLs. Baseline for identifying unintended exposures." },
+        { "label": "Professional action", "value": "Download both files. Every robots.txt Disallow path gets visited directly. Every URL in sitemap.xml is the intended footprint — URLs found elsewhere are unintended." }
+      ]
+    },
+    {
+      "heading": "Beyond Google",
+      "rows": [
+        { "label": "Bing", "value": "Supports site:, filetype:, intitle:, inurl: — run same dorks. Different index = different results. May contain content Google deindexed." },
+        { "label": "web.archive.org", "value": "Wayback Machine — historical page snapshots. Enter any domain. Check robots.txt history, old page versions, deleted content, former subdomains." },
+        { "label": "Shodan (shodan.io)", "value": "Search engine for internet-connected devices. org:\"Target Name\", ssl:\"target.com\" — reveals open ports, software versions, SSL certificates. Use in authorised engagements." },
+        { "label": "GitHub / GitLab", "value": "site:github.com \"target.com\" — finds public repositories referencing the target. Use TruffleHog or Gitleaks for credential scanning of repositories." }
+      ]
+    },
+    {
+      "heading": "Professional Google Dorking Sequence",
+      "rows": [
+        { "label": "Step 1", "value": "site:target.com — understand indexed footprint size and content categories" },
+        { "label": "Step 2", "value": "target.com/robots.txt — read all Disallow paths; visit each one directly" },
+        { "label": "Step 3", "value": "target.com/sitemap.xml — establish intended public URL baseline" },
+        { "label": "Step 4", "value": "site:target.com filetype:pdf | xlsx | docx | env | sql — find indexed documents" },
+        { "label": "Step 5", "value": "site:target.com intitle:\"index of\" — find open directory listings" },
+        { "label": "Step 6", "value": "site:target.com inurl:admin | login | portal | phpmyadmin — find login portals" },
+        { "label": "Step 7", "value": "site:github.com + site:pastebin.com — check external platforms for leaks" },
+        { "label": "Step 8", "value": "web.archive.org — check historical snapshots for deleted content and old infrastructure" },
+        { "label": "Step 9", "value": "Extract metadata from any discovered documents: exiftool document.pdf" }
+      ]
+    }
+  ]
+}

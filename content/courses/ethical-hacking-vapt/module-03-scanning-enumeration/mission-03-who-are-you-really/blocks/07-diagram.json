@@ -1,0 +1,31 @@
+{
+  "id": "mod3m3-block-07-diagram",
+  "type": "diagram",
+  "order": 7,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Service Identity Flow",
+  "title": "From Open Port to Confirmed Version: The Professional Path",
+  "description": "The full professional sequence from a known open port to actionable intelligence — how banner grabbing and Nmap -sV work together to produce the version number that unlocks vulnerability research.",
+  "nodes": [
+    { "id": "open_port", "label": "Open Port\nPort 8443", "type": "attacker", "detail": "Confirmed from port scanning in Mission 2" },
+    { "id": "banner_grab", "label": "Banner Grab\n(curl / nc)", "type": "action", "detail": "Connect and read what the service announces" },
+    { "id": "nmap_sv", "label": "Nmap -sV\n(Probe Database)", "type": "action", "detail": "Send known probes, match behavioural signatures" },
+    { "id": "banner_result", "label": "Banner\n'Apache Tomcat/7.0.37'", "type": "result", "detail": "Service's self-reported identity" },
+    { "id": "sv_result", "label": "Behavioural Match\nApache Tomcat 7.0.37", "type": "result", "detail": "Identity confirmed through response patterns" },
+    { "id": "version", "label": "Version Confirmed\n7.0.37", "type": "target", "detail": "The key that unlocks CVE research" },
+    { "id": "cve_search", "label": "CVE Database\nSearch", "type": "action", "detail": "Search NVD: apache tomcat 7.0.37" },
+    { "id": "findings", "label": "Known Vulnerabilities\nIdentified", "type": "result", "detail": "Specific CVEs affecting this exact version" }
+  ],
+  "edges": [
+    { "from": "open_port", "to": "banner_grab", "label": "Connect and read", "type": "probe", "animated": true },
+    { "from": "open_port", "to": "nmap_sv", "label": "Probe with signatures", "type": "probe", "animated": true },
+    { "from": "banner_grab", "to": "banner_result", "label": "Service responds", "type": "success", "animated": true },
+    { "from": "nmap_sv", "to": "sv_result", "label": "Signature matched", "type": "success", "animated": true },
+    { "from": "banner_result", "to": "version", "label": "Parse version string", "type": "info" },
+    { "from": "sv_result", "to": "version", "label": "Confirm version", "type": "info" },
+    { "from": "version", "to": "cve_search", "label": "Version unlocks research", "animated": true },
+    { "from": "cve_search", "to": "findings", "label": "CVEs identified", "type": "success", "animated": true }
+  ],
+  "caption": "The service identification workflow. Banner grabbing and Nmap -sV run against the same open port — both aiming at the same output: the version number.\n\nThe version number is the pivotal point. Without it, the CVE database cannot be searched systematically. With it, the path from 'open port' to 'confirmed vulnerability' is direct and evidence-based.\n\nNote: when both methods agree on the same version, confidence is high. When they disagree, the discrepancy is itself a finding.",
+  "interactive": false
+}

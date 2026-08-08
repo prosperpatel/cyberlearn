@@ -1,0 +1,21 @@
+{
+  "id": "mod3m2-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "The Right Analogy",
+  "title": "The Office Building",
+  "realWorldThing": "Visiting a large office building with many numbered departments, some open, some closed, and one with a security guard blocking the corridor",
+  "concept": "Port scanning — identifying which services on a networked host are open, closed, or blocked by a firewall",
+  "comparison": "Imagine you are doing a security audit of a large office building you have never visited. The building has one address — but inside, it has hundreds of numbered departments, each running a different function.\n\nYou walk through the building knocking on doors.\n\nDepartment 22 (SSH). You knock. A voice immediately: 'Yes, come in, what do you need?' The department is staffed. The door is unlocked. Someone is actively there and ready to work with you. That is open.\n\nDepartment 8080 (HTTP-proxy). You knock. A voice: 'Nobody here today — wrong department.' The room is real. The host is real. But this department is not currently staffed. That is closed. The building told you clearly: nothing here.\n\nDepartment 3306 (MySQL). You turn the corner and a security guard steps in front of you before you can even reach the door. 'This area is not accessible.' You cannot see the door. You cannot hear what is behind it. You have no idea if the room is full of critical equipment or completely empty.\n\nThat is filtered. And here is what the guard's presence tells you: someone made a deliberate decision to station protection at this specific department. That decision implies something was considered worth protecting. Whether the room holds what you are looking for — that requires a completely different approach to find out.\n\nFiltered is not the same as empty. Filtered means you cannot see inside.",
+  "breakdown": [
+    { "realWorld": "The building's street address", "techEquivalent": "The IP address — identifies the machine, not the services on it" },
+    { "realWorld": "Numbered departments inside the building", "techEquivalent": "Port numbers — route network traffic to the correct application" },
+    { "realWorld": "'Yes, come in' — someone answers immediately", "techEquivalent": "Open — SYN/ACK received, service is listening and responding" },
+    { "realWorld": "'Nobody here today, wrong department'", "techEquivalent": "Closed — RST received, host alive but no service on this port" },
+    { "realWorld": "Security guard blocks access before you reach the door", "techEquivalent": "Filtered — firewall drops the probe, port state unknown" },
+    { "realWorld": "Guard implies something worth protecting is behind the door", "techEquivalent": "Filtered ports often protect real services — investigate further, never assume empty" },
+    { "realWorld": "Checking every numbered department in the building", "techEquivalent": "Full-range scan (-p-) — checking all 65,535 possible ports" },
+    { "realWorld": "Only checking the departments on the main floor directory", "techEquivalent": "Default scan — checking only the most commonly used ports" }
+  ]
+}

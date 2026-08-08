@@ -1,0 +1,30 @@
+{
+  "id": "mod3m3-block-01-mission-brief",
+  "type": "mission-brief",
+  "order": 1,
+  "estimatedMinutes": 3,
+  "sidebarLabel": "Mission Brief",
+  "missionTitle": "Who Are You Really?",
+  "operativeCodename": "Operation Service Identity",
+  "subtitle": "The port is open. Now find out who is standing behind the door.",
+  "briefing": "Monday, 12:31 PM. The port map is complete.\n\nTwo confirmed live hosts. Eight open ports across both systems. And on port 8443 of the legacy server — a service that would have been invisible if Maya had stopped at the default scan.\n\nBut the service column still reads: https-alt.\n\nAn IANA label. A convention. Not a confirmed identity.\n\n'Now we fingerprint it,' Maya had said.\n\nService fingerprinting is the technique that transforms an open port number into a confirmed software identity. It is the bridge between knowing a door exists and knowing who is standing behind it — their name, their version, their history, and any known weaknesses that version carries.\n\nIn Module 2, passive reconnaissance captured a Tomcat version banner from the legacy server via Shodan. Active fingerprinting will confirm whether that same service is still running — and exactly which version it is.\n\nThis mission identifies the occupants.",
+  "whyItMatters": "An open port without service identity is like a closed door in an unfamiliar building — you know the door is there, but you do not know if it leads to a storage room or a vault. Service fingerprinting is how professionals determine what they are actually looking at before they start testing it. Without version information, there is no way to systematically search for known vulnerabilities. With it, the path from 'open port' to 'confirmed vulnerability' becomes direct and methodical.",
+  "objectives": [
+    "Explain what a service banner is and why many services announce their identity when first contacted",
+    "Use manual banner grabbing with curl and netcat to retrieve service information from open ports",
+    "Explain how Nmap's -sV flag probes services to determine what software and version is running",
+    "Interpret service fingerprinting output — software name, version string, and protocol details",
+    "Explain why version numbers are required for systematic vulnerability research",
+    "Explain why hidden or modified banners do not make systems secure against competent assessment",
+    "Document service fingerprinting findings in the engagement log with professional precision"
+  ],
+  "skillsUnlocked": [
+    "Manual banner grabbing using curl and netcat against web, SSH, and custom services",
+    "Running Nmap service version detection (-sV) against confirmed open ports",
+    "Connecting version numbers to CVE database research as the foundation for Mission 4"
+  ],
+  "closingMessage": "By the end of this mission, you will have confirmed the identity and version of every service on both Meridian Financial hosts. Eight services. Eight version strings. That information becomes the foundation for Mission 4: identifying which of those versions carry known vulnerabilities.",
+  "difficulty": "beginner",
+  "xpReward": 100,
+  "tags": ["service-detection", "banner-grabbing", "nmap", "version-detection", "fingerprinting", "active-recon", "cve-research", "network-basics"]
+}

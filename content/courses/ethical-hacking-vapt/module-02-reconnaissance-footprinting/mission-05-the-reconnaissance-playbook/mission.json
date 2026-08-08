@@ -1,0 +1,41 @@
+{
+  "id": "mission-05-the-reconnaissance-playbook",
+  "slug": "mission-05-the-reconnaissance-playbook",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-02-reconnaissance-footprinting",
+  "title": "The Reconnaissance Playbook",
+  "tagline": "Individual techniques are skills. A methodology is what makes you a professional.",
+  "description": "The capstone mission of Reconnaissance & Footprinting. Learn how professional penetration testers combine WHOIS, DNS enumeration, Google Dorking, and OSINT into a single structured workflow — from client brief to attack surface map. Master the complete passive reconnaissance methodology used in real engagements, including scope planning, intelligence organisation, attack surface prioritisation, and professional reporting.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 65,
+  "xpReward": 100,
+  "order": 5,
+  "missionNumber": 5,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-04-google-knows-more-than-their-it-team"],
+  "tags": ["reconnaissance", "methodology", "osint", "scope", "attack-surface", "penetration-testing", "recon-planning", "intelligence-profile", "passive-recon", "professional-workflow"],
+  "learningObjectives": [
+    "Describe the complete professional passive reconnaissance workflow from scope review to recon report",
+    "Explain how to plan a reconnaissance phase before beginning any information gathering",
+    "Combine WHOIS, DNS enumeration, and search engine reconnaissance into a single coherent intelligence profile",
+    "Prioritise an attack surface by severity and exploitability based on passive recon findings",
+    "Identify when passive reconnaissance is complete and active testing can begin",
+    "Explain the professional and ethical standards governing scope, escalation, and documentation"
+  ],
+  "skills": [
+    "Planning a passive reconnaissance phase from a client scope document",
+    "Building a structured intelligence profile by correlating WHOIS, DNS, and OSINT findings",
+    "Prioritising an attack surface into Critical / High / Medium / Low tiers",
+    "Writing a reconnaissance section of a professional penetration test report",
+    "Making professional judgement calls on scope boundaries and immediate escalation"
+  ],
+  "badge": "Reconnaissance Analyst",
+  "missionIcon": "📋",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

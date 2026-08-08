@@ -1,0 +1,45 @@
+{
+  "id": "mod2m4-block-13-common-mistakes",
+  "type": "common-mistakes",
+  "order": 13,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Common Mistakes",
+  "intro": "These five mistakes define the gap between someone who has heard of Google Dorking and someone who uses it professionally. Three of them create legal or ethical exposure. Two of them cause professionals to miss critical findings. All five are correctable with one rule: Google is a database, not a door — querying it is research, and what you do with the results is a professional decision governed by scope, ethics, and minimum necessary access.",
+  "mistakes": [
+    {
+      "title": "Believing robots.txt protects sensitive content",
+      "wrong": "'We have /admin listed in robots.txt Disallow, so Google won't index it and nobody can find it. It's protected.'",
+      "right": "robots.txt tells cooperative crawlers to skip a path. It does not restrict access to that path for any visitor — human or automated — who knows or can guess the URL. It also announces that the path exists to anyone who reads robots.txt. Security professionals read robots.txt on every engagement specifically to find the paths organisations consider sensitive. robots.txt is a disclosure risk, not a protection.",
+      "explanation": "The correct protection for a sensitive web path is server-side access control: require authentication before returning any response, or implement IP allowlisting so only authorised networks can reach the path. robots.txt should be used to manage search engine indexing behaviour — not as a substitute for access control. An admin portal listed as Disallow in robots.txt but accessible to any internet user is not protected. It is announced.",
+      "severity": "critical"
+    },
+    {
+      "title": "Downloading sensitive documents found via Google Dorking",
+      "wrong": "'The file is publicly accessible — Google indexed it, I can click the result and download it, and it's legitimate because it's technically public.'",
+      "right": "A file that is accidentally publicly accessible is not intentionally public. In a professional context, downloading sensitive documents beyond what is necessary to prove the exposure creates legal complexity — even when the files are technically accessible. The professional standard is minimum necessary access: capture a screenshot of the Google search result and the URL, confirm the file is accessible (without opening it), and report the finding. The client's team handles the remediation and breach assessment.",
+      "explanation": "The question is not whether you can access the file — it is whether accessing it is appropriate. A 2.4MB database backup sitting in an open directory is a critical finding. Proving it exists requires: showing the Google result, showing the directory listing with the filename and size, and confirming the URL returns a file (by checking the HTTP response code — 200 means accessible). Downloading the 2.4MB backup to your laptop is not necessary to prove the finding and introduces data you did not need and should not have.",
+      "severity": "critical"
+    },
+    {
+      "title": "Assuming Google Dorking is only useful on websites",
+      "wrong": "'Google Dorking is a web technique. It finds web pages. I need a different tool for infrastructure, code, and documents.'",
+      "right": "Google Dorking spans multiple sources. The same index surfaces: PDF and Word documents hosted on web servers, GitHub repositories (site:github.com), Pastebin pastes (site:pastebin.com), LinkedIn profiles, news coverage, job postings (which reveal technology stack), academic papers, regulatory filings, press releases, and more. A well-structured Google Dork session covers web pages, documents, code repositories, and the web's broader record of the target organisation.",
+      "explanation": "Google's index is not limited to web pages. It includes any publicly accessible document, any indexed public repository, and any content on any site Google has crawled. Job postings alone are a reconnaissance source: a job ad for 'Senior Salesforce Developer with experience in MuleSoft API integration' confirms the organisation uses Salesforce and MuleSoft — and is probably expanding both. Technology stack intelligence from job postings informs the active scanning phase without touching any of the target's systems.",
+      "severity": "warning"
+    },
+    {
+      "title": "Treating a cached page as the current state of the target",
+      "wrong": "'I loaded the cached version and it shows an admin panel at /legacy-admin with default login credentials. I can use that to access the system.'",
+      "right": "A cached page shows the state of a page at the last time Google crawled it — which may have been weeks ago. The live server may have different content, different access controls, or may no longer serve that URL at all. A credential visible in a cached page is a historical finding; it tells you something existed, not that it still exists. Confirm findings against the live server before drawing conclusions. And confirming a cached finding on a live system crosses into active testing.",
+      "explanation": "Cache is reconnaissance data, not current intelligence. It is most useful for: understanding what a page contained before it was removed, identifying old version numbers that suggest the technology era, and discovering paths or content that may have been intentionally hidden. Any cached finding needs to be verified against the live server — in the active testing phase, with authorisation — before acting on it.",
+      "severity": "warning"
+    },
+    {
+      "title": "Trying the admin portal login during passive recon",
+      "wrong": "'I found the admin portal via Google Dorking. Let me try admin/admin to see if it works — that's not really hacking, it's just a guess.'",
+      "right": "Attempting any authentication — even a single common credential pair — is active testing. It generates a log entry on the target server. It may trigger account lockout. It is beyond the scope of passive reconnaissance. Any credential test requires explicit written authorisation for that specific system. The finding is: the admin portal is publicly accessible and indexed. The test of whether credentials work happens during the active phase.",
+      "explanation": "This is the most common mistake beginners make when they first discover an exposed admin portal. The instinct is immediate: 'Let me see if I can get in.' But making an authentication request to a server is not passive — it is a connection to the target's infrastructure that is logged, that triggers security monitoring, and that requires authorisation. In an authorised engagement during the active phase, credential testing of an in-scope admin portal is legitimate work. During passive recon, before the active phase begins, it is out of scope regardless of how trivial the attempt seems.",
+      "severity": "critical"
+    }
+  ]
+}

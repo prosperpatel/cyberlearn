@@ -1,0 +1,75 @@
+{
+  "id": "mod2m1-block-16-quiz",
+  "type": "quiz",
+  "order": 16,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "Quiz",
+  "passingScore": 80,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "A security researcher searches LinkedIn to find all employees at a target company with 'IT Administrator' in their job title, then records their names, roles, and the software tools they list in their profiles. Which type of reconnaissance is this?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Active reconnaissance, because they are collecting information about real people", "isCorrect": false },
+        { "id": "b", "text": "Passive reconnaissance, because they are reading publicly available information with no direct contact with the target's systems", "isCorrect": true },
+        { "id": "c", "text": "Active reconnaissance, because LinkedIn is not authorised for security research", "isCorrect": false },
+        { "id": "d", "text": "Neither — this would only be reconnaissance if technical infrastructure is being researched", "isCorrect": false }
+      ],
+      "explanation": "LinkedIn research is passive reconnaissance. The researcher is reading publicly available information that the employees themselves chose to post — no contact is made with the target company's systems, no packets are sent, and no logs are created on the target's infrastructure. Human-layer intelligence (employee names, roles, technology familiarity) is as valuable as technical intelligence — and it is gathered the same way: passively, from public sources.",
+      "xpReward": 15
+    },
+    {
+      "id": "q2",
+      "question": "What does 'Open Source' mean in the context of OSINT (Open Source Intelligence)?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Intelligence gathered using open-source security tools such as Nmap and Metasploit", "isCorrect": false },
+        { "id": "b", "text": "Intelligence gathered from Linux and other open-source operating systems", "isCorrect": false },
+        { "id": "c", "text": "Intelligence gathered from publicly available sources — information accessible to anyone without special access", "isCorrect": true },
+        { "id": "d", "text": "Intelligence that is shared publicly between security teams and organisations", "isCorrect": false }
+      ],
+      "explanation": "In OSINT, 'open source' means publicly available — information that anyone can access without special privileges, credentials, or legal authorisation. It has nothing to do with open-source software. OSINT sources include websites, social media, public records, news archives, WHOIS databases, SSL certificate logs, breach databases, and job postings. All of these are publicly accessible, and gathering intelligence from them is entirely legal.",
+      "xpReward": 15
+    },
+    {
+      "id": "q3",
+      "question": "In 2013, attackers breached Target Corporation's payment card systems by first compromising Fazio Mechanical, a small HVAC vendor with remote access to Target's network. Which concept does this best illustrate?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Digital footprint — Target had left too much information publicly visible online", "isCorrect": false },
+        { "id": "b", "text": "Attack surface — the breach used an entry point (a vendor) that was part of Target's attack surface but outside its direct security controls", "isCorrect": true },
+        { "id": "c", "text": "Active reconnaissance — the attackers sent packets to Fazio Mechanical's network", "isCorrect": false },
+        { "id": "d", "text": "OSINT — the attackers only used publicly available information to carry out the breach", "isCorrect": false }
+      ],
+      "explanation": "The Target breach illustrates the attack surface concept precisely. Target's own systems were well-defended. The attackers found an entry point that existed outside Target's direct control — a vendor (Fazio Mechanical) with legitimate remote access credentials. This vendor was part of Target's attack surface even though Target did not own or control Fazio's security posture. An organisation's attack surface always extends beyond its own systems to every supplier, vendor, and partner with network access.",
+      "xpReward": 15
+    },
+    {
+      "id": "q4",
+      "question": "A penetration tester uses the website crt.sh to search for SSL certificates associated with a target company's domain and discovers three subdomains that are not listed on the company's public website. Which statement best describes this activity?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "Active reconnaissance — the tester interacted with the company's systems to discover the subdomains", "isCorrect": false },
+        { "id": "b", "text": "Passive reconnaissance — the tester read a public SSL certificate log; the target's systems were not contacted", "isCorrect": true },
+        { "id": "c", "text": "Illegal reconnaissance — querying certificate logs requires the domain owner's permission", "isCorrect": false },
+        { "id": "d", "text": "Passive reconnaissance, but only if the subdomains discovered are publicly accessible", "isCorrect": false }
+      ],
+      "explanation": "Certificate Transparency logs are deliberately public by design — every Certificate Authority is required to log every certificate they issue in publicly readable logs. Reading these logs is passive reconnaissance: you are querying a public database, not contacting the target. This is entirely legal. The subdomain discoveries made through crt.sh often reveal staging environments, development portals, and legacy systems that the organisation forgot were still running — exactly the kind of high-value intelligence that distinguishes thorough OSINT from a surface-level search.",
+      "xpReward": 15
+    },
+    {
+      "id": "q5",
+      "question": "A penetration tester on an authorised engagement has completed extensive passive OSINT and is about to begin port scanning the target's web servers using Nmap. Before launching the scan, what is the most important thing to verify?",
+      "type": "single",
+      "options": [
+        { "id": "a", "text": "That the Nmap tool is installed and up to date on their testing machine", "isCorrect": false },
+        { "id": "b", "text": "That the specific servers they intend to scan are within the agreed written scope, and that active scanning techniques are explicitly authorised", "isCorrect": true },
+        { "id": "c", "text": "That the target company's IT team is aware the scan is about to begin", "isCorrect": false },
+        { "id": "d", "text": "That the passive reconnaissance phase produced enough findings to justify active scanning", "isCorrect": false }
+      ],
+      "explanation": "Before any active reconnaissance or scanning begins, the tester must verify that the specific systems and techniques are covered by the written scope agreement. Port scanning is active reconnaissance — it sends packets to the target's systems and creates log entries. Even with a signed contract, scanning systems outside the agreed scope is unauthorised access. The scope agreement is a legal document, not a formality, and the tester is responsible for operating within its exact boundaries. Notifying the IT team in advance is sometimes a courtesy but is not universally required; the scope agreement is what matters legally.",
+      "xpReward": 20
+    }
+  ]
+}

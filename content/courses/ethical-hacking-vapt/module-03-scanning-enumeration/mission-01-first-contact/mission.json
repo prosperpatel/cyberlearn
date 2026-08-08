@@ -1,0 +1,41 @@
+{
+  "id": "mission-01-first-contact",
+  "slug": "mission-01-first-contact",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-03-scanning-enumeration",
+  "title": "First Contact",
+  "tagline": "The moment everything changes — your first packet crosses into active territory.",
+  "description": "You have a complete passive intelligence picture of the Meridian Financial network. Now the engagement goes active. Before scanning a single port, professionals answer one question: which systems are actually alive? Learn host discovery from first principles — what 'alive' means on a network, how ICMP works, why firewalls make hosts appear offline when they are not, and how TCP probes reveal hosts that ping cannot.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 60,
+  "xpReward": 100,
+  "order": 1,
+  "missionNumber": 1,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-05-the-reconnaissance-playbook"],
+  "tags": ["host-discovery", "nmap", "icmp", "active-recon", "ping-sweep", "tcp-probe", "network-basics", "scanning"],
+  "learningObjectives": [
+    "Explain why host discovery precedes port scanning — what goes wrong if you skip it",
+    "Describe what 'alive' means for a networked system from first principles: IP addresses, packets, and responses",
+    "Explain how ICMP echo request and echo reply work, and what a successful ping proves",
+    "Explain why a non-response to ping does not prove a host is offline",
+    "Describe TCP-based host discovery and when it reveals hosts that ICMP cannot",
+    "Use Nmap host discovery flags to identify live hosts in an IP range",
+    "Document host discovery results in an engagement log with method, timestamp, and professional interpretation"
+  ],
+  "skills": [
+    "Running Nmap host discovery with ICMP and TCP probe types",
+    "Interpreting host discovery output — including the ambiguous 'no response' case",
+    "Recognising ICMP filtering and applying TCP probes as a follow-up",
+    "Documenting live host findings professionally in an engagement log"
+  ],
+  "badge": "First Signal",
+  "missionIcon": "📡",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}

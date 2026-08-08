@@ -1,0 +1,30 @@
+{
+  "id": "mod2m2-block-12-student-questions",
+  "type": "student-questions",
+  "order": 12,
+  "estimatedMinutes": 4,
+  "sidebarLabel": "Your Questions",
+  "intro": "These are the questions every student asks when they first learn about domains, DNS, and WHOIS. The answers matter more than they seem — each one connects directly to professional practice.",
+  "faqs": [
+    {
+      "question": "Is it legal to run WHOIS lookups, query DNS records, and check ASN data on a company without their permission?",
+      "answer": "Yes, completely and unambiguously. WHOIS, DNS, and ASN data are all designed to be publicly accessible — that is the point of these systems. WHOIS exists because domain registration requires transparency; ICANN policy historically required registrants to provide accurate contact information accessible to anyone. DNS is publicly queryable by design because the entire internet depends on any device being able to look up any domain name at any time — without DNS being globally accessible, the internet would not function. ASN and IP WHOIS data is maintained by Regional Internet Registries (ARIN, RIPE, APNIC) as a public resource for network operators, researchers, and abuse response teams. Querying any of these databases is not hacking. It is reading a public record that was designed to be read."
+    },
+    {
+      "question": "If WHOIS is supposed to be public, why does privacy protection exist — and why does GDPR matter here?",
+      "answer": "WHOIS privacy protection predates GDPR by many years — it was always available as a paid add-on from most registrars, and personal domain owners (particularly those running personal websites or small businesses) used it to avoid receiving spam and unwanted contact at their personal addresses. After GDPR was implemented in the EU in 2018, the tension between ICANN's transparency requirements and European data protection law created a period of significant uncertainty. ICANN eventually adopted a tiered access model: basic WHOIS data (registrar, nameservers, registration dates) remains public, while personal registrant contact information is restricted and available only through legitimate access pathways for law enforcement and verified security researchers. This is why you now frequently see WHOIS records where the registrant is shown as 'REDACTED FOR PRIVACY' — the underlying registration still exists and is accessible to those with verified legitimate purposes, but is not publicly visible."
+    },
+    {
+      "question": "What exactly is the difference between a domain not resolving and a domain not existing?",
+      "answer": "This is an important technical distinction. A domain 'not resolving' typically means the domain is registered — it exists in the WHOIS database — but has either no A record configured (pointing to no server) or has a DNS record pointing to a server that is not currently responding. A domain 'not existing' means it was never registered, or its registration has expired — a DNS query for it returns NXDOMAIN (Non-Existent Domain). This distinction matters enormously in threat intelligence. A registered domain with an active MX record but no A record — like the suspicious no-hyphen domain in the discussion scenario — is actively configured for email but not yet serving web content. This is exactly the configuration for a domain being prepared for a phishing campaign: the attacker sets up the email infrastructure first, then builds the fake website when they are ready to launch the attack."
+    },
+    {
+      "question": "Can the same company own domains registered under completely different TLDs?",
+      "answer": "Yes — and large organisations routinely do this. A company might own company.com, company.co.uk, company.de, company.io, company.net, and company.org, all pointing to the same or related infrastructure. From a reconnaissance perspective, this means that investigating a target organisation should include a search for all their registered domain variants across multiple TLDs — not just the primary .com. Some organisations also own defensive registrations: registering company-typo.com, companyy.com, and similar variations themselves, so that attackers cannot use them for phishing. When a domain variant is NOT defensively registered by the target, that absence is itself an opportunity — and in threat intelligence investigations, finding typosquatting domains registered by third parties is a common and high-value finding."
+    },
+    {
+      "question": "How long does it take for a new DNS record to 'propagate' across the internet, and why does propagation matter?",
+      "answer": "DNS propagation refers to the time it takes for a change to a DNS record to spread across all recursive resolvers and cached records globally. A new DNS record is visible immediately at the authoritative nameserver — if you query the authoritative nameserver directly, you see the change instantly. But most queries go to recursive resolvers, which serve cached results for the duration of the TTL (Time To Live) value on each record. If a record has a TTL of 3600 (one hour), resolvers will continue serving the old answer for up to one hour after the change. For records with TTL of 86400 (24 hours), propagation can take a full day. This is why organisations planning a DNS migration (moving from one server to another) lower their TTL well in advance — they switch the TTL from 86400 to 300 (five minutes) days before the migration, so that when the change actually happens, it propagates globally within five minutes. For attackers or defenders, TTL values are a signal: very short TTLs often indicate infrastructure that changes frequently, which is characteristic of fast-flux malware C2 networks."
+    }
+  ]
+}

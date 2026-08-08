@@ -1,0 +1,44 @@
+{
+  "id": "mod2m5-block-03-story",
+  "type": "story",
+  "order": 3,
+  "estimatedMinutes": 6,
+  "sidebarLabel": "The Full Picture",
+  "narrative": [
+    "Day five of the Meridian Financial engagement. Maya had been up since 6am, not running tools — writing. The passive reconnaissance report was taking shape on her second monitor. James arrived at 8:30 to find her refilling her coffee and reviewing a structured document that was already eleven pages long.",
+    "'Is that... the report already?' he asked. 'We haven't done any scanning yet.'",
+    "'This is the reconnaissance report,' Maya said. 'The deliverable from this phase. It goes to the client before we start active testing.' She turned the monitor toward him. 'I want to walk you through what we found and how it connects. Because what you're about to see is why we spent four days on passive recon instead of just running Nmap on day one.'",
+    "She opened a clean document — not the report. A one-page summary she had built specifically for James.",
+    "'Let's start with what we actually know.' She pointed to the top of the page. 'Meridian Financial runs their primary website at meridian-financial.com. The domain was registered in 2009 — which means they have fifteen years of DNS history and probably infrastructure decisions that predate modern cloud security practices. The registrar is GoDaddy. Their DNS is managed through Cloudflare. So any attacker who compromises their Cloudflare account controls their entire DNS zone — all their web traffic, all their email routing, all their subdomains. That is a single point of failure that predates anything we've found technically.'",
+    "James wrote that down.",
+    "'Their email runs on Google Workspace,' Maya continued. 'We confirmed that from the MX record: aspmx.l.google.com, priority 1. No backup mail server. Their DMARC policy is p=none — monitoring only. That domain can be spoofed in phishing emails targeting their clients. Anyone can send an email appearing to come from an official Meridian Financial address. That is a critical finding. It goes in the report as Critical finding number one.'",
+    "She moved down the page. 'From DNS enumeration — five subdomains beyond the main site. The main domain resolves to a Cloudflare IP, which is expected. The portal subdomain is a Salesforce Force.com deployment — their customer-facing portal. Their CRM is Salesforce. We know this from three separate sources: the portal CNAME, a Salesforce verification token in their TXT records, and a Salesforce authentication token listed in their SPF record. Three independent data points confirm the same thing. That level of corroboration is what separates intelligence from a guess.'",
+    "'And the development server,' James said.",
+    "'dev.meridian-financial.com,' Maya confirmed. 'A record pointing to 45.77.180.10 — a Vultr VPS. Direct IP, no CDN, no DDoS protection. IP WHOIS confirms it belongs to a VPS hosting provider, not Cloudflare. When I ran Google Dorks on it, it did not appear in any search results — which is consistent with a development environment that is reachable but not publicly advertised.' She paused. 'That gap — reachable but not advertised — is where attackers spend most of their time. The organisation knows about their main website. They may not know about dev.meridian-financial.com in the same way.'",
+    "James looked at the summary page. It was structured as a table: Asset, Finding, Severity, Source, Recommended Action.",
+    "'From Google Dorking,' Maya continued, 'we found four things they definitely didn't know about. An HR handbook marked DRAFT, publicly accessible on their web server and indexed by Google. An open /backup/ directory containing what appears to be a production database backup. An admin login portal indexed by Google. And an unauthenticated API endpoint at /api/v1/internal that returned live production statistics — fourteen thousand users, forty-seven pending reviews — to anyone who visited it. No authentication.' She looked up. 'That API endpoint is a critical finding. It is live data. If I were writing the report for the partner review right now, that is the finding that gets a phone call before the PDF is sent.'",
+    "'When did you report the API finding?' James asked.",
+    "'Same day I found it. Day four, afternoon.' Maya pointed to an email thread in her engagement folder. 'I sent the client an immediate advisory. They took it down within four hours. The written report will document it as a critical finding that was remediated during the engagement — that is better than leaving it live until the report-out meeting two weeks from now.'",
+    "James sat back. He was looking at the page differently now.",
+    "'You didn't find any of this by scanning,' he said. 'You found all of it passively.'",
+    "'Correct. And that matters for two reasons.' Maya poured her coffee. 'First: everything we found is in the report before a single active scan runs. When we start active testing on Monday, we already know our priorities. We know which systems are directly reachable. We know where the old software is likely to live. We know the admin portal exists. We know their email can be spoofed. We are not going to waste scan time on systems that the reconnaissance already told us are hardened.' She set the mug down. 'Second: everything we found is documented with a source. WHOIS query, date, result. DNS record query, date, result. Google Dork query, date, result. URL of the cached page. Screenshot of the directory listing. When the client says in the debrief meeting, \"How did you find the backup directory?\" we do not say \"we googled it.\" We say: we performed a targeted search engine query with operator intitle:\"index of\" site:meridian-financial.com on day four, which returned a directory at /backup/ with directory listing enabled, confirmed accessible via HTTP 200 response, containing files with the following names and modification dates. That is a professional finding.'",
+    "James looked at the structured table again. Fourteen rows. Every row had a source, a severity, a recommended action.",
+    "'We haven't scanned anything yet,' he said again, quieter this time.",
+    "'We have done the reconnaissance,' Maya said. 'Active testing is what happens when you already know where to look. The methodology is what gets you to that position — without making a sound.'"
+  ],
+  "characters": [
+    {
+      "name": "Maya Patel",
+      "role": "Lead Penetration Tester",
+      "description": "Six years of professional experience across financial services and government. For Maya, passive reconnaissance is not a preliminary step — it is the discipline that determines whether active testing is focused or wasted.",
+      "emoji": "🔍"
+    },
+    {
+      "name": "James Okafor",
+      "role": "Junior Penetration Tester",
+      "description": "First year in professional security. Watching Maya build a fourteen-row findings table from four days of passive OSINT — before a single scanner is opened — is reframing how he understands what reconnaissance actually produces.",
+      "emoji": "💻"
+    }
+  ],
+  "mood": "focused"
+}

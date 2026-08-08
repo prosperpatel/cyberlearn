@@ -1,0 +1,33 @@
+{
+  "id": "mod2m1-block-14-analogy",
+  "type": "analogy",
+  "order": 14,
+  "estimatedMinutes": 2,
+  "sidebarLabel": "Mind Map",
+  "title": "The Detective's Approach",
+  "realWorldThing": "A detective investigating a suspect before making any move. The best detectives spend days — sometimes weeks — building an intelligence picture before they act. They review public records. They check newspaper archives. They interview witnesses who know the subject publicly. They watch from a distance. They map relationships, routines, and connections. When they finally move, they move with precision — because they already know where to go, what to look for, and who to talk to. Nothing about the arrest surprises them, because nothing about the subject surprises them anymore.",
+  "concept": "A professional conducting reconnaissance before any active testing. The best investigators spend hours — sometimes days — building an intelligence picture before they launch any tool. They query WHOIS records. They search GitHub archives. They map employees through LinkedIn. They scan certificate transparency logs. They correlate breach databases. When they finally begin active scanning, they already know which system to check, which port to probe, and which vendor relationship to investigate. Nothing about the active phase surprises them, because nothing about the target surprises them anymore.",
+  "comparison": "Both are investigators who understand that the quality of your preparation determines the quality of your outcome. The detective who rushes to confront a suspect without building a case arrives unprepared — misses the alibi, missed the connection to a second suspect, missed the motive. The penetration tester who rushes to run tools without building intelligence arrives unprepared — scans the wrong systems, misses the forgotten subdomain, misses the vendor connection that was the actual attack vector. In both cases, the slow, methodical, intelligence-led approach is not the conservative choice. It is the approach that finds what matters.",
+  "breakdown": [
+    {
+      "realWorld": "Detective checks public property records, company registrations, and court filings to understand the subject's professional and financial history",
+      "techEquivalent": "Penetration tester checks WHOIS records, company filings, and public DNS records to understand the target's domain ownership and infrastructure history"
+    },
+    {
+      "realWorld": "Detective reads newspaper archives and social media to understand the subject's public statements, relationships, and known associates",
+      "techEquivalent": "Penetration tester reads LinkedIn profiles, job postings, and press releases to understand the target's technology stack, team structure, and vendor relationships"
+    },
+    {
+      "realWorld": "Detective watches from a distance — without approaching or making contact — to observe patterns, routines, and connections",
+      "techEquivalent": "Penetration tester conducts passive OSINT — without contacting target systems — to observe technology choices, naming conventions, and exposed assets"
+    },
+    {
+      "realWorld": "Detective identifies the weakest link in the suspect's network — the associate most likely to cooperate, the location most likely to yield evidence",
+      "techEquivalent": "Penetration tester identifies the softest entry point in the target's attack surface — the vendor with weaker security, the forgotten subdomain with outdated software, the employee with excessive access"
+    },
+    {
+      "realWorld": "Detective makes a targeted, precise move — because weeks of preparation have produced a complete intelligence picture",
+      "techEquivalent": "Penetration tester begins active scanning with a prioritised target list — because hours of passive OSINT have produced a complete intelligence picture"
+    }
+  ]
+}

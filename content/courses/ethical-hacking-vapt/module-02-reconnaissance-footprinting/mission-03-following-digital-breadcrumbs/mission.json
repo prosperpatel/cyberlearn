@@ -1,0 +1,38 @@
+{
+  "id": "mission-03-following-digital-breadcrumbs",
+  "slug": "mission-03-following-digital-breadcrumbs",
+  "courseSlug": "ethical-hacking-vapt",
+  "moduleSlug": "module-02-reconnaissance-footprinting",
+  "title": "Following Digital Breadcrumbs",
+  "tagline": "Every server, service, and system an organisation runs leaves a public trail. DNS is where that trail lives.",
+  "description": "Go deep into DNS enumeration — the systematic interrogation of every DNS record type to build a complete picture of a target's internet-facing infrastructure. Learn A, AAAA, MX, NS, TXT, CNAME, PTR, and SRV records from scratch. Understand zone transfers, subdomain enumeration, and why DNS reveals far more than just IP addresses.",
+  "difficulty": "beginner",
+  "estimatedMinutes": 75,
+  "xpReward": 100,
+  "order": 3,
+  "missionNumber": 3,
+  "version": "1.0.0",
+  "author": "Cyber Learn Team",
+  "createdAt": "2026-08-02T00:00:00Z",
+  "updatedAt": "2026-08-02T00:00:00Z",
+  "prerequisites": ["mission-02-domain-intelligence"],
+  "tags": ["dns", "dns-enumeration", "a-record", "aaaa-record", "mx-record", "ns-record", "txt-record", "cname", "ptr", "srv", "zone-transfer", "subdomain-enumeration", "reconnaissance"],
+  "learningObjectives": [
+    "Explain what DNS enumeration is and why it reveals more than just IP addresses",
+    "Identify and interpret all eight DNS record types: A, AAAA, MX, NS, TXT, CNAME, PTR, and SRV",
+    "Explain what a DNS zone transfer is, why it exists, and what it exposes when misconfigured",
+    "Describe subdomain enumeration — what it is, how it is done, and why subdomains are often the most valuable findings",
+    "Recognise what each DNS record type reveals about a target's infrastructure in a professional engagement"
+  ],
+  "skills": [
+    "Querying and interpreting all eight DNS record types using free tools",
+    "Identifying what each record type reveals about email infrastructure, cloud providers, and vendor relationships",
+    "Recognising the signs of a misconfigured zone transfer and understanding its professional implications"
+  ],
+  "badge": "Zone Reader",
+  "missionIcon": "📡",
+  "completionRequirements": {
+    "minBlocksCompleted": 16,
+    "minQuizScore": 80
+  }
+}
