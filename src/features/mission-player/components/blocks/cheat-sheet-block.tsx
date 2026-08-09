@@ -32,11 +32,34 @@ export function CheatSheetBlock({ block }: { block: StandardBlock }) {
 
         {/* Sections */}
         <div className="space-y-5">
-          {sections.map((sec, si) => (
+          {sections.map((sec, si) => {
+            const firstLabel = sec.rows[0]?.label.toLowerCase() ?? ''
+            const isSpectrum = firstLabel.includes('black') || firstLabel.includes('phase 1') || firstLabel.includes('1.')
+            return (
             <div key={si} className="space-y-2">
               <p className="text-xs font-black uppercase tracking-wider text-blue-400 font-mono">
                 {sec.heading}
               </p>
+
+              {/* Knowledge spectrum bar for Black/Grey/White-box sections */}
+              {isSpectrum && sec.rows.length >= 3 && (
+                <div className="flex items-center gap-0 mb-3 px-1">
+                  {sec.rows.map((_, ri) => (
+                    <div key={ri} className="flex items-center flex-1">
+                      <div className="flex flex-col items-center">
+                        <div className="size-2.5 rounded-full bg-blue-500/60 border border-blue-500/30" />
+                        <span className="text-[9px] font-mono text-muted-foreground/50 mt-1 whitespace-nowrap">
+                          {sec.rows[ri].label.split('-')[0].trim()}
+                        </span>
+                      </div>
+                      {ri < sec.rows.length - 1 && (
+                        <div className="flex-1 h-px bg-gradient-to-r from-blue-500/40 to-blue-500/15 mx-1" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="rounded-lg border border-border/50 overflow-hidden">
                 {sec.rows.map((row, ri) => (
                   <div
@@ -53,7 +76,8 @@ export function CheatSheetBlock({ block }: { block: StandardBlock }) {
                 ))}
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>

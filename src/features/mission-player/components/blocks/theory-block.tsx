@@ -46,12 +46,12 @@ function renderInline(text: string) {
   )
 }
 
-const CALLOUT_STYLES: Record<string, { icon: React.ReactNode; border: string; bg: string; title: string }> = {
-  info:    { icon: <Info className="size-4 text-blue-400" />,           border: 'border-blue-500/30',   bg: 'bg-blue-500/8',   title: 'text-blue-400'   },
-  warning: { icon: <AlertTriangle className="size-4 text-orange-400" />, border: 'border-orange-500/30', bg: 'bg-orange-500/8', title: 'text-orange-400' },
-  tip:     { icon: <Info className="size-4 text-green-400" />,           border: 'border-green-500/30',  bg: 'bg-green-500/8',  title: 'text-green-400'  },
-  danger:  { icon: <AlertTriangle className="size-4 text-red-400" />,    border: 'border-red-500/30',    bg: 'bg-red-500/8',    title: 'text-red-400'    },
-  insight: { icon: <Info className="size-4 text-purple-400" />,          border: 'border-purple-500/30', bg: 'bg-purple-500/8', title: 'text-purple-400' },
+const CALLOUT_STYLES: Record<string, { icon: React.ReactNode; border: string; accent: string; bg: string; title: string }> = {
+  info:    { icon: <Info className="size-4 text-blue-400" />,           border: 'border-blue-500/30',   accent: 'border-l-blue-500',   bg: 'bg-blue-500/8',   title: 'text-blue-400'   },
+  warning: { icon: <AlertTriangle className="size-4 text-orange-400" />, border: 'border-orange-500/30', accent: 'border-l-orange-500', bg: 'bg-orange-500/8', title: 'text-orange-400' },
+  tip:     { icon: <Info className="size-4 text-green-400" />,           border: 'border-green-500/30',  accent: 'border-l-green-500',  bg: 'bg-green-500/8',  title: 'text-green-400'  },
+  danger:  { icon: <AlertTriangle className="size-4 text-red-400" />,    border: 'border-red-500/30',    accent: 'border-l-red-500',    bg: 'bg-red-500/8',    title: 'text-red-400'    },
+  insight: { icon: <Info className="size-4 text-purple-400" />,          border: 'border-purple-500/30', accent: 'border-l-purple-500', bg: 'bg-purple-500/8', title: 'text-purple-400' },
 }
 
 export function TheoryBlock({ block }: { block: StandardBlock }) {
@@ -80,15 +80,20 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
         {/* Body */}
         {content && <div className="space-y-3">{renderContent(content)}</div>}
 
-        {/* Callouts */}
+        {/* Callouts — left accent border */}
         {callouts.map((callout, i) => {
           const style = CALLOUT_STYLES[callout.type] ?? CALLOUT_STYLES.info
           return (
-            <div key={i} className={cn('rounded-lg border p-4 space-y-1.5', style.border, style.bg)}>
+            <div key={i} className={cn(
+              'rounded-lg border border-l-4 p-4 space-y-1.5',
+              style.border, style.accent, style.bg,
+            )}>
               <div className="flex items-center gap-2">
                 {style.icon}
                 {callout.title && (
-                  <p className={cn('text-xs font-bold uppercase tracking-wider', style.title)}>{callout.title}</p>
+                  <p className={cn('text-sm font-bold uppercase tracking-wider', style.title)}>
+                    {callout.title}
+                  </p>
                 )}
               </div>
               <p className="text-base text-foreground/85 leading-relaxed">{callout.text}</p>
@@ -96,18 +101,21 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
           )
         })}
 
-        {/* Key terms */}
+        {/* Key terms — 2-col card grid */}
         {keyTerms.length > 0 && (
           <div className="space-y-3 border-t border-border/40 pt-4">
             <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">Key Terms</p>
-            <dl className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {keyTerms.map((kt, i) => (
-                <div key={i} className="rounded-lg bg-base-800/60 border border-border/40 p-3.5">
-                  <dt className="text-sm font-semibold text-blue-400 mb-1">{kt.term}</dt>
-                  <dd className="text-base text-muted-foreground leading-relaxed">{kt.definition}</dd>
+                <div
+                  key={i}
+                  className="rounded-xl bg-base-800/50 border border-blue-500/15 p-4 transition-colors hover:border-blue-500/35 hover:bg-base-800/80"
+                >
+                  <dt className="text-sm font-bold text-blue-400 mb-1.5">{kt.term}</dt>
+                  <dd className="text-sm text-muted-foreground leading-relaxed">{kt.definition}</dd>
                 </div>
               ))}
-            </dl>
+            </div>
           </div>
         )}
       </div>

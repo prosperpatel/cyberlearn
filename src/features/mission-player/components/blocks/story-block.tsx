@@ -1,4 +1,5 @@
 import { BookOpen } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import type { StandardBlock } from '@/types/mission-engine'
 
@@ -15,21 +16,22 @@ interface StoryContent {
   mood?:       'neutral' | 'tense' | 'discovery' | 'triumph' | 'warning'
 }
 
-const MOOD_STYLES: Record<string, { label: string; color: string }> = {
-  tense:     { label: 'Tense',     color: 'border-red-500/30 text-red-400'     },
-  discovery: { label: 'Discovery', color: 'border-cyan-500/30 text-cyan-400'   },
-  triumph:   { label: 'Triumph',   color: 'border-green-500/30 text-green-400' },
-  warning:   { label: 'Warning',   color: 'border-orange-500/30 text-orange-400'},
-  neutral:   { label: 'Neutral',   color: 'border-border text-muted-foreground' },
+const MOOD_CONFIG: Record<string, { label: string; badge: string; dot: string; line: string }> = {
+  tense:     { label: 'Tense',     badge: 'border-red-500/30 text-red-400',     dot: 'bg-red-500',    line: 'bg-red-500/25'    },
+  discovery: { label: 'Discovery', badge: 'border-cyan-500/30 text-cyan-400',   dot: 'bg-cyan-400',   line: 'bg-cyan-400/25'   },
+  triumph:   { label: 'Triumph',   badge: 'border-green-500/30 text-green-400', dot: 'bg-green-400',  line: 'bg-green-400/25'  },
+  warning:   { label: 'Warning',   badge: 'border-orange-500/30 text-orange-400', dot: 'bg-orange-400', line: 'bg-orange-400/25' },
+  neutral:   { label: 'Neutral',   badge: 'border-border text-muted-foreground', dot: 'bg-muted-foreground', line: 'bg-muted/30' },
 }
 
 export function StoryBlock({ block }: { block: StandardBlock }) {
-  const c         = block.content as StoryContent
-  const narrative  = c.narrative  ?? []
-  const characters = c.characters ?? []
-  const mood       = c.mood ?? 'neutral'
-  const moodStyle  = MOOD_STYLES[mood] ?? MOOD_STYLES.neutral
-  const title      = block.title || 'Story'
+  const reducedMotion = useReducedMotion()
+  const c              = block.content as StoryContent
+  const narrative      = c.narrative  ?? []
+  const characters     = c.characters ?? []
+  const mood           = c.mood       ?? 'neutral'
+  const moodCfg        = MOOD_CONFIG[mood] ?? MOOD_CONFIG.neutral
+  const title          = block.title || 'Story'
 
   return (
     <div className="rounded-xl border border-purple-500/30 bg-base-900 overflow-hidden">
@@ -42,45 +44,63 @@ export function StoryBlock({ block }: { block: StandardBlock }) {
             <BookOpen className="size-3" />
             Story
           </span>
-          <span className={cn(
-            'rounded-md border px-2 py-0.5 text-xs font-mono uppercase tracking-wider',
-            moodStyle.color,
-          )}>
-            {moodStyle.label}
+          <span className={cn('rounded-md border px-2 py-0.5 text-xs font-mono uppercase tracking-wider', moodCfg.badge)}>
+            {moodCfg.label}
           </span>
           <span className="text-xs text-muted-foreground ml-auto">~{block.metadata.estimatedMinutes}min</span>
         </div>
 
-        {/* Title */}
         {title && <h2 className="text-xl font-bold text-foreground">{title}</h2>}
 
-        {/* Narrative — stronger left rail, larger text, generous leading */}
-        <div className="space-y-5 border-l-4 border-purple-500/50 pl-6">
-          {narrative.map((para, i) => (
-            <p key={i} className="text-base text-foreground leading-loose">
-              {para}
-            </p>
-          ))}
-        </div>
-
-        {/* Characters */}
+        {/* Characters — top intro row */}
         {characters.length > 0 && (
-          <div className="space-y-3 pt-2 border-t border-border/40">
-            <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
-              Characters
-            </p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {characters.map((char, i) => (
-                <div key={i} className="flex items-start gap-3 rounded-lg bg-base-800/60 border border-border/40 p-3.5">
-                  {char.emoji && (
-                    <span className="text-2xl shrink-0">{char.emoji}</span>
-                  )}
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-foreground">{char.name}</p>
-                    <p className="text-xs font-mono uppercase tracking-wider text-purple-400/70 mb-1">{char.role}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{char.description}</p>
-                  </div>
+          <div className="flex flex-wrap gap-2">
+            {characters.map((char, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 rounded-lg bg-base-800/40 border border-purple-500/20 px-3 py-2"
+              >
+                {char.emoji && <span className="text-xl leading-none shrink-0">{char.emoji}</span>}
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-foreground leading-none">{char.name}</p>
+                  <p className="text-[10px] font-mono uppercase tracking-wider text-purple-400/70 mt-0.5">
+                    {char.role}
+                  </p>
                 </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Cinematic timeline */}
+        {narrative.length > 0 && (
+          <div className="relative">
+            {/* Vertical line */}
+            <div className={cn('absolute left-[7px] top-3 bottom-3 w-px', moodCfg.line)} />
+
+            <div className="space-y-4 pl-6">
+              {narrative.map((para, i) => (
+                <motion.div
+                  key={i}
+                  initial={reducedMotion ? false : { opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: reducedMotion ? 0 : i * 0.12, duration: 0.28 }}
+                  className="relative"
+                >
+                  {/* Timeline dot */}
+                  <span className={cn(
+                    'absolute -left-6 top-3 size-3.5 rounded-full border-2 border-base-900 shrink-0',
+                    moodCfg.dot,
+                  )} />
+
+                  {/* Beat card */}
+                  <div className="rounded-lg bg-base-800/30 border border-border/30 px-4 py-3">
+                    <span className="text-[10px] font-mono text-muted-foreground/40 block mb-1">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-base text-foreground leading-loose">{para}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>

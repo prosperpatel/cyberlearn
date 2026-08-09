@@ -57,7 +57,7 @@ export function CommonMistakesBlock({ block }: { block: StandardBlock }) {
                 <span className={cn(
                   'text-xs font-black uppercase tracking-wider font-mono px-1.5 py-0.5 rounded',
                   m.severity === 'critical'
-                    ? 'bg-red-500/20 text-red-400'
+                    ? 'bg-red-500/20 text-red-400 ring-1 ring-red-500/30 animate-pulse'
                     : 'bg-orange-500/20 text-orange-400',
                 )}>
                   {m.severity}

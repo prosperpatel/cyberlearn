@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { Trophy, Zap, ChevronRight, Star } from 'lucide-react'
+import { motion, useReducedMotion } from 'framer-motion'
 import type { StandardBlock } from '@/types/mission-engine'
 
 interface BadgeUnlocked { name: string; description?: string }
@@ -12,12 +14,29 @@ interface MissionCompleteContent {
 }
 
 export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
+  const reducedMotion  = useReducedMotion()
   const c              = block.content as MissionCompleteContent
   const headline       = c.headline       ?? 'Mission Complete'
   const message        = c.message        ?? ''
   const xpEarned       = c.xpEarned       ?? 0
   const badgesUnlocked = c.badgesUnlocked ?? []
   const nextSteps      = c.nextSteps      ?? []
+
+  const [displayedXp, setDisplayedXp] = useState(reducedMotion ? xpEarned : 0)
+
+  useEffect(() => {
+    if (reducedMotion || xpEarned === 0) { setDisplayedXp(xpEarned); return }
+    const duration = 800
+    const start = performance.now()
+    let raf: number
+    function step(now: number) {
+      const progress = Math.min((now - start) / duration, 1)
+      setDisplayedXp(Math.round(progress * xpEarned))
+      if (progress < 1) raf = requestAnimationFrame(step)
+    }
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+  }, [xpEarned, reducedMotion])
 
   return (
     <div className="rounded-xl border border-cyber-blue/40 bg-base-900 overflow-hidden">
@@ -46,12 +65,12 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
           </div>
         </div>
 
-        {/* XP earned */}
+        {/* XP earned — animated counter */}
         {xpEarned > 0 && (
           <div className="flex justify-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyber-green/30 bg-cyber-green/8 px-5 py-2.5">
               <Zap className="size-4 text-cyber-green" />
-              <span className="text-xl font-black text-cyber-green">+{xpEarned} XP</span>
+              <span className="text-xl font-black text-cyber-green">+{displayedXp} XP</span>
               <span className="text-sm text-muted-foreground">earned</span>
             </div>
           </div>
@@ -65,8 +84,11 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {badgesUnlocked.map((badge, i) => (
-                <div
+                <motion.div
                   key={i}
+                  initial={reducedMotion ? false : { opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: reducedMotion ? 0 : 0.6 + i * 0.15, duration: 0.25 }}
                   className="flex items-center gap-2 rounded-lg border border-cyber-blue/25 bg-cyber-blue/8 px-3 py-2"
                 >
                   <div className="flex size-7 items-center justify-center rounded-full bg-cyber-blue/15 border border-cyber-blue/30">
@@ -78,7 +100,7 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
                       <p className="text-xs text-muted-foreground mt-0.5 leading-none">{badge.description}</p>
                     )}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

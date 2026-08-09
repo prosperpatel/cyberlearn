@@ -12,6 +12,48 @@ interface MissionBriefRawContent {
   closingMessage?:    string
 }
 
+function ForkingPathsSVG() {
+  return (
+    <svg
+      viewBox="0 0 300 72"
+      className="w-full"
+      style={{ height: 72 }}
+      aria-hidden="true"
+    >
+      {/* Stem */}
+      <line x1="150" y1="4" x2="150" y2="36" stroke="rgb(75 85 99)" strokeWidth="1.5" />
+      {/* Left fork — authorised */}
+      <line x1="150" y1="36" x2="60" y2="66" stroke="rgb(34 197 94 / 0.5)" strokeWidth="1.5" />
+      {/* Right fork — unauthorised */}
+      <line x1="150" y1="36" x2="240" y2="66" stroke="rgb(239 68 68 / 0.5)" strokeWidth="1.5" />
+      {/* Fork point */}
+      <circle cx="150" cy="36" r="3.5" fill="rgb(75 85 99)" />
+      {/* End dots */}
+      <circle cx="60"  cy="66" r="3" fill="rgb(34 197 94 / 0.6)" />
+      <circle cx="240" cy="66" r="3" fill="rgb(239 68 68 / 0.6)" />
+      {/* Labels */}
+      <text
+        x="60" y="59"
+        fontSize="8"
+        fill="rgb(74 222 128 / 0.7)"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        AUTHORISED
+      </text>
+      <text
+        x="240" y="59"
+        fontSize="8"
+        fill="rgb(248 113 113 / 0.7)"
+        fontFamily="monospace"
+        textAnchor="middle"
+      >
+        UNAUTHORISED
+      </text>
+    </svg>
+  )
+}
+
 export function MissionBriefBlock({ block }: { block: StandardBlock }) {
   const c = block.content as MissionBriefRawContent
 
@@ -67,6 +109,13 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
             <p className="text-base text-cyan-400/80 font-medium">{subtitle}</p>
           )}
         </div>
+
+        {/* Forking paths visual — appears before briefing text to prime the concept */}
+        {briefing && (
+          <div className="py-1">
+            <ForkingPathsSVG />
+          </div>
+        )}
 
         {/* Briefing */}
         {briefing && (
