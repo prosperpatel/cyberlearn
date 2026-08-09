@@ -111,11 +111,11 @@ function TopBar({ criticalCount }: { criticalCount: number }) {
   const isAlert = criticalCount > 0
   return (
     <div style={topBarStyle}>
-      <span style={{ fontSize: 9, letterSpacing: '0.2em', color: 'rgba(0,217,255,0.35)' }}>
+      <span style={{ fontSize: 10, letterSpacing: '0.18em', color: 'rgba(0,217,255,0.35)' }}>
         SENTINEL&nbsp;&nbsp;·&nbsp;&nbsp;HOSPITAL INCIDENT RESPONSE
       </span>
       <span style={{
-        fontSize: 9, letterSpacing: '0.15em',
+        fontSize: 10, letterSpacing: '0.15em',
         color: isAlert ? '#FF4757' : 'rgba(0,255,135,0.55)',
         display: 'flex', alignItems: 'center', gap: 5,
       }}>
@@ -162,7 +162,7 @@ function WidgetCard({
       style={{
         background:  bgColor,
         border:      `1px solid ${borderColor}`,
-        padding:     '10px 12px',
+        padding:     '12px 14px',
         cursor:      canInspect ? 'pointer' : 'default',
         textAlign:   'left' as const,
         fontFamily:  '"Courier New", monospace',
@@ -172,25 +172,25 @@ function WidgetCard({
       aria-label={`${def.label}: ${sl}${canInspect ? '. Click to inspect.' : ''}`}
       aria-pressed={isSelected}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-        <span style={{ fontSize: 8, letterSpacing: '0.18em', color: 'rgba(0,217,255,0.55)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+        <span style={{ fontSize: 11, letterSpacing: '0.12em', color: 'rgba(0,217,255,0.55)' }}>
           {def.shortLabel}
         </span>
         {isInspected && (
-          <span style={{ fontSize: 7, letterSpacing: '0.1em', color: 'rgba(0,255,135,0.5)' }}>✓</span>
+          <span style={{ fontSize: 10, letterSpacing: '0.1em', color: 'rgba(0,255,135,0.6)' }}>✓</span>
         )}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
         {(!reducedMotion && isBad) ? (
           <motion.span
-            style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: sc, flexShrink: 0 }}
+            style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: sc, flexShrink: 0 }}
             animate={{ opacity: [1, 0.25, 1] }}
             transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
           />
         ) : (
-          <span style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: sc, flexShrink: 0 }} />
+          <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: sc, flexShrink: 0 }} />
         )}
-        <span style={{ fontSize: 9, color: sc, letterSpacing: '0.1em' }}>{sl}</span>
+        <span style={{ fontSize: 11, color: sc, letterSpacing: '0.1em' }}>{sl}</span>
       </div>
     </button>
   )
@@ -210,35 +210,35 @@ function InspectPanel({ widget, status, phase, alerts }: InspectPanelProps) {
 
       {widget && status ? (
         <>
-          <div style={{ fontSize: 11, letterSpacing: '0.14em', color: '#00D9FF', marginBottom: 10, marginTop: 8 }}>
+          <div style={{ fontSize: 13, letterSpacing: '0.12em', color: '#00D9FF', marginBottom: 10, marginTop: 8 }}>
             {widget.label.toUpperCase()}
           </div>
           <div style={{
-            fontSize:    11,
+            fontSize:    14,
             lineHeight:  1.75,
-            color:       'rgba(208,238,248,0.75)',
+            color:       'rgba(208,238,248,0.8)',
             borderTop:   '1px solid rgba(0,217,255,0.08)',
             paddingTop:  10,
             marginBottom: 12,
           }}>
             {widget.inspectText}
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
             <span style={{
-              width: 5, height: 5, borderRadius: '50%',
+              width: 7, height: 7, borderRadius: '50%',
               background: statusColor(status),
               display: 'inline-block', flexShrink: 0,
             }} />
-            <span style={{ fontSize: 8, color: statusColor(status), letterSpacing: '0.14em' }}>
+            <span style={{ fontSize: 10, color: statusColor(status), letterSpacing: '0.14em' }}>
               {statusLabel(status)}
             </span>
           </div>
-          <div style={{ fontSize: 7, letterSpacing: '0.12em', color: 'rgba(0,217,255,0.3)' }}>
+          <div style={{ fontSize: 9, letterSpacing: '0.12em', color: 'rgba(0,217,255,0.3)' }}>
             OBSERVATION LOGGED
           </div>
         </>
       ) : (
-        <div style={{ fontSize: 9, color: 'rgba(0,217,255,0.25)', lineHeight: 1.75, marginTop: 8 }}>
+        <div style={{ fontSize: 11, color: 'rgba(0,217,255,0.25)', lineHeight: 1.75, marginTop: 8 }}>
           {phase === 'briefing'
             ? 'Awaiting system access...'
             : 'Select a system widget to inspect it.'}
@@ -250,9 +250,9 @@ function InspectPanel({ widget, status, phase, alerts }: InspectPanelProps) {
           <div style={{ ...sectionLabelStyle, marginBottom: 6 }}>ALERT LOG</div>
           <div style={{ maxHeight: 100, overflowY: 'auto' }}>
             {alerts.map(a => (
-              <div key={a.time} style={{ marginBottom: 6 }}>
-                <div style={{ fontSize: 7, color: 'rgba(0,217,255,0.28)' }}>{a.time}</div>
-                <div style={{ fontSize: 9, color: a.level === 'red' ? '#FF4757' : '#FF6B35' }}>
+              <div key={a.time} style={{ marginBottom: 7 }}>
+                <div style={{ fontSize: 9, color: 'rgba(0,217,255,0.28)' }}>{a.time}</div>
+                <div style={{ fontSize: 11, color: a.level === 'red' ? '#FF4757' : '#FF6B35' }}>
                   {a.msg}
                 </div>
               </div>
@@ -294,7 +294,7 @@ function DialoguePanel({
       <div style={speakerBarStyle}>
         <span style={{ color: '#00D9FF', letterSpacing: '0.12em' }}>ARIA</span>
         <span style={{
-          fontSize: 9, letterSpacing: '0.15em',
+          fontSize: 11, letterSpacing: '0.15em',
           color: 'rgba(0,255,135,0.5)',
           display: 'flex', alignItems: 'center', gap: 4,
         }}>
@@ -307,9 +307,9 @@ function DialoguePanel({
       <div
         onClick={canAdvance ? onAdvance : undefined}
         style={{
-          padding:    '14px 16px',
-          minHeight:  52,
-          fontSize:   13,
+          padding:    '16px 20px',
+          minHeight:  60,
+          fontSize:   16,
           lineHeight: 1.7,
           color:      '#D0EEF8',
           cursor:     canAdvance ? 'pointer' : 'default',
@@ -329,7 +329,7 @@ function DialoguePanel({
           <span style={{ color: 'rgba(0,217,255,0.3)' }}>—</span>
         )}
         {showProgress && (
-          <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.4)', letterSpacing: '0.08em' }}>
+          <span style={{ fontSize: 13, color: 'rgba(0,217,255,0.4)', letterSpacing: '0.06em' }}>
             Inspect systems to observe the incident. Click each widget panel.
           </span>
         )}
@@ -342,7 +342,7 @@ function DialoguePanel({
 
       <div style={actionFooterStyle}>
         {showProgress && (
-          <span style={{ fontSize: 9, color: 'rgba(0,217,255,0.35)', letterSpacing: '0.1em' }}>
+          <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.35)', letterSpacing: '0.1em' }}>
             SYSTEMS INSPECTED:&nbsp;
             <span style={{ color: inspectedCount >= 3 ? '#00FF87' : '#00D9FF' }}>
               {inspectedCount}&nbsp;/&nbsp;3
@@ -350,7 +350,7 @@ function DialoguePanel({
           </span>
         )}
         {canAdvance && !isTyping && (
-          <span style={{ fontSize: 9, color: 'rgba(0,217,255,0.32)', letterSpacing: '0.12em' }}>
+          <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.32)', letterSpacing: '0.12em' }}>
             CLICK OR PRESS SPACE TO ADVANCE
           </span>
         )}
@@ -605,21 +605,21 @@ const widgetAreaStyle: CSSProperties = {
 const widgetGridStyle: CSSProperties = {
   display:             'grid',
   gridTemplateColumns: '1fr 1fr',
-  gap:                 8,
+  gap:                 10,
   marginTop:           8,
 }
 
 const inspectPanelStyle: CSSProperties = {
-  width:      280,
+  width:      300,
   flexShrink: 0,
-  padding:    '12px 14px',
+  padding:    '12px 16px',
   borderLeft: '1px solid rgba(0,217,255,0.07)',
   overflowY:  'auto',
 }
 
 const sectionLabelStyle: CSSProperties = {
-  fontSize:      8,
-  letterSpacing: '0.2em',
+  fontSize:      10,
+  letterSpacing: '0.18em',
   color:         'rgba(0,217,255,0.28)',
   textTransform: 'uppercase' as const,
 }
@@ -633,8 +633,8 @@ const speakerBarStyle: CSSProperties = {
   display:        'flex',
   alignItems:     'center',
   justifyContent: 'space-between',
-  padding:        '8px 16px',
-  fontSize:       11,
+  padding:        '10px 20px',
+  fontSize:       13,
   letterSpacing:  '0.12em',
 }
 
@@ -646,6 +646,6 @@ const thinRuleStyle: CSSProperties = {
 const actionFooterStyle: CSSProperties = {
   display:    'flex',
   alignItems: 'center',
-  padding:    '8px 16px',
-  minHeight:  38,
+  padding:    '10px 20px',
+  minHeight:  42,
 }

@@ -2,7 +2,7 @@ import type { MissionConfig } from '@/features/mission/types'
 import { BootScene }                      from './scenes/boot-scene'
 import { WorldScene }                     from './scenes/world-scene'
 import { HospitalScene }                  from './scenes/hospital-scene'
-import { InvestigationPlaceholderScene }  from './scenes/investigation-placeholder-scene'
+import { InvestigationScene }             from './scenes/investigation-scene'
 
 // Valid 44-byte silent WAV (44100 Hz, 16-bit mono, 0 data samples).
 // Placeholder until real audio assets are produced.
@@ -49,8 +49,8 @@ export const mission01Config: MissionConfig = {
     },
     {
       id:        'investigation',
-      component: InvestigationPlaceholderScene,
-      label:     'Investigation — Coming Soon',
+      component: InvestigationScene,
+      label:     'Investigation — Ransomware Analysis',
     },
   ],
 

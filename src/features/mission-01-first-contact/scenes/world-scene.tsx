@@ -71,11 +71,11 @@ function TopBar({ phase }: { phase: WorldPhase }) {
   const isAnomaly = phase === 'anomaly'
   return (
     <div style={topBarStyle}>
-      <span style={{ fontSize: 9, letterSpacing: '0.2em', color: 'rgba(0,217,255,0.35)' }}>
+      <span style={{ fontSize: 10, letterSpacing: '0.18em', color: 'rgba(0,217,255,0.35)' }}>
         SENTINEL OPERATIONS CENTER&nbsp;&nbsp;·&nbsp;&nbsp;LIVE FEED
       </span>
       <span style={{
-        fontSize: 9, letterSpacing: '0.15em',
+        fontSize: 10, letterSpacing: '0.15em',
         color: isAnomaly ? '#FF4757' : 'rgba(0,255,135,0.55)',
         display: 'flex', alignItems: 'center', gap: 5,
       }}>
@@ -96,12 +96,12 @@ function StatusPanel({ inspected }: { inspected: boolean }) {
         { label: 'THREATS', value: '0 ACTIVE', ok: true  },
         { label: 'STATUS',  value: 'NOMINAL',  ok: true  },
       ].map(({ label, value, ok }) => (
-        <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
-          <span style={{ color: ok ? '#00FF87' : '#FF4757', fontSize: 7, flexShrink: 0 }}>●</span>
-          <span style={{ fontSize: 9, color: 'rgba(0,217,255,0.4)', width: 52, flexShrink: 0 }}>
+        <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+          <span style={{ color: ok ? '#00FF87' : '#FF4757', fontSize: 9, flexShrink: 0 }}>●</span>
+          <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.4)', width: 58, flexShrink: 0 }}>
             {label}
           </span>
-          <span style={{ fontSize: 9, color: '#00D9FF' }}>{value}</span>
+          <span style={{ fontSize: 12, color: '#00D9FF' }}>{value}</span>
         </div>
       ))}
 
@@ -114,12 +114,12 @@ function StatusPanel({ inspected }: { inspected: boolean }) {
             { label: 'DENSITY', value: 'HIGH',   warn: true },
             { label: 'STATUS',  value: 'FLAGGED',warn: true },
           ].map(({ label, value, warn }) => (
-            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
-              <span style={{ color: warn ? '#FF6B35' : '#00FF87', fontSize: 7, flexShrink: 0 }}>●</span>
-              <span style={{ fontSize: 9, color: 'rgba(0,217,255,0.4)', width: 52, flexShrink: 0 }}>
+            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+              <span style={{ color: warn ? '#FF6B35' : '#00FF87', fontSize: 9, flexShrink: 0 }}>●</span>
+              <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.4)', width: 58, flexShrink: 0 }}>
                 {label}
               </span>
-              <span style={{ fontSize: 9, color: '#FF6B35' }}>{value}</span>
+              <span style={{ fontSize: 12, color: '#FF6B35' }}>{value}</span>
             </div>
           ))}
         </>
@@ -183,15 +183,15 @@ function NetworkMap({ inspected, reducedMotion }: { inspected: boolean; reducedM
                 </circle>
               )}
               {/* Glow halo */}
-              <circle cx={node.cx} cy={node.cy} r="2.2" fill={glow} />
+              <circle cx={node.cx} cy={node.cy} r="2.4" fill={glow} />
               {/* Core dot */}
               <circle cx={node.cx} cy={node.cy} r="1.1" fill={fill} />
               {/* Region label */}
               <text
-                x={node.cx} y={node.cy + 4.5}
+                x={node.cx} y={node.cy + 5}
                 textAnchor="middle"
-                fontSize="2.8"
-                fill={active ? 'rgba(0,255,135,0.55)' : 'rgba(0,217,255,0.35)'}
+                fontSize="3.5"
+                fill={active ? 'rgba(0,255,135,0.65)' : 'rgba(0,217,255,0.45)'}
                 fontFamily='"Courier New", monospace'
               >
                 {node.id}
@@ -209,15 +209,15 @@ function EventLog({ phase }: { phase: WorldPhase }) {
     <div style={eventLogStyle}>
       <div style={sectionLabelStyle}>EVENT LOG</div>
       {LOG_ENTRIES.map(e => (
-        <div key={e.time} style={{ marginBottom: 6 }}>
-          <div style={{ fontSize: 7, color: 'rgba(0,217,255,0.28)' }}>{e.time}</div>
-          <div style={{ fontSize: 9, color: 'rgba(0,217,255,0.55)' }}>{e.msg}</div>
+        <div key={e.time} style={{ marginBottom: 7 }}>
+          <div style={{ fontSize: 9, color: 'rgba(0,217,255,0.28)' }}>{e.time}</div>
+          <div style={{ fontSize: 11, color: 'rgba(0,217,255,0.55)' }}>{e.msg}</div>
         </div>
       ))}
       {phase === 'anomaly' && (
-        <div style={{ marginBottom: 6 }}>
-          <div style={{ fontSize: 7, color: 'rgba(255,71,87,0.45)' }}>14:32:49</div>
-          <div style={{ fontSize: 9, color: '#FF4757' }}>ANOMALY DETECTED !</div>
+        <div style={{ marginBottom: 7 }}>
+          <div style={{ fontSize: 9, color: 'rgba(255,71,87,0.45)' }}>14:32:49</div>
+          <div style={{ fontSize: 11, color: '#FF4757' }}>ANOMALY DETECTED !</div>
         </div>
       )}
     </div>
@@ -253,7 +253,7 @@ function DialoguePanel({
       {/* Speaker bar */}
       <div style={speakerBarStyle}>
         <span style={{ color: '#00D9FF', letterSpacing: '0.12em' }}>ARIA</span>
-        <span style={{ fontSize: 9, letterSpacing: '0.15em', color: 'rgba(0,255,135,0.5)', display: 'flex', alignItems: 'center', gap: 4 }}>
+        <span style={{ fontSize: 11, letterSpacing: '0.15em', color: 'rgba(0,255,135,0.5)', display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ color: '#00FF87' }}>●</span>ONLINE
         </span>
       </div>
@@ -264,9 +264,9 @@ function DialoguePanel({
       <div
         onPointerDown={showAdvance ? onAdvance : undefined}
         style={{
-          padding:     '14px 16px',
-          minHeight:   52,
-          fontSize:    13,
+          padding:     '16px 20px',
+          minHeight:   60,
+          fontSize:    16,
           lineHeight:  1.7,
           color:       '#D0EEF8',
           cursor:      showAdvance ? 'pointer' : 'default',
@@ -303,7 +303,7 @@ function DialoguePanel({
           </button>
         )}
         {showAdvance && !isTyping && (
-          <span style={{ fontSize: 9, color: 'rgba(0,217,255,0.32)', letterSpacing: '0.12em' }}>
+          <span style={{ fontSize: 11, color: 'rgba(0,217,255,0.32)', letterSpacing: '0.12em' }}>
             CLICK OR PRESS SPACE TO ADVANCE
           </span>
         )}
@@ -469,7 +469,7 @@ const mainAreaStyle: CSSProperties = {
 }
 
 const statusPanelStyle: CSSProperties = {
-  width:       160,
+  width:       180,
   flexShrink:  0,
   padding:     '12px 14px',
   borderRight: '1px solid rgba(0,217,255,0.07)',
@@ -485,8 +485,8 @@ const eventLogStyle: CSSProperties = {
 }
 
 const sectionLabelStyle: CSSProperties = {
-  fontSize:      8,
-  letterSpacing: '0.2em',
+  fontSize:      10,
+  letterSpacing: '0.18em',
   color:         'rgba(0,217,255,0.28)',
   marginBottom:  8,
   textTransform: 'uppercase' as const,
@@ -501,8 +501,8 @@ const speakerBarStyle: CSSProperties = {
   display:        'flex',
   alignItems:     'center',
   justifyContent: 'space-between',
-  padding:        '8px 16px',
-  fontSize:       11,
+  padding:        '10px 20px',
+  fontSize:       13,
   letterSpacing:  '0.12em',
 }
 
@@ -514,18 +514,18 @@ const thinRuleStyle: CSSProperties = {
 const actionFooterStyle: CSSProperties = {
   display:     'flex',
   alignItems:  'center',
-  padding:     '8px 16px',
-  minHeight:   38,
+  padding:     '10px 20px',
+  minHeight:   42,
 }
 
 const inspectBtnStyle: CSSProperties = {
-  background:    'transparent',
-  border:        '1px solid rgba(0,217,255,0.4)',
+  background:    'rgba(0,217,255,0.04)',
+  border:        '1px solid rgba(0,217,255,0.7)',
   color:         '#00D9FF',
   fontFamily:    '"Courier New", monospace',
-  fontSize:      11,
+  fontSize:      13,
   letterSpacing: '0.1em',
-  padding:       '6px 16px',
+  padding:       '7px 20px',
   cursor:        'pointer',
   outline:       'none',
 }
@@ -542,7 +542,7 @@ const anomalyWrapStyle: CSSProperties = {
 }
 
 const anomalyTextStyle: CSSProperties = {
-  fontSize:      20,
+  fontSize:      24,
   letterSpacing: '0.22em',
   color:         '#FF4757',
   textAlign:     'center',

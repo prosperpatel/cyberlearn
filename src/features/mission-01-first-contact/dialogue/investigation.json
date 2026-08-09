@@ -1,0 +1,96 @@
+{
+  "findings": {
+    "id": "m01-inv-findings",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mif-01",
+        "speakerId": "aria",
+        "text": "Before we name what happened — look at what the data shows.",
+        "emotion": "measured",
+        "autoAdvanceMs": 2800
+      },
+      {
+        "id": "mif-02",
+        "speakerId": "aria",
+        "text": "Gateway traffic hit 14 times baseline. Outbound. From multiple hosts at once.",
+        "emotion": "analytical"
+      },
+      {
+        "id": "mif-03",
+        "speakerId": "aria",
+        "text": "Files across three departments were encrypted within four minutes of each other.",
+        "emotion": "urgent"
+      },
+      {
+        "id": "mif-04",
+        "speakerId": "aria",
+        "text": "And 47 staff were locked out of their accounts at the exact same timestamp.",
+        "emotion": "grave"
+      },
+      {
+        "id": "mif-05",
+        "speakerId": "aria",
+        "text": "These three things happened together. That pattern means something. What do you think it is?",
+        "emotion": "inquiring",
+        "autoAdvanceMs": 3200
+      }
+    ]
+  },
+  "reveal": {
+    "id": "m01-inv-reveal",
+    "speakers": {
+      "aria": {
+        "id": "aria",
+        "displayName": "ARIA",
+        "colorClass": "text-cyan-400"
+      }
+    },
+    "lines": [
+      {
+        "id": "mir-01",
+        "speakerId": "aria",
+        "text": "Correct. Ransomware.",
+        "emotion": "affirming",
+        "autoAdvanceMs": 1800
+      },
+      {
+        "id": "mir-02",
+        "speakerId": "aria",
+        "text": "This is its signature: get in, encrypt the files, lock out the users, and demand payment — all while exfiltrating data through that outbound channel.",
+        "emotion": "explanatory"
+      },
+      {
+        "id": "mir-03",
+        "speakerId": "aria",
+        "text": "The simultaneity is the tell. Humans don't move that fast. Automated malware does.",
+        "emotion": "analytical"
+      },
+      {
+        "id": "mir-04",
+        "speakerId": "aria",
+        "text": "In a hospital, this isn't just an IT problem. Delayed lab results. Inaccessible patient records. Automated dispensing offline.",
+        "emotion": "grave"
+      },
+      {
+        "id": "mir-05",
+        "speakerId": "aria",
+        "text": "Real patients. Real risk. That's why this work matters.",
+        "emotion": "resolute"
+      },
+      {
+        "id": "mir-06",
+        "speakerId": "aria",
+        "text": "You identified it. First mission complete. SENTINEL is logging your analysis.",
+        "emotion": "affirming",
+        "autoAdvanceMs": 3500
+      }
+    ]
+  }
+}
