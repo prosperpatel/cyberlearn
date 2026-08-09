@@ -4,11 +4,11 @@ import type { StandardBlock } from '@/types/mission-engine'
 interface BadgeUnlocked { name: string; description?: string }
 
 interface MissionCompleteContent {
-  headline?:      string
-  message?:       string
-  xpEarned?:      number
+  headline?:       string
+  message?:        string
+  xpEarned?:       number
   badgesUnlocked?: BadgeUnlocked[]
-  nextSteps?:     string[]
+  nextSteps?:      string[]
 }
 
 export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
@@ -36,12 +36,12 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
           </div>
 
           <div className="space-y-1.5">
-            <span className="block text-[10px] font-black uppercase tracking-[0.3em] text-cyber-blue font-mono">
+            <span className="block text-xs font-black uppercase tracking-[0.25em] text-cyber-blue font-mono">
               Mission Complete
             </span>
             <h2 className="text-2xl font-black text-foreground leading-tight">{headline}</h2>
             {message && (
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-md">{message}</p>
+              <p className="text-base text-muted-foreground leading-relaxed max-w-md">{message}</p>
             )}
           </div>
         </div>
@@ -52,7 +52,7 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
             <div className="inline-flex items-center gap-2 rounded-full border border-cyber-green/30 bg-cyber-green/8 px-5 py-2.5">
               <Zap className="size-4 text-cyber-green" />
               <span className="text-xl font-black text-cyber-green">+{xpEarned} XP</span>
-              <span className="text-xs text-muted-foreground">earned</span>
+              <span className="text-sm text-muted-foreground">earned</span>
             </div>
           </div>
         )}
@@ -60,7 +60,7 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
         {/* Badges */}
         {badgesUnlocked.length > 0 && (
           <div className="space-y-3">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono text-center">
+            <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono text-center">
               Badges Unlocked
             </p>
             <div className="flex flex-wrap justify-center gap-3">
@@ -73,9 +73,9 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
                     <Trophy className="size-3.5 text-cyber-blue" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-foreground leading-none">{badge.name}</p>
+                    <p className="text-sm font-bold text-foreground leading-none">{badge.name}</p>
                     {badge.description && (
-                      <p className="text-[10px] text-muted-foreground mt-0.5 leading-none">{badge.description}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5 leading-none">{badge.description}</p>
                     )}
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
         {nextSteps.length > 0 && (
           <div className="rounded-xl border border-border/40 bg-base-800/30 divide-y divide-border/40">
             <div className="px-5 py-3">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
+              <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
                 What's Next
               </p>
             </div>
@@ -97,7 +97,7 @@ export function MissionCompleteBlock({ block }: { block: StandardBlock }) {
                 <span className="shrink-0 flex size-5 items-center justify-center rounded-full bg-base-700 border border-border text-[10px] font-black font-mono text-muted-foreground">
                   {i + 1}
                 </span>
-                <p className="flex-1 text-sm text-foreground/85 leading-snug">{step}</p>
+                <p className="flex-1 text-base text-foreground/90 leading-snug">{step}</p>
                 <ChevronRight className="size-4 shrink-0 text-muted-foreground/40" />
               </div>
             ))}

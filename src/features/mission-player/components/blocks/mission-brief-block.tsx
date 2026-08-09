@@ -32,7 +32,7 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
 
         {/* Badge row */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="flex items-center gap-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-cyan-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-cyan-400 font-mono">
             <Flag className="size-3" />
             Mission Brief
           </span>
@@ -51,7 +51,7 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {operativeCodename && (
           <div className="flex items-center gap-2">
             <div className="h-px flex-1 bg-cyan-500/20" />
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-cyan-500/70">
+            <p className="text-xs font-mono uppercase tracking-[0.25em] text-cyan-500/70">
               {operativeCodename}
             </p>
             <div className="h-px flex-1 bg-cyan-500/20" />
@@ -71,10 +71,10 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {/* Briefing */}
         {briefing && (
           <section className="space-y-3">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
+            <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
               Briefing
             </h3>
-            <div className="space-y-3 text-sm text-foreground/90 leading-relaxed">
+            <div className="space-y-3 text-base text-foreground/90 leading-relaxed">
               {briefing.split('\n\n').map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -85,10 +85,10 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {/* Why it matters */}
         {whyItMatters && (
           <section className="space-y-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-primary font-mono">
+            <h3 className="text-xs font-black uppercase tracking-wider text-primary font-mono">
               Why This Matters
             </h3>
-            <div className="space-y-3 text-sm text-foreground/90 leading-relaxed">
+            <div className="space-y-3 text-base text-foreground/90 leading-relaxed">
               {whyItMatters.split('\n\n').map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -99,12 +99,12 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {/* Objectives */}
         {objectives.length > 0 && (
           <section className="space-y-3">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
+            <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
               Mission Objectives
             </h3>
             <ul className="space-y-2">
               {objectives.map((obj, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-foreground/90">
+                <li key={i} className="flex items-start gap-3 text-base text-foreground/90">
                   <CheckCircle2 className="size-4 shrink-0 mt-0.5 text-cyber-green" />
                   <span>{obj}</span>
                 </li>
@@ -116,14 +116,14 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {/* Skills unlocked */}
         {skillsUnlocked.length > 0 && (
           <section className="space-y-3">
-            <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono flex items-center gap-1.5">
+            <h3 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono flex items-center gap-1.5">
               <Target className="size-3" />
               Skills Unlocked
             </h3>
             <ul className="space-y-1.5">
               {skillsUnlocked.map((skill, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-foreground/80">
-                  <span className="mt-1.5 size-1.5 rounded-full bg-cyber-green/60 shrink-0" />
+                <li key={i} className="flex items-start gap-2 text-base text-foreground/85">
+                  <span className="mt-2 size-1.5 rounded-full bg-cyber-green/60 shrink-0" />
                   <span>{skill}</span>
                 </li>
               ))}
@@ -134,7 +134,7 @@ export function MissionBriefBlock({ block }: { block: StandardBlock }) {
         {/* Closing message */}
         {closingMessage && (
           <section className="border-t border-border/40 pt-6">
-            <div className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+            <div className="space-y-2 text-base text-muted-foreground leading-relaxed">
               {closingMessage.split('\n\n').map((para, i) => (
                 <p key={i} className="italic">{para}</p>
               ))}

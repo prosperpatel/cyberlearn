@@ -35,15 +35,15 @@ export function StoryBlock({ block }: { block: StandardBlock }) {
     <div className="rounded-xl border border-purple-500/30 bg-base-900 overflow-hidden">
       <div className="h-1.5 w-full bg-gradient-to-r from-purple-500 to-purple-500/20" />
 
-      <div className="px-5 sm:px-8 py-6 space-y-6">
+      <div className="px-5 sm:px-8 py-8 space-y-6">
         {/* Header */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="flex items-center gap-1.5 rounded-md bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-purple-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-purple-400 font-mono">
             <BookOpen className="size-3" />
             Story
           </span>
           <span className={cn(
-            'rounded-md border px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider',
+            'rounded-md border px-2 py-0.5 text-xs font-mono uppercase tracking-wider',
             moodStyle.color,
           )}>
             {moodStyle.label}
@@ -52,12 +52,12 @@ export function StoryBlock({ block }: { block: StandardBlock }) {
         </div>
 
         {/* Title */}
-        {title && <h2 className="text-lg font-bold text-foreground">{title}</h2>}
+        {title && <h2 className="text-xl font-bold text-foreground">{title}</h2>}
 
-        {/* Narrative */}
-        <div className="space-y-4 border-l-2 border-purple-500/25 pl-5">
+        {/* Narrative — stronger left rail, larger text, generous leading */}
+        <div className="space-y-5 border-l-4 border-purple-500/50 pl-6">
           {narrative.map((para, i) => (
-            <p key={i} className="text-sm text-foreground/90 leading-relaxed">
+            <p key={i} className="text-base text-foreground leading-loose">
               {para}
             </p>
           ))}
@@ -66,7 +66,7 @@ export function StoryBlock({ block }: { block: StandardBlock }) {
         {/* Characters */}
         {characters.length > 0 && (
           <div className="space-y-3 pt-2 border-t border-border/40">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">
+            <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
               Characters
             </p>
             <div className="grid sm:grid-cols-2 gap-3">
@@ -77,8 +77,8 @@ export function StoryBlock({ block }: { block: StandardBlock }) {
                   )}
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-foreground">{char.name}</p>
-                    <p className="text-[10px] font-mono uppercase tracking-wider text-purple-400/70 mb-1">{char.role}</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{char.description}</p>
+                    <p className="text-xs font-mono uppercase tracking-wider text-purple-400/70 mb-1">{char.role}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{char.description}</p>
                   </div>
                 </div>
               ))}

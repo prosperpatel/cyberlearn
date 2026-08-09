@@ -26,7 +26,7 @@ function renderContent(raw: string) {
       return (
         <ul key={bi} className="space-y-1.5 my-1">
           {items.map((item, ii) => (
-            <li key={ii} className="flex items-start gap-2 text-sm text-foreground/85 leading-relaxed">
+            <li key={ii} className="flex items-start gap-2 text-base text-foreground/90 leading-relaxed">
               <span className="mt-2 size-1.5 rounded-full bg-primary/60 shrink-0" />
               <span>{renderInline(item)}</span>
             </li>
@@ -34,7 +34,7 @@ function renderContent(raw: string) {
         </ul>
       )
     }
-    return <p key={bi} className="text-sm text-foreground/85 leading-relaxed">{renderInline(block)}</p>
+    return <p key={bi} className="text-base text-foreground/90 leading-relaxed">{renderInline(block)}</p>
   })
 }
 
@@ -68,7 +68,7 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
 
         {/* Header */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-blue-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-blue-400 font-mono">
             <FileText className="size-3" />
             Theory
           </span>
@@ -91,7 +91,7 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
                   <p className={cn('text-xs font-bold uppercase tracking-wider', style.title)}>{callout.title}</p>
                 )}
               </div>
-              <p className="text-sm text-foreground/80 leading-relaxed">{callout.text}</p>
+              <p className="text-base text-foreground/85 leading-relaxed">{callout.text}</p>
             </div>
           )
         })}
@@ -99,12 +99,12 @@ export function TheoryBlock({ block }: { block: StandardBlock }) {
         {/* Key terms */}
         {keyTerms.length > 0 && (
           <div className="space-y-3 border-t border-border/40 pt-4">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground font-mono">Key Terms</p>
+            <p className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">Key Terms</p>
             <dl className="space-y-3">
               {keyTerms.map((kt, i) => (
                 <div key={i} className="rounded-lg bg-base-800/60 border border-border/40 p-3.5">
                   <dt className="text-sm font-semibold text-blue-400 mb-1">{kt.term}</dt>
-                  <dd className="text-sm text-muted-foreground leading-relaxed">{kt.definition}</dd>
+                  <dd className="text-base text-muted-foreground leading-relaxed">{kt.definition}</dd>
                 </div>
               ))}
             </dl>

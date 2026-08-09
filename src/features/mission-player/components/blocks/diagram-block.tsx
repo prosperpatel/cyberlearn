@@ -4,9 +4,9 @@ import { cn } from '@/lib/utils'
 import type { StandardBlock } from '@/types/mission-engine'
 
 interface DiagramNode {
-  id:     string
-  label:  string
-  type?:  string
+  id:      string
+  label:   string
+  type?:   string
   detail?: string
 }
 
@@ -38,13 +38,13 @@ export function DiagramBlock({ block }: { block: StandardBlock }) {
   const edgeByFrom = new Map(edges.map(e => [e.from, e]))
 
   return (
-    <div className="rounded-xl border border-sky-500/30 bg-base-900 overflow-hidden">
-      <div className="h-1.5 w-full bg-gradient-to-r from-sky-500 to-sky-500/20" />
+    <div className="rounded-xl border border-blue-500/30 bg-base-900 overflow-hidden">
+      <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 to-blue-500/20" />
 
       <div className="px-5 sm:px-8 py-6 space-y-5">
         {/* Header */}
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1.5 rounded-md bg-sky-500/10 border border-sky-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-sky-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-blue-400 font-mono">
             <Share2 className="size-3" />
             Diagram
           </span>
@@ -52,8 +52,8 @@ export function DiagramBlock({ block }: { block: StandardBlock }) {
         </div>
 
         <div className="space-y-1">
-          <h2 className="text-base font-bold text-foreground">{title}</h2>
-          {description && <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>}
+          <h2 className="text-xl font-bold text-foreground">{title}</h2>
+          {description && <p className="text-base text-muted-foreground leading-relaxed">{description}</p>}
         </div>
 
         {/* Flow diagram — horizontal scrollable pipeline */}
@@ -69,16 +69,14 @@ export function DiagramBlock({ block }: { block: StandardBlock }) {
                   {/* Node */}
                   <button
                     onClick={() => setActiveNode(isActive ? null : node.id)}
-                    className={cn(
-                      'flex flex-col items-center gap-1.5 p-0 transition-all focus-visible:outline-none',
-                    )}
+                    className="flex flex-col items-center gap-1.5 p-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/50 rounded-xl"
                   >
                     <div className={cn(
                       'flex size-12 items-center justify-center rounded-xl border-2 text-xs font-black font-mono transition-all',
                       isAttacker
                         ? 'border-red-500/60 bg-red-500/10 text-red-400 hover:border-red-500 hover:bg-red-500/20'
-                        : 'border-sky-500/40 bg-sky-500/8 text-sky-400 hover:border-sky-500/80 hover:bg-sky-500/15',
-                      isActive && (isAttacker ? 'border-red-500 bg-red-500/25 shadow-[0_0_12px_rgba(239,68,68,0.3)]' : 'border-sky-500 bg-sky-500/20 shadow-[0_0_12px_rgba(14,165,233,0.25)]'),
+                        : 'border-blue-500/40 bg-blue-500/8 text-blue-400 hover:border-blue-500/80 hover:bg-blue-500/15',
+                      isActive && (isAttacker ? 'border-red-500 bg-red-500/25 shadow-[0_0_12px_rgba(239,68,68,0.3)]' : 'border-blue-500 bg-blue-500/20 shadow-[0_0_12px_rgba(59,130,246,0.25)]'),
                     )}>
                       {String(i + 1).padStart(2, '0')}
                     </div>
@@ -98,7 +96,7 @@ export function DiagramBlock({ block }: { block: StandardBlock }) {
                       </span>
                       <div className={cn(
                         'flex items-center',
-                        edge.type === 'attack' ? 'text-red-500/60' : 'text-sky-500/40',
+                        edge.type === 'attack' ? 'text-red-500/60' : 'text-blue-500/40',
                       )}>
                         <div className="w-8 h-px bg-current" />
                         <div className="border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-current" />
@@ -115,15 +113,15 @@ export function DiagramBlock({ block }: { block: StandardBlock }) {
         {activeNode && (() => {
           const node = nodes.find(n => n.id === activeNode)
           return node?.detail ? (
-            <div className="rounded-lg bg-sky-500/8 border border-sky-500/25 p-4 text-sm text-foreground/90 leading-relaxed">
-              <span className="font-semibold text-sky-400 mr-2">{node.label}:</span>
+            <div className="rounded-lg bg-blue-500/8 border border-blue-500/25 p-4 text-base text-foreground/90 leading-relaxed">
+              <span className="font-semibold text-blue-400 mr-2">{node.label}:</span>
               {node.detail}
             </div>
           ) : null
         })()}
 
         {caption && (
-          <p className="text-xs text-muted-foreground/60 italic border-t border-border/40 pt-3">{caption}</p>
+          <p className="text-sm text-muted-foreground/60 italic border-t border-border/40 pt-3">{caption}</p>
         )}
       </div>
     </div>

@@ -30,11 +30,6 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
   const [selected,  setSelected]  = useState<Record<string, string>>({})
   const [submitted, setSubmitted] = useState(false)
 
-  // Signal completion as soon as the quiz is submitted (regardless of score)
-  useEffect(() => {
-    if (submitted) complete()
-  }, [submitted, complete])
-
   const correctCount = submitted
     ? questions.filter(q => {
         const sel = selected[q.id]
@@ -47,6 +42,11 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
     : 0
 
   const passed = scorePercent >= passingScore
+
+  // Only signal completion when the quiz is submitted AND the learner passes
+  useEffect(() => {
+    if (submitted && passed) complete()
+  }, [submitted, passed, complete])
 
   function submit() {
     if (Object.keys(selected).length < questions.length) return
@@ -65,11 +65,11 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
       <div className="px-5 sm:px-8 py-6 space-y-6">
         {/* Header */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="flex items-center gap-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-emerald-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-emerald-400 font-mono">
             <Trophy className="size-3" />
             Quiz
           </span>
-          <span className="text-[10px] font-mono text-muted-foreground">Pass: {passingScore}%</span>
+          <span className="text-xs font-mono text-muted-foreground">Pass: {passingScore}%</span>
           <span className="text-xs text-muted-foreground ml-auto">~{block.metadata.estimatedMinutes}min</span>
         </div>
 
@@ -87,22 +87,29 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
               <p className={cn('text-2xl font-black', passed ? 'text-emerald-400' : 'text-red-400')}>
                 {scorePercent}%
               </p>
-              <p className="text-sm text-foreground/80">
+              <p className="text-base text-foreground/85">
                 {correctCount}/{questions.length} correct — {passed ? 'Passed!' : `Need ${passingScore}% to pass`}
               </p>
+              {!passed && (
+                <p className="text-sm text-muted-foreground mt-1">
+                  Review the material above and try again.
+                </p>
+              )}
             </div>
-            <button onClick={reset} className="ml-auto text-xs text-muted-foreground hover:text-foreground transition-colors">
-              Retry
-            </button>
+            {!passed && (
+              <button onClick={reset} className="ml-auto text-sm text-muted-foreground hover:text-foreground transition-colors font-medium">
+                Retry
+              </button>
+            )}
           </div>
         )}
 
         {/* Questions */}
         <div className="space-y-6">
           {questions.map((q, qi) => {
-            const chosenId   = selected[q.id]
-            const chosen     = q.options.find(o => o.id === chosenId)
-            const isCorrect  = chosen?.isCorrect ?? false
+            const chosenId  = selected[q.id]
+            const chosen    = q.options.find(o => o.id === chosenId)
+            const isCorrect = chosen?.isCorrect ?? false
 
             return (
               <div key={q.id} className="space-y-3">
@@ -110,11 +117,11 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
                   <span className="shrink-0 flex size-6 items-center justify-center rounded-full bg-base-800 border border-border text-[10px] font-black font-mono text-muted-foreground">
                     {qi + 1}
                   </span>
-                  <p className="text-sm font-semibold text-foreground leading-snug">{q.question}</p>
+                  <p className="text-base font-semibold text-foreground leading-snug">{q.question}</p>
                 </div>
 
                 {q.context && (
-                  <p className="text-xs text-muted-foreground leading-relaxed pl-8 italic">{q.context}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed pl-8 italic">{q.context}</p>
                 )}
 
                 <div className="space-y-2 pl-8">
@@ -128,7 +135,7 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
                         disabled={submitted}
                         onClick={() => !submitted && setSelected(prev => ({ ...prev, [q.id]: opt.id }))}
                         className={cn(
-                          'w-full flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all',
+                          'w-full flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-base transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50',
                           !submitted && !isSelected && 'border-border/50 bg-base-800/30 hover:border-emerald-500/40 hover:bg-emerald-500/5',
                           !submitted &&  isSelected && 'border-emerald-500/60 bg-emerald-500/10',
                           showResult && opt.isCorrect  && 'border-emerald-500/70 bg-emerald-500/12',
@@ -168,7 +175,7 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
                 {/* Explanation */}
                 {submitted && (
                   <div className={cn(
-                    'ml-8 rounded-lg border p-3.5 text-sm leading-relaxed',
+                    'ml-8 rounded-lg border p-3.5 text-base leading-relaxed',
                     isCorrect
                       ? 'border-emerald-500/25 bg-emerald-500/6 text-emerald-300/90'
                       : 'border-red-500/25 bg-red-500/6 text-red-300/90',
@@ -195,6 +202,17 @@ export function QuizBlock({ block }: { block: StandardBlock }) {
             className="w-full"
           >
             Submit Answers
+          </Button>
+        )}
+
+        {/* Retry after fail */}
+        {submitted && !passed && (
+          <Button
+            onClick={reset}
+            variant="outline"
+            className="w-full"
+          >
+            Try Again
           </Button>
         )}
       </div>

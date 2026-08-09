@@ -28,14 +28,14 @@ export function CommonMistakesBlock({ block }: { block: StandardBlock }) {
       <div className="px-5 sm:px-8 py-6 space-y-5">
         {/* Header */}
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1.5 rounded-md bg-red-500/10 border border-red-500/20 px-2 py-0.5 text-[10px] font-black uppercase tracking-widest text-red-400 font-mono">
+          <span className="flex items-center gap-1.5 rounded-md bg-red-500/10 border border-red-500/20 px-2 py-0.5 text-xs font-black uppercase tracking-widest text-red-400 font-mono">
             <AlertTriangle className="size-3" />
             Common Mistakes
           </span>
           <span className="text-xs text-muted-foreground ml-auto">~{block.metadata.estimatedMinutes}min</span>
         </div>
 
-        {intro && <p className="text-sm text-muted-foreground leading-relaxed">{intro}</p>}
+        {intro && <p className="text-base text-muted-foreground leading-relaxed">{intro}</p>}
 
         {/* Mistake cards */}
         <div className="space-y-4">
@@ -53,9 +53,9 @@ export function CommonMistakesBlock({ block }: { block: StandardBlock }) {
                   'size-3.5 shrink-0',
                   m.severity === 'critical' ? 'text-red-400' : 'text-orange-400',
                 )} />
-                <span className="text-sm font-semibold text-foreground flex-1">{m.title}</span>
+                <span className="text-base font-semibold text-foreground flex-1">{m.title}</span>
                 <span className={cn(
-                  'text-[9px] font-black uppercase tracking-widest font-mono px-1.5 py-0.5 rounded',
+                  'text-xs font-black uppercase tracking-wider font-mono px-1.5 py-0.5 rounded',
                   m.severity === 'critical'
                     ? 'bg-red-500/20 text-red-400'
                     : 'bg-orange-500/20 text-orange-400',
@@ -69,24 +69,24 @@ export function CommonMistakesBlock({ block }: { block: StandardBlock }) {
                 <div className="flex items-start gap-2.5 p-4 bg-red-500/5">
                   <XCircle className="size-4 shrink-0 mt-0.5 text-red-400/70" />
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-red-400/70 mb-1">Don't</p>
-                    <p className="text-sm text-foreground/80 leading-relaxed italic">{m.wrong}</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-red-400/70 mb-1">Don't</p>
+                    <p className="text-base text-foreground/85 leading-relaxed italic">{m.wrong}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-2.5 p-4 bg-green-500/5">
                   <CheckCircle2 className="size-4 shrink-0 mt-0.5 text-green-400/70" />
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-green-400/70 mb-1">Do</p>
-                    <p className="text-sm text-foreground/80 leading-relaxed">{m.right}</p>
+                    <p className="text-xs font-bold uppercase tracking-wider text-green-400/70 mb-1">Do</p>
+                    <p className="text-base text-foreground/85 leading-relaxed">{m.right}</p>
                   </div>
                 </div>
               </div>
 
               {/* Explanation */}
               <div className="px-4 py-3 border-t border-border/40 bg-base-800/30">
-                <p className="text-sm text-muted-foreground leading-relaxed">{m.explanation}</p>
+                <p className="text-base text-muted-foreground leading-relaxed">{m.explanation}</p>
                 {m.example && (
-                  <p className="mt-2 text-xs text-muted-foreground/60 italic">{m.example}</p>
+                  <p className="mt-2 text-sm text-muted-foreground/60 italic">{m.example}</p>
                 )}
               </div>
             </div>
